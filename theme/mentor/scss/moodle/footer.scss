@@ -1,0 +1,237 @@
+$tablet-break: 1200px;
+$mobile-break: 768px;
+
+#page-footer {
+  background-color: $white;
+  color: $maintitlecolor;
+  border-top: solid 2px $maincolor;
+
+  #footer-content {
+    margin: 40px 60px 15px 60px;
+    display: flex;
+    flex-direction: column;
+
+    @media(max-width: $mobile-break) {
+      margin: 0 16px 32px 16px;
+    }
+  }
+
+  #first-part-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    @media(max-width: 1090px) {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    & > div {
+      max-width: 900px;
+    }
+
+    #footer-logo {
+      margin-left: 18px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      @media(max-width: 1090px) {
+        margin-left: 0;
+      }
+
+      @media(max-width: $mobile-break) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      a {
+        display: block;
+        padding-right: 10px;
+        align-self: flex-start;
+
+        &:focus {
+          box-shadow: none;
+          background: none;
+          outline: none;
+        }
+
+        & > img {
+          width: 255px;
+          height: 174px;
+
+          @media(max-width: 1300px) {
+            width: 192px;
+            height: 130px;
+            padding-top: 15px;
+          }
+
+          @media(max-width: 1090px) {
+            width: 220px;
+            height: 150px;
+          }
+        }
+      }
+
+      .european-logo {
+        height: 60px;
+        display: flex;
+
+        @media(max-width: $mobile-break) {
+          gap: 3px;
+        }
+
+        .icon {
+          height: 60px;
+          width: auto;
+          margin-right: 0;
+
+          @media(max-width: 1300px) {
+            height: 47px;
+          }
+
+          @media(max-width: 1090px) {
+            height: 60px;
+          }
+        }
+      }
+    }
+
+    .footer-link {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding-bottom: 16px;
+      font-size: 16px;
+      gap: 16px 5px;
+      margin: 0;
+      padding-left: 0;
+
+      @media(max-width: 950px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media(max-width: $mobile-break) {
+        grid-template-columns: repeat(2, 1fr);
+        font-size: 14px;
+      }
+
+      & > li {
+        font-weight: bold;
+        list-style-type: none;
+      }
+
+      a {
+        font-weight: bold;
+        color: $maintitlecolor;
+        text-decoration: none;
+
+        &:hover {
+          color: #6a6a6a;
+        }
+
+        &:focus {
+          outline: none;
+          color: #6a6a6a;
+          background-color: unset;
+          -webkit-box-shadow: none;
+        }
+      }
+
+      .tool_usertours-resettourcontainer:empty {
+        display: none;
+      }
+    }
+
+    #text-info {
+      margin-bottom: 13px;
+      font-size: 16px;
+
+      @media(max-width: $tablet-break) {
+        margin-top: 7px;
+      }
+    }
+  }
+
+  #break-line-footer {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #6a6a6a;
+    margin: 31px 0 16px 0;
+    padding: 0;
+  }
+
+  #last-part-footer {
+    display: flex;
+    justify-content: space-between;
+    color: #6a6a6a;
+    font-size: 12px;
+
+    @media(max-width: 1500px) {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pipe-list {
+
+      ul {
+        list-style-type: none;
+        position: relative;
+        padding: 0;
+        margin-bottom: 0;
+        -webkit-margin-start: 0;
+
+        li {
+          display: inline-block;
+          line-height: 1;
+          padding-right: 1em;
+          margin-right: 1em;
+          border-right: 1px solid;
+          margin-bottom: 0;
+
+          &:last-child {
+            border-right: none;
+            padding-right: 0;
+            margin-right: 0;
+          }
+
+          a {
+            color: #6a6a6a;
+            text-decoration: none;
+
+            &:focus {
+              outline: none;
+              color: #6a6a6a;
+              background-color: unset;
+              -webkit-box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  .cachesused th {
+    background-color: inherit !important;
+  }
+
+  .tool_dataprivacy {
+    display: none;
+  }
+
+  .performanceinfo,
+  .tool_dataprivacy {
+    display: none;
+  }
+
+  #licence-text {
+    margin: 0;
+    padding: 0;
+
+    a {
+      color: #6a6a6a;
+    }
+  }
+}

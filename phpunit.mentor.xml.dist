@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="lib/phpunit/phpunit.xsd"
+        bootstrap="lib/phpunit/bootstrap.php"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        processIsolation="false"
+        backupGlobals="false"
+        backupStaticAttributes="false"
+        stopOnError="false"
+        stopOnFailure="false"
+        stopOnIncomplete="false"
+        stopOnSkipped="false"
+        beStrictAboutTestsThatDoNotTestAnything="false"
+        beStrictAboutOutputDuringTests="true"
+        printerClass="Hint_ResultPrinter"
+        testSuiteLoaderClass="phpunit_autoloader"
+        >
+
+    <php>
+        <!--<const name="PHPUNIT_LONGTEST" value="1"/> uncomment to execute also slow or otherwise expensive tests-->
+        <const name="PHPUNIT_SEQUENCE_START" value=""/>
+
+        <!--Following constants instruct tests to fetch external test files from alternative location or skip tests if empty, clone https://github.com/moodlehq/moodle-exttests to local web server-->
+        <!--<const name="TEST_EXTERNAL_FILES_HTTP_URL" value="http://download.moodle.org/unittest"/> uncomment and alter to fetch external test files from alternative location-->
+        <!--<const name="TEST_EXTERNAL_FILES_HTTPS_URL" value="https://download.moodle.org/unittest"/> uncomment and alter to fetch external test files from alternative location-->
+    </php>
+
+<!--All core suites need to be manually added here-->
+
+<testsuites>
+    <testsuite name="mentor_testsuite">
+            <directory suffix="_test.php">theme/mentor/tests</directory>
+            <directory suffix="_test.php">local/mentor_core/tests</directory>
+            <directory suffix="_test.php">local/mentor_specialization/tests</directory>
+            <directory suffix="_test.php">local/library/tests</directory>
+            <directory suffix="_test.php">enrol/sirh/tests</directory>
+            <directory suffix="_test.php">course/format/edadmin/tests</directory>
+            <directory suffix="_test.php">filter/scormlink/tests</directory>
+            <directory suffix="_test.php">admin/tool/log/store/mentor2</directory>
+            <directory suffix="_test.php">local/user/tests</directory>
+            <directory suffix="_test.php">blocks/archivedsessions/tests</directory>
+            <directory suffix="_test.php">blocks/mysessions/tests</directory>
+    </testsuite>
+</testsuites>
+
+<filter>
+	<whitelist processUncoveredFilesFromWhitelist="false">
+        <directory suffix=".php">admin/tool/log/store/mentor2</directory>
+        <directory suffix=".php">blocks/mysessions</directory>
+        <directory suffix=".php">blocks/mytrainings</directory>
+        <directory suffix=".php">blocks/archivedsessions</directory>
+        <directory suffix=".php">course/format/edadmin</directory>
+        <directory suffix=".php">enrol/sirh</directory>
+        <directory suffix=".php">theme/mentor</directory>
+        <directory suffix=".php">local</directory>
+        <directory suffix=".php">filter/scormlink</directory>
+		<exclude>
+            <directory suffix=".php">admin/tool/adhoctasksqueue</directory>
+            <directory suffix=".php">admin/tool/log/store/mentor</directory>
+        	<directory suffix=".php">local/mentor_core/tests/*</directory>
+        	<directory suffix=".php">local/mentor_specialization/tests/*</directory>
+        	<directory suffix=".php">enrol/sirh/tests/*</directory>
+        	<directory suffix=".php">local/user/tests/*</directory>
+        	<directory suffix=".php">blocks/archivedsessions/tests/*</directory>
+        	<directory suffix=".php">blocks/mysessions/tests/*</directory>
+        	<directory suffix=".php">local/mentor_core/db/*</directory>
+        	<directory suffix=".php">local/mentor_specialization/db/*</directory>
+            <directory suffix=".php">local/codechecker</directory>
+            <directory suffix=".php">local/staticpage</directory>
+            <directory suffix=".php">*/*/tests</directory>
+            <directory suffix=".php">*/*/lang</directory>
+            <directory suffix=".php">*/*/*/lang</directory>
+            <directory suffix=".php">*/*/forms</directory>
+            <directory suffix=".php">*/*/pages</directory>
+            <directory suffix=".php">*/*/db</directory>
+            <directory suffix=".php">*/*/data</directory>
+            <directory suffix=".php">*/*/ajax</directory>
+            <file suffix=".php">*/*/version.php</file>
+            <file suffix=".php">*/*/settings.php</file>
+            <file suffix=".php">*/*/init.php</file>
+		    <file>local/*/version.php</file>
+		    <file>enrol/sirh/classes/restclient.php</file>
+		    <file>admin/tool/log/store/mentor2/database.php</file>
+		    <file>local/entities/classes/controllers/user_controller.php</file>
+		    <file>local/session/classes/controllers/session_controller.php</file>
+		    <file>local/trainings/classes/controllers/training_controller.php</file>
+		    <file>blocks/mytrainings/classes/controllers/training_favourite_controller.php</file>
+		</exclude>
+	</whitelist>
+</filter>
+</phpunit>

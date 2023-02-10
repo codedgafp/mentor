@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteCond %{QUERY_STRING} ^$
+RewriteRule ^catalog/?([0-9-]+) /local/catalog/pages/training.php?trainingid=$1 [R=301,L]
+
+RewriteRule ^course/index\.php$ /index.php? [R=301,L]
+RewriteRule ^admin/tool/mergeusers/index\.php$ /admin/tool/mergeusers/index_mentor.php? [R=301,L]
+
+RewriteRule ^offre /local/catalog/index.php [R=301,L]

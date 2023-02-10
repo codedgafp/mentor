@@ -1,0 +1,226 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+
+<div id="training-library-header">
+    <h1>
+        {{# title }}
+            {{ title }}
+        {{/title}}
+        {{^ title }}
+            {{ name }}
+        {{/title}}
+    </h1>
+    <div>
+        {{# iscertifying }}
+            <div class="certifying">
+                {{# pix }} certifying, local_library, {{# str }} certifying, local_library {{/str}}{{/ pix }}
+                <p>
+                    {{# str }} certifying, local_library {{/str}}
+                </p>
+            </div>
+        {{/ iscertifying }}
+    </div>
+</div>
+
+
+<div id="training-library-content">
+    <div class="creator-information">
+        <div class="collections row justify-content-start">
+            {{#collectiontiles}}
+                <p class="collection rounded-pill" style="background-color: {{color}}">{{name}}</p>
+            {{/collectiontiles}}
+        </div>
+        <p class="suggestedby {{^ hasproducerorganization }}no-producer{{/hasproducerorganization}}">
+            {{# str }} suggestedby, local_library, <span class="font-weight-bold">{{ entityfullname }} </span>{{/str}}
+        </p>
+        {{# hasproducerorganization }}
+            <div class="producer-card
+                {{# producingorganizationlogo}}
+                    has-logo
+                {{/ producingorganizationlogo }}
+                {{# producingorganization }}
+                    has-name
+                {{/ producingorganization }}
+                {{# contactproducerorganization }}
+                    has-contact
+                {{/ contactproducerorganization }}
+            ">
+                {{# producingorganizationlogo}}
+                    <img
+                        class="logo"
+                        src="{{ producingorganizationlogo }}"
+                        alt="{{# str }} producerorganizationlogo, local_library {{/str}}"
+                        {{# producingorganization }}
+                            aria-label="{{# str }} logoof, local_library, {{ producingorganization }} {{/str}}"
+                        {{/ producingorganization }}
+                    >
+                {{/ producingorganizationlogo }}
+                {{# producingorganization }}
+                <div class="producer-data">
+                    <p class="name">{{# str }} producedby, local_library, <span class="font-weight-bold">{{ producingorganization }}</span> {{/str}}</p>
+                    {{^ contactproducerorganization }}
+                    </div>
+                    {{/contactproducerorganization}}
+                {{/ producingorganization }}
+                {{# contactproducerorganization }}
+                    {{^ producingorganization }}
+                    <div class="producer-data">
+                    {{/producingorganization}}
+                    <p class="contact">{{# str }} contact, local_library, <span class="font-weight-bold">{{ contactproducerorganization }} {{/str}}</p>
+                </div>
+                {{/ contactproducerorganization }}
+            </div>
+        {{/hasproducerorganization}}
+    </div>
+    <div class="teaser-part">
+        {{# idsirh }}
+            <p class="idsirh">{{# str }} idsirh, local_library, <span class="font-weight-bold">{{ idsirh }} {{/str}}</span></p>
+        {{/ idsirh }}
+        <div class="teaser">
+            {{# teaser }}
+                {{#teaserispicture}}
+                    <img class="picture" src="{{teaser}}" alt="{{# str }} teaserof, local_library, {{name}} {{/str}}" aria-label="{{# str }} teaserof, local_library,
+{{name}} {{/str}}">
+                {{/teaserispicture}}
+                {{^teaserispicture}}
+                    {{{teaser}}}
+                {{/teaserispicture}}
+            {{/teaser}}
+        </div>
+    </div>
+    <div id="training-objective">
+        <div class="details">
+            <p class="training-catchphrase">{{ catchphrase }}</p>
+            <div class="training-goal">{{{ traininggoal }}}</div>
+            <div id="gradientmask" class="hidden"></div>
+            <button class="show-more hidden">{{# str }} readmore, local_library {{/str}}</button>
+            <button class="show-less hidden">{{# str }} viewless, local_library {{/str}}</button>
+        </div>
+    </div>
+    <div id="training-estimated-time">
+        {{# pix }} clock, local_library {{/ pix }}{{# remoteestimatedtime }}{{# str }} onlineduration, local_library, {{ remoteestimatedtime }} {{/str}} - {{/
+    remoteestimatedtime }}
+        {{# presenceestimatedtime }}{{# str }} presenceduration, local_library, {{ presenceestimatedtime }} {{/str}} - {{/ presenceestimatedtime }}
+        {{ modality }}
+    </div>
+    <div id="training-time-publication">
+        {{# timemodified }}
+            {{# pix }} calendar, local_library {{/pix}}{{# str }} publicationfirstandlast, local_library, { "timecreated": "{{ timecreated }}", "timemodified": "{{
+        timemodified }}" }{{/str}}
+        {{/ timemodified }}
+        {{^ timemodified }}
+            {{# pix }} calendar, local_library {{/pix}}{{# str }} publicationfirst, local_library, {{ timecreated }} {{/str}}
+        {{/ timemodified }}
+    </div>
+    <div id="action-tiles">
+        <button id="demonstration-action">
+            <p class="title">
+                {{# str }} trainingdemonstrationtitle, local_library {{/str}}
+            </p>
+            <p class="description">
+                {{# str }} trainingdemonstrationtext, local_library {{/str}}
+            </p>
+            <p class="action">
+                {{# str }} access, local_library {{/str}}{{# pix }} arrow-right, local_library {{/pix}}
+            </p>
+        </button>
+
+        {{# hasimportcapabilities }}
+            <button id="import-action">
+                <a class="btn btn-link p-0 help_button" role="button" data-container="body" data-toggle="popover"
+                   data-placement="right" data-content="{{# str }} editablerespectcopyright, local_library {{/str}}"
+                   data-html="true" tabindex="0" data-trigger="focus">
+                    <i class="icon fa fa-exclamation-triangle text-info fa-fw" title="{{ help_icon_title }}" aria-label="{{ help_icon_title }}"></i>
+                </a>
+                <p class="title">
+                    {{# str }} importtrainingtitle, local_library {{/str}}
+                </p>
+                <p class="description">
+                    {{# str }} importtrainingtext, local_library {{/str}}
+                </p>
+                <p class="action">
+                    {{# pix }} import, local_library {{/pix}}{{# str }} import, local_library {{/str}}
+                </p>
+            </button>
+        {{/ hasimportcapabilities }}
+    </div>
+    <div id="training-details">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-content-tab" data-toggle="tab" href="#nav-content" role="tab" aria-controls="nav-content"
+                        aria-selected="true">{{# str }}
+                    content, local_library {{/str}}
+                </button>
+                {{# prerequisite }}
+                    <button class="nav-link" id="nav-prerequisite-tab" data-toggle="tab" href="#nav-prerequisite" role="tab" aria-controls="nav-prerequisite" aria-selected="false">
+                        {{# str }} prerequisites, local_library {{/str}}
+                    </button>
+                {{/prerequisite}}
+                {{# skills }}
+                    <button class="nav-link" id="nav-skills-tab" data-toggle="tab" href="#nav-skills" role="tab" aria-controls="nav-skills" aria-selected="false">{{# str }}
+                        skills, local_library {{/str}}
+                    </button>
+                {{/skills}}
+                {{# typicaljob }}
+                    <button class="nav-link" id="nav-typicaljob-tab" data-toggle="tab" href="#nav-typicaljob" role="tab" aria-controls="nav-typicaljob" aria-selected="false">
+                        {{# str }} typicaljob, local_library {{/str}}
+                    </button>
+                {{/typicaljob}}
+                <button class="nav-link" id="nav-licenseterms-tab" data-toggle="tab" href="#nav-licenseterms" role="tab" aria-controls="nav-licenseterms" aria-selected="false">
+                    {{# str }} termsoflicense, local_library {{/str}}
+                </button>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-content" role="tabpanel" aria-labelledby="nav-content-tab">{{{ content }}}</div>
+            {{# prerequisite }}
+                <div class="tab-pane fade" id="nav-prerequisite" role="tabpanel" aria-labelledby="nav-prerequisite-tab">{{{ prerequisite }}}</div>
+            {{/ prerequisite }}
+            {{# skills }}
+                <div class="tab-pane fade" id="nav-skills" role="tabpanel" aria-labelledby="nav-skills-tab">{{{ skills }}}</div>
+            {{/skills}}
+            {{# typicaljob }}
+                <div class="tab-pane fade" id="nav-typicaljob" role="tabpanel" aria-labelledby="nav-typicaljob-tab">{{{ typicaljob }}}</div>
+            {{/typicaljob}}
+            <div class="tab-pane fade" id="nav-licenseterms" role="tabpanel" aria-labelledby="nav-licenseterms-tab">{{{ licensetermsfullname }}}</div>
+        </div>
+    </div>
+</div>
+
+{{# hasimportcapabilities }}
+    <div id="import-to-entity">
+        <p>Vous allez importer une formation dans votre espace dédié. Veuillez préciser :</p>
+        <form id="import-to-entity-form">
+            <div class="form-import-input">
+                <label for="form-import-shortname">Le nom abrégé de la formation :</label>
+                <input type="text" name="shortname" id="form-import-shortname">
+            </div>
+            <div class="form-import-input">
+                <label for="form-import-entity">L'espace dédié cible :</label>
+                <select name="entity" id="form-import-entity" class="custom-select">
+                    {{^ singleentity }}
+                        <option value="0"></option>
+                    {{/singleentity}}
+                    {{# listeentities }}
+                        <option value="{{ id }}">{{ shortname }}</option>
+                    {{/ listeentities }}
+                </select>
+            </div>
+        </form>
+        <div id="popup-waring-message" class="text-center"></div>
+    </div>
+{{/hasimportcapabilities}}

@@ -1,0 +1,238 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+
+<div id="training-sheet-{{id}}" class="mentor-sheet training-sheet sidenav closed">
+    <div class="header">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 close-sheet close-training-sheet">
+                <button aria-label="{{# str }} close, local_mentor_core {{/str}} {{name}}">{{# pix }} return, local_mentor_core, {{/ pix }}</button>
+                <h1>{{name}}</h1>
+            </div>
+            {{#iscertifying}}
+                <div class="col-lg-6 col-sm-12">
+                    <div class="certifying">
+                        {{# pix }} certifying, local_mentor_core, {{# str }} certifying, local_mentor_core {{/str}}{{/ pix }} {{# str }} certifying, local_mentor_core {{/str}}
+                    </div>
+                </div>
+            {{/iscertifying}}
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 idsirh">
+                <div>
+                    {{#idsirh}}
+                        <span class="training-sheet-bold">{{idsirh}}</span>
+                    {{/idsirh}}
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 entity">
+                <div>
+                    <button class="copy-link {{^ preview }}copy-training-link{{/ preview }}" data-trainingid="{{id}}">
+                        <i class="fa fa-link" aria-hidden="true"></i>
+                        {{# str }} copylink, local_mentor_core {{/str}}</button>
+                    <br/>
+                    {{# str }} suggestedby, local_mentor_core, <span class="training-sheet-bold">{{entityname}}</span> {{/str}}
+                </div>
+            </div>
+        </div>
+        <div class="collections row justify-content-start">
+            {{#collectiontiles}}
+                <div class="collection rounded-pill" style="background-color: {{color}}">
+                    <span>{{name}}</span>
+                </div>
+            {{/collectiontiles}}
+        </div>
+        <div class="organization row">
+            <div>
+                {{#producingorganizationlogo}}
+                    <div class="logo">
+                        <div class="picture" style="background-image: url('{{producingorganizationlogo}}');" aria-label="{{# str }} logoof, local_mentor_core, {{name}}
+                        {{/str}}"></div>
+                    </div>
+                {{/producingorganizationlogo}}
+            </div>
+            <div class="contact">
+                {{#producingorganization}}
+                    <p class="training-sheet-bold">
+                        {{producingorganization}}
+                    </p>
+                {{/producingorganization}}
+                {{#contactproducerorganization}}
+                    <p>
+                        {{# str }} contact, local_mentor_core, {{contactproducerorganization}} {{/str}}
+                    </p>
+                {{/contactproducerorganization}}
+            </div>
+            <div class="teaser">
+                {{#teaserispicture}}
+                    <div class="picture" style="background-image: url('{{teaser}}')" aria-label="{{# str }} teaserof, local_mentor_core, {{name}} {{/str}}"></div>
+                {{/teaserispicture}}
+                {{^teaserispicture}}
+                    {{{teaser}}}
+                {{/teaserispicture}}
+            </div>
+        </div>
+    </div>
+    <div id="training-goal-{{id}}" class="card">
+        <div class="card-header" id="heading-traininggoal-{{id}}">
+            <div class="btn btn-link collapsed target-header" data-toggle="collapse" data-target="#collapse-traininggoal-{{id}}" aria-expanded="false"
+                 aria-controls="collapse-traininggoal-{{id}}">
+                <h2 class="target-header-title fr-text">
+                    {{# str }} objectivesandcontent, local_mentor_core {{/str}}
+                </h2>
+                <div class="target-header-right">
+                    <button class="accordion-opening"></button>
+                </div>
+            </div>
+        </div>
+        <div id="collapse-traininggoal-{{id}}" class="collapse" aria-labelledby="heading-traininggoal-{{id}}" data-parent="#training-goal-{{id}}">
+            <div class="card-body">
+                {{#traininggoal}}
+                    <div>
+                        <h3 class="sub-title">
+                            {{# str }} objectives, local_mentor_core {{/str}}
+                        </h3>
+                        <p>
+                            {{{traininggoal}}}
+                        </p>
+                    </div>
+                {{/traininggoal}}
+                {{#content}}
+                    <div>
+                        <h3 class="sub-title">
+                            {{# str }} content, local_mentor_core {{/str}}
+                        </h3>
+                        <p>
+                            {{{content}}}
+                        </p>
+                    </div>
+                {{/content}}
+            </div>
+        </div>
+    </div>
+    {{#prerequisite}}
+        <div id="prerequisite-{{id}}" class="card">
+            <div class="card-header" id="heading-prerequisite-{{id}}">
+                <div class="btn btn-link collapsed target-header collapsed" data-toggle="collapse" data-target="#collapse-prerequisite-{{id}}" aria-expanded="false"
+                     aria-controls="collapse-prerequisite-{{id}}">
+                    <h2 class="target-header-title fr-text">
+                        {{# str }} prerequisites, local_mentor_core {{/str}}
+                    </h2>
+                    <div class="target-header-right">
+                        <button class="accordion-opening"></button>
+                    </div>
+                </div>
+            </div>
+            <div id="collapse-prerequisite-{{id}}" class="collapse" aria-labelledby="heading-prerequisite-{{id}}" data-parent="#prerequisite-{{id}}">
+                <div class="card-body">
+                    {{prerequisite}}
+                </div>
+            </div>
+        </div>
+    {{/prerequisite}}
+    {{#skills}}
+        <div id="skills-{{id}}" class="card">
+            <div class="card-header" id="heading-skills-{{id}}">
+                <div class="btn btn-link collapsed target-header collapsed" data-toggle="collapse" data-target="#collapse-skills-{{id}}" aria-expanded="false"
+                     aria-controls="collapse-skills-{{id}}">
+                    <h2 class="target-header-title fr-text">
+                        {{# str }} skills, local_mentor_core {{/str}}
+                    </h2>
+                    <div class="target-header-right">
+                        <button class="accordion-opening"></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="collapse-skills-{{id}}" class="collapse" aria-labelledby="heading-skills-{{id}}" data-parent="#skills-{{id}}">
+                <div class="card-body">
+                    {{{ skills }}}
+                </div>
+            </div>
+        </div>
+    {{/skills}}
+    {{#typicaljob}}
+        <div id="typicaljob-{{id}}" class="card">
+            <div class="card-header" id="heading-typicaljob-{{id}}">
+                <div class="btn btn-link collapsed target-header collapsed" data-toggle="collapse" data-target="#collapse-typicaljob-{{id}}" aria-expanded="false"
+                     aria-controls="collapse-typicaljob-{{id}}">
+                    <h2 class="target-header-title fr-text">
+                        {{# str }} typicaljob, local_mentor_core {{/str}}
+                    </h2>
+                    <div class="target-header-right">
+                        <button class="accordion-opening"></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="collapse-typicaljob-{{id}}" class="collapse" aria-labelledby="heading-typicaljob-{{id}}" data-parent="#typicaljob-{{id}}">
+                <div class="card-body">
+                    {{{ typicaljob }}}
+                </div>
+            </div>
+        </div>
+    {{/typicaljob}}
+    {{#licenseterms}}
+        <div id="licenseterms-{{id}}" class="card">
+            <div class="card-header" id="heading-licenseterms-{{id}}">
+                <div class="btn btn-link collapsed target-header collapsed" data-toggle="collapse" data-target="#collapse-licenseterms-{{id}}"
+                     aria-expanded="false"
+                     aria-controls="collapse-licenseterms-{{id}}">
+                    <h2 class="target-header-title fr-text">
+                        {{# str }} termsoflicense, local_mentor_core {{/str}}
+                    </h2>
+                    <div class="target-header-right">
+                        <button class="accordion-opening"></button>
+                    </div>
+                </div>
+            </div>
+            <div id="collapse-licenseterms-{{id}}" class="collapse" aria-labelledby="heading-licenseterms-{{id}}" data-parent="#licenseterms-{{id}}">
+                <div class="card-body">
+                    {{licensetermsfullname}}
+                </div>
+            </div>
+        </div>
+    {{/licenseterms}}
+
+    {{! If user is not logged in, do not display sessions tile }}
+    {{#isloggedin}}
+        <div id="list-sessions-{{id}}" class="list-sessions card">
+            <div class="card-header opened" id="heading-list-sessions-{{id}}">
+                <div class="btn btn-link target-header" data-toggle="collapse" data-target="#collapse-list-sessions-{{id}}" aria-expanded="true"
+                     aria-controls="collapse-list-sessions-{{id}}">
+                    <h2 class="target-header-title fr-text">
+                        {{# str }} sessionsoffered, local_mentor_core {{/str}}
+                    </h2>
+                    <div class="target-header-right">
+                        <button class="accordion-opening open"></button>
+                    </div>
+                </div>
+            </div>
+            <div id="collapse-list-sessions-{{id}}" class="collapse show" aria-labelledby="heading-list-sessions-{{id}}" data-parent="#list-sessions-{{id}}">
+                <div class="card-body card-body-tile">
+                    <div class="sessions-message">
+                        {{# str }} sessionlisting, local_mentor_core {{/str}}
+                    </div>
+                    <div class="sessions-tile row">
+                        {{#sessions}}
+                            {{> local_mentor_specialization/catalog/session-tile }}
+                        {{/sessions}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/isloggedin}}
+</div>

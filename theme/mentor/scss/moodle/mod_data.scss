@@ -1,0 +1,188 @@
+#page-mod-data-view,
+#page-mod-data-edit {
+  #region-main {
+
+    h3 {
+      font-size: 16px;
+    }
+
+    .datapreferences {
+      margin-bottom: 30px;
+
+      input[type="submit"] {
+        margin-left: 10px;
+      }
+
+      form {
+        @media(max-width: $size-lg) {
+          #pref_perpage {
+            margin-right: calc(100% - 200px);
+          }
+          #reg_search {
+            margin-right: calc(100% - 300px);
+          }
+
+          #pref_sortby,
+          #pref_order,
+          #pref_perpage,
+          #reg_search {
+            margin-bottom: 8px;
+            display: block;
+          }
+
+          #advancedcheckbox {
+            margin-bottom: 20px;
+            margin-top: 20px;
+          }
+        }
+      }
+    }
+
+    table.nostyle {
+
+      margin-bottom: 20px;
+      font-size: 14px;
+
+      tr {
+        background: none !important;
+        border: none;
+
+        td, th {
+          background: none !important;
+          border: none;
+        }
+      }
+    }
+
+    table.datalist {
+
+      font-size: 14px;
+      margin-bottom: 20px;
+
+      th {
+        padding: 20px 10px;
+      }
+
+    }
+
+    i.fa {
+
+      &.fa-trash,
+      &.fa-search-plus,
+      &.fa-cog {
+        background-repeat: no-repeat;
+        background-size: cover;
+        vertical-align: middle;
+
+        &:before {
+          content: none;
+        }
+      }
+    }
+
+    i.fa-trash {
+      background-image: url("[[pix:theme|trash]]");
+    }
+
+    i.fa-cog {
+      background-image: url("[[pix:theme|editdata]]");
+      width: 18px;
+      height: 18px;
+    }
+
+    i.fa-search-plus {
+      background-image: url("[[pix:theme|loupe]]");
+    }
+
+    .tablelabel {
+      text-align: right;
+      width: 260px;
+      padding-right: 26px;
+
+      @media (max-width: 767.98px) {
+        text-align: left;
+        width: auto;
+      }
+    }
+
+    .tablevalue {
+      font-weight: bold;
+
+      p {
+        margin-bottom: 0;
+      }
+    }
+
+    div.newsheet {
+      .inline-req {
+        margin-left: -27px;
+      }
+
+      td {
+        padding-bottom: 20px;
+      }
+
+      td.formlabel {
+        width: 400px;
+        font-size: 16px;
+        vertical-align: top;
+        padding-right: 30px;
+      }
+
+      h3 {
+        font-size: 18px;
+      }
+    }
+
+    img.list_picture {
+      max-height: 500px;
+      height: auto;
+      width: auto;
+      max-width: 500px;
+
+      @media (max-width: 767.98px) {
+        max-width: 210px;
+      }
+    }
+
+    .search_inline {
+      table {
+        tr {
+          background: none !important;
+
+          td {
+            border: none !important;
+
+            .form-control {
+              margin-bottom: 20px;
+            }
+          }
+        }
+      }
+
+      input[type="submit"] {
+        margin-left: 0 !important;
+      }
+    }
+
+    #printbutton {
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 767.98px) {
+      .nav-tabs .nav-item,
+      .nav-pills .nav-item {
+        margin-bottom: 5px;
+      }
+
+      #selectall-listview-entries {
+        margin-bottom: 5px;
+
+        & + .btn-secondary {
+          margin-bottom: 5px;
+        }
+      }
+    }
+
+  }
+}

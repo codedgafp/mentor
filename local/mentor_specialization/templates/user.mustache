@@ -1,0 +1,81 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_mentor_specialization/user
+
+    This template renders the user management page.
+
+    Example context (json):
+    {
+        "manageurl" : "link to the entity role management page",
+        "entities" : [
+            {
+                "id" : 1,
+                "name" : "Entity 1"
+            },
+            {
+                "id" : 2,
+                "name" : "Entity 2"
+            }
+        ],
+        "regions" : [
+            {
+                "name" : "Region 1"
+            },
+            {
+                "name" : "Region 2"
+            }
+        ]
+    }
+}}
+
+<div id="manageroles">
+    <a id="btn-manageroles" href="{{ manageurl }}" target="__blank" class="btn-secondary">
+        {{# str }} manageroles, local_user {{/ str }}
+    </a>
+</div>
+
+{{# ismanager }}
+    <div id="user-buttons">
+        <a id="addusers" href="#" class="dt-button btn btn-primary">{{# str }} adduser, local_user {{/ str }}</a>
+        <a href="{{ importusersurl }}" class="dt-button btn btn-primary">{{# str }} importusersglobal, local_mentor_core {{/ str }}</a>
+        <a id="mergeusers" href="{{ mergeusersurl }}" class="dt-button btn btn-primary" title="{{# str }} mergeusers_help,
+            local_mentor_core {{/ str }}">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>{{# str }} mergeusers, local_mentor_core {{/ str }}
+        </a>
+        {{# suspendusersurl }}
+        <a href="{{ suspendusersurl }}" class="dt-button btn btn-primary">{{# str }} suspendusers, local_mentor_core {{/ str }}</a>
+        {{/suspendusersurl}}
+    </div>
+{{/ ismanager }}
+
+{{> local_user/filters }}
+
+<table id="user-admin-table">
+    <thead>
+    <tr>
+        <th class="header-lastname">{{# str }} lastname, moodle {{/ str }}</th>
+        <th class="header-firstname">{{# str }} firstname, moodle {{/ str }}</th>
+        <th class="header-email">{{# str }} email, moodle {{/ str }}</th>
+        <th class="header-entity">{{# str }} connectingmainentity, local_mentor_specialization {{/ str }}</th>
+        <th class="header-lastconnection">{{# str }} lastconnection, local_user {{/ str }}</th>
+        <th class="header-actions">{{# str }} actions, moodle {{/ str }}</th>
+    </tr>
+    </thead>
+</table>
+
+{{> local_mentor_specialization/add_user_popup }}

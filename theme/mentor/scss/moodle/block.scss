@@ -1,0 +1,11 @@
+.block {
+  border-radius: 4px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+  background-color: $white;
+  border: none;
+
+  h2, h4, h5 {
+    line-height: 24px;
+    font-size: 20px;
+  }
+}

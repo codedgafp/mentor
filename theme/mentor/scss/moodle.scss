@@ -1,0 +1,46 @@
+@import "../../boost/scss/moodle";
+@import "dsfr";
+@import "moodle/variables";
+@import "moodle/main";
+@import "moodle/fonts";
+@import "moodle/tabs";
+@import "moodle/form";
+@import "moodle/header";
+@import "moodle/footer";
+@import "moodle/drawer";
+@import "moodle/popup";
+@import "moodle/block";
+@import "moodle/course";
+@import "moodle/my";
+@import "moodle/atto_templates";
+@import "moodle/login";
+@import "moodle/signup";
+@import "moodle/admin";
+@import "moodle/activities";
+@import "moodle/user";
+@import "moodle/datatable";
+
+// Activities
+@import "moodle/mod_assign";
+@import "moodle/mod_choice";
+@import "moodle/mod_customcert";
+@import "moodle/mod_data";
+@import "moodle/mod_forum";
+@import "moodle/mod_questionnaire";
+@import "moodle/mod_quiz";
+@import "moodle/mod_scorm";
+@import "moodle/mod_wiki";
+@import "moodle/mod_glossary";
+
+// Blocks
+@import "moodle/block_completion_progress";
+@import "moodle/block_summary";
+@import "moodle/block_calendar_upcoming";
+
+// Formats
+@import "moodle/format_buttons";
+@import "moodle/format_tiles";
+@import "moodle/format_topics";
+
+// Other plugins
+@import "moodle/local_staticpages";

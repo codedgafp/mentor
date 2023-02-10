@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<report version="2020110300">
+    <visible><![CDATA[1]]></visible>
+    <name><![CDATA[Sessions disponibles par espace]]></name>
+    <summary>
+        <![CDATA[<p dir="ltr" style="text-align:left;"></p><div><div><div><div><dl><dt><span style="font-size:.9375rem;font-weight:400;">Nombre de session ('inscriptions ouvertes' + 'en cours') d'un espace dédié + Nombre de sessions (des autres) partagées à cet espace dédié (spécifiquement ou tous) à l'instant T -  (par espace)</span><br /></dt></dl></div></div></div></div><br /><p></p>]]></summary>
+    <summaryformat><![CDATA[1]]></summaryformat>
+    <type><![CDATA[sql]]></type>
+    <pagination><![CDATA[0]]></pagination>
+    <components>
+        <![CDATA[YTo0OntzOjk6ImN1c3RvbXNxbCI7YToxOntzOjY6ImNvbmZpZyI7Tzo4OiJzdGRDbGFzcyI6Njp7czo4OiJxdWVyeXNxbCI7czoxNDg0OiIrKysrU0VMRUNUJTBEJTBBKysrKysrKytjYy5uYW1lK2FzK0VzcGFjZSUyQyslMjglMEQlMEErKysrKysrKysrKytTRUxFQ1QrQ09VTlQlMjhzLmlkJTI5JTBEJTBBKysrKysrKysrKysrRlJPTStwcmVmaXhfc2Vzc2lvbitzJTBEJTBBKysrKysrKysrKysrSk9JTitwcmVmaXhfY291cnNlK2MrT04rcy5jb3Vyc2VzaG9ydG5hbWUrJTNEK2Muc2hvcnRuYW1lJTBEJTBBKysrKysrKysrKysrSk9JTitwcmVmaXhfY291cnNlX2NhdGVnb3JpZXMrY2MyK09OK2MuY2F0ZWdvcnkrJTNEK2NjMi5pZCUwRCUwQSsrKysrKysrKysrK1dIRVJFJTBEJTBBKysrKysrKysrKysrKysrKyUyOHMuc3RhdHVzKyUzRCslMjdpbnByb2dyZXNzJTI3JTBEJTBBJTA5KysrKysrKysrKysrT1IlMEQlMEErKysrKysrKysrKysrKysrcy5zdGF0dXMrJTNEKyUyN29wZW5lZHJlZ2lzdHJhdGlvbiUyNyUyOSUwRCUwQSsrKysrKysrKysrKysrKytBTkQrJTBEJTBBKysrKysrKysrKysrKysrK2NjMi5wYXRoK0xJS0UrQ09OQ0FUJTI4JTI3JTVDJTJGJTI3JTJDK2NjLmlkKyUyQyUyNyU1QyUyRiUyNSUyNyUyOSUwRCUwQSsrKysrKysrJTI5K0FTK291dmVydGVzJTJDJTBEJTBBKysrKysrKyslMjglMEQlMEErKysrKysrKysrKytTRUxFQ1QrK0NPVU5UJTI4czIuaWQlMjklMEQlMEErKysrKysrKysrKytGUk9NK3ByZWZpeF9zZXNzaW9uK3MyJTBEJTBBKysrKysrKysrKysrSk9JTitwcmVmaXhfY291cnNlK2MyK09OK3MyLmNvdXJzZXNob3J0bmFtZSslM0QrYzIuc2hvcnRuYW1lJTBEJTBBKysrKysrKysrKysrSk9JTitwcmVmaXhfY291cnNlX2NhdGVnb3JpZXMrY2MzK09OK2MyLmNhdGVnb3J5KyUzRCtjYzMuaWQlMEQlMEErKysrKysrKysrKytXSEVSRSUwRCUwQSsrKysrKysrKysrKysrKyslMjhzMi5zdGF0dXMrJTNEKyUyN2lucHJvZ3Jlc3MlMjclMEQlMEElMDkrKysrKysrKysrKytPUiUwRCUwQSsrKysrKysrKysrKysrKytzMi5zdGF0dXMrJTNEKyUyN29wZW5lZHJlZ2lzdHJhdGlvbiUyNyUyOSUwRCUwQSsrKysrKysrKysrKysrKytBTkQrJTBEJTBBKysrKysrKysrKysrKysrK2NjMy5wYXRoK05PVCtMSUtFK0NPTkNBVCUyOCUyNyU1QyUyRiUyNyUyQytjYy5pZCslMkMlMjclNUMlMkYlMjUlMjclMjklMEQlMEErKysrKysrKysrKysrKysrQU5EKyUwRCUwQSsrKysrKysrKysrKysrKyslMjhzMi5vcGVudG8rJTNEKyUyN2FsbCUyNytPUitjYy5pZCtJTislMjhTRUxFQ1QrY291cnNlY2F0ZWdvcnlpZCtGUk9NK3ByZWZpeF9zZXNzaW9uX3NoYXJpbmcrV0hFUkUrc2Vzc2lvbmlkKyUzRCtzMi5pZCUyOSUyOSUwRCUwQSsrKysrKysrJTI5K0FTK3BhcnRhZ2VlcyUwRCUwQSsrKysrKysrKysrKyUwRCUwQSsrKytGUk9NJTBEJTBBKysrKysrKytwcmVmaXhfY291cnNlX2NhdGVnb3JpZXMrY2MlMEQlMEErKysrV0hFUkUlMEQlMEErKysrKysrK2NjLnBhcmVudCslM0QrMCslMEQlMEElMDlPUkRFUitCWSslMEQlMEElMDklMDljYy5uYW1lK0FTQyI7czo4OiJjb3Vyc2VpZCI7aToxO3M6MTI6InN1Ym1pdGJ1dHRvbiI7czoxMToiRW5yZWdpc3RyZXIiO3M6MTY6InJlcG9ydGNhdGVnb3JpZXMiO3M6MToiMCI7czoxNzoicmVwb3J0c2luY2F0ZWdvcnkiO3M6MToiMCI7czoxNDoicmVtb3RlcXVlcnlzcWwiO3M6MDoiIjt9fXM6NToiY2FsY3MiO2E6MTp7czo4OiJlbGVtZW50cyI7YTowOnt9fXM6MTE6InBlcm1pc3Npb25zIjthOjE6e3M6NjoiY29uZmlnIjtPOjg6InN0ZENsYXNzIjoxOntzOjEzOiJjb25kaXRpb25leHByIjtzOjA6IiI7fX1zOjQ6InBsb3QiO2E6MTp7czo4OiJlbGVtZW50cyI7YTowOnt9fX0=]]></components>
+    <export><![CDATA[csv,xls,]]></export>
+    <jsordering><![CDATA[1]]></jsordering>
+    <global><![CDATA[1]]></global>
+    <lastexecutiontime><![CDATA[7]]></lastexecutiontime>
+    <cron><![CDATA[0]]></cron>
+    <remote><![CDATA[0]]></remote>
+</report>

@@ -1,0 +1,161 @@
+@responsive-size: 800px;
+
+#page-course-view-edadmin {
+  #trainings-buttons {
+    flex-direction: column !important;
+
+    #trainings-buttons-actions {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #trainings-buttons-filter {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      margin-top: 20px;
+
+      #filter-title {
+        font-weight: bold;
+
+        i {
+          padding-right: 5px;
+        }
+      }
+
+      #filter-actions {
+        display: flex;
+        justify-content: flex-start;
+        align-items: end;
+        -webkit-align-items: flex-end;
+        margin-top: 5px;
+
+        @media (max-width: @responsive-size) {
+          flex-direction: column;
+          align-items: baseline;
+          width: 100%;
+        }
+
+        & > div {
+          display: flex;
+          flex-direction: column;
+          margin-right: 10px;
+
+          @media (max-width: @responsive-size) {
+            width: 100%;
+          }
+
+          select {
+            border: 1px solid #0154d4;
+            width: 190px;
+
+            &#collection-select {
+              width: 300px;
+            }
+          }
+
+          span {
+            @media (max-width: @responsive-size) {
+              width: 100% !important;
+            }
+
+            &.select2 {
+              ::-webkit-input-placeholder {
+                /* Chrome/Opera/Safari */
+                color: black;
+              }
+
+              ::-moz-placeholder {
+                /* Firefox 19+ */
+                color: black;
+              }
+
+              :-ms-input-placeholder {
+                /* IE 10+ */
+                color: black;
+              }
+
+              :-moz-placeholder {
+                /* Firefox 18- */
+                color: black;
+              }
+            }
+          }
+        }
+
+        .filters-button {
+          display: flex;
+          flex-direction: inherit;
+          align-items: baseline;
+
+          button {
+            @media (max-width: @responsive-size) {
+              margin-top: 20px;
+              align-items: baseline;
+            }
+
+            &#filter-reset {
+
+              @media (max-width: @responsive-size) {
+                padding: 0;
+                margin: 20px 0 0;
+              }
+
+              &:hover {
+                text-decoration: none;
+              }
+
+              &:focus {
+                -webkit-box-shadow: none;
+                box-shadow: none;
+              }
+            }
+          }
+
+          #filter-apply {
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#page-local-trainings-pages-update_training,
+#page-local-trainings-pages-add_training {
+  #training-preview {
+    color: rgb(0, 0, 145) !important;
+    box-shadow: inset 0 0 0 1px rgb(0, 0, 145);
+    background-color: #FFF !important;
+    background-image: none !important;
+    padding: 7px 15px 7px 15px !important;
+    border-radius: 0 !important;
+    border: none !important;
+    font-size: 14px !important;
+
+    &:hover {
+      color: rgb(0, 0, 145);
+    }
+
+    &:active {
+      color: rgba(194, 194, 194, 0.5);
+    }
+
+    &:active,
+    &:hover {
+      background-color: #FFF;
+      background-image: linear-gradient(0deg, rgba(224, 224, 224, 0.5), rgba(224, 224, 224, 0.5)) !important;
+    }
+
+    &:focus {
+      outline-offset: 2px;
+      outline: rgb(42, 127, 254) solid 2px;
+      background-color: #FFF;
+      color: rgb(0, 0, 145);
+      border: none;
+      box-shadow: rgb(0, 0, 145) 0px 0px 0px 1px inset;
+    }
+  }
+}

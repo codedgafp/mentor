@@ -1,0 +1,250 @@
+.ui-widget {
+  font-family: "Marianne",Arial,sans-serif !important;
+}
+
+.ui-dialog,
+.modal-dialog {
+  z-index: 10000 !important;
+  border: none !important;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 16px 16px -16px rgba(0, 0, 0, 0.32);
+  background-color: $white;
+  padding: 24px 22px 20px 22px !important;
+  border-radius: 0 !important;
+  min-width: 400px;
+
+  .ui-widget-header,
+  .modal-header {
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #161616;
+    background: $white;
+    border: none;
+  }
+
+  .modal-header {
+    padding: 0 !important;
+    margin-bottom: 16px !important;
+
+    h4 {
+      padding-left: 40px !important;
+      background-image: url("[[pix:theme|arrow_black]]");
+      background-position: center left;
+      background-repeat: no-repeat;
+      background-size: 32px 32px;
+    }
+  }
+
+  .ui-dialog-titlebar {
+    padding: 0 !important;
+    margin-bottom: 16px !important;
+    background-image: url("[[pix:theme|arrow_black]]");
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
+    padding-left: 40px !important;
+  }
+
+  .ui-dialog-title,
+  .modal-title {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #161616;
+  }
+
+  .modal-title {
+    padding-left: 40px !important;
+    background-image: url("[[pix:theme|arrow_black]]");
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
+  }
+
+  button.close,
+  .ui-dialog-titlebar-close {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none;
+    top: -4px !important;
+    right: -12px !important;
+    content: "";
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    background-image: url("[[pix:theme|close_blue]]") !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-color: $white !important;
+    opacity: 1;
+
+    &:hover, &:active, &:focus {
+      border: none !important;
+      opacity: 0.7;
+      background-image: url("[[pix:theme|close_blue]]") !important;
+      background-position: center center !important;
+      background-repeat: no-repeat !important;
+      background-color: $white !important;
+    }
+
+    &:focus {
+      outline-offset: 1px;
+      outline: rgb(42, 127, 254) solid 2px;
+    }
+
+    span {
+      display: none;
+    }
+  }
+
+  .modal-content {
+    border: none !important;
+  }
+
+  .ui-dialog-content,
+  .modal-body {
+    font-size: 14px;
+    line-height: 1.71;
+    color: $modaltextcolor;
+    padding: 0 !important;
+    border: none !important;
+
+    label {
+      font-size: 14px;
+    }
+  }
+
+  .ui-dialog-buttonpane,
+  .modal-footer {
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-top: 32px !important;
+    border: none;
+
+    button {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+  }
+
+  select,
+  .custom-select {
+
+    &:focus {
+      border: 2px solid rgb(17 119 209 / 75%);
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+}
+
+#page-admin-tool-mergeusers-index_mentor .moodle-dialogue {
+  z-index: 10000 !important;
+  border: none !important;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 16px 16px -16px rgba(0, 0, 0, 0.32);
+  background-color: $white;
+  padding: 24px 22px 20px 22px !important;
+  border-radius: 0 !important;
+  min-width: 400px;
+
+  .moodle-dialogue-wrap {
+    border: none;
+  }
+
+  .moodle-dialogue-hd {
+    padding: 0 !important;
+    margin-bottom: 16px !important;
+    background-image: url("[[pix:theme|arrow_black]]") !important;
+    background-position: center left !important;
+    background-repeat: no-repeat !important;
+    background-size: 32px 32px !important;
+    padding-left: 40px !important;
+    min-height: auto !important;
+    border: none !important;
+    font-size: inherit !important;
+
+    h1 {
+      margin: 0 !important;
+      padding: 0 !important;
+      font-size: 24px !important;
+      font-weight: 700;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.33;
+      letter-spacing: normal;
+      color: #161616;
+    }
+  }
+
+  .moodle-dialogue-bd {
+    padding: 0 !important;
+  }
+
+  .confirmation-message {
+    font-size: 14px;
+    line-height: 1.71;
+    color: $modaltextcolor;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  .confirmation-buttons {
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-top: 32px !important;
+    border: none;
+    justify-content: right !important;
+
+    input[type="button"],
+    button {
+      margin: 0 0.4em 0 0;
+    }
+  }
+
+  .closebutton {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none;
+    top: -4px !important;
+    right: -12px !important;
+    content: "";
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    background-image: url("[[pix:theme|close_blue]]") !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-color: $white !important;
+    opacity: 1;
+
+    &:hover, &:active, &:focus {
+      border: none !important;
+      opacity: 0.7;
+      background-image: url("[[pix:theme|close_blue]]") !important;
+      background-position: center center !important;
+      background-repeat: no-repeat !important;
+      background-color: $white !important;
+    }
+
+    &:focus {
+      outline-offset: 1px;
+      outline: rgb(42, 127, 254) solid 2px;
+    }
+
+    &::after {
+      content: "" !important;
+    }
+
+    span {
+      display: none;
+    }
+  }
+}

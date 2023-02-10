@@ -1,0 +1,27 @@
+#page-admin-user {
+  // Hide the native department field from profile fields filter
+  #fgroup_id_department_grp {
+    display: none;
+  }
+
+  .admintable {
+    td.header {
+      border-bottom: 2px solid #6a6a6a;;
+      border-top: none;
+      background-color: #f9f8f6;
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+
+    th.c5 {
+      min-width: 90px;
+    }
+  }
+}
+
+#page-admin-roles-assign,
+#page-admin-tool-recyclebin-index {
+  .backlink {
+    display: none;
+  }
+}

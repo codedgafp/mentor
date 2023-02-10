@@ -1,0 +1,313 @@
+@import "../../catalog/less/training";
+
+#page-course-view-edadmin {
+
+  #destinationsubentity-container {
+    display: none;
+  }
+
+  #trainings-table_wrapper.dataTables_wrapper {
+    .dt-buttons {
+      text-align: right;
+
+      button {
+        margin-right: 0 !important;
+      }
+    }
+  }
+
+
+  #create-session-popup {
+    overflow: unset;
+
+    #create-session-message {
+      margin-top: 17px;
+      color: red;
+    }
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+
+      input {
+        margin: 0;
+      }
+
+      select {
+        width: 100% !important;
+      }
+    }
+  }
+
+  .confirm-dialog {
+    #create-session-popup {
+      align-items: center;
+      justify-content: center;
+
+      &[style*='display: block'] {
+        display: flex !important;
+        gap: 15px;
+      }
+    }
+  }
+
+  #move-training-popup,
+  #create-session-popup,
+  #duplicate-training-popup {
+    display: none;
+    flex-direction: column;
+    padding-top: 12px;
+
+    #movetrainingmessage {
+      margin-bottom: 20px;
+    }
+
+    #entity {
+      width: 370px;
+    }
+  }
+
+  #duplicate-training-popup {
+
+    &.ui-dialog-content {
+      display: flex !important;
+    }
+
+    #duplicate-form {
+      margin-top: 20px;
+      margin-left: 30px;
+      text-align: left;
+
+      div {
+        margin-bottom: 10px;
+      }
+    }
+
+    #trainingshortname,
+    #destinationentity,
+    #destinationsubentity {
+      width: 300px;
+      margin-bottom: 10px;
+    }
+
+    label {
+      width: 250px;
+    }
+  }
+
+  #create-training-popup {
+    display: none;
+    flex-direction: column;
+    padding-top: 12px;
+
+    #create-training-popup-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      select {
+        width: 90%;
+      }
+    }
+  }
+
+  #duplicate-training-message {
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ui-dialog {
+    #duplicate-training-message {
+      display: flex !important;
+    }
+
+    .ui-dialog-content {
+      position: relative;
+
+      #session-name-used, #training-name-used {
+        display: none;
+        position: absolute;
+        bottom: 0;
+        color: red;
+        font-size: .9em;
+      }
+
+      #session-name-used {
+        width: 97%;
+      }
+    }
+  }
+
+  #trainings-table {
+
+    width: 100% !important;
+    font-size: 14px;
+
+    td, th {
+      font-size: 14px;
+    }
+
+    th.action-admin-trainings {
+      min-width: 90px;
+      max-width: 90px;
+    }
+
+    td.action-admin-trainings {
+
+      text-align: center;
+
+      & > div {
+        width: 20%;
+        float: left;
+
+        img {
+
+          width: 16px;
+          height: 16px;
+
+          &.cursor-image-training-admin-trainings {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+  }
+
+  #duplicate-training-modal-content-admin-trainings {
+    div {
+      text-align: center;
+      margin: 20px;
+    }
+  }
+
+  .text-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  #name-session-create-admin-session {
+    margin: 10px;
+  }
+
+  #trainings-buttons {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-bottom: 5px;
+
+    form {
+      display: inline-block;
+    }
+
+    #recyclebin {
+      display: inline-block;
+      text-align: right;
+      height: 36px;
+      padding: 7px 20px 7px 42px !important;
+      background-image: url([[pix:local_trainings|trash]]) !important;
+      background-position: 20px center !important;
+      background-repeat: no-repeat !important;
+
+      a {
+        color: #000091;
+
+        &:hover, &:active, &:focus {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+}
+
+#page-local-trainings-pages-update_training {
+  #fitem_id_creativestructurestatic {
+    img {
+      margin-left: 10px;
+    }
+  }
+}
+
+#page-course-edit {
+  #id_general,
+  #id_descriptionhdr,
+  #fitem_id_shortname,
+  #fitem_id_category,
+  #fitem_id_fullname,
+  #fitem_id_startdate,
+  #fitem_id_enddate {
+    display: none;
+  }
+}
+
+#page-local-trainings-pages-training {
+  .catalog-pages-training;
+}
+
+#page-local-trainings-pages-add_training,
+#page-local-trainings-pages-update_training {
+  #warningsinfo {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+
+    .text-warning {
+      color: #fc5d00 !important;
+    }
+  }
+
+  #fitem_id_currentthumbnail,
+  #fitem_id_catchphrase,
+  #fitem_id_traininggoal,
+  #fitem_id_content,
+  #fitem_id_trainingmodalities {
+    span.d-inline-block,
+    label.d-inline {
+      width: 100%;
+
+      .text-warning {
+        float: right;
+        color: #fc5d00 !important;
+      }
+    }
+
+    .fa-question-circle {
+      margin-top: 3px;
+    }
+  }
+
+  #fitem_id_content {
+    .fa-question-circle {
+      margin-top: 4px;
+    }
+  }
+
+  @media (width: 1366px) {
+    #fitem_id_thumbnail {
+      .fa-exclamation-circle {
+        margin-top: 3px;
+      }
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1919px) {
+    .col-md-3 {
+      flex: 0 0 30%;
+      max-width: 30%;
+    }
+
+    .col-md-9 {
+      flex: 0 0 70%;
+      max-width: 70%;
+    }
+  }
+
+
+}

@@ -1,0 +1,18 @@
+.path-mod {
+
+  .activity-navigation {
+    display: none;
+    background-color: rgba(7, 98, 200, 0.06);
+    padding: 12px 25px 12px 20px;
+    color: $maincolor;
+
+    #prev-activity-link,
+    #next-activity-link {
+      font-weight: bold;
+    }
+
+    #jump-to-activity {
+      color: $maincolor;
+    }
+  }
+}

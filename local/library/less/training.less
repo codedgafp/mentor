@@ -1,0 +1,625 @@
+@header-link-and-certificate-with: 220px;
+@teaser-part-width: 350px;
+@teaser-part-width-tablet: 300px;
+
+#page-local-library-pages-training {
+  .page-header-headings {
+    h1 {
+      display: none;
+    }
+  }
+
+  #region-main-box {
+    @media (max-width: 767px) {
+      padding: 0;
+    }
+  }
+
+  .card-body {
+    #page-navbar {
+      @media (max-width: 767px) {
+        margin-bottom: 0;
+      }
+
+      .breadcrumb {
+        @media (max-width: 767px) {
+          padding-bottom: 0;
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .prevstep {
+      @media (max-width: 767px) {
+        padding-bottom: 11px;
+      }
+    }
+  }
+
+  button:focus-visible {
+    box-shadow: none;
+    outline: solid 2px #0a76f6 !important;
+    outline-offset: 4px !important;
+  }
+
+  #region-main {
+    padding: 29px;
+
+    @media (max-width: 767px) {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    @media (max-width: 640px) {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    #training-library-header {
+      padding-bottom: 45px;
+
+      @media (max-width: 950px) {
+        padding-bottom: 20px;
+      }
+
+      @media (max-width: 767px) {
+        padding-right: 20px;
+        padding-left: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #383838;
+        width: ~"calc(100% - (@{header-link-and-certificate-with} + 100px))";
+        display: inline-block;
+
+        @media (max-width: 950px) {
+          width: 100%;
+          margin-bottom: 1rem;
+        }
+
+        @media (max-width: 500px) {
+          font-size: 20px;
+        }
+      }
+
+      div:last-child {
+        float: right;
+
+        @media (max-width: 950px) {
+          display: flex;
+          width: 100%;
+          float: unset;
+          clear: both;
+        }
+
+        .copy-link {
+          cursor: pointer;
+          color: #000091;
+          text-decoration: none;
+          background-color: transparent;
+          border: none;
+          padding-right: 20px;
+
+          &:hover {
+            text-decoration: underline;
+            color: inherit;
+          }
+
+          &:focus {
+            outline: none;
+            border: none;
+          }
+        }
+
+        button {
+          height: 28px;
+
+          .icon {
+            margin-right: 2px;
+          }
+        }
+
+        .certifying {
+          float: right;
+
+          @media (max-width: 950px) {
+            float: unset;
+            clear: both;
+            width: 118px;
+          }
+        }
+      }
+    }
+
+    #training-library-content {
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 16px;
+
+      .creator-information {
+        width: ~"calc(100% - (@{teaser-part-width} + 30px))";
+        display: inline-block;
+        padding-bottom: 34px;
+
+        @media (max-width: 1200px) {
+          width: ~"calc(100% - (@{teaser-part-width-tablet} + 30px))";
+        }
+
+        @media (max-width: 950px) {
+          width: 100%;
+        }
+
+        @media (max-width: 767px) {
+          padding-right: 20px;
+          padding-left: 20px;
+        }
+
+        .collections {
+          margin-left: 0;
+
+          .collection {
+            padding: 5px 12px 5px 12px;
+            margin: 0 20px 20px 0;
+            text-align: center;
+            font-weight: 500;
+            font-size: 12px;
+
+            @media (max-width: 950px) {
+              margin: 0 10px 16px 0;
+            }
+          }
+        }
+
+        .suggestedby {
+          &.no-producer {
+            margin-bottom: 0;
+          }
+        }
+
+        .producer-card {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          border: solid 1px #e5e5e5;
+          padding: 13px;
+          width: fit-content;
+
+          @media (max-width: 700px) {
+            display: block;
+          }
+
+          .logo {
+            width: auto;
+            height: 80px;
+            margin-right: 13px;
+            place-self: center;
+
+            @media (max-width: 700px) {
+              margin-right: 0;
+              margin-bottom: 13px;
+            }
+          }
+
+          p {
+            margin: 0;
+          }
+        }
+      }
+
+      .teaser-part {
+        width: @teaser-part-width;
+        float: right;
+
+        @media (max-width: 1200px) {
+          width: @teaser-part-width-tablet;
+        }
+
+        @media (max-width: 950px) {
+          float: unset;
+          clear: both;
+          width: 100%;
+          padding-bottom: 31px;
+        }
+
+        @media (max-width: 767px) {
+          padding-right: 20px;
+          padding-left: 20px;
+        }
+
+        @media (max-width: 500px) {
+          text-align: center;
+        }
+
+        .teaser {
+          margin-left: auto;
+
+          .mentor-video, .picture {
+            height: 160px;
+            width: 284px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            float: right;
+
+            @media (max-width: 950px) {
+              clear: both;
+              float: unset;
+            }
+          }
+
+          .mentor-video {
+            height: 160px;
+          }
+
+          .picture {
+            border: solid 1px #e5e5e5;
+            height: auto;
+            max-height: 160px;
+          }
+        }
+
+        .idsirh {
+          text-align: right;
+
+          @media (max-width: 950px) {
+            text-align: left;
+          }
+        }
+
+        #training-course-url {
+          float: right;
+          margin-top: 34px;
+
+          @media (max-width: 950px) {
+            float: unset;
+            clear: both;
+          }
+        }
+      }
+
+      #training-objective {
+        width: ~"calc(100% - (@{teaser-part-width} + 30px))";
+        display: inline-block;
+        padding-bottom: 23px;
+
+        @media (max-width: 1200px) {
+          width: ~"calc(100% - (@{teaser-part-width-tablet} + 30px))";
+        }
+
+        @media (max-width: 950px) {
+          width: 100%;
+        }
+
+        @media (max-width: 767px) {
+          padding-right: 20px;
+          padding-left: 20px;
+        }
+
+        button {
+          height: 35px;
+        }
+
+        .details {
+          max-width: 700px;
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          position: relative;
+
+          button {
+            color: #000091 !important;
+            font-size: 16px;
+            border: none;
+            background-color: white;
+            padding: 5px 0 20px 0;
+
+            &:focus {
+              outline: none;
+            }
+          }
+
+          .training-goal {
+
+            .goal-break-line {
+              display: block;
+              height: 1rem;
+              content: " ";
+            }
+
+            &.text-truncate {
+              overflow: hidden !important;
+              -webkit-box-orient: vertical;
+              -moz-box-orient: vertical;
+              display: block;
+              display: -webkit-box;
+              text-overflow: ellipsis;
+              -webkit-line-clamp: 4;
+              white-space: unset;
+
+              p {
+                margin-bottom: 0;
+              }
+            }
+          }
+        }
+
+        .training-goal.truncate {
+          max-height: 126px;
+          overflow: hidden;
+        }
+
+        .show-more {
+          position: relative;
+        }
+
+        #gradientmask {
+          background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, .6), #fff);
+          content: " ";
+          height: 80px;
+          left: 0;
+          position: absolute;
+          bottom: 33px;
+          width: 100%;
+          cursor: pointer;
+        }
+      }
+
+      #training-details {
+        padding-top: 50px;
+
+        nav {
+          @media (max-width: 803px) {
+            overflow: auto;
+          }
+
+          .nav-tabs {
+            @media (max-width: 803px) {
+              background-color: white;
+              overflow: scroll;
+              border-bottom: 1px solid #dee2e6;
+              flex-wrap: unset;
+              width: max-content;
+              padding-bottom: 0;
+            }
+
+            .nav-link {
+              margin-left: 10px;
+              background-color: #e3e3fd;
+              border: none;
+              color: #161616;
+              font-weight: bold;
+
+              &.active {
+                background-color: #fff;
+                color: #000091;
+                border-top: solid 3px #000091;
+                border-right: 1px solid #dee2e6;
+                border-left: 1px solid #dee2e6;
+              }
+
+              &:not(.active) {
+                &:hover {
+                  background-color: #bfbffa;
+                  border-bottom: 2px solid #bfbffa;
+                }
+              }
+
+              &:focus {
+                outline: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+              }
+
+              @media (max-width: 803px) {
+                margin-bottom: 0;
+              }
+
+              @media (max-width: 803px) {
+                padding: 5px 14px;
+                font-size: 14px;
+              }
+            }
+          }
+        }
+
+        .tab-content {
+          padding: 20px;
+          max-width: 700px;
+
+          @media (max-width: 803px) {
+            padding-right: 20px;
+            padding-left: 20px;
+          }
+        }
+      }
+
+      #training-estimated-time {
+        padding-bottom: 9px;
+      }
+
+      #training-time-publication {
+        padding-bottom: 13px;
+      }
+
+      #training-estimated-time,
+      #training-time-publication {
+        .icon {
+          margin-right: 7px;
+        }
+
+        @media (max-width: 767px) {
+          padding-right: 20px;
+          padding-left: 20px;
+        }
+      }
+
+      #action-tiles {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 16px;
+
+        @media (max-width: 1024px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 767px) {
+          grid-template-columns: repeat(1, 1fr);
+          padding-right: 20px;
+          padding-left: 20px;
+        }
+
+        #demonstration-action,
+        #import-action {
+          width: 344px;
+          height: 150px;
+          border: solid 1px #e5e5e5;
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          justify-content: space-between;
+          border-bottom: solid 4px #000091;
+          background-color: white;
+          text-align: initial;
+          color: rgb(0, 0, 0);
+
+          @media (max-width: 500px) {
+            padding: 15px 10px;
+            min-height: 136px;
+          }
+
+          &:focus {
+            outline: none;
+          }
+
+          p {
+            margin-bottom: 0;
+
+            &.title {
+              font-weight: bold;
+            }
+
+            &.description {
+              font-size: 14px;
+            }
+
+            &.action {
+              align-self: end;
+              color: #000091;
+            }
+          }
+
+          p.action {
+            .icon {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+
+        #demonstration-action {
+          p.action {
+            .icon {
+              margin-right: 0;
+              margin-left: 7px;
+            }
+          }
+        }
+
+        #import-action {
+          position: relative;
+
+          .help_button {
+            position: absolute;
+            right: 20px;
+            width: 16px;
+            height: 16px;
+
+            &:focus {
+              -webkit-box-shadow: none;
+              box-shadow: none;
+            }
+
+            i {
+              color: unset !important;
+              width: 16px;
+              height: 16px;
+
+              &::before {
+                content: url([[pix:local_library|info]]);
+              }
+            }
+          }
+
+          p.action {
+            .icon {
+              margin-right: 7px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #import-to-entity {
+    display: none;
+    margin: 10px;
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      div {
+        margin: 10px;
+
+        @media (max-width: 600px) {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        input,
+        select {
+          float: right;
+          width: 300px;
+        }
+
+        .select2-container {
+          float: right;
+
+          .select2-selection--single {
+            background-color: #f8f8f8;
+            min-height: 28px;
+          }
+        }
+      }
+    }
+  }
+
+  #popup-waring-message {
+    color: red;
+    margin: 10px 0;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .select2-dropdown {
+    z-index: 10000;
+  }
+
+  .ui-dialog-buttonpane {
+    margin-top: 10px !important;
+  }
+
+  .ui-widget.ui-widget-content {
+    max-width: 700px!important;
+    width: -webkit-fill-available !important;
+    width: -moz-available !important;
+    min-width: unset;
+  }
+}

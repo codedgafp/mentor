@@ -1,0 +1,61 @@
+.path-mod-scorm {
+
+  #scormviewformmentor,
+  #scormviewform {
+    input[type="submit"] {
+      display: block;
+      margin: auto;
+
+      @media (max-width: $size-xl) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  // In page
+  &#page-mod-scorm-player:not(.pagelayout-embedded) {
+
+    margin-left: 0;
+
+    #scormpage #scorm_content {
+      width: 100%;
+    }
+
+    @media (max-width: $size-md) {
+      .btn-secondary {
+        padding: 5px 16px 5px 15px!important;
+      }
+    }
+
+    #region-main-settings-menu.has-blocks, #region-main.has-blocks {
+      width: 100%;
+    }
+
+    #course-status {
+      margin-right: 10px;
+    }
+
+    section[data-region="blocks-column"],
+    #nav-drawer,
+    #page-footer,
+    .navbar div[data-region="drawer-toggle"] {
+      display: none !important;
+    }
+
+  }
+
+  // Fullscreen
+  &#page-mod-scorm-player.pagelayout-embedded {
+
+    overflow: hidden;
+
+    h2 {
+      display: none;
+    }
+
+    #scormpage #scorm_object {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

@@ -1,0 +1,75 @@
+.block .minicalendar td.weekend {
+  color: #696969 !important;
+}
+
+.block_calendar_upcoming {
+  h5 {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.09;
+    color: $maintitlecolor;
+  }
+
+  .card-text {
+    .event {
+      margin-top: 29px;
+
+      img.icon {
+        display: none;
+      }
+
+      hr {
+        display: none;
+      }
+
+      a[data-type=event] {
+        margin: 0 0 8px;
+        font-size: 16px;
+        line-height: 1;
+        color: #383838;
+      }
+
+      .date {
+        margin: 8px 41px 0 0;
+        font-size: 14px;
+        line-height: 1.29;
+        color: $maincolor;
+
+        a::before {
+          color: #6a6a6a;
+          font-size: 14px;
+          line-height: 1.29;
+          content: url([[pix:theme|calendar]]) ' À venir ';
+        }
+      }
+    }
+
+    .footer {
+      margin-top: 29px;
+
+      .gotocal {
+        a {
+          font-weight: normal;
+          line-height: 1.5;
+          text-align: right;
+          color: $maincolor;
+          font-size: 14px;
+
+          &:hover {
+            text-decoration: none;
+          }
+
+          &::after {
+            font-family: 'dsfr-icon', sans-serif;
+            content: "";
+            font-weight: 700;
+            display: inline-block;
+            vertical-align: sub;
+            font-size: 18px;
+            margin-left: 2px;
+          }
+        }
+      }
+    }
+  }
+}

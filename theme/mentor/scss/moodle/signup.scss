@@ -1,0 +1,36 @@
+#page-login-signup {
+
+  .navbar {
+    .site-name {
+      margin-left: 60px;
+    }
+
+    div[data-region="drawer-toggle"] {
+      display: none !important;
+    }
+  }
+
+  #page {
+    background-image: url("[[pix:theme|login]]");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  #region-main {
+    @media(max-width: $size-md) {
+      margin-top: 40px;
+      margin-bottom: 30px;
+
+      #id_password,
+      #id_username {
+        width: 100%;
+        max-width: 335px;
+      }
+
+      .fitem .float-sm-right {
+        float: none !important;
+      }
+    }
+  }
+
+}

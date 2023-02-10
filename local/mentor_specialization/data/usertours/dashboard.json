@@ -1,0 +1,83 @@
+{
+  "name": "VG - Pr\u00e9sentation du tableau de bord",
+  "description": "Cette visite guid\u00e9e pr\u00e9sente le tableau de bord et l'acc\u00e8s aux formations",
+  "pathmatch": "\/my\/",
+  "enabled": "1",
+  "sortorder": "5",
+  "configdata": "{\"placement\":\"bottom\",\"orphan\":\"0\",\"backdrop\":\"0\",\"reflex\":\"0\",\"filtervalues\":{\"accessdate\":{\"filter_accessdate\":\"tool_usertours_accountcreation\",\"filter_accessdate_range\":0,\"filter_accessdate_enabled\":\"0\"},\"category\":[],\"course\":[],\"courseformat\":[],\"role\":[],\"theme\":[\"mentor\"]},\"majorupdatetime\":1614185648}",
+  "version": "2020061502",
+  "steps": [
+    {
+      "title": "Bienvenue sur Mentor",
+      "content": "Bienvenue sur Mentor ! \r\nMentor a \u00e9t\u00e9 pens\u00e9 pour accompagner chaque agent dans son parcours en lui proposant des choix de formations adapt\u00e9es et diverses.\r\nIl s\u2019inscrit dans la volont\u00e9 de d\u00e9velopper un outil commun de formation en ligne. ",
+      "targettype": "2",
+      "targetvalue": "",
+      "sortorder": "0",
+      "configdata": "{}"
+    },
+    {
+      "title": "Mes sessions",
+      "content": "Sur votre tableau de bord, vous pouvez avoir acc\u00e8s directement aux sessions de formations pour lesquelles vous \u00eates inscrit.",
+      "targettype": "0",
+      "targetvalue": "#instance-695-header",
+      "sortorder": "1",
+      "configdata": "{}"
+    },
+    {
+      "title": "S'inscrire",
+      "content": "Cliquez sur ce lien afin de vous inscrire \u00e0 d'autres sessions de formation.",
+      "targettype": "0",
+      "targetvalue": "#enroltosession > a",
+      "sortorder": "2",
+      "configdata": "{}"
+    },
+    {
+      "title": "Calendrier",
+      "content": "Ce bloc vous permet de visualiser tous les \u00e9v\u00e9nements li\u00e9s aux activit\u00e9s  des formations dans lesquelles vous \u00eates inscrit (contributions, tests, etc.).\r\n",
+      "targettype": "0",
+      "targetvalue": "#inst694",
+      "sortorder": "3",
+      "configdata": "{}"
+    },
+    {
+      "title": "Offre de formation",
+      "content": "Cliquez ici pour acc\u00e9der \u00e0 l'ensemble des offres de formation qui vous sont propos\u00e9es.",
+      "targettype": "0",
+      "targetvalue": "#page-wrapper > nav > ul.navbar-nav.d-none.d-md-flex > li.nav-item.catalog > a",
+      "sortorder": "4",
+      "configdata": "{}"
+    },
+    {
+      "title": "Menu",
+      "content": "Cliquez sur le bouton \"Menu\" qui vous permet d'acc\u00e9der facilement aux page suivantes : \r\n- Tableau de bord ;\r\n- Calendrier ; \r\n- Fichiers personnels ;\r\n- Banque de contenus.\r\n\r\nEn cliquant dessus vous pouvez aussi le masquer (ou l'afficher) ce qui vous permet de lib\u00e9rer plus d'espace de votre \u00e9cran pour visualiser la plateforme Mentor et ses formations.",
+      "targettype": "0",
+      "targetvalue": "#page-wrapper > nav > div > button > i",
+      "sortorder": "5",
+      "configdata": "{}"
+    },
+    {
+      "title": "Notifications",
+      "content": "Retrouvez ici toutes les notifications de la plateforme. Les notifications vous demandent souvent une action de votre part, elles vous informent notamment sur les  :\r\n - Nouveaux messages dans les forums de formations ;\r\n- Contributions \u00e0 rendre pour valider la formation ; \r\n- Activit\u00e9s des formations et de leur d\u00e9roulement ...\r\nUne nouvelle notification est symbolis\u00e9e par une bulle rouge.\r\n\r\n",
+      "targettype": "0",
+      "targetvalue": "#nav-notification-popover-container > div.popover-region-toggle.nav-link > i",
+      "sortorder": "6",
+      "configdata": "{}"
+    },
+    {
+      "title": "Tiroir des messages",
+      "content": "Cliquez sur ce bouton pour acc\u00e9der \u00e0 la messagerie instantan\u00e9e.",
+      "targettype": "0",
+      "targetvalue": "#yui_3_17_2_1_1619177661878_65 > span",
+      "sortorder": "7",
+      "configdata": "{}"
+    },
+    {
+      "title": "Acc\u00e8s au profil",
+      "content": "Cliquez sur ce bouton si vous souhaitez acc\u00e9der aux rubriques suivantes : \r\n- \"Tableau de bord\" afin de retrouver les formations dans lesquelles vous \u00eates inscrit ;\r\n- \"Profil Mentor\" afin d'acc\u00e9der \u00e0 vos informations personnelles ;\r\n- \"Messages personnels\" afin d'acc\u00e9der \u00e0 la messagerie ;\r\n- \"D\u00e9connexion\" afin de vous d\u00e9connecter de Mentor.",
+      "targettype": "0",
+      "targetvalue": "#action-menu-toggle-1 > span > span.avatars > span > img",
+      "sortorder": "8",
+      "configdata": "{}"
+    }
+  ]
+}

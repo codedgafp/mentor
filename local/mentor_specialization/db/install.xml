@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/mentor_specialization/db" VERSION="20150717" COMMENT="XMLDB file for local_mentor_specialization"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+    <TABLES>
+        <TABLE NAME="regions" COMMENT="">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT=""/>
+                <FIELD NAME="code" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT=""/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT=""/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="category_options" COMMENT="">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT=""/>
+                <FIELD NAME="categoryid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="course category id"/>
+                <FIELD NAME="name" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="name"/>
+                <FIELD NAME="value" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="value"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT=""/>
+                <KEY NAME="fk_mdl_courscategories" TYPE="foreign" FIELDS="categoryid" REFTABLE="course_categories" REFFIELDS="id" COMMENT=""/>
+            </KEYS>
+        </TABLE>
+    </TABLES>
+</XMLDB>

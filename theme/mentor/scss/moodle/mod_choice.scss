@@ -1,0 +1,61 @@
+.path-mod-choice {
+
+  div[role="main"] {
+    margin-left: 50px;
+    margin-right: 50px;
+
+    h2 {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+
+  #intro {
+    p {
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 1.5;
+    }
+  }
+
+  form.vertical, form.horizontal {
+    text-align: center;
+
+    .choices {
+      display: inline;
+      text-align: left;
+
+      .option {
+        padding-right: 25px;
+
+        label {
+          margin: 0 0 27px 12px;
+          font-size: 14px;
+          line-height: 1.5;
+        }
+
+        input[type="radio"] {
+          display: none;
+        }
+
+        input[type="radio"] + label::before {
+          content: "";
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          margin: 0 12px 3px 0;
+          border: solid 0.7px #1e1e1e;
+          vertical-align: middle;
+          background: $white;
+          border-radius: 12px;
+        }
+
+        input[type="radio"]:checked + label::before {
+          border: solid 0.7px $maincolor;
+          background: $maincolor;
+          box-shadow: inset 0 0 0 3px $white;
+        }
+      }
+    }
+  }
+}

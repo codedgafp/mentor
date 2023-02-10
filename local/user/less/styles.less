@@ -1,0 +1,293 @@
+@responsive-size: 800px;
+
+#page-course-view-edadmin {
+
+  #user-buttons-filter {
+
+    margin-bottom: 40px;
+
+    #filter-title {
+      font-weight: bold;
+
+      i {
+        padding-right: 5px;
+      }
+    }
+
+    #user-status-filter {
+      #status {
+        background-color: #fff;
+        border: 1px solid #aaa;
+        outline: 0;
+        height: 44px;
+        width: 200px;
+        border-radius: 4px;
+        padding-left: 5px;
+        padding-right: 5px;
+        box-sizing: border-box;
+      }
+    }
+
+    #filter-actions {
+      display: flex;
+      justify-content: flex-start;
+      align-items: end;
+      -webkit-align-items: flex-end;
+      margin-top: 5px;
+
+      @media (max-width: @responsive-size) {
+        flex-direction: column;
+        align-items: baseline;
+        width: 100%;
+      }
+
+      & > div {
+        display: flex;
+        flex-direction: column;
+        margin-right: 10px;
+
+        @media (max-width: @responsive-size) {
+          width: 100%;
+        }
+
+        select {
+          border: 1px solid #0154d4;
+          width: 190px;
+
+          &#collection-select {
+            width: 300px;
+          }
+        }
+
+        span {
+          @media (max-width: @responsive-size) {
+            width: 100% !important;
+          }
+
+          &.select2 {
+            ::-webkit-input-placeholder {
+              /* Chrome/Opera/Safari */
+              color: black;
+            }
+
+            ::-moz-placeholder {
+              /* Firefox 19+ */
+              color: black;
+            }
+
+            :-ms-input-placeholder {
+              /* IE 10+ */
+              color: black;
+            }
+
+            :-moz-placeholder {
+              /* Firefox 18- */
+              color: black;
+            }
+          }
+        }
+      }
+    }
+
+    .filters-button {
+      display: flex;
+      flex-direction: inherit !important;
+      align-items: baseline;
+
+      button {
+        @media (max-width: @responsive-size) {
+          margin-top: 20px;
+          align-items: baseline;
+        }
+
+        &#filter-reset {
+
+          @media (max-width: @responsive-size) {
+            padding: 0;
+            margin: 20px 0 0;
+          }
+
+          &:hover {
+            text-decoration: none;
+          }
+
+          &:focus {
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+        }
+      }
+
+      #filter-apply {
+        &:focus {
+          outline: none;
+        }
+      }
+
+    }
+  }
+
+  .user-admin-title {
+    margin-bottom: 30px;
+  }
+
+  #user-admin-table {
+    width: 100% !important;
+
+    .user-admin-table-actions {
+      width: 50px !important;
+    }
+
+    .user-suspended {
+      color: #b2b2b2;
+    }
+
+  }
+
+  .user-admin-button-action {
+    display: flex;
+
+    .button-action {
+      margin: 5px;
+      padding: 2px;
+
+      img {
+        height: 20px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+    }
+  }
+
+  #user-buttons {
+    margin-bottom: 20px;
+
+    #mergeusers {
+      i {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  #user-admin-modal-content-add {
+    max-height: 500px;
+    width: 570px;
+
+    form {
+      margin-top: 10px;
+      max-height: 360px;
+      font-size: 20px;
+
+      div {
+        margin: 8px;
+      }
+    }
+
+    span {
+      font-size: 9px;
+    }
+  }
+
+  #user-admin-modal-content-remove {
+    width: 500px;
+    font-size: 20px;
+
+    ul {
+      text-align: initial;
+      margin-left: 33%;
+    }
+  }
+
+  #user-admin-modal-remove {
+    .header {
+      & + div {
+        div:first-of-type {
+          margin: 30px;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  #user-admin-form-add {
+    overflow: auto;
+
+    div {
+      margin-top: 1em;
+
+      label {
+        display: inline-block;
+        width: 100%;
+        text-align: start;
+      }
+
+      input {
+        &.user-admin-form-add-user-invalid {
+          border: 2px solid red;
+        }
+
+        &.user-admin-form-add-user-valid {
+          border: 2px solid green;
+        }
+      }
+
+      span {
+        &.user-admin-form-add-user-error-hide {
+          display: none;
+          margin-left: 10px;
+        }
+
+        &.user-admin-form-add-user-error-show {
+          color: red;
+          margin-left: 10px;
+        }
+      }
+
+    }
+
+  }
+
+  #manageroles {
+    text-align: right;
+  }
+
+  #user-modal-content-error {
+    height: 200px;
+    width: 400px;
+
+    div.user-modal-error {
+      font-size: 20px;
+      margin: 15px;
+    }
+
+    div.buttons {
+      margin: 10px;
+    }
+
+  }
+}
+
+#page-local-user-pages-roles {
+  #roles-table {
+    th, td {
+      font-size: 14px;
+    }
+  }
+}
+
+
+#page-local-user-pages-suspend_users {
+
+  #id_userscsv_fieldset {
+
+    noscript + p,
+    .form-filetypes-descriptions {
+      display: none;
+    }
+  }
+
+}
+

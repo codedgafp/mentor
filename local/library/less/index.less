@@ -1,0 +1,608 @@
+#page-local-library-index {
+  #library-trainings,
+  #library-dictionnary {
+    display: none;
+  }
+
+  #page {
+    @media (max-width: 456px) {
+      margin-top: 180px;
+    }
+
+    #page-header {
+      @media (max-width: 667px) {
+        padding-top: 0;
+      }
+    }
+
+    #region-main {
+      background: transparent !important;
+      box-shadow: none !important;
+      padding-top: 0;
+
+      @media (max-width: 1024px) {
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 0;
+      }
+
+      #user-notifications {
+        .alert {
+          z-index: 2;
+        }
+      }
+
+      #header-library {
+        padding: 0 300px 20px 0;
+        position: relative;
+
+        @media (max-width: 767px) {
+          padding-right: 0;
+        }
+
+        & > p {
+          font-size: 16px;
+          margin-bottom: 4px;
+          white-space: pre-wrap;
+
+          &:first-child {
+            margin-bottom: 0;
+          }
+
+          &.truncate {
+            max-height: 54px;
+            overflow: hidden;
+          }
+        }
+
+        & > img.icon {
+          position: absolute;
+          top: -90px;
+          right: 40px;
+          width: 200px;
+          height: auto;
+        }
+
+        button {
+          color: #000091 !important;
+          font-size: 16px;
+          border: none;
+          background-color: #fef8f9;
+          padding: 5px 0 20px 0;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        #gradientmask {
+          background-image: linear-gradient(rgba(254, 248, 249, 0), rgba(254, 248, 249, .6), #fef8f9);
+          content: " ";
+          height: 60px;
+          left: 0;
+          position: absolute;
+          bottom: 70px;
+          cursor: pointer;
+          width: ~"calc(100% - 300px)";
+
+          @media (max-width: 767px) {
+            width: 100%;
+          }
+        }
+      }
+
+      #local-library {
+        max-width: 1278px;
+        margin: auto;
+        position: relative;
+
+        @media (min-width: 1920px) {
+          max-width: 1817px;
+        }
+
+        #loader {
+          text-align: center;
+        }
+
+        .no-library-message {
+          margin: 0 auto;
+          width: 50%;
+          text-align: center;
+          padding-top: 40px;
+        }
+
+
+        .library-search {
+          text-align: right;
+          position: absolute;
+          border-radius: 4px 4px 0 0;
+          right: 22px;
+          z-index: 1;
+
+          @media (max-width: 1024px) {
+            text-align: center;
+            right: 0;
+          }
+
+          @media (max-width: 767px) {
+            display: -webkit-flex;
+            text-align: center;
+            position: relative;
+            right: auto;
+          }
+
+          #search {
+            width: 386px;
+            background-color: #f8f8f8;
+            border-top-right-radius: 0;
+            float: left;
+            height: 40px;
+
+            @media (max-width: 1024px) {
+              max-width: 300px;
+            }
+
+            @media (max-width: 767px) {
+              max-width: none;
+              width: ~"calc( 100% - 44px)";
+            }
+
+            &:focus-visible {
+              border-radius: 0;
+              border: 2px solid #2a7ffe !important;
+              outline: none;
+            }
+
+          }
+
+          #search-button {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            border-top-right-radius: 4px !important;
+            padding: 0 !important;
+            float: right;
+
+            @media (max-width: 767px) {
+              margin-left: -4px;
+            }
+
+            .icon {
+              margin: 0;
+              font-size: 18px !important;
+            }
+          }
+
+          #search, #search-button {
+            border-bottom: 2px solid #000091 !important;
+            vertical-align: middle;
+
+            @media (max-width: 767px) {
+              float: none;
+            }
+          }
+        }
+
+        #library-filters {
+          width: 252px;
+          float: left;
+          margin-left: 20px;
+          margin-right: 40px;
+          min-height: 300px;
+
+          @media (max-width: 1247px) {
+            margin-left: 0;
+            margin-right: 20px;
+          }
+
+          @media (max-width: 767px) {
+            float: none;
+            width: 100%;
+            min-height: 0;
+            margin-top: 20px;
+          }
+
+          ul#collections, ul#entities {
+            padding: 0;
+            margin: 0;
+          }
+
+          #entities-filter {
+
+            @media (max-width: 1247px) {
+              border-bottom: 1px solid rgba(0, 0, 0, .125);
+            }
+
+            .collapse {
+              .card-body {
+                border-bottom: none;
+              }
+            }
+          }
+
+          .mentor-accordion {
+            .card {
+              background: transparent;
+
+              .card-header {
+                align-items: baseline;
+                border-bottom: none;
+                padding-top: 7px;
+                padding-bottom: 4px;
+
+                h2 {
+                  .btn-link {
+                    font-size: 16px;
+                    color: #383838;
+                  }
+                }
+              }
+            }
+
+            .card-body {
+              padding-top: 0;
+            }
+
+            .collapse {
+              &.show {
+                .card-body {
+                  border-bottom: 0;
+                }
+              }
+            }
+          }
+
+          li {
+            list-style-type: none;
+
+            button {
+              text-align: left;
+              padding: 2px 8px 6px 8px;
+              border-radius: 13px;
+              background-color: #e3e3fd;
+              color: #000091;
+              font-size: 12px;
+              line-height: 1.67;
+              margin-bottom: 10px;
+              margin-right: 10px;
+              display: inline-block;
+              border: none;
+              position: relative;
+
+              .nbresults {
+                margin-left: 3px;
+              }
+
+              .cross {
+                display: none;
+                border-radius: 7px;
+                background: #fff;
+                position: absolute;
+                top: -3px;
+                right: -4px;
+                color: #000091;
+                border: 1px solid #000091;
+                width: 14px;
+                height: 14px;
+                text-align: center;
+                line-height: 8px;
+                font-size: 12px;
+              }
+
+              &.selected {
+                color: #fff;
+                background-color: #000091;
+                outline: 2px solid #0a76f6;
+                outline-offset: 2px;
+
+                .cross {
+                  display: block;
+                }
+              }
+
+              &:focus,
+              &:focus-visible {
+                border: 2px solid #2a7ffe !important;
+                outline: none;
+              }
+            }
+          }
+        }
+
+
+        .library-grid {
+          position: relative;
+          float: left;
+          border-left: 1px solid rgba(0, 0, 0, .125);
+          padding-left: 40px;
+          width: ~"calc( 100% - 332px)";
+
+          @media (max-width: 1247px) {
+            width: ~"calc( 100% - 272px)";
+            margin-top: 50px;
+          }
+
+          @media (max-width: 1024px) {
+            padding-left: 25px;
+          }
+
+          @media (max-width: 767px) {
+            float: none;
+            width: 100%;
+            border-left: none;
+            padding-left: 0;
+            text-align: center;
+            margin-top: 24px;
+          }
+
+          #library-found {
+            font-size: 16px;
+            color: #1e1e1e;
+            margin-bottom: 28px;
+            margin-top: 10px;
+            clear: both;
+
+            @media (max-width: 767px) {
+              margin-bottom: 45px;
+            }
+
+            .countnumber {
+              font-weight: bold;
+            }
+          }
+
+          #library-tile {
+            margin: 0;
+            max-width: 100%;
+
+            @media (min-width: 968px) and (max-width: 1247px) {
+              margin: auto;
+              width: 600px;
+            }
+
+            @media (min-width: 768px) and (max-width: 967px) {
+              text-align: center;
+            }
+
+            @media (max-width: 767px) {
+              text-align: left;
+              max-width: 100%;
+              margin-left: auto;
+              margin-right: auto;
+              width: 580px;
+            }
+
+            @media (min-width: 614px) and (max-width: 767px) {
+              text-align: left;
+              margin-left: auto;
+              margin-right: auto;
+              width: 580px;
+            }
+
+            @media (max-width: 767px) {
+              text-align: center;
+            }
+
+            .training-tile {
+              position: relative;
+              width: 100%;
+              height: 163px;
+              max-width: none;
+              display: inline-block;
+              margin-right: 15px;
+              margin-bottom: 15px;
+              text-align: left;
+              padding: 0;
+              border: solid 1px #e5e5e5;
+              background: #fff;
+              box-sizing: content-box;
+
+              @media (min-width: 1920px) {
+                width: 710px;
+              }
+
+              @media (max-width: 1247px) {
+                width: 280px;
+                height: 333px;
+                margin-left: 5px;
+                margin-right: 5px;
+              }
+
+              &.hidden {
+                display: none;
+              }
+
+              &.even {
+                margin-right: 0;
+              }
+
+              &:hover {
+                cursor: pointer;
+              }
+
+              &:focus,
+              &:focus-within {
+                outline: none;
+
+                .training-tile-information {
+                  background-color: #EEEEEE;
+                }
+              }
+
+              &:focus-visible {
+                outline: none;
+
+                .training-tile-information {
+                  background-color: #EEEEEE;
+                }
+              }
+
+              .training-tile-thumbnail {
+                width: 245px;
+                height: 163px;
+                float: left;
+
+                @media (max-width: 1247px) {
+                  width: 100%;
+                  height: 187px;
+                }
+
+                .training-tile-thumbnail-resize {
+                  background-size: cover;
+                  width: 245px;
+                  height: 163px;
+                  background-repeat: no-repeat;
+                  background-position: center;
+
+                  @media (max-width: 1247px) {
+                    width: 100%;
+                    height: 187px;
+                  }
+                }
+
+              }
+
+              .training-tile-information {
+                display: inline-block;
+                height: 163px;
+                width: ~"calc(100% - 245px)";
+                vertical-align: top;
+                position: relative;
+                padding: 12px 16px;
+
+                @media (max-width: 1247px) {
+                  padding: 16px;
+                  width: 100%;
+                  height: 146px;
+                }
+
+                .training-name {
+                  width: ~"calc( 100% - 24px)";
+                  margin: 0 0 3.9px;
+                  font-size: 16px;
+                  font-weight: bold;
+                  font-stretch: normal;
+                  font-style: normal;
+                  line-height: 1.51;
+                  letter-spacing: normal;
+                  color: #161616;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  display: -webkit-box;
+                  -webkit-box-orient: vertical;
+                  -webkit-line-clamp: 2;
+
+
+                  @media (min-width: 1920px) {
+                    width: 400px;
+                  }
+
+                  @media (max-width: 1247px) {
+                    width: 100%;
+                    margin-bottom: 0;
+                  }
+                }
+
+                .training-trainer {
+                  width: ~"calc( 100% - 24px)";
+                  font-size: 14px;
+                  font-weight: normal;
+                  font-stretch: normal;
+                  font-style: normal;
+                  line-height: 1.48;
+                  letter-spacing: normal;
+                  color: #3a3a3a;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  display: -webkit-box;
+                  -webkit-box-orient: vertical;
+                  -webkit-line-clamp: 1;
+                  margin-bottom: 2px;
+
+                  @media (min-width: 1920px) {
+                    width: 400px;
+                  }
+
+                  @media (max-width: 1247px) {
+                    width: 100%;
+                    display: block;
+                    line-height: 1.71;
+                    margin-bottom: 10px;
+
+                    .separator {
+                      display: none;
+                    }
+                  }
+
+                  .training-creator,
+                  .training-producer {
+                    @media (max-width: 1247px) {
+                      width: 100%;
+                      display: block;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                      -webkit-box-orient: vertical;
+                      -webkit-line-clamp: 1;
+                    }
+                  }
+
+                  .training-entityname,
+                  .training-producer-shortname {
+                    font-weight: bold;
+                  }
+                }
+
+                .training-catchphrase {
+                  width: ~"calc( 100% - 24px)";
+                  font-size: 14px;
+                  color: #3a3a3a;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  display: -webkit-box;
+                  -webkit-box-orient: vertical;
+                  -webkit-line-clamp: 2;
+
+                  @media (min-width: 1920px) {
+                    width: 400px;
+                  }
+
+                  @media (max-width: 1247px) {
+                    display: none;
+                  }
+                }
+
+                .fr-fi-arrow-right-line {
+                  position: absolute;
+                  bottom: 16px;
+                  right: 16px;
+                  color: #000091;
+
+                  @media (max-width: 1247px) {
+                    display: none;
+                  }
+                }
+
+                .training-time {
+                  color: #161616;
+                  font-size: 14px;
+                  position: absolute;
+                  bottom: 10px;
+
+                  @media (max-width: 1247px) {
+                    bottom: 12px;
+                  }
+
+                  img.icon {
+                    width: 18px;
+                    height: 18px;
+                    margin-right: 7px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

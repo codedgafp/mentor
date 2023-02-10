@@ -1,0 +1,139 @@
+.format-tiles {
+
+  .tiles {
+    display: flex;
+    justify-content: center !important;
+    flex-wrap: wrap;
+
+    li.section {
+      @media(max-width: $size-sm) {
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+      }
+    }
+
+    .tile {
+      border: solid 1.6px #e7e7e7;
+      background-color: $white !important;
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+
+      .tile-link {
+        .tile-content {
+          .tile-top {
+            .tileiconcontainer {
+              padding-top: 6px;
+
+              @media(max-width: $size-sm) {
+                width: 40px;
+              }
+
+              .icon {
+                font-size: 200%;
+
+                @media(max-width: $size-sm) {
+                  font-size: 30px;
+                  text-align: left;
+                }
+
+                &::before {
+                  @media(max-width: $size-sm) {
+                    text-align: left;
+                  }
+                }
+              }
+            }
+
+            .tiletopright {
+              svg {
+                @media(max-width: $size-sm) {
+                  width: 20px;
+                }
+              }
+            }
+          }
+
+          .tile-text {
+            .tile-textinner {
+              top: 35%;
+
+              h3 {
+                line-height: 1.2;
+                color: $maintitlecolor;
+                font-size: 20px;
+
+                @media(max-width: $size-sm) {
+                  font-size: 15px;
+                }
+
+                @media(width: $size-xl) {
+                  font-size: 18px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .tile-icon {
+      i {
+        color: rgba(22, 112, 204, 1);
+      }
+    }
+  }
+
+  .subtiles {
+    @media(max-width: $size-md) {
+      justify-content: center;
+      width: unset;
+    }
+
+    li[id^=module] {
+      @media(max-width: $size-md) {
+        max-width: unset !important;
+        margin: 3px 5px 3px 5px !important;
+      }
+
+      .clickable-region {
+        @media(max-width: $size-md) {
+          width: 100% !important;
+        }
+      }
+    }
+  }
+
+  #page-header {
+    @media(max-width: $size-sm) {
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+  }
+
+  .headerabovetiles {
+    @media(max-width: $size-sm) {
+      text-align: left;
+      padding-top: 6px;
+      padding-bottom: 3px;
+      margin-left: 15px;
+    }
+  }
+
+  #id_courseformathdr {
+    #selectedicon {
+      .icon {
+        color: rgba(22, 112, 204, 1);
+      }
+    }
+  }
+
+  .single-section {
+    #single_section_tiles {
+      .tileiconcontainer {
+        .icon {
+          color: rgba(22, 112, 204, 1);
+        }
+      }
+    }
+  }
+}

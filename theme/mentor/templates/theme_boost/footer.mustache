@@ -1,0 +1,119 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    Page footer.
+}}
+<div id="goto-top-link">
+    {{! go to top is sticky to footer so needs to be sibling }}
+    <a class="btn btn-light" role="button" href="#">
+        {{#pix}} i/up, core, {{#str}} totop, theme_boost {{/str}}{{/pix}}
+    </a>
+</div>
+<footer id="page-footer" role="contentinfo">
+    <div id="footer-content">
+        <div id="first-part-footer">
+            <div id="footer-logo">
+                <a href="https://www.transformation.gouv.fr" target="_blank" rel="opener" title="{{#str}} footerlogotitle, theme_mentor {{/str}}">{{#pix}}
+                    logo-footer, theme_mentor, {{#str}} footerlogotitle, theme_mentor {{/str}}{{/pix}}</a>
+                <div class="european-logo">
+                    {{#pix}}
+                        france-relance, theme_mentor, {{#str}} footerlogotitle, theme_mentor {{/str}}{{/pix}}
+                    {{#pix}}
+                        finance-union-europeenne, theme_mentor, {{#str}} footerlogotitle, theme_mentor {{/str}}{{/pix}}
+                </div>
+            </div>
+            <div>
+                {{# output.textinfofooter_page }}
+                    <p id="text-info">{{{ output.textinfofooter_page }}}</p>
+                {{/ output.textinfofooter_page }}
+                <div>
+                    <ul class="footer-link">
+                        {{# output.about_page }}
+                            <li>
+                                <a href="{{{ output.about_page }}}">{{#str}} about, theme_mentor {{/str}}</a>
+                            </li>
+                        {{/ output.about_page }}
+                        <li class="tool_usertours-resettourcontainer"></li>
+                        {{# output.contact_page }}
+                            <li>
+                                <a href="{{{ output.contact_page }}}">{{#str}} contact, theme_mentor {{/str}}</a>
+                            </li>
+                        {{/ output.contact_page }}
+                        {{# output.faq_page }}
+                            <li>
+                                <a href="{{{ output.faq_page }}}">{{#str}} faq, theme_mentor {{/str}}</a>
+                            </li>
+                        {{/ output.faq_page }}
+                    </ul>
+                    <ul class="footer-link">
+                        {{# output.externallink_page }}
+                            <li>
+                                <a href="https://www.{{ . }}" target="_blank" rel="noreferrer noopener">{{ . }}</a>
+                            </li>
+                        {{/ output.externallink_page }}
+                    </ul>
+                    <div class="footer-link">
+                        {{{ output.standard_footer_html }}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr id="break-line-footer"/>
+        <div id="last-part-footer">
+            <div class="pipe-list">
+                <ul>
+                    {{# output.sitemap_page }}
+                        <li>
+                            <a href="{{{ output.sitemap_page }}}">
+                                {{#str}} sitemap, theme_mentor {{/str}}
+                            </a>
+                        </li>
+                    {{/ output.sitemap_page }}
+                    {{# output.accessibility_page }}
+                        <li>
+                            <a href="{{{ output.accessibility_page }}}">
+                                {{#str}} accessibility, theme_mentor {{/str}}
+                            </a>
+                        </li>
+                    {{/ output.accessibility_page }}
+                    {{# output.legalnotice_page }}
+                        <li>
+                            <a href="{{{ output.legalnotice_page }}}">
+                                {{#str}} legalnotice, theme_mentor {{/str}}
+                            </a>
+                        </li>
+                    {{/ output.legalnotice_page }}
+                    {{# output.personaldata_page }}
+                        <li>
+                            <a href="{{{ output.personaldata_page }}}">
+                                {{#str}} personaldata, theme_mentor {{/str}}
+                            </a>
+                        </li>
+                    {{/ output.personaldata_page }}
+                    {{# output.versionnumber_page }}
+                        <li>
+                            {{#str}} version, theme_mentor, {{{ output.versionnumber_page }}}{{/str}}
+                        </li>
+                    {{/ output.versionnumber_page }}
+                </ul>
+            </div>
+            <p id="licence-text">{{{ output.mentorlicence_page }}}</div>
+        </div>
+    </div>
+
+    {{{ output.standard_end_of_body_html }}}
+</footer>

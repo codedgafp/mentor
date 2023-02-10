@@ -1,0 +1,197 @@
+#page-mod-questionnaire-view {
+  h2 {
+    font-size: 24px;
+    line-height: 1;
+    margin: 0 151px 26px 14px;
+    color: $maintitlecolor;
+  }
+
+  .mod_questionnaire_viewpage {
+    .intro {
+      font-size: 14px;
+      line-height: 1.71;
+      margin: 18px 83px 23px 15px;
+      color: $maintitlecolor;
+    }
+
+    .yourresponse {
+      margin-left: 15px;
+    }
+
+    .allresponses {
+      margin-left: 15px;
+    }
+
+    .complete {
+      text-align: center;
+    }
+  }
+}
+
+#page-mod-questionnaire-questions {
+  font-size: 14px;
+
+  .qn-container, .moving {
+    border-left: none;
+    border-right: none;
+    border-top: solid 1px #cecece;
+    border-bottom: solid 1px #cecece;
+    margin-bottom: -1px;
+
+    #fgroup_id_manageqgroup {
+      display: inline-block;
+      width: 50%;
+      margin: 0;
+
+      .qnums {
+        font-weight: normal;
+        line-height: 1.71;
+        color: #1e1e1e;
+      }
+
+      input[type=image] {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    div[id^=fitem_id_qcontent] {
+      display: inline-block;
+      width: 50%;
+      margin: 0;
+    }
+
+    .qn-info {
+      padding: 1px 11px 5px 11px;
+      margin-top: 5px;
+      border-radius: 16px;
+      background-color: #e7e7e7;
+    }
+
+    .qn-question {
+      background-color: $white;
+    }
+  }
+}
+
+#page-mod-questionnaire-complete, #page-mod-questionnaire-preview,
+#page-mod-questionnaire-myreport, #page-mod-questionnaire-report {
+  h3 {
+    font-size: 24px;
+    line-height: 1;
+    margin: 22px 151px 26px 14px;
+    color: $maintitlecolor;
+
+    @media(max-width: $size-sm) {
+      width: 100%;
+      padding-bottom: 20px;
+    }
+  }
+
+  .respondentsnavbar {
+    background-color: $white;
+  }
+
+  .mod_questionnaire_completepage, .mod_questionnaire_previewpage,
+  .mod_questionnaire_reportpage {
+    .box.generalbox {
+      padding-bottom: 25px;
+    }
+
+    .singlebutton {
+      margin-left: 15px;
+    }
+
+    .qn-container {
+      .qn-info {
+        background-color: $white;
+      }
+
+      .qn-legend {
+        width: 26px;
+        margin-top: -1px;
+        margin-left: 10px;
+
+        .qn-number {
+          font-size: 20px;
+          font-weight: bold;
+          line-height: 1.5;
+          color: #1e1e1e;
+        }
+      }
+
+      .qn-content {
+        margin-left: 30px;
+
+        .editor_atto_content_wrap {
+          border: 1px solid #bbb;
+          border-top: none;
+        }
+
+        .qn-answer {
+          margin-top: -10px;
+          padding-left: 5px;
+
+          label {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #1e1e1e;
+            vertical-align: middle;
+          }
+
+          input[type="radio"] {
+            margin-bottom: 20px;
+            margin-left: 0;
+          }
+
+          input[type="checkbox"] {
+            margin-bottom: 20px;
+          }
+
+          .smalltext {
+            font-size: 12px;
+            line-height: 1.33;
+            color: #1e1e1e;
+          }
+
+          .raterow {
+            padding: 8px;
+            background-color: $white;
+            border-left: none;
+            border-right: none;
+            font-size: 14px;
+            line-height: 1.71;
+            color: $maintitlecolor;
+
+            input[type="radio"], input[type="checkbox"] {
+              margin-bottom: 0;
+            }
+
+            .notanswered {
+              background-color: $white;
+            }
+
+            .c0, .c1 {
+              border-top: none;
+              border-bottom: 1px solid #dee2e6;
+            }
+          }
+        }
+
+        .qn-question {
+          font-size: 16px;
+          font-weight: bold;
+          line-height: 1.5;
+          color: #1e1e1e;
+          background-color: $white;
+        }
+      }
+    }
+
+    .notice {
+      .buttons {
+        text-align: center;
+      }
+    }
+  }
+}

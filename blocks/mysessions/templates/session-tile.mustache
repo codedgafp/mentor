@@ -1,0 +1,99 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+
+<a
+    class="block-session-tile {{# iscompleted }}is-completed{{/ iscompleted }}
+    {{# isparticipant }}{{#isopenedregistration}}no-link{{/isopenedregistration}}{{/isparticipant}}"
+    style="display: none;"
+    {{# isparticipant }}
+        {{^isopenedregistration}}
+            href="{{{ courseurl }}}"
+        {{/isopenedregistration}}
+    {{/isparticipant}}
+    {{^ isparticipant }}href="{{{ courseurl }}}"{{/isparticipant}}
+    tabindex="0"
+    title="{{fullname}}">
+    <div class="session-tile-thumbnail">
+        <div class="session-tile-thumbnail-size">
+            {{#thumbnail}}
+                <div class="session-tile-thumbnail-resize" aria-hidden="true" data-thumbnail-url="{{thumbnail}}"></div>
+            {{/thumbnail}}
+        </div>
+        {{^ isparticipant }}
+            {{#istrainer}}
+                <div class="session-tile-trainer">
+                    {{# str}}trainer, block_mysessions{{/str}}
+                </div>
+            {{/istrainer}}
+
+            {{#istutor}}
+                <div class="session-tile-trainer">
+                    {{# str}}tutor, block_mysessions{{/str}}
+                </div>
+            {{/istutor}}
+        {{/isparticipant}}
+    </div>
+    <div class="information {{ status }}" data-session-id="{{id}}">
+        <h3 class="name{{#isopenedregistration}} is-opened-registration{{/isopenedregistration}}{{#completed}} completed{{/completed}}">
+            {{#fullname}}
+                {{fullname}}
+            {{/fullname}}
+            {{^fullname}}
+                {{trainingname}}
+            {{/fullname}}
+        </h3>
+        <p class="status {{#completed}}completed{{/completed}}">
+            {{#isinpreparation}}
+                {{# pix }} calendar, block_mysessions{{/ pix }} {{# str }} comingsoon, block_mysessions, <span class="date">{{sessionstartdate}}</span>{{/ str }}
+            {{/isinpreparation}}
+            {{#isopenedregistration}}
+                {{# pix }} calendar, block_mysessions{{/ pix }} {{# str }} comingsoon, block_mysessions, <span class="date">{{sessionstartdate}}</span>{{/ str }}
+            {{/isopenedregistration}}
+            {{#isreported}}
+                {{# pix }} calendar, block_mysessions{{/ pix }} {{# str }} comingsoon, block_mysessions, {{/ str }}
+            {{/isreported}}
+            {{#isinprogress}}
+                {{# showProgress}}
+                    <span class="progression">{{# str }} progression,
+                    block_mysessions, {{progress}} {{/ str }}
+                    </span>
+                {{/ showProgress}}
+            {{/isinprogress}}
+            {{#completed}}
+                {{# pix }} check-circle, block_mysessions{{/ pix }} {{# str }}
+                completed, block_mysessions {{/ str }} {{#sessionenddate}}{{# str }} on, block_mysessions, {{sessionenddate}} {{/ str }}{{/sessionenddate}}
+            {{/completed}}
+            {{#isarchived}}
+                {{# pix }} check-circle, block_mysessions{{/ pix }} {{# str }}
+                completed, block_mysessions {{/ str }} {{#sessionenddate}}{{# str }} on, block_mysessions, {{sessionenddate}} {{/ str }}{{/sessionenddate}}
+            {{/isarchived}}
+
+        </p>
+        <div class="session-more-information" data-training-id="{{trainingid}}" data-session-id="{{id}}">
+            {{#str}} moreinfotile, block_mysessions {{/str}} <i class="fr-fi-arrow-right-line" aria-hidden="true"></i>
+        </div>
+        {{#isinprogress}}
+            {{# showProgress}}
+                <div class="progression-content">
+                    <div class="progression-bar" style="width: {{progress}}%;"></div>
+                </div>
+            {{/ showProgress}}
+        {{/isinprogress}}
+        <i class="fa fa-star-o fav {{# favouritesession }}hidden{{/ favouritesession }}" aria-hidden="true" title="{{# str}}addfavourite, block_mytrainings{{/str}}"></i>
+        <i class="fa fa-star fav {{^ favouritesession }}hidden{{/ favouritesession }}" aria-hidden="true" title="{{# str}}removefavourite, block_mytrainings{{/str}}"></i>
+    </div>
+</a>

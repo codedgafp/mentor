@@ -1,0 +1,32 @@
+@responsive-size: 800px;
+@training-sheet-padding: 30px;
+
+#page-local-catalog-index, #page-my-index {
+  .session-sheet {
+
+    .bold-element {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1e1e1e;
+      padding-bottom: 4px;
+    }
+
+    .body {
+      display: flex;
+      flex-direction: column;
+      padding: @training-sheet-padding;
+
+      @media (max-width: 667px) {
+        padding: 10px;
+      }
+
+      .title {
+        padding-bottom: 8px;
+      }
+
+      .content {
+        padding-bottom: 40px;
+      }
+    }
+  }
+}

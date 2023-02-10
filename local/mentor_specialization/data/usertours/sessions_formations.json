@@ -1,0 +1,147 @@
+{
+  "name": "VG-  Gestion des sessions et des formations",
+  "description": "Cette visite guid\u00e9e \u00e0 pour but pr\u00e9senter les fiches session sur Mentor",
+  "pathmatch": "\/course\/view.php",
+  "enabled": "1",
+  "sortorder": "7",
+  "configdata": "{\"placement\":\"bottom\",\"orphan\":\"0\",\"backdrop\":\"0\",\"reflex\":\"1\",\"filtervalues\":{\"accessdate\":{\"filter_accessdate\":\"tool_usertours_accountcreation\",\"filter_accessdate_range\":0,\"filter_accessdate_enabled\":\"0\"},\"category\":[],\"course\":[],\"courseformat\":[\"edadmin\"],\"role\":[\"-1\",\"admindedie\",\"referentlocal\",\"respformation\"],\"theme\":[\"mentor\"]},\"majorupdatetime\":1614096890}",
+  "version": "2020061502",
+  "steps": [
+    {
+      "title": "Gestion des sessions",
+      "content": "Cette visite guid\u00e9e vous permettra de comprendre l'interface de gestion des sessions tout en vous pr\u00e9sentant les fonctionnalit\u00e9s disponibles.",
+      "targettype": "0",
+      "targetvalue": "#session-table",
+      "sortorder": "0",
+      "configdata": "{\"placement\":\"top\",\"orphan\":\"0\",\"reflex\":\"0\"}"
+    },
+    {
+      "title": "Cr\u00e9er une session",
+      "content": "Cliquez sur le bouton \"Cr\u00e9er une session\" si vous souhaitez cr\u00e9er une nouvelle session de formation sur l'espace, vous serez alors renvoy\u00e9 sur la page de gestion des formations pour cr\u00e9er la session.",
+      "targettype": "0",
+      "targetvalue": "#create-session > a",
+      "sortorder": "1",
+      "configdata": "{}"
+    },
+    {
+      "title": "Recherche rapide",
+      "content": "Vous pouvez rechercher une session directement gr\u00e2ce \u00e0 l\u2019encart \"Rechercher\" ce qui vous permet de gagner du temps. Il suffit de rentrer l\u2019intitul\u00e9, la collection ou bien le nom abr\u00e9g\u00e9 de la session pour la retrouver.",
+      "targettype": "0",
+      "targetvalue": "#session-table_filter",
+      "sortorder": "2",
+      "configdata": "{}"
+    },
+    {
+      "title": "Description du tableau des sessions",
+      "content": "Le tableau de gestion des sessions se pr\u00e9sente comme suit : \r\n\r\n- Une colonne \"N\u00b0 de session\", qui indique le num\u00e9ro de session cr\u00e9e \u00e0 partir d'une m\u00eame formation ;\r\n\r\n- Une colonne \"Collections\", qui pr\u00e9cise la ou les th\u00e9matiques auxquelles la formation est rattach\u00e9e ;\r\n\r\n- Une colonne \"Intitul\u00e9 de la formation\", qui donne le nom de la formation et qui pr\u00e9cise en info-bulle le libell\u00e9 de la session. C'est ce libell\u00e9 que les participants verront sur leur tableau de bord ;\r\n\r\n- Une colonne \"Nom abr\u00e9g\u00e9 de la session\", qui donne le nom raccourci de la session de formation ;\r\n\r\n- Une colonne \"Statut\", qui pr\u00e9cise le statut de la session de formation (7 statuts existent : en pr\u00e9paration, inscriptions ouvertes, report\u00e9e, en cours, termin\u00e9e, annul\u00e9e et archiv\u00e9e) ;\r\n\r\n- Une colonne \"Date de d\u00e9but\", qui renseigne la date de lancement de la session de formation ;\r\n\r\n- Une colonne \"Participants\", qui indique le nombre de participants  inscrits \u00e0 la session formation ;\r\n\r\n- Une colonne \"Partag\u00e9e\", qui pr\u00e9cise si la session de formation a \u00e9t\u00e9 partag\u00e9e sur un autre espace ;\r\n\r\n- Une colonne \"Actions\" qui donne les actions possibles sur l'administration des sessions de formation.",
+      "targettype": "0",
+      "targetvalue": "#session-table",
+      "sortorder": "3",
+      "configdata": "{\"placement\":\"top\",\"orphan\":\"0\",\"reflex\":\"0\"}"
+    },
+    {
+      "title": "Acc\u00e9der \u00e0 la fiche session",
+      "content": "Cliquez sur ce bouton si vous souhaitez acc\u00e9der \u00e0 la fiche session pour  ajouter des \u00e9l\u00e9ments ou bien faire des modifications. ",
+      "targettype": "0",
+      "targetvalue": ".btn-sessionsheet:first",
+      "sortorder": "4",
+      "configdata": "{}"
+    },
+    {
+      "title": "Gestion des inscriptions manuelles",
+      "content": "Cliquez sur ce bouton pour ajouter\/supprimer\/inscrire  manuellement des formateurs ou des utilisateurs \u00e0 la session de formation.",
+      "targettype": "0",
+      "targetvalue": "#session-table > tbody > tr > td.action-admin-session > div.btn-manageuser > a > img",
+      "sortorder": "5",
+      "configdata": "{}"
+    },
+    {
+      "title": "Gestion des inscriptions en lots",
+      "content": "Cliquez sur ce bouton si vous souhaitez inscrire des utilisateurs \u00e0 la session par l'interm\u00e9diaire d'un fichier CSV.",
+      "targettype": "0",
+      "targetvalue": "#session-table > tbody > tr > td.action-admin-session > div.btn-importusers > a > img",
+      "sortorder": "6",
+      "configdata": "{}"
+    },
+    {
+      "title": "Annuler la session",
+      "content": "Cliquez sur ce bouton si vous souhaitez annuler et supprimer la session de formation.",
+      "targettype": "0",
+      "targetvalue": "#session-table > tbody > tr > td.action-admin-session > div.btn-cancelsession > img",
+      "sortorder": "7",
+      "configdata": "{}"
+    },
+    {
+      "title": "Gestion des formations",
+      "content": "Cette visite guid\u00e9e vous permettra de comprendre l'interface de gestion des formations tout en vous pr\u00e9sentant les fonctionnalit\u00e9s disponibles.",
+      "targettype": "0",
+      "targetvalue": "#trainings-table",
+      "sortorder": "8",
+      "configdata": "{\"placement\":\"top\"}"
+    },
+    {
+      "title": "Ajout de formation",
+      "content": "Cliquez sur le bouton \"Ajouter une formation\" si vous souhaitez cr\u00e9er une nouvelle formation sur l'espace.",
+      "targettype": "0",
+      "targetvalue": "#add-training-button",
+      "sortorder": "9",
+      "configdata": "{\"placement\":\"top\"}"
+    },
+    {
+      "title": "Recherche rapide",
+      "content": "Vous pouvez rechercher une formation directement gr\u00e2ce \u00e0 l\u2019encart \"Rechercher \" qui vous permet de gagner du temps. Il suffit de rentrer l\u2019intitul\u00e9, la collection ou bien l\u2019identifiant SIRH d\u2019origine de la formation pour la retrouver.",
+      "targettype": "0",
+      "targetvalue": "#trainings-table_filter",
+      "sortorder": "10",
+      "configdata": "{\"placement\":\"top\"}"
+    },
+    {
+      "title": "Corbeille",
+      "content": "Cliquez sur le bouton \"Corbeille\" pour acc\u00e9der aux formations supprim\u00e9es. Les formations supprim\u00e9es restent dans la corbeille pour une dur\u00e9e de 7 jours avant d'\u00eatre supprim\u00e9es d\u00e9finitivement de Mentor (param\u00e9trage par d\u00e9faut).",
+      "targettype": "0",
+      "targetvalue": "#recyclebin",
+      "sortorder": "11",
+      "configdata": "{\"placement\":\"top\"}"
+    },
+    {
+      "title": "Description du tableau",
+      "content": "Le tableau se compose de plusieurs colonnes :\r\n\r\n- Une colonne \"Collection\", qui informe sur la ou les th\u00e9matique(s) auxquelles la formation est rattach\u00e9e ;\r\n\r\n- Une colonne \"Intitul\u00e9 de la formation\", qui donne le nom de la formation ;\r\n\r\n- Une colonne \"Identifiant SIRH\", qui donne le code SIRH de la formation ;\r\n\r\n- Une colonne \"Statut\", qui informe sur le statut de la formation (il existe 4 statuts : brouillon, gabarit, \u00e9laboration termin\u00e9e, archiv\u00e9e) ;\r\n\r\n- Une colonne \"Actions\", qui regroupe l'ensemble des actions possibles sur une formation. En fonction du statut de la formation les actions sont les suivantes : acc\u00e9der \u00e0 la fiche session, g\u00e9rer les concepteurs, dupliquer une formation, cr\u00e9er une session de formation et supprimer une formation.",
+      "targettype": "0",
+      "targetvalue": "#trainings-table",
+      "sortorder": "12",
+      "configdata": "{\"placement\":\"top\",\"orphan\":\"0\",\"reflex\":\"0\"}"
+    },
+    {
+      "title": "Acc\u00e9der \u00e0 la fiche de formation",
+      "content": "Cliquez sur ce bouton si vous souhaitez acc\u00e9der \u00e0 la fiche de formation afin de la consulter et\/ou la modifier.",
+      "targettype": "0",
+      "targetvalue": "#trainings-table > tbody > tr.odd > td.action-admin-trainings > div.btn-trainingsheet",
+      "sortorder": "13",
+      "configdata": "{\"placement\":\"top\",\"orphan\":\"0\"}"
+    },
+    {
+      "title": "Gestion des concepteurs",
+      "content": "Cliquez sur ce bouton pour inscrire\/ajouter\/supprimer des concepteurs.",
+      "targettype": "0",
+      "targetvalue": "#trainings-table > tbody > tr.even > td.action-admin-trainings > div.btn-assignusers",
+      "sortorder": "14",
+      "configdata": "{\"placement\":\"top\",\"orphan\":\"0\"}"
+    },
+    {
+      "title": "Duplication de la formation",
+      "content": "Cliquez sur ce bouton si vous souhaitez dupliquer une formation et\/ou la partager sur d'autres espaces d\u00e9di\u00e9s. ",
+      "targettype": "0",
+      "targetvalue": "#trainings-table > tbody > tr.even > td.action-admin-trainings > div.btn-duplicatetraining",
+      "sortorder": "15",
+      "configdata": "{}"
+    },
+    {
+      "title": "Cr\u00e9er des sessions pour la formation.",
+      "content": "Cliquez sur ce bouton si vous souhaitez ajouter des sessions \u00e0 la formation.",
+      "targettype": "0",
+      "targetvalue": "#trainings-table > tbody > tr:nth-child(1) > td.action-admin-trainings > div.btn-createsessions > img",
+      "sortorder": "16",
+      "configdata": "{\"placement\":\"top\"}"
+    }
+  ]
+}

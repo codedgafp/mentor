@@ -1,0 +1,97 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+
+{{!
+    @template local_mentor_specialization/add_user_popup
+
+    This template renders the user creation form.
+
+    Example context (json):
+    {
+        "entities" : [
+            {
+                "id" : 1,
+                "name" : "Entity 1"
+            },
+            {
+                "id" : 2,
+                "name" : "Entity 2"
+            }
+        ],
+        "regions" : [
+            {
+                "name" : "Region 1"
+            },
+            {
+                "name" : "Region 2"
+            }
+        ]
+    }
+}}
+<div id="user-admin-add">
+    <form id="user-admin-form-add">
+        <div>
+            <label for="user-admin-form-add-lastname">
+                {{# str }} lastname, local_user {{/ str }}* :
+            </label>
+            <input type="text" id="user-admin-form-add-lastname" name="lastname">
+        </div>
+        <div>
+            <label for="user-admin-form-add-firstname">
+                {{# str }} firstname, local_user {{/ str }}* :
+            </label>
+            <input type="text" id="user-admin-form-add-firstname" name="firstname">
+        </div>
+        <div>
+            <label for="user-admin-form-add-mail">
+                {{# str }} email, local_user {{/ str }}* :
+            </label>
+            <input type="email" id="user-admin-form-add-mail" name="mail">
+        </div>
+        <div>
+            <label for="user-admin-form-add-entity">
+                {{# str }} connectingmainentity, local_mentor_specialization {{/ str }} :
+            </label>
+            <select id="user-admin-form-add-entity" name="entity" class="custom-select">
+                {{#entities}}
+                    <option value="{{id}}">{{shortname}}</option>
+                {{/entities}}
+            </select>
+        </div>
+        <div>
+            <label for="user-admin-form-add-secondary-entities">{{# str }} connectingsecondaryentities, local_mentor_specialization {{/ str }} :</label>
+            <select id="user-admin-form-add-secondary-entities" name="secondaryentities[]" class="custom-select" multiple="multiple">
+                {{# entities }}
+                    {{# id }}
+                        <option value="{{ id }}"> {{ shortname }}</option>
+                    {{/id}}
+                {{/ entities }}
+            </select>
+        </div>
+        <div>
+            <label for="user-admin-form-add-region">
+                {{# str }} region, local_user {{/ str }} :
+            </label>
+            <select id="user-admin-form-add-region" name="region" class="custom-select">
+                {{#regions}}
+                    <option value="{{name}}"> {{name}}</option>
+                {{/regions}}
+            </select>
+        </div>
+    </form>
+    <p class="user-admin-form-warning user-admin-form-warning-none"></p>
+</div>

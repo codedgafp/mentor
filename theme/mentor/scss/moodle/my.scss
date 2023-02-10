@@ -1,0 +1,28 @@
+#page-my-index {
+
+  #page-header {
+    background-position: right 15px center;
+    background-repeat: no-repeat;
+    background-size: auto 72%;
+
+    @media(max-width: $size-md) {
+      background-size: auto 45px;
+      background-position: left 15px top 10px;
+      padding-top: 50px;
+      padding-bottom: 10px;
+    }
+  }
+
+  #region-main {
+    box-shadow: none;
+  }
+
+  .modal-dialog {
+    min-width: 550px;
+  }
+
+  span[data-flexitour="container"][x-placement="bottom-start"] div[data-role="arrow"] {
+    top: -40px;
+  }
+
+}

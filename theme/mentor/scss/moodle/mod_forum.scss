@@ -1,0 +1,26 @@
+.path-mod-forum {
+
+  #page-header {
+    #search {
+      margin-right: 0;
+      height: 40px;
+    }
+  }
+
+  div[role="main"] {
+    .forumpost {
+      padding: 14px !important;
+      border: none !important;
+      border-bottom: 1px solid #dee2e6 !important;
+
+      &.firstpost {
+        background-color: rgba(7, 98, 200, 0.06);
+        border-bottom: 2px solid $maincolor !important;
+        margin-bottom: 0 !important;
+      }
+    }
+
+
+  }
+
+}

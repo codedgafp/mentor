@@ -1,0 +1,56 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+
+{{#trainings}}
+    <a data-training-id="{{id}}" {{#isdev}}data-entity-fullname="{{entityfullname}}"{{/isdev}} class="training-tile" tabindex="0" href="{{{ trainingsheeturl }}}">
+        <div class="training-tile-thumbnail">
+            <div class="training-tile-thumbnail-resize" aria-hidden="true" data-thumbnail-url="{{thumbnail}}"></div>
+        </div>
+        <div class="training-tile-information">
+            {{#name}}
+                <h3 class="training-name">{{name}}</h3>
+            {{/name}}
+            {{#entityname}}
+                <p class="training-trainer">
+                <span class="training-creator">
+                    {{# str}}trainings_trainer, local_mentor_core{{/str}}
+                    <span title="{{ entityfullname }}" class="training-entityname">{{entityname}}</span>
+                </span>
+                {{#producerorganizationshortname}}
+                <span class="training-producer">
+                    <span class="separator">-</span>
+                    {{# str}}trainings_producer, local_mentor_core{{/str}}
+                    <span title="{{ producingorganization }}" class="training-producer-shortname">{{producerorganizationshortname}}</span>
+                </span>
+                {{/producerorganizationshortname}}
+                </p>
+            {{/entityname}}
+            {{#catchphrase}}
+                <p class="training-catchphrase">
+                    {{catchphrase}}
+                </p>
+            {{/catchphrase}}
+
+            {{# time }}
+                <div class="training-time">
+                    {{# pix }} clock, local_library {{/ pix }}{{ time }} - {{ modality }}
+                </div>
+            {{/time}}
+            <i class="fr-fi-arrow-right-line"></i>
+        </div>
+    </a>
+{{/trainings}}

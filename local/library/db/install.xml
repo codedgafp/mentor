@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/library/db" VERSION="2022112100" COMMENT="XMLDB file for Moodle library local"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+    <TABLES>
+        <TABLE NAME="library" COMMENT="Table de lien entre la formatiob de la librairie et la formation d'origine">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Identifiant unique"/>
+                <FIELD NAME="trainingid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Identifiant de la formation"/>
+                <FIELD NAME="originaltrainingid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Identifiant de la formation d'origine"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Date de premiere publication"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Date de derniere publication"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Utilisateur de la publication"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT=""/>
+            </KEYS>
+        </TABLE>
+    </TABLES>
+</XMLDB>

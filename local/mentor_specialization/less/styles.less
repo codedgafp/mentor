@@ -1,0 +1,98 @@
+@import "./catalog/styles.less";
+@import "./user.less";
+@import "./trainings.less";
+@import "./sessions.less";
+@import "./entities.less";
+
+.collection-row-session-specification {
+  width: 250px !important;
+}
+
+.session-logo {
+  max-width: 250px;
+}
+
+td.centered {
+  text-align: center;
+}
+
+body.mentor-page {
+  #nav-drawer {
+    a[data-key="participants"],
+    a[data-key="badgesview"],
+    a[data-key="competencies"],
+    a[data-key="grades"] {
+      display: none;
+    }
+  }
+
+  &:not(.mentor-editing) {
+    #region-main-settings-menu,
+    .context-header-settings-menu {
+      display: none;
+    }
+  }
+}
+
+.session-status,
+.training-status {
+  width: 80px;
+  height: 24px;
+  margin: 14px 0 14px 0;
+  padding: 4px 13px 5px 14px;
+  border-radius: 22.5px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+  color: #FFF;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-align: center;
+  white-space: nowrap;
+
+  &[data-status="elaboration_completed"] {
+    background-color: #008941;
+  }
+
+  &[data-status="draft"] {
+    background-color: #5770be;
+  }
+
+  &[data-status="archived"] {
+    background-color: #9c9c9c;
+  }
+
+  &[data-status="template"] {
+    background-color: #000091;
+  }
+
+  &[data-status="inpreparation"] {
+    background-color: #5770be;
+  }
+
+  &[data-status="openedregistration"] {
+    background-color: #00AC8C;
+  }
+
+  &[data-status="reported"] {
+    background-color: #FF9940;
+  }
+
+  &[data-status="cancelled"] {
+    background-color: #e10600
+  }
+
+  &[data-status="inprogress"] {
+    background-color: #000091;
+  }
+
+  &[data-status="completed"] {
+    background-color: #008941;
+  }
+}
+
+#page-course-view-topics {
+  #fitem_id_cohortlist {
+    display: none;
+  }
+}

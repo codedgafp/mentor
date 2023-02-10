@@ -1,0 +1,19 @@
+.path-local-staticpage {
+  div[role="main"] {
+    & > h1 {
+      display: none;
+    }
+
+    table {
+      margin-bottom: 20px;
+
+      th, td {
+        padding: 16px;
+      }
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+}

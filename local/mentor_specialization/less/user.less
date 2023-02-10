@@ -1,0 +1,70 @@
+#page-course-view-edadmin {
+
+  #user-admin-table_wrapper.dataTables_wrapper {
+    .dt-buttons {
+      text-align: right;
+
+      button {
+        margin-right: 0 !important;
+      }
+    }
+  }
+
+  #user-admin-add {
+    display: none;
+
+    #user-admin-form-add {
+      margin: 10px;
+
+      & > div {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        & > label {
+          font-size: 14px;
+          align-self: center;
+        }
+
+        & > input, & > select {
+          width: 250px;
+        }
+
+        & > select {
+          background-color: #f8f8f8;
+          height: 40px;
+        }
+      }
+    }
+
+    .user-admin-form-warning {
+      color: red;
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      margin: 0;
+      width: 100%;
+      text-align: center;
+
+      &.user-admin-form-warning-none {
+        display: none;
+      }
+    }
+  }
+
+  .select2-dropdown {
+    z-index: 10000;
+  }
+
+  .select2-selection__rendered {
+    height: auto;
+    min-height: 24px;
+  }
+
+  #user-admin-form-add-secondary-entities + .select2 {
+    .select2-selection__rendered {
+      height: auto;
+      min-height: 24px;
+    }
+  }
+}

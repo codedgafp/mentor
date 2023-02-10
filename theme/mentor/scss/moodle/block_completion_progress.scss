@@ -1,0 +1,58 @@
+.block_completion_progress {
+  .nowDiv {
+
+    top: -50px !important;
+    text-transform: lowercase;
+    line-height: 1;
+    font-size: 16px;
+    color: #383838;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
+
+    .nowicon {
+      display: none;
+    }
+  }
+
+  .progressBarCell {
+    &.firstProgressBarCell,
+    &.lastProgressBarCell {
+      border-radius: 0 !important;
+    }
+  }
+
+  .progressEventInfo {
+    font-size: 16px;
+    margin-top: 20px;
+    line-height: 16px;
+
+    a {
+      display: block;
+      margin-bottom: 5px;
+    }
+  }
+
+  .overviewButton {
+    margin: 16px 0 5px;
+    text-align: left;
+
+    .btn-secondary {
+      font-size: 14px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.24;
+      border: none !important;
+      text-transform: uppercase;
+      padding: 0 !important;
+
+      &:focus, &:hover {
+        background: none !important;
+      }
+    }
+  }
+}

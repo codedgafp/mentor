@@ -1,0 +1,166 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_mentor_specialization/trainings
+
+    This template renders the trainings management page.
+
+    Example context (json):
+    {
+        "entityid" : 1,
+        "addtraininglink" : "",
+        "hassubentities" : true,
+        "subentity" : 1,
+        "recyclebinlink" : "link to the recycle bin page",
+        "subentitiesfilter" : [
+            {
+                "id" : 1,
+                "name" : "Sub entity 1"
+            },
+            {
+                "id" : 2,
+                "name" : "Sub entity 2"
+            }
+        ],
+        "collections" : [
+            {
+                "key" : 1,
+                "value" : "Collection 1"
+            },
+        ],
+        "status" : [
+            {
+                "key" : 1,
+                "value" : "Status 1"
+            },
+        ]
+    }
+}}
+{{# addtraininglink }}
+    <div id="trainings-buttons">
+        <div id="trainings-buttons-actions">
+            {{#hassubentities }}
+                {{#subentity}}
+                    <form action="{{ addtraininglink }}">
+                        <input type="hidden" name="entityid" value="{{ subentity }}"/>
+                        <button class="btn btn-primary" id="add-training-button">
+                            {{# str }} addtraining, local_mentor_specialization {{/ str }}
+                        </button>
+                    </form>
+                {{/subentity}}
+
+                {{^subentity}}
+                    <button class="btn btn-primary" id="add-training-button-subentities">
+                        {{# str }} addtraining, local_mentor_specialization {{/ str }}
+                    </button>
+                {{/subentity}}
+            {{/hassubentities }}
+
+            {{^hassubentities }}
+                <form action="{{ addtraininglink }}">
+                    <input type="hidden" name="entityid" value="{{ entityid }}"/>
+                    <button class="btn btn-primary" id="add-training-button">
+                        {{# str }} addtraining, local_mentor_specialization {{/ str }}
+                    </button>
+                </form>
+            {{/hassubentities }}
+
+            {{# recyclebinlink }}
+                <a href="{{ recyclebinlink }}" target="_blank" rel="opener" id="recyclebin" class="btn btn-secondary" title="{{# str }} trash, local_mentor_specialization {{/ str
+                }}">
+                    <span>
+                        {{# str }} trash, local_mentor_specialization {{/ str }}
+                    </span>
+                </a>
+            {{/recyclebinlink}}
+        </div>
+        <div id="trainings-buttons-filter">
+            <div id="filter-title">
+                <i class="fa fa-filter" aria-hidden="true"></i>{{# str }} sortby, local_mentor_specialization {{/ str }}
+            </div>
+            <div id="filter-actions">
+                <div id="sub-entity-filter">
+                    <label for="sub-entity-select" class="fr-text--sm">{{# str }} subentity, local_mentor_core {{/ str }}</label>
+                    <select name="sub-entity-select" class="custom-select" id="sub-entity-select" multiple="multiple">
+                        {{# subentitiesfilter }}
+                            <option value="{{ id }}">{{ name }}</option>
+                        {{/ subentitiesfilter }}
+                    </select>
+                </div>
+
+                <div id="collection-filter">
+                    <label for="collection-select" class="fr-text--sm">{{# str }} collections, local_mentor_specialization {{/ str }}</label>
+                    <select name="collection-select" class="custom-select" id="collection-select" multiple="multiple">
+                        {{# collections }}
+                            <option value="{{ key }}">{{ value }}</option>
+                        {{/ collections }}
+                    </select>
+                </div>
+
+                <div id="status-filter">
+                    <label for="status-select" class="fr-text--sm">{{# str }} status, local_mentor_specialization {{/ str }}</label>
+                    <select name="status-select" class="custom-select" id="status-select" multiple="multiple">
+                        {{# status }}
+                            <option value="{{ key }}">{{ value }}</option>
+                        {{/ status }}
+                    </select>
+                </div>
+                <div class="filters-button">
+                    <button id="filter-apply" class="btn btn-primary"><i class="fa fa-filter" aria-hidden="true"></i>{{# str }} applyfilters, local_mentor_specialization {{/ str
+                    }}</button>
+                    <button id="filter-reset" class="btn btn-link">{{# str }} resetfilters, local_mentor_specialization {{/ str }}</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{{/addtraininglink }}
+
+<table id="trainings-table" data-entityid="{{entityid}}">
+    <thead>
+    <tr>
+        <th class="header-sub-entity">
+            {{# str }} subentity, local_mentor_specialization {{/ str }}
+        </th>
+        <th class="header-collections">
+            {{# str }} collection, local_mentor_specialization {{/ str }}
+        </th>
+        <th class="header-trainingname">
+            {{# str }} trainingname, local_mentor_specialization {{/ str }}
+        </th>
+        <th class="header-sessions">
+            {{# str }} sessions, local_mentor_specialization {{/ str }}
+        </th>
+        <th class="header-sirhid">
+            {{# str }} sirhid, local_mentor_specialization {{/ str }}
+        </th>
+        <th class="header-status">
+            {{# str }} status, local_mentor_specialization {{/ str }}
+        </th>
+        <th class="header-actions">
+            {{# str }} actions, local_mentor_specialization {{/ str }}
+        </th>
+    </tr>
+    </thead>
+</table>
+
+{{#hassubentities }}
+    {{> local_trainings/create_training_popup }}
+{{/hassubentities }}
+{{> local_trainings/move_training_popup }}
+{{> local_trainings/duplicate_training_popup }}
+{{> local_trainings/create_session_popup }}

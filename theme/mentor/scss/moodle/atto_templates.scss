@@ -1,0 +1,542 @@
+.moodle-dialogue {
+  min-width: 500px;
+
+  .atto_snippet_buttons {
+
+    // Depend du nombre de snippets : ici 3
+    width: 31%;
+
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+    button {
+      @extend .btn-primary;
+    }
+  }
+
+  .atto_media_urlentrysubmit {
+    @extend .btn-primary;
+  }
+}
+
+
+.mentor-separator {
+  width: 100%;
+  background-color: $maincolor;
+  height: 3px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+}
+
+.mentor-image-text {
+  img {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+
+.mentor-card {
+
+  &.consigne {
+    .mentor-card-left {
+      background-color: $consignebackgroudcolor;
+    }
+  }
+
+  &.retenir {
+    .mentor-card-left {
+      background-color: $retenirbackgroudcolor;
+    }
+  }
+
+  &.plus-loin {
+    .mentor-card-left {
+      background-color: $plusloinbackgroudcolor;
+    }
+  }
+
+  &.pratique {
+    .mentor-card-left {
+      background-color: $pratiquebackgroudcolor;
+    }
+  }
+
+  &.definition {
+    .mentor-card-left {
+      background-color: $definitionbackgroudcolor;
+    }
+  }
+
+  &.important {
+    .mentor-card-left {
+      background-color: $importantbackgroudcolor;
+    }
+  }
+
+  .mentor-card-left {
+    color: $white;
+    font-weight: bold;
+    line-height: 1.33;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    font-size: 18px;
+
+    @media(width: $size-xl) {
+      font-size: 16px;
+    }
+
+    i {
+      margin-top: 15px;
+      color: white !important;
+      font-size: 36px;
+
+      @media(width: $size-xl) {
+        font-size: 31px;
+      }
+    }
+  }
+
+  .mentor-card-content {
+    padding: 13px 24px 30px;
+
+    h5 {
+      margin-top: 10px;
+      margin-bottom: 14px;
+      line-height: 1.5;
+      color: $maintitlecolor;
+      font-size: 16px;
+
+      @media(width: $size-xl) {
+        font-size: 14px;
+      }
+    }
+
+    .duration {
+      color: $maincolor;
+      line-height: 1.6;
+      font-size: 14px;
+
+      @media(width: $size-xl) {
+        font-size: 12px;
+      }
+    }
+
+    .modalities {
+      list-style-type: none !important;
+      padding-left: 0;
+
+      li {
+        color: $maincolor;
+        line-height: 0.9;
+        font-size: 16px;
+
+        @media(max-width: 767px) {
+          line-height: inherit;
+        }
+
+        @media(width: $size-xl) {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+.moodle-dialogue {
+  .consigne-content {
+    max-width: calc(100% - 120px);
+  }
+}
+
+.drawer-open-left {
+  @media(max-width: $size-lg) {
+    .mentor-consigne {
+      .consigne-left {
+        max-width: 100%;
+        flex: 100%;
+      }
+
+      .consigne-content .modalities li {
+        max-width: 100%;
+        flex: 100%;
+      }
+    }
+  }
+}
+
+.mentor-accordion {
+
+  // Cache les elements vides generes par atto.
+  & + br,
+  & ~ p[dir="ltr"]:empty {
+    display: none;
+  }
+
+  // Cache la bordure superieure des accordeons qui suivent cet element pour eviter la superposition.
+  & + br + .mentor-accordion,
+  & + br + p[dir="ltr"]:empty + .mentor-accordion {
+    .card-header {
+      border-top: 0;
+    }
+  }
+
+  .card {
+    margin: 0;
+    border: none;
+    border-top: 1px solid rgba(0,0,0,.125);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+
+    .card-header {
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.2;
+      letter-spacing: normal;
+      background-color: transparent;
+      padding: 11px 11px 11px 0;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+      font-size: 16px;
+      border-bottom: 0;
+
+      .btn {
+        padding: 0;
+      }
+
+      &.opened {
+        h5 {
+          color: $maincolor;
+          .btn {
+            color: $maincolor;
+          }
+        }
+      }
+
+      h5 {
+        font-size: 16px;
+        align-items: center;
+        color: $maintitlecolor;
+
+        .btn {
+          font-size: 16px;
+          color: $maintitlecolor;
+          text-align: left;
+        }
+      }
+
+
+      .btn-link {
+        &:focus {
+          text-decoration: none;
+        }
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+
+    }
+
+    .card-body {
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.75;
+      letter-spacing: normal;
+      text-align: justify;
+      color: #1e1e1e;
+      padding: 11px 0 20px 0;
+      font-size: 16px;
+
+      @media (width: $size-xl) {
+        font-size: 14px;
+      }
+    }
+
+  }
+}
+
+.editor_atto {
+  .mentor-accordion {
+
+    .card {
+      margin: 0px 50px;
+    }
+
+    .btn:not(:disabled):not(.disabled) {
+      cursor: text;
+    }
+
+    h5 {
+      color: $maincolor !important;
+      .btn {
+        color: $maincolor !important;
+      }
+    }
+
+    .collapse:not(.show) {
+      display: block;
+    }
+
+
+    .card-header {
+      cursor: auto;
+    }
+
+  }
+}
+
+.mentor-h2 {
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  font-size: 24px;
+
+  @media (width: $size-xl) {
+    font-size: 21px;
+  }
+
+  &.mentor-h2-black {
+    color: $mentortitlecolor !important;
+  }
+
+  &.mentor-h2-blue {
+    color: $maincolor !important;
+  }
+
+}
+
+.mentor-h3 {
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  font-size: 18px;
+
+  @media (width: $size-xl) {
+    font-size: 16px;
+  }
+
+  &.mentor-h3-black {
+    color: $mentortitlecolor;
+  }
+
+  &.mentor-h3-blue {
+    color: $maincolor;
+  }
+}
+
+.row.cards-mentor {
+  margin-right: 0;
+
+}
+
+.add-card, .remove-card {
+  display: none;
+}
+
+.card-mentor {
+  margin: 20px;
+  min-width: 200px;
+  padding-left: 0;
+  padding-right: 0;
+
+  .card-text {
+    margin-bottom: 3rem;
+  }
+
+  .card-body > a:last-child {
+      color: $white!important;
+      background: $maincolor!important;
+      padding: 7px 16px 9px 15px!important;
+      border: none!important;
+      border-radius: 0!important;
+      bottom: 1.25rem;
+      position: absolute;
+  }
+}
+
+#id_introeditoreditable {
+  .add-card {
+    display: block;
+    position: absolute;
+    left: 302px;
+    top: 50%;
+    cursor: pointer;
+  }
+
+  .remove-card {
+    display: block;
+    position: absolute;
+    left: 275px;
+    top: -15px;
+    background-color: white;
+    border: 1px solid rgba(0,0,0,.125);
+  }
+}
+
+#card-popup-modal {
+  .modal-content {
+    width: 450px!important;
+
+    .card-modal-form {
+      margin: 20px;
+
+      #card-text-input {
+        height: 100px;
+      }
+    }
+  }
+}
+
+.class-virtuelle, .presentiel {
+  .mentor-card-left {
+    background-color: #0562C8;
+  }
+
+}
+
+.class-virtuelle, .presentiel, .presentation-formation {
+  .mentor-card-content {
+    .date {
+      color: #0562C8;
+    }
+  }
+}
+
+.presentiel {
+  .mentor-card-left {
+    i {
+      font-size: 25px;
+      margin: 15px 2px 0 2px;
+
+      @media (width: $size-xl) {
+        font-size: 22px;
+      }
+    }
+  }
+
+  .adresse {
+    .adresse-title {
+      font-size: 14px;
+
+      @media (width: $size-xl) {
+        font-size: 12px;
+      }
+    }
+
+    .adresse-content {
+      i {
+        color: #0562C8;
+        font-size: 20px;
+
+        @media (width: $size-xl) {
+          font-size: 18px;
+        }
+      }
+
+      .adresse-position {
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+.presentation-formation {
+  .mentor-card-left {
+    color: #0562C8;
+    justify-content: start;
+    -ms-flex-pack: start;
+    padding-top: 60px;
+
+    i {
+      color: #0562C8!important;
+    }
+  }
+
+  .mentor-card-content {
+    .date-virtuelle {
+      i {
+        font-size: 18px;
+
+        @media (width: $size-xl) {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .file {
+      color: #0562C8;
+
+      i {
+        padding-left: 15px;
+
+        &:first-child {
+          padding-left: 0;
+        }
+      }
+
+      a {
+        padding-left: 15px;
+
+        &:first-child {
+          padding-left: 0;
+        }
+      }
+    }
+
+    .formateur {
+      .formateur-title {
+        font-size: 14px;
+
+        @media (width: $size-xl) {
+          font-size: 12px;
+        }
+      }
+
+      .formateur-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 13px;
+
+        @media (width: $size-xl) {
+          font-size: 11px;
+        }
+
+        img {
+          width: 30px;
+          height: 30px;
+          clip-path: ellipse(50% 50%)!important;
+          margin-left: 40px;
+          margin-right: 10px;
+
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.mentor-video {
+  max-height: 450px;
+
+  iframe {
+    max-width: 800px;
+    left: 50% !important;
+    transform: translate(-50%) !important;
+  }
+}

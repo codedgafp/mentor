@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<report version="2020110300">
+    <visible><![CDATA[1]]></visible>
+    <name><![CDATA[Total d'agents uniques sur la période (par entité de rattac)]]></name>
+    <summary>
+        <![CDATA[<p dir="ltr" style="text-align:left;">Nombre d’agents uniques (chaque agent ne peut compter qu'une seule fois et doit avoir un rôle de participants sur la session) qui se sont connectés au moins 1 fois sur une <b>période</b> à au moins 1 session ‘en cours’ (durant la période) sur l'ensemble de la plateforme. Filtré par <b>entité de rattachement</b><br /></p>]]></summary>
+    <summaryformat><![CDATA[1]]></summaryformat>
+    <type><![CDATA[sql]]></type>
+    <pagination><![CDATA[0]]></pagination>
+    <components>
+        <![CDATA[YTozOntzOjk6ImN1c3RvbXNxbCI7YToxOntzOjY6ImNvbmZpZyI7Tzo4OiJzdGRDbGFzcyI6Njp7czo4OiJxdWVyeXNxbCI7czo1NTQ6IisrKysrKysrU0VMRUNUK0NPVU5UJTI4RElTVElOQ1QlMjhtdS51c2VyaWQlMjklMjkrQVMrJTIybmJhZ2VudHMlMjIlMEQlMEErKysrKysrK0ZST00rcHJlZml4X2xvZ3N0b3JlX21lbnRvcl91c2VyK211JTBEJTBBKysrKysrKytKT0lOK3ByZWZpeF9sb2dzdG9yZV9tZW50b3JfaGlzdG9yeV9sb2crbWwrT04rbWwudXNlcmxvZ2lkKyUzRCttdS5pZCUwRCUwQSsrKysrKysrSk9JTitwcmVmaXhfbG9nc3RvcmVfbWVudG9yX3Nlc3Npb24rbXMrT04rbWwuc2Vzc2lvbmxvZ2lkKyUzRCttcy5pZCUwRCUwQSsrKysrKysrV0hFUkUlMEQlMEErKysrKysrK21zLnN0YXR1cyslM0QrJTI3aW5wcm9ncmVzcyUyNyUwRCUwQSUwOSUwOUFORCttdS50cmFpbmVyKyUzRCswJTBEJTBBJTA5JTA5JTI1JTI1RklMVEVSX0NBVEVHT1JJRVMlM0FtdS5lbnRpdHklMjUlMjUrJTBEJTBBJTA5JTA5JTI1JTI1RklMVEVSX1NUQVJUVElNRSUzQW1sLnRpbWVjcmVhdGVkJTNBJTNFJTI1JTI1KyUwRCUwQSUwOSUwOSUyNSUyNUZJTFRFUl9FTkRUSU1FJTNBbWwudGltZWNyZWF0ZWQlM0ElM0MlMjUlMjUrIjtzOjg6ImNvdXJzZWlkIjtpOjE7czoxMjoic3VibWl0YnV0dG9uIjtzOjExOiJFbnJlZ2lzdHJlciI7czoxNjoicmVwb3J0Y2F0ZWdvcmllcyI7czoxOiIwIjtzOjE3OiJyZXBvcnRzaW5jYXRlZ29yeSI7czoxOiIwIjtzOjE0OiJyZW1vdGVxdWVyeXNxbCI7czowOiIiO319czo3OiJmaWx0ZXJzIjthOjE6e3M6ODoiZWxlbWVudHMiO2E6Mjp7aTowO2E6NTp7czoyOiJpZCI7czoxNToiSzhEa000Y2xVTXpFcVZTIjtzOjg6ImZvcm1kYXRhIjtPOjg6InN0ZENsYXNzIjowOnt9czoxMDoicGx1Z2lubmFtZSI7czoxMjoic3RhcnRlbmR0aW1lIjtzOjE0OiJwbHVnaW5mdWxsbmFtZSI7czozNToiRmlsdHJlK2RhdGUrZGUrZCVDMyVBOWJ1dCtvdStkZStmaW4iO3M6Nzoic3VtbWFyeSI7czozNToiRmlsdHJlK2RhdGUrZGUrZCVDMyVBOWJ1dCtvdStkZStmaW4iO31pOjE7YTo1OntzOjI6ImlkIjtzOjE1OiJXdXhLRkNHbDBCYXVsdTEiO3M6ODoiZm9ybWRhdGEiO086ODoic3RkQ2xhc3MiOjA6e31zOjEwOiJwbHVnaW5uYW1lIjtzOjEwOiJjYXRlZ29yaWVzIjtzOjE0OiJwbHVnaW5mdWxsbmFtZSI7czoyNjoiRmlsdHJlK2RlcytjYXQlQzMlQTlnb3JpZXMiO3M6Nzoic3VtbWFyeSI7czoyNjoiRmlsdHJlcitwYXIrY2F0JUMzJUE5Z29yaWUiO319fXM6MTE6InBlcm1pc3Npb25zIjthOjI6e3M6NjoiY29uZmlnIjtPOjg6InN0ZENsYXNzIjoxOntzOjEzOiJjb25kaXRpb25leHByIjtzOjA6IiI7fXM6ODoiZWxlbWVudHMiO2E6MDp7fX19]]></components>
+    <export><![CDATA[csv,xls,]]></export>
+    <jsordering><![CDATA[1]]></jsordering>
+    <global><![CDATA[1]]></global>
+    <lastexecutiontime><![CDATA[4]]></lastexecutiontime>
+    <cron><![CDATA[0]]></cron>
+    <remote><![CDATA[0]]></remote>
+</report>

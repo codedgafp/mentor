@@ -1,0 +1,61 @@
+#id_sessionstartdate_disabled_calendar, #id_sessionenddate_disabled_calendar {
+  display: none;
+}
+
+.select2 {
+  @media(max-width: 455px) {
+    width: 300px !important;
+  }
+
+  .select2-selection__rendered {
+    word-wrap: break-word;
+    text-overflow: inherit;
+    white-space: normal!important;
+  }
+
+  .select2-selection__choice {
+    background-color: $maincolor !important;
+    color: white !important;
+    padding-bottom: 3px;
+
+    .select2-selection__choice__remove {
+      color: white !important;
+    }
+  }
+}
+
+.mform {
+  .form-group {
+
+    fieldset {
+      margin-top: auto!important;
+    }
+
+    &.optional > div {
+      label, p.col-form-label, p:first-child {
+        font-style: italic;
+      }
+    }
+
+    .text-warning {
+      margin-left: 0.25rem !important;
+      color: #fc5d00 !important;
+
+      @media (min-width: 768px) {
+        margin-left: auto !important;
+      }
+
+      & ~ .ml-1 {
+        margin-left: inherit !important;
+
+        &:empty {
+          display: none !important;
+        }
+      }
+    }
+
+    label .text-warning i::before {
+      vertical-align: sub;
+    }
+  }
+}

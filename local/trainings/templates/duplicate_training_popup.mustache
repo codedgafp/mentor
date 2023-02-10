@@ -1,0 +1,106 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+
+{{!
+    @template local_training/duplicate_training_popup
+
+    This template renders training duplication form.
+
+    Example context (json):
+    {
+        "entityid" : 1,
+        "subentity" : 2,
+        "cansharetrainings" : true,
+        "hasmultipleentitiesduplicate" : true,
+        "hassubentitiestocreatesession" : true,
+        "entitiesduplicate" : [
+            {
+                "id" : 1,
+                "sel" : false,
+                "name" : "Entity"
+            },
+            {
+                "id" : 3,
+                "sel" : true,
+                "name" : "Sub entity"
+            },
+        ],
+        "subentities" : [
+            {
+                "id" : 1,
+                "name" : "Entity"
+            },
+            {
+                "id" : 3,
+                "name" : "Sub entity"
+            },
+        ]
+    }
+}}
+
+<div id="duplicate-training-popup" class="text-center">
+
+    {{#cansharetrainings}}
+        <span>{{# str }} duplicatetrainingsharingdialogcontent, local_trainings {{/ str }}</span>
+    {{/cansharetrainings}}
+
+    {{^cansharetrainings}}
+        <span>{{# str }} duplicatetrainingdialogcontent, local_trainings {{/ str }}</span>
+    {{/cansharetrainings}}
+
+    <div id="duplicate-form">
+        <div>
+            <label for="trainingshortname">{{# str }} abbreviatedname, local_trainings {{/ str }} </label>
+            <input id="trainingshortname" type="text" name="trainingshortname" value=""/>
+        </div>
+
+        {{#cansharetrainings}}
+            <div>
+                {{#hasmultipleentitiesduplicate}}
+                    <div>
+                        <label for="destinationentity">{{# str }} dedicateddtargetdspace, local_trainings {{/ str }} </label>
+                        <select id="destinationentity" name="destinationentity" class="custom-select">
+                            {{#entitiesduplicate}}
+                                <option value="{{id}}" {{#sel}}selected{{/sel}}>{{name}}</option>
+                            {{/entitiesduplicate}}
+                        </select>
+                    </div>
+                {{/hasmultipleentitiesduplicate}}
+
+                {{#hassubentitiestocreatesession}}
+                    <div id="destinationsubentity-container" data-parentid="{{ entityid }}">
+                        <label for="destinationsubentity">{{# str }} dedicateddtargetdsubentity, local_trainings {{/ str }}</label>
+                        <select id="destinationsubentity" name="destinationsubentity" class="custom-select">
+                            {{#subentities}}
+                                <option value="{{id}}">{{name}}</option>
+                            {{/subentities}}
+                        </select>
+                    </div>
+                {{/hassubentitiestocreatesession}}
+
+                {{^hassubentitiestocreatesession}}
+                    <div id="destinationsubentity-container" data-parentid="{{ entityid }}" data-subentity="{{ subentity }}"></div>
+                {{/hassubentitiestocreatesession}}
+            </div>
+        {{/cansharetrainings}}
+    </div>
+    <div id="training-name-used">{{# str }} trainingnanmeused, local_trainings {{/ str }}</div>
+</div>
+
+<div id="duplicate-training-message" class="text-center">
+    {{# str }} duplicatetoaddhoc, local_trainings {{/ str }}
+</div>

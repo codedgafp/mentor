@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<report version="2020110300">
+    <visible><![CDATA[1]]></visible>
+    <name><![CDATA[Participants connectés au moins 1 fois (par entité)]]></name>
+    <summary>
+        <![CDATA[Nombre de participants  (chaque agent compte 1 fois PAR session) qui se sont connectés au moins 1 fois sur une période à 1 session ‘en cours’ (durant la période) par espaces (espace de la session). Filtré par entité de rattachement]]></summary>
+    <summaryformat><![CDATA[1]]></summaryformat>
+    <type><![CDATA[sql]]></type>
+    <pagination><![CDATA[0]]></pagination>
+    <components>
+        <![CDATA[YToyOntzOjc6ImZpbHRlcnMiO2E6MTp7czo4OiJlbGVtZW50cyI7YToyOntpOjA7YTo1OntzOjI6ImlkIjtzOjE1OiJJck5CTVhBclpFeDBoMXMiO3M6ODoiZm9ybWRhdGEiO086ODoic3RkQ2xhc3MiOjA6e31zOjEwOiJwbHVnaW5uYW1lIjtzOjEwOiJjYXRlZ29yaWVzIjtzOjE0OiJwbHVnaW5mdWxsbmFtZSI7czoxNzoiRmlsdGVyK2NhdGVnb3JpZXMiO3M6Nzoic3VtbWFyeSI7czoyMToiVG8rZmlsdGVyK2J5K2NhdGVnb3J5Ijt9aToxO2E6NTp7czoyOiJpZCI7czoxNToiTU1uQktIMkRPU1E5TFlKIjtzOjg6ImZvcm1kYXRhIjtPOjg6InN0ZENsYXNzIjowOnt9czoxMDoicGx1Z2lubmFtZSI7czoxMjoic3RhcnRlbmR0aW1lIjtzOjE0OiJwbHVnaW5mdWxsbmFtZSI7czoyNToiU3RhcnQrJTJGK0VuZCtkYXRlK2ZpbHRlciI7czo3OiJzdW1tYXJ5IjtzOjI1OiJTdGFydCslMkYrRW5kK2RhdGUrZmlsdGVyIjt9fX1zOjk6ImN1c3RvbXNxbCI7YToxOntzOjY6ImNvbmZpZyI7Tzo4OiJzdGRDbGFzcyI6Njp7czo4OiJxdWVyeXNxbCI7czoxMTU2OiJTRUxFQ1QlMEQlMEErKysrKysrK2NjLm5hbWUrQVMrRXNwYWNlJTJDJTBEJTBBKysrKysrKytDT0FMRVNDRSUyOCUyOCUwRCUwQSsrKysrKysrKysrK1NFTEVDVCtTVU0lMjhuYnJwYXJ0aWNpcGFudCUyOSUwRCUwQSsrKysrKysrKysrK0ZST00lMjglMEQlMEErKysrKysrKysrKysrKysrU0VMRUNUKytDT1VOVCUyOERJU1RJTkNUJTI4bG11LnVzZXJpZCUyOSUyOStBUytuYnJwYXJ0aWNpcGFudCUyQytsbXMuc3BhY2UrQVMrc3BhY2UlMEQlMEErKysrKysrKysrKysrKysrKysrKysrKytGUk9NKyU3QmxvZ3N0b3JlX21lbnRvcl9oaXN0b3J5X2xvZyU3RCtsbWwlMEQlMEErKysrKysrKysrKysrKysrKysrKysrKytKT0lOKyU3QmxvZ3N0b3JlX21lbnRvcl91c2VyJTdEK2xtdStPTitsbWwudXNlcmxvZ2lkKyUzRCtsbXUuaWQlMEQlMEErKysrKysrKysrKysrKysrKysrKysrKytKT0lOKyU3QmxvZ3N0b3JlX21lbnRvcl9zZXNzaW9uJTdEK2xtcytPTitsbXMuaWQrJTNEK2xtbC5zZXNzaW9ubG9naWQlMEQlMEErKysrKysrKysrKysrKysrKysrKysrKytXSEVSRStsbXMuc3RhdHVzKyUzRCslMjdpbnByb2dyZXNzJTI3JTBEJTBBJTA5JTA5JTA5KyslMDklMDklMDlBTkQrbG11LnRyYWluZXIrJTNEKzAlMEQlMEElMDklMDklMDklMDklMDklMDklMjUlMjVGSUxURVJfQ0FURUdPUklFUyUzQWxtdS5lbnRpdHklMjUlMjUrJTBEJTBBJTA5JTA5JTA5JTA5JTA5JTA5JTI1JTI1RklMVEVSX1NUQVJUVElNRSUzQWxtbC50aW1lY3JlYXRlZCUzQSUzRSUyNSUyNSslMEQlMEElMDklMDklMDklMDklMDklMDklMjUlMjVGSUxURVJfRU5EVElNRSUzQWxtbC50aW1lY3JlYXRlZCUzQSUzQyUyNSUyNSslMEQlMEErKysrKysrKysrKysrKysrKysrKysrKytHUk9VUCtCWStsbXMuc2Vzc2lvbmlkJTJDJTBEJTBBJTA5JTA5JTA5KyslMDklMDklMDklMDklMDkrbG1zLnNwYWNlJTBEJTBBKysrKysrKysrKysrJTI5K0FTK3NyYyUwRCUwQSsrKysrKysrKysrK1dIRVJFK3NyYy5zcGFjZSslM0QrY2MuaWQlMEQlMEErKysrKysrKyUyOSUyQyswJTI5K0FTK25iUGFydGljaXBhbnQlMEQlMEErKysrRlJPTSslN0Jjb3Vyc2VfY2F0ZWdvcmllcyU3RCtjYyUwRCUwQSsrKytXSEVSRStjYy5wYXJlbnQrJTNEKzArJTBEJTBBKysrK09SREVSK0JZK2NjLm5hbWUrQVNDIjtzOjg6ImNvdXJzZWlkIjtpOjE7czoxMjoic3VibWl0YnV0dG9uIjtzOjEyOiJTYXZlK2NoYW5nZXMiO3M6MTY6InJlcG9ydGNhdGVnb3JpZXMiO3M6MToiMCI7czoxNzoicmVwb3J0c2luY2F0ZWdvcnkiO3M6MToiMCI7czoxNDoicmVtb3RlcXVlcnlzcWwiO3M6MDoiIjt9fX0=]]></components>
+    <export><![CDATA[csv,xls,]]></export>
+    <jsordering><![CDATA[1]]></jsordering>
+    <global><![CDATA[0]]></global>
+    <lastexecutiontime><![CDATA[4]]></lastexecutiontime>
+    <cron><![CDATA[0]]></cron>
+    <remote><![CDATA[0]]></remote>
+</report>

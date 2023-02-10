@@ -1,0 +1,325 @@
+#block-region-side-pre {
+  .block.block_summary {
+    div.card-body {
+      padding-left: 0 !important;
+      font-size: 15px !important;
+
+      h5.card-title {
+        padding-left: 16px;
+      }
+
+      div.card-text {
+        margin-top: 6px !important;
+
+        & > ul {
+          &:first-child {
+            & > li {
+              border-bottom: none;
+
+              &:not(:last-child) {
+                &::after {
+                  content: '';
+                  display: block;
+                  width: calc(100% - 22px);
+                  border-bottom: solid 1px #e6e6e6;
+                  transform: translate(16px, 10px);
+                  margin-bottom: 6px;
+                }
+              }
+
+              &:last-child {
+                padding-bottom: 0;
+              }
+            }
+          }
+
+          & > li {
+            padding-bottom: 6px;
+
+            &:not(:first-child) {
+              padding-top: 6px;
+            }
+
+            .summary_arrow {
+              top: 7px;
+
+              i.plusicon, i.minusicon {
+                padding-top: 0;
+
+                &.fa-plus-square-o {
+                  &:before {
+                    content: url([[pix:theme|chevron-down-sm]]);
+                  }
+                }
+
+                &.fa-minus-square-o {
+                  &:before {
+                    content: url([[pix:theme|chevron-up-sm]]);
+                  }
+                }
+              }
+
+              &:focus, &:focus-visible {
+                outline: none;
+              }
+            }
+
+            & > p {
+              padding: 6px 60px 6px 16px;
+
+              &:hover,
+              &:active,
+              &:focus,
+              &:focus-within {
+                background: white !important;
+                border: 2px solid $maincolor;
+                padding-top: 4px;
+                padding-bottom: 4px;
+                padding-left: 14px;
+
+                .summary_arrow {
+                  top: 5px;
+                  right: 10px;
+                }
+
+                .eyeicon, .lockicon {
+                  top: 7px;
+                  right: 36px;
+                }
+
+                a {
+                  &:focus {
+                    background-color: transparent;
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
+                  }
+                }
+              }
+            }
+
+            &.is_active, &.child_is_active {
+              background-color: unset !important;
+
+              & > p {
+                padding-left: 14px;
+
+                a {
+                  color: $maincolor !important;
+                  font-weight: 700;
+
+                  i.plusicon, i.minusicon {
+                    &.fa-plus-square-o {
+                      &:before {
+                        content: url([[pix:theme|chevron-down-sm-b]]);
+                      }
+                    }
+
+                    &.fa-minus-square-o {
+                      &:before {
+                        content: url([[pix:theme|chevron-up-sm-b]]);
+                      }
+                    }
+                  }
+                }
+
+                &:first-child {
+                  border-left: 2px solid $maincolor;
+                }
+
+                &:hover,
+                &:active,
+                &:focus,
+                &:focus-within {
+                  padding-left: 14px;
+                }
+              }
+
+              i.plusicon, i.minusicon {
+                color: $maincolor;
+              }
+
+              a:before {
+                content: "" !important;
+              }
+            }
+
+
+            &.is_active {
+              & > p {
+                background-color: #e5e5f4;
+
+                &:hover,
+                &:active,
+                &:focus,
+                &:focus-within {
+                  background: #e5e5f4 !important;
+                }
+              }
+            }
+
+            .eyeicon, .lockicon {
+              top: 9px;
+            }
+
+            .sub {
+              margin-left: 17px;
+              padding-left: 13px;
+              padding-top: 5px;
+              padding-bottom: 5px;
+              margin-top: 6px;
+              margin-bottom: 6px;
+              width: 305px;
+
+              .eyeicon, .lockicon {
+                top: 3px;
+              }
+
+              .eyeicon {
+                left: 262px;
+              }
+
+              .lockicon {
+                left: 267px;
+              }
+
+              & > p {
+                padding: 0;
+                width: 250px;
+
+                &:hover,
+                &:active,
+                &:focus,
+                &:focus-within {
+                  background: transparent !important;
+                  text-decoration: none;
+                }
+
+                & > a {
+                  color: #383838;
+                }
+              }
+
+              &:hover,
+              &:active,
+              &:focus,
+              &:focus-within {
+                border: 2px solid $maincolor;
+                margin-top: -2px;
+                margin-bottom: 6px;
+                padding-left: 11px;
+                padding-bottom: 3px;
+
+                .eyeicon, .lockicon {
+                  right: 20px;
+                }
+
+                a {
+                  &:focus {
+                    background-color: transparent;
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
+                  }
+                }
+              }
+
+              &.is_active {
+                border-left: 2px solid $maincolor;
+                padding-top: 3px;
+                padding-bottom: 3px;
+                background-color: #e5e5f4;
+
+                & > p {
+                  & > a {
+                    color: $maincolor !important;
+                    font-weight: 700;
+                  }
+                }
+
+                &:hover,
+                &:active,
+                &:focus,
+                &:focus-within {
+                  padding-left: 13px;
+                  padding-bottom: 1px;
+                  padding-top: 1px;
+                  margin-top: 0;
+                }
+
+                .eyeicon {
+                  left: 260px;
+                }
+
+                .lockicon {
+                  left: 265px;
+                }
+
+                &:first-child {
+                  &:hover,
+                  &:active,
+                  &:focus,
+                  &:focus-within {
+                    margin-top: 6px;
+                  }
+                }
+              }
+
+              &:first-child {
+                &:hover,
+                &:active,
+                &:focus,
+                &:focus-within {
+                  margin-top: 4px;
+                }
+              }
+
+              &:last-child {
+                &:hover,
+                &:active,
+                &:focus,
+                &:focus-within {
+                  margin-bottom: 6px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .editbutton {
+      padding-bottom: 0;
+      margin-top: 0;
+
+      li {
+        padding-bottom: 0!important;
+
+        a {
+          color: $maincolor;
+        }
+      }
+    }
+
+    &.block_with_controls {
+      div.card-text {
+        & > ul {
+          &:first-child {
+            & > li {
+              &:last-child {
+                p {
+                  margin-bottom: 4px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #page-blocks-summary-edit {
+    #save,
+    #addsection {
+      @extend .btn-primary;
+    }
+  }
+}

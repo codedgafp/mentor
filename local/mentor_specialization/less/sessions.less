@@ -1,0 +1,174 @@
+@responsive-filter-break: 1610px;
+@responsive-date-filter-break: 1250px;
+@responsive-size: 800px;
+
+#page-course-view-edadmin {
+  #sessions-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #sessions-buttons-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    #filter-title {
+      font-weight: bold;
+
+      i {
+        padding-right: 5px;
+      }
+    }
+
+    #filter-actions {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      -webkit-align-items: flex-end;
+      margin-top: 5px;
+
+      @media (max-width: @responsive-filter-break) {
+        flex-direction: column;
+        align-items: start;
+        width: 100%;
+      }
+
+      #filter-input {
+        display: flex;
+        flex-direction: row;
+        align-items: end;
+        margin-right: 10px;
+
+        @media (max-width: @responsive-date-filter-break) {
+          flex-direction: column;
+          align-items: baseline;
+          width: 100%;
+        }
+
+        & > div {
+          display: flex;
+          flex-direction: column;
+          margin-right: 10px;
+
+          @media (max-width: @responsive-size) {
+            width: 100%;
+          }
+
+          select {
+            border: 1px solid #0154d4;
+            width: 200px;
+
+            @media (min-width: @responsive-size) and (max-width: @responsive-date-filter-break) {
+              width: 455px;
+            }
+
+            &#collection-select {
+              width: 250px;
+
+              @media (min-width: @responsive-size) and (max-width: @responsive-date-filter-break) {
+                width: 455px;
+              }
+            }
+          }
+
+          span {
+            @media (max-width: @responsive-size) {
+              width: 100% !important;
+            }
+
+            &.select2 {
+              ::-webkit-input-placeholder {
+                /* Chrome/Opera/Safari */
+                color: black;
+              }
+
+              ::-moz-placeholder {
+                /* Firefox 19+ */
+                color: black;
+              }
+
+              :-ms-input-placeholder {
+                /* IE 10+ */
+                color: black;
+              }
+
+              :-moz-placeholder {
+                /* Firefox 18- */
+                color: black;
+              }
+            }
+          }
+        }
+      }
+
+      .filters-button {
+        display: flex;
+        flex-direction: inherit;
+        align-items: baseline;
+
+        @media (max-width: @responsive-filter-break) {
+          flex-direction: row;
+        }
+
+        button {
+          @media (min-width: @responsive-size) and (max-width: @responsive-filter-break) {
+            align-items: baseline;
+            margin: 20px 0 0;
+          }
+
+          &#filter-reset {
+            @media (max-width: @responsive-filter-break) {
+              padding: 0;
+              margin: 20px 0 0 20px;
+            }
+
+            &:hover {
+              text-decoration: none;
+            }
+
+            &:focus {
+              -webkit-box-shadow: none;
+              box-shadow: none;
+            }
+          }
+        }
+
+        #filter-apply {
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+
+      #date-filter {
+        display: flex;
+
+        & > div {
+          position: relative;
+
+          input {
+            height: 42px;
+            background-color: #fff;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            cursor: text;
+            padding: 0 5px;
+
+            &[type="date"]:before {
+              content: attr(placeholder) !important;
+              color: #aaa;
+              margin-right: 0.5em;
+            }
+
+            &[type="date"]:focus:before,
+            &[type="date"]:valid:before {
+              content: "";
+            }
+          }
+        }
+      }
+    }
+  }
+}

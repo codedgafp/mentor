@@ -1,0 +1,13 @@
+#page-mod-customcert-view {
+  div[role="main"] {
+    .singlebutton {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    h2:last-child {
+      margin-top: 8px;
+    }
+  }
+}

@@ -1,0 +1,98 @@
+.path-mod-assign {
+
+  .gradingsummary {
+    h3 {
+      @media(max-width: $size-sm) {
+        margin-left: 11px;
+      }
+    }
+  }
+
+  .submissionstatustable {
+    @media(max-width: $size-sm) {
+      margin-left: 11px;
+    }
+  }
+
+  #page-content {
+    h2 {
+      @media(max-width: $size-sm) {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    }
+
+    #intro {
+      @media(max-width: $size-sm) {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    }
+  }
+
+  .editsubmissionform {
+    #fitem_id_files_filemanager {
+      #id_files_filemanager_label {
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 1.2;
+        color: #383838;
+        margin-left: -40px;
+
+        @media(max-width: $size-sm) {
+          margin-left: 0;
+          padding-bottom: 15px;
+        }
+      }
+
+      .col-md-3 {
+        flex: unset;
+        max-width: unset;
+      }
+
+      .col-md-9 {
+        margin: 0 auto;
+
+        @media(max-width: 768px) {
+          flex: unset;
+          max-width: unset;
+        }
+      }
+
+      .filemanager {
+        .filemanager-container {
+          .fm-empty-container {
+            @media(max-width: 768px) {
+              padding-top: 67px;
+            }
+          }
+        }
+      }
+    }
+
+    #fgroup_id_buttonar {
+      #id_submitbutton {
+        margin-right: 16px;
+        margin-left: -10px;
+      }
+
+      .col-md-3 {
+        flex: unset;
+        max-width: unset;
+      }
+
+      .col-md-9 {
+        margin: 0 auto;
+
+        @media(max-width: 768px) {
+          flex: unset;
+          max-width: unset;
+        }
+      }
+
+      .d-flex.flex-wrap.align-items-center {
+        justify-content: center;
+      }
+    }
+  }
+}
