@@ -124,14 +124,14 @@ class check_update_sirh extends \core\task\scheduled_task {
             'upate_data_sirh_email',
             'enrol_sirh',
             array(
-                'sirh'             => $enrolsirhinstance->customchar1,
-                'trainingsirh'     => $enrolsirhinstance->customchar2,
-                'sessionsirh'      => $enrolsirhinstance->customchar3,
+                'sirh' => $enrolsirhinstance->customchar1,
+                'trainingsirh' => $enrolsirhinstance->customchar2,
+                'sessionsirh' => $enrolsirhinstance->customchar3,
                 'nametrainingsirh' => $apisirh->libelleFormation,
-                'namesessionsirh'  => $apisirh->libelleSession,
-                'startdate'        => $apisirh->dateDebut,
-                'enddate'          => $apisirh->dateFin,
-                'sessionurl'       => $sessioncourseurl->out(),
+                'namesessionsirh' => $apisirh->libelleSession,
+                'startdate' => $apisirh->dateDebut,
+                'enddate' => $apisirh->dateFin,
+                'sessionurl' => $sessioncourseurl->out(),
             )
         );
 
@@ -164,11 +164,11 @@ class check_update_sirh extends \core\task\scheduled_task {
             'upate_user_sirh_email',
             'enrol_sirh',
             array(
-                'sessionname'  => $sessionname,
-                'sirh'         => $enrolsirhinstance->customchar1,
+                'sessionname' => $sessionname,
+                'sirh' => $enrolsirhinstance->customchar1,
                 'trainingsirh' => $enrolsirhinstance->customchar2,
-                'sessionsirh'  => $enrolsirhinstance->customchar3,
-                'sessionurl'   => $sessioncourseurl->out(),
+                'sessionsirh' => $enrolsirhinstance->customchar3,
+                'sessionurl' => $sessioncourseurl->out(),
             )
         );
 

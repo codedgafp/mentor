@@ -90,21 +90,21 @@ foreach ($alllogs as $log) {
 
     // Entities.
     $userentity = $DB->get_record_sql('SELECT name FROM {logstore_mentor_entity2} WHERE id = :id',
-            ['id' => $log->userentitylogid]);
+        ['id' => $log->userentitylogid]);
 
     $sessionentity = $DB->get_record_sql('SELECT name FROM {logstore_mentor_entity2} WHERE id = :id', [
-            'id' =>
-                    $log->entitylogid
+        'id' =>
+            $log->entitylogid
     ]);
 
     $sessionsubentity = $DB->get_record_sql('SELECT name FROM {logstore_mentor_entity2} WHERE id = :id',
-            ['id' => $log->subentitylogid]);
+        ['id' => $log->subentitylogid]);
 
     $trainingentity = $DB->get_record_sql('SELECT name FROM {logstore_mentor_entity2} WHERE id = :id',
-            ['id' => $log->trainingentitylogid]);
+        ['id' => $log->trainingentitylogid]);
 
     $trainingsubentity = $DB->get_record_sql('SELECT name FROM {logstore_mentor_entity2} WHERE id = :id',
-            ['id' => $log->trainingsubentitylogid]);
+        ['id' => $log->trainingsubentitylogid]);
 
     $session = \local_mentor_core\session_api::get_session($log->sessionid);
 
@@ -160,15 +160,15 @@ foreach ($alllogs as $log) {
     $output .= '<td>' . $sessionentity->name . '</td>';
 
     $sessionsubentity = $sessionentity->name == $sessionsubentity->name ? '-' : $sessionsubentity->name;
-    $output           .= '<td>' . $sessionsubentity . '</td>';
+    $output .= '<td>' . $sessionsubentity . '</td>';
 
     $output .= '<td>' . implode(',', $regs) . '</td>';
 
     $output .= '<td>' . $trainingentity->name . '</td>';
 
     $trainingsubentity = $trainingentity->name == $trainingsubentity->name ? '-' : $trainingsubentity->name;
-    $output            .= '<td>' . $trainingsubentity . '</td>';
-    $output            .= '<td>' . implode(',', $trainingregs) . '</td>';
+    $output .= '<td>' . $trainingsubentity . '</td>';
+    $output .= '<td>' . implode(',', $trainingregs) . '</td>';
 
     $output .= '<td>' . $log->status . '</td>';
     $output .= '<td>' . $log->shared . '</td>';

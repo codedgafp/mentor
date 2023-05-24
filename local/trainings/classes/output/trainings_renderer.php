@@ -54,9 +54,9 @@ class trainings_renderer extends \plugin_renderer_base implements \format_edadmi
         // Init var.
         $entityid = $course->category;
 
-        $currententity      = entity_api::get_entity($entityid);
+        $currententity = entity_api::get_entity($entityid);
         $trainingcategoryid = $currententity->get_entity_formation_category();
-        $context            = $currententity->get_context();
+        $context = $currententity->get_context();
 
         // Load language strings for JavaScript.
         $this->page->requires->strings_for_js(
@@ -104,33 +104,33 @@ class trainings_renderer extends \plugin_renderer_base implements \format_edadmi
         );
 
         // Initialize params to JS and template.
-        $params           = new \stdClass();
+        $params = new \stdClass();
         $params->entityid = $entityid;
 
         // Get subentities.
-        $subentities            = $currententity->get_sub_entities();
+        $subentities = $currententity->get_sub_entities();
         $params->hassubentities = count($subentities) > 0;
-        $params->subentities    = [];
+        $params->subentities = [];
 
         $cancreate = false;
 
         // Add the main entity into the selector.
         if (has_capability('local/trainings:create', $context)) {
-            $subentitystd          = new \stdClass();
-            $subentitystd->id      = $currententity->id;
-            $subentitystd->name    = $currententity->get_entity_path();
+            $subentitystd = new \stdClass();
+            $subentitystd->id = $currententity->id;
+            $subentitystd->name = $currententity->get_entity_path();
             $params->subentities[] = $subentitystd;
-            $cancreate             = true;
+            $cancreate = true;
         }
 
         // Add the sub entities into the selector.
         foreach ($subentities as $subentity) {
             if (has_capability('local/trainings:create', $subentity->get_context())) {
-                $subentitystd          = new \stdClass();
-                $subentitystd->id      = $subentity->id;
-                $subentitystd->name    = $subentity->name;
+                $subentitystd = new \stdClass();
+                $subentitystd->id = $subentity->id;
+                $subentitystd->name = $subentity->name;
                 $params->subentities[] = $subentitystd;
-                $cancreate             = true;
+                $cancreate = true;
             }
         }
 
@@ -156,11 +156,11 @@ class trainings_renderer extends \plugin_renderer_base implements \format_edadmi
         // Get the right training table template.
         $template = training_api::get_trainings_template('local_trainings/local_trainings');
 
-        $params->entities          = [];
+        $params->entities = [];
         $params->entitiesduplicate = [];
-        $params->subentities       = [];
+        $params->subentities = [];
         $params->subentitiesfilter = [];
-        $params->moveentities      = [];
+        $params->moveentities = [];
 
         $params->canmove = false;
 
@@ -169,9 +169,9 @@ class trainings_renderer extends \plugin_renderer_base implements \format_edadmi
 
             // Add current entity if user can manage it.
             if (has_capability('local/trainings:create', $currententity->get_context())) {
-                $ent                    = new \stdClass();
-                $ent->id                = $currententity->id;
-                $ent->name              = $currententity->shortname;
+                $ent = new \stdClass();
+                $ent->id = $currententity->id;
+                $ent->name = $currententity->shortname;
                 $params->moveentities[] = $ent;
             }
 
@@ -182,13 +182,13 @@ class trainings_renderer extends \plugin_renderer_base implements \format_edadmi
                     continue;
                 }
 
-                $ent              = new \stdClass();
-                $ent->id          = $subentity->id;
-                $ent->name        = $subentity->name;
+                $ent = new \stdClass();
+                $ent->id = $subentity->id;
+                $ent->name = $subentity->name;
                 $ent->issubentity = true;
 
                 $params->moveentities[] = $ent;
-                $params->canmove        = true;
+                $params->canmove = true;
             }
         }
 
@@ -204,8 +204,8 @@ class trainings_renderer extends \plugin_renderer_base implements \format_edadmi
             $params->entities = [];
 
             foreach ($entities as $entity) {
-                $ent       = new \stdClass();
-                $ent->id   = $entity->id;
+                $ent = new \stdClass();
+                $ent->id = $entity->id;
                 $ent->name = $entity->shortname;
 
                 // Select the current entity.
@@ -213,14 +213,14 @@ class trainings_renderer extends \plugin_renderer_base implements \format_edadmi
                     $ent->sel = 1;
                 }
 
-                $params->entities[]          = $ent;
+                $params->entities[] = $ent;
                 $params->entitiesduplicate[] = $ent;
             }
         }
 
-        $entnone                     = new \stdClass();
-        $entnone->id                 = $currententity->id;
-        $entnone->name               = get_string('none', 'local_trainings');
+        $entnone = new \stdClass();
+        $entnone->id = $currententity->id;
+        $entnone->name = get_string('none', 'local_trainings');
         $params->subentitiesfilter[] = $entnone;
 
         if ($params->hassubentities && has_capability('local/mentor_core:sharetrainingssubentities', $context)) {
@@ -228,9 +228,9 @@ class trainings_renderer extends \plugin_renderer_base implements \format_edadmi
 
             // Add the parent entity.
             if (!has_capability('local/mentor_core:sharetrainings', $context)) {
-                $ent                = new \stdClass();
-                $ent->id            = $currententity->id;
-                $ent->name          = $currententity->shortname;
+                $ent = new \stdClass();
+                $ent->id = $currententity->id;
+                $ent->name = $currententity->shortname;
                 $params->entities[] = $ent;
             }
 
@@ -246,14 +246,14 @@ class trainings_renderer extends \plugin_renderer_base implements \format_edadmi
                     continue;
                 }
 
-                $ent              = new \stdClass();
-                $ent->id          = $subentity->id;
-                $ent->name        = $subentity->name;
+                $ent = new \stdClass();
+                $ent->id = $subentity->id;
+                $ent->name = $subentity->name;
                 $ent->issubentity = true;
 
                 $params->subentitiesfilter[] = $ent;
-                $params->subentities[]       = $ent;
-                $params->canmove             = true;
+                $params->subentities[] = $ent;
+                $params->canmove = true;
             }
 
             if (count($params->subentities) === 1) {

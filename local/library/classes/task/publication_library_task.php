@@ -87,16 +87,19 @@ class publication_library_task extends \core\task\adhoc_task {
         $dbi->publish_to_library($newtraining->id, $oldtraining->id, $data->userid);
 
         // Get recipient and sender.
-        $creator     = \core_user::get_user($data->userid);
+        $creator = \core_user::get_user($data->userid);
         $supportuser = \core_user::get_support_user();
 
         // Get the content of the email.
-        $content     = get_string('publication_library_email', 'local_library', array(
-            'newtrainingurlsheet'  => $newtraining->get_sheet_url()->out(),
-            'newtrainingfullname'  => $newtraining->name,
+        $content = get_string('publication_library_email', 'local_library', array(
+            'traininglibraryurlsheet' => (new \moodle_url(
+                '/local/library/pages/training.php',
+                array('trainingid' => $newtraining->id)
+            ))->out(false),
+            'newtrainingfullname' => $newtraining->name,
             'newtrainingshortname' => $newtraining->shortname,
-            'oldtrainingurlsheet'  => $oldtraining->get_sheet_url()->out(),
-            'oldtrainingfullname'  => $oldtraining->name,
+            'oldtrainingurlcourse' => course_get_url($oldtraining->get_course()->id)->out(false),
+            'oldtrainingfullname' => $oldtraining->name,
             'oldtrainingshortname' => $oldtraining->shortname,
         ));
         $contenthtml = text_to_html($content, false, false, true);

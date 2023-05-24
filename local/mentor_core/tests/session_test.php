@@ -37,7 +37,7 @@ require_once($CFG->dirroot . '/local/mentor_core/api/profile.php');
 class local_mentor_core_session_testcase extends advanced_testcase {
 
     public const UNAUTHORISED_CODE = 2020120810;
-    public const DEFAULT_USER      = 2;
+    public const DEFAULT_USER = 2;
 
     /**
      * Reset the singletons
@@ -47,8 +47,8 @@ class local_mentor_core_session_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -131,7 +131,7 @@ class local_mentor_core_session_testcase extends advanced_testcase {
     public function init_role() {
         global $DB;
 
-        $db      = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $manager = $db->get_role_by_name('manager');
 
         if (!$manager) {
@@ -152,25 +152,25 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         global $DB;
 
         // Create user.
-        $user             = new stdClass();
-        $user->lastname   = 'lastname';
-        $user->firstname  = 'firstname';
-        $user->email      = 'test@test.com';
-        $user->username   = 'testusername';
-        $user->password   = 'to be generated';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
-        $user->auth       = 'manual';
+        $user->confirmed = 1;
+        $user->auth = 'manual';
 
         $userid = local_mentor_core\profile_api::create_user($user);
         set_user_preference('auth_forcepasswordchange', 0, $user);
 
         $field = $DB->get_record('user_info_field', ['shortname' => 'mainentity']);
 
-        $userdata          = new stdClass();
+        $userdata = new stdClass();
         $userdata->fieldid = $field->id;
-        $userdata->data    = 'New Entity 1';
-        $userdata->userid  = $userid;
+        $userdata->data = 'New Entity 1';
+        $userdata->userid = $userid;
 
         $DB->insert_record('user_info_data', $userdata);
 
@@ -188,30 +188,30 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         $data = new stdClass();
 
         if ($training) {
-            $data->name      = 'fullname';
+            $data->name = 'fullname';
             $data->shortname = 'shortname';
-            $data->content   = 'summary';
-            $data->status    = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+            $data->content = 'summary';
+            $data->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
         } else {
-            $data->trainingname      = 'fullname';
+            $data->trainingname = 'fullname';
             $data->trainingshortname = 'shortname';
-            $data->trainingcontent   = 'summary';
-            $data->trainingstatus    = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+            $data->trainingcontent = 'summary';
+            $data->trainingstatus = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
         }
 
         // Fields for taining.
         $data->traininggoal = 'TEST TRAINING ';
-        $data->thumbnail    = '';
+        $data->thumbnail = '';
 
         // Specific fields for session (only for update).
         if ($sessionid) {
-            $data->id     = $sessionid;
+            $data->id = $sessionid;
             $data->opento = 'all';
 
             $data->sessionstartdate = 1609801200;
-            $data->sessionenddate   = 1609801200;
-            $data->maxparticipants  = 10;
-            $data->opentolist       = '';
+            $data->sessionenddate = 1609801200;
+            $data->maxparticipants = 10;
+            $data->opentolist = '';
         }
 
         return $data;
@@ -235,9 +235,9 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         try {
             // Get entity object for default category.
             $entityid = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1',
-                'userid'    => 2  // Set the admin user as manager of the entity.
+                'userid' => 2  // Set the admin user as manager of the entity.
             ]);
 
             $entity = \local_mentor_core\entity_api::get_entity($entityid);
@@ -283,10 +283,10 @@ class local_mentor_core_session_testcase extends advanced_testcase {
      */
     public function init_training_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -297,10 +297,10 @@ class local_mentor_core_session_testcase extends advanced_testcase {
      */
     public function init_session_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -398,13 +398,13 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         }
 
         // Set data passed as an argument.
-        $datasessionandfilter           = new stdClass();
+        $datasessionandfilter = new stdClass();
         $datasessionandfilter->entityid = $session->get_entity()->id;
-        $datasessionandfilter->status   = null;
-        $datasessionandfilter->dateto   = null;
+        $datasessionandfilter->status = null;
+        $datasessionandfilter->dateto = null;
         $datasessionandfilter->datefrom = null;
-        $datasessionandfilter->length   = 10;
-        $datasessionandfilter->start    = 0;
+        $datasessionandfilter->length = 10;
+        $datasessionandfilter->start = 0;
 
         // Test session not found.
         try {
@@ -451,13 +451,13 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         }
 
         // Set data passed as an argument.
-        $datasessionandfilter           = new stdClass();
+        $datasessionandfilter = new stdClass();
         $datasessionandfilter->entityid = $session->get_entity()->id;
-        $datasessionandfilter->status   = null;
-        $datasessionandfilter->dateto   = null;
+        $datasessionandfilter->status = null;
+        $datasessionandfilter->dateto = null;
         $datasessionandfilter->datefrom = null;
-        $datasessionandfilter->length   = 10;
-        $datasessionandfilter->start    = 0;
+        $datasessionandfilter->length = 10;
+        $datasessionandfilter->start = 0;
 
         $userid = self::init_create_user();
         self::setUser($userid);
@@ -501,13 +501,13 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         }
 
         // Set data passed as an argument.
-        $datasessionandfilter           = new stdClass();
+        $datasessionandfilter = new stdClass();
         $datasessionandfilter->entityid = $session->get_entity()->id;
-        $datasessionandfilter->status   = null;
-        $datasessionandfilter->dateto   = null;
+        $datasessionandfilter->status = null;
+        $datasessionandfilter->dateto = null;
         $datasessionandfilter->datefrom = null;
-        $datasessionandfilter->length   = 10;
-        $datasessionandfilter->start    = 0;
+        $datasessionandfilter->length = 10;
+        $datasessionandfilter->start = 0;
 
         // Test session not found.
         try {
@@ -549,13 +549,13 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         }
 
         // Set data passed as an argument.
-        $datasessionandfilter           = new stdClass();
+        $datasessionandfilter = new stdClass();
         $datasessionandfilter->entityid = $session->get_entity()->id;
-        $datasessionandfilter->status   = null;
-        $datasessionandfilter->dateto   = null;
+        $datasessionandfilter->status = null;
+        $datasessionandfilter->dateto = null;
         $datasessionandfilter->datefrom = null;
-        $datasessionandfilter->length   = 10;
-        $datasessionandfilter->start    = 0;
+        $datasessionandfilter->length = 10;
+        $datasessionandfilter->start = 0;
 
         $userid = self::init_create_user();
         self::setUser($userid);
@@ -597,13 +597,13 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         }
 
         // Set data passed as an argument.
-        $datasessionandfilter           = new stdClass();
+        $datasessionandfilter = new stdClass();
         $datasessionandfilter->entityid = $session->get_entity()->id;
-        $datasessionandfilter->status   = null;
-        $datasessionandfilter->dateto   = null;
+        $datasessionandfilter->status = null;
+        $datasessionandfilter->dateto = null;
         $datasessionandfilter->datefrom = null;
-        $datasessionandfilter->length   = 10;
-        $datasessionandfilter->start    = 0;
+        $datasessionandfilter->length = 10;
+        $datasessionandfilter->start = 0;
 
         // Test session not found.
         try {
@@ -847,10 +847,10 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         $data = new stdClass();
 
         // New session data.
-        $data->id              = $sessionid;
+        $data->id = $sessionid;
         $data->maxparticipants = 12;
-        $data->opento          = 'other_entities';
-        $data->opentolist      = [1, 2];
+        $data->opento = 'other_entities';
+        $data->opentolist = [1, 2];
 
         try {
             $session = \local_mentor_core\session_api::update_session($data);
@@ -864,8 +864,8 @@ class local_mentor_core_session_testcase extends advanced_testcase {
 
         // New session data.
         $data->maxparticipants = 13;
-        $form                  = new stdClass();
-        $form->session         = $data;
+        $form = new stdClass();
+        $form->session = $data;
 
         try {
             $session = \local_mentor_core\session_api::update_session($data, $form);
@@ -902,7 +902,7 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         $data = new stdClass();
 
         // New session data.
-        $data->id              = $sessionid;
+        $data->id = $sessionid;
         $data->maxparticipants = 12;
 
         // Tty to update the session with a new user with no capabilities.
@@ -958,7 +958,7 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         // Set data session form.
         $sessionentity = $session->get_entity();
 
-        $logo    = $sessionentity->get_logo();
+        $logo = $sessionentity->get_logo();
         $logourl = '';
         if ($logo) {
             $logourl = moodle_url::make_pluginfile_url(
@@ -972,19 +972,19 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         }
 
         $sharedentities = [];
-        $allentities    = \local_mentor_core\entity_api::get_all_entities(true, [$sessionentity->id]);
+        $allentities = \local_mentor_core\entity_api::get_all_entities(true, [$sessionentity->id]);
         foreach ($allentities as $entity) {
             $sharedentities[$entity->id] = $entity->name;
         }
 
-        $formparams                 = new stdClass();
-        $formparams->session        = $session;
-        $formparams->returnto       = $session->get_url();
-        $formparams->session        = $session;
-        $formparams->entity         = $sessionentity;
+        $formparams = new stdClass();
+        $formparams->session = $session;
+        $formparams->returnto = $session->get_url();
+        $formparams->session = $session;
+        $formparams->entity = $sessionentity;
         $formparams->sharedentities = $sharedentities;
-        $formparams->logourl        = $logourl;
-        $formparams->actionurl      = $session->get_sheet_url()->out();
+        $formparams->logourl = $logourl;
+        $formparams->actionurl = $session->get_sheet_url()->out();
 
         // Get session form.
         try {
@@ -1263,11 +1263,11 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         $session->status = \local_mentor_core\session::STATUS_IN_PROGRESS;
         \local_mentor_core\session_api::update_session($session);
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
-        $user     = new stdClass();
+        $user = new stdClass();
         $user->id = $userid;
         $session->get_entity()->add_member($user);
 
@@ -1442,7 +1442,7 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         // Create session.
         $sessionid = $this->init_session_creation();
 
-        $userid            = $this->init_create_user();
+        $userid = $this->init_create_user();
         $enrolmentpassword = 'testkey';
 
         // Get session.
@@ -1459,7 +1459,7 @@ class local_mentor_core_session_testcase extends advanced_testcase {
 
         // Create self enrolment instance.
         $session->create_self_enrolment_instance();
-        $selfenrolmentsession           = $session->get_enrolment_instances_by_type('self');
+        $selfenrolmentsession = $session->get_enrolment_instances_by_type('self');
         $selfenrolmentsession->password = $enrolmentpassword;
         $session->update_enrolment_instance($selfenrolmentsession);
 
@@ -1504,8 +1504,8 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         // Create session.
         $sessionid = $this->init_session_creation();
 
-        $userid                 = $this->init_create_user();
-        $enrolmentpassword      = 'testkey';
+        $userid = $this->init_create_user();
+        $enrolmentpassword = 'testkey';
         $enrolmentfalsepassword = 'testfalsekey';
 
         // Get session.
@@ -1517,7 +1517,7 @@ class local_mentor_core_session_testcase extends advanced_testcase {
 
         // Create self enrolment instance.
         $session->create_self_enrolment_instance();
-        $selfenrolmentsession           = $session->get_enrolment_instances_by_type('self');
+        $selfenrolmentsession = $session->get_enrolment_instances_by_type('self');
         $selfenrolmentsession->password = $enrolmentpassword;
         $session->update_enrolment_instance($selfenrolmentsession);
 
@@ -1954,13 +1954,13 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         $this->init_role();
 
         self::assertEquals([
-            session::STATUS_IN_PREPARATION      => session::STATUS_IN_PREPARATION,
+            session::STATUS_IN_PREPARATION => session::STATUS_IN_PREPARATION,
             session::STATUS_OPENED_REGISTRATION => session::STATUS_OPENED_REGISTRATION,
-            session::STATUS_IN_PROGRESS         => session::STATUS_IN_PROGRESS,
-            session::STATUS_COMPLETED           => session::STATUS_COMPLETED,
-            session::STATUS_ARCHIVED            => session::STATUS_ARCHIVED,
-            session::STATUS_REPORTED            => session::STATUS_REPORTED,
-            session::STATUS_CANCELLED           => session::STATUS_CANCELLED,
+            session::STATUS_IN_PROGRESS => session::STATUS_IN_PROGRESS,
+            session::STATUS_COMPLETED => session::STATUS_COMPLETED,
+            session::STATUS_ARCHIVED => session::STATUS_ARCHIVED,
+            session::STATUS_REPORTED => session::STATUS_REPORTED,
+            session::STATUS_CANCELLED => session::STATUS_CANCELLED,
         ], \local_mentor_core\session_api::get_status_list());
 
         self::resetAllData();
@@ -2016,7 +2016,7 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         $this->reset_singletons();
         $this->init_role();
 
-        $datatest       = new stdClass();
+        $datatest = new stdClass();
         $datatest->test = 'test';
 
         // Prepare editor data.
@@ -2084,9 +2084,9 @@ class local_mentor_core_session_testcase extends advanced_testcase {
 
         // Create new enrity.
         $newentityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 2',
+            'name' => 'New Entity 2',
             'shortname' => 'New Entity 2',
-            'userid'    => 2  // Set the admin user as manager of the entity.
+            'userid' => 2  // Set the admin user as manager of the entity.
         ]);
 
         // Move session in new entity.
@@ -2165,9 +2165,9 @@ class local_mentor_core_session_testcase extends advanced_testcase {
 
         // Create new enrity.
         $newentityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 2',
+            'name' => 'New Entity 2',
             'shortname' => 'New Entity 2',
-            'userid'    => 2  // Set the admin user as manager of the entity.
+            'userid' => 2  // Set the admin user as manager of the entity.
         ]);
 
         $userid = self::init_create_user();
@@ -2213,9 +2213,9 @@ class local_mentor_core_session_testcase extends advanced_testcase {
 
         // Create new enrity.
         $newentityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 2',
+            'name' => 'New Entity 2',
             'shortname' => 'New Entity 2',
-            'userid'    => 2  // Set the admin user as manager of the entity.
+            'userid' => 2  // Set the admin user as manager of the entity.
         ]);
 
         $userid = self::init_create_user();
@@ -2271,19 +2271,19 @@ class local_mentor_core_session_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $session     = \local_mentor_core\session_api::get_session($this->init_session_creation());
+        $session = \local_mentor_core\session_api::get_session($this->init_session_creation());
         $sessionname = $session->fullname;
 
         $entity = $session->get_entity();
 
         // Set data passed as an argument.
-        $datasessionandfilter           = new stdClass();
+        $datasessionandfilter = new stdClass();
         $datasessionandfilter->entityid = $entity->id;
-        $datasessionandfilter->status   = null;
-        $datasessionandfilter->dateto   = null;
+        $datasessionandfilter->status = null;
+        $datasessionandfilter->dateto = null;
         $datasessionandfilter->datefrom = null;
-        $datasessionandfilter->length   = 10;
-        $datasessionandfilter->start    = 0;
+        $datasessionandfilter->length = 10;
+        $datasessionandfilter->start = 0;
 
         // One session in entity and zero remove training.
         self::assertCount(1, \local_mentor_core\session_api::get_sessions_by_entity($datasessionandfilter));
@@ -2332,19 +2332,19 @@ class local_mentor_core_session_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $session     = \local_mentor_core\session_api::get_session($this->init_session_creation());
+        $session = \local_mentor_core\session_api::get_session($this->init_session_creation());
         $sessionname = $session->fullname;
 
         $entity = $session->get_entity();
 
         // Set data passed as an argument.
-        $datasessionandfilter           = new stdClass();
+        $datasessionandfilter = new stdClass();
         $datasessionandfilter->entityid = $entity->id;
-        $datasessionandfilter->status   = null;
-        $datasessionandfilter->dateto   = null;
+        $datasessionandfilter->status = null;
+        $datasessionandfilter->dateto = null;
         $datasessionandfilter->datefrom = null;
-        $datasessionandfilter->length   = 10;
-        $datasessionandfilter->start    = 0;
+        $datasessionandfilter->length = 10;
+        $datasessionandfilter->start = 0;
 
         // One session in entity and zero remove training.
         self::assertCount(1, \local_mentor_core\session_api::get_sessions_by_entity($datasessionandfilter));
@@ -2483,7 +2483,7 @@ class local_mentor_core_session_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         // No other session with the same short name.
         self::assertEquals(1, \local_mentor_core\session_api::get_next_available_shortname_index($session->shortname));
@@ -2511,8 +2511,8 @@ class local_mentor_core_session_testcase extends advanced_testcase {
 
         // Create entity.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
-        $entity    = $session->get_entity();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $entity = $session->get_entity();
         $session->delete();
 
         // Return true value because one item have the same session shortname.
@@ -2535,8 +2535,8 @@ class local_mentor_core_session_testcase extends advanced_testcase {
 
         // Create entity.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
-        $entity    = $session->get_entity();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $entity = $session->get_entity();
 
         // Disable recycle bin.
         set_config('categorybinenable', '0', 'tool_recyclebin');
@@ -2582,19 +2582,19 @@ class local_mentor_core_session_testcase extends advanced_testcase {
 
         // Create entity.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         $allowedrolesdata = [
             'participant' => [
-                'name'      => 'Participant',
+                'name' => 'Participant',
                 'shortname' => 'participant'
             ],
-            'tuteur'      => [
-                'name'      => 'Tuteur',
+            'tuteur' => [
+                'name' => 'Tuteur',
                 'shortname' => 'tuteur'
             ],
-            'formateur'   => [
-                'name'      => 'Formateur',
+            'formateur' => [
+                'name' => 'Formateur',
                 'shortname' => 'formateur'
             ]
         ];
@@ -2672,10 +2672,10 @@ class local_mentor_core_session_testcase extends advanced_testcase {
 
         // Create entity.
         $entity1id = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity1   = \local_mentor_core\entity_api::get_entity($entity1id);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entity1id);
 
         self::setUser($user1);
 
@@ -2695,10 +2695,10 @@ class local_mentor_core_session_testcase extends advanced_testcase {
 
         // Create entity.
         $entity2id = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 2',
+            'name' => 'New Entity 2',
             'shortname' => 'New Entity 2'
         ]);
-        $entity2   = \local_mentor_core\entity_api::get_entity($entity2id);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entity2id);
         $entity2->assign_manager($user1->id);
 
         self::setUser($user1);
@@ -2799,15 +2799,15 @@ class local_mentor_core_session_testcase extends advanced_testcase {
         self::assertFalse($DB->record_exists('favourite', array('userid' => $user->id)));
 
         // Add favourite with defined user.
-        $favourite               = new \stdClass();
-        $favourite->component    = 'local_session';
-        $favourite->itemtype     = 'favourite_session';
-        $favourite->itemid       = $session->id;
-        $favourite->contextid    = $session->get_context()->id;
-        $favourite->userid       = $user->id;
-        $favourite->timecreated  = time();
+        $favourite = new \stdClass();
+        $favourite->component = 'local_session';
+        $favourite->itemtype = 'favourite_session';
+        $favourite->itemid = $session->id;
+        $favourite->contextid = $session->get_context()->id;
+        $favourite->userid = $user->id;
+        $favourite->timecreated = time();
         $favourite->timemodified = time();
-        $favouriteid1            = $DB->insert_record('favourite', $favourite);
+        $favouriteid1 = $DB->insert_record('favourite', $favourite);
 
         $favourites = $DB->get_records('favourite');
         self::assertCount(1, $favourites);
@@ -2817,6 +2817,34 @@ class local_mentor_core_session_testcase extends advanced_testcase {
 
         $favourites = $DB->get_records('favourite');
         self::assertEmpty($favourites);
+
+        self::resetAllData();
+    }
+
+    /**
+     * Test get_all_roles function
+     *
+     * @covers \local_mentor_core\session_api::get_all_roles
+     */
+    public function test_get_all_roles() {
+        global $DB;
+
+        $this->resetAfterTest(true);
+        $this->reset_singletons();
+        $this->init_role();
+        self::setAdminUser();
+
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+
+        $allrolecourse = \local_mentor_core\session_api::get_all_roles($session->get_course()->id);
+        $allrole = $DB->get_records('role', null, '', 'shortname, *');
+
+        self::assertCount(count($allrole), $allrolecourse);
+
+        foreach ($allrolecourse as $key => $role) {
+            self::assertEquals($role->id, $allrole[$key]->id);
+        }
 
         self::resetAllData();
     }

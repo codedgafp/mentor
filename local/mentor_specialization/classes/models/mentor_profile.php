@@ -34,15 +34,17 @@ require_once($CFG->dirroot . '/local/mentor_specialization/classes/database_inte
 
 class mentor_profile extends \local_mentor_core\profile {
 
-    public const ROLE_ADMINDIE              = 'admindedie';
-    public const ROLE_COURSECREATOR         = 'coursecreator';
-    public const ROLE_RESPFORMATION         = 'respformation';
-    public const ROLE_REFERENTLOCAL         = 'referentlocal';
-    public const ROLE_CONCEPTEUR            = 'concepteur';
-    public const ROLE_FORMATEUR             = 'formateur';
-    public const ROLE_PARTICIPANT           = 'participant';
+    public const ROLE_ADMINDIE = 'admindedie';
+    public const ROLE_COURSECREATOR = 'coursecreator';
+    public const ROLE_RESPFORMATION = 'respformation';
+    public const ROLE_REFERENTLOCAL = 'referentlocal';
+    public const ROLE_REFERENTLOCALNONEDITEUR = 'reflocalnonediteur';
+    public const ROLE_CONCEPTEUR = 'concepteur';
+    public const ROLE_FORMATEUR = 'formateur';
+    public const ROLE_PARTICIPANT = 'participant';
     public const ROLE_PARTICIPANTNONEDITEUR = 'participantnonediteur';
-    public const ROLE_TUTEUR                = 'tuteur';
+    public const ROLE_PARTICIPANTDEMONSTRATION = 'participantdemonstration';
+    public const ROLE_TUTEUR = 'tuteur';
 
     /**
      * Sync user entities
@@ -98,14 +100,14 @@ class mentor_profile extends \local_mentor_core\profile {
         // Get users cohort by regions.
         $regionscohortslist = [];
         if (isset($userprofilefields['region']) && !empty($userprofilefields['region'])) {
-            $regionid           = array_search($userprofilefields['region'], $regionslist);
-            $regionscohorts     = $dbinterfacementor->get_cohorts_by_region($regionid);
+            $regionid = array_search($userprofilefields['region'], $regionslist);
+            $regionscohorts = $dbinterfacementor->get_cohorts_by_region($regionid);
             $regionscohortslist = array_keys($regionscohorts);
         }
 
         $allcohorts = array_unique(array_merge($allcohorts, $regionscohortslist));
 
-        $cohortstoadd    = array_diff($allcohorts, $oldcohorts);
+        $cohortstoadd = array_diff($allcohorts, $oldcohorts);
         $cohortstoremove = array_diff($oldcohorts, $allcohorts);
 
         // Add user to cohorts.
@@ -171,7 +173,7 @@ class mentor_profile extends \local_mentor_core\profile {
         }
 
         // Check if the entity is part of the user's secondary entity list.
-        $entity                = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
         $secondaryentitiesname = explode(', ', $secondaryentities);
         return in_array($entity->get_name(), $secondaryentitiesname);
     }

@@ -41,8 +41,8 @@ class local_mentor_specialization_entity_testcase extends advanced_testcase {
         global $CFG;
 
         $CFG->mentor_specializations = [
-            '\\local_mentor_specialization\\mentor_specialization' =>
-                'local/mentor_specialization/classes/mentor_specialization.php'
+                '\\local_mentor_specialization\\mentor_specialization' =>
+                        'local/mentor_specialization/classes/mentor_specialization.php'
         ];
     }
 
@@ -54,8 +54,8 @@ class local_mentor_specialization_entity_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core specialization singleton.
         $specialization = \local_mentor_core\specialization::get_instance();
-        $reflection     = new ReflectionClass($specialization);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($specialization);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -82,18 +82,18 @@ class local_mentor_specialization_entity_testcase extends advanced_testcase {
         $this->init_database();
 
         return [
-            [
-                'name'      => 'New Entity 1',
-                'shortname' => 'New Entity 1',
-                'regions'   => [5], // Corse.
-                'userid'    => 2  // Set the admin user as manager of the entity.
-            ],
-            [
-                'name'      => 'New Entity 2',
-                'shortname' => 'New Entity 2',
-                'regions'   => [8], // Guyane.
-                'userid'    => 2  // Set the admin user as manager of the entity.
-            ],
+                [
+                        'name' => 'New Entity 1',
+                        'shortname' => 'New Entity 1',
+                        'regions' => [5], // Corse.
+                        'userid' => 2  // Set the admin user as manager of the entity.
+                ],
+                [
+                        'name' => 'New Entity 2',
+                        'shortname' => 'New Entity 2',
+                        'regions' => [8], // Guyane.
+                        'userid' => 2  // Set the admin user as manager of the entity.
+                ],
         ];
     }
 
@@ -169,7 +169,7 @@ class local_mentor_specialization_entity_testcase extends advanced_testcase {
 
         $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
-        $newdata       = new stdClass();
+        $newdata = new stdClass();
         $newdata->name = 'Name updated';
 
         try {
@@ -366,7 +366,7 @@ class local_mentor_specialization_entity_testcase extends advanced_testcase {
 
         $newuser = self::getDataGenerator()->create_user();
 
-        $entitydata           = $this->get_entities_data()[0];
+        $entitydata = $this->get_entities_data()[0];
         $entitydata['userid'] = 0; // Remove the manager.
 
         // Test standard Entity creation.
@@ -440,7 +440,7 @@ class local_mentor_specialization_entity_testcase extends advanced_testcase {
             // Test standard Entity creation.
             try {
                 $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
-                $list[]   = $entitydata['name'];
+                $list[] = $entitydata['name'];
             } catch (\Exception $e) {
                 // Failed if the name of this entity is already in use.
                 self::fail($e->getMessage());
@@ -449,8 +449,8 @@ class local_mentor_specialization_entity_testcase extends advanced_testcase {
 
         try {
             self::assertEquals(
-                implode("\n", $list),
-                \local_mentor_core\entity_api::get_entities_list(true, true)
+                    implode("\n", $list),
+                    \local_mentor_core\entity_api::get_entities_list(true, true)
             );
         } catch (\Exception $e) {
             self::fail($e->getMessage());
@@ -653,7 +653,7 @@ class local_mentor_specialization_entity_testcase extends advanced_testcase {
 
         try {
             $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'Test managed entity', 'shortname' => 'TME']);
-            $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+            $entity = \local_mentor_core\entity_api::get_entity($entityid);
             $entity->create_edadmin_courses_if_missing();
             $entitycourse = $entity->get_edadmin_courses('entities');
         } catch (\Exception $e) {
@@ -718,7 +718,7 @@ class local_mentor_specialization_entity_testcase extends advanced_testcase {
             // Test standard Entity creation.
             try {
                 $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
-                $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+                $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
                 $entity->add_member($newuser);
 

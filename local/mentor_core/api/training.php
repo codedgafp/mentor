@@ -94,13 +94,13 @@ class training_api {
 
         // Create the training course.
         $course = array(
-            'fullname'            => $data->name,
-            'shortname'           => $data->shortname,
-            'categoryid'          => $data->categorychildid,
+            'fullname' => $data->name,
+            'shortname' => $data->shortname,
+            'categoryid' => $data->categorychildid,
             'courseformatoptions' =>
                 array(
                     array(
-                        'name'  => 'summary',
+                        'name' => 'summary',
                         'value' => $data->content
                     )
                 )
@@ -130,9 +130,9 @@ class training_api {
         }
 
         // Create an empty training object.
-        $trainingobj                  = new \stdClass();
+        $trainingobj = new \stdClass();
         $trainingobj->courseshortname = $data->shortname;
-        $trainingobj->status          = $data->status;
+        $trainingobj->status = $data->status;
 
         // Create the training in database.
         $trainingid = $db->add_training($trainingobj);
@@ -146,9 +146,12 @@ class training_api {
         // Trigger a training created event.
         $event = training_create::create(array(
             'objectid' => $training->id,
-            'context'  => $training->get_context()
+            'context' => $training->get_context()
         ));
         $event->trigger();
+
+        // Refresh the training object.
+        $training = self::get_training($trainingid, true);
 
         // Add training to api cache.
         self::$trainings[$training->id] = $training;
@@ -209,8 +212,8 @@ class training_api {
 
         // Get the training object.
         $trainingid = $data->id;
-        $training   = self::get_training($trainingid);
-        $context    = $training->get_context();
+        $training = self::get_training($trainingid);
+        $context = $training->get_context();
 
         // Check capabilities.
         if (!has_capability('local/trainings:update', $context)) {
@@ -272,8 +275,8 @@ class training_api {
         // Trigger a training updated event.
         $event = \local_mentor_core\event\training_update::create(array(
             'objectid' => $trainingid,
-            'context'  => $training->get_context(),
-            'other'    => array(
+            'context' => $training->get_context(),
+            'other' => array(
                 'updatedfields' => $updatedfields
             )
         ));
@@ -390,19 +393,19 @@ class training_api {
 
         // Format trainings as array.
         foreach ($trainingsrecord as $key => $training) {
-            $training       = self::get_training($training->id);
+            $training = self::get_training($training->id);
             $trainingentity = $training->get_entity(false);
 
             $ismainentity = $trainingentity->is_main_entity();
 
             // The user has access if it is a main entity or if he manages trainings on this entity or its sub-entity.
             if ($ismainentity || $trainingentity->is_trainings_manager($USER)) {
-                $trainingsarray[$key]                        = array();
-                $trainingsarray[$key]['data']                = $training;
+                $trainingsarray[$key] = array();
+                $trainingsarray[$key]['data'] = $training;
                 $trainingsarray[$key]['data']->subentityname = !$ismainentity ? $trainingentity->get_name() : '';
-                $trainingsarray[$key]['data']->entityid      = $trainingentity->id;
-                $trainingsarray[$key]['url']                 = $trainingsarray[$key]['data']->get_url()->out();
-                $trainingsarray[$key]['actions']             = $trainingsarray[$key]['data']->get_actions();
+                $trainingsarray[$key]['data']->entityid = $trainingentity->id;
+                $trainingsarray[$key]['url'] = $trainingsarray[$key]['data']->get_url()->out();
+                $trainingsarray[$key]['actions'] = $trainingsarray[$key]['data']->get_actions();
             }
         }
 
@@ -487,7 +490,7 @@ class training_api {
         $adhoctask = new duplicate_training_task();
 
         $adhoctask->set_custom_data([
-            'trainingid'        => $trainingid,
+            'trainingid' => $trainingid,
             'trainingshortname' => $trainingshortname,
             'destinationentity' => $destinationentity,
         ]);
@@ -530,7 +533,7 @@ class training_api {
 
             // Check if the user can manage the trainings of the entity.
             if ($entity->is_trainings_manager($user)) {
-                $course                 = $entity->get_main_entity()->get_edadmin_courses('trainings');
+                $course = $entity->get_main_entity()->get_edadmin_courses('trainings');
                 $courses[$course['id']] = $course;
             }
         }
@@ -595,7 +598,7 @@ class training_api {
         global $CFG;
         require_once($CFG->dirroot . '/local/mentor_core/forms/training_form.php');
 
-        $form           = new training_form($action, $params);
+        $form = new training_form($action, $params);
         $specialization = specialization::get_instance();
 
         return $specialization->get_specialization('get_training_form', $form, $params);
@@ -632,7 +635,7 @@ class training_api {
      * @throws \moodle_exception
      */
     public static function get_next_available_training_name($trainingid) {
-        $db       = database_interface::get_instance();
+        $db = database_interface::get_instance();
         $training = self::get_training($trainingid);
 
         return $db->get_next_available_training_name($training->get_course()->shortname);
@@ -649,7 +652,7 @@ class training_api {
     public static function get_user_available_sessions_by_trainings($userid, $onlytrainings = false) {
 
         $specialization = specialization::get_instance();
-        $trainings      = $specialization->get_specialization(
+        $trainings = $specialization->get_specialization(
             'get_user_available_sessions_by_trainings', [], ['userid' => $userid, 'onlytrainings' => $onlytrainings]
         );
 
@@ -674,7 +677,7 @@ class training_api {
 
                     $trainings[$session->trainingid] = $training->convert_for_template();
 
-                    $trainings[$session->trainingid]->sessions              = [];
+                    $trainings[$session->trainingid]->sessions = [];
                     $trainings[$session->trainingid]->hasinprogresssessions = false;
                 }
 
@@ -811,10 +814,10 @@ class training_api {
      */
     public static function get_status_list() {
         return [
-            training::STATUS_DRAFT                 => training::STATUS_DRAFT,
-            training::STATUS_TEMPLATE              => training::STATUS_TEMPLATE,
+            training::STATUS_DRAFT => training::STATUS_DRAFT,
+            training::STATUS_TEMPLATE => training::STATUS_TEMPLATE,
             training::STATUS_ELABORATION_COMPLETED => training::STATUS_ELABORATION_COMPLETED,
-            training::STATUS_ARCHIVED              => training::STATUS_ARCHIVED,
+            training::STATUS_ARCHIVED => training::STATUS_ARCHIVED,
         ];
     }
 
@@ -858,9 +861,9 @@ class training_api {
         $entity = entity_api::get_entity($entityid);
 
         // Get the entity's trainings recycle bin.
-        $trainingcategoryid      = $entity->get_entity_formation_category();
+        $trainingcategoryid = $entity->get_entity_formation_category();
         $contexttrainingcategory = \context_coursecat::instance($trainingcategoryid);
-        $recyclebin              = new \tool_recyclebin\category_bin($contexttrainingcategory->instanceid);
+        $recyclebin = new \tool_recyclebin\category_bin($contexttrainingcategory->instanceid);
 
         // Check if the user can restore items.
         if (!$recyclebin->can_restore()) {
@@ -878,7 +881,7 @@ class training_api {
         $user = get_admin();
 
         // Get the backup file.
-        $fs    = get_file_storage();
+        $fs = get_file_storage();
         $files = $fs->get_area_files($contexttrainingcategory->id, 'tool_recyclebin', TOOL_RECYCLEBIN_COURSECAT_BIN_FILEAREA,
             $item->id,
             'itemid, filepath, filename', false);
@@ -895,7 +898,7 @@ class training_api {
         $file = reset($files);
 
         // Get a backup temp directory name and create it.
-        $tempdir     = \restore_controller::get_tempdir_name($contexttrainingcategory->id, $user->id);
+        $tempdir = \restore_controller::get_tempdir_name($contexttrainingcategory->id, $user->id);
         $fulltempdir = make_backup_temp_directory($tempdir);
 
         // Extract the backup to tmpdir.
@@ -903,11 +906,11 @@ class training_api {
         $fb->extract_to_pathname($file, $fulltempdir);
 
         // Build a course.
-        $course            = new \stdClass();
-        $course->category  = $trainingcategoryid;
+        $course = new \stdClass();
+        $course->category = $trainingcategoryid;
         $course->shortname = $item->shortname;
-        $course->fullname  = $item->fullname;
-        $course->summary   = '';
+        $course->fullname = $item->fullname;
+        $course->summary = '';
 
         // Create a new course.
         $course = create_course($course);
@@ -921,7 +924,7 @@ class training_api {
             $tempdir,
             $course->id,
             \backup::INTERACTIVE_NO,
-            \backup::MODE_AUTOMATED,
+            \backup::MODE_GENERAL,
             $user->id,
             \backup::TARGET_NEW_COURSE
         );
@@ -959,7 +962,7 @@ class training_api {
         // Fire event.
         $event = \tool_recyclebin\event\category_bin_item_restored::create(array(
             'objectid' => $item->id,
-            'context'  => $contexttrainingcategory
+            'context' => $contexttrainingcategory
         ));
         $event->add_record_snapshot('tool_recyclebin_category', $item);
         $event->trigger();
@@ -974,7 +977,7 @@ class training_api {
 
             // Restore shortname and fullname course to link whith training.
             $courseaftercontroller->shortname = $item->shortname;
-            $courseaftercontroller->fullname  = $item->fullname;
+            $courseaftercontroller->fullname = $item->fullname;
             update_course($courseaftercontroller);
         }
 
@@ -996,7 +999,7 @@ class training_api {
         global $USER, $PAGE, $OUTPUT;
 
         // Get managed entities if user has any.
-        $managedentities         = entity_api::get_managed_entities($USER);
+        $managedentities = entity_api::get_managed_entities($USER);
         $trainingmanagedentities = self::get_entities_training_managed($USER);
 
         $managedentities = $managedentities + $trainingmanagedentities;
@@ -1006,18 +1009,18 @@ class training_api {
         }
 
         // Create an entity selector if it manages several entities.
-        $data                 = new \stdClass();
+        $data = new \stdClass();
         $data->switchentities = [];
 
         foreach ($managedentities as $managedentity) {
             if (!$managedentity->is_main_entity()) {
                 continue;
             }
-            $entitydata             = new \stdClass();
-            $entitydata->name       = $managedentity->name;
-            $entitydata->link       = new \moodle_url('/local/trainings/pages/recyclebin_trainings.php',
+            $entitydata = new \stdClass();
+            $entitydata->name = $managedentity->name;
+            $entitydata->link = new \moodle_url('/local/trainings/pages/recyclebin_trainings.php',
                 array('entityid' => $managedentity->id));
-            $entitydata->selected   = $entityid == $managedentity->id;
+            $entitydata->selected = $entityid == $managedentity->id;
             $data->switchentities[] = $entitydata;
         }
 
@@ -1042,9 +1045,9 @@ class training_api {
         $entity = entity_api::get_entity($entityid);
 
         // Get the entity's trainings recycle bin.
-        $trainingcategoryid      = $entity->get_entity_formation_category();
+        $trainingcategoryid = $entity->get_entity_formation_category();
         $contexttrainingcategory = \context_coursecat::instance($trainingcategoryid);
-        $recyclebin              = new \tool_recyclebin\category_bin($contexttrainingcategory->instanceid);
+        $recyclebin = new \tool_recyclebin\category_bin($contexttrainingcategory->instanceid);
 
         // Get training's course item.
         $item = $recyclebin->get_item($itemid);
@@ -1060,5 +1063,14 @@ class training_api {
             redirect($urlredirect, get_string('alertdeleted', 'local_mentor_core', $item), 2,
                 \core\output\notification::NOTIFY_SUCCESS);
         }
+    }
+
+    /**
+     * Gives the name of the capability that allows access to the edadmin course of trainings format.
+     *
+     * @return string
+     */
+    public static function get_edadmin_course_view_capability() {
+        return 'local/mentor_core:movetrainings';
     }
 }

@@ -35,48 +35,48 @@ if ($ADMIN->fulltree) {
         $student = get_archetype_roles('student');
         $student = reset($student);
         $settings->add(new admin_setting_configselect('enrol_sirh/roleid',
-                get_string('defaultrole', 'role'), '', $student->id ?? null, $options));
+            get_string('defaultrole', 'role'), '', $student->id ?? null, $options));
 
         $options = array(
-                ENROL_EXT_REMOVED_UNENROL        => get_string('extremovedunenrol', 'enrol'),
-                ENROL_EXT_REMOVED_SUSPENDNOROLES => get_string('extremovedsuspendnoroles', 'enrol')
+            ENROL_EXT_REMOVED_UNENROL => get_string('extremovedunenrol', 'enrol'),
+            ENROL_EXT_REMOVED_SUSPENDNOROLES => get_string('extremovedsuspendnoroles', 'enrol')
         );
         $settings->add(new admin_setting_configselect('enrol_sirh/unenrolaction', get_string('extremovedaction', 'enrol'),
-                get_string('extremovedaction_help', 'enrol'), ENROL_EXT_REMOVED_UNENROL, $options));
+            get_string('extremovedaction_help', 'enrol'), ENROL_EXT_REMOVED_UNENROL, $options));
 
         // Default SIRH list.
         $sirhlist = [
-                'AES' => 'Musée Air  Espace',
-                'AGR' => 'MAA',
-                'CCO' => 'Cour des Comptes',
-                'CET' => 'Conseil d Etat',
-                'CNI' => 'CNIL',
-                'CNM' => 'CNMSS',
-                'CSA' => 'Conseil sup Audio',
-                'DDD' => 'Défenseur des Droi',
-                'EDA' => 'Ecole Air',
-                'EIF' => 'Univ. Gust. Eiffel',
-                'ENV' => 'Ministère écologie',
-                'GET' => 'ANCT (ex cget)',
-                'INI' => 'INI',
-                'MCC' => 'Ministère MCC',
-                'MDA' => 'Musée de l\'armée',
-                'MEN' => 'Min Educ Nat Jeun.',
-                'MMA' => 'Musée de la Marine',
-                'MQB' => 'Musée MQB',
-                'MSO' => 'Ministères sociaux',
-                'MTO' => 'Météo France',
-                'NAH' => 'ANAH',
-                'NAO' => 'Inst Nat Orig Qual',
-                'NAV' => 'École navale',
-                'OFB' => 'OFB',
-                'ONA' => 'ONAC-VG',
-                'PAD' => 'ECPAD',
-                'SAE' => 'ISAE Supaéro',
-                'SHO' => 'SHOM',
-                'SPM' => 'Services du PM',
-                'STA' => 'ENSTA Bretagne',
-                'VNF' => 'VNF',
+            'AES' => 'Musée Air  Espace',
+            'AGR' => 'MAA',
+            'CCO' => 'Cour des Comptes',
+            'CET' => 'Conseil d Etat',
+            'CNI' => 'CNIL',
+            'CNM' => 'CNMSS',
+            'CSA' => 'Conseil sup Audio',
+            'DDD' => 'Défenseur des Droi',
+            'EDA' => 'Ecole Air',
+            'EIF' => 'Univ. Gust. Eiffel',
+            'ENV' => 'Ministère écologie',
+            'GET' => 'ANCT (ex cget)',
+            'INI' => 'INI',
+            'MCC' => 'Ministère MCC',
+            'MDA' => 'Musée de l\'armée',
+            'MEN' => 'Min Educ Nat Jeun.',
+            'MMA' => 'Musée de la Marine',
+            'MQB' => 'Musée MQB',
+            'MSO' => 'Ministères sociaux',
+            'MTO' => 'Météo France',
+            'NAH' => 'ANAH',
+            'NAO' => 'Inst Nat Orig Qual',
+            'NAV' => 'École navale',
+            'OFB' => 'OFB',
+            'ONA' => 'ONAC-VG',
+            'PAD' => 'ECPAD',
+            'SAE' => 'ISAE Supaéro',
+            'SHO' => 'SHOM',
+            'SPM' => 'Services du PM',
+            'STA' => 'ENSTA Bretagne',
+            'VNF' => 'VNF',
         ];
 
         $default = '';
@@ -85,11 +85,11 @@ if ($ADMIN->fulltree) {
         }
 
         $settings->add(new admin_setting_configtextarea(
-                'enrol_sirh/sirhlist',
-                'Liste des SIRH',
-                'Liste des SIRH (1 par ligne)',
-                $default,
-                PARAM_TEXT
+            'enrol_sirh/sirhlist',
+            'Liste des SIRH',
+            'Liste des SIRH (1 par ligne)',
+            $default,
+            PARAM_TEXT
         ));
     }
 }

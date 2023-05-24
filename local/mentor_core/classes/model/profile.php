@@ -84,7 +84,14 @@ class profile extends model {
      */
     public $auth;
 
-    protected $canmovesessions  = [];
+    /**
+     * @var array
+     */
+    protected $canmovesessions = [];
+
+    /**
+     * @var array
+     */
     protected $canmovetrainings = [];
 
     /**
@@ -104,28 +111,28 @@ class profile extends model {
             $user = $this->dbinterface->get_user_by_id($userorid);
         }
 
-        $this->id         = $user->id;
-        $this->username   = $user->username;
-        $this->firstname  = $user->firstname;
-        $this->lastname   = $user->lastname;
-        $this->email      = $user->email;
+        $this->id = $user->id;
+        $this->username = $user->username;
+        $this->firstname = $user->firstname;
+        $this->lastname = $user->lastname;
+        $this->email = $user->email;
         $this->profileurl = $this->get_url();
-        $this->suspended  = $user->suspended;
-        $this->auth       = $user->auth;
+        $this->suspended = $user->suspended;
+        $this->auth = $user->auth;
 
         if (!isset($user->lastaccess) || $user->lastaccess == 0) {
             $this->lastconnection = [
-                'display'   => get_string('never', 'local_mentor_core'),
+                'display' => get_string('never', 'local_mentor_core'),
                 'timestamp' => 0
             ];
         } else {
             // Create date format (example: 02/05/2021 15:16).
 
             // When day number not have two digit, add "0" first.
-            $dateformat           = strlen(userdate($user->lastaccess, '%d')) === 1 ?
+            $dateformat = strlen(userdate($user->lastaccess, '%d')) === 1 ?
                 '0%d/%m/%Y %R' : '%d/%m/%Y %R';
             $this->lastconnection = [
-                'display'   => userdate($user->lastaccess, $dateformat),
+                'display' => userdate($user->lastaccess, $dateformat),
                 'timestamp' => (int) $user->lastaccess
             ];
         }
@@ -135,7 +142,7 @@ class profile extends model {
             $this->mainentity = $user->mainentity;
         } else {
             $profileuserrecord = profile_user_record($this->id);
-            $this->mainentity  = property_exists($profileuserrecord, 'mainentity') ? $profileuserrecord->mainentity : '';
+            $this->mainentity = property_exists($profileuserrecord, 'mainentity') ? $profileuserrecord->mainentity : '';
         }
 
     }
@@ -251,12 +258,12 @@ class profile extends model {
 
         $entity = \local_mentor_core\entity_api::get_entity_by_name($userprofilefields['mainentity']);
 
-        $maincohort   = $entity->get_cohort();
+        $maincohort = $entity->get_cohort();
         $maincohortid = $maincohort->id;
 
         $allcohorts = array_unique([$maincohortid]);
 
-        $cohortstoadd    = array_diff($allcohorts, $oldcohorts);
+        $cohortstoadd = array_diff($allcohorts, $oldcohorts);
         $cohortstoremove = array_diff($oldcohorts, $allcohorts);
 
         // Add user to cohorts.
@@ -314,7 +321,7 @@ class profile extends model {
         $object = get_string('email_disabled_accounts_object', 'local_mentor_specialization');
 
         // Get the content of the email.
-        $content     = get_string('email_disabled_accounts_content', 'local_mentor_specialization');
+        $content = get_string('email_disabled_accounts_content', 'local_mentor_specialization');
         $contenthtml = text_to_html($content, false, false, true);
 
         // Send email.
@@ -352,12 +359,12 @@ class profile extends model {
 
         $object = get_string('enabledaccountobject', 'local_profile');
 
-        $a                    = new \stdClass();
-        $a->wwwroot           = $CFG->wwwroot;
+        $a = new \stdClass();
+        $a->wwwroot = $CFG->wwwroot;
         $a->forgetpasswordurl = $CFG->wwwroot . '/login/forgot_password.php';
 
         // Get the content of the email.
-        $content     = get_string('enabledaccountcontent', 'local_profile', $a);
+        $content = get_string('enabledaccountcontent', 'local_profile', $a);
         $contenthtml = text_to_html($content, false, false, true);
 
         $user->suspended = 0;
@@ -483,7 +490,7 @@ class profile extends model {
     public function can_move_training($mainentity) {
 
         if (!isset($this->canmovetrainings[$mainentity->id])) {
-            $canmove       = false;
+            $canmove = false;
             $countentities = 0;
 
             // Move into entity and subentities.
@@ -532,7 +539,7 @@ class profile extends model {
     public function can_move_session($mainentity) {
 
         if (!isset($this->canmovesessions[$mainentity->id])) {
-            $canmove       = false;
+            $canmove = false;
             $countentities = 0;
 
             // Move into entity and subentities.

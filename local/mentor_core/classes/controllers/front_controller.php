@@ -73,7 +73,7 @@ class front_controller {
     public function __construct($plugin, $namespace, $options = null) {
 
         $this->namespace = $namespace;
-        $this->plugin    = $plugin;
+        $this->plugin = $plugin;
 
         if (!empty($options)) {
             $this->params = $options;
@@ -139,7 +139,8 @@ class front_controller {
 
         if (!$reflector->hasMethod($action)) {
             throw new \InvalidArgumentException(
-                "The controller action '$action' is undefined fot the controller '" . $this->namespace . $this->controller . "'.");
+                "The controller action '$action' is undefined fot the controller '" . $this->namespace . $this->controller .
+                "'.");
         }
 
         $this->action = $action;
@@ -152,8 +153,8 @@ class front_controller {
      * Set params from $_GET and $_POST
      */
     public function set_params() {
-        $get          = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
-        $post         = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+        $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $this->params = array_merge((array) $get, (array) $post);
     }
 
@@ -161,7 +162,7 @@ class front_controller {
      * Execute the controller action
      */
     public function execute() {
-        $class      = $this->namespace . $this->controller;
+        $class = $this->namespace . $this->controller;
         $controller = new $class($this->params);
 
         return $controller->execute();

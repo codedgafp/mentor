@@ -25,10 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version  = 2020122100;       // The current module version (Date: YYYYMMDDXX).
+$plugin->version = 2020122100;       // The current module version (Date: YYYYMMDDXX).
 $plugin->requires = 2014051219;       // Requires this Moodle version.
 /** @var String $plugin */
-$plugin->component    = 'local_profile';       // Full name of the plugin (used for diagnostics).
+$plugin->component = 'local_profile';       // Full name of the plugin (used for diagnostics).
 $plugin->dependencies = array(
     'local_mentor_core' => 2020112700
 );

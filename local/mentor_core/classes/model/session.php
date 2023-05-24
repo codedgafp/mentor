@@ -40,21 +40,22 @@ require_once($CFG->dirroot . '/user/profile/lib.php');
 require_once($CFG->dirroot . '/local/mentor_core/classes/model/model.php');
 require_once($CFG->dirroot . '/local/mentor_core/api/profile.php');
 require_once($CFG->dirroot . '/local/mentor_core/lib.php');
+require_once($CFG->dirroot . '/backup/controller/backup_controller_edu.class.php');
 
 class session extends model {
 
-    public const STATUS_IN_PREPARATION      = 'inpreparation';
+    public const STATUS_IN_PREPARATION = 'inpreparation';
     public const STATUS_OPENED_REGISTRATION = 'openedregistration';
-    public const STATUS_IN_PROGRESS         = 'inprogress';
-    public const STATUS_COMPLETED           = 'completed';
-    public const STATUS_ARCHIVED            = 'archived';
-    public const STATUS_REPORTED            = 'reported';
-    public const STATUS_CANCELLED           = 'cancelled';
+    public const STATUS_IN_PROGRESS = 'inprogress';
+    public const STATUS_COMPLETED = 'completed';
+    public const STATUS_ARCHIVED = 'archived';
+    public const STATUS_REPORTED = 'reported';
+    public const STATUS_CANCELLED = 'cancelled';
 
     public const OPEN_TO_CURRENT_ENTITY = 'current_entity';
-    public const OPEN_TO_ALL            = 'all';
-    public const OPEN_TO_OTHER_ENTITY   = 'other_entities';
-    public const OPEN_TO_NOT_VISIBLE    = 'not_visible';
+    public const OPEN_TO_ALL = 'all';
+    public const OPEN_TO_OTHER_ENTITY = 'other_entities';
+    public const OPEN_TO_NOT_VISIBLE = 'not_visible';
 
     public const FAVOURITE = 'favourite_session';
 
@@ -118,6 +119,15 @@ class session extends model {
     // Cache the sessions participants.
     protected $participants;
 
+    // Cache the sessions tutors.
+    protected $tutors;
+
+    // Cache the sessions formateurs.
+    protected $formateurs;
+
+    // Cache the sessions demonstrateurs.
+    protected $demonstrateurs;
+
     /**
      * db session
      *
@@ -176,9 +186,9 @@ class session extends model {
         // Get course users.
         $this->get_course_users();
 
-        $this->placesavailable    = $this->get_available_places();
+        $this->placesavailable = $this->get_available_places();
         $this->numberparticipants = null;
-        $this->opentolist         = ($this->opento == 'other_entities') ? $this->get_opento_list() : '';
+        $this->opentolist = ($this->opento == 'other_entities') ? $this->get_opento_list() : '';
     }
 
     /**
@@ -356,15 +366,15 @@ class session extends model {
             $userid = $USER->id;
         }
 
-        $entity     = $this->get_entity();
+        $entity = $this->get_entity();
         $mainentity = $entity->get_main_entity();
 
         // Check if the user can access the training sheet.
         if ($this->is_updater($userid)) {
-            $sessioncourse           = $mainentity->get_edadmin_courses('session');
-            $url                     = $CFG->wwwroot . '/course/view.php?id=' . $sessioncourse['id'];
+            $sessioncourse = $mainentity->get_edadmin_courses('session');
+            $url = $CFG->wwwroot . '/course/view.php?id=' . $sessioncourse['id'];
             $actions['sessionSheet'] = [
-                'url'     => $this->get_sheet_url()->out() . '&returnto=' . $url,
+                'url' => $this->get_sheet_url()->out() . '&returnto=' . $url,
                 'tooltip' => get_string('gotosessionsheet', 'local_mentor_core')
             ];
         }
@@ -374,7 +384,7 @@ class session extends model {
         // Move session.
         if (has_capability('local/session:create', $entity->get_context()) && $profile->can_move_session($mainentity)) {
             $actions['moveSession'] = [
-                'url'     => '',
+                'url' => '',
                 'tooltip' => get_string('movesession', 'local_mentor_core')
             ];
         }
@@ -384,12 +394,12 @@ class session extends model {
             $this->status != self::STATUS_COMPLETED) {
             // It can assign users because he is manager.
             $actions['manageUser'] = [
-                'url'     => $CFG->wwwroot . '/user/index.php?id=' . $this->courseid,
+                'url' => $CFG->wwwroot . '/user/index.php?id=' . $this->courseid,
                 'tooltip' => get_string('manageusers', 'local_mentor_core')
             ];
 
             $actions['importUsers'] = [
-                'url'     => $CFG->wwwroot . '/local/mentor_core/pages/importcsv.php?courseid=' . $this->courseid,
+                'url' => $CFG->wwwroot . '/local/mentor_core/pages/importcsv.php?courseid=' . $this->courseid,
                 'tooltip' => get_string('enrolusers', 'local_mentor_core')
             ];
 
@@ -404,7 +414,7 @@ class session extends model {
 
         if (in_array($this->status, $cancelstates)) {
             $actions['cancelSession'] = [
-                'url'     => '',
+                'url' => '',
                 'tooltip' => get_string('cancelsession', 'local_mentor_core')
             ];
         }
@@ -412,7 +422,7 @@ class session extends model {
         // Delete session button.
         if (has_capability('local/session:delete', $this->get_context()) && count($this->get_course_users()) == 0) {
             $actions['deleteSession'] = [
-                'url'     => '',
+                'url' => '',
                 'tooltip' => get_string('deletesession', 'local_mentor_core')
             ];
         }
@@ -442,7 +452,7 @@ class session extends model {
             throw new Exception(get_string('shortnameexist', 'local_trainings'));
         }
 
-        $oldstatus          = $this->status;
+        $oldstatus = $this->status;
         $oldmaxparticipants = $this->maxparticipants;
 
         // If form is modified by a designer.
@@ -473,9 +483,9 @@ class session extends model {
             $this->termsregistration = $data->termsregistration;
         }
 
-        $oldcourseshortname    = $this->courseshortname;
+        $oldcourseshortname = $this->courseshortname;
         $this->courseshortname = $data->shortname;
-        $this->status          = $data->status;
+        $this->status = $data->status;
 
         // If we want to modify opento field.
         // User need to have specific capability to share session to other spaces.
@@ -524,19 +534,19 @@ class session extends model {
             // Excpetion when update course if set end date without start date.
             if (is_null($this->sessionenddate)) {
                 $startdate = is_null($this->sessionstartdate) ? 0 : $this->sessionstartdate;
-                $enddate   = 0;
+                $enddate = 0;
             } else {
                 $startdate = is_null($this->sessionstartdate) ? $this->get_course()->timecreated : $this->sessionstartdate;
-                $enddate   = $this->sessionenddate;
+                $enddate = $this->sessionenddate;
             }
 
             // Update course.
             $course = array(
-                'id'        => $this->courseid,
-                'fullname'  => $data->fullname ?: $this->get_training()->name,
+                'id' => $this->courseid,
+                'fullname' => $data->fullname ?: $this->get_training()->name,
                 'shortname' => $data->shortname,
                 'startdate' => $startdate,
-                'enddate'   => $enddate
+                'enddate' => $enddate
             );
 
             $result = self::update_session_course($course);
@@ -593,7 +603,7 @@ class session extends model {
      * @throws moodle_exception
      */
     public function get_entity() {
-        $course   = $this->get_course();
+        $course = $this->get_course();
         $entityid = $this->dbinterface->get_course_main_category_id($course->id);
         return entity_api::get_entity($entityid, false);
     }
@@ -632,29 +642,29 @@ class session extends model {
      */
     public function create_self_enrolment_instance() {
         $course = $this->get_course();
-        $type   = 'self';
+        $type = 'self';
 
         if (!$this->get_enrolment_instances_by_type($type)) {
             // Create new self enrol instance.
             $plugin = enrol_get_plugin($type);
 
-            $instance                  = (object) $plugin->get_instance_defaults();
-            $instance->status          = 0;
-            $instance->id              = '';
-            $instance->courseid        = $course->id;
-            $instance->customint1      = 0;
-            $instance->customint2      = 0;
-            $instance->customint3      = 0; // Max participants.
-            $instance->customint4      = 1;
-            $instance->customint5      = 0;
-            $instance->customint6      = 1; // Enable.
-            $instance->name            = '';
-            $instance->password        = '';
-            $instance->customtext1     = '';
-            $instance->returnurl       = '';
+            $instance = (object) $plugin->get_instance_defaults();
+            $instance->status = 0;
+            $instance->id = '';
+            $instance->courseid = $course->id;
+            $instance->customint1 = 0;
+            $instance->customint2 = 0;
+            $instance->customint3 = 0; // Max participants.
+            $instance->customint4 = 1;
+            $instance->customint5 = 0;
+            $instance->customint6 = 1; // Enable.
+            $instance->name = '';
+            $instance->password = '';
+            $instance->customtext1 = '';
+            $instance->returnurl = '';
             $instance->expirythreshold = 0;
-            $instance->enrolstartdate  = 0;
-            $instance->enrolenddate    = 0;
+            $instance->enrolstartdate = 0;
+            $instance->enrolenddate = 0;
 
             $fields = (array) $instance;
 
@@ -677,21 +687,21 @@ class session extends model {
     public function create_manual_enrolment_instance() {
 
         $course = $this->get_course();
-        $type   = 'manual';
+        $type = 'manual';
 
         if (!$this->get_enrolment_instances_by_type($type)) {
             // Create new self enrol instance.
             $plugin = enrol_get_plugin($type);
 
-            $instance                  = (object) $plugin->get_instance_defaults();
-            $instance->status          = 0;
-            $instance->id              = '';
-            $instance->courseid        = $course->id;
+            $instance = (object) $plugin->get_instance_defaults();
+            $instance->status = 0;
+            $instance->id = '';
+            $instance->courseid = $course->id;
             $instance->expirythreshold = 0;
-            $instance->enrolstartdate  = 0;
-            $instance->enrolenddate    = 0;
-            $instance->timecreated     = time();
-            $instance->timemodified    = time();
+            $instance->enrolstartdate = 0;
+            $instance->enrolenddate = 0;
+            $instance->timecreated = time();
+            $instance->timemodified = time();
 
             $fields = (array) $instance;
 
@@ -741,8 +751,18 @@ class session extends model {
      * @throws coding_exception
      */
     public function is_participant($user) {
+        if (is_int($user)) {
+            $userid = $user;
+            $user = new \stdClass();
+            $user->id = $userid;
+        }
+
+        $participantrole = $this->dbinterface->get_role_by_name('participant');
+        $participantnonediteurrole = $this->dbinterface->get_role_by_name('participantnonediteur');
+
         // Ignore the user if he can update the course settings.
-        if (has_capability('moodle/course:update', $this->get_context(), $user)) {
+        if (!user_has_role_assignment($user->id, $participantrole->id, $this->get_context()->id) &&
+            !user_has_role_assignment($user->id, $participantnonediteurrole->id, $this->get_context()->id)) {
             return false;
         }
 
@@ -956,7 +976,7 @@ class session extends model {
         global $CFG;
         require_once($CFG->dirroot . '/course/lib.php');
 
-        $course          = $this->get_course();
+        $course = $this->get_course();
         $course->visible = 0;
         \update_course($course);
 
@@ -973,7 +993,7 @@ class session extends model {
         global $CFG;
         require_once($CFG->dirroot . '/course/lib.php');
 
-        $course          = $this->get_course();
+        $course = $this->get_course();
         $course->visible = 1;
         \update_course($course);
 
@@ -1018,9 +1038,9 @@ class session extends model {
         // Check if user have not access to session.
         if (!$this->is_available_to_user()) {
             return [
-                'status'   => false,
+                'status' => false,
                 'warnings' => ['message' => get_string('selfenrolmentnotallowed', 'local_mentor_core')],
-                'lang'     => 'errorauthorizationselfenrolment'
+                'lang' => 'errorauthorizationselfenrolment'
             ];
         }
 
@@ -1040,9 +1060,9 @@ class session extends model {
         // Check if a self enrolment instance exists.
         if (!$instance) {
             return [
-                'status'   => false,
+                'status' => false,
                 'warnings' => ['message' => get_string('selfenrolmentdisabled', 'local_mentor_core')],
-                'lang'     => 'errorselfenrolment'
+                'lang' => 'errorselfenrolment'
             ];
         }
 
@@ -1051,12 +1071,12 @@ class session extends model {
             $result = \enrol_self_external::enrol_user($this->courseid, $enrolmentkey, $instance->id);
         } catch (Exception $e) {
             return [
-                'status'   => false,
+                'status' => false,
                 'warnings' => ['message' => $e->getMessage()]
             ];
         }
 
-        $this->participants       = null;
+        $this->participants = null;
         $this->numberparticipants = null;
 
         return $result;
@@ -1082,20 +1102,20 @@ class session extends model {
     public function convert_for_template() {
         global $USER;
 
-        $templateobj           = new \stdClass();
-        $templateobj->id       = $this->id;
+        $templateobj = new \stdClass();
+        $templateobj->id = $this->id;
         $templateobj->fullname = $this->fullname;
-        $templateobj->status   = $this->status;
+        $templateobj->status = $this->status;
 
         // Available places.
-        $places                       = $this->get_available_places();
+        $places = $this->get_available_places();
         $templateobj->placesavailable = is_int($places) && $places < 0 ? 0 : $places;
 
-        $templateobj->istrainer     = $this->is_trainer($USER->id);
-        $templateobj->istutor       = $this->is_tutor($USER->id);
+        $templateobj->istrainer = $this->is_trainer($USER->id);
+        $templateobj->istutor = $this->is_tutor($USER->id);
         $templateobj->isparticipant = $this->is_participant($USER);
-        $templateobj->trainingid    = $this->trainingid;
-        $training                   = $this->get_training();
+        $templateobj->trainingid = $this->trainingid;
+        $training = $this->get_training();
         if ($thumbnail = $this->dbinterface->get_file_from_database($training->contextid,
             'local_trainings',
             'thumbnail',
@@ -1118,17 +1138,17 @@ class session extends model {
         // Set session start and end date.
         if (!empty($this->sessionstartdate)) {
             $sessionstartdate = $this->sessionstartdate;
-            $startdate        = new \DateTime("@$sessionstartdate");
+            $startdate = new \DateTime("@$sessionstartdate");
             $startdate->setTimezone($dtz);
-            $templateobj->sessionstartdate          = $startdate->format('d/m/Y');
+            $templateobj->sessionstartdate = $startdate->format('d/m/Y');
             $templateobj->sessionstartdatetimestamp = $sessionstartdate;
         }
 
         if (!empty($this->sessionenddate)) {
             $sessionenddate = $this->sessionenddate;
-            $enddate        = new \DateTime("@$sessionenddate");
+            $enddate = new \DateTime("@$sessionenddate");
             $enddate->setTimezone($dtz);
-            $templateobj->sessionenddate          = $enddate->format('d/m/Y');
+            $templateobj->sessionenddate = $enddate->format('d/m/Y');
             $templateobj->sessionenddatetimestamp = $sessionenddate;
         }
 
@@ -1136,7 +1156,7 @@ class session extends model {
         $templateobj->placesnotlimited = true;
 
         if (is_numeric($this->maxparticipants)) {
-            $templateobj->placesnotlimited       = false;
+            $templateobj->placesnotlimited = false;
             $templateobj->placesavailablemoreone = (int) $this->placesavailable > 1;
         }
 
@@ -1425,10 +1445,12 @@ class session extends model {
      * @throws dml_exception
      */
     public function get_all_users() {
-        $admins       = $this->get_editors();
+        $admins = $this->get_editors();
         $participants = $this->get_participants();
+        $tutors = $this->get_tutors();
+        $demonstrateurs = $this->get_demonstrateurs();
 
-        return array_merge($admins, $participants);
+        return array_merge($admins, $participants, $tutors, $demonstrateurs);
     }
 
     /**
@@ -1479,8 +1501,8 @@ class session extends model {
         // Send a message if the session was reported.
         if ($oldstatus == self::STATUS_REPORTED) {
             // Data for message.
-            $infodata            = new stdClass();
-            $infodata->fullname  = $this->fullname ?: $this->trainingname;
+            $infodata = new stdClass();
+            $infodata->fullname = $this->fullname ?: $this->trainingname;
             $infodata->startdate = date('d/m/Y', $this->sessionstartdate);
 
             // Message text.
@@ -1500,11 +1522,12 @@ class session extends model {
     /**
      * Mark the session as opened (inprogress)
      *
+     * @param string $oldstatus
      * @throws coding_exception
      * @throws dml_exception
      * @throws \moodle_exception
      */
-    protected function open() {
+    protected function open($oldstatus) {
         $dbinterface = database_interface::get_instance();
 
         // Update status.
@@ -1520,9 +1543,10 @@ class session extends model {
     /**
      * Mark the session as completed
      *
+     * @param string $oldstatus
      * @throws dml_exception
      */
-    protected function complete() {
+    protected function complete($oldstatus) {
         $dbinterface = database_interface::get_instance();
 
         // Update status.
@@ -1530,14 +1554,36 @@ class session extends model {
 
         // Disable all enrol instance.
         $this->disable_enrolment_instance();
+
+        // Send a message if the session was complete.
+        if ($oldstatus == self::STATUS_IN_PROGRESS) {
+            // Data for message.
+            $fullname = $this->fullname ?: $this->trainingname;
+
+            // Message text.
+            $messagetext = get_string('email_complete_session_content', 'local_mentor_core', $fullname);
+
+            // Message subject.
+            $subject = get_string('email_complete_session_object', 'local_mentor_core', $fullname);
+
+            // Message HTML.
+            $messagehtml = text_to_html($messagetext, false, false, true);
+
+            // Send a report email to participants.
+            $this->send_message_to_users(
+                array_merge($this->get_participants(), $this->get_tutors(), $this->get_formateurs()),
+                $subject, $messagetext, $messagehtml
+            );
+        }
     }
 
     /**
      * Mark the session as archived
      *
+     * @param string $oldstatus
      * @throws dml_exception
      */
-    protected function archive() {
+    protected function archive($oldstatus) {
         $dbinterface = database_interface::get_instance();
 
         // Update status.
@@ -1545,6 +1591,27 @@ class session extends model {
 
         // Disable self enrol instance.
         $this->disable_self_enrolment_instance();
+
+        // Send a message if the session was archive.
+        if ($oldstatus == self::STATUS_COMPLETED) {
+            // Data for message.
+            $fullname = $this->fullname ?: $this->trainingname;
+
+            // Message text.
+            $messagetext = get_string('email_archive_session_content', 'local_mentor_core', $fullname);
+
+            // Message subject.
+            $subject = get_string('email_archive_session_object', 'local_mentor_core', $fullname);
+
+            // Message HTML.
+            $messagehtml = text_to_html($messagetext, false, false, true);
+
+            // Send a report email to participants.
+            $this->send_message_to_users(
+                array_merge($this->get_participants(), $this->get_tutors(), $this->get_formateurs()),
+                $subject, $messagetext, $messagehtml
+            );
+        }
     }
 
     /**
@@ -1564,8 +1631,8 @@ class session extends model {
         $this->hide_course();
 
         // Data for message.
-        $infodata            = new stdClass();
-        $infodata->fullname  = $this->fullname ?: $this->trainingname;
+        $infodata = new stdClass();
+        $infodata->fullname = $this->fullname ?: $this->trainingname;
         $infodata->startdate = date('d/m/Y', $this->sessionstartdate);
 
         // Message text.
@@ -1578,7 +1645,10 @@ class session extends model {
         $subject = get_string('reported_session', 'local_mentor_core') . ' ' . $infodata->fullname;
 
         // Send a report email to participants.
-        $this->send_message_to_all($subject, $messagetext, $messagehtml);
+        $this->send_message_to_users(
+            array_merge($this->get_participants(), $this->get_tutors(), $this->get_formateurs()),
+            $subject, $messagetext, $messagehtml
+        );
 
         // Disable self enrol instance.
         $this->disable_self_enrolment_instance();
@@ -1602,8 +1672,8 @@ class session extends model {
         $this->hide_course();
 
         // Data for message.
-        $infodata            = new stdClass();
-        $infodata->fullname  = $this->fullname ?: $this->trainingname;
+        $infodata = new stdClass();
+        $infodata->fullname = $this->fullname ?: $this->trainingname;
         $infodata->startdate = date('d/m/Y', $this->sessionstartdate);
 
         // Message text.
@@ -1616,7 +1686,10 @@ class session extends model {
         $subject = get_string('cancelled_session', 'local_mentor_core') . ' ' . $infodata->fullname;
 
         // Send a cancel email to participants.
-        $this->send_message_to_all($subject, $messagetext, $messagehtml);
+        $this->send_message_to_users(
+            array_merge($this->get_participants(), $this->get_tutors(), $this->get_formateurs()),
+            $subject, $messagetext, $messagehtml
+        );
 
         // Disable all enrol instance.
         $this->disable_enrolment_instance();
@@ -1644,13 +1717,13 @@ class session extends model {
                 $this->open_to_registration($oldstatus);
                 break;
             case self::STATUS_IN_PROGRESS :
-                $this->open();
+                $this->open($oldstatus);
                 break;
             case self::STATUS_COMPLETED :
-                $this->complete();
+                $this->complete($oldstatus);
                 break;
             case self::STATUS_ARCHIVED :
-                $this->archive();
+                $this->archive($oldstatus);
                 break;
             case self::STATUS_REPORTED :
                 $this->report();
@@ -1785,9 +1858,25 @@ class session extends model {
         }
 
         // Create a new backup file.
-        $bc = new \backup_controller(\backup::TYPE_1COURSE, $this->courseid, \backup::FORMAT_MOODLE,
+        $bc = new \backup_controller_edu(
+            \backup::TYPE_1COURSE, $this->courseid, \backup::FORMAT_MOODLE,
             \backup::INTERACTIVE_NO,
-            \backup::MODE_GENERAL, $USER->id);
+            \backup::MODE_GENERAL,
+            $USER->id,
+            [
+                'settings' => [
+                    ['name' => 'activities', 'value' => true],
+                    ['name' => 'blocks', 'value' => true],
+                    ['name' => 'files', 'value' => true],
+                    ['name' => 'filters', 'value' => true],
+                    ['name' => 'badges', 'value' => true],
+                    ['name' => 'questionbank', 'value' => true],
+                    ['name' => 'groups', 'value' => true],
+                    ['name' => 'customfield', 'value' => true],
+                    ['name' => 'contentbankcontent', 'value' => true]
+                ]
+            ]
+        );
         $bc->execute_plan();
 
         $CFG->backuptempdir = $oldbackuptempdir;
@@ -1840,25 +1929,25 @@ class session extends model {
         $training = clone($sessiontraining);
 
         $training->categorychildid = $course->category;
-        $training->categoryid      = \core_course_category::get($course->category)->parent;
+        $training->categoryid = \core_course_category::get($course->category)->parent;
         // Name and shortname are updated after the restore.
         // This ame and shortname are used so that there is.
         // no error saying that they are used for another course.
-        $training->name      = $trainingfullname;
+        $training->name = $trainingfullname;
         $training->shortname = $trainingshortname;
         // Make "draft" default status value.
         $training->status = training::STATUS_DRAFT;
 
-        $coursexists     = $this->dbinterface->course_exists($training->shortname);
+        $coursexists = $this->dbinterface->course_exists($training->shortname);
         $linkcoursexists = $this->dbinterface->training_exists($training->shortname);
 
         $counter = 0;
-        $max     = 50;
+        $max = 50;
 
         while ($coursexists || $linkcoursexists) {
             $training->shortname .= ' copie';
-            $coursexists         = $this->dbinterface->course_exists($training->shortname);
-            $linkcoursexists     = $this->dbinterface->training_exists($training->shortname);
+            $coursexists = $this->dbinterface->course_exists($training->shortname);
+            $linkcoursexists = $this->dbinterface->training_exists($training->shortname);
             if ($counter++ > $max) {
                 // Remove backup file.
                 $backupfile->delete();
@@ -1888,11 +1977,11 @@ class session extends model {
         $trainingcourse = $sessiontraining->get_course();
 
         // Clone 'summary' course attribute.
-        $newcourse                   = $newtraining->get_course();
-        $newcourse->summary          = $trainingcourse->summary;
-        $newcourse->format           = $course->format;
-        $newcourse->showgrades       = $course->showgrades;
-        $newcourse->newsitems        = $course->newsitems;
+        $newcourse = $newtraining->get_course();
+        $newcourse->summary = $trainingcourse->summary;
+        $newcourse->format = $course->format;
+        $newcourse->showgrades = $course->showgrades;
+        $newcourse->newsitems = $course->newsitems;
         $newcourse->enablecompletion = $course->enablecompletion;
         $newcourse->completionnotify = $course->completionnotify;
 
@@ -1904,14 +1993,14 @@ class session extends model {
         }
 
         // Move the course into the new entity.
-        $entity              = entity_api::get_entity($destinationentity);
+        $entity = entity_api::get_entity($destinationentity);
         $newcourse->category = $entity->get_entity_formation_category();
 
         // Update the new course.
         update_course($newcourse);
 
         // Copy the pictures.
-        $fs             = get_file_storage();
+        $fs = get_file_storage();
         $newpicturedata = ['contextid' => $newtraining->contextid, 'itemid' => $newtraining->id];
 
         // Copy the thumbnail.
@@ -1983,7 +2072,7 @@ class session extends model {
         $filerecord = [
             'contextid' => \context_system::instance()->id,
             'component' => 'backuptemp',
-            'filearea'  => $backup->get_filearea()
+            'filearea' => $backup->get_filearea()
         ];
 
         $tempbackup = $fs->create_file_from_storedfile($filerecord, $backup);
@@ -2011,9 +2100,20 @@ class session extends model {
             }
 
             // Update summary field.
-            $course          = $training->get_course();
+            $course = $training->get_course();
             $course->summary = $oldcoursesummary;
             update_course($course);
+            $training->create_manual_enrolment_instance();
+
+            // Re enrol users.
+            foreach ($oldenrolments as $oldenrolment) {
+
+                // Enrol user.
+                enrol_try_internal_enrol($training->courseid, $oldenrolment->userid, $oldenrolment->roleid);
+
+                // Set user role.
+                role_assign($oldenrolment->roleid, $oldenrolment->userid, $training->get_context());
+            }
 
             mtrace($e->getMessage());
             throw new \Exception('Restoration failed');
@@ -2021,7 +2121,6 @@ class session extends model {
 
         // Reset user data.
         $training->reset();
-
         $training->create_manual_enrolment_instance();
 
         // Re enrol users.
@@ -2035,14 +2134,14 @@ class session extends model {
         }
 
         // Copy session course data into training course data.
-        $sessioncourse  = $this->get_course(true);
+        $sessioncourse = $this->get_course(true);
         $trainingcourse = $training->get_course(true);
 
-        $sessioncourse->id        = $trainingcourse->id;
+        $sessioncourse->id = $trainingcourse->id;
         $sessioncourse->shortname = $trainingcourse->shortname;
-        $sessioncourse->fullname  = $trainingcourse->fullname;
-        $sessioncourse->category  = $trainingcourse->category;
-        $sessioncourse->summary   = $oldcoursesummary;
+        $sessioncourse->fullname = $trainingcourse->fullname;
+        $sessioncourse->category = $trainingcourse->category;
+        $sessioncourse->summary = $oldcoursesummary;
 
         update_course($sessioncourse);
 
@@ -2054,7 +2153,7 @@ class session extends model {
         $filerecord = [
             'contextid' => $training->get_context()->id,
             'component' => 'backup',
-            'filearea'  => $backup->get_filearea()
+            'filearea' => $backup->get_filearea()
         ];
 
         $fs->create_file_from_storedfile($filerecord, $tempbackup);
@@ -2122,5 +2221,100 @@ class session extends model {
         }
 
         return $this->dbinterface->has_enroll_user_enabled($this->get_course()->id, $userid);
+    }
+
+    /**
+     * Get all tutors with no editing rights
+     *
+     * @param bool $refresh
+     * @return stdClass[]
+     * @throws dml_exception
+     */
+    public function get_tutors($refresh = false) {
+
+        // Check if the participants list must be reloaded.
+        if ($refresh || empty($this->tutors)) {
+
+            $dbinterface = database_interface::get_instance();
+
+            $this->tutors = $dbinterface->get_course_tutors($this->get_context()->id);
+        }
+
+        return $this->tutors;
+    }
+
+    /**
+     * Get all formateurs with no editing rights
+     *
+     * @param bool $refresh
+     * @return stdClass[]
+     * @throws dml_exception
+     */
+    public function get_formateurs($refresh = false) {
+
+        // Check if the participants list must be reloaded.
+        if ($refresh || empty($this->formateurs)) {
+
+            $dbinterface = database_interface::get_instance();
+
+            $this->formateurs = $dbinterface->get_course_formateurs($this->get_context()->id);
+        }
+
+        return $this->formateurs;
+    }
+
+    /**
+     * Get all demonstrateurs with no editing rights
+     *
+     * @param bool $refresh
+     * @return stdClass[]
+     * @throws dml_exception
+     */
+    public function get_demonstrateurs($refresh = false) {
+
+        // Check if the participants list must be reloaded.
+        if ($refresh || empty($this->demonstrateurs)) {
+
+            $dbinterface = database_interface::get_instance();
+
+            $this->demonstrateurs = $dbinterface->get_course_demonstrateurs($this->get_context()->id);
+        }
+
+        return $this->demonstrateurs;
+    }
+
+    /**
+     * Reset all userdata
+     */
+    public function reset() {
+        $resetdata = new \stdClass();
+        $resetdata->reset_start_date = 0;
+        $resetdata->reset_end_date = 0;
+        $resetdata->reset_events = 1;
+        $resetdata->reset_comments = 1;
+        $resetdata->reset_completion = 1;
+        $resetdata->delete_blog_associations = 1;
+        $resetdata->reset_competency_ratings = 1;
+
+        // List course roles.
+        $resetdata->unenrol_users = array_keys($this->dbinterface->get_course_roles());
+
+        $resetdata->reset_roles_overrides = 0;
+        $resetdata->reset_roles_local = 0;
+        $resetdata->reset_gradebook_grades = 1;
+        $resetdata->reset_groups_remove = 0;
+        $resetdata->reset_groupings_remove = 0;
+        $resetdata->reset_groupings_members = 0;
+        $resetdata->reset_forum_all = 1;
+        $resetdata->reset_forum_types = 1;
+        $resetdata->id = $this->courseid;
+
+        reset_course_userdata($resetdata);
+
+        // Remove roles.
+        $this->dbinterface->unassign_roles($this->get_context()->id, $resetdata->unenrol_users);
+
+        // Remove all enrol instance.
+        enrol_course_delete($this->get_course(true));
     }
 }

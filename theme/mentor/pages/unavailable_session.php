@@ -30,8 +30,8 @@ $courseid = required_param('id', PARAM_INT);
 
 $PAGE->set_url(new moodle_url('/theme/mentor/pages/unavailable_session.php', ['id' => $courseid]));
 
-$id      = required_param('id', PARAM_INT);
-$course  = get_course($id);
+$id = required_param('id', PARAM_INT);
+$course = get_course($id);
 $context = context_course::instance($id);
 $PAGE->set_context($context);
 echo $OUTPUT->header();

@@ -118,8 +118,8 @@ if (!empty($option)) {
             }
 
             $step = (!empty($SESSION->mut->olduser) && !empty($SESSION->mut->newuser)) ?
-                    $renderer::INDEX_PAGE_CONFIRMATION_STEP :
-                    $renderer::INDEX_PAGE_SEARCH_STEP;
+                $renderer::INDEX_PAGE_CONFIRMATION_STEP :
+                $renderer::INDEX_PAGE_SEARCH_STEP;
 
             echo $renderer->index_page($mergeuserform, $step);
             break;
@@ -170,7 +170,7 @@ if (!empty($option)) {
             $renderer->mu_error(get_string('invalid_option', 'tool_mergeusers'));
             break;
     }
-// Any submitted data?
+    // Any submitted data?
 } else if ($data) {
     // If there is a search argument use this instead of advanced form
     if (!empty($data->searchgroup['searcharg'])) {

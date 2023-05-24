@@ -27,379 +27,379 @@ defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
 
-    'local/mentor_specialization:changefullname' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changefullname' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changeshortname' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changeshortname' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changecontent' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changecontent' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changecollection' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changecollection' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changeidsirh' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changeidsirh' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changeskills'          => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changeskills' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
     // Access for session.
-    'local/mentor_specialization:changesessionfullname' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changesessionfullname' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changesessionshortname' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changesessionshortname' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changesessionopento' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changesessionopento' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changesessionpubliccible' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changesessionpubliccible' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changesessiononlinetime' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changesessiononlinetime' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changesessionpresencetime' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changesessionpresencetime' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changesessionpermanentsession' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changesessionpermanentsession' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changesessionstartdate' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changesessionstartdate' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changesessionenddate' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changesessionenddate' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changesessionaccompaniment' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changesessionaccompaniment' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changesessionsessionmodalities' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changesessionsessionmodalities' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changesessiontermsregistration' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changesessiontermsregistration' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changesessionmaxparticipants' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changesessionmaxparticipants' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changesessionlocation' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changesessionlocation' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changesessionorganizingstructure' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changesessionorganizingstructure' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changeentityname' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changeentityname' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changeentityregion' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changeentityregion' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 
-    'local/mentor_specialization:changeentitylogo'                    => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changeentitylogo' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
-    'local/mentor_specialization:changecontactproducerorganization'   => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changecontactproducerorganization' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
-    'local/mentor_specialization:changeproducerorganizationshortname' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changeproducerorganizationshortname' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
-    'local/mentor_specialization:changeproducingorganization'         => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changeproducingorganization' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
-    'local/mentor_specialization:changetypicaljob'                    => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changetypicaljob' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
-    'local/mentor_specialization:changeteaser'                        => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changeteaser' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
-    'local/mentor_specialization:changedesigners'                     => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changedesigners' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
-    'local/mentor_specialization:changecertifying'                    => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changecertifying' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
-    'local/mentor_specialization:changelicenseterms'                  => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changelicenseterms' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
-    'local/mentor_specialization:changeprerequisite'                  => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changeprerequisite' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
-    'local/mentor_specialization:changepresenceestimatedtimehours'    => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changepresenceestimatedtimehours' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
-    'local/mentor_specialization:changeremoteestimatedtimehours'      => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changeremoteestimatedtimehours' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
-    'local/mentor_specialization:changetrainingmodalities'            => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changetrainingmodalities' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
-    'local/mentor_specialization:changeproducerorganizationlogo'      => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changeproducerorganizationlogo' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
-    'local/mentor_specialization:changeteaserpicture'                 => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changeteaserpicture' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
-    'local/mentor_specialization:changecatchphrase'                   => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
-            'manager' => CAP_ALLOW,
+        'local/mentor_specialization:changecatchphrase' => array(
+                'riskbitmask' => RISK_XSS,
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_COURSE,
+                'archetypes' => array(
+                        'manager' => CAP_ALLOW,
+                ),
+                'clonepermissionsfrom' => 'moodle/course:update'
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
-    ),
 );

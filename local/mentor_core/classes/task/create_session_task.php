@@ -71,7 +71,7 @@ class create_session_task extends \core\task\adhoc_task {
         $db = \local_mentor_core\database_interface::get_instance();
 
         $training = \local_mentor_core\training_api::get_training($data->trainingid);
-        $course   = get_course($training->get_course()->id);
+        $course = get_course($training->get_course()->id);
 
         // Get the asked entity of the training entity.
         $entity = (is_null($entityid) || $entityid == 0) ? $training->get_entity() : local_mentor_core\entity_api::get_entity
@@ -96,17 +96,17 @@ class create_session_task extends \core\task\adhoc_task {
 
         $course->shortname = trim($data->sessionname);
 
-        $coursexists     = $db->course_exists($course->shortname);
+        $coursexists = $db->course_exists($course->shortname);
         $linkcoursexists = $db->session_exists($course->shortname);
 
         $counter = 0;
-        $max     = 50;
+        $max = 50;
 
         // Define the course shortname by adding " session" until the shortname is unique.
         while ($coursexists || $linkcoursexists) {
             $course->shortname .= ' session';
-            $coursexists       = $db->course_exists($course->shortname);
-            $linkcoursexists   = $db->session_exists($course->shortname);
+            $coursexists = $db->course_exists($course->shortname);
+            $linkcoursexists = $db->session_exists($course->shortname);
             if ($counter++ > $max) {
                 // If the counter exceeds the max value, remove backup file.
                 $backupfile->delete();
@@ -116,12 +116,12 @@ class create_session_task extends \core\task\adhoc_task {
 
         // Get the sessions category.
         $sessionscatname = 'Sessions';
-        $sessioncat      = $db->get_course_category_by_parent_and_name($entity->id, $sessionscatname);
+        $sessioncat = $db->get_course_category_by_parent_and_name($entity->id, $sessionscatname);
 
         // Create a Sessions category if missing.
         if (!$sessioncat) {
-            $newcategory         = new \stdClass();
-            $newcategory->name   = $sessionscatname;
+            $newcategory = new \stdClass();
+            $newcategory->name = $sessionscatname;
             $newcategory->parent = $entity->id;
 
             $sessioncat = \core_course_category::create($newcategory);
@@ -141,7 +141,7 @@ class create_session_task extends \core\task\adhoc_task {
         $newcourse = create_course($course);
 
         $restoretarget = \backup::TARGET_EXISTING_DELETING;
-        $fp            = get_file_packer('application/vnd.moodle.backup');
+        $fp = get_file_packer('application/vnd.moodle.backup');
 
         // Get file path.
         $dirname = basename($backupfile->get_filename(), '.mbz');
@@ -149,7 +149,7 @@ class create_session_task extends \core\task\adhoc_task {
         $courseid = $newcourse->id;
 
         // Define a local storage for the backup restore.
-        $oldbackuptempdir   = $CFG->backuptempdir;
+        $oldbackuptempdir = $CFG->backuptempdir;
         $CFG->backuptempdir = isset($CFG->mentorbackuproot) ? $CFG->mentorbackuproot : $CFG->dataroot . '/mentor_backup';
 
         if (!is_dir($CFG->backuptempdir)) {
@@ -164,8 +164,8 @@ class create_session_task extends \core\task\adhoc_task {
             delete_course($courseid, false);
             throw new \Exception('extract error in folder : ' . $CFG->backuptempdir . '/' . $dirname);
         }
-        $rc = new \restore_controller($dirname, $courseid, \backup::INTERACTIVE_NO, \backup::MODE_IMPORT, $userid,
-                $restoretarget);
+        $rc = new \restore_controller($dirname, $courseid, \backup::INTERACTIVE_NO, \backup::MODE_GENERAL, $userid,
+            $restoretarget);
         $rc->execute_precheck();
         $rc->execute_plan();
 
@@ -174,10 +174,10 @@ class create_session_task extends \core\task\adhoc_task {
         // Delete the backup file.
         $backupfile->delete();
 
-        $session                  = new \stdClass();
+        $session = new \stdClass();
         $session->courseshortname = $newcourse->shortname;
-        $session->trainingid      = $data->trainingid;
-        $session->status          = \local_mentor_core\session::STATUS_IN_PREPARATION;
+        $session->trainingid = $data->trainingid;
+        $session->status = \local_mentor_core\session::STATUS_IN_PREPARATION;
 
         // Create the session in database.
         $sessionid = $db->add_session($session);
@@ -206,8 +206,8 @@ class create_session_task extends \core\task\adhoc_task {
 
         // Trigger a session created event.
         $event = \local_mentor_core\event\session_create::create(array(
-                'objectid' => $session->id,
-                'context'  => $session->get_context()
+            'objectid' => $session->id,
+            'context' => $session->get_context()
         ));
         $event->trigger();
 
@@ -217,21 +217,28 @@ class create_session_task extends \core\task\adhoc_task {
         // Enable manual enrolment.
         $session->create_manual_enrolment_instance();
 
+        // Reset user data.
+        $session->reset();
+
+        // Delete all H5P owners in database.
+        // If the owner loses his 'moodle/h5p:deploy' capability and the H5P has never opened before, then it is not visible.
+        $db->remove_user_owner_h5p_file($session->get_context()->id);
+
         // Send email to user.
-        $creator     = \core_user::get_user($this->get_userid());
+        $creator = \core_user::get_user($this->get_userid());
         $supportuser = \core_user::get_support_user();
-        $content     = get_string('create_session_email', 'local_mentor_core', array(
-                'sessionurlsheet'   => $session->get_sheet_url()->out(),
-                'sessionfullname'   => $session->fullname,
-                'sessionshortname'  => $session->shortname,
-                'trainingurlsheet'  => $training->get_sheet_url()->out(),
-                'trainingfullname'  => $training->name,
-                'trainingshortname' => $training->shortname,
+        $content = get_string('create_session_email', 'local_mentor_core', array(
+            'sessionurlsheet' => $session->get_sheet_url()->out(),
+            'sessionfullname' => $session->fullname,
+            'sessionshortname' => $session->shortname,
+            'trainingurlsheet' => $training->get_sheet_url()->out(),
+            'trainingfullname' => $training->name,
+            'trainingshortname' => $training->shortname,
         ));
         $contenthtml = text_to_html($content, false, false, true);
         email_to_user($creator, $supportuser, get_string('create_session_object_email', 'local_mentor_core', $training->name),
-                $content,
-                $contenthtml);
+            $content,
+            $contenthtml);
 
         return $session;
     }

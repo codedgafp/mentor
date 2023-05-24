@@ -57,7 +57,7 @@ class sirh_api {
     public static function get_sirh_sessions($sessionid, $filter) {
 
         // Get session and this entity sirh list.
-        $session        = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $entitysirhlist = $session->get_entity()->get_main_entity()->get_sirh_list();
 
         $sirhinstances = $session->get_sirh_instances();
@@ -92,11 +92,11 @@ class sirh_api {
         // Get SIRH REST API.
         $sirhrest = static::get_sirh_rest_api();
 
-        $nbelemperpage               = $filter['nombreElementPage'];
+        $nbelemperpage = $filter['nombreElementPage'];
         $filter['nombreElementPage'] = 1;
 
         // Count all sessions.
-        $countsessions               = $sirhrest->count_sirh_sessions($filter);
+        $countsessions = $sirhrest->count_sirh_sessions($filter);
         $filter['nombreElementPage'] = $countsessions;
 
         $pagenumber = $filter['numeroPage'];
@@ -119,7 +119,7 @@ class sirh_api {
                 ) {
 
                     $sirhsession->instanceexists = true;
-                    $sirhsession->instanceid     = $sirhinstance->id;
+                    $sirhsession->instanceid = $sirhinstance->id;
                 }
             }
 
@@ -134,7 +134,7 @@ class sirh_api {
             // Sort by instanceexists.
             usort($finalsessions,
                 function($a, $b) use ($dir) {
-                    $left  = $a->instanceexists ? 1 : 0;
+                    $left = $a->instanceexists ? 1 : 0;
                     $right = $b->instanceexists ? 1 : 0;
 
                     if ($dir == 'ASC') {
@@ -147,7 +147,7 @@ class sirh_api {
         }
 
         // Splice results by page number and nb results per page.
-        $offset        = ($pagenumber - 1) * $nbelemperpage;
+        $offset = ($pagenumber - 1) * $nbelemperpage;
         $finalsessions = array_splice($finalsessions, $offset, $nbelemperpage);
 
         return $finalsessions;
@@ -174,7 +174,7 @@ class sirh_api {
     public static function count_sirh_sessions($sessionid, $filter) {
 
         // Get session and this entity sirh list.
-        $session        = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $entitysirhlist = $session->get_entity()->get_main_entity()->get_sirh_list();
 
         $sirhinstances = $session->get_sirh_instances();
@@ -228,7 +228,7 @@ class sirh_api {
      */
     public static function get_session_users($sessionid, $sirh, $sirhtraining, $sirhsession, $nbuser = null) {
         // Get session and this entity sirh list.
-        $session        = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $entitysirhlist = $session->get_entity()->get_main_entity()->get_sirh_list();
 
         // Check capability.
@@ -260,7 +260,7 @@ class sirh_api {
      */
     public static function enrol_users_sirh($sessionid, $sirh, $sirhtraining, $sirhsession) {
         // Get session and this entity sirh list.
-        $session  = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $courseid = $session->get_course()->id;
 
         // Check capability.
@@ -389,18 +389,18 @@ class sirh_api {
         // Create new self enrol instance.
         $plugin = enrol_get_plugin('sirh');
 
-        $instance                  = (object) $plugin->get_instance_defaults();
-        $instance->status          = 0;
-        $instance->id              = '';
-        $instance->courseid        = $courseid;
+        $instance = (object) $plugin->get_instance_defaults();
+        $instance->status = 0;
+        $instance->id = '';
+        $instance->courseid = $courseid;
         $instance->expirythreshold = 0;
-        $instance->enrolstartdate  = 0;
-        $instance->enrolenddate    = 0;
-        $instance->timecreated     = time();
-        $instance->timemodified    = time();
-        $instance->customchar1     = $sirh;
-        $instance->customchar2     = $sirhtraining;
-        $instance->customchar3     = $sirhsession;
+        $instance->enrolstartdate = 0;
+        $instance->enrolenddate = 0;
+        $instance->timecreated = time();
+        $instance->timemodified = time();
+        $instance->customchar1 = $sirh;
+        $instance->customchar2 = $sirhtraining;
+        $instance->customchar3 = $sirhsession;
 
         $fields = (array) $instance;
 
@@ -426,7 +426,7 @@ class sirh_api {
         if (!$instance = self::get_enrol_sirh_instance($courseid, $sirh, $sirhtraining, $sirhsession)) {
             // Create enrol instance if not exist.
             $instanceid = self::create_enrol_sirh_instance($courseid, $sirh, $sirhtraining, $sirhsession);
-            $instance   = $DB->get_record('enrol', ['id' => $instanceid]);
+            $instance = $DB->get_record('enrol', ['id' => $instanceid]);
         }
 
         return $instance;
@@ -469,7 +469,7 @@ class sirh_api {
                 }
 
                 $userdata->username = $user['email'];
-                $user               = $userdata;
+                $user = $userdata;
             }
 
             // Get user if exists.
@@ -580,9 +580,9 @@ class sirh_api {
      */
     public static function create_group_sirh($instance) {
         // Create a new group for the cohort.
-        $groupdata           = new \stdClass();
+        $groupdata = new \stdClass();
         $groupdata->courseid = $instance->courseid;
-        $groupdata->name     = get_string('sirh_group_name', 'enrol_sirh',
+        $groupdata->name = get_string('sirh_group_name', 'enrol_sirh',
             array(
                 // SIRH.
                 'c1' => $instance->customchar1,
@@ -609,8 +609,8 @@ class sirh_api {
         $instance = self::get_instance($instanceid);
 
         // Update SIRH instance with new group.
-        $enrol                       = enrol_get_plugin('sirh');
-        $newinstancedata             = new \stdClass();
+        $enrol = enrol_get_plugin('sirh');
+        $newinstancedata = new \stdClass();
         $newinstancedata->customint1 = $groupid;
         $enrol->update_instance($instance, $newinstancedata);
 

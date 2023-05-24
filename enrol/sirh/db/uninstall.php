@@ -28,7 +28,7 @@ function xmldb_enrol_sirh_uninstall() {
     global $DB;
 
     $sirh = enrol_get_plugin('sirh');
-    $rs   = $DB->get_recordset('enrol', array('enrol' => 'sirh'));
+    $rs = $DB->get_recordset('enrol', array('enrol' => 'sirh'));
 
     foreach ($rs as $instance) {
         $sirh->delete_instance($instance);

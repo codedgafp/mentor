@@ -49,19 +49,19 @@ class local_mentor_specialization_library_class_testcase extends advanced_testca
         global $CFG;
 
         $CFG->mentor_specializations = [
-            '\\local_mentor_specialization\\mentor_specialization' =>
-                'local/mentor_specialization/classes/mentor_specialization.php'
+                '\\local_mentor_specialization\\mentor_specialization' =>
+                        'local/mentor_specialization/classes/mentor_specialization.php'
         ];
     }
 
     public function init_competencies() {
         global $CFG;
 
-        $text      = file_get_contents($CFG->dirroot .
-                                       '/local/mentor_specialization/data/competencies/competencies_comma_separated.csv');
-        $encoding  = 'UTF-8';
+        $text = file_get_contents($CFG->dirroot .
+                                  '/local/mentor_specialization/data/competencies/competencies_comma_separated.csv');
+        $encoding = 'UTF-8';
         $delimiter = 'comma';
-        $importer  = new \tool_lpimportcsv\framework_importer($text, $encoding, $delimiter, 0, null, true);
+        $importer = new \tool_lpimportcsv\framework_importer($text, $encoding, $delimiter, 0, null, true);
         $importer->import();
     }
 
@@ -73,8 +73,8 @@ class local_mentor_specialization_library_class_testcase extends advanced_testca
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -101,18 +101,18 @@ class local_mentor_specialization_library_class_testcase extends advanced_testca
         $this->init_database();
 
         return [
-            [
-                'name'      => 'New Entity 1',
-                'shortname' => 'New Entity 1',
-                'regions'   => [5], // Corse.
-                'userid'    => 2  // Set the admin user as manager of the entity.
-            ],
-            [
-                'name'      => 'New Entity 2',
-                'shortname' => 'New Entity 2',
-                'regions'   => [5], // Corse.
-                'userid'    => 2  // Set the admin user as manager of the entity.
-            ],
+                [
+                        'name' => 'New Entity 1',
+                        'shortname' => 'New Entity 1',
+                        'regions' => [5], // Corse.
+                        'userid' => 2  // Set the admin user as manager of the entity.
+                ],
+                [
+                        'name' => 'New Entity 2',
+                        'shortname' => 'New Entity 2',
+                        'regions' => [5], // Corse.
+                        'userid' => 2  // Set the admin user as manager of the entity.
+                ],
         ];
     }
 
@@ -123,36 +123,36 @@ class local_mentor_specialization_library_class_testcase extends advanced_testca
 
     public function create_training($entity, $shorntname = 'shortname') {
 
-        $trainingdata                               = new stdClass();
-        $trainingdata->name                         = 'fullname';
-        $trainingdata->shortname                    = $shorntname;
-        $trainingdata->teaser                       = 'http://www.edunao.com/';
-        $trainingdata->teaserpicture                = '';
-        $trainingdata->prerequisite                 = 'TEST';
-        $trainingdata->collection                   = 'accompagnement';
-        $trainingdata->traininggoal                 = 'TEST TRAINING ';
-        $trainingdata->idsirh                       = 'TEST ID SIRH';
-        $trainingdata->licenseterms                 = 'cc-sa';
-        $trainingdata->typicaljob                   = 'TEST';
-        $trainingdata->skills                       = ['FP2SF001', 'FP2SF002'];
-        $trainingdata->certifying                   = '1';
-        $trainingdata->presenceestimatedtimehours   = '12';
+        $trainingdata = new stdClass();
+        $trainingdata->name = 'fullname';
+        $trainingdata->shortname = $shorntname;
+        $trainingdata->teaser = 'http://www.edunao.com/';
+        $trainingdata->teaserpicture = '';
+        $trainingdata->prerequisite = 'TEST';
+        $trainingdata->collection = 'accompagnement';
+        $trainingdata->traininggoal = 'TEST TRAINING ';
+        $trainingdata->idsirh = 'TEST ID SIRH';
+        $trainingdata->licenseterms = 'cc-sa';
+        $trainingdata->typicaljob = 'TEST';
+        $trainingdata->skills = ['FP2SF001', 'FP2SF002'];
+        $trainingdata->certifying = '1';
+        $trainingdata->presenceestimatedtimehours = '12';
         $trainingdata->presenceestimatedtimeminutes = '10';
-        $trainingdata->remoteestimatedtimehours     = '15';
-        $trainingdata->remoteestimatedtimeminutes   = '30';
-        $trainingdata->trainingmodalities           = 'd';
-        $trainingdata->producingorganization        = 'TEST';
-        $trainingdata->producerorganizationlogo     = '';
-        $trainingdata->designers                    = 'TEST';
-        $trainingdata->contactproducerorganization  = 'TEST';
-        $trainingdata->thumbnail                    = '';
-        $trainingdata->status                       = 'dr';
-        $trainingdata->content                      = [];
-        $trainingdata->content['text']              = 'ContentText';
-        $formationid                                = $entity->get_entity_formation_category();
-        $trainingdata->categorychildid              = $formationid;
-        $trainingdata->categoryid                   = $entity->id;
-        $trainingdata->creativestructure            = $entity->id;
+        $trainingdata->remoteestimatedtimehours = '15';
+        $trainingdata->remoteestimatedtimeminutes = '30';
+        $trainingdata->trainingmodalities = 'd';
+        $trainingdata->producingorganization = 'TEST';
+        $trainingdata->producerorganizationlogo = '';
+        $trainingdata->designers = 'TEST';
+        $trainingdata->contactproducerorganization = 'TEST';
+        $trainingdata->thumbnail = '';
+        $trainingdata->status = 'dr';
+        $trainingdata->content = [];
+        $trainingdata->content['text'] = 'ContentText';
+        $formationid = $entity->get_entity_formation_category();
+        $trainingdata->categorychildid = $formationid;
+        $trainingdata->categoryid = $entity->id;
+        $trainingdata->creativestructure = $entity->id;
         return \local_mentor_core\training_api::create_training($trainingdata);
     }
 
@@ -176,7 +176,7 @@ class local_mentor_specialization_library_class_testcase extends advanced_testca
 
         self::assertEmpty($library->get_trainings());
 
-        $entity   = $this->create_entity('Entity');
+        $entity = $this->create_entity('Entity');
         $training = $this->create_training($entity);
         \local_mentor_core\library_api::publish_to_library($training->id, true);
 

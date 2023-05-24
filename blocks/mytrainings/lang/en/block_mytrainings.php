@@ -23,19 +23,19 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['mytrainings:addinstance']   = 'Add a new my trainings block';
+$string['mytrainings:addinstance'] = 'Add a new my trainings block';
 $string['mytrainings:myaddinstance'] = 'Add my trainings block to Dashboard';
-$string['pluginname']                = 'Mes formations en cours de conception';
-$string['privacy:metadata']          = 'My trainings block only shows data stored in other locations.';
-$string['certifying']                = 'Certifiante';
-$string['reviewer']                  = 'Relecteur';
-$string['thumbnail']                 = 'Vignette';
-$string['trainings_trainer']         = 'Proposé par';
-$string['next']                      = 'Suivant';
-$string['previous']                  = 'Précédent';
-$string['moreinfo']                  = 'Plus d\'info sur {$a}';
-$string['moreinfotile']              = 'En savoir plus';
-$string['showless']                  = 'Réduire';
-$string['showmore']                  = 'Voir plus';
-$string['addfavourite']              = "Ajouter aux favoris";
-$string['removefavourite']           = "Retirer des favoris";
+$string['pluginname'] = 'Mes formations en cours de conception';
+$string['privacy:metadata'] = 'My trainings block only shows data stored in other locations.';
+$string['certifying'] = 'Certifiante';
+$string['reviewer'] = 'Relecteur';
+$string['thumbnail'] = 'Vignette';
+$string['trainings_trainer'] = 'Proposé par';
+$string['next'] = 'Suivant';
+$string['previous'] = 'Précédent';
+$string['moreinfo'] = 'Plus d\'info sur {$a}';
+$string['moreinfotile'] = 'En savoir plus';
+$string['showless'] = 'Réduire';
+$string['showmore'] = 'Voir plus';
+$string['addfavourite'] = "Ajouter aux favoris";
+$string['removefavourite'] = "Retirer des favoris";

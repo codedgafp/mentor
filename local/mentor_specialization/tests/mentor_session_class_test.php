@@ -44,8 +44,8 @@ class local_mentor_specialization_mentor_session_class_testcase extends advanced
     public function reset_singletons() {
         // Reset the mentor core specialization singleton.
         $specialization = \local_mentor_core\specialization::get_instance();
-        $reflection     = new ReflectionClass($specialization);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($specialization);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -67,64 +67,64 @@ class local_mentor_specialization_mentor_session_class_testcase extends advanced
             'local_mentor_specialization');
 
         if ($training) {
-            $data->name      = 'fullname';
+            $data->name = 'fullname';
             $data->shortname = 'shortname';
-            $data->content   = 'summary';
-            $data->status    = 'ec';
+            $data->content = 'summary';
+            $data->status = 'ec';
         } else {
-            $data->trainingname      = 'fullname';
+            $data->trainingname = 'fullname';
             $data->trainingshortname = 'shortname';
-            $data->trainingcontent   = 'summary';
-            $data->trainingstatus    = 'ec';
+            $data->trainingcontent = 'summary';
+            $data->trainingstatus = 'ec';
         }
 
         // Fields for training.
-        $data->teaser                       = 'http://www.edunao.com/';
-        $data->teaserpicture                = '';
-        $data->prerequisite                 = 'TEST';
-        $data->collection                   = 'accompagnement';
-        $data->traininggoal                 = 'TEST TRAINING ';
-        $data->idsirh                       = 'TEST ID SIRH';
-        $data->licenseterms                 = 'cc-sa';
-        $data->typicaljob                   = 'TEST';
-        $data->skills                       = [];
-        $data->certifying                   = '1';
-        $data->presenceestimatedtimehours   = '12';
+        $data->teaser = 'http://www.edunao.com/';
+        $data->teaserpicture = '';
+        $data->prerequisite = 'TEST';
+        $data->collection = 'accompagnement';
+        $data->traininggoal = 'TEST TRAINING ';
+        $data->idsirh = 'TEST ID SIRH';
+        $data->licenseterms = 'cc-sa';
+        $data->typicaljob = 'TEST';
+        $data->skills = [];
+        $data->certifying = '1';
+        $data->presenceestimatedtimehours = '12';
         $data->presenceestimatedtimeminutes = '10';
-        $data->remoteestimatedtimehours     = '15';
-        $data->remoteestimatedtimeminutes   = '30';
-        $data->trainingmodalities           = 'd';
-        $data->producingorganization        = 'TEST';
-        $data->producerorganizationlogo     = '';
-        $data->designers                    = 'TEST';
-        $data->contactproducerorganization  = 'TEST';
-        $data->thumbnail                    = '';
+        $data->remoteestimatedtimehours = '15';
+        $data->remoteestimatedtimeminutes = '30';
+        $data->trainingmodalities = 'd';
+        $data->producingorganization = 'TEST';
+        $data->producerorganizationlogo = '';
+        $data->designers = 'TEST';
+        $data->contactproducerorganization = 'TEST';
+        $data->thumbnail = '';
 
         // Specific fields for session (only for update).
         if ($sessionid) {
-            $data->id                      = $sessionid;
-            $data->opento                  = 'all';
-            $data->publiccible             = 'TEST';
-            $data->termsregistration       = 'autre';
+            $data->id = $sessionid;
+            $data->opento = 'all';
+            $data->publiccible = 'TEST';
+            $data->termsregistration = 'autre';
             $data->termsregistrationdetail = 'TEST';
 
-            $data->onlinesessionestimatedtimehours     = '10';
-            $data->onlinesessionestimatedtimeminutes   = '15';
-            $data->presencesessionestimatedtimehours   = '12';
+            $data->onlinesessionestimatedtimehours = '10';
+            $data->onlinesessionestimatedtimeminutes = '15';
+            $data->presencesessionestimatedtimehours = '12';
             $data->presencesessionestimatedtimeminutes = '25';
 
-            $data->sessionpermanent    = 0;
-            $data->sessionstartdate    = 1609801200;
-            $data->sessionenddate      = 1609801200;
-            $data->sessionmodalities   = 'presentiel';
-            $data->accompaniment       = 'TEST';
-            $data->maxparticipants     = 10;
-            $data->placesavailable     = 8;
-            $data->numberparticipants  = 2;
-            $data->location            = 'PARIS';
+            $data->sessionpermanent = 0;
+            $data->sessionstartdate = 1609801200;
+            $data->sessionenddate = 1609801200;
+            $data->sessionmodalities = 'presentiel';
+            $data->accompaniment = 'TEST';
+            $data->maxparticipants = 10;
+            $data->placesavailable = 8;
+            $data->numberparticipants = 2;
+            $data->location = 'PARIS';
             $data->organizingstructure = 'TEST ORGANISATION';
-            $data->sessionnumber       = 1;
-            $data->opentolist          = '';
+            $data->sessionnumber = 1;
+            $data->opentolist = '';
         }
 
         return $data;
@@ -135,10 +135,10 @@ class local_mentor_specialization_mentor_session_class_testcase extends advanced
      */
     public function init_training_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -162,9 +162,9 @@ class local_mentor_specialization_mentor_session_class_testcase extends advanced
         try {
             // Get entity object for default category.
             $entityid = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1',
-                'regions'   => [1]
+                'regions' => [1]
             ]);
 
             $entity = \local_mentor_core\entity_api::get_entity($entityid);
@@ -223,19 +223,19 @@ class local_mentor_specialization_mentor_session_class_testcase extends advanced
         // Create new self enrol instance.
         $sirhplugin = enrol_get_plugin('sirh');
 
-        $instance                  = (object) $sirhplugin->get_instance_defaults();
-        $instance->status          = 0;
-        $instance->id              = '';
-        $instance->courseid        = $courseid;
+        $instance = (object) $sirhplugin->get_instance_defaults();
+        $instance->status = 0;
+        $instance->id = '';
+        $instance->courseid = $courseid;
         $instance->expirythreshold = 0;
-        $instance->enrolstartdate  = 0;
-        $instance->enrolenddate    = 0;
-        $instance->timecreated     = time();
-        $instance->timemodified    = time();
-        $instance->customchar1     = 'sirh';
-        $instance->customchar2     = 'sirhtraining';
-        $instance->customchar3     = 'sirhsession';
-        $instance->roleid          = $sirhplugin->get_config('roleid');
+        $instance->enrolstartdate = 0;
+        $instance->enrolenddate = 0;
+        $instance->timecreated = time();
+        $instance->timemodified = time();
+        $instance->customchar1 = 'sirh';
+        $instance->customchar2 = 'sirhtraining';
+        $instance->customchar3 = 'sirhsession';
+        $instance->roleid = $sirhplugin->get_config('roleid');
 
         return $instance;
     }
@@ -262,7 +262,7 @@ class local_mentor_specialization_mentor_session_class_testcase extends advanced
         self::assertEquals($session->fullname, $sessionobj->fullname);
         self::assertEquals($session->shortname, $sessionobj->shortname);
 
-        $baddata     = new stdClass();
+        $baddata = new stdClass();
         $baddata->id = $sessionid;
 
         try {
@@ -271,19 +271,19 @@ class local_mentor_specialization_mentor_session_class_testcase extends advanced
             self::fail($e->getMessage());
         }
 
-        $sessionobjbis                   = new \stdClass();
-        $sessionobjbis->id               = $sessionobj->id;
-        $sessionobjbis->courseshortname  = $sessionobj->courseshortname;
-        $sessionobjbis->courseid         = $sessionobj->courseid;
-        $sessionobjbis->contextid        = $sessionobj->contextid;
-        $sessionobjbis->trainingid       = $sessionobj->trainingid;
-        $sessionobjbis->fullname         = $sessionobj->fullname;
-        $sessionobjbis->shortname        = $sessionobj->shortname;
-        $sessionobjbis->status           = $sessionobj->status;
-        $sessionobjbis->opento           = $sessionobj->opento;
+        $sessionobjbis = new \stdClass();
+        $sessionobjbis->id = $sessionobj->id;
+        $sessionobjbis->courseshortname = $sessionobj->courseshortname;
+        $sessionobjbis->courseid = $sessionobj->courseid;
+        $sessionobjbis->contextid = $sessionobj->contextid;
+        $sessionobjbis->trainingid = $sessionobj->trainingid;
+        $sessionobjbis->fullname = $sessionobj->fullname;
+        $sessionobjbis->shortname = $sessionobj->shortname;
+        $sessionobjbis->status = $sessionobj->status;
+        $sessionobjbis->opento = $sessionobj->opento;
         $sessionobjbis->sessionstartdate = $sessionobj->sessionstartdate;
-        $sessionobjbis->sessionenddate   = $sessionobj->sessionenddate;
-        $sessionobjbis->maxparticipants  = $sessionobj->maxparticipants;
+        $sessionobjbis->sessionenddate = $sessionobj->sessionenddate;
+        $sessionobjbis->maxparticipants = $sessionobj->maxparticipants;
 
         try {
             $sessionexception = new \local_mentor_specialization\mentor_session($sessionobjbis);
@@ -346,18 +346,18 @@ class local_mentor_specialization_mentor_session_class_testcase extends advanced
 
         $session = new \local_mentor_specialization\mentor_session($sessionid);
 
-        $data                          = new stdClass();
-        $data->status                  = \local_mentor_core\session::STATUS_COMPLETED;
+        $data = new stdClass();
+        $data->status = \local_mentor_core\session::STATUS_COMPLETED;
         $data->termsregistrationdetail = 'termsregistrationdetail';
-        $data->sessionpermanent        = 0;
+        $data->sessionpermanent = 0;
         $session->update($data, true);
 
         self::assertEquals($session->status, \local_mentor_core\session::STATUS_COMPLETED);
 
-        $data                          = new stdClass();
-        $data->status                  = \local_mentor_core\session::STATUS_CANCELLED;
+        $data = new stdClass();
+        $data->status = \local_mentor_core\session::STATUS_CANCELLED;
         $data->termsregistrationdetail = 'termsregistrationdetail';
-        $data->sessionpermanent        = 0;
+        $data->sessionpermanent = 0;
         $session->update($data, true);
 
         self::assertEquals($session->status, \local_mentor_core\session::STATUS_CANCELLED);
@@ -412,14 +412,14 @@ class local_mentor_specialization_mentor_session_class_testcase extends advanced
         self::setAdminUser();
 
         $sessionid = $this->init_session_creation();
-        $session   = new \local_mentor_specialization\mentor_session($sessionid);
+        $session = new \local_mentor_specialization\mentor_session($sessionid);
 
         // Instance not existe.
         self::assertEmpty($session->get_sirh_instances());
 
         // Create new self enrol instance.
         $sirhplugin = enrol_get_plugin('sirh');
-        $instance   = $this->get_instance_data($session->get_course()->id);
+        $instance = $this->get_instance_data($session->get_course()->id);
         $instanceid = $sirhplugin->add_instance($session->get_course(), (array) $instance);
 
         // Instance existe.
@@ -445,20 +445,20 @@ class local_mentor_specialization_mentor_session_class_testcase extends advanced
 
         self::setAdminUser();
 
-        $sessionid       = $this->init_session_creation();
-        $session         = new \local_mentor_specialization\mentor_session($sessionid);
-        $entity          = $session->get_entity()->get_main_entity();
-        $liststatus      = \local_mentor_core\session_api::get_status_list();
+        $sessionid = $this->init_session_creation();
+        $session = new \local_mentor_specialization\mentor_session($sessionid);
+        $entity = $session->get_entity()->get_main_entity();
+        $liststatus = \local_mentor_core\session_api::get_status_list();
         $sirhaccessstats = [
             \local_mentor_core\session::STATUS_OPENED_REGISTRATION,
             \local_mentor_core\session::STATUS_IN_PROGRESS
         ];
 
         foreach ($liststatus as $status) {
-            $data                          = new stdClass();
-            $data->status                  = $status;
+            $data = new stdClass();
+            $data->status = $status;
             $data->termsregistrationdetail = 'termsregistrationdetail';
-            $data->sessionpermanent        = 0;
+            $data->sessionpermanent = 0;
             $session->update($data, true);
 
             // Without SIRH.

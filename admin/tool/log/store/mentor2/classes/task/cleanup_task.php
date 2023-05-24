@@ -49,11 +49,11 @@ class cleanup_task extends \core\task\scheduled_task {
 
         // Get logs before midnight.
         $oldlogs = $DB->get_records_sql(
-                'SELECT *
+            'SELECT *
                 FROM {logstore_mentor_log2}
                 WHERE timecreated < :lastmidnight
                 ORDER BY timecreated ASC'
-                , ['lastmidnight' => $lastmidnight]);
+            , ['lastmidnight' => $lastmidnight]);
 
         // Clone old logs in history log table.
         $DB->insert_records('logstore_mentor_history_log2', $oldlogs);

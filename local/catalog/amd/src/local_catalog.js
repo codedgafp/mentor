@@ -723,11 +723,6 @@ define([
         updateExportTrainingButton: function (exportButton, exportNumber) {
             var sessionStoragetraining = localCatalog.getSelectedTrainingId();
             $(exportNumber).html(sessionStoragetraining.length);
-            if (sessionStoragetraining.length > 0) {
-                $(exportButton).removeClass('hidden');
-            } else {
-                $(exportButton).addClass('hidden');
-            }
         },
         /**
          * Initialize modal export training catalog.
@@ -744,14 +739,16 @@ define([
                 // Order by name.
                 .sort(Intl.Collator().compare);
 
+            var selectedtraininglength = localCatalog.getSelectedTrainingId().length;
+
             templates.renderForPromise(
                 'local_catalog/training-catalog-popin',
                 {
-                    selectedtraininglength: localCatalog.getSelectedTrainingId().length,
+                    selectedtraininglength: selectedtraininglength,
                     selectedtrainingname: sessionNameListOrderByName
                 }
             ).then(function (_ref) {
-                localCatalog.setModalExportTraining(_ref.html, eventForm);
+                localCatalog.setModalExportTraining(_ref.html, eventForm, selectedtraininglength);
             });
         },
         /**
@@ -759,34 +756,42 @@ define([
          *
          * @param {string} html
          * @param {event} eventForm
+         * @param {int} selectedtraininglength
          */
-        setModalExportTraining: function (html, eventForm) {
+        setModalExportTraining: function (html, eventForm, selectedtraininglength) {
+
+            var buttons = [];
+
+            if (selectedtraininglength > 0) {
+                buttons.push({
+                    // Export.
+                    text: M.util.get_string('toexport', 'local_catalog'),
+                    class: "btn btn-primary",
+                    click: function () {
+                        $(eventForm.target).attr('action', localCatalog.getExportPdfUri());
+                        eventForm.target.submit();
+                        // Just close the modal.
+                        $(this).dialog("destroy");
+                    }
+                });
+            }
+
+            buttons.push({
+                // Cancel button.
+                text: M.util.get_string('cancel', 'moodle'),
+                class: "btn btn-secondary",
+                click: function () {
+                    // Just close the modal.
+                    $(this).dialog("destroy");
+                }
+            });
+
             mentor.dialog(
                 html,
                 {
                     width: 700,
                     title: M.util.get_string('exportpdfformat', 'local_catalog'),
-                    buttons: [
-                        {
-                            // Export.
-                            text: M.util.get_string('toexport', 'local_catalog'),
-                            class: "btn btn-primary",
-                            click: function () {
-                                $(eventForm.target).attr('action', localCatalog.getExportPdfUri());
-                                eventForm.target.submit();
-                                // Just close the modal.
-                                $(this).dialog("destroy");
-                            }
-                        },
-                        {
-                            // Cancel button.
-                            text: M.util.get_string('cancel', 'moodle'),
-                            class: "btn btn-secondary",
-                            click: function () {
-                                // Just close the modal.
-                                $(this).dialog("destroy");
-                            }
-                        }]
+                    buttons: buttons
                 });
         }
     };

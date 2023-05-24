@@ -57,9 +57,9 @@ function local_trainings_pluginfile($course, $cm, $context, $filearea, $args, $f
         return false;
     }
 
-    $fs           = get_file_storage();
+    $fs = get_file_storage();
     $relativepath = implode('/', $args);
-    $fullpath     = "/$context->id/local_trainings/$filearea/$relativepath";
+    $fullpath = "/$context->id/local_trainings/$filearea/$relativepath";
     if (!$file = $fs->get_file_by_hash(sha1($fullpath)) or $file->is_directory()) {
         return false;
     }
@@ -109,8 +109,8 @@ function local_trainings_extend_settings_navigation($settingsnav, $context) {
     // Add a link to the training sheet.
     if ($settingnode = $settingsnav->find('courseadmin', navigation_node::TYPE_COURSE)) {
 
-        $name         = get_string('fichetraining', 'local_trainings');
-        $url          = $training->get_sheet_url() . '&returnto=' . $PAGE->url->out();
+        $name = get_string('fichetraining', 'local_trainings');
+        $url = $training->get_sheet_url() . '&returnto=' . $PAGE->url->out();
         $workflownode = navigation_node::create(
             $name,
             $url,

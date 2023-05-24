@@ -28,11 +28,11 @@ defined('MOODLE_INTERNAL') || die();
 $tasks = array(
     array(
         'classname' => 'local_mentor_core\task\cleanup_trainings_and_sessions',
-        'blocking'  => 0,
-        'minute'    => '0',
-        'hour'      => '1',
-        'day'       => '*',
+        'blocking' => 0,
+        'minute' => '0',
+        'hour' => '1',
+        'day' => '*',
         'dayofweek' => '*',
-        'month'     => '*'
+        'month' => '*'
     )
 );

@@ -32,7 +32,7 @@ require_once(__DIR__ . '/../lib.php');
 require_login();
 
 $sessionid = required_param('sessionid', PARAM_INT);
-$returnto  = optional_param('returnto', null, PARAM_LOCALURL);
+$returnto = optional_param('returnto', null, PARAM_LOCALURL);
 
 // Sessionid is required.
 if (!$sessionid) {
@@ -104,18 +104,18 @@ if ($logo) {
 }
 
 $sharedentities = [];
-$allentities    = \local_mentor_core\entity_api::get_all_entities(true, [$sessionentity->id], false, null, false);
+$allentities = \local_mentor_core\entity_api::get_all_entities(true, [$sessionentity->id], false, null, false);
 foreach ($allentities as $entity) {
     $sharedentities[$entity->id] = $entity->shortname;
 }
 
-$forminfos                 = new stdClass();
-$forminfos->session        = $session;
-$forminfos->entity         = $sessionentity;
+$forminfos = new stdClass();
+$forminfos->session = $session;
+$forminfos->entity = $sessionentity;
 $forminfos->sharedentities = $sharedentities;
-$forminfos->logourl        = $logourl;
-$forminfos->actionurl      = $url->out();
-$forminfos->returnto       = empty($returnto) ? $session->get_url() : $returnto;
+$forminfos->logourl = $logourl;
+$forminfos->actionurl = $url->out();
+$forminfos->returnto = empty($returnto) ? $session->get_url() : $returnto;
 
 $form = \local_mentor_core\session_api::get_session_form($url->out(), $forminfos);
 

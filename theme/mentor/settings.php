@@ -27,101 +27,101 @@ if ($ADMIN->fulltree) {
 
     // Texte d'information en début de footer.
     $textinfofootersetting = new admin_setting_configtext(
-        'theme_mentor/textinfofooter',
-        get_string('textinfofooter', 'theme_mentor'),
-        get_string('textinfofooter_desc', 'theme_mentor'),
-        get_string('textinfofooterdefault', 'theme_mentor'),
-        PARAM_TEXT
+            'theme_mentor/textinfofooter',
+            get_string('textinfofooter', 'theme_mentor'),
+            get_string('textinfofooter_desc', 'theme_mentor'),
+            get_string('textinfofooterdefault', 'theme_mentor'),
+            PARAM_TEXT
     );
 
     // About link.
     $aboutsetting = new admin_setting_configtext(
-        'theme_mentor/about',
-        get_string('about', 'theme_mentor'),
-        get_string('about_desc', 'theme_mentor'),
-        $CFG->wwwroot . '/local/staticpage/view.php?page=ensavoirplus',
-        PARAM_URL
+            'theme_mentor/about',
+            get_string('about', 'theme_mentor'),
+            get_string('about_desc', 'theme_mentor'),
+            $CFG->wwwroot . '/local/staticpage/view.php?page=ensavoirplus',
+            PARAM_URL
     );
 
     // Legal notice link.
     $legalnoticesetting = new admin_setting_configtext(
-        'theme_mentor/legalnotice',
-        get_string('legalnotice', 'theme_mentor'),
-        get_string('legalnotice_desc', 'theme_mentor'),
-        $CFG->wwwroot . '/local/staticpage/view.php?page=mentionslegales',
-        PARAM_URL
+            'theme_mentor/legalnotice',
+            get_string('legalnotice', 'theme_mentor'),
+            get_string('legalnotice_desc', 'theme_mentor'),
+            $CFG->wwwroot . '/local/staticpage/view.php?page=mentionslegales',
+            PARAM_URL
     );
 
     // FAQ.
     $faqsetting = new admin_setting_configtext(
-        'theme_mentor/faq',
-        get_string('faq', 'theme_mentor'),
-        get_string('faq_desc', 'theme_mentor'),
-        $CFG->wwwroot . '/local/staticpage/view.php?page=faq',
-        PARAM_URL
+            'theme_mentor/faq',
+            get_string('faq', 'theme_mentor'),
+            get_string('faq_desc', 'theme_mentor'),
+            $CFG->wwwroot . '/local/staticpage/view.php?page=faq',
+            PARAM_URL
     );
 
     // Liens extérieur à Mentor.
     $externallinkssetting = new admin_setting_configtext(
-        'theme_mentor/externallinks',
-        get_string('externallinks', 'theme_mentor'),
-        get_string('externallinks_desc', 'theme_mentor'),
-        'legifrance.gouv.fr|gouvernement.fr|service-public.fr|data.gouv.fr',
-        PARAM_TEXT
+            'theme_mentor/externallinks',
+            get_string('externallinks', 'theme_mentor'),
+            get_string('externallinks_desc', 'theme_mentor'),
+            'legifrance.gouv.fr|gouvernement.fr|service-public.fr|data.gouv.fr',
+            PARAM_TEXT
     );
 
     // Mentor version number.
     $versionnumbersetting = new admin_setting_configtext(
-        'theme_mentor/versionnumber',
-        get_string('versionnumber', 'theme_mentor'),
-        get_string('versionnumber_desc', 'theme_mentor'),
-        '',
-        PARAM_TEXT
+            'theme_mentor/versionnumber',
+            get_string('versionnumber', 'theme_mentor'),
+            get_string('versionnumber_desc', 'theme_mentor'),
+            '',
+            PARAM_TEXT
     );
 
     // Mentor copyright.
     $mentorlicencesetting = new admin_setting_configtext(
-        'theme_mentor/mentorlicence',
-        get_string('mentorlicence', 'theme_mentor'),
-        get_string('mentorlicence_desc', 'theme_mentor'),
-        get_string('mentorlicencedefault', 'theme_mentor'),
-        PARAM_RAW
+            'theme_mentor/mentorlicence',
+            get_string('mentorlicence', 'theme_mentor'),
+            get_string('mentorlicence_desc', 'theme_mentor'),
+            get_string('mentorlicencedefault', 'theme_mentor'),
+            PARAM_RAW
     );
 
     // Site map link.
     $sitemapsetting = new admin_setting_configtext(
-        'theme_mentor/sitemap',
-        get_string('sitemap', 'theme_mentor'),
-        get_string('sitemap_desc', 'theme_mentor'),
-        $CFG->wwwroot . '/local/staticpage/view.php?page=plandusite',
-        PARAM_URL
+            'theme_mentor/sitemap',
+            get_string('sitemap', 'theme_mentor'),
+            get_string('sitemap_desc', 'theme_mentor'),
+            $CFG->wwwroot . '/local/staticpage/view.php?page=plandusite',
+            PARAM_URL
     );
 
     // Accessibility link.
     $accessibilitysetting = new admin_setting_configtext(
-        'theme_mentor/accessibility',
-        get_string('accessibility', 'theme_mentor'),
-        get_string('accessibility_desc', 'theme_mentor'),
-        '',
-        PARAM_URL
+            'theme_mentor/accessibility',
+            get_string('accessibility', 'theme_mentor'),
+            get_string('accessibility_desc', 'theme_mentor'),
+            '',
+            PARAM_URL
     );
 
     // Personal data link.
     $personaldatasetting = new admin_setting_configtext(
-        'theme_mentor/personaldata',
-        get_string('personaldata', 'theme_mentor'),
-        get_string('personaldata_desc', 'theme_mentor'),
-        $CFG->wwwroot . '/local/staticpage/view.php?page=donneespersonnelles',
-        PARAM_URL
+            'theme_mentor/personaldata',
+            get_string('personaldata', 'theme_mentor'),
+            get_string('personaldata_desc', 'theme_mentor'),
+            $CFG->wwwroot . '/local/staticpage/view.php?page=donneespersonnelles',
+            PARAM_URL
     );
 
     // Plugin agent connect identifier.
     $agentconnectidentifiersetting = new admin_setting_configtext(
-        'theme_mentor/agentconnectidentifier',
-        get_string('agentconnectidentifier', 'theme_mentor'),
-        get_string('agentconnectidentifier_desc', 'theme_mentor'),
-        'oauth2',
-        PARAM_TEXT
+            'theme_mentor/agentconnectidentifier',
+            get_string('agentconnectidentifier', 'theme_mentor'),
+            get_string('agentconnectidentifier_desc', 'theme_mentor'),
+            'oauth2',
+            PARAM_TEXT
     );
 
     $settings->add($textinfofootersetting);

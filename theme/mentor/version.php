@@ -38,7 +38,7 @@ $plugin->component = 'theme_mentor';
 
 // This is a list of plugins, this plugin depends on (and their versions).
 $plugin->dependencies = [
-        'theme_boost'       => 2016102100,
+        'theme_boost' => 2016102100,
         'local_mentor_core' => ANY_VERSION
 ];
 

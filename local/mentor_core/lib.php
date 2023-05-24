@@ -111,20 +111,20 @@ function local_mentor_core_add_capability($role, $capability) {
 
     // Capability already exists.
     if (!$cap = $DB->get_record('role_capabilities', ['roleid' => $role->id, 'capability' => $capability])) {
-        $cap               = new stdClass();
-        $cap->roleid       = $role->id;
-        $cap->capability   = $capability;
-        $cap->contextid    = 1;
-        $cap->permission   = 1;
+        $cap = new stdClass();
+        $cap->roleid = $role->id;
+        $cap->capability = $capability;
+        $cap->contextid = 1;
+        $cap->permission = 1;
         $cap->timemodified = time();
-        $cap->modifierid   = 0;
+        $cap->modifierid = 0;
 
         return $DB->insert_record('role_capabilities', $cap);
     }
 
-    $cap->permission   = 1;
+    $cap->permission = 1;
     $cap->timemodified = time();
-    $cap->modifierid   = 0;
+    $cap->modifierid = 0;
 
     return $DB->update_record('role_capabilities', $cap);
 }
@@ -157,20 +157,20 @@ function local_mentor_core_prevent_capability($role, $capability) {
 
     // Capability already exists.
     if (!$cap = $DB->get_record('role_capabilities', ['roleid' => $role->id, 'capability' => $capability])) {
-        $cap               = new stdClass();
-        $cap->roleid       = $role->id;
-        $cap->capability   = $capability;
-        $cap->contextid    = 1;
-        $cap->permission   = -1;
+        $cap = new stdClass();
+        $cap->roleid = $role->id;
+        $cap->capability = $capability;
+        $cap->contextid = 1;
+        $cap->permission = -1;
         $cap->timemodified = time();
-        $cap->modifierid   = 0;
+        $cap->modifierid = 0;
 
         return $DB->insert_record('role_capabilities', $cap);
     }
 
-    $cap->permission   = -1;
+    $cap->permission = -1;
     $cap->timemodified = time();
-    $cap->modifierid   = 0;
+    $cap->modifierid = 0;
 
     return $DB->update_record('role_capabilities', $cap);
 }
@@ -222,7 +222,7 @@ function local_mentor_core_add_context_levels($roleid, $contextlevels) {
             $DB->insert_record(
                 'role_context_levels',
                 array(
-                    'roleid'       => $roleid,
+                    'roleid' => $roleid,
                     'contextlevel' => $contextlevel
                 )
             );
@@ -313,14 +313,14 @@ function local_mentor_core_validate_users_csv($content, $delimitername, $coursei
         $headers[] = 'group';
 
         $allowedroles = \local_mentor_core\session_api::get_allowed_roles($courseid);
-        $defaultrole  = $allowedroles['participant']->localname;
+        $defaultrole = $allowedroles['participant']->localname;
     }
 
     // Fatal errors that stops processing the content.
     $hasfatalerrors = false;
 
     // Fields pattern.
-    $pattern      = '/[\/~`\!@#\$%\^&\*\(\)_\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/';
+    $pattern = '/[\/~`\!@#\$%\^&\*\(\)_\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/';
     $emailpattern = '/[\'\/~`\!#\$%\^&\*\(\)\+=\{\}\[\]\|;:"\<\>,\?\\\]/';
 
     // No more than 500 entries.
@@ -339,8 +339,8 @@ function local_mentor_core_validate_users_csv($content, $delimitername, $coursei
             continue;
         }
 
-        $groupname  = null;
-        $rolename   = $defaultrole;
+        $groupname = null;
+        $rolename = $defaultrole;
         $linenumber = $index + 1;
         $columnscsv = str_getcsv(trim($line), csv_import_reader::get_delimiter($delimitername));
 
@@ -384,11 +384,11 @@ function local_mentor_core_validate_users_csv($content, $delimitername, $coursei
             }
 
             // Init csv columns indexes.
-            $emailkey     = array_search('email', $columns, true);
-            $lastnamekey  = array_search('lastname', $columns, true);
+            $emailkey = array_search('email', $columns, true);
+            $lastnamekey = array_search('lastname', $columns, true);
             $firstnamekey = array_search('firstname', $columns, true);
-            $groupkey     = (in_array('group', $columns, true)) ? array_search('group', $columns, true) : null;
-            $rolekey      = (in_array('role', $columns, true)) ? array_search('role', $columns, true) : null;
+            $groupkey = (in_array('group', $columns, true)) ? array_search('group', $columns, true) : null;
+            $rolekey = (in_array('role', $columns, true)) ? array_search('role', $columns, true) : null;
 
             continue;
         }
@@ -400,7 +400,7 @@ function local_mentor_core_validate_users_csv($content, $delimitername, $coursei
 
         // Check if each lines has at least 3 fields.
         if ($columnscount < 3) {
-            $hasfatalerrors   = true;
+            $hasfatalerrors = true;
             $errors['list'][] = [
                 $linenumber,
                 get_string('error_missing_field', 'local_mentor_core'),
@@ -477,7 +477,7 @@ function local_mentor_core_validate_users_csv($content, $delimitername, $coursei
                     (strtolower($allowedrole->localname) == strtolower($rolename)) ||
                     (strtolower($allowedrole->name) == strtolower($rolename))
                 ) {
-                    $rolefound   = true;
+                    $rolefound = true;
                     $definedrole = $allowedrole;
                 }
             }
@@ -531,12 +531,12 @@ function local_mentor_core_validate_users_csv($content, $delimitername, $coursei
                     // Check if data to add entity to main or secondary entity exist.
                     if (isset($other['entityid']) && isset($other['addtoentity'])) {
                         // Get main and secondary user data.
-                        $profile           = \local_mentor_core\profile_api::get_profile($u->id);
-                        $mainentity        = $profile->get_main_entity();
+                        $profile = \local_mentor_core\profile_api::get_profile($u->id);
+                        $mainentity = $profile->get_main_entity();
                         $sedondaryentities = $profile->get_secondary_entities();
 
                         // Get data to add entity to main or secondary entity user.
-                        $entityid    = $other['entityid'];
+                        $entityid = $other['entityid'];
                         $addtoentity = $other['addtoentity'];
 
                         switch ($addtoentity) {
@@ -550,7 +550,7 @@ function local_mentor_core_validate_users_csv($content, $delimitername, $coursei
                                             $linenumber,
                                             get_string('error_user_already_main_entity', 'local_mentor_core')
                                         ];
-                                        $ignoreline       = true;
+                                        $ignoreline = true;
                                     }
                                 } else {
                                     $haswarning = false;
@@ -585,7 +585,7 @@ function local_mentor_core_validate_users_csv($content, $delimitername, $coursei
                                         $linenumber,
                                         get_string('error_user_already_secondary_entity', 'local_mentor_core')
                                     ];
-                                    $ignoreline       = true;
+                                    $ignoreline = true;
                                 } else {
                                     // Secondary entities user are empty : WARNING.
                                     // Or Entity is not part to secondary entity list : WARNING.
@@ -622,14 +622,14 @@ function local_mentor_core_validate_users_csv($content, $delimitername, $coursei
                 // The user exists, now check if he's enrolled.
                 if (!is_null($definedrole) && false !== $definedrole) {
 
-                    $user     = current($users);
+                    $user = current($users);
                     $oldroles = profile_api::get_course_roles($user->id, $courseid);
 
                     // User is enrolled.
                     if (!empty($oldroles) && !isset($oldroles[$definedrole->id])) {
 
-                        $strparams           = new stdClass();
-                        $strparams->newrole  = $definedrole->localname;
+                        $strparams = new stdClass();
+                        $strparams->newrole = $definedrole->localname;
                         $strparams->oldroles = '';
                         foreach ($oldroles as $oldrole) {
                             $strparams->oldroles .= $allowedroles[$oldrole->shortname]->localname . ',';
@@ -675,14 +675,14 @@ function local_mentor_core_validate_users_csv($content, $delimitername, $coursei
 
             $newline = [
                 'linenumber' => $linenumber,
-                'lastname'   => $columns[$lastnamekey],
-                'firstname'  => $columns[$firstnamekey],
-                'email'      => strtolower($columns[$emailkey])
+                'lastname' => $columns[$lastnamekey],
+                'firstname' => $columns[$firstnamekey],
+                'email' => strtolower($columns[$emailkey])
             ];
 
             // Add extras fields for session import.
             if (!is_null($courseid)) {
-                $newline['role']      = $rolename;
+                $newline['role'] = $rolename;
                 $newline['groupname'] = $groupname;
             }
 
@@ -743,14 +743,14 @@ function local_mentor_core_enrol_users_csv($courseid, $userslist = [], $userstor
         // User not found : account creation.
         if (false === $user) {
 
-            $user             = new stdClass();
-            $user->lastname   = $line['lastname'];
-            $user->firstname  = $line['firstname'];
-            $user->email      = $line['email'];
-            $user->username   = $line['email'];
-            $user->password   = 'to be generated';
+            $user = new stdClass();
+            $user->lastname = $line['lastname'];
+            $user->firstname = $line['firstname'];
+            $user->email = $line['email'];
+            $user->username = $line['email'];
+            $user->password = 'to be generated';
             $user->mnethostid = 1;
-            $user->confirmed  = 1;
+            $user->confirmed = 1;
             if (isset($line['auth'])) {
                 $user->auth = $line['auth'];
             }
@@ -803,7 +803,6 @@ function local_mentor_core_enrol_users_csv($courseid, $userslist = [], $userstor
 
             // Set user role.
             profile_api::role_assign($role, $user->id, context_course::instance($courseid)->id);
-
         } else if (
             isset($line['role']) &&
             null !== $line['role'] &&
@@ -832,11 +831,11 @@ function local_mentor_core_enrol_users_csv($courseid, $userslist = [], $userstor
             // Create the group if it does not exist.
             if (!$groupid = groups_get_group_by_name($courseid, $line['groupname'])) {
 
-                $data              = new stdClass();
-                $data->name        = $line['groupname'];
+                $data = new stdClass();
+                $data->name = $line['groupname'];
                 $data->timecreated = time();
-                $data->courseid    = $courseid;
-                $groupid           = groups_create_group($data);
+                $data->courseid = $courseid;
+                $groupid = groups_create_group($data);
             }
 
             // Add the user into the group.
@@ -881,7 +880,7 @@ function local_mentor_core_create_users_csv($userslist = [], $userstoreactivate 
 
     // Checks if we will add an entity to main or secondary entity user.
     if (!is_null($entityid) && $addtoentity !== \importcsv_form::ADD_TO_ANY_ENTITY) {
-        $entity     = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
         $entityname = $entity->get_name();
     }
 
@@ -895,14 +894,14 @@ function local_mentor_core_create_users_csv($userslist = [], $userstoreactivate 
         // User not found : account creation.
         if (false === $user) {
 
-            $user             = new stdClass();
-            $user->lastname   = $line['lastname'];
-            $user->firstname  = $line['firstname'];
-            $user->email      = $email;
-            $user->username   = $email;
-            $user->password   = 'to be generated';
+            $user = new stdClass();
+            $user->lastname = $line['lastname'];
+            $user->firstname = $line['firstname'];
+            $user->email = $email;
+            $user->username = $email;
+            $user->password = 'to be generated';
             $user->mnethostid = 1;
-            $user->confirmed  = 1;
+            $user->confirmed = 1;
 
             if (isset($line['auth'])) {
                 $user->auth = $line['auth'];
@@ -941,17 +940,17 @@ function local_mentor_core_create_users_csv($userslist = [], $userstoreactivate 
             $dbinterface = \local_mentor_core\database_interface::get_instance();
 
             // Get main and secondary entity user.
-            $usermainentity        = $dbinterface->get_profile_field_value($user->id, 'mainentity');
+            $usermainentity = $dbinterface->get_profile_field_value($user->id, 'mainentity');
             $usersecondaryentities = $dbinterface->get_profile_field_value($user->id, 'secondaryentities');
 
             // Create old user data object for the update event.
-            $olduserdata                                  = new \stdClass();
-            $olduserdata->id                              = $user->id;
-            $olduserdata->profile_field_mainentity        = $usermainentity;
+            $olduserdata = new \stdClass();
+            $olduserdata->id = $user->id;
+            $olduserdata->profile_field_mainentity = $usermainentity;
             $olduserdata->profile_field_secondaryentities = explode(', ', $usersecondaryentities);
 
             // Create new user data object for the update event.
-            $newuserdata     = new \stdClass();
+            $newuserdata = new \stdClass();
             $newuserdata->id = $user->id;
 
             $triggerupdateentityevent = false;
@@ -982,20 +981,20 @@ function local_mentor_core_create_users_csv($userslist = [], $userstoreactivate 
             // Update secondary entities user.
             if ($addtoentity === \importcsv_form::ADD_TO_SECONDARY_ENTITY) {
                 // Get main and secondary entity user.
-                $entityname            = $entity->get_name();
+                $entityname = $entity->get_name();
                 $secondaryentitieslist = empty($usersecondaryentities) ? [] : explode(', ', $usersecondaryentities);
 
                 if (!in_array($entityname, $secondaryentitieslist) && $entityname !== $usermainentity) {
 
                     // Update secondary entity.
-                    $profile                 = \local_mentor_core\profile_api::get_profile($user->id);
+                    $profile = \local_mentor_core\profile_api::get_profile($user->id);
                     $secondaryentitieslist[] = $entityname;
                     $profile->set_profile_field('secondaryentities', implode(', ', $secondaryentitieslist));
 
                     // Update new data user with new secondary entity.
-                    $newuserdata->profile_field_mainentity        = $usermainentity;
+                    $newuserdata->profile_field_mainentity = $usermainentity;
                     $newuserdata->profile_field_secondaryentities = implode(', ', $secondaryentitieslist);
-                    $triggerupdateentityevent                     = true;
+                    $triggerupdateentityevent = true;
                 }
             }
 
@@ -1012,11 +1011,11 @@ function local_mentor_core_create_users_csv($userslist = [], $userstoreactivate 
                         'new' => $newuserdata
                     )
                 );
-                $data      = array(
-                    'objectid'      => $newuserdata->id,
+                $data = array(
+                    'objectid' => $newuserdata->id,
                     'relateduserid' => $newuserdata->id,
-                    'context'       => \context_user::instance($newuserdata->id),
-                    'other'         => $otherdata
+                    'context' => \context_user::instance($newuserdata->id),
+                    'other' => $otherdata
                 );
 
                 // Create and trigger event.
@@ -1084,20 +1083,20 @@ function local_mentor_core_get_profile_fields_values() {
  * @return stdClass
  */
 function local_mentor_core_create_field_object_to_use($values) {
-    $field                    = new stdClass();
-    $field->shortname         = array_key_exists(0, $values) ? $values[0] : null;
-    $field->name              = array_key_exists(1, $values) ? $values[1] : null;
-    $field->datatype          = array_key_exists(2, $values) ? $values[2] : null;
-    $field->description       = array_key_exists(3, $values) ? $values[3] : null;
+    $field = new stdClass();
+    $field->shortname = array_key_exists(0, $values) ? $values[0] : null;
+    $field->name = array_key_exists(1, $values) ? $values[1] : null;
+    $field->datatype = array_key_exists(2, $values) ? $values[2] : null;
+    $field->description = array_key_exists(3, $values) ? $values[3] : null;
     $field->descriptionformat = array_key_exists(4, $values) ? $values[4] : null;
-    $field->categoryid        = array_key_exists(5, $values) ? $values[5] : null;
-    $field->sortorder         = array_key_exists(6, $values) ? $values[6] : null;
-    $field->required          = array_key_exists(7, $values) ? $values[7] : null;
-    $field->locked            = array_key_exists(8, $values) ? $values[8] : null;
-    $field->visible           = array_key_exists(9, $values) ? $values[9] : null;
-    $field->forceunique       = array_key_exists(10, $values) ? $values[10] : null;
-    $field->signup            = array_key_exists(11, $values) ? $values[11] : null;
-    $field->defaultdata       = array_key_exists(12, $values) ? $values[12] : null;
+    $field->categoryid = array_key_exists(5, $values) ? $values[5] : null;
+    $field->sortorder = array_key_exists(6, $values) ? $values[6] : null;
+    $field->required = array_key_exists(7, $values) ? $values[7] : null;
+    $field->locked = array_key_exists(8, $values) ? $values[8] : null;
+    $field->visible = array_key_exists(9, $values) ? $values[9] : null;
+    $field->forceunique = array_key_exists(10, $values) ? $values[10] : null;
+    $field->signup = array_key_exists(11, $values) ? $values[11] : null;
+    $field->defaultdata = array_key_exists(12, $values) ? $values[12] : null;
     $field->defaultdataformat = array_key_exists(13, $values) ? $values[13] : null;
 
     // If it begin with "list_", excute associated funtion.
@@ -1146,22 +1145,20 @@ function local_mentor_core_update_entities_list() {
 
     require_once($CFG->dirroot . '/local/mentor_core/api/entity.php');
 
-    $entities = \local_mentor_core\entity_api::get_entities_list(true, true, false);
-
     // Main entity profile fields.
     if (!$field = $DB->get_record('user_info_field', array('shortname' => 'mainentity'))) {
         throw new \moodle_exception('shortnamedoesnotexist', 'local_profile', '', 'mainentity');
     }
 
-    $field->param1    = $entities;
+    $field->param1 = \local_mentor_core\entity_api::get_entities_list(true, true, false, false);
     $mainentityupdate = $DB->update_record('user_info_field', $field);
 
     // Secondary entity profile fields.
     if (!$field = $DB->get_record('user_info_field', array('shortname' => 'secondaryentities'))) {
-        throw new \moodle_exception('shortnamedoesnotexist', 'local_profile', '', 'mainentity');
+        throw new \moodle_exception('shortnamedoesnotexist', 'local_profile', '', 'secondaryentities');
     }
 
-    $field->param1           = $entities;
+    $field->param1 = \local_mentor_core\entity_api::get_entities_list(true, true, false);
     $secondaryentitiesupdate = $DB->update_record('user_info_field', $field);
 
     return $mainentityupdate && $secondaryentitiesupdate;
@@ -1221,7 +1218,7 @@ function local_mentor_core_completion_find_exclusions($courseid, $userid = null)
 
     $params = array('courseid' => $courseid);
     if (!is_null($userid)) {
-        $query            .= " AND g.userid = :userid";
+        $query .= " AND g.userid = :userid";
         $params['userid'] = $userid;
     }
     $results = $DB->get_records_sql($query, $params);
@@ -1244,8 +1241,8 @@ function local_mentor_core_completion_find_exclusions($courseid, $userid = null)
  * @throws moodle_exception
  */
 function local_mentor_core_completion_get_activities($courseid) {
-    $modinfo    = get_fast_modinfo($courseid, -1);
-    $sections   = $modinfo->get_sections();
+    $modinfo = get_fast_modinfo($courseid, -1);
+    $sections = $modinfo->get_sections();
     $activities = array();
 
     // Create activities list with completion set.
@@ -1254,18 +1251,18 @@ function local_mentor_core_completion_get_activities($courseid) {
         foreach ($instances as $cm) {
             if ($cm->completion != COMPLETION_TRACKING_NONE) {
                 $activities[] = array(
-                    'type'       => $module,
+                    'type' => $module,
                     'modulename' => $modulename,
-                    'id'         => $cm->id,
-                    'instance'   => $cm->instance,
-                    'name'       => format_string($cm->name),
-                    'expected'   => $cm->completionexpected,
-                    'section'    => $cm->sectionnum,
-                    'position'   => array_search($cm->id, $sections[$cm->sectionnum]),
-                    'url'        => method_exists($cm->url, 'out') ? $cm->url->out() : '',
-                    'context'    => $cm->context,
-                    'icon'       => $cm->get_icon_url(),
-                    'available'  => $cm->available,
+                    'id' => $cm->id,
+                    'instance' => $cm->instance,
+                    'name' => format_string($cm->name),
+                    'expected' => $cm->completionexpected,
+                    'section' => $cm->sectionnum,
+                    'position' => array_search($cm->id, $sections[$cm->sectionnum]),
+                    'url' => method_exists($cm->url, 'out') ? $cm->url->out() : '',
+                    'context' => $cm->context,
+                    'icon' => $cm->get_icon_url(),
+                    'available' => $cm->available,
                 );
             }
         }
@@ -1288,8 +1285,8 @@ function local_mentor_core_completion_get_activities($courseid) {
 function local_mentor_core_completion_filter_activities($activities, $userid, $courseid, $exclusions) {
     global $CFG;
     $filteredactivities = array();
-    $modinfo            = get_fast_modinfo($courseid, $userid);
-    $coursecontext      = CONTEXT_COURSE::instance($courseid);
+    $modinfo = get_fast_modinfo($courseid, $userid);
+    $coursecontext = CONTEXT_COURSE::instance($courseid);
 
     // Keep only activities that are visible.
     foreach ($activities as $activity) {
@@ -1347,17 +1344,17 @@ function local_mentor_core_completion_get_user_course_submissions($courseid, $us
 
     // Set userid in query for different activities.
     if ($userid) {
-        $assignwhere   = 'AND s.userid = :userid';
+        $assignwhere = 'AND s.userid = :userid';
         $workshopwhere = 'AND s.authorid = :userid';
-        $quizwhere     = 'AND qa.userid = :userid';
+        $quizwhere = 'AND qa.userid = :userid';
 
         $params += [
             'userid' => $userid,
         ];
     } else {
-        $assignwhere   = '';
+        $assignwhere = '';
         $workshopwhere = '';
-        $quizwhere     = '';
+        $quizwhere = '';
     }
 
     // Queries to deliver instance IDs of activities with submissions by user.
@@ -1366,7 +1363,7 @@ function local_mentor_core_completion_get_user_course_submissions($courseid, $us
             /* Assignments with individual submission, or groups requiring a submission per user,
             or ungrouped users in a group submission situation. */
             'module' => 'assign',
-            'query'  => "SELECT " . $DB->sql_concat('s.userid', "'-'", 'c.id') . " AS id,
+            'query' => "SELECT " . $DB->sql_concat('s.userid', "'-'", 'c.id') . " AS id,
                          s.userid, c.id AS cmid,
                          MAX(CASE WHEN ag.grade IS NULL OR ag.grade = -1 THEN 0 ELSE 1 END) AS graded
                       FROM {assign_submission} s
@@ -1392,7 +1389,7 @@ function local_mentor_core_completion_get_user_course_submissions($courseid, $us
         [
             // Assignments with groups requiring only one submission per group.
             'module' => 'assign',
-            'query'  => "SELECT " . $DB->sql_concat('s.userid', "'-'", 'c.id') . " AS id,
+            'query' => "SELECT " . $DB->sql_concat('s.userid', "'-'", 'c.id') . " AS id,
                          s.userid, c.id AS cmid,
                          MAX(CASE WHEN ag.grade IS NULL OR ag.grade = -1 THEN 0 ELSE 1 END) AS graded
                       FROM {assign_submission} gs
@@ -1415,7 +1412,7 @@ function local_mentor_core_completion_get_user_course_submissions($courseid, $us
 
         [
             'module' => 'workshop',
-            'query'  => "SELECT " . $DB->sql_concat('s.authorid', "'-'", 'c.id') . " AS id,
+            'query' => "SELECT " . $DB->sql_concat('s.authorid', "'-'", 'c.id') . " AS id,
                            s.authorid AS userid, c.id AS cmid,
                            1 AS graded
                          FROM {workshop_submissions} s, {workshop} w, {modules} m, {course_modules} c
@@ -1432,7 +1429,7 @@ function local_mentor_core_completion_get_user_course_submissions($courseid, $us
         [
             // Quizzes with 'first' and 'last attempt' grading methods.
             'module' => 'quiz',
-            'query'  => "SELECT " . $DB->sql_concat('qa.userid', "'-'", 'c.id') . " AS id,
+            'query' => "SELECT " . $DB->sql_concat('qa.userid', "'-'", 'c.id') . " AS id,
                        qa.userid, c.id AS cmid,
                        (CASE WHEN qa.sumgrades IS NULL THEN 0 ELSE 1 END) AS graded
                      FROM {quiz_attempts} qa
@@ -1452,13 +1449,13 @@ function local_mentor_core_completion_get_user_course_submissions($courseid, $us
                       $quizwhere",
             'params' => [
                 'gmfirst' => 3,
-                'gmlast'  => 4,
+                'gmlast' => 4,
             ],
         ],
         [
             // Quizzes with 'maximum' and 'average' grading methods.
             'module' => 'quiz',
-            'query'  => "SELECT " . $DB->sql_concat('qa.userid', "'-'", 'c.id') . " AS id,
+            'query' => "SELECT " . $DB->sql_concat('qa.userid', "'-'", 'c.id') . " AS id,
                        qa.userid, c.id AS cmid,
                        MIN(CASE WHEN qa.sumgrades IS NULL THEN 0 ELSE 1 END) AS graded
                      FROM {quiz_attempts} qa
@@ -1503,11 +1500,11 @@ function local_mentor_core_completion_get_progress($activities, $userid, $course
     $completions = array();
     // Get completion information for a course.
     $completioninfo = new completion_info($course);
-    $cm             = new stdClass();
+    $cm = new stdClass();
 
     // Creates a list of user's progress for activities/resources.
     foreach ($activities as $activity) {
-        $cm->id     = $activity['id'];
+        $cm->id = $activity['id'];
         $completion = $completioninfo->get_data($cm, true, $userid);
         $submission = $submissions[$userid . '-' . $cm->id] ?? null;
 
@@ -1608,9 +1605,9 @@ function local_mentor_core_resize_picture($file, $maxfilewidth) {
     }
 
     $originalheight = $imageinfo[1];
-    $ratio          = $originalheight / $originalwidth;
+    $ratio = $originalheight / $originalwidth;
 
-    $newwidth  = $maxfilewidth;
+    $newwidth = $maxfilewidth;
     $newheight = $newwidth * $ratio;
 
     // Create a resized file.
@@ -1622,16 +1619,16 @@ function local_mentor_core_resize_picture($file, $maxfilewidth) {
 
     // Store the new file in the place of the old one.
     $explodedextension = explode('.', $file->get_filename());
-    $ext               = end($explodedextension);
+    $ext = end($explodedextension);
 
-    $fs     = get_file_storage();
+    $fs = get_file_storage();
     $record = array(
         'contextid' => $file->get_contextid(),
         'component' => $file->get_component(),
-        'filearea'  => $file->get_filearea(),
-        'itemid'    => $file->get_itemid(),
-        'filepath'  => $file->get_filepath(),
-        'filename'  => basename($file->get_filename(), '.' . $ext) . '.png'
+        'filearea' => $file->get_filearea(),
+        'itemid' => $file->get_itemid(),
+        'filepath' => $file->get_filepath(),
+        'filename' => basename($file->get_filename(), '.' . $ext) . '.png'
     );
 
     // Delete the uploaded file.
@@ -1713,8 +1710,8 @@ function local_mentor_core_email_is_allowed($email) {
  * @throws moodle_exception
  */
 function local_mentor_core_get_available_sessions_csv_data($entityid) {
-    $entity            = \local_mentor_core\entity_api::get_entity($entityid);
-    $mainentity        = $entity->get_main_entity();
+    $entity = \local_mentor_core\entity_api::get_entity($entityid);
+    $mainentity = $entity->get_main_entity();
     $availablesessions = $mainentity->get_available_sessions_to_catalog();
 
     $csvdata = [];
@@ -1754,7 +1751,7 @@ function local_mentor_core_get_available_sessions_csv_data($entityid) {
         $sessionstartdate = '';
         if (!empty($session->sessionstartdate)) {
             $sessionstartdate = $session->sessionstartdate;
-            $startdate        = new \DateTime("@$sessionstartdate");
+            $startdate = new \DateTime("@$sessionstartdate");
             $startdate->setTimezone($dtz);
             $sessionstartdate = $startdate->format('d/m/Y');
         }
@@ -1762,12 +1759,12 @@ function local_mentor_core_get_available_sessions_csv_data($entityid) {
         $sessionenddate = '';
         if (!empty($session->sessionenddate)) {
             $sessionenddate = $session->sessionenddate;
-            $enddate        = new \DateTime("@$sessionenddate");
+            $enddate = new \DateTime("@$sessionenddate");
             $enddate->setTimezone($dtz);
             $sessionenddate = $enddate->format('d/m/Y');
         }
 
-        $places          = $session->get_available_places();
+        $places = $session->get_available_places();
         $placesavailable = is_int($places) && $places < 0 ? 0 : $places;
 
         $csvdata[] = [
@@ -1806,16 +1803,16 @@ function local_mentor_core_get_available_sessions_csv_data($entityid) {
  * @return string
  */
 function local_mentor_core_minutes_to_hours($finaltimesaving) {
-    $hours   = floor($finaltimesaving / 60);
+    $hours = floor($finaltimesaving / 60);
     $minutes = $finaltimesaving % 60;
 
     if ($hours < 10) {
-        $hours = '0'.$hours;
+        $hours = '0' . $hours;
     }
 
     if ($hours == 0) {
         if ($minutes < 10) {
-            $minutes = '0'.$minutes;
+            $minutes = '0' . $minutes;
         }
         return $minutes . 'min';
     }
@@ -1825,7 +1822,7 @@ function local_mentor_core_minutes_to_hours($finaltimesaving) {
     }
 
     if ($minutes < 10) {
-        $minutes = '0'.$minutes;
+        $minutes = '0' . $minutes;
     }
 
     return $hours . 'h' . $minutes;
@@ -2036,7 +2033,7 @@ function local_mentor_core_clean_html($html) {
         foreach ($cleanedtags as $cleanedtag) {
             // Tag must be replaced.
             if (substr_compare($html, $cleanedtag, 0, strlen($cleanedtag)) === 0) {
-                $html  = substr_replace($html, '', 0, strlen($cleanedtag));
+                $html = substr_replace($html, '', 0, strlen($cleanedtag));
                 $found = true;
             }
         }
@@ -2050,7 +2047,7 @@ function local_mentor_core_clean_html($html) {
         foreach ($cleanedtags as $cleanedtag) {
             // Tag must be replaced.
             if (substr_compare($html, $cleanedtag, -strlen($cleanedtag)) === 0) {
-                $html  = substr_replace($html, '', -strlen($cleanedtag));
+                $html = substr_replace($html, '', -strlen($cleanedtag));
                 $found = true;
             }
         }
@@ -2148,4 +2145,24 @@ function local_mentor_core_uasort_session_to_catalog($s1, $s2) {
 
     // Sort by session shortname.
     return strcmp(local_mentor_core_sanitize_string($s1->shortname), local_mentor_core_sanitize_string($s2->shortname));
+}
+
+/**
+ * Give the name of the capability that allows access to the edadmin course.
+ *
+ * @param $formattype
+ * @return string
+ */
+function local_mentor_core_get_edadmin_course_view_capability($formattype = '') {
+    switch ($formattype) {
+        case 'trainings':
+            return \local_mentor_core\training_api::get_edadmin_course_view_capability();
+        case 'session':
+            return \local_mentor_core\session_api::get_edadmin_course_view_capability();
+        case 'user':
+            return \local_mentor_core\profile_api::get_edadmin_course_view_capability();
+        case 'entities':
+        default:
+            return \local_mentor_core\entity_api::get_edadmin_course_view_capability();
+    }
 }

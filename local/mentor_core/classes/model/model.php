@@ -47,7 +47,7 @@ class model {
      * model constructor.
      */
     public function __construct() {
-        $this->dbinterface    = database_interface::get_instance();
+        $this->dbinterface = database_interface::get_instance();
         $this->specialization = specialization::get_instance();
     }
 }

@@ -34,19 +34,21 @@ $trainingid = required_param('trainingid', PARAM_INT);
 // Get training selected.
 $training = \local_mentor_core\training_api::get_training($trainingid);
 
+// Get training context.
+$context = $training->get_context();
+
 // Check access.
 if (
     $training->status !== \local_mentor_core\training::STATUS_ELABORATION_COMPLETED ||
-    !is_siteadmin()
+    !has_capability('local/library:publish', $context)
 ) {
     print_error('Permission denied');
 }
 
 // Set data.
-$context   = $training->get_context();
-$title     = get_string('publicationtraininglibrarytitle', 'local_library', $training->name);
-$url       = new \moodle_url('/local/library/pages/publication.php', array('trainingid' => $trainingid));
-$course    = $training->get_course();
+$title = get_string('publicationtraininglibrarytitle', 'local_library', $training->name);
+$url = new \moodle_url('/local/library/pages/publication.php', array('trainingid' => $trainingid));
+$course = $training->get_course();
 $courseurl = $training->get_url();
 
 // Set page config.
@@ -66,7 +68,9 @@ $form = new \local_library\publication_form($url, $training);
 
 // When form is submitted.
 if ($data = $form->get_data()) {
-    \local_mentor_core\library_api::publish_to_library($trainingid);
+    if (!\local_mentor_core\library_api::publish_to_library($trainingid)) {
+        print_error('Permission denied');
+    }
 
     // Set JS Success.
     $PAGE->requires->strings_for_js(['publicationtraininglibrarymodal'], 'local_library');

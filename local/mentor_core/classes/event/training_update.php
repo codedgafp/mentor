@@ -51,8 +51,8 @@ class training_update extends base {
      */
     protected function init() {
         $this->data['objecttable'] = 'training';
-        $this->data['crud']        = 'u';
-        $this->data['edulevel']    = self::LEVEL_OTHER;
+        $this->data['crud'] = 'u';
+        $this->data['edulevel'] = self::LEVEL_OTHER;
     }
 
     /**

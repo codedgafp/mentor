@@ -23,43 +23,43 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['activitytype']      = 'Edadmin';
+$string['activitytype'] = 'Edadmin';
 $string['activitytype_help'] = 'Choisissez le type de cours d\'administration';
-$string['defactivitytype']   = 'activité administrative';
+$string['defactivitytype'] = 'activité administrative';
 $string['defactivitytypedesc']
-                             = 'Préciser le type d\'activité qui sera sélectionné par défaut lors de la création d\'un nouveau cours';
+    = 'Préciser le type d\'activité qui sera sélectionné par défaut lors de la création d\'un nouveau cours';
 $string['erroractivitytype'] = 'Le type d\'activité n\'est pas défini dans le cadre des cours';
-$string['orphaned']          = 'Orphelins';
-$string['orphanedwarning']   = 'Ces activités sont inaccessibles aux utilisateurs !';
-$string['pluginname']        = 'Edadmin format';
-$string['sectionname']       = '';
+$string['orphaned'] = 'Orphelins';
+$string['orphanedwarning'] = 'Ces activités sont inaccessibles aux utilisateurs !';
+$string['pluginname'] = 'Edadmin format';
+$string['sectionname'] = '';
 $string['warningchangeformat']
-                             = 'Lorsque vous changez le format de cours existant pour "Single activity", assurez-vous de supprimer toutes les activités supplémentaires du cours, y compris les "Announcements". Notez que la structure des sections peut être modifiée.';
-$string['privacy:metadata']  = 'Le plugin Single activity format ne stocke aucune donnée personnelle.';
+    = 'Lorsque vous changez le format de cours existant pour "Single activity", assurez-vous de supprimer toutes les activités supplémentaires du cours, y compris les "Announcements". Notez que la structure des sections peut être modifiée.';
+$string['privacy:metadata'] = 'Le plugin Single activity format ne stocke aucune donnée personnelle.';
 
 // Lib format course.
-$string['edadmintype']         = 'Choisissez le type :';
-$string['edadmintype_help']    = 'Choisissez le type de cours d\'administration que vous souhaitez:
+$string['edadmintype'] = 'Choisissez le type :';
+$string['edadmintype_help'] = 'Choisissez le type de cours d\'administration que vous souhaitez:
 
 * Utilisateur: permet de gérer les utilisateurs enregistrés dans la catégorie choisie sur l\'option suivante
 * Catégorie: permet de gérer les catégories et les cours enregistrés dans la catégorie choisie sur l\'option suivante
 * Thème: permet de gérer le thème dans la catégorie choisie sur l\'option suivante';
-$string['edadmicategory']      = 'Choisisez la categorie :';
+$string['edadmicategory'] = 'Choisisez la categorie :';
 $string['edadmicategory_help'] = 'Choisissez la catégorie qui sera administrée par ce cours';
-$string['edadmincohort']       = 'Choisisez la cohorte :';
-$string['edadmincohort_help']  = 'Choisissez la cohorte qui sera liée à la catégorie sélectionnée précedemment';
+$string['edadmincohort'] = 'Choisisez la cohorte :';
+$string['edadmincohort_help'] = 'Choisissez la cohorte qui sera liée à la catégorie sélectionnée précedemment';
 
 // Error message.
 $string['pleaserefresh'] = 'Erreur, veuillez cliquer sur OK pour rafraîchir la page';
 
-$string['save']     = 'Enregistrer';
-$string['delete']   = 'Supprimer';
-$string['confirm']  = 'Confirmer';
+$string['save'] = 'Enregistrer';
+$string['delete'] = 'Supprimer';
+$string['confirm'] = 'Confirmer';
 $string['tocreate'] = 'Créer';
-$string['cancel']   = 'Annuler';
+$string['cancel'] = 'Annuler';
 
-$string['dedicatedspace']       = 'Espace dédié : ';
+$string['dedicatedspace'] = 'Espace dédié : ';
 $string['choosededicatedspace'] = 'Choisir un espace dédié : ';
-$string['notregisterederror']   = 'The value {$a} is not registered in the database';
+$string['notregisterederror'] = 'The value {$a} is not registered in the database';
 
 $string['managespaces'] = 'Gérer les espaces';

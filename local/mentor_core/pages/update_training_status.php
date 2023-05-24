@@ -53,22 +53,22 @@ if (!$picture) {
     $filerecord = [
         'contextid' => $training->get_context()->id,
         'component' => 'local_trainings',
-        'filearea'  => 'thumbnail',
-        'itemid'    => $training->id,
-        'filepath'  => '/',
-        'filename'  => $filename,
+        'filearea' => 'thumbnail',
+        'itemid' => $training->id,
+        'filepath' => '/',
+        'filename' => $filename,
     ];
-    $pathname   = $CFG->dirroot . '/local/mentor_core/pix/' . $filename;
+    $pathname = $CFG->dirroot . '/local/mentor_core/pix/' . $filename;
 
     $fs->create_file_from_pathname($filerecord, $pathname);
 }
 
-$data                     = new stdClass();
-$data->id                 = $training->id;
-$data->status             = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
-$data->content            = ['text' => 'content', 'format' => 1];
-$data->traininggoal       = ['text' => 'traininggoal', 'format' => 1];
-$data->collection         = [0 => 'achat'];
+$data = new stdClass();
+$data->id = $training->id;
+$data->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+$data->content = ['text' => 'content', 'format' => 1];
+$data->traininggoal = ['text' => 'traininggoal', 'format' => 1];
+$data->collection = [0 => 'achat'];
 $data->trainingmodalities = 'p';
 
 \local_mentor_core\training_api::update_training($data);

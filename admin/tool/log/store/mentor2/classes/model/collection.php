@@ -29,7 +29,7 @@ class collection extends abstractlog {
 
     public function get_required_fields() {
         return [
-                'name'
+            'name'
         ];
     }
 

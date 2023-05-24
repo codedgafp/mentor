@@ -6,7 +6,7 @@ define(['jquery', 'jqueryui', 'theme_mentor/headroom'], function ($, ui, headroo
 
             // Construct an instance of Headroom, passing the element
             if (myElement) {
-                headroom.options.tolerance= {
+                headroom.options.tolerance = {
                     up: 0,
                     down: 50
                 };

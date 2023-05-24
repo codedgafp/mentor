@@ -41,7 +41,7 @@ class sub_entity_renderer extends \plugin_renderer_base {
     public function get_new_sub_entity_form($extrahtml = '') {
 
         $options = (object) array(
-                'extrahtml'    => $extrahtml
+            'extrahtml' => $extrahtml
         );
 
         // Return the form HTML template.

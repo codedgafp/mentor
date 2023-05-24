@@ -51,14 +51,14 @@ class session_renderer extends \plugin_renderer_base implements edadmin_renderer
      */
     public function display($course, $section) {
         // Initialize params to JS and template.
-        $params           = new \stdClass();
+        $params = new \stdClass();
         $params->entityid = $course->category;
 
-        $currententity                   = entity_api::get_entity($course->category);
-        $trainingadmincourse             = $currententity->get_edadmin_courses('trainings');
-        $sessionscategoryid              = $currententity->get_entity_session_category();
+        $currententity = entity_api::get_entity($course->category);
+        $trainingadmincourse = $currententity->get_edadmin_courses('trainings');
+        $sessionscategoryid = $currententity->get_entity_session_category();
         $params->trainingadmincourselink = $trainingadmincourse['link'];
-        $filterttrainingid               = optional_param('trainingid', null, PARAM_INT);
+        $filterttrainingid = optional_param('trainingid', null, PARAM_INT);
 
         // Set filter name.
         if ($filterttrainingid) {
@@ -88,9 +88,9 @@ class session_renderer extends \plugin_renderer_base implements edadmin_renderer
 
             // Add main entity.
             if (has_capability('local/session:create', $mainentity->get_context())) {
-                $ent                    = new \stdClass();
-                $ent->id                = $mainentity->id;
-                $ent->name              = $mainentity->shortname;
+                $ent = new \stdClass();
+                $ent->id = $mainentity->id;
+                $ent->name = $mainentity->shortname;
                 $params->moveentities[] = $ent;
 
                 $params->subentities = $subentities;
@@ -102,9 +102,9 @@ class session_renderer extends \plugin_renderer_base implements edadmin_renderer
                 if (!has_capability('local/session:create', $subentity->get_context())) {
                     continue;
                 }
-                $ent              = new \stdClass();
-                $ent->id          = $subentity->id;
-                $ent->name        = $subentity->name;
+                $ent = new \stdClass();
+                $ent->id = $subentity->id;
+                $ent->name = $subentity->name;
                 $ent->issubentity = true;
 
                 $params->moveentities[] = $ent;
@@ -124,8 +124,8 @@ class session_renderer extends \plugin_renderer_base implements edadmin_renderer
                     continue;
                 }
 
-                $ent       = new \stdClass();
-                $ent->id   = $entity->id;
+                $ent = new \stdClass();
+                $ent->id = $entity->id;
                 $ent->name = $entity->shortname;
 
                 $params->entities[] = $ent;
@@ -144,9 +144,9 @@ class session_renderer extends \plugin_renderer_base implements edadmin_renderer
             if (!$subentity->is_sessions_manager()) {
                 continue;
             }
-            $ent              = new \stdClass();
-            $ent->id          = $subentity->id;
-            $ent->name        = $subentity->name;
+            $ent = new \stdClass();
+            $ent->id = $subentity->id;
+            $ent->name = $subentity->name;
             $ent->issubentity = true;
 
             $params->subentitiesfilter[] = $ent;
@@ -181,11 +181,11 @@ class session_renderer extends \plugin_renderer_base implements edadmin_renderer
         );
 
         // Get the right JS to use and call it.
-        $js                            = session_api::get_session_javascript('local_session/local_session');
-        $jsparams                      = new \stdClass();
-        $jsparams->entityid            = $params->entityid;
-        $jsparams->exportcatalogpdf    = $params->exportcatalogpdf;
-        $jsparams->exportcatalogcsv    = $params->exportcatalogcsv;
+        $js = session_api::get_session_javascript('local_session/local_session');
+        $jsparams = new \stdClass();
+        $jsparams->entityid = $params->entityid;
+        $jsparams->exportcatalogpdf = $params->exportcatalogpdf;
+        $jsparams->exportcatalogcsv = $params->exportcatalogcsv;
         $jsparams->mainentityshortname = $params->mainentityshortname;
         if (isset($params->filtertrainingname)) {
             $jsparams->filtertrainingname = $params->filtertrainingname;

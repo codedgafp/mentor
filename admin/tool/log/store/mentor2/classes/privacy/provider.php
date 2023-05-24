@@ -52,18 +52,18 @@ class provider implements
      */
     public static function get_metadata(collection $collection): collection {
         $collection->add_database_table('logstore_mentor_user2', [
-            'userid'      => 'privacy:metadata:loguser:userid',
+            'userid' => 'privacy:metadata:loguser:userid',
             'entitylogid' => 'privacy:metadata:loguser:entitylogid',
-            'trainer'     => 'privacy:metadata:loguser:trainer',
-            'status'      => 'privacy:metadata:loguser:status',
-            'category'    => 'privacy:metadata:loguser:category',
+            'trainer' => 'privacy:metadata:loguser:trainer',
+            'status' => 'privacy:metadata:loguser:status',
+            'category' => 'privacy:metadata:loguser:category',
             'regionlogid' => 'privacy:metadata:loguser:regionlogid',
-            'department'  => 'privacy:metadata:loguser:department',
+            'department' => 'privacy:metadata:loguser:department',
         ], 'privacy:metadata:loguser');
 
         $collection->add_database_table('logstore_mentor_entity2', [
             'entityid' => 'privacy:metadata:logentity:entityid',
-            'name'     => 'privacy:metadata:logentity:name',
+            'name' => 'privacy:metadata:logentity:name',
         ], 'privacy:metadata:logentity');
 
         $collection->add_database_table('logstore_mentor_region2', [
@@ -76,18 +76,18 @@ class provider implements
         ], 'privacy:metadata:entityreg');
 
         $collection->add_database_table('logstore_mentor_sesscoll2', [
-            'sessionlogid'    => 'privacy:metadata:sesscoll:sessionlogid',
+            'sessionlogid' => 'privacy:metadata:sesscoll:sessionlogid',
             'collectionlogid' => 'privacy:metadata:sesscoll:collectionlogid',
         ], 'privacy:metadata:sesscoll');
 
         $collection->add_database_table('logstore_mentor_session2', [
-            'sessionid'              => 'privacy:metadata:logsession:sessionid',
-            'entitylogid'            => 'privacy:metadata:logsession:entitylogid',
-            'status'                 => 'privacy:metadata:logsession:status',
-            'shared'                 => 'privacy:metadata:logsession:shared',
-            'trainingentitylogid'    => 'privacy:metadata:logsession:trainingentitylogid',
+            'sessionid' => 'privacy:metadata:logsession:sessionid',
+            'entitylogid' => 'privacy:metadata:logsession:entitylogid',
+            'status' => 'privacy:metadata:logsession:status',
+            'shared' => 'privacy:metadata:logsession:shared',
+            'trainingentitylogid' => 'privacy:metadata:logsession:trainingentitylogid',
             'trainingsubentitylogid' => 'privacy:metadata:logsession:trainingsubentitylogid',
-            'subentitylogid'         => 'privacy:metadata:logsession:subentitylogid',
+            'subentitylogid' => 'privacy:metadata:logsession:subentitylogid',
         ], 'privacy:metadata:logsession');
 
         $collection->add_database_table('logstore_mentor_collection2', [
@@ -95,19 +95,19 @@ class provider implements
         ], 'privacy:metadata:logcollection');
 
         $collection->add_database_table('logstore_mentor_log2', [
-            'userlogid'    => 'privacy:metadata:log:userlogid',
+            'userlogid' => 'privacy:metadata:log:userlogid',
             'sessionlogid' => 'privacy:metadata:log:sessionlogid',
-            'timecreated'  => 'privacy:metadata:log:timecreated',
-            'lastview'     => 'privacy:metadata:log:lastview',
-            'numberview'   => 'privacy:metadata:log:numberview'
+            'timecreated' => 'privacy:metadata:log:timecreated',
+            'lastview' => 'privacy:metadata:log:lastview',
+            'numberview' => 'privacy:metadata:log:numberview'
         ], 'privacy:metadata:log');
 
         $collection->add_database_table('logstore_mentor_history_log2', [
-            'userlogid'    => 'privacy:metadata:loghistory:userlogid',
+            'userlogid' => 'privacy:metadata:loghistory:userlogid',
             'sessionlogid' => 'privacy:metadata:loghistory:sessionlogid',
-            'timecreated'  => 'privacy:metadata:loghistory:timecreated',
-            'lastview'     => 'privacy:metadata:loghistory:lastview',
-            'numberview'   => 'privacy:metadata:loghistory:numberview'
+            'timecreated' => 'privacy:metadata:loghistory:timecreated',
+            'lastview' => 'privacy:metadata:loghistory:lastview',
+            'numberview' => 'privacy:metadata:loghistory:numberview'
         ], 'privacy:metadata:loghistory');
         return $collection;
     }
@@ -132,7 +132,7 @@ class provider implements
                   lmu.userid = :userid";
         $contextlist->add_from_sql($sql, [
             'contextlevel' => CONTEXT_COURSE,
-            'userid'       => $userid
+            'userid' => $userid
         ]);
     }
 

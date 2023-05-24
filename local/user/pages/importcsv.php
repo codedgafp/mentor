@@ -57,7 +57,7 @@ $entitycontext = $entity->get_context();
 require_capability('local/mentor_core:importusers', $entitycontext);
 
 $title = get_string('importusers', 'local_user');
-$url   = new moodle_url('/local/user/pages/importcsv.php', ['entityid' => $entityid]);
+$url = new moodle_url('/local/user/pages/importcsv.php', ['entityid' => $entityid]);
 
 // Set navbar.
 $PAGE->navbar->ignore_active();
@@ -76,7 +76,7 @@ $PAGE->set_title($title);
 $PAGE->set_heading($title);
 
 $params = [
-    'modaltitle'   => get_string('import_reactivate_modal_title', 'local_mentor_core'),
+    'modaltitle' => get_string('import_reactivate_modal_title', 'local_mentor_core'),
     'modalcontent' => get_string('import_reactivate_modal_content', 'local_mentor_core'),
 ];
 
@@ -93,11 +93,11 @@ echo $OUTPUT->heading($title);
 $anchorurl = new moodle_url('/local/user/pages/importcsv.php', ['entityid' => $entityid], 'import-reports');
 
 // Import CSV form.
-$csvmform    = new importcsv_form($anchorurl->out(), ['entityid' => $entityid]);
+$csvmform = new importcsv_form($anchorurl->out(), ['entityid' => $entityid]);
 $csvformdata = $csvmform->get_data();
 
 // Import users form.
-$importusersform     = new importusers_form([], $url);
+$importusersform = new importusers_form([], $url);
 $importusersformdata = $importusersform->get_data();
 
 // Import users with validated data.
@@ -144,15 +144,15 @@ if (null !== $csvformdata) {
 
         // Preview array.
         $preview = [
-            'list'                 => [], // Cleaned list of accounts.
-            'validlines'           => 0, // Number of lines without error.
-            'validforcreation'     => 0, // Number of lines that will create an account.
+            'list' => [], // Cleaned list of accounts.
+            'validlines' => 0, // Number of lines without error.
+            'validforcreation' => 0, // Number of lines that will create an account.
             'validforreactivation' => [], // Valid accounts for reactivation.
         ];
 
         // Other data.
         $other = [
-            'entityid'    => $entity->id,
+            'entityid' => $entity->id,
             'addtoentity' => $csvformdata->addtoentity
         ];
 
@@ -166,7 +166,7 @@ if (null !== $csvformdata) {
             $out .= html_writer::tag('h5', get_string('preview_table', 'local_mentor_core'), ['class' => 'report-title']);
 
             // Building preview table.
-            $previewstable       = new html_table();
+            $previewstable = new html_table();
             $previewstable->head = [
                 get_string('csv_line', 'local_mentor_core'),
                 get_string('lastname'),
@@ -174,7 +174,7 @@ if (null !== $csvformdata) {
                 get_string('email', 'local_mentor_core')
             ];
             $previewstable->data = array_slice($preview['list'], 0, 10);
-            $out                 .= html_writer::table($previewstable);
+            $out .= html_writer::table($previewstable);
 
             // Add validated data into the import users form.
             $importusersform = new importusers_form($preview['list'], $preview['validforreactivation'], $addtoentity, $url);
@@ -197,10 +197,10 @@ if (null !== $csvformdata) {
             \core\notification::warning(get_string('errors_detected', 'local_mentor_core'));
 
             // Building errors report table.
-            $errorstable       = new html_table();
+            $errorstable = new html_table();
             $errorstable->head = ['Ligne', get_string('error')];
             $errorstable->data = $errors['list'];
-            $out               .= html_writer::table($errorstable);
+            $out .= html_writer::table($errorstable);
         }
 
         // Display warnings bloc.
@@ -209,10 +209,10 @@ if (null !== $csvformdata) {
             \core\notification::warning(get_string('warnings_detected', 'local_mentor_core'));
 
             // Building errors report table.
-            $warningstable       = new html_table();
+            $warningstable = new html_table();
             $warningstable->head = ['Ligne', get_string('warning', 'local_mentor_core')];
             $warningstable->data = $warnings['list'];
-            $out                 .= html_writer::table($warningstable);
+            $out .= html_writer::table($warningstable);
         }
 
         // Display import users form.

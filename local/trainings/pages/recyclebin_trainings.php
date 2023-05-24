@@ -30,7 +30,7 @@ require_once(__DIR__ . '/../lib.php');
 require_login();
 
 $entityid = required_param('entityid', PARAM_INT);
-$action   = optional_param('action', null, PARAM_ALPHA);
+$action = optional_param('action', null, PARAM_ALPHA);
 
 if (!$entityid) {
     throw new \coding_exception('The entity ID must be set.');
@@ -97,7 +97,7 @@ echo $OUTPUT->header();
 $renderer = $PAGE->get_renderer('local_trainings', 'recyclebin');
 
 $inititems = [];
-$items     = $entity->get_training_recyclebin_items();
+$items = $entity->get_training_recyclebin_items();
 
 // Display the table.
 $renderer->display($entity, $items);

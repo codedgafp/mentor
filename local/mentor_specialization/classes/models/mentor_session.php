@@ -49,11 +49,11 @@ class mentor_session extends session {
      * @var string[]
      */
     protected $_allowedarea
-        = [
-            'thumbnail',
-            'producerorganizationlogo',
-            'teaserpicture'
-        ];
+            = [
+                    'thumbnail',
+                    'producerorganizationlogo',
+                    'teaserpicture'
+            ];
 
     /** @var string */
     public $trainingname;
@@ -179,17 +179,17 @@ class mentor_session extends session {
         parent::__construct($sessionidorinstance);
 
         $requiredfields = [
-            'publiccible',
-            'termsregistration',
-            'termsregistrationdetail',
-            'onlinesessionestimatedtime',
-            'presencesessionestimatedtime',
-            'sessionpermanent',
-            'sessionmodalities',
-            'accompaniment',
-            'location',
-            'organizingstructure',
-            'sessionnumber',
+                'publiccible',
+                'termsregistration',
+                'termsregistrationdetail',
+                'onlinesessionestimatedtime',
+                'presencesessionestimatedtime',
+                'sessionpermanent',
+                'sessionmodalities',
+                'accompaniment',
+                'location',
+                'organizingstructure',
+                'sessionnumber',
         ];
 
         // Check if required fields exist.
@@ -222,7 +222,7 @@ class mentor_session extends session {
         $fs = get_file_storage();
 
         $areafiles = $fs->get_area_files($this->get_context()->id, 'local_session', $filearea, $this->id,
-            "itemid, filepath, filename", false);
+                "itemid, filepath, filename", false);
 
         if (count($areafiles) === 0) {
             return false;
@@ -243,54 +243,54 @@ class mentor_session extends session {
         // Common fields with training.
         $training = $this->get_training();
 
-        $session->trainingname                  = $training->name;
-        $session->trainingshortname             = $training->shortname;
-        $session->trainingcontent               = $training->content;
-        $session->teaser                        = $training->teaser;
-        $session->teaserpicture                 = $training->teaserpicture;
-        $session->prerequisite                  = $training->prerequisite;
-        $session->collection                    = $training->collection;
-        $session->creativestructure             = $training->creativestructure;
-        $session->traininggoal                  = $training->traininggoal;
-        $session->idsirh                        = $training->idsirh;
-        $session->trainingmodalities            = $training->trainingmodalities;
-        $session->typicaljob                    = $training->typicaljob;
-        $session->skills                        = $training->skills;
-        $session->certifying                    = $training->certifying;
-        $session->catchphrase                   = $training->catchphrase;
-        $session->presenceestimatedtime         = $training->presenceestimatedtime;
-        $session->remoteestimatedtime           = $training->remoteestimatedtime;
-        $session->producingorganization         = $training->producingorganization;
-        $session->producerorganizationlogo      = $training->producerorganizationlogo;
-        $session->contactproducerorganization   = $training->contactproducerorganization;
+        $session->trainingname = $training->name;
+        $session->trainingshortname = $training->shortname;
+        $session->trainingcontent = $training->content;
+        $session->teaser = $training->teaser;
+        $session->teaserpicture = $training->teaserpicture;
+        $session->prerequisite = $training->prerequisite;
+        $session->collection = $training->collection;
+        $session->creativestructure = $training->creativestructure;
+        $session->traininggoal = $training->traininggoal;
+        $session->idsirh = $training->idsirh;
+        $session->trainingmodalities = $training->trainingmodalities;
+        $session->typicaljob = $training->typicaljob;
+        $session->skills = $training->skills;
+        $session->certifying = $training->certifying;
+        $session->catchphrase = $training->catchphrase;
+        $session->presenceestimatedtime = $training->presenceestimatedtime;
+        $session->remoteestimatedtime = $training->remoteestimatedtime;
+        $session->producingorganization = $training->producingorganization;
+        $session->producerorganizationlogo = $training->producerorganizationlogo;
+        $session->contactproducerorganization = $training->contactproducerorganization;
         $session->producerorganizationshortname = $training->producerorganizationshortname;
-        $session->thumbnail                     = $training->thumbnail;
-        $session->trainingstatus                = $training->status;
-        $session->licenseterms                  = $training->licenseterms;
-        $session->designers                     = $training->designers;
-        $session->timecreated                   = $training->timecreated;
+        $session->thumbnail = $training->thumbnail;
+        $session->trainingstatus = $training->status;
+        $session->licenseterms = $training->licenseterms;
+        $session->designers = $training->designers;
+        $session->timecreated = $training->timecreated;
 
         // Get presence estimated time.
         if (isset($session->presenceestimatedtime)) {
-            $session->presenceestimatedtimehours   = floor($session->presenceestimatedtime / 60);
+            $session->presenceestimatedtimehours = floor($session->presenceestimatedtime / 60);
             $session->presenceestimatedtimeminutes = $session->presenceestimatedtime % 60;
         }
 
         // Get remote estimated time.
         if (isset($session->remoteestimatedtime)) {
-            $session->remoteestimatedtimehours   = floor($session->remoteestimatedtime / 60);
+            $session->remoteestimatedtimehours = floor($session->remoteestimatedtime / 60);
             $session->remoteestimatedtimeminutes = $session->remoteestimatedtime % 60;
         }
 
         // Get presence session estimated time.
         if (isset($session->presencesessionestimatedtime)) {
-            $session->presencesessionestimatedtimehours   = floor($session->presencesessionestimatedtime / 60);
+            $session->presencesessionestimatedtimehours = floor($session->presencesessionestimatedtime / 60);
             $session->presencesessionestimatedtimeminutes = $session->presencesessionestimatedtime % 60;
         }
 
         // Get online session estimated time.
         if (isset($session->onlinesessionestimatedtime)) {
-            $session->onlinesessionestimatedtimehours   = floor($session->onlinesessionestimatedtime / 60);
+            $session->onlinesessionestimatedtimehours = floor($session->onlinesessionestimatedtime / 60);
             $session->onlinesessionestimatedtimeminutes = $session->onlinesessionestimatedtime % 60;
         }
 
@@ -324,38 +324,38 @@ class mentor_session extends session {
         parent::update($data, $mform);
 
         $optionalfields = [
-            'trainingname',
-            'trainingshortname',
-            'teaser',
-            'teaserpicture',
-            'prerequisite',
-            'collection',
-            'creativestructure',
-            'traininggoal',
-            'idsirh',
-            'trainingcontent',
-            'publiccible',
-            'accompaniment',
-            'sessionmodalities',
-            'termsregistration',
-            'location',
-            'organizingstructure',
-            'typicaljob',
-            'skills',
-            'certifying',
-            'presenceestimatedtime',
-            'remoteestimatedtime',
-            'trainingmodalities',
-            'producingorganization',
-            'producerorganizationlogo',
-            'contactproducerorganization',
-            'producerorganizationshortname',
-            'thumbnail',
-            'trainingstatus',
-            'licenseterms',
-            'designers',
-            'timecreated',
-            'catchphrase'
+                'trainingname',
+                'trainingshortname',
+                'teaser',
+                'teaserpicture',
+                'prerequisite',
+                'collection',
+                'creativestructure',
+                'traininggoal',
+                'idsirh',
+                'trainingcontent',
+                'publiccible',
+                'accompaniment',
+                'sessionmodalities',
+                'termsregistration',
+                'location',
+                'organizingstructure',
+                'typicaljob',
+                'skills',
+                'certifying',
+                'presenceestimatedtime',
+                'remoteestimatedtime',
+                'trainingmodalities',
+                'producingorganization',
+                'producerorganizationlogo',
+                'contactproducerorganization',
+                'producerorganizationshortname',
+                'thumbnail',
+                'trainingstatus',
+                'licenseterms',
+                'designers',
+                'timecreated',
+                'catchphrase'
         ];
 
         // Use the current value for optional fields if they are not set.
@@ -372,33 +372,33 @@ class mentor_session extends session {
         // If the session is not updated by moodle form, set precedent values.
         if (!$mform) {
             // Training data.
-            $this->trainingname                  = trim($data->trainingname);
-            $this->trainingshortname             = trim($data->trainingshortname);
-            $this->trainingcontent               = $data->trainingcontent;
-            $this->teaser                        = $data->teaser;
-            $this->teaserpicture                 = $data->teaserpicture;
-            $this->prerequisite                  = $data->prerequisite;
-            $this->collection                    = $data->collection;
-            $this->creativestructure             = $data->creativestructure;
-            $this->traininggoal                  = $data->traininggoal;
-            $this->idsirh                        = $data->idsirh;
-            $this->typicaljob                    = $data->typicaljob;
-            $this->skills                        = $data->skills;
-            $this->certifying                    = $data->certifying;
-            $this->presenceestimatedtime         = $data->presenceestimatedtime;
-            $this->remoteestimatedtime           = $data->remoteestimatedtime;
-            $this->trainingmodalities            = $data->trainingmodalities;
-            $this->catchphrase                   = $data->catchphrase;
-            $this->producingorganization         = $data->producingorganization;
-            $this->producerorganizationlogo      = $data->producerorganizationlogo;
-            $this->contactproducerorganization   = $data->contactproducerorganization;
+            $this->trainingname = trim($data->trainingname);
+            $this->trainingshortname = trim($data->trainingshortname);
+            $this->trainingcontent = $data->trainingcontent;
+            $this->teaser = $data->teaser;
+            $this->teaserpicture = $data->teaserpicture;
+            $this->prerequisite = $data->prerequisite;
+            $this->collection = $data->collection;
+            $this->creativestructure = $data->creativestructure;
+            $this->traininggoal = $data->traininggoal;
+            $this->idsirh = $data->idsirh;
+            $this->typicaljob = $data->typicaljob;
+            $this->skills = $data->skills;
+            $this->certifying = $data->certifying;
+            $this->presenceestimatedtime = $data->presenceestimatedtime;
+            $this->remoteestimatedtime = $data->remoteestimatedtime;
+            $this->trainingmodalities = $data->trainingmodalities;
+            $this->catchphrase = $data->catchphrase;
+            $this->producingorganization = $data->producingorganization;
+            $this->producerorganizationlogo = $data->producerorganizationlogo;
+            $this->contactproducerorganization = $data->contactproducerorganization;
             $this->producerorganizationshortname = $data->producerorganizationshortname;
-            $this->thumbnail                     = $data->thumbnail;
-            $this->trainingstatus                = $data->trainingstatus;
-            $this->licenseterms                  = $data->licenseterms;
-            $this->designers                     = $data->designers;
-            $this->timecreated                   = $data->timecreated;
-            $this->sessionmodalities             = $data->sessionmodalities;
+            $this->thumbnail = $data->thumbnail;
+            $this->trainingstatus = $data->trainingstatus;
+            $this->licenseterms = $data->licenseterms;
+            $this->designers = $data->designers;
+            $this->timecreated = $data->timecreated;
+            $this->sessionmodalities = $data->sessionmodalities;
 
             // Set the session number.
             if (!$this->sessionnumber) {
@@ -420,16 +420,16 @@ class mentor_session extends session {
                 $onlinesessiontime = (int) $data->onlinesessionestimatedtimehours * 60 + $data->onlinesessionestimatedtimeminutes;
             }
 
-            $this->publiccible                  = trim($data->publiccible);
-            $this->termsregistration            = $data->termsregistration;
-            $this->termsregistrationdetail      = $data->termsregistrationdetail;
-            $this->onlinesessionestimatedtime   = $onlinesessiontime;
+            $this->publiccible = trim($data->publiccible);
+            $this->termsregistration = $data->termsregistration;
+            $this->termsregistrationdetail = $data->termsregistrationdetail;
+            $this->onlinesessionestimatedtime = $onlinesessiontime;
             $this->presencesessionestimatedtime = $presencesessiontime;
-            $this->sessionpermanent             = $data->sessionpermanent;
-            $this->sessionmodalities            = $data->sessionmodalities;
-            $this->accompaniment                = trim($data->accompaniment);
-            $this->location                     = trim($data->location);
-            $this->organizingstructure          = trim($data->organizingstructure);
+            $this->sessionpermanent = $data->sessionpermanent;
+            $this->sessionmodalities = $data->sessionmodalities;
+            $this->accompaniment = trim($data->accompaniment);
+            $this->location = trim($data->location);
+            $this->organizingstructure = trim($data->organizingstructure);
         }
 
         // Update the session with specific attributes in database.
@@ -483,8 +483,8 @@ class mentor_session extends session {
         // Send a message if the session was reported.
         if ($oldstatus == self::STATUS_REPORTED) {
             // Data for message.
-            $infodata            = new stdClass();
-            $infodata->fullname  = $this->fullname ?: $this->trainingname;
+            $infodata = new stdClass();
+            $infodata->fullname = $this->fullname ?: $this->trainingname;
             $infodata->startdate = date('d/m/Y', $this->sessionstartdate);
 
             // Message text.
@@ -497,18 +497,22 @@ class mentor_session extends session {
             $messagehtml = text_to_html($messagetext, false, false, true);
 
             // Send a report email to participants.
-            $this->send_message_to_all($subject, $messagetext, $messagehtml);
+            $this->send_message_to_users(
+                    array_merge($this->get_participants(), $this->get_tutors(), $this->get_formateurs()),
+                    $subject, $messagetext, $messagehtml
+            );
         }
     }
 
     /**
      * Mark the session as opened (inprogress)
      *
+     * @param string $oldstatus
      * @throws coding_exception
      * @throws dml_exception
      * @throws \moodle_exception
      */
-    protected function open() {
+    protected function open($oldstatus) {
         $dbinterface = database_interface::get_instance();
 
         // Update status.
@@ -525,15 +529,39 @@ class mentor_session extends session {
             // Disable self enrol instance if exist.
             $this->disable_self_enrolment_instance();
         }
+
+        // Send a message if the session was open.
+        if ($oldstatus == self::STATUS_OPENED_REGISTRATION) {
+            // Data for message.
+            $infodata = new stdClass();
+            $infodata->fullname = $this->fullname ?: $this->trainingname;
+            $infodata->dashboardurl = (new \moodle_url('/my'))->out(false);
+
+            // Message text.
+            $messagetext = get_string('email_open_session_content', 'local_mentor_specialization', $infodata);
+
+            // Message subject.
+            $subject = get_string('email_open_session_object', 'local_mentor_specialization', $infodata->fullname);
+
+            // Message HTML.
+            $messagehtml = text_to_html($messagetext, false, false, true);
+
+            // Send a report email to participants.
+            $this->send_message_to_users(
+                    array_merge($this->get_participants(), $this->get_tutors(), $this->get_formateurs()),
+                    $subject, $messagetext, $messagehtml
+            );
+        }
     }
 
     /**
      * Mark the session as archived
      *
+     * @param string $oldstatus
      * @throws dml_exception
      */
-    protected function archive() {
-        parent::archive();
+    protected function archive($oldstatus) {
+        parent::archive($oldstatus);
 
         $dbinterface = database_interface::get_instance();
 
@@ -556,12 +584,12 @@ class mentor_session extends session {
      */
     public function get_available_status() {
         $allstatus = [
-            self::STATUS_IN_PREPARATION      => [self::STATUS_OPENED_REGISTRATION],
-            self::STATUS_OPENED_REGISTRATION => [self::STATUS_REPORTED],
-            self::STATUS_IN_PROGRESS         => [self::STATUS_REPORTED],
-            self::STATUS_COMPLETED           => [self::STATUS_ARCHIVED],
-            self::STATUS_REPORTED            => [self::STATUS_OPENED_REGISTRATION],
-            self::STATUS_CANCELLED           => []
+                self::STATUS_IN_PREPARATION => [self::STATUS_OPENED_REGISTRATION],
+                self::STATUS_OPENED_REGISTRATION => [self::STATUS_REPORTED],
+                self::STATUS_IN_PROGRESS => [self::STATUS_REPORTED],
+                self::STATUS_COMPLETED => [self::STATUS_ARCHIVED],
+                self::STATUS_REPORTED => [self::STATUS_OPENED_REGISTRATION],
+                self::STATUS_CANCELLED => []
         ];
 
         // Check if the session has been archived for more than a month.
@@ -593,8 +621,8 @@ class mentor_session extends session {
             return false;
         }
 
-        $instance             = new stdClass();
-        $instance->id         = $instanceid;
+        $instance = new stdClass();
+        $instance->id = $instanceid;
         $instance->customint3 = $this->maxparticipants; // Max participants.
         $instance->customint4 = get_config('enrol_self', 'sendcoursewelcomemessage');
 
@@ -639,14 +667,14 @@ class mentor_session extends session {
             $templateobj = parent::convert_for_template();
 
             // Add specific data.
-            $templateobj->sessionpermanent            = $this->sessionpermanent == 1;
-            $templateobj->organizingstructure         = $this->organizingstructure;
+            $templateobj->sessionpermanent = $this->sessionpermanent == 1;
+            $templateobj->organizingstructure = $this->organizingstructure;
             $templateobj->contactproducerorganization = $this->contactproducerorganization;
-            $templateobj->publiccible                 = $this->publiccible;
-            $templateobj->accompaniment               = $this->accompaniment;
-            $templateobj->location                    = $this->location;
-            $templateobj->onlinesessionestimatedtime  = $this->onlinesessionestimatedtime;
-            $templateobj->trainingname                = $this->trainingname;
+            $templateobj->publiccible = $this->publiccible;
+            $templateobj->accompaniment = $this->accompaniment;
+            $templateobj->location = $this->location;
+            $templateobj->onlinesessionestimatedtime = $this->onlinesessionestimatedtime;
+            $templateobj->trainingname = $this->trainingname;
 
             // Convert online session estimated time into hours.
             if (!$this->onlinesessionestimatedtime) {
@@ -664,7 +692,7 @@ class mentor_session extends session {
 
             // Set modality string.
             $templateobj->sessionmodalities = empty($this->sessionmodalities) ? '' :
-                get_string($this->sessionmodalities, 'local_catalog');
+                    get_string($this->sessionmodalities, 'local_catalog');
 
             $this->template = $templateobj;
         }
@@ -685,8 +713,8 @@ class mentor_session extends session {
 
         // Make sure the user is an object.
         if (!is_object($user)) {
-            $oldid    = $user;
-            $user     = new stdClass();
+            $oldid = $user;
+            $user = new stdClass();
             $user->id = $oldid;
         }
 
@@ -764,7 +792,7 @@ class mentor_session extends session {
         $sessiontraining = $this->get_training();
 
         // Copy the pictures.
-        $fs             = get_file_storage();
+        $fs = get_file_storage();
         $newpicturedata = ['contextid' => $newtraining->contextid, 'itemid' => $newtraining->id];
 
         // Copy the producerorganizationlogo.
@@ -807,8 +835,8 @@ class mentor_session extends session {
         $actions = parent::get_actions($userid, $refresh);
 
         $sirhaccessstatus = [
-            self::STATUS_OPENED_REGISTRATION,
-            self::STATUS_IN_PROGRESS
+                self::STATUS_OPENED_REGISTRATION,
+                self::STATUS_IN_PROGRESS
         ];
 
         // SIRH enrolment.
@@ -817,10 +845,10 @@ class mentor_session extends session {
 
             // Enrolment SIRH button.
             if (count($sirh) > 0) {
-                $newaction               = [];
+                $newaction = [];
                 $newaction['importSIRH'] = [
-                    'url'     => $CFG->wwwroot . '/enrol/sirh/pages/index.php?sessionid=' . $this->id,
-                    'tooltip' => 'Inscriptions SIRH'
+                        'url' => $CFG->wwwroot . '/enrol/sirh/pages/index.php?sessionid=' . $this->id,
+                        'tooltip' => 'Inscriptions SIRH'
                 ];
 
                 $index = array_search('importUsers', array_keys($actions));
@@ -854,9 +882,9 @@ class mentor_session extends session {
 
         // Re-Check if the session is visible or the user exists.
         if (
-            $this->opento == self::OPEN_TO_NOT_VISIBLE ||
-            is_null($userid) ||
-            $userid == 0
+                $this->opento == self::OPEN_TO_NOT_VISIBLE ||
+                is_null($userid) ||
+                $userid == 0
         ) {
             return false;
         }
@@ -876,14 +904,14 @@ class mentor_session extends session {
         if (isset($userprofilefields['region']) && !empty($userprofilefields['region'])) {
 
             $regionid = array_search($userprofilefields['region'], $regionslist);
-            $regions  = $mainentity->regions;
+            $regions = $mainentity->regions;
 
             $canregistrer = in_array($regionid, $regions);
         }
 
         // Check for secondary entities.
         if (!$canregistrer && $this->opento === self::OPEN_TO_CURRENT_ENTITY) {
-            $profile           = profile_api::get_profile($userid);
+            $profile = profile_api::get_profile($userid);
             $secondaryentities = $profile->get_secondary_entities();
             foreach ($secondaryentities as $secondaryentity) {
                 if ($mainentity->id == $secondaryentity->id) {

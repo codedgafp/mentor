@@ -72,7 +72,7 @@ class mysessions implements renderable, templatable {
         $sessionsenrol = \local_mentor_core\session_api::get_user_sessions($USER->id, true);
 
         // Data for the training and session sheet.
-        $trainings     = [];
+        $trainings = [];
         $finalsessions = [];
 
         // If there is at least one full session.
@@ -97,7 +97,7 @@ class mysessions implements renderable, templatable {
                 $sessionenrol->progress === 100
             ) {
                 $sessionenrol->iscompleted = true;
-                $hassessioncompleted       = true;
+                $hassessioncompleted = true;
             }
 
             $finalsessions[] = $sessionenrol;
@@ -106,16 +106,16 @@ class mysessions implements renderable, templatable {
                 $trainings[$sessionenrol->trainingid] = \local_mentor_core\training_api::get_training($sessionenrol->trainingid)
                     ->convert_for_template();
             }
-            $trainings[$sessionenrol->trainingid]->sessions   = [];
+            $trainings[$sessionenrol->trainingid]->sessions = [];
             $trainings[$sessionenrol->trainingid]->sessions[] = $sessionenrol;
         }
 
         // Create data for the template block.
-        $templateparams                      = new \stdClass();
-        $templateparams->trainings           = $trainings;
-        $templateparams->sessions            = $finalsessions;
-        $templateparams->sessionscount       = count($finalsessions);
-        $templateparams->catalogurl          = $CFG->wwwroot . '/local/catalog/index.php';
+        $templateparams = new \stdClass();
+        $templateparams->trainings = $trainings;
+        $templateparams->sessions = $finalsessions;
+        $templateparams->sessionscount = count($finalsessions);
+        $templateparams->catalogurl = $CFG->wwwroot . '/local/catalog/index.php';
         $templateparams->hassessioncompleted = $hassessioncompleted;
 
         // Return data for the template block.

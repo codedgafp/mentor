@@ -104,16 +104,27 @@ class importcsv_form extends moodleform {
 
         // Add a checkbox to automatically add new users on the entity.
         if (!empty($this->entityid)) {
-            $mform->addElement('select', 'addtoentity', get_string('addtoentity', 'local_mentor_core'), array(
-                // Add to main entity.
-                self::ADD_TO_MAIN_ENTITY      => get_string('addtomainentity', 'local_mentor_core'),
+
+            $entity = \local_mentor_core\entity_api::get_entity($this->entityid);
+
+            $dataoptions = [
                 // Add to secondary entity list.
                 self::ADD_TO_SECONDARY_ENTITY => get_string('addtosecondaryentity', 'local_mentor_core'),
                 // Does not add.
-                self::ADD_TO_ANY_ENTITY       => get_string('addtoanyentity', 'local_mentor_core')
-            ));
+                self::ADD_TO_ANY_ENTITY => get_string('addtoanyentity', 'local_mentor_core')
+            ];
+            $defaultoption = self::ADD_TO_SECONDARY_ENTITY;
+
+            // The entity must be able to accept being in main.
+            if ($entity->can_be_main_entity()) {
+                // Add to main entity.
+                $dataoptions = [self::ADD_TO_MAIN_ENTITY => get_string('addtomainentity', 'local_mentor_core')] + $dataoptions;
+                $defaultoption = self::ADD_TO_MAIN_ENTITY;
+            }
+
+            $mform->addElement('select', 'addtoentity', get_string('addtoentity', 'local_mentor_core'), $dataoptions);
             $mform->addHelpButton('addtoentity', 'addtoentity', 'local_mentor_core');
-            $mform->setDefault('addtoentity', self::ADD_TO_MAIN_ENTITY);
+            $mform->setDefault('addtoentity', $defaultoption);
         }
 
         $this->add_action_buttons(false, get_string('continue_import', 'local_mentor_core'));

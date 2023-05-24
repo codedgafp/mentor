@@ -34,12 +34,12 @@ require_once($CFG->dirroot . '/local/mentor_specialization/lib.php');
 class training_form extends \moodleform {
 
     protected $modalities
-        = [
-            ''   => 'emptychoice',
-            'p'  => 'presentiel',
-            'd'  => 'online',
-            'dp' => 'mixte'
-        ];
+            = [
+                    '' => 'emptychoice',
+                    'p' => 'presentiel',
+                    'd' => 'online',
+                    'dp' => 'mixte'
+            ];
 
     /**
      * @var mentor_entity
@@ -73,11 +73,11 @@ class training_form extends \moodleform {
         $db = database_interface::get_instance();
 
         // Init entity object.
-        $this->entity   = $data->entity;
+        $this->entity = $data->entity;
         $this->training = isset($data->training) ? $data->training : null;
-        $this->logourl  = $data->logourl;
+        $this->logourl = $data->logourl;
         $this->returnto = isset($data->returnto) ? $data->returnto : '';
-        $this->publish  = isset($data->publish) ? $data->publish : null;
+        $this->publish = isset($data->publish) ? $data->publish : null;
 
         // Init skills.
         $this->allskills = $db->get_skills();
@@ -96,7 +96,7 @@ class training_form extends \moodleform {
         global $CFG, $OUTPUT;
         $mform = $this->_form;
 
-        $strwarning  = get_string('requiredelaborationcompleted', 'local_trainings');
+        $strwarning = get_string('requiredelaborationcompleted', 'local_trainings');
         $warningicon = '<div class="text-warning" title="' . $strwarning .
                        '"><i class="icon fa fa-exclamation-circle text-warning fa-fw " title="' . $strwarning . '" aria-label="' .
                        $strwarning . '"></i></div>';
@@ -106,9 +106,9 @@ class training_form extends \moodleform {
         $context = $this->training ? $this->training->get_context() : $this->entity->get_context();
 
         // Structure créatrice.
-        $structurehtml  = '<span>' . $this->entity->get_entity_path() . '</span>';
+        $structurehtml = '<span>' . $this->entity->get_entity_path() . '</span>';
         $structurelabel = $this->entity->is_main_entity() ? get_string('space', 'local_mentor_core') :
-            get_string('space', 'local_mentor_core') . '/' . get_string('subspace', 'local_mentor_core');
+                get_string('space', 'local_mentor_core') . '/' . get_string('subspace', 'local_mentor_core');
         $mform->addElement('static', 'creativestructurestatic', $structurelabel, $structurehtml);
 
         // Date de création.
@@ -119,13 +119,14 @@ class training_form extends \moodleform {
         if ($this->publish) {
             // Date de première publication.
             $mform->addElement('static', 'publishtimecreated', get_string('publishtimecreated', 'local_mentor_specialization'),
-                date('Y-m-d H:i', $this->publish->timecreated));
+                    date('Y-m-d H:i', $this->publish->timecreated));
             $mform->addHelpButton('publishtimecreated', 'publishtimecreated', 'local_mentor_specialization');
 
-            if($this->publish->timecreated !== $this->publish->timemodified) {
+            if ($this->publish->timecreated !== $this->publish->timemodified) {
                 // Date de dernière publication.
-                $mform->addElement('static', 'publishtimemodified', get_string('publishtimemodified', 'local_mentor_specialization'),
-                    date('Y-m-d H:i', $this->publish->timemodified));
+                $mform->addElement('static', 'publishtimemodified',
+                        get_string('publishtimemodified', 'local_mentor_specialization'),
+                        date('Y-m-d H:i', $this->publish->timemodified));
                 $mform->addHelpButton('publishtimemodified', 'publishtimemodified', 'local_mentor_specialization');
             }
         }
@@ -160,17 +161,17 @@ class training_form extends \moodleform {
             $mform->addRule('shortname', get_string('errorallstatus', 'local_mentor_specialization'), 'required');
         }
 
-        $thumbnail    = is_null($this->training) ? false : $this->training->get_training_picture();
+        $thumbnail = is_null($this->training) ? false : $this->training->get_training_picture();
         $thumbnailurl = '';
 
         if ($thumbnail) {
             $thumbnailurl = \moodle_url::make_pluginfile_url(
-                $thumbnail->get_contextid(),
-                $thumbnail->get_component(),
-                $thumbnail->get_filearea(),
-                $thumbnail->get_itemid(),
-                $thumbnail->get_filepath(),
-                $thumbnail->get_filename()
+                    $thumbnail->get_contextid(),
+                    $thumbnail->get_component(),
+                    $thumbnail->get_filearea(),
+                    $thumbnail->get_itemid(),
+                    $thumbnail->get_filepath(),
+                    $thumbnail->get_filename()
             );
         }
 
@@ -182,11 +183,11 @@ class training_form extends \moodleform {
                                  '" /></div>';
 
                 $thumbnailoption = [
-                    'label'           => get_string('thumbnail', 'local_trainings'),
-                    'warning_text'    => get_string('requiredelaborationcompleted', 'local_trainings'),
-                    'help_text'       => get_string('thumbnail_help', 'local_trainings'),
-                    'help_icon_title' => get_string('thumbnail_help_icon', 'local_trainings'),
-                    'html'            => $thumbnailhtml,
+                        'label' => get_string('thumbnail', 'local_trainings'),
+                        'warning_text' => get_string('requiredelaborationcompleted', 'local_trainings'),
+                        'help_text' => get_string('thumbnail_help', 'local_trainings'),
+                        'help_icon_title' => get_string('thumbnail_help_icon', 'local_trainings'),
+                        'html' => $thumbnailhtml,
                 ];
 
                 // Custom form field.
@@ -197,18 +198,18 @@ class training_form extends \moodleform {
             // Delete the thumbnail.
             if ($thumbnailurl) {
                 $mform->addElement('static', 'currentthumbnail', get_string('currentthumbnail', 'local_mentor_core') . $warningicon,
-                    '<img src="' . $thumbnailurl .
-                    '" width="72px"/>');
+                        '<img src="' . $thumbnailurl .
+                        '" width="72px"/>');
 
                 $mform->addElement('checkbox', 'deletethumbnail', get_string('deletethumbnail', 'local_mentor_core'));
                 $mform->setDefault('deletethumbnail', 0);
             }
 
             $mform->addElement('filepicker', 'thumbnail',
-                get_string('thumbnail', 'local_trainings') . ' ' . get_string('recommandedratio', 'local_mentor_core', '3:2')
-                . $warningicon,
-                null,
-                array('accepted_types' => $acceptedtypes, 'subdirs' => 0, 'maxfiles' => 1, 'maxbytes' => 1024000));
+                    get_string('thumbnail', 'local_trainings') . ' ' . get_string('recommandedratio', 'local_mentor_core', '3:2')
+                    . $warningicon,
+                    null,
+                    array('accepted_types' => $acceptedtypes, 'subdirs' => 0, 'maxfiles' => 1, 'maxbytes' => 1024000));
             $mform->addHelpButton('thumbnail', 'thumbnail', 'local_trainings');
         }
 
@@ -217,21 +218,21 @@ class training_form extends \moodleform {
 
         if (has_capability('local/mentor_specialization:changecollection', $context)) {
             $mform->addElement(
-                'autocomplete',
-                'collection',
-                get_string('collections', 'local_trainings'),
-                $collectionsnames,
-                ['multiple' => true]
+                    'autocomplete',
+                    'collection',
+                    get_string('collections', 'local_trainings'),
+                    $collectionsnames,
+                    ['multiple' => true]
             );
             $mform->addRule('collection', get_string('errorallstatus', 'local_mentor_specialization'), 'required');
             $mform->addHelpButton('collection', 'collection', 'local_trainings');
         } else {
             if (isset($this->training) && $this->training->collection) {
                 $selectedcollections = explode(',', $this->training->collection);
-                $collectionshtml     = '<div class="form-autocomplete-selection">';
+                $collectionshtml = '<div class="form-autocomplete-selection">';
                 foreach ($selectedcollections as $skill) {
                     $collectionshtml .= \html_writer::tag('span', $skill,
-                        array('style' => 'font-size:100%;', 'class' => 'badge badge-info mb-3 mr-1', 'role' => 'listitem'));
+                            array('style' => 'font-size:100%;', 'class' => 'badge badge-info mb-3 mr-1', 'role' => 'listitem'));
                 }
                 $collectionshtml .= '</div>';
             } else {
@@ -243,7 +244,7 @@ class training_form extends \moodleform {
         }
 
         // Formation certifiante.
-        $radioarray   = array();
+        $radioarray = array();
         $radioarray[] = $mform->createElement('radio', 'certifying', '', get_string('yes'), 1);
         $radioarray[] = $mform->createElement('radio', 'certifying', '', get_string('no'), 0);
         $mform->addGroup($radioarray, 'certifying', get_string('certifying', 'local_trainings'), array(' '), false);
@@ -254,7 +255,7 @@ class training_form extends \moodleform {
 
         // Termes de la licence.
         $mform->addElement('select', 'licenseterms', get_string('licenseterms', 'local_trainings'),
-            local_mentor_specialization_get_license_terms());
+                local_mentor_specialization_get_license_terms());
         $mform->addRule('licenseterms', get_string('errorallstatus', 'local_mentor_specialization'), 'required');
         $mform->setDefault('licenseterms', 'cc-sa');
         if (!has_capability('local/mentor_specialization:changelicenseterms', $context)) {
@@ -263,8 +264,8 @@ class training_form extends \moodleform {
 
         // Prérequis.
         $mform->addElement('text', 'prerequisite',
-            get_string('prerequisite', 'local_trainings') . get_string('optional', 'local_mentor_specialization'),
-            array('size' => 40, 'class' => 'optional'));
+                get_string('prerequisite', 'local_trainings') . get_string('optional', 'local_mentor_specialization'),
+                array('size' => 40, 'class' => 'optional'));
         $mform->setType('prerequisite', PARAM_NOTAGS);
         $mform->addHelpButton('prerequisite', 'prerequisite', 'local_trainings');
         if (!has_capability('local/mentor_specialization:changeprerequisite', $context)) {
@@ -274,9 +275,9 @@ class training_form extends \moodleform {
         // Catchphrase.
         $mform->addElement('text', 'catchphrase', get_string('catchphrase', 'local_mentor_specialization') .
                                                   get_string('maxcaracters', 'local_mentor_specialization', 152) . $warningicon,
-            array(
-                'size' => 130
-            ));
+                array(
+                        'size' => 130
+                ));
         $mform->setType('catchphrase', PARAM_NOTAGS);
         if (!has_capability('local/mentor_specialization:changecatchphrase', $context)) {
             $mform->disabledIf('catchphrase', '');
@@ -285,7 +286,7 @@ class training_form extends \moodleform {
         // Objectifs de la formation.
         $mform->addElement('editor', 'traininggoal', get_string('traininggoal', 'local_trainings') . $warningicon, array
         (
-            'rows' => 8, 'cols' => 60
+                'rows' => 8, 'cols' => 60
         ));
         $mform->setType('traininggoal', PARAM_RAW);
         $mform->addHelpButton('traininggoal', 'traininggoal', 'local_trainings');
@@ -295,7 +296,7 @@ class training_form extends \moodleform {
 
         // Contenu de la formation.
         $mform->addElement('editor', 'content', get_string('trainingcontent', 'local_mentor_specialization') . $warningicon,
-            ['rows' => 8, 'cols' => 60]);
+                ['rows' => 8, 'cols' => 60]);
         $mform->setType('content', PARAM_RAW);
         $mform->addHelpButton('content', 'content', 'local_trainings');
         if (!has_capability('local/mentor_core:changecontent', $context)) {
@@ -308,13 +309,13 @@ class training_form extends \moodleform {
         }
 
         $estimatedpresencetime[] = $mform->createElement('text', 'presenceestimatedtimehours', 'presenceestimatedtimehours',
-            array('size' => 2));
+                array('size' => 2));
         $estimatedpresencetime[] = $mform->createElement('static', '', '', get_string('hours', 'local_mentor_specialization'));
         $estimatedpresencetime[] = $mform->createElement('select', 'presenceestimatedtimeminutes', 'presenceestimatedtimeminutes',
-            $minutes);
+                $minutes);
         $estimatedpresencetime[] = $mform->createElement('static', '', '', get_string('minutes', 'local_mentor_specialization'));
         $mform->addGroup($estimatedpresencetime, 'presenceestimatedtime', get_string('presenceestimatedtime', 'local_trainings'),
-            array(' '), false);
+                array(' '), false);
         $mform->setType('presenceestimatedtimehours', PARAM_NOTAGS);
         $mform->addHelpButton('presenceestimatedtime', 'presenceestimatedtime', 'local_trainings');
         $mform->setDefault('presenceestimatedtimehours', '00');
@@ -325,13 +326,13 @@ class training_form extends \moodleform {
 
         // Durée estimée à distance.
         $estimatedremotetime[] = $mform->createElement('text', 'remoteestimatedtimehours', 'remoteestimatedtimehours',
-            array('size' => 2));
+                array('size' => 2));
         $estimatedremotetime[] = $mform->createElement('static', '', '', get_string('hours', 'local_mentor_specialization'));
         $estimatedremotetime[] = $mform->createElement('select', 'remoteestimatedtimeminutes', 'remoteestimatedtimeminutes',
-            $minutes);
+                $minutes);
         $estimatedremotetime[] = $mform->createElement('static', '', '', get_string('minutes', 'local_mentor_specialization'));
         $mform->addGroup($estimatedremotetime, 'remoteestimatedtime', get_string('remoteestimatedtime', 'local_trainings'),
-            array(' '), false);
+                array(' '), false);
         $mform->setType('remoteestimatedtimehours', PARAM_NOTAGS);
         $mform->addHelpButton('remoteestimatedtime', 'remoteestimatedtime', 'local_trainings');
         $mform->setDefault('remoteestimatedtimehours', '00');
@@ -342,33 +343,33 @@ class training_form extends \moodleform {
 
         // Modalités envisagées de la formation.
         $mform->addElement('select', 'trainingmodalities', get_string('trainingmodalities', 'local_trainings') . $warningicon,
-            array_map(function($modality) {
-                return get_string($modality, 'local_mentor_specialization');
-            }, $this->modalities), array('style' => 'width : 405px'));
+                array_map(function($modality) {
+                    return get_string($modality, 'local_mentor_specialization');
+                }, $this->modalities), array('style' => 'width : 405px'));
         if (!has_capability('local/mentor_specialization:changetrainingmodalities', $context)) {
             $mform->disabledIf('trainingmodalities', '');
         }
 
         // Teaser.
         $mform->addElement('text', 'teaser',
-            get_string('teaservideo', 'local_trainings') . get_string('optional', 'local_mentor_specialization'),
-            array('size' => 40, 'class' => 'optional'));
+                get_string('teaservideo', 'local_trainings') . get_string('optional', 'local_mentor_specialization'),
+                array('size' => 40, 'class' => 'optional'));
         $mform->setType('teaser', PARAM_RAW);
         $mform->addHelpButton('teaser', 'teaservideo', 'local_trainings');
         if (!has_capability('local/mentor_specialization:changeteaser', $context)) {
             $mform->disabledIf('teaser', '');
         }
 
-        $teaserpicture    = is_null($this->training) ? false : $this->training->get_training_picture('teaserpicture');
+        $teaserpicture = is_null($this->training) ? false : $this->training->get_training_picture('teaserpicture');
         $teaserpictureurl = '';
         if ($teaserpicture) {
             $teaserpictureurl = \moodle_url::make_pluginfile_url(
-                $teaserpicture->get_contextid(),
-                $teaserpicture->get_component(),
-                $teaserpicture->get_filearea(),
-                $teaserpicture->get_itemid(),
-                $teaserpicture->get_filepath(),
-                $teaserpicture->get_filename()
+                    $teaserpicture->get_contextid(),
+                    $teaserpicture->get_component(),
+                    $teaserpicture->get_filearea(),
+                    $teaserpicture->get_itemid(),
+                    $teaserpicture->get_filepath(),
+                    $teaserpicture->get_filename()
             );
         }
 
@@ -381,71 +382,71 @@ class training_form extends \moodleform {
                                      '" width="72px"/></div>';
 
                 $teaserpictureoption = [
-                    'label'           => get_string('teaserpicture', 'local_trainings') .
-                                         get_string('optional', 'local_mentor_specialization'),
-                    'help_text'       => get_string('teaserpicture_help', 'local_trainings'),
-                    'help_icon_title' => get_string('teaserpicture_help_icon', 'local_trainings'),
-                    'html'            => $teaserpicturehtml,
+                        'label' => get_string('teaserpicture', 'local_trainings') .
+                                   get_string('optional', 'local_mentor_specialization'),
+                        'help_text' => get_string('teaserpicture_help', 'local_trainings'),
+                        'help_icon_title' => get_string('teaserpicture_help_icon', 'local_trainings'),
+                        'html' => $teaserpicturehtml,
                 ];
 
                 // Custom form field.
                 $mform->addElement('html',
-                    $OUTPUT->render_from_template('local_mentor_core/form_custom_field', $teaserpictureoption));
+                        $OUTPUT->render_from_template('local_mentor_core/form_custom_field', $teaserpictureoption));
             }
         } else {
 
             // Delete the teaser picture.
             if ($teaserpictureurl) {
                 $mform->addElement('static',
-                    'currentteaserpicture',
-                    '<div class="form-group optional"><div><label>' .
-                    get_string('currentteaserpicture', 'local_mentor_specialization') .
-                    get_string('optional', 'local_mentor_specialization') .
-                    '</label></div></div>',
-                    '<img src="' . $teaserpictureurl .
-                    '" width="72px"/>');
+                        'currentteaserpicture',
+                        '<div class="form-group optional"><div><label>' .
+                        get_string('currentteaserpicture', 'local_mentor_specialization') .
+                        get_string('optional', 'local_mentor_specialization') .
+                        '</label></div></div>',
+                        '<img src="' . $teaserpictureurl .
+                        '" width="72px"/>');
 
                 $mform->addElement('checkbox', 'deleteteaserpicture',
-                    get_string('deleteteaserpicture', 'local_mentor_specialization'));
+                        get_string('deleteteaserpicture', 'local_mentor_specialization'));
                 $mform->setDefault('deleteteaserpicture', 0);
             }
 
             $mform->addElement('filepicker', 'teaserpicture',
-                get_string('teaserpicture', 'local_trainings') . ' ' .
-                get_string('recommandedratio', 'local_mentor_core', '16:9') .
-                get_string('optional', 'local_mentor_specialization'),
-                array('class' => 'optional'), array(
-                    'accepted_types' => $acceptedtypes, 'subdirs' => 0, 'maxfiles' => 1,
-                    'maxbytes'       => 1024000
-                ));
+                    get_string('teaserpicture', 'local_trainings') . ' ' .
+                    get_string('recommandedratio', 'local_mentor_core', '16:9') .
+                    get_string('optional', 'local_mentor_specialization'),
+                    array('class' => 'optional'), array(
+                            'accepted_types' => $acceptedtypes, 'subdirs' => 0, 'maxfiles' => 1,
+                            'maxbytes' => 1024000
+                    ));
             $mform->addHelpButton('teaserpicture', 'teaserpicture', 'local_trainings');
         }
 
         // Identifiant SIRH d’origine.
         $mform->addElement('text', 'idsirh',
-            get_string('idsirh', 'local_trainings') . get_string('optional', 'local_mentor_specialization'),
-            array('size' => 40, 'class' => 'optional'));
+                get_string('idsirh', 'local_trainings') . get_string('optional', 'local_mentor_specialization'),
+                array('size' => 40, 'class' => 'optional'));
         $mform->setType('idsirh', PARAM_NOTAGS);
         if (!has_capability('local/mentor_specialization:changeidsirh', $context)) {
             $mform->disabledIf('idsirh', '');
         }
 
         // Métiers.
-        $jobarray   = array();
+        $jobarray = array();
         $jobarray[] = $mform->createElement('text', 'typicaljob', get_string('typicaljob', 'local_trainings'), array('size' => 40));
         $jobarray[] = $mform->createElement('static', 'typicaljobstaticrime', '',
-            'Référentiel :&nbsp;<a href="' . get_config('local_trainings', 'rime_link') .
-            '" target="_blank" rel="external help opener">
+                'Référentiel :&nbsp;<a href="' . get_config('local_trainings', 'rime_link') .
+                '" target="_blank" rel="external help opener">
                                         RIME
                                     </a>&nbsp;(vous pouvez également vous aider des référentiels métiers des ministères)');
         $jobarray[] = $mform->createElement('static', 'typicaljobstaticsep', '', \html_writer::tag('span', '&nbsp;'));
         $mform->addGroup($jobarray, 'typicaljobhtml',
-            get_string('typicaljob', 'local_trainings') . get_string('optional', 'local_mentor_specialization'), array(' '),
-            false);
+                get_string('typicaljob', 'local_trainings') . get_string('optional', 'local_mentor_specialization'), array(' '),
+                false);
         $mform->setType('typicaljob', PARAM_NOTAGS);
 
-        $element             = $this->_form->getElement('typicaljobhtml');
-        $attributes          = $element->getAttributes();
+        $element = $this->_form->getElement('typicaljobhtml');
+        $attributes = $element->getAttributes();
         $attributes['class'] = 'optional';
         $element->setAttributes($attributes);
 
@@ -456,16 +457,16 @@ class training_form extends \moodleform {
         // Compétences.
         if (has_capability('local/mentor_specialization:changeskills', $context)) {
             $mform->addElement('autocomplete', 'skills',
-                get_string('skills', 'local_trainings') . get_string('optional', 'local_mentor_specialization'),
-                $this->allskills,
-                ['multiple' => true, 'class' => 'optional']);
+                    get_string('skills', 'local_trainings') . get_string('optional', 'local_mentor_specialization'),
+                    $this->allskills,
+                    ['multiple' => true, 'class' => 'optional']);
         } else {
             if (isset($this->training) && $this->training->skills) {
                 $selectedskills = explode(',', $this->training->skills);
-                $skillshtml     = '<div class="form-autocomplete-selection">';
+                $skillshtml = '<div class="form-autocomplete-selection">';
                 foreach ($selectedskills as $skill) {
                     $skillshtml .= \html_writer::tag('span', $this->allskills[$skill],
-                        array('style' => 'font-size:100%;', 'class' => 'badge badge-info mb-3 mr-1', 'role' => 'listitem'));
+                            array('style' => 'font-size:100%;', 'class' => 'badge badge-info mb-3 mr-1', 'role' => 'listitem'));
                 }
                 $skillshtml .= '</div>';
             } else {
@@ -477,8 +478,8 @@ class training_form extends \moodleform {
 
         // Organisme producteur.
         $mform->addElement('text', 'producingorganization',
-            get_string('producingorganization', 'local_trainings') . get_string('optional', 'local_mentor_specialization'),
-            array('size' => 40, 'class' => 'optional'));
+                get_string('producingorganization', 'local_trainings') . get_string('optional', 'local_mentor_specialization'),
+                array('size' => 40, 'class' => 'optional'));
         $mform->setType('producingorganization', PARAM_NOTAGS);
         $mform->addHelpButton('producingorganization', 'producingorganization', 'local_trainings');
         if (!has_capability('local/mentor_specialization:changeproducingorganization', $context)) {
@@ -487,10 +488,10 @@ class training_form extends \moodleform {
 
         // Nom abrégé de l'organisme producteur.
         $mform->addElement('text', 'producerorganizationshortname',
-            get_string('producerorganizationshortname', 'local_mentor_specialization') .
-            get_string('maxcaracters', 'local_mentor_specialization', 18) .
-            get_string('optional', 'local_mentor_specialization'),
-            array('size' => 40, 'class' => 'optional'));
+                get_string('producerorganizationshortname', 'local_mentor_specialization') .
+                get_string('maxcaracters', 'local_mentor_specialization', 18) .
+                get_string('optional', 'local_mentor_specialization'),
+                array('size' => 40, 'class' => 'optional'));
         $mform->setType('producerorganizationshortname', PARAM_NOTAGS);
         $mform->addHelpButton('producerorganizationshortname', 'producerorganizationshortname', 'local_mentor_specialization');
         if (!has_capability('local/mentor_specialization:changeproducerorganizationshortname', $context)) {
@@ -499,17 +500,17 @@ class training_form extends \moodleform {
 
         // Logo de l’organisme producteur.
         $producerorganizationlogo = is_null($this->training) ? false :
-            $this->training->get_training_picture('producerorganizationlogo');
+                $this->training->get_training_picture('producerorganizationlogo');
 
         $producerorganizationlogourl = '';
         if ($producerorganizationlogo) {
             $producerorganizationlogourl = \moodle_url::make_pluginfile_url(
-                $producerorganizationlogo->get_contextid(),
-                $producerorganizationlogo->get_component(),
-                $producerorganizationlogo->get_filearea(),
-                $producerorganizationlogo->get_itemid(),
-                $producerorganizationlogo->get_filepath(),
-                $producerorganizationlogo->get_filename()
+                    $producerorganizationlogo->get_contextid(),
+                    $producerorganizationlogo->get_component(),
+                    $producerorganizationlogo->get_filearea(),
+                    $producerorganizationlogo->get_itemid(),
+                    $producerorganizationlogo->get_filepath(),
+                    $producerorganizationlogo->get_filename()
             );
         }
 
@@ -528,30 +529,30 @@ class training_form extends \moodleform {
             if ($producerorganizationlogo) {
 
                 $mform->addElement('static', 'currentproducerorganizationlogo',
-                    '<div class="form-group optional"><div><label>' .
-                    get_string('currentproducerorganizationlogo', 'local_mentor_specialization') .
-                    get_string('optional', 'local_mentor_specialization') . '</label></div></div>',
-                    '<img src="' . $producerorganizationlogourl .
-                    '" width="72px"/>');
+                        '<div class="form-group optional"><div><label>' .
+                        get_string('currentproducerorganizationlogo', 'local_mentor_specialization') .
+                        get_string('optional', 'local_mentor_specialization') . '</label></div></div>',
+                        '<img src="' . $producerorganizationlogourl .
+                        '" width="72px"/>');
 
                 $mform->addElement('checkbox', 'deleteproducerorganizationlogo',
-                    get_string('deleteproducerorganizationlogo', 'local_mentor_specialization'));
+                        get_string('deleteproducerorganizationlogo', 'local_mentor_specialization'));
                 $mform->setDefault('deleteproducerorganizationlogo', 0);
             }
 
             $squarestr = get_string('square', 'local_mentor_core');
             $mform->addElement('filepicker', 'producerorganizationlogo',
-                get_string('producerorganizationlogo', 'local_trainings') . ' ' .
-                get_string('recommandedratio', 'local_mentor_core', $squarestr) .
-                get_string('optional', 'local_mentor_specialization'),
-                array('class' => 'optional'),
-                array('accepted_types' => $acceptedtypes, 'subdirs' => 0, 'maxfiles' => 1, 'maxbytes' => 1024000));
+                    get_string('producerorganizationlogo', 'local_trainings') . ' ' .
+                    get_string('recommandedratio', 'local_mentor_core', $squarestr) .
+                    get_string('optional', 'local_mentor_specialization'),
+                    array('class' => 'optional'),
+                    array('accepted_types' => $acceptedtypes, 'subdirs' => 0, 'maxfiles' => 1, 'maxbytes' => 1024000));
         }
 
         // Contact organisme producteur.
         $mform->addElement('text', 'contactproducerorganization', get_string('contactproducerorganization', 'local_trainings') .
                                                                   get_string('optional', 'local_mentor_specialization'),
-            array('size' => 40, 'class' => 'optional'));
+                array('size' => 40, 'class' => 'optional'));
         $mform->setType('contactproducerorganization', PARAM_NOTAGS);
         $mform->addHelpButton('contactproducerorganization', 'contactproducerorganization', 'local_trainings');
         if (!has_capability('local/mentor_specialization:changecontactproducerorganization', $context)) {
@@ -560,8 +561,8 @@ class training_form extends \moodleform {
 
         // Concepteur(s).
         $mform->addElement('text', 'designers',
-            get_string('designers', 'local_trainings') . get_string('optional', 'local_mentor_specialization'),
-            array('size' => 40, 'class' => 'optional'));
+                get_string('designers', 'local_trainings') . get_string('optional', 'local_mentor_specialization'),
+                array('size' => 40, 'class' => 'optional'));
         $mform->setType('designers', PARAM_NOTAGS);
         $mform->addHelpButton('designers', 'designers', 'local_trainings');
         if (!has_capability('local/mentor_specialization:changedesigners', $context)) {
@@ -585,10 +586,10 @@ class training_form extends \moodleform {
         $mform->setType('returnto', PARAM_LOCALURL);
 
         if (has_capability('local/trainings:update', $context)) {
-            $buttonarray   = array();
+            $buttonarray = array();
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
             $buttonarray[] = &$mform->createElement('submit', 'submitbuttonpreview', 'Enregistrer et prévisualiser',
-                ['id' => 'training-preview'], ['class' => 'test'], ['class' => 'test']);
+                    ['id' => 'training-preview'], ['class' => 'test'], ['class' => 'test']);
             $buttonarray[] = &$mform->createElement('cancel');
             $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
             $mform->closeHeaderBefore('buttonar');
@@ -617,14 +618,14 @@ class training_form extends \moodleform {
 
         // Check thumbnail.
         if (in_array($data['status'], $statusmandatorythumbnail)) {
-            $fs      = get_file_storage();
+            $fs = get_file_storage();
             $context = \context_user::instance($USER->id);
 
             $thumbnail = $fs->get_area_files(
-                $context->id,
-                'user',
-                'draft', $data['thumbnail'],
-                'id DESC', false);
+                    $context->id,
+                    'user',
+                    'draft', $data['thumbnail'],
+                    'id DESC', false);
 
             if (isset($data['deletethumbnail']) && $data['deletethumbnail'] == 1 && $thumbnail) {
                 $errors['deletethumbnail'] = get_string('errorthumbnail', 'local_mentor_specialization');

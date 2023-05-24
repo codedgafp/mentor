@@ -40,8 +40,8 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -124,13 +124,13 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
     public function init_role() {
         global $DB;
 
-        $db      = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $manager = $db->get_role_by_name('manager');
 
         if (!$manager) {
             $otherrole = $DB->get_record('role', array('archetype' => 'manager'), '*', IGNORE_MULTIPLE);
             $this->duplicate_role($otherrole->shortname, 'manager', 'Manager',
-                'manager');
+                    'manager');
         }
     }
 
@@ -153,16 +153,16 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
         $this->init_database();
 
         return [
-            [
-                'name'      => 'New Entity 1',
-                'shortname' => 'New Entity 1',
-                'userid'    => 2  // Set the admin user as manager of the entity.
-            ],
-            [
-                'name'      => 'New Entity 2',
-                'shortname' => 'New Entity 2',
-                'userid'    => 2  // Set the admin user as manager of the entity.
-            ],
+                [
+                        'name' => 'New Entity 1',
+                        'shortname' => 'New Entity 1',
+                        'userid' => 2  // Set the admin user as manager of the entity.
+                ],
+                [
+                        'name' => 'New Entity 2',
+                        'shortname' => 'New Entity 2',
+                        'userid' => 2  // Set the admin user as manager of the entity.
+                ],
         ];
     }
 
@@ -182,14 +182,14 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
         // Init test data.
         $trainingdata = new stdClass();
 
-        $trainingdata->name      = 'fullname';
+        $trainingdata->name = 'fullname';
         $trainingdata->shortname = 'shortname';
-        $trainingdata->content   = 'summary';
+        $trainingdata->content = 'summary';
 
         // Create training object.
         $trainingdata->traininggoal = 'TEST TRAINING';
-        $trainingdata->thumbnail    = '';
-        $trainingdata->status       = \local_mentor_core\training::STATUS_DRAFT;
+        $trainingdata->thumbnail = '';
+        $trainingdata->status = \local_mentor_core\training::STATUS_DRAFT;
 
         try {
             // Get entity object for default category.
@@ -201,9 +201,9 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
         }
 
         // Fill with entity data.
-        $formationid                     = $entity->get_entity_formation_category();
-        $trainingdata->categorychildid   = $formationid;
-        $trainingdata->categoryid        = $entity->id;
+        $formationid = $entity->get_entity_formation_category();
+        $trainingdata->categorychildid = $formationid;
+        $trainingdata->categoryid = $entity->id;
         $trainingdata->creativestructure = $entity->id;
 
         return $trainingdata;
@@ -230,7 +230,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $entitydata              = $this->get_entities_data()[0];
+        $entitydata = $this->get_entities_data()[0];
         $entitydata['shortname'] = 'shortnameentity';
 
         // Test standard Entity creation.
@@ -449,7 +449,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
-        $newdata       = new stdClass();
+        $newdata = new stdClass();
         $newdata->name = 'Name updated';
 
         try {
@@ -498,7 +498,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
             self::fail($e->getMessage());
         }
 
-        $subentitydata             = $this->get_entities_data()[1];
+        $subentitydata = $this->get_entities_data()[1];
         $subentitydata['parentid'] = $entityid;
 
         // Test standard sub Entity creation.
@@ -510,8 +510,8 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
         }
 
         // Set new data sub entity.
-        $newdata           = new stdClass();
-        $newdata->name     = 'Name updated';
+        $newdata = new stdClass();
+        $newdata->name = 'Name updated';
         $newdata->parentid = $entityid;
 
         try {
@@ -597,7 +597,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
             self::fail($e->getMessage());
         }
 
-        $subentitydata             = $this->get_entities_data()[1];
+        $subentitydata = $this->get_entities_data()[1];
         $subentitydata['parentid'] = $entityid;
 
         // Test standard sub Entity creation.
@@ -694,7 +694,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
             self::fail($e->getMessage());
         }
 
-        $subentitydata             = $this->get_entities_data()[1];
+        $subentitydata = $this->get_entities_data()[1];
         $subentitydata['parentid'] = $entityid;
 
         // Test standard sub Entity creation.
@@ -794,43 +794,43 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
-            'shortname' => 'New Entity 1',
+                'name' => 'New Entity 1',
+                'shortname' => 'New Entity 1',
         ]);
 
         $entityid2 = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'Sub Entity 2',
-            'shortname' => 'Sub Entity 2',
-            'parentid'  => $entityid
+                'name' => 'Sub Entity 2',
+                'shortname' => 'Sub Entity 2',
+                'parentid' => $entityid
         ]);
 
-        $filter                  = new \stdClass();
+        $filter = new \stdClass();
         $filter->search['value'] = 'entity';
-        $filter->order['dir']    = 'ASC';
-        $filter->start           = 0;
-        $filter->length          = 100;
+        $filter->order['dir'] = 'ASC';
+        $filter->start = 0;
+        $filter->length = 100;
 
         $allentities = \local_mentor_core\entity_api::get_all_entities(false, [], true, $filter);
         self::assertCount(2, $allentities);
         self::assertEquals($allentities[0]->id, $entityid);
         self::assertEquals($allentities[1]->id, $entityid2);
 
-        $filter                  = new \stdClass();
+        $filter = new \stdClass();
         $filter->search['value'] = 'New';
-        $filter->order['dir']    = 'ASC';
-        $filter->start           = 0;
-        $filter->length          = 100;
+        $filter->order['dir'] = 'ASC';
+        $filter->start = 0;
+        $filter->length = 100;
 
         $allentities = \local_mentor_core\entity_api::get_all_entities(false, [], true, $filter);
         self::assertCount(2, $allentities);
         self::assertEquals($allentities[0]->id, $entityid);
         self::assertEquals($allentities[1]->id, $entityid2);
 
-        $filter                  = new \stdClass();
+        $filter = new \stdClass();
         $filter->search['value'] = 'Sub';
-        $filter->order['dir']    = 'ASC';
-        $filter->start           = 0;
-        $filter->length          = 100;
+        $filter->order['dir'] = 'ASC';
+        $filter->start = 0;
+        $filter->length = 100;
 
         $allentities = \local_mentor_core\entity_api::get_all_entities(false, [], true, $filter);
         self::assertCount(1, $allentities);
@@ -860,26 +860,26 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
         $DB->delete_records('course_categories');
 
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity A',
-            'shortname' => 'New Entity A',
+                'name' => 'New Entity A',
+                'shortname' => 'New Entity A',
         ]);
 
         $entityid2 = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'Sub Entity A',
-            'shortname' => 'Sub Entity A',
-            'parentid'  => $entityid
+                'name' => 'Sub Entity A',
+                'shortname' => 'Sub Entity A',
+                'parentid' => $entityid
         ]);
 
         $entityid3 = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity B',
-            'shortname' => 'New Entity B',
+                'name' => 'New Entity B',
+                'shortname' => 'New Entity B',
         ]);
 
-        $filter                  = new \stdClass();
+        $filter = new \stdClass();
         $filter->search['value'] = null;
-        $filter->order['dir']    = 'ASC';
-        $filter->start           = 0;
-        $filter->length          = 100;
+        $filter->order['dir'] = 'ASC';
+        $filter->start = 0;
+        $filter->length = 100;
 
         $allentities = \local_mentor_core\entity_api::get_all_entities(false, [], true, $filter);
         self::assertCount(3, $allentities);
@@ -887,11 +887,11 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
         self::assertEquals($allentities[1]->id, $entityid2);
         self::assertEquals($allentities[2]->id, $entityid3);
 
-        $filter                  = new \stdClass();
+        $filter = new \stdClass();
         $filter->search['value'] = null;
-        $filter->order['dir']    = 'DESC';
-        $filter->start           = 0;
-        $filter->length          = 100;
+        $filter->order['dir'] = 'DESC';
+        $filter->start = 0;
+        $filter->length = 100;
 
         $allentities = \local_mentor_core\entity_api::get_all_entities(false, [], true, $filter);
         self::assertCount(3, $allentities);
@@ -930,7 +930,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
             self::fail($e->getMessage());
         }
 
-        $subentitydata             = $this->get_entities_data()[1];
+        $subentitydata = $this->get_entities_data()[1];
         $subentitydata['parentid'] = $entityid;
 
         // Test standard sub Entity creation.
@@ -1025,7 +1025,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
             self::fail($e->getMessage());
         }
 
-        $subentitydata             = $this->get_entities_data()[1];
+        $subentitydata = $this->get_entities_data()[1];
         $subentitydata['parentid'] = $entityid;
 
         // Test standard sub Entity creation.
@@ -1076,7 +1076,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         $newuser = self::getDataGenerator()->create_user();
 
-        $entitydata           = $this->get_entities_data()[0];
+        $entitydata = $this->get_entities_data()[0];
         $entitydata['userid'] = 0; // Remove the manager.
 
         // Test standard Entity creation.
@@ -1087,7 +1087,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
             self::fail($e->getMessage());
         }
 
-        $subentitydata             = $this->get_entities_data()[1];
+        $subentitydata = $this->get_entities_data()[1];
         $subentitydata['parentid'] = $entityid;
 
         // Test standard sub Entity creation.
@@ -1178,51 +1178,51 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
             $entityname = 'entity' . $i;
 
             $entityid = \local_mentor_core\entity_api::create_entity(
-                array(
-                    'name'      => $entityname,
-                    'shortname' => $entityname
-                )
+                    array(
+                            'name' => $entityname,
+                            'shortname' => $entityname
+                    )
             );
 
             \local_mentor_core\entity_api::create_entity(
-                array(
-                    'name'      => 'sub' . $entityname,
-                    'shortname' => 'sub' . $entityname,
-                    'parentid'  => $entityid
-                )
+                    array(
+                            'name' => 'sub' . $entityname,
+                            'shortname' => 'sub' . $entityname,
+                            'parentid' => $entityid
+                    )
             );
         }
 
-        $data               = new \stdClass();
-        $data->search       = null;
-        $data->order        = [];
+        $data = new \stdClass();
+        $data->search = null;
+        $data->order = [];
         $data->order['dir'] = 'ASC';
-        $data->search       = array('value' => null);
-        $data->draw         = null;
-        $data->length       = 10;
-        $data->start        = 0;
+        $data->search = array('value' => null);
+        $data->draw = null;
+        $data->length = 10;
+        $data->start = 0;
 
         // With admin.
         $managedentities = \local_mentor_core\entity_api::get_managed_entities(null, false, $data, true);
         self::assertCount(10, $managedentities);
         self::assertEquals('entity0', current($managedentities)->name);
 
-        $data->length    = 5;
-        $data->start     = 5;
+        $data->length = 5;
+        $data->start = 5;
         $managedentities = \local_mentor_core\entity_api::get_managed_entities(null, false, $data, true);
         self::assertCount(5, $managedentities);
         self::assertEquals('subentity2', current($managedentities)->name);
 
-        $data->length       = 10;
-        $data->start        = 0;
+        $data->length = 10;
+        $data->start = 0;
         $data->order['dir'] = 'DESC';
-        $managedentities    = \local_mentor_core\entity_api::get_managed_entities(null, false, $data, true);
+        $managedentities = \local_mentor_core\entity_api::get_managed_entities(null, false, $data, true);
         self::assertCount(10, $managedentities);
         self::assertEquals('subentity9', current($managedentities)->name);
 
         $data->order['dir'] = 'ASC';
-        $data->search       = array('value' => 'entity3');
-        $managedentities    = \local_mentor_core\entity_api::get_managed_entities(null, false, $data, true);
+        $data->search = array('value' => 'entity3');
+        $managedentities = \local_mentor_core\entity_api::get_managed_entities(null, false, $data, true);
         self::assertCount(2, $managedentities);
         self::assertEquals('entity3', current($managedentities)->name);
 
@@ -1230,52 +1230,52 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
             $entityname = 'entity' . $i;
 
             $entityid = \local_mentor_core\entity_api::create_entity(
-                array(
-                    'name'      => $entityname,
-                    'shortname' => $entityname,
-                    'userid'    => $newuser->id
-                )
+                    array(
+                            'name' => $entityname,
+                            'shortname' => $entityname,
+                            'userid' => $newuser->id
+                    )
             );
 
             \local_mentor_core\entity_api::create_entity(
-                array(
-                    'name'      => 'sub' . $entityname,
-                    'shortname' => 'sub' . $entityname,
-                    'parentid'  => $entityid
-                )
+                    array(
+                            'name' => 'sub' . $entityname,
+                            'shortname' => 'sub' . $entityname,
+                            'parentid' => $entityid
+                    )
             );
         }
 
         // With user.
-        $data               = new \stdClass();
-        $data->search       = null;
-        $data->order        = [];
+        $data = new \stdClass();
+        $data->search = null;
+        $data->order = [];
         $data->order['dir'] = 'ASC';
-        $data->search       = array('value' => null);
-        $data->draw         = null;
-        $data->length       = 10;
-        $data->start        = 0;
+        $data->search = array('value' => null);
+        $data->draw = null;
+        $data->length = 10;
+        $data->start = 0;
 
         $managedentities = \local_mentor_core\entity_api::get_managed_entities($newuser, false, $data, true);
         self::assertCount(10, $managedentities);
         self::assertEquals('entity10', current($managedentities)->name);
 
-        $data->length    = 5;
-        $data->start     = 5;
+        $data->length = 5;
+        $data->start = 5;
         $managedentities = \local_mentor_core\entity_api::get_managed_entities($newuser, false, $data, true);
         self::assertCount(5, $managedentities);
         self::assertEquals('subentity12', current($managedentities)->name);
 
-        $data->length       = 10;
-        $data->start        = 0;
+        $data->length = 10;
+        $data->start = 0;
         $data->order['dir'] = 'DESC';
-        $managedentities    = \local_mentor_core\entity_api::get_managed_entities($newuser, false, $data, true);
+        $managedentities = \local_mentor_core\entity_api::get_managed_entities($newuser, false, $data, true);
         self::assertCount(10, $managedentities);
         self::assertEquals('subentity19', current($managedentities)->name);
 
         $data->order['dir'] = 'ASC';
-        $data->search       = array('value' => 'entity13');
-        $managedentities    = \local_mentor_core\entity_api::get_managed_entities($newuser, false, $data, true);
+        $data->search = array('value' => 'entity13');
+        $managedentities = \local_mentor_core\entity_api::get_managed_entities($newuser, false, $data, true);
         self::assertCount(2, $managedentities);
         self::assertEquals('entity13', current($managedentities)->name);
 
@@ -1310,7 +1310,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
             // Test standard Entity creation.
             try {
                 $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
-                $list[]   = $entitydata['name'];
+                $list[] = $entitydata['name'];
             } catch (\Exception $e) {
                 // Failed if the name of this entity is already in use.
                 self::fail($e->getMessage());
@@ -1319,8 +1319,8 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         try {
             self::assertEquals(
-                implode("\n", $list),
-                \local_mentor_core\entity_api::get_entities_list(true, true)
+                    implode("\n", $list),
+                    \local_mentor_core\entity_api::get_entities_list(true, true)
             );
         } catch (\Exception $e) {
             self::fail($e->getMessage());
@@ -1350,25 +1350,25 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         $list = [];
 
-        $entitydata           = $this->get_entities_data()[0];
+        $entitydata = $this->get_entities_data()[0];
         $entitydata['userid'] = 0; // Remove the manager.
 
         // Test standard Entity creation.
         try {
             $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
-            $list[]   = $entitydata['name'];
+            $list[] = $entitydata['name'];
         } catch (\Exception $e) {
             // Failed if the name of this entity is already in use.
             self::fail($e->getMessage());
         }
 
-        $subentitydata             = $this->get_entities_data()[1];
+        $subentitydata = $this->get_entities_data()[1];
         $subentitydata['parentid'] = $entityid;
 
         // Test standard sub Entity creation.
         try {
             $subentityid = \local_mentor_core\entity_api::create_entity($subentitydata);
-            $list[]      = $subentitydata['name'];
+            $list[] = $subentitydata['name'];
         } catch (\Exception $e) {
             // Failed if the name of this entity is already in use.
             self::fail($e->getMessage());
@@ -1376,8 +1376,8 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         try {
             self::assertEquals(
-                implode("\n", $list),
-                \local_mentor_core\entity_api::get_entities_list(false, true)
+                    implode("\n", $list),
+                    \local_mentor_core\entity_api::get_entities_list(false, true)
             );
         } catch (\Exception $e) {
             self::fail($e->getMessage());
@@ -1451,8 +1451,8 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
         // Test with a shortname too long.
         try {
             $entity = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'entityname',
-                'shortname' => 'shortname too long for this entity'
+                    'name' => 'entityname',
+                    'shortname' => 'shortname too long for this entity'
             ]);
         } catch (\Exception $e) {
             // Failed if the name of this entity is already in use.
@@ -1462,8 +1462,8 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
         // Create a valid entity.
         try {
             $entity = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'entityname',
-                'shortname' => 'entityshortname'
+                    'name' => 'entityname',
+                    'shortname' => 'entityshortname'
             ]);
         } catch (\Exception $e) {
             // Failed if the name of this entity is already in use.
@@ -1473,8 +1473,8 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
         // Test with a duplicated shortname.
         try {
             $entity = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'entityname2',
-                'shortname' => 'entityshortname'
+                    'name' => 'entityname2',
+                    'shortname' => 'entityshortname'
             ]);
         } catch (\Exception $e) {
             // Failed if the name of this entity is already in use.
@@ -1630,7 +1630,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         try {
             $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'Test managed entity', 'shortname' => 'TME']);
-            $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+            $entity = \local_mentor_core\entity_api::get_entity($entityid);
             $entity->create_edadmin_courses_if_missing();
             $entitycourse = $entity->get_edadmin_courses('entities');
         } catch (\Exception $e) {
@@ -1672,7 +1672,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         $this->init_database();
 
-        $entitydata           = $this->get_entities_data()[0];
+        $entitydata = $this->get_entities_data()[0];
         $entitydata['userid'] = 0; // Remove the manager.
 
         // Test standard Entity creation.
@@ -1683,7 +1683,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
             self::fail($e->getMessage());
         }
 
-        $subentitydata             = $this->get_entities_data()[1];
+        $subentitydata = $this->get_entities_data()[1];
         $subentitydata['parentid'] = $entityid;
 
         // Test standard sub Entity creation.
@@ -1769,13 +1769,13 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
         $userentities = \local_mentor_core\entity_api::get_user_entities($newuser->id);
         self::assertEquals(0, count($userentities));
 
-        $entitydata           = $this->get_entities_data()[0];
+        $entitydata = $this->get_entities_data()[0];
         $entitydata['userid'] = 0; // Remove the manager.
 
         // Test standard Entity creation.
         try {
             $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
-            $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+            $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
             $entity->add_member($newuser);
         } catch (\Exception $e) {
@@ -1783,13 +1783,13 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
             self::fail($e->getMessage());
         }
 
-        $subentitydata             = $this->get_entities_data()[1];
+        $subentitydata = $this->get_entities_data()[1];
         $subentitydata['parentid'] = $entityid;
 
         // Test standard sub Entity creation.
         try {
             $subentityid = \local_mentor_core\entity_api::create_entity($subentitydata);
-            $subentity   = \local_mentor_core\entity_api::get_entity($subentityid);
+            $subentity = \local_mentor_core\entity_api::get_entity($subentityid);
 
             $subentity->add_member($newuser);
 
@@ -1836,7 +1836,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
         try {
             $entity = \local_mentor_core\entity_api::get_entity($entityid);
             self::assertCount(count($listtypecourse),
-                $entity->get_edadmin_courses());
+                    $entity->get_edadmin_courses());
         } catch (\Exception $e) {
             // Fail if entity does not exist.
             self::fail($e->getMessage());
@@ -1862,7 +1862,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $entitydata           = $this->get_entities_data()[0];
+        $entitydata = $this->get_entities_data()[0];
         $entitydata['userid'] = 0; // Remove the manager.
 
         // Test standard Entity creation.
@@ -1873,7 +1873,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
             self::fail($e->getMessage());
         }
 
-        $subentitydata             = $this->get_entities_data()[1];
+        $subentitydata = $this->get_entities_data()[1];
         $subentitydata['parentid'] = $entityid;
 
         // Test standard sub Entity creation.
@@ -1884,8 +1884,8 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
             self::fail($e->getMessage());
         }
 
-        $listtypecourse                        = format_edadmin::get_all_type_name();
-        $listedadmincourseexception            = \local_mentor_core\entity::SUB_ENTITY_EDADMIN_EXCEPT;
+        $listtypecourse = format_edadmin::get_all_type_name();
+        $listedadmincourseexception = \local_mentor_core\entity::SUB_ENTITY_EDADMIN_EXCEPT;
         $listedadmincourseexceptionbutmustseen = \local_mentor_core\entity::SUB_ENTITY_COURSES_EXCLUDED_BUT_MUST_SEEN;
 
         // Test of number of edadmin course in the sub entity.
@@ -1893,7 +1893,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
             $subentity = \local_mentor_core\entity_api::get_entity($subentityid);
             self::assertCount((count($listtypecourse) - count($listedadmincourseexception)) +
                               count($listedadmincourseexceptionbutmustseen),
-                $subentity->get_edadmin_courses());
+                    $subentity->get_edadmin_courses());
         } catch (\Exception $e) {
             // Fail if entity does not exist.
             self::fail($e->getMessage());
@@ -1917,19 +1917,19 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $entitydata           = $this->get_entities_data()[0];
+        $entitydata = $this->get_entities_data()[0];
         $entitydata['userid'] = 0; // Remove the manager.
 
         // Test standard Entity creation.
         try {
             $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
-            $entity1  = \local_mentor_core\entity_api::get_entity($entityid);
+            $entity1 = \local_mentor_core\entity_api::get_entity($entityid);
         } catch (\Exception $e) {
             // Failed if the name of this entity is already in use.
             self::fail($e->getMessage());
         }
 
-        $entitydata           = $this->get_entities_data()[1];
+        $entitydata = $this->get_entities_data()[1];
         $entitydata['userid'] = 0; // Remove the manager.
 
         // Test standard Entity creation.
@@ -1997,7 +1997,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         $this->init_database();
 
-        $entitydata           = $this->get_entities_data()[0];
+        $entitydata = $this->get_entities_data()[0];
         $entitydata['userid'] = 0; // Remove the manager.
 
         // Test standard Entity creation.
@@ -2011,7 +2011,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
         // Has not sub entity.
         self::assertFalse(\local_mentor_core\entity_api::has_sub_entities($entityid));
 
-        $subentitydata             = $this->get_entities_data()[1];
+        $subentitydata = $this->get_entities_data()[1];
         $subentitydata['parentid'] = $entityid;
 
         // Test standard sub Entity creation.
@@ -2042,12 +2042,12 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $trainingdata            = $this->get_training_data();
-        $training                = \local_mentor_core\training_api::create_training($trainingdata);
+        $trainingdata = $this->get_training_data();
+        $training = \local_mentor_core\training_api::create_training($trainingdata);
         $trainingdata->shortname = "shortname2";
-        $trainingdata->name      = "fullname2";
-        $training2               = \local_mentor_core\training_api::create_training($trainingdata);
-        $entity                  = $training->get_entity();
+        $trainingdata->name = "fullname2";
+        $training2 = \local_mentor_core\training_api::create_training($trainingdata);
+        $entity = $training->get_entity();
 
         local_mentor_core\training_api::remove_training($training->id);
         self::assertCount(1, $entity->get_training_recyclebin_items());
@@ -2081,12 +2081,12 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $trainingdata            = $this->get_training_data();
-        $training                = \local_mentor_core\training_api::create_training($trainingdata);
+        $trainingdata = $this->get_training_data();
+        $training = \local_mentor_core\training_api::create_training($trainingdata);
         $trainingdata->shortname = "shortname2";
-        $trainingdata->name      = "fullname2";
-        $training2               = \local_mentor_core\training_api::create_training($trainingdata);
-        $entity                  = $training->get_entity();
+        $trainingdata->name = "fullname2";
+        $training2 = \local_mentor_core\training_api::create_training($trainingdata);
+        $entity = $training->get_entity();
 
         local_mentor_core\training_api::remove_training($training->id);
         self::assertCount(1, $entity->get_training_recyclebin_items());
@@ -2115,12 +2115,12 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $training   = \local_mentor_core\training_api::create_training($this->get_training_data());
+        $training = \local_mentor_core\training_api::create_training($this->get_training_data());
         $sessionid1 = \local_mentor_core\session_api::create_session($training->id, 'session1', true);
-        $session1   = \local_mentor_core\session_api::get_session($sessionid1, true);
+        $session1 = \local_mentor_core\session_api::get_session($sessionid1, true);
         $sessionid2 = \local_mentor_core\session_api::create_session($training->id, 'session2', true);
-        $session2   = \local_mentor_core\session_api::get_session($sessionid2, true);
-        $entity     = $training->get_entity();
+        $session2 = \local_mentor_core\session_api::get_session($sessionid2, true);
+        $entity = $training->get_entity();
 
         $session1->delete();
         self::assertCount(1, $entity->get_sessions_recyclebin_items());
@@ -2153,12 +2153,12 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $training   = \local_mentor_core\training_api::create_training($this->get_training_data());
+        $training = \local_mentor_core\training_api::create_training($this->get_training_data());
         $sessionid1 = \local_mentor_core\session_api::create_session($training->id, 'session1', true);
-        $session1   = \local_mentor_core\session_api::get_session($sessionid1, true);
+        $session1 = \local_mentor_core\session_api::get_session($sessionid1, true);
         $sessionid2 = \local_mentor_core\session_api::create_session($training->id, 'session2', true);
-        $session2   = \local_mentor_core\session_api::get_session($sessionid2, true);
-        $entity     = $training->get_entity();
+        $session2 = \local_mentor_core\session_api::get_session($sessionid2, true);
+        $entity = $training->get_entity();
 
         $session1->delete();
         self::assertCount(1, $entity->get_sessions_recyclebin_items());
@@ -2186,7 +2186,7 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $entitydata              = $this->get_entities_data()[0];
+        $entitydata = $this->get_entities_data()[0];
         $entitydata['shortname'] = 'shortnameentity';
 
         // Test standard Entity creation.
@@ -2225,11 +2225,11 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         $DB->delete_records('course_categories');
 
-        $entitydata  = $this->get_entities_data()[0];
-        $entityid    = \local_mentor_core\entity_api::create_entity($entitydata);
-        $entity      = \local_mentor_core\entity_api::get_entity($entityid);
+        $entitydata = $this->get_entities_data()[0];
+        $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
         $entity2data = $this->get_entities_data()[1];
-        $entity2id   = \local_mentor_core\entity_api::create_entity($entity2data);
+        $entity2id = \local_mentor_core\entity_api::create_entity($entity2data);
         \local_mentor_core\entity_api::get_entity($entity2id);
 
         $user1entitysessionmanage = \local_mentor_core\entity_api::get_entities_where_sessions_managed();
@@ -2275,12 +2275,12 @@ class local_mentor_core_entity_testcase extends advanced_testcase {
 
         $DB->delete_records('course_categories');
 
-        $entitydata  = $this->get_entities_data()[0];
-        $entityid    = \local_mentor_core\entity_api::create_entity($entitydata);
-        $entity      = \local_mentor_core\entity_api::get_entity($entityid);
+        $entitydata = $this->get_entities_data()[0];
+        $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
         $entity2data = $this->get_entities_data()[1];
-        $entity2id   = \local_mentor_core\entity_api::create_entity($entity2data);
-        $entity2     = \local_mentor_core\entity_api::get_entity($entity2id);
+        $entity2id = \local_mentor_core\entity_api::create_entity($entity2data);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entity2id);
 
         // Admin.
         $adminentitysessionmanage = \local_mentor_core\entity_api::get_entities_can_import_training_library_object();

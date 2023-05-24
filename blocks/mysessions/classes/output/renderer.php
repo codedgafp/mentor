@@ -42,7 +42,7 @@ class renderer extends plugin_renderer_base {
 
         // Set training data as json into an hidden div.
         $trainingsjson = htmlspecialchars(json_encode($exportfortemplate->trainings, JSON_HEX_TAG), ENT_QUOTES, 'UTF-8');
-        $template      = '<div id="available-trainings" style="display: none">' . $trainingsjson . '</div>';
+        $template = '<div id="available-trainings" style="display: none">' . $trainingsjson . '</div>';
 
         return $template . $this->render_from_template('block_mysessions/mysessions', $exportfortemplate);
     }

@@ -66,10 +66,10 @@ if ($mform->is_cancelled()) {
     $data->username = $data->email;
 
     // Remove < and > characters.
-    $data->firstname                         = str_replace(['<', '>'], '', $data->firstname);
-    $data->lastname                          = str_replace(['<', '>'], '', $data->lastname);
+    $data->firstname = str_replace(['<', '>'], '', $data->firstname);
+    $data->lastname = str_replace(['<', '>'], '', $data->lastname);
     $data->profile_field_attachmentstructure = str_replace(['<', '>'], '', $data->profile_field_attachmentstructure);
-    $data->profile_field_affectation         = str_replace(['<', '>'], '', $data->profile_field_affectation);
+    $data->profile_field_affectation = str_replace(['<', '>'], '', $data->profile_field_affectation);
 
     // Add missing required fields.
     $user = signup_setup_new_user($data);

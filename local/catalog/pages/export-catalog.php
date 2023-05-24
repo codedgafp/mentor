@@ -38,7 +38,7 @@ core_php_time_limit::raise();
 raise_memory_limit(MEMORY_EXTRA);
 
 $selectedtrainingsid = required_param_array('trainingsid', PARAM_INT);
-$trainingsid         = [];
+$trainingsid = [];
 
 // Check if training has available session.
 foreach ($selectedtrainingsid as $trainingid) {

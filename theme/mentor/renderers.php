@@ -26,24 +26,24 @@ class theme_mentor_core_renderer extends core_renderer {
 
     // Define site types.
     private $types
-        = [
-            'azure_dev'               => 'dev',
-            'azure_formation'         => 'prod',
-            'azure_hotfix'            => 'preprod',
-            'azure_iso_prod'          => 'prod',
-            'azure_iso_qualification' => 'qualif',
-            'azure_test'              => 'dev',
-            'dev'                     => 'dev',
-            'developpement'           => 'dev',
-            'preprod'                 => 'preprod',
-            'preproduction'           => 'preprod',
-            'pre-production'          => 'preprod',
-            'prod'                    => 'prod',
-            'production'              => 'prod',
-            'qualif'                  => 'qualif',
-            'qualification'           => 'qualif',
-            'test'                    => 'dev',
-        ];
+            = [
+                    'azure_dev' => 'dev',
+                    'azure_formation' => 'prod',
+                    'azure_hotfix' => 'preprod',
+                    'azure_iso_prod' => 'prod',
+                    'azure_iso_qualification' => 'qualif',
+                    'azure_test' => 'dev',
+                    'dev' => 'dev',
+                    'developpement' => 'dev',
+                    'preprod' => 'preprod',
+                    'preproduction' => 'preprod',
+                    'pre-production' => 'preprod',
+                    'prod' => 'prod',
+                    'production' => 'prod',
+                    'qualif' => 'qualif',
+                    'qualification' => 'qualif',
+                    'test' => 'dev',
+            ];
 
     /**
      * Define if the logo must be displayed
@@ -89,7 +89,7 @@ class theme_mentor_core_renderer extends core_renderer {
         if (isset($CFG->sitetype) && (!isset($this->types[$CFG->sitetype]) ||
                                       (isset($this->types[$CFG->sitetype]) && $this->types[$CFG->sitetype] != 'prod'))) {
 
-            $type   = isset($this->types[$CFG->sitetype]) ? $this->types[$CFG->sitetype] : $CFG->sitetype;
+            $type = isset($this->types[$CFG->sitetype]) ? $this->types[$CFG->sitetype] : $CFG->sitetype;
             $output .= '<span id="site-type" class="type-' . $type . '"> ' . $CFG->sitetype . '</span>';
         }
         return $output;
@@ -123,6 +123,22 @@ class theme_mentor_core_renderer extends core_renderer {
         get_enabled_auth_plugins(true);
 
         $context->agentconnectenabled = false;
+
+        // Catch agent connect data button.
+        foreach ($context->identityproviders as $key => $identityprovider) {
+            if ($identityprovider['name'] === get_string('agentconnectname', 'theme_mentor')) {
+                $context->agentconnectenabled = true;
+                $context->agentconnecturl = $identityprovider['url'];
+                $context->agentconnectkey = $key;
+            }
+        }
+
+        // If there is Agent Connect, unset to "identityproviders" context data.
+        if (isset($context->agentconnectkey)) {
+            unset($context->identityproviders[$context->agentconnectkey]);
+            $context->hasidentityproviders = count($context->identityproviders) > 0;
+        }
+
         if (!empty($CFG->auth)) {
             $authsenabled = explode(',', $CFG->auth);
             if (in_array(get_config('theme_mentor', 'agentconnectidentifier'), $authsenabled)) {
@@ -145,8 +161,8 @@ class theme_mentor_core_renderer extends core_renderer {
         }
         $context->logourl = $url;
 
-        $context->sitename  = format_string($SITE->fullname, true,
-            ['context' => context_course::instance(SITEID), "escape" => false]);
+        $context->sitename = format_string($SITE->fullname, true,
+                ['context' => context_course::instance(SITEID), "escape" => false]);
         $context->signupurl = \local_mentor_core\login_api::get_signup_url($context->signupurl);
 
         $context->mentorpictureurl = $this->image_url('logo-mentor-w', 'theme_mentor');
@@ -169,12 +185,12 @@ class theme_mentor_core_renderer extends core_renderer {
 
         // Add catalog link.
         $cataloglink = $CFG->wwwroot . '/local/catalog/index.php';
-        $render      = '<li class="nav-item catalog">';
-        $render      .= '<a class="nav-item nav-link" href="' . $cataloglink . '">';
-        $render      .= $this->pix_icon('offre', '', 'theme_mentor');
-        $render      .= '<span>' . get_string('trainingcatalog', 'theme_mentor') . '</span>';
-        $render      .= '</a>';
-        $render      .= '</li>';
+        $render = '<li class="nav-item catalog">';
+        $render .= '<a class="nav-item nav-link" href="' . $cataloglink . '">';
+        $render .= $this->pix_icon('offre', '', 'theme_mentor');
+        $render .= '<span>' . get_string('trainingcatalog', 'theme_mentor') . '</span>';
+        $render .= '</a>';
+        $render .= '</li>';
 
         // If the user is not loggedin, return the standard custom menu.
         if (!isloggedin()) {
@@ -190,13 +206,15 @@ class theme_mentor_core_renderer extends core_renderer {
             $custommenuitems = $CFG->custommenuitems;
         }
 
-        $managedentities = \local_mentor_core\entity_api::count_managed_entities(null, false);
+        $managedentities = \local_mentor_core\entity_api::count_managed_entities(null, false, null, true, is_siteadmin());
 
         // Manage entities links.
         if ($managedentities) {
 
-            $strmanageentities = $managedentities > 1 ? get_string('managemyentities', 'theme_mentor') :
-                get_string('managemyentity', 'theme_mentor');
+            $managedentitieswithothercapabilites = \local_mentor_core\entity_api::count_managed_entities(null, false, null, true,
+                    is_siteadmin(), true);
+            $strmanageentities = $managedentitieswithothercapabilites > 1 ? get_string('managemyentities', 'theme_mentor') :
+                    get_string('managemyentity', 'theme_mentor');
 
             $custommenuitems = $strmanageentities . '|/local/entities/index.php' . "\n" .
                                $custommenuitems;
@@ -204,15 +222,15 @@ class theme_mentor_core_renderer extends core_renderer {
         } else {// Manage trainings links.
 
             if (isset($_SESSION['lastentity'])) {
-                $entity          = local_mentor_core\entity_api::get_entity($_SESSION['lastentity']);
+                $entity = local_mentor_core\entity_api::get_entity($_SESSION['lastentity']);
                 $admincourselist = $entity->get_main_entity()->get_edadmin_courses();
-                $trainingcourse  = $admincourselist['trainings'];
-                $sessioncourse   = $admincourselist['session'];
+                $trainingcourse = $admincourselist['trainings'];
+                $sessioncourse = $admincourselist['session'];
             } else {
-                $trainings      = local_mentor_core\training_api::get_user_training_courses();
+                $trainings = local_mentor_core\training_api::get_user_training_courses();
                 $trainingcourse = current($trainings);
 
-                $sessions      = local_mentor_core\session_api::get_user_session_courses();
+                $sessions = local_mentor_core\session_api::get_user_session_courses();
                 $sessioncourse = current($sessions);
             }
 
@@ -433,18 +451,25 @@ class theme_mentor_core_renderer extends core_renderer {
         if ($session = \local_mentor_core\session_api::get_session_by_course_id($COURSE->id)) {
 
             if (
-                !has_capability('moodle/course:update', $session->get_context(), $USER) &&
-                !$session->is_tutor($USER)
-                &&
-                (
-                    $session->status === \local_mentor_core\session::STATUS_IN_PREPARATION ||
-                    $session->status === \local_mentor_core\session::STATUS_OPENED_REGISTRATION
-                )
+                    !has_capability('moodle/course:update', $session->get_context(), $USER) &&
+                    !$session->is_tutor($USER)
+                    &&
+                    (
+                            $session->status === \local_mentor_core\session::STATUS_IN_PREPARATION ||
+                            $session->status === \local_mentor_core\session::STATUS_OPENED_REGISTRATION
+                    )
             ) {
                 redirect(new \moodle_url('/theme/mentor/pages/unavailable_session.php', array('id' => $COURSE->id)));
             }
 
-            $header .= '<div id="course-status">' . get_string($session->status, 'local_session') . '</div>';
+            // Does not display the status of the current session if it is permanent and "in progress" for user participant.
+            if (
+                    $session->status !== \local_mentor_core\session::STATUS_IN_PROGRESS ||
+                    !$session->is_participant($USER) ||
+                    $session->sessionpermanent !== '1'
+            ) {
+                $header .= '<div id="course-status">' . get_string($session->status, 'local_session') . '</div>';
+            }
 
             // Get training status.
         } else if ($training = \local_mentor_core\training_api::get_training_by_course_id($COURSE->id)) {
@@ -490,20 +515,20 @@ class theme_mentor_core_renderer extends core_renderer {
             // the settings block on it. The region main settings are included in the settings block and
             // duplicating the content causes behat failures.
             $this->page->add_header_action(html_writer::div(
-                $this->region_main_settings_menu(),
-                'd-print-none',
-                ['id' => 'region-main-settings-menu']
+                    $this->region_main_settings_menu(),
+                    'd-print-none',
+                    ['id' => 'region-main-settings-menu']
             ));
         }
 
-        $header                    = new stdClass();
-        $header->settingsmenu      = $this->context_header_settings_menu();
-        $header->contextheader     = $this->context_header();
-        $header->hasnavbar         = empty($this->page->layout_options['nonavbar']);
-        $header->navbar            = $this->navbar();
+        $header = new stdClass();
+        $header->settingsmenu = $this->context_header_settings_menu();
+        $header->contextheader = $this->context_header();
+        $header->hasnavbar = empty($this->page->layout_options['nonavbar']);
+        $header->navbar = $this->navbar();
         $header->pageheadingbutton = $this->page_heading_button();
-        $header->courseheader      = $this->course_header();
-        $header->headeractions     = $this->page->get_header_actions();
+        $header->courseheader = $this->course_header();
+        $header->headeractions = $this->page->get_header_actions();
 
         $header->hasprevbutton = 0;
 
@@ -512,39 +537,39 @@ class theme_mentor_core_renderer extends core_renderer {
             // Back to the course for activity.
             if (strpos($this->page->url, '/mod/') !== false && $this->page->course->format != 'singleactivity') {
                 $header->hasprevbutton = 1;
-                $header->prevstepurl   = (new moodle_url('/course/view.php',
-                    ['id' => $this->page->course->id, 'section' => $this->page->cm->sectionnum]))->out();
-                $header->prevstetitle  = get_string('prevstep', 'theme_mentor');
+                $header->prevstepurl = (new moodle_url('/course/view.php',
+                        ['id' => $this->page->course->id, 'section' => $this->page->cm->sectionnum]))->out();
+                $header->prevstetitle = get_string('prevstep', 'theme_mentor');
             }
 
             // Back to the catalog for training catalog.
             if (strpos($this->page->url, '/local/catalog/pages/') !== false) {
                 $header->hasprevbutton = 1;
-                $header->prevstepurl   = (new moodle_url('/local/catalog/index.php'))->out();
-                $header->prevstetitle  = get_string('prevstepcatalog', 'theme_mentor');
+                $header->prevstepurl = (new moodle_url('/local/catalog/index.php'))->out();
+                $header->prevstetitle = get_string('prevstepcatalog', 'theme_mentor');
             }
 
             // Back to the dashboard for training sheet.
             if (strpos($this->page->url, '/local/trainings/pages/training.php') !== false) {
                 $header->hasprevbutton = 1;
-                $header->prevstepurl   = (new moodle_url('/'))->out();
-                $header->prevstetitle  = get_string('prevstepdashboard', 'theme_mentor');
+                $header->prevstepurl = (new moodle_url('/'))->out();
+                $header->prevstetitle = get_string('prevstepdashboard', 'theme_mentor');
             }
 
             // Back to the training sheet page.
             if (strpos($this->page->url, '/local/trainings/pages/preview.php') !== false) {
-                $trainingid            = required_param('trainingid', PARAM_INT);
+                $trainingid = required_param('trainingid', PARAM_INT);
                 $header->hasprevbutton = 1;
-                $header->prevstepurl   = (new moodle_url('/local/trainings/pages/update_training.php',
-                    ['trainingid' => $trainingid]))->out();
-                $header->prevstetitle  = get_string('closetrainingpreview', 'local_trainings');
+                $header->prevstepurl = (new moodle_url('/local/trainings/pages/update_training.php',
+                        ['trainingid' => $trainingid]))->out();
+                $header->prevstetitle = get_string('closetrainingpreview', 'local_trainings');
             }
 
             // Back to the library page.
             if (strpos($this->page->url, '/local/library/pages/training.php') !== false) {
                 $header->hasprevbutton = 1;
-                $header->prevstepurl   = (new moodle_url('/local/library/index.php'))->out();
-                $header->prevstetitle  = get_string('libraryreturn', 'theme_mentor');
+                $header->prevstepurl = (new moodle_url('/local/library/index.php'))->out();
+                $header->prevstetitle = get_string('libraryreturn', 'theme_mentor');
             }
         }
 

@@ -27,12 +27,12 @@ defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
 
-    'local/entities:manageentity'    => array(
+    'local/entities:manageentity' => array(
         'riskbitmask' => RISK_XSS,
 
-        'captype'      => 'write',
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
 
@@ -41,9 +41,9 @@ $capabilities = array(
     'local/entities:renamesubentity' => array(
         'riskbitmask' => RISK_XSS,
 
-        'captype'      => 'write',
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
 

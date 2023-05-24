@@ -81,9 +81,9 @@ class admin_renderer extends \plugin_renderer_base {
         }
 
         // Init and call JS.
-        $params               = new \stdClass();
+        $params = new \stdClass();
         $params->listtypename = array_values($listtypename);
-        $params->isadmin      = is_siteadmin();
+        $params->isadmin = is_siteadmin();
 
         // Get the right JS to use and call it.
         $js = entity_api::get_entity_javascript('local_entities/local_entities');

@@ -22,6 +22,7 @@
  * @author     rcolet <remi.colet@edunao.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace local_mentor_core\event;
 
 use core\event\base;

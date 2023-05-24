@@ -59,7 +59,7 @@ class publication_form extends \moodleform {
         // Training name.
         $mform->addElement('text', 'trainingname', get_string('trainingfullname', 'local_mentor_core'), [
             'disabled' => 'disabled',
-            'value'    =>
+            'value' =>
                 $this->training->name
         ]);
         $mform->setType('trainingname', PARAM_NOTAGS);
@@ -67,7 +67,7 @@ class publication_form extends \moodleform {
         // Training shortname.
         $mform->addElement('text', 'trainingshortname', get_string('trainingshortname', 'local_library'), [
             'disabled' => 'disabled',
-            'value'    =>
+            'value' =>
                 get_string('nametrainingpublish', 'local_library', $this->training->shortname)
         ]);
         $mform->setType('trainingshortname', PARAM_NOTAGS);

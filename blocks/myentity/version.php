@@ -25,10 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2021122400;          // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2020060900;          // Requires this Moodle version.
+$plugin->version = 2021122400;          // The current plugin version (Date: YYYYMMDDXX).
+$plugin->requires = 2020060900;          // Requires this Moodle version.
 $plugin->component = "block_myentity";  // Full name of the plugin (used for diagnostics).
 
 $plugin->dependencies = array(
-        'local_mentor_core' => 2020112700
+    'local_mentor_core' => 2020112700
 );

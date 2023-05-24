@@ -25,9 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version      = 2022081900; // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires     = 2019111200; // Requires this Moodle version.
-$plugin->component    = 'logstore_mentor2'; // Full name of the plugin (used for diagnostics).
+$plugin->version = 2022081900; // The current plugin version (Date: YYYYMMDDXX).
+$plugin->requires = 2019111200; // Requires this Moodle version.
+$plugin->component = 'logstore_mentor2'; // Full name of the plugin (used for diagnostics).
 $plugin->dependencies = array(
-        'local_mentor_specialization' => 2021060700
+    'local_mentor_specialization' => 2021060700
 );

@@ -54,39 +54,39 @@ class user_controller extends controller_base {
             case 'get_roles' :
 
                 // Get count of all roles.
-                $data               = new \stdClass();
-                $data->start        = 0;
-                $data->length       = 0;
-                $data->search       = false;
-                $data->order        = false;
-                $data->filters      = [];
+                $data = new \stdClass();
+                $data->start = 0;
+                $data->length = 0;
+                $data->search = false;
+                $data->order = false;
+                $data->filters = [];
                 $data->recordsTotal = count($this->get_roles($data));
 
                 // Get count all trainings record by entity with filter.
-                $data->draw            = $this->get_param('draw', PARAM_INT, null);
-                $data->order           = $this->get_param('order', PARAM_RAW, null)[0];
-                $data->search          = $this->get_param('search', PARAM_RAW, null);
-                $data->filters         = $this->get_param('filter', PARAM_RAW, []);
+                $data->draw = $this->get_param('draw', PARAM_INT, null);
+                $data->order = $this->get_param('order', PARAM_RAW, null)[0];
+                $data->search = $this->get_param('search', PARAM_RAW, null);
+                $data->filters = $this->get_param('filter', PARAM_RAW, []);
                 $data->recordsFiltered = count($this->get_roles($data));
 
                 // Get trainings record by entity with filter, lentgh and start.
                 $data->length = $this->get_param('length', PARAM_INT, null);
-                $data->start  = $this->get_param('start', PARAM_INT, null);
-                $data->data   = $this->get_roles($data);
+                $data->start = $this->get_param('start', PARAM_INT, null);
+                $data->data = $this->get_roles($data);
 
                 return $data;
             case  'create_and_add_user':
-                $lastname          = $this->get_param('lastname', PARAM_TEXT);
-                $firstname         = $this->get_param('firstname', PARAM_TEXT);
-                $email             = $this->get_param('mail', PARAM_TEXT);
-                $entity            = $this->get_param('entity', PARAM_TEXT, null);
+                $lastname = $this->get_param('lastname', PARAM_TEXT);
+                $firstname = $this->get_param('firstname', PARAM_TEXT);
+                $email = $this->get_param('mail', PARAM_TEXT);
+                $entity = $this->get_param('entity', PARAM_TEXT, null);
                 $secondaryentities = $this->get_param('secondaryentities', PARAM_RAW, []);
-                $region            = $this->get_param('region', PARAM_TEXT, null);
+                $region = $this->get_param('region', PARAM_TEXT, null);
                 return $this->create_and_add_user($lastname, $firstname, $email, $entity, $secondaryentities, $region);
             case 'set_user_preference' :
                 $userid = $this->get_param('userid', PARAM_INT, null);
                 $preferencename = $this->get_param('preferencename', PARAM_TEXT);
-                $value          = $this->get_param('value', PARAM_TEXT);
+                $value = $this->get_param('value', PARAM_TEXT);
                 return $this->set_user_preference($userid, $preferencename, $value);
 
             default:

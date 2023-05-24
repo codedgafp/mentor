@@ -29,10 +29,10 @@ class session extends abstractlog {
 
     public function get_required_fields() {
         return [
-                'sessionid',
-                'space',
-                'status',
-                'shared'
+            'sessionid',
+            'space',
+            'status',
+            'shared'
         ];
     }
 
@@ -67,7 +67,7 @@ class session extends abstractlog {
             $this->id = $id;
 
             $oldcollections = $DB->get_fieldset_select('logstore_mentor_collection', 'name', 'sessionlogid = :sessionlogid',
-                    ['sessionlogid' => $this->id]);
+                ['sessionlogid' => $this->id]);
 
             $diff = array_diff($collections, $oldcollections);
 

@@ -277,7 +277,7 @@ define([
                     data: function (data, type, row, meta) {
 
                         if (type === 'display') {
-                            return '<a href="' + data.link + '" title="' + M.util.get_string('wordingsession', 'local_session', data.sessionname) + '">' + data.shortname + '</a>';
+                            return '<a href="' + data.link + '" title="' + M.util.get_string('wordingsession', 'local_session', data.sessionname) + '" target="_blank">' + data.shortname + '</a>';
                         }
                         return data.shortname;
                     }
@@ -524,7 +524,8 @@ define([
                         item = {
                             'id': index + data.id,
                             'href': element.url,
-                            'text': '<img src="' + M.util.image_url(index.toLowerCase(), 'local_session') + '"> ' + element.tooltip
+                            'text': '<img src="' + M.util.image_url(index.toLowerCase(), 'local_session') + '"> ' + element.tooltip,
+                            'target': '_blank'
                         };
                         break;
                     case 'importUsers' :

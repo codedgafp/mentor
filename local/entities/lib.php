@@ -57,9 +57,9 @@ function local_entities_pluginfile($course, $cm, $context, $filearea, $args, $fo
         return false;
     }
 
-    $fs           = get_file_storage();
+    $fs = get_file_storage();
     $relativepath = implode('/', $args);
-    $fullpath     = "/$context->id/local_entities/$filearea/$relativepath";
+    $fullpath = "/$context->id/local_entities/$filearea/$relativepath";
     if (!$file = $fs->get_file_by_hash(sha1($fullpath))) {
         return false;
     }

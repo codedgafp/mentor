@@ -49,7 +49,7 @@ abstract class abstractlog {
         $this->dbinterface = database_interface::get_instance();
 
         $requiredfields = $this->get_required_fields();
-        $table          = (new \ReflectionClass($this))->getShortName();
+        $table = (new \ReflectionClass($this))->getShortName();
 
         // Check if all required fields exist.
         foreach ($requiredfields as $requiredfield) {

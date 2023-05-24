@@ -25,20 +25,20 @@ class RestClient implements Iterator, ArrayAccess {
 
     public function __construct(array $options = []) {
         $default_options = [
-            'headers'               => [],
-            'parameters'            => [],
-            'curl_options'          => [],
+            'headers' => [],
+            'parameters' => [],
+            'curl_options' => [],
             'build_indexed_queries' => false,
-            'user_agent'            => "PHP RestClient/0.1.8",
-            'base_url'              => null,
-            'format'                => null,
-            'format_regex'          => "/(\w+)\/(\w+)(;[.+])?/",
-            'decoders'              => [
+            'user_agent' => "PHP RestClient/0.1.8",
+            'base_url' => null,
+            'format' => null,
+            'format_regex' => "/(\w+)\/(\w+)(;[.+])?/",
+            'decoders' => [
                 'json' => 'json_decode',
-                'php'  => 'unserialize'
+                'php' => 'unserialize'
             ],
-            'username'              => null,
-            'password'              => null
+            'username' => null,
+            'password' => null
         ];
 
         $this->options = array_merge($default_options, $options);
@@ -132,13 +132,13 @@ class RestClient implements Iterator, ArrayAccess {
     }
 
     public function execute(string $url, string $method = 'GET', $parameters = [], array $headers = []): RestClient {
-        $client         = clone $this;
-        $client->url    = $url;
+        $client = clone $this;
+        $client->url = $url;
         $client->handle = curl_init();
-        $curlopt        = [
-            CURLOPT_HEADER         => true,
+        $curlopt = [
+            CURLOPT_HEADER => true,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_USERAGENT      => $client->options['user_agent']
+            CURLOPT_USERAGENT => $client->options['user_agent']
         ];
 
         if ($client->options['username'] && $client->options['password']) {
@@ -148,7 +148,7 @@ class RestClient implements Iterator, ArrayAccess {
 
         if (count($client->options['headers']) || count($headers)) {
             $curlopt[CURLOPT_HTTPHEADER] = [];
-            $headers                     = array_merge($client->options['headers'], $headers);
+            $headers = array_merge($client->options['headers'], $headers);
             foreach ($headers as $key => $values) {
                 foreach (is_array($values) ? $values : [$values] as $value) {
                     $curlopt[CURLOPT_HTTPHEADER][] = sprintf("%s:%s", $key, $value);
@@ -164,7 +164,7 @@ class RestClient implements Iterator, ArrayAccess {
         // allows casting to a string). Parameters passed as strings will not be
         // merged with parameters specified in the default options.
         if (is_array($parameters)) {
-            $parameters        = array_merge($client->options['parameters'], $parameters);
+            $parameters = array_merge($client->options['parameters'], $parameters);
             $parameters_string = http_build_query($parameters);
 
             // http_build_query automatically adds an array index to repeated
@@ -185,11 +185,11 @@ class RestClient implements Iterator, ArrayAccess {
         }
 
         if (strtoupper($method) === 'POST') {
-            $curlopt[CURLOPT_POST]       = true;
+            $curlopt[CURLOPT_POST] = true;
             $curlopt[CURLOPT_POSTFIELDS] = $parameters_string;
         } else if (strtoupper($method) !== 'GET') {
             $curlopt[CURLOPT_CUSTOMREQUEST] = strtoupper($method);
-            $curlopt[CURLOPT_POSTFIELDS]    = $parameters_string;
+            $curlopt[CURLOPT_POSTFIELDS] = $parameters_string;
         } else if ($parameters_string) {
             $client->url .= strpos($client->url, '?') ? '&' : '?';
             $client->url .= $parameters_string;
@@ -212,7 +212,7 @@ class RestClient implements Iterator, ArrayAccess {
         curl_setopt_array($client->handle, $curlopt);
 
         $client->parse_response(curl_exec($client->handle));
-        $client->info  = (object) curl_getinfo($client->handle);
+        $client->info = (object) curl_getinfo($client->handle);
         $client->error = curl_error($client->handle);
 
         curl_close($client->handle);
@@ -220,9 +220,9 @@ class RestClient implements Iterator, ArrayAccess {
     }
 
     public function parse_response($response): void {
-        $headers                     = [];
+        $headers = [];
         $this->response_status_lines = [];
-        $line                        = strtok($response, "\n");
+        $line = strtok($response, "\n");
         do {
             if (strlen(trim($line)) == 0) {
                 // Since we tokenize on \n, use the remaining \r to detect empty lines.
@@ -235,7 +235,7 @@ class RestClient implements Iterator, ArrayAccess {
             } else {
                 // Has to be a header
                 [$key, $value] = explode(':', $line, 2);
-                $key   = strtolower(trim(str_replace('-', '_', $key)));
+                $key = strtolower(trim(str_replace('-', '_', $key)));
                 $value = trim($value);
 
                 if (empty($headers[$key])) {
@@ -248,7 +248,7 @@ class RestClient implements Iterator, ArrayAccess {
             }
         } while ($line = strtok("\n"));
 
-        $this->headers  = (object) $headers;
+        $this->headers = (object) $headers;
         $this->response = strtok("");
     }
 

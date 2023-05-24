@@ -39,8 +39,8 @@ $coursemodule = get_coursemodule_from_id('scorm', $cmid);
 require_login($coursemodule->course, false, $coursemodule);
 
 $dbparams = ['id' => $coursemodule->instance];
-$fields   = 'id, name, intro, introformat, completionstatusrequired, completionscorerequired, completionstatusallscos, ' .
-            'timeopen, timeclose';
+$fields = 'id, name, intro, introformat, completionstatusrequired, completionscorerequired, completionstatusallscos, ' .
+          'timeopen, timeclose';
 if (!$scorm = $DB->get_record('scorm', $dbparams, $fields)) {
     return false;
 }
@@ -57,8 +57,8 @@ if ($coursemodule->showdescription) {
 // Populate the custom completion rules as key => value pairs, but only if the completion mode is 'automatic'.
 if ($coursemodule->completion == COMPLETION_TRACKING_AUTOMATIC) {
     $result->customdata['customcompletionrules']['completionstatusrequired'] = $scorm->completionstatusrequired;
-    $result->customdata['customcompletionrules']['completionscorerequired']  = $scorm->completionscorerequired;
-    $result->customdata['customcompletionrules']['completionstatusallscos']  = $scorm->completionstatusallscos;
+    $result->customdata['customcompletionrules']['completionscorerequired'] = $scorm->completionscorerequired;
+    $result->customdata['customcompletionrules']['completionstatusallscos'] = $scorm->completionstatusallscos;
 }
 // Populate some other values that can be used in calendar or on dashboard.
 if ($scorm->timeopen) {
@@ -78,7 +78,7 @@ if ($scorm->popup == 1 && !has_capability('moodle/course:manageactivities', $con
 
     require_once($CFG->dirroot . '/mod/scorm/locallib.php');
 
-    $organization  = $scorm->launch;
+    $organization = $scorm->launch;
     $orgidentifier = '';
 
     if ($sco = scorm_get_sco($organization, SCO_ONLY)) {
@@ -100,11 +100,11 @@ if ($scorm->popup == 1 && !has_capability('moodle/course:manageactivities', $con
     }
 
     $url = new moodle_url($CFG->wwwroot . '/mod/scorm/player.php', [
-        'a'       => $scorm->id,
-        'scoid'   => $launchsco,
+        'a' => $scorm->id,
+        'scoid' => $launchsco,
         'sesskey' => sesskey(),
         'display' => 'popup',
-        'normal'  => 'normal'
+        'normal' => 'normal'
     ]);
 
     redirect($url->out());

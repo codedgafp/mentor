@@ -42,14 +42,14 @@ class training_renderer extends \plugin_renderer_base {
     public function display($training) {
 
         // Get data renderer.
-        $paramsrenderer                = \local_mentor_core\library_api::get_training_renderer($training);
+        $paramsrenderer = \local_mentor_core\library_api::get_training_renderer($training);
 
         // Get entities to import.
-        $listeentities                         = \local_mentor_core\entity_api::get_entities_can_import_training_library_object(
+        $listeentities = \local_mentor_core\entity_api::get_entities_can_import_training_library_object(
             null, true, false);
         $paramsrenderer->hasimportcapabilities = count($listeentities) > 0;
-        $paramsrenderer->singleentity          = count($listeentities) === 1;
-        $paramsrenderer->listeentities         = array_values($listeentities);
+        $paramsrenderer->singleentity = count($listeentities) === 1;
+        $paramsrenderer->listeentities = array_values($listeentities);
 
         // Add strings to JS.
         $this->page->requires->strings_for_js([

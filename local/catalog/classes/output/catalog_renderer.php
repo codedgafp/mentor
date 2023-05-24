@@ -66,7 +66,7 @@ class catalog_renderer extends \plugin_renderer_base {
             'trainingnotavailable'
         ], 'local_mentor_core');
 
-        $jsparams              = new \stdClass();
+        $jsparams = new \stdClass();
         $jsparams->collections = local_mentor_specialization_get_collections();
 
         $paramsrenderer = catalog_api::get_params_renderer();

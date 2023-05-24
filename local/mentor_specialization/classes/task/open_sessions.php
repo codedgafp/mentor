@@ -39,7 +39,7 @@ class open_sessions extends \core\task\scheduled_task {
 
         require_once($CFG->dirroot . '/local/mentor_specialization/classes/models/mentor_session.php');
 
-        $now    = time();
+        $now = time();
         $status = mentor_session::STATUS_OPENED_REGISTRATION;
 
         // Get sessions with state "openedregistration" that must be opened.
@@ -61,7 +61,7 @@ class open_sessions extends \core\task\scheduled_task {
             mtrace('Open session : ' . $session->id . ' - ' . $session->courseshortname);
 
             $session = new mentor_session($session->id);
-            $session->update_status(mentor_session::STATUS_IN_PROGRESS);
+            $session->update_status(mentor_session::STATUS_IN_PROGRESS, $status);
         }
     }
 }

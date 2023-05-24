@@ -34,26 +34,26 @@ $extraclasses = [];
 if ($navdraweropen) {
     $extraclasses[] = 'drawer-open-left';
 }
-$bodyattributes          = $OUTPUT->body_attributes($extraclasses);
-$blockshtml              = $OUTPUT->blocks('side-pre');
-$hasblocks               = strpos($blockshtml, 'data-block=') !== false;
+$bodyattributes = $OUTPUT->body_attributes($extraclasses);
+$blockshtml = $OUTPUT->blocks('side-pre');
+$hasblocks = strpos($blockshtml, 'data-block=') !== false;
 $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions();
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
-$templatecontext        = [
-    'sitename'                  => format_string($SITE->shortname, true,
-        ['context' => context_course::instance(SITEID), "escape" => false]),
-    'output'                    => $OUTPUT,
-    'sidepreblocks'             => $blockshtml,
-    'hasblocks'                 => $hasblocks,
-    'bodyattributes'            => $bodyattributes,
-    'navdraweropen'             => $navdraweropen,
-    'regionmainsettingsmenu'    => $regionmainsettingsmenu,
-    'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu)
+$templatecontext = [
+        'sitename' => format_string($SITE->shortname, true,
+                ['context' => context_course::instance(SITEID), "escape" => false]),
+        'output' => $OUTPUT,
+        'sidepreblocks' => $blockshtml,
+        'hasblocks' => $hasblocks,
+        'bodyattributes' => $bodyattributes,
+        'navdraweropen' => $navdraweropen,
+        'regionmainsettingsmenu' => $regionmainsettingsmenu,
+        'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu)
 ];
 
-$nav                                     = $PAGE->flatnav;
-$templatecontext['flatnavigation']       = $nav;
+$nav = $PAGE->flatnav;
+$templatecontext['flatnavigation'] = $nav;
 $templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
 
 $templatecontext['hasprevbutton'] = 0;
@@ -64,8 +64,8 @@ if ($PAGE->has_set_url()) {
     if (strpos($this->page->url, '/mod/') !== false && $PAGE->course->format != 'singleactivity') {
         $templatecontext['hasprevbutton'] = 1;
 
-        $templatecontext['prevstepurl']  = (new moodle_url('/course/view.php',
-            ['id' => $PAGE->course->id, 'section' => $PAGE->cm->sectionnum]
+        $templatecontext['prevstepurl'] = (new moodle_url('/course/view.php',
+                ['id' => $PAGE->course->id, 'section' => $PAGE->cm->sectionnum]
         ))->out();
         $templatecontext['prevstetitle'] = get_string('prevstep', 'theme_mentor');
     }
@@ -73,31 +73,31 @@ if ($PAGE->has_set_url()) {
     // Back to the catalog for trainong catalog.
     if (strpos($this->page->url, '/local/catalog/pages/') !== false) {
         $templatecontext['hasprevbutton'] = 1;
-        $templatecontext['prevstepurl']   = (new moodle_url('/local/catalog/index.php'))->out();
-        $templatecontext['prevstetitle']  = get_string('prevstepcatalog', 'theme_mentor');
+        $templatecontext['prevstepurl'] = (new moodle_url('/local/catalog/index.php'))->out();
+        $templatecontext['prevstetitle'] = get_string('prevstepcatalog', 'theme_mentor');
     }
 
     // Back to the dashboard for training sheet.
     if (strpos($this->page->url, '/local/trainings/pages/training.php') !== false) {
         $templatecontext['hasprevbutton'] = 1;
-        $templatecontext['prevstepurl']   = (new moodle_url('/'))->out();
-        $templatecontext['prevstetitle']  = get_string('prevstepdashboard', 'theme_mentor');
+        $templatecontext['prevstepurl'] = (new moodle_url('/'))->out();
+        $templatecontext['prevstetitle'] = get_string('prevstepdashboard', 'theme_mentor');
     }
 
     // Back to the training sheet page.
     if (strpos($this->page->url, '/local/trainings/pages/preview.php') !== false) {
-        $trainingid                       = required_param('trainingid', PARAM_INT);
+        $trainingid = required_param('trainingid', PARAM_INT);
         $templatecontext['hasprevbutton'] = 1;
-        $templatecontext['prevstepurl']   = (new moodle_url('/local/trainings/pages/update_training.php',
-            ['trainingid' => $trainingid]))->out();
-        $templatecontext['prevstetitle']  = get_string('closetrainingpreview', 'local_trainings');
+        $templatecontext['prevstepurl'] = (new moodle_url('/local/trainings/pages/update_training.php',
+                ['trainingid' => $trainingid]))->out();
+        $templatecontext['prevstetitle'] = get_string('closetrainingpreview', 'local_trainings');
     }
 
     // Back to the library page.
     if (strpos($this->page->url, '/local/library/pages/training.php') !== false) {
         $templatecontext['hasprevbutton'] = 1;
-        $templatecontext['prevstepurl']   = (new moodle_url('/local/library/index.php'))->out();
-        $templatecontext['prevstetitle']  = get_string('libraryreturn', 'theme_mentor');
+        $templatecontext['prevstepurl'] = (new moodle_url('/local/library/index.php'))->out();
+        $templatecontext['prevstetitle'] = get_string('libraryreturn', 'theme_mentor');
     }
 }
 echo $OUTPUT->render_from_template('theme_boost/columns2', $templatecontext);

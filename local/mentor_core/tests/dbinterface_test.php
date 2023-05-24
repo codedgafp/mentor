@@ -47,15 +47,15 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $CFG->defaultauth = 'manual';
 
         // Create user.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname';
-        $user->firstname                = 'firstname';
-        $user->email                    = 'test@test.com';
-        $user->username                 = 'testusername';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = 'New Entity 1';
 
         $userid = local_mentor_core\profile_api::create_user($user);
@@ -73,7 +73,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
     public function init_create_entity($entityname = 'New Entity 1') {
 
         $entitydata = [
-            'name'      => $entityname,
+            'name' => $entityname,
             'shortname' => $entityname
         ];
 
@@ -102,32 +102,32 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         // Init test data.
         $trainingdata = new stdClass();
 
-        $trainingdata->name      = $name;
+        $trainingdata->name = $name;
         $trainingdata->shortname = $shortname;
-        $trainingdata->content   = 'summary';
+        $trainingdata->content = 'summary';
 
         // Create training object.
-        $trainingdata->teaser                       = 'http://www.edunao.com/';
-        $trainingdata->teaserpicture                = '';
-        $trainingdata->prerequisite                 = 'TEST';
-        $trainingdata->collection                   = 'accompagnement';
-        $trainingdata->traininggoal                 = 'TEST TRAINING ';
-        $trainingdata->idsirh                       = 'TEST ID SIRH';
-        $trainingdata->licenseterms                 = 'cc-sa';
-        $trainingdata->typicaljob                   = 'TEST';
-        $trainingdata->skills                       = [1, 3];
-        $trainingdata->certifying                   = '1';
-        $trainingdata->presenceestimatedtimehours   = '12';
+        $trainingdata->teaser = 'http://www.edunao.com/';
+        $trainingdata->teaserpicture = '';
+        $trainingdata->prerequisite = 'TEST';
+        $trainingdata->collection = 'accompagnement';
+        $trainingdata->traininggoal = 'TEST TRAINING ';
+        $trainingdata->idsirh = 'TEST ID SIRH';
+        $trainingdata->licenseterms = 'cc-sa';
+        $trainingdata->typicaljob = 'TEST';
+        $trainingdata->skills = [1, 3];
+        $trainingdata->certifying = '1';
+        $trainingdata->presenceestimatedtimehours = '12';
         $trainingdata->presenceestimatedtimeminutes = '10';
-        $trainingdata->remoteestimatedtimehours     = '15';
-        $trainingdata->remoteestimatedtimeminutes   = '30';
-        $trainingdata->trainingmodalities           = 'd';
-        $trainingdata->producingorganization        = 'TEST';
-        $trainingdata->producerorganizationlogo     = '';
-        $trainingdata->designers                    = 'TEST';
-        $trainingdata->contactproducerorganization  = 'TEST';
-        $trainingdata->thumbnail                    = '';
-        $trainingdata->status                       = \local_mentor_core\training::STATUS_DRAFT;
+        $trainingdata->remoteestimatedtimehours = '15';
+        $trainingdata->remoteestimatedtimeminutes = '30';
+        $trainingdata->trainingmodalities = 'd';
+        $trainingdata->producingorganization = 'TEST';
+        $trainingdata->producerorganizationlogo = '';
+        $trainingdata->designers = 'TEST';
+        $trainingdata->contactproducerorganization = 'TEST';
+        $trainingdata->thumbnail = '';
+        $trainingdata->status = \local_mentor_core\training::STATUS_DRAFT;
 
         try {
             $entity = \local_mentor_core\entity_api::get_entity($entityid);
@@ -136,9 +136,9 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         }
 
         // Fill with entity data.
-        $formationid                     = $entity->get_entity_formation_category();
-        $trainingdata->categorychildid   = $formationid;
-        $trainingdata->categoryid        = $entity->id;
+        $formationid = $entity->get_entity_formation_category();
+        $trainingdata->categorychildid = $formationid;
+        $trainingdata->categoryid = $entity->id;
         $trainingdata->creativestructure = $entity->id;
 
         return \local_mentor_core\training_api::create_training($trainingdata);
@@ -164,7 +164,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
             self::fail($e->getMessage());
         }
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -179,8 +179,8 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -263,7 +263,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
     public function init_role() {
         global $DB;
 
-        $db      = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $manager = $db->get_role_by_name('manager');
 
         if (!$manager) {
@@ -393,7 +393,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $dbinterface = \local_mentor_core\database_interface::get_instance();
 
         $firstname = 'firstname';
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
 
         // Search for a valid user.
         $search = $dbinterface->search_users($firstname . ' ' . $lastname, []);
@@ -429,7 +429,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         $dbinterface = \local_mentor_core\database_interface::get_instance();
 
-        $entity       = new stdClass();
+        $entity = new stdClass();
         $entity->name = "New name";
 
         // Try to update an entity without entity id.
@@ -442,7 +442,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         // Update the entity with the right data.
         $entity->id = $entityid;
-        $result     = $dbinterface->update_entity($entity);
+        $result = $dbinterface->update_entity($entity);
         self::assertTrue($result);
 
         self::resetAllData();
@@ -466,16 +466,16 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         $contextid = context_system::instance()->id;
         $component = 'local_mentor_core';
-        $filearea  = 'test';
-        $itemid    = 0;
+        $filearea = 'test';
+        $itemid = 0;
 
-        $filerecord            = new stdClass();
+        $filerecord = new stdClass();
         $filerecord->contextid = $contextid;
         $filerecord->component = $component;
-        $filerecord->filearea  = $filearea;
-        $filerecord->itemid    = $itemid;
-        $filerecord->filepath  = '/';
-        $filerecord->filename  = 'logo.png';
+        $filerecord->filearea = $filearea;
+        $filerecord->itemid = $itemid;
+        $filerecord->filepath = '/';
+        $filerecord->filename = 'logo.png';
 
         $filepath = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
 
@@ -555,7 +555,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         // Create the category with valid data.
         $createdcategoryid = \local_mentor_core\entity_api::create_entity(['name' => $categoryname, 'shortname' => $categoryname]);
-        $createdcategory   = \local_mentor_core\entity_api::get_entity($createdcategoryid);
+        $createdcategory = \local_mentor_core\entity_api::get_entity($createdcategoryid);
 
         // Get a valid category.
         $category = $dbinterface->get_course_category_by_name($categoryname);
@@ -617,7 +617,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         // Create the category with valid data.
         $createdcategoryid = \local_mentor_core\entity_api::create_entity(['name' => $categoryname, 'shortname' => $categoryname]);
-        $createdcategory   = \local_mentor_core\entity_api::get_entity($createdcategoryid);
+        $createdcategory = \local_mentor_core\entity_api::get_entity($createdcategoryid);
 
         // Get a valid category.
         $category = $dbinterface->get_main_entity_by_name($categoryname);
@@ -705,15 +705,15 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         $entityid = $this->init_create_entity();
 
-        $trainingname      = 'Training name';
+        $trainingname = 'Training name';
         $trainingshortname = 'Training shortname';
 
         $training = $this->init_create_training($trainingname, $trainingshortname, $entityid);
-        $next     = $dbinterface->get_next_available_training_name($trainingshortname);
+        $next = $dbinterface->get_next_available_training_name($trainingshortname);
         self::assertEquals($trainingshortname . " 1", $next);
 
         $training = $this->init_create_training($trainingshortname . " 1", $next, $entityid);
-        $next     = $dbinterface->get_next_available_training_name($trainingshortname);
+        $next = $dbinterface->get_next_available_training_name($trainingshortname);
         self::assertEquals($trainingshortname . " 2", $next);
 
         // Create task create session with next index into name.
@@ -778,7 +778,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         $entityid = $this->init_create_entity();
 
-        $trainingname      = 'Training name';
+        $trainingname = 'Training name';
         $trainingshortname = 'Training shortname';
 
         $training = $this->init_create_training($trainingname, $trainingshortname, $entityid);
@@ -854,8 +854,8 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         // Create a training.
         $trainingname1 = 'Training name 1';
-        $training1     = $this->init_create_training($trainingname1, $trainingname1, $entityid);
-        $course        = $training1->get_course();
+        $training1 = $this->init_create_training($trainingname1, $trainingname1, $entityid);
+        $course = $training1->get_course();
 
         $dbtraining = $dbinterface->get_training_by_course_id($course->id);
 
@@ -888,7 +888,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         // Create a training.
         $trainingname1 = 'Training name 1';
-        $training1     = $this->init_create_training($trainingname1, $trainingname1, $entityid);
+        $training1 = $this->init_create_training($trainingname1, $trainingname1, $entityid);
 
         $dbtraining = $dbinterface->get_training_by_id($training1->id);
 
@@ -928,11 +928,11 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $entityid = $this->init_create_entity();
 
         // Create a course.
-        $coursedata            = new stdClass();
-        $coursedata->fullname  = "New course";
+        $coursedata = new stdClass();
+        $coursedata->fullname = "New course";
         $coursedata->shortname = "New course";
-        $coursedata->category  = $entityid;
-        $course                = create_course($coursedata);
+        $coursedata->category = $entityid;
+        $course = create_course($coursedata);
 
         $training = new stdClass();
         try {
@@ -980,13 +980,13 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $entityid = $this->init_create_entity();
 
         // Create a training course.
-        $coursedata            = new stdClass();
-        $coursedata->fullname  = "Training course";
+        $coursedata = new stdClass();
+        $coursedata->fullname = "Training course";
         $coursedata->shortname = "Training course";
-        $coursedata->category  = $entityid;
-        $trainingcourse        = create_course($coursedata);
+        $coursedata->category = $entityid;
+        $trainingcourse = create_course($coursedata);
 
-        $training                  = new stdClass();
+        $training = new stdClass();
         $training->courseshortname = $trainingcourse->shortname;
         try {
             $training->id = $dbinterface->add_training($training);
@@ -996,11 +996,11 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         }
 
         // Create a session course.
-        $coursedata            = new stdClass();
-        $coursedata->fullname  = "Session course";
+        $coursedata = new stdClass();
+        $coursedata->fullname = "Session course";
         $coursedata->shortname = "Session course";
-        $coursedata->category  = $entityid;
-        $sessioncourse         = create_course($coursedata);
+        $coursedata->category = $entityid;
+        $sessioncourse = create_course($coursedata);
 
         $session = new stdClass();
         // Try without courseshortname and trainingid.
@@ -1190,7 +1190,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         // Create an Entity.
         $entityid = $this->init_create_entity();
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // Add user to entity cohort.
         $entity->add_member($newuser);
@@ -1253,12 +1253,12 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         // Create a course.
         $coursedata = array(
-            'fullname'   => 'CourseTest',
-            'shortname'  => 'CT',
+            'fullname' => 'CourseTest',
+            'shortname' => 'CT',
             'categoryid' => 1,
-            'summary'    => 'Cours de test'
+            'summary' => 'Cours de test'
         );
-        $course     = current(\core_course_external::create_courses([$coursedata]));
+        $course = current(\core_course_external::create_courses([$coursedata]));
 
         $requestresult = $dbinterface->get_course_by_id($course['id']);
 
@@ -1290,12 +1290,12 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         // Create a course.
         $coursedata = array(
-            'fullname'   => 'CourseTest',
-            'shortname'  => 'CT',
+            'fullname' => 'CourseTest',
+            'shortname' => 'CT',
             'categoryid' => 1,
-            'summary'    => 'Cours de test'
+            'summary' => 'Cours de test'
         );
-        $course     = current(\core_course_external::create_courses([$coursedata]));
+        $course = current(\core_course_external::create_courses([$coursedata]));
 
         // Get course.
         $requestresult = $dbinterface->get_course_by_shortname($course['shortname']);
@@ -1329,11 +1329,11 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         // Create a course.
         $coursedata = array(
-            'fullname'   => 'CourseTest',
-            'shortname'  => 'CT',
+            'fullname' => 'CourseTest',
+            'shortname' => 'CT',
             'categoryid' => 1,
         );
-        $course     = current(\core_course_external::create_courses([$coursedata]));
+        $course = current(\core_course_external::create_courses([$coursedata]));
 
         // Check if course exist.
         self::assertTrue($dbinterface->course_shortname_exists($course['shortname']));
@@ -1391,12 +1391,12 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         // Create a course.
         $coursedata = array(
-            'fullname'   => 'CourseTest',
-            'shortname'  => 'CT',
+            'fullname' => 'CourseTest',
+            'shortname' => 'CT',
             'categoryid' => 1,
-            'summary'    => 'Cours de test'
+            'summary' => 'Cours de test'
         );
-        $course     = current(\core_course_external::create_courses([$coursedata]));
+        $course = current(\core_course_external::create_courses([$coursedata]));
 
         self::assertTrue($dbinterface->course_shortname_exists($course['shortname']));
 
@@ -1476,6 +1476,78 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
     }
 
     /**
+     * Test set_course_format_options
+     *
+     * @throws ReflectionException
+     * @throws coding_exception
+     * @throws moodle_exception
+     * @covers \local_mentor_core\database_interface::set_course_format_options
+     */
+    public function test_set_course_format_options() {
+        global $DB;
+        $this->resetAfterTest(true);
+
+        self::setAdminUser();
+
+        $this->reset_singletons();
+
+        $dbinterface = \local_mentor_core\database_interface::get_instance();
+
+        // Create a course format option.
+        $courseid = 10;
+        $format = 'Test';
+        $courseformatoption = [];
+        $courseformatoption[0] = new \stdClass();
+        $courseformatoption[0]->sectionid = 0;
+        $courseformatoption[0]->name = 'Test';
+        $courseformatoption[0]->value = 1;
+        $dbinterface->set_course_format_options($courseid, $format, $courseformatoption);
+
+        // Get a course format option.
+        $resultrequest = $DB->get_records('course_format_options', array('courseid' => $courseid));
+
+        // Check values.
+        self::assertCount(1, $resultrequest);
+        $resultrequest = array_values($resultrequest);
+        self::assertEquals($resultrequest[0]->courseid, $courseid);
+        self::assertEquals($resultrequest[0]->format, $format);
+        self::assertEquals($resultrequest[0]->sectionid, $courseformatoption[0]->sectionid);
+        self::assertEquals($resultrequest[0]->name, $courseformatoption[0]->name);
+        self::assertEquals($resultrequest[0]->value, $courseformatoption[0]->value);
+
+        // Create a course format option.
+        $courseformatoption = [];
+        $courseformatoption[0] = new \stdClass();
+        $courseformatoption[0]->sectionid = 1;
+        $courseformatoption[0]->name = 'Test2';
+        $courseformatoption[0]->value = 2;
+        $courseformatoption[1] = new \stdClass();
+        $courseformatoption[1]->sectionid = 3;
+        $courseformatoption[1]->name = 'Test3';
+        $courseformatoption[1]->value = 4;
+        $dbinterface->set_course_format_options($courseid, $format, $courseformatoption);
+
+        // Get a course format option.
+        $resultrequest = $DB->get_records('course_format_options', array('courseid' => $courseid));
+
+        // Check values.
+        self::assertCount(2, $resultrequest);
+        $resultrequest = array_values($resultrequest);
+        self::assertEquals($resultrequest[0]->courseid, $courseid);
+        self::assertEquals($resultrequest[0]->format, $format);
+        self::assertEquals($resultrequest[0]->sectionid, $courseformatoption[0]->sectionid);
+        self::assertEquals($resultrequest[0]->name, $courseformatoption[0]->name);
+        self::assertEquals($resultrequest[0]->value, $courseformatoption[0]->value);
+        self::assertEquals($resultrequest[1]->courseid, $courseid);
+        self::assertEquals($resultrequest[1]->format, $format);
+        self::assertEquals($resultrequest[1]->sectionid, $courseformatoption[1]->sectionid);
+        self::assertEquals($resultrequest[1]->name, $courseformatoption[1]->name);
+        self::assertEquals($resultrequest[1]->value, $courseformatoption[1]->value);
+
+        self::resetAllData();
+    }
+
+    /**
      * Test add_course_format_option
      *
      * @throws ReflectionException
@@ -1494,13 +1566,13 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $dbinterface = \local_mentor_core\database_interface::get_instance();
 
         // Create a course format option.
-        $courseformatoption            = new stdClass();
-        $courseformatoption->courseid  = 1;
-        $courseformatoption->format    = 'Test';
+        $courseformatoption = new stdClass();
+        $courseformatoption->courseid = 1;
+        $courseformatoption->format = 'Test';
         $courseformatoption->sectionid = 0;
-        $courseformatoption->name      = 'Test';
-        $courseformatoption->value     = 1;
-        $courseformatoptionid          = $dbinterface->add_course_format_option($courseformatoption);
+        $courseformatoption->name = 'Test';
+        $courseformatoption->value = 1;
+        $courseformatoptionid = $dbinterface->add_course_format_option($courseformatoption);
 
         // Get a course format option.
         $resultrequest = $DB->get_record('course_format_options', array('id' => $courseformatoptionid));
@@ -1517,13 +1589,13 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $options = $dbinterface->get_course_format_options_by_course_id(1);
 
         // Create a course format option.
-        $courseformatoption            = new stdClass();
-        $courseformatoption->courseid  = 1;
-        $courseformatoption->format    = 'Test';
+        $courseformatoption = new stdClass();
+        $courseformatoption->courseid = 1;
+        $courseformatoption->format = 'Test';
         $courseformatoption->sectionid = 0;
-        $courseformatoption->name      = 'Test2';
-        $courseformatoption->value     = 1;
-        $courseformatoptionid          = $dbinterface->add_course_format_option($courseformatoption);
+        $courseformatoption->name = 'Test2';
+        $courseformatoption->value = 1;
+        $courseformatoptionid = $dbinterface->add_course_format_option($courseformatoption);
 
         // Get a course format option.
         $resultrequest = $DB->get_record('course_format_options', array('id' => $courseformatoptionid));
@@ -1558,10 +1630,10 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $dbinterface = \local_mentor_core\database_interface::get_instance();
 
         // Create cohort.
-        $cohort            = new \stdClass();
-        $cohort->name      = 'Testcohort';
+        $cohort = new \stdClass();
+        $cohort->name = 'Testcohort';
         $cohort->contextid = 10;// False context.
-        $cohort->id        = cohort_add_cohort($cohort);
+        $cohort->id = cohort_add_cohort($cohort);
 
         // Get cohort with username.
         $resultrequest = $dbinterface->get_cohort_by_id($cohort->id);
@@ -1592,10 +1664,10 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $dbinterface = \local_mentor_core\database_interface::get_instance();
 
         // Create cohort.
-        $cohort            = new \stdClass();
-        $cohort->name      = 'Testcohort';
+        $cohort = new \stdClass();
+        $cohort->name = 'Testcohort';
         $cohort->contextid = 10;// False context.
-        $cohort->id        = cohort_add_cohort($cohort);
+        $cohort->id = cohort_add_cohort($cohort);
 
         // Get cohort with username.
         $resultrequest = current($dbinterface->get_cohorts_by_name($cohort->name));
@@ -1628,10 +1700,10 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $dbinterface = \local_mentor_core\database_interface::get_instance();
 
         // Create cohort.
-        $cohort            = new \stdClass();
-        $cohort->name      = 'Testcohort';
+        $cohort = new \stdClass();
+        $cohort->name = 'Testcohort';
         $cohort->contextid = 10;// False context.
-        $cohort->id        = cohort_add_cohort($cohort);
+        $cohort->id = cohort_add_cohort($cohort);
 
         $this->init_create_entity();
 
@@ -1661,8 +1733,8 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         // Check if are equals values.
         self::assertCount(0, $resultrequest);
 
-        $user            = new \stdClass();
-        $user->id        = $newuserid;
+        $user = new \stdClass();
+        $user->id = $newuserid;
         $user->suspended = 1;
         $DB->update_record('user', $user);
 
@@ -1699,10 +1771,10 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $dbinterface = \local_mentor_core\database_interface::get_instance();
 
         // Create cohort.
-        $cohort            = new \stdClass();
-        $cohort->name      = 'Testcohort';
+        $cohort = new \stdClass();
+        $cohort->name = 'Testcohort';
         $cohort->contextid = 10;// False context.
-        $cohort->id        = cohort_add_cohort($cohort);
+        $cohort->id = cohort_add_cohort($cohort);
 
         // Create user.
         $newuserid = $this->init_create_user();
@@ -1735,10 +1807,10 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $dbinterface = \local_mentor_core\database_interface::get_instance();
 
         // Create cohort.
-        $cohort            = new \stdClass();
-        $cohort->name      = 'Testcohort';
+        $cohort = new \stdClass();
+        $cohort->name = 'Testcohort';
         $cohort->contextid = 10;// False context.
-        $cohort->id        = cohort_add_cohort($cohort);
+        $cohort->id = cohort_add_cohort($cohort);
 
         // Create user.
         $newuserid = $this->init_create_user();
@@ -1771,10 +1843,10 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $dbinterface = \local_mentor_core\database_interface::get_instance();
 
         // Create cohort.
-        $cohort            = new \stdClass();
-        $cohort->name      = 'Testcohort';
+        $cohort = new \stdClass();
+        $cohort->name = 'Testcohort';
         $cohort->contextid = 10;// False context.
-        $cohort->id        = cohort_add_cohort($cohort);
+        $cohort->id = cohort_add_cohort($cohort);
 
         // Create user.
         $newuserid = $this->init_create_user();
@@ -1819,16 +1891,16 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $newcourseshortname = 'toto_update';
 
         // Create a course.
-        $coursedata            = new stdClass();
-        $coursedata->fullname  = "New course";
+        $coursedata = new stdClass();
+        $coursedata->fullname = "New course";
         $coursedata->shortname = $oldcourseshortname;
-        $coursedata->category  = $entityid;
-        $course                = create_course($coursedata);
+        $coursedata->category = $entityid;
+        $course = create_course($coursedata);
 
         // Create training.
-        $training                  = new stdClass();
+        $training = new stdClass();
         $training->courseshortname = $course->shortname;
-        $training->id              = $dbinterface->add_training($training);
+        $training->id = $dbinterface->add_training($training);
 
         // Change training course shortname.
         $training->courseshortname = $newcourseshortname;
@@ -1875,15 +1947,15 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $newsessioncourseshortname = "Session course update";
 
         // Create a session course.
-        $coursedata            = new stdClass();
-        $coursedata->fullname  = "Session course";
+        $coursedata = new stdClass();
+        $coursedata->fullname = "Session course";
         $coursedata->shortname = $oldsessioncourseshortname;
-        $coursedata->category  = $entityid;
+        $coursedata->category = $entityid;
         create_course($coursedata);
-        $session                  = new stdClass();
+        $session = new stdClass();
         $session->courseshortname = $coursedata->shortname;
-        $session->trainingid      = $training->id;
-        $session->id              = $dbinterface->add_session($session);
+        $session->trainingid = $training->id;
+        $session->id = $dbinterface->add_session($session);
 
         // Change session course shortname.
         $session->courseshortname = $newsessioncourseshortname;
@@ -1930,11 +2002,11 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         // Create a session course.
         $session = local_mentor_core\session_api::create_session($training->id, "Session course", true);
-        $data    = new stdClass();
+        $data = new stdClass();
 
         // Update a session course with sharing.
-        $data->id         = $session->id;
-        $data->opento     = 'other_entities';
+        $data->id = $session->id;
+        $data->opento = 'other_entities';
         $data->opentolist = [$entity2id];
         $session->update($data);
 
@@ -1992,7 +2064,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
             ->will($this->throwException(new \Exception()));
 
         // Replace dbinterface data with database interface Mock in training Mock.
-        $reflection         = new ReflectionClass($dbinterface);
+        $reflection = new ReflectionClass($dbinterface);
         $reflectionproperty = $reflection->getProperty('db');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($dbinterface, $DB);
@@ -2035,11 +2107,11 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         // Create a session course.
         $session = local_mentor_core\session_api::create_session($training->id, "Session course", true);
-        $data    = new stdClass();
+        $data = new stdClass();
 
         // Update a session course with sharing.
-        $data->id         = $session->id;
-        $data->opento     = 'other_entities';
+        $data->id = $session->id;
+        $data->opento = 'other_entities';
         $data->opentolist = [$entity2id];
         $session->update($data);
 
@@ -2104,12 +2176,12 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $dbinterface = \local_mentor_core\database_interface::get_instance();
 
         // Create a course.
-        $coursedata            = new stdClass();
-        $coursedata->fullname  = "New course";
+        $coursedata = new stdClass();
+        $coursedata->fullname = "New course";
         $coursedata->shortname = "New course";
-        $coursedata->category  = 1;
-        $coursedata->idnumber  = 1;
-        $course                = create_course($coursedata);
+        $coursedata->category = 1;
+        $coursedata->idnumber = 1;
+        $course = create_course($coursedata);
 
         $resutrequest = $dbinterface->get_category_course_by_idnumber($coursedata->category, $coursedata->idnumber);
 
@@ -2145,44 +2217,44 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $field = $DB->get_record('user_info_field', ['shortname' => 'mainentity']);
 
         // Create user.
-        $user1             = new stdClass();
-        $user1->lastname   = 'lastname1';
-        $user1->firstname  = 'User1';
-        $user1->email      = 'user1@test.com';
-        $user1->username   = 'testuser1';
-        $user1->password   = 'user1';
+        $user1 = new stdClass();
+        $user1->lastname = 'lastname1';
+        $user1->firstname = 'User1';
+        $user1->email = 'user1@test.com';
+        $user1->username = 'testuser1';
+        $user1->password = 'user1';
         $user1->mnethostid = 1;
-        $user1->confirmed  = 1;
-        $user1->auth       = 'manual';
+        $user1->confirmed = 1;
+        $user1->auth = 'manual';
 
         $user1id = local_mentor_core\profile_api::create_user($user1);
         set_user_preference('auth_forcepasswordchange', 0, $user1);
 
-        $user1data          = new stdClass();
+        $user1data = new stdClass();
         $user1data->fieldid = $field->id;
-        $user1data->data    = $oldentityname;
-        $user1data->userid  = $user1id;
+        $user1data->data = $oldentityname;
+        $user1data->userid = $user1id;
 
         $user1infodata = $DB->insert_record('user_info_data', $user1data);
 
         // Create user.
-        $user2             = new stdClass();
-        $user2->lastname   = 'lastname2';
-        $user2->firstname  = 'User2';
-        $user2->email      = 'user2@test.com';
-        $user2->username   = 'testuser2';
-        $user2->password   = 'user2';
+        $user2 = new stdClass();
+        $user2->lastname = 'lastname2';
+        $user2->firstname = 'User2';
+        $user2->email = 'user2@test.com';
+        $user2->username = 'testuser2';
+        $user2->password = 'user2';
         $user2->mnethostid = 1;
-        $user2->confirmed  = 1;
-        $user2->auth       = 'manual';
+        $user2->confirmed = 1;
+        $user2->auth = 'manual';
 
         $user2id = local_mentor_core\profile_api::create_user($user2);
         set_user_preference('auth_forcepasswordchange', 0, $user2);
 
-        $user2data          = new stdClass();
+        $user2data = new stdClass();
         $user2data->fieldid = $field->id;
-        $user2data->data    = $oldentityname;
-        $user2data->userid  = $user2id;
+        $user2data->data = $oldentityname;
+        $user2data->userid = $user2id;
 
         $user2infodata = $DB->insert_record('user_info_data', $user2data);
 
@@ -2190,7 +2262,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
             SELECT *
             FROM {user_info_data}
             WHERE ' . $DB->sql_compare_text('data') . ' = ' . $DB->sql_compare_text(':data') .
-                                              'AND fieldid = :fieldid', ['data' => $oldentityname, 'fieldid' => $field->id]);
+            'AND fieldid = :fieldid', ['data' => $oldentityname, 'fieldid' => $field->id]);
 
         self::assertEquals($resultrequest[$user1infodata]->userid, $user1id);
         self::assertEquals($resultrequest[$user1infodata]->data, $oldentityname);
@@ -2203,7 +2275,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
             SELECT *
             FROM {user_info_data}
             WHERE ' . $DB->sql_compare_text('data') . ' = ' . $DB->sql_compare_text(':data') .
-                                              'AND fieldid = :fieldid', ['data' => $newentityname, 'fieldid' => $field->id]);
+            'AND fieldid = :fieldid', ['data' => $newentityname, 'fieldid' => $field->id]);
 
         self::assertEquals($resultrequest[$user1infodata]->userid, $user1id);
         self::assertEquals($resultrequest[$user1infodata]->data, $newentityname);
@@ -2267,7 +2339,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
             ->disableOriginalConstructor()
             ->getMock();
 
-        $mainentityfield     = new \stdClass();
+        $mainentityfield = new \stdClass();
         $mainentityfield->id = 0;
 
         $DB->expects($this->once())
@@ -2279,7 +2351,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
             ->will($this->throwException(new \dml_exception('DB Error!!!')));
 
         // Replace dbinterface data with DB Mock.
-        $reflection         = new ReflectionClass($dbinterface);
+        $reflection = new ReflectionClass($dbinterface);
         $reflectionproperty = $reflection->getProperty('db');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($dbinterface, $DB);
@@ -2322,10 +2394,10 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertFalse($dbinterface->course_exists($courseshrortname));
 
         // Create a course.
-        $coursedata            = new stdClass();
-        $coursedata->fullname  = "New course fullname";
+        $coursedata = new stdClass();
+        $coursedata->fullname = "New course fullname";
         $coursedata->shortname = $courseshrortname;
-        $coursedata->category  = 1;
+        $coursedata->category = 1;
         create_course($coursedata);
 
         // Course exist.
@@ -2352,7 +2424,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $dbinterface = \local_mentor_core\database_interface::get_instance();
 
         $entityid = $this->init_create_entity();
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // Course exist.
         self::assertTrue($dbinterface->course_category_exists($entity->id));
@@ -2378,7 +2450,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $dbinterface = \local_mentor_core\database_interface::get_instance();
 
         // Create session.
-        $session          = $this->init_create_session();
+        $session = $this->init_create_session();
         $oldsessionstatus = $session->status;
 
         // Update session.
@@ -2472,14 +2544,14 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         // Create session.
         $session = $this->init_create_session();
 
-        $data           = new stdClass();
+        $data = new stdClass();
         $data->entityid = $session->get_entity()->id;
-        $data->status   = $session->status;
-        $date           = new DateTime();
-        $data->dateto   = $date->getTimestamp() - 1000;
+        $data->status = $session->status;
+        $date = new DateTime();
+        $data->dateto = $date->getTimestamp() - 1000;
         $data->datefrom = $date->getTimestamp() + 1000;
-        $data->start    = 0;
-        $data->length   = 10;
+        $data->start = 0;
+        $data->length = 10;
 
         // Get sessions by entity.
         $resultrequest = $dbinterface->get_sessions_by_entity_id($data);
@@ -2513,11 +2585,11 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         // Create session.
         $session = $this->init_create_session();
 
-        $data           = new stdClass();
+        $data = new stdClass();
         $data->entityid = $session->get_entity()->id;
-        $data->status   = $session->status;
-        $date           = new DateTime();
-        $data->dateto   = $date->getTimestamp() - 1000;
+        $data->status = $session->status;
+        $date = new DateTime();
+        $data->dateto = $date->getTimestamp() - 1000;
         $data->datefrom = $date->getTimestamp() + 1000;
 
         // Count sessions by entity.
@@ -2663,7 +2735,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $session->status = \local_mentor_core\session::STATUS_IN_PROGRESS;
         \local_mentor_core\session_api::update_session($session);
 
-        $user     = new stdClass();
+        $user = new stdClass();
         $user->id = $userid;
         $session->get_entity()->add_member($user);
 
@@ -2905,9 +2977,9 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertCount(0, $resultrequest);
 
         // Update a session course with sharing.
-        $data             = new stdClass();
-        $data->id         = $session->id;
-        $data->opento     = 'other_entities';
+        $data = new stdClass();
+        $data->id = $session->id;
+        $data->opento = 'other_entities';
         $data->opentolist = [$entity2id];
         $session->update($data);
 
@@ -2942,11 +3014,11 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $userid = self::init_create_user();
 
         // Set mainentity to user.
-        $field             = $DB->get_record('user_info_field', ['shortname' => 'mainentity']);
-        $userdata          = new stdClass();
+        $field = $DB->get_record('user_info_field', ['shortname' => 'mainentity']);
+        $userdata = new stdClass();
         $userdata->fieldid = $field->id;
-        $userdata->data    = $entityname;
-        $userdata->userid  = $userid;
+        $userdata->data = $entityname;
+        $userdata->userid = $userid;
         $DB->insert_record('user_info_data', $userdata);
 
         // Check entity is mainentity for user.
@@ -3046,18 +3118,18 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         $dbinterface = \local_mentor_core\database_interface::get_instance();
 
-        $entity1id                  = $this->init_create_entity('Entity 1');
-        $categoryoption             = new \stdClass();
+        $entity1id = $this->init_create_entity('Entity 1');
+        $categoryoption = new \stdClass();
         $categoryoption->categoryid = $entity1id;
-        $categoryoption->name       = 'hidden';
-        $categoryoption->value      = 1;
+        $categoryoption->name = 'hidden';
+        $categoryoption->value = 1;
         $DB->insert_record('category_options', $categoryoption);
 
-        $entity2id                  = $this->init_create_entity('Entity 2');
-        $categoryoption             = new \stdClass();
+        $entity2id = $this->init_create_entity('Entity 2');
+        $categoryoption = new \stdClass();
         $categoryoption->categoryid = $entity2id;
-        $categoryoption->name       = 'hidden';
-        $categoryoption->value      = 0;
+        $categoryoption->name = 'hidden';
+        $categoryoption->value = 0;
         $DB->insert_record('category_options', $categoryoption);
 
         // Not match.
@@ -3202,7 +3274,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         $entity->assign_manager($USER->id);
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->search = false;
 
         $users = $dbinterface->get_all_category_users($data);
@@ -3212,14 +3284,14 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertEquals('Manager', $users[0]->rolename);
 
         // Wrong search.
-        $data                  = new stdClass();
+        $data = new stdClass();
         $data->search['value'] = 'TEST';
 
         $users = $dbinterface->get_all_category_users($data);
         self::assertCount(0, $users);
 
         // Right search.
-        $data                  = new stdClass();
+        $data = new stdClass();
         $data->search['value'] = 'Admin Manager';
 
         $users = $dbinterface->get_all_category_users($data);
@@ -3294,7 +3366,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $session = local_mentor_core\session_api::create_session($training->id, "Session course", true);
         $session->update_status(session::STATUS_IN_PROGRESS);
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -3308,14 +3380,14 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $session2 = local_mentor_core\session_api::create_session($training2->id, "Session course 2", true);
         $session2->update_status(session::STATUS_IN_PROGRESS);
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session2->update($data);
 
         // Create a session in preparation.
         $session3 = local_mentor_core\session_api::create_session($training2->id, "Session course 3", true);
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session3->update($data);
 
@@ -3353,17 +3425,17 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         $contextid = context_system::instance()->id;
         $component = 'local_trainings';
-        $itemid    = $training->id;
-        $filearea  = 'thumbnail';
+        $itemid = $training->id;
+        $filearea = 'thumbnail';
         $contextid = $training->get_context()->id;
 
-        $filerecord            = new stdClass();
+        $filerecord = new stdClass();
         $filerecord->contextid = $contextid;
         $filerecord->component = $component;
-        $filerecord->filearea  = $filearea;
-        $filerecord->itemid    = $itemid;
-        $filerecord->filepath  = '/';
-        $filerecord->filename  = 'logo.png';
+        $filerecord->filearea = $filearea;
+        $filerecord->itemid = $itemid;
+        $filerecord->filepath = '/';
+        $filerecord->filename = 'logo.png';
 
         $filepath = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
 
@@ -3402,8 +3474,8 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $training = $this->init_create_training('Training course', 'Training course', $entity1id);
 
         // Create a session course.
-        $session      = local_mentor_core\session_api::create_session($training->id, "Session course", true);
-        $data         = new stdClass();
+        $session = local_mentor_core\session_api::create_session($training->id, "Session course", true);
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -3472,7 +3544,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $session = local_mentor_core\session_api::create_session($training->id, "Session course", true);
         $session->update_status(\local_mentor_core\session::STATUS_OPENED_REGISTRATION);
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -3480,7 +3552,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $session = local_mentor_core\session_api::create_session($training->id, "Session course 2", true);
         $session->update_status(\local_mentor_core\session::STATUS_OPENED_REGISTRATION);
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -3488,7 +3560,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $session = local_mentor_core\session_api::create_session($training->id, "Session course 3", true);
         $session->update_status(\local_mentor_core\session::STATUS_IN_PROGRESS);
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -3497,7 +3569,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         // Session with in preparation status must be ignored.
         $session->update_status(\local_mentor_core\session::STATUS_IN_PREPARATION);
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -3560,20 +3632,20 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         $dbinterface = \local_mentor_core\database_interface::get_instance();
 
-        $entity1id                  = $this->init_create_entity('Entité Mentor');
-        $entity1                    = \local_mentor_core\entity_api::get_entity($entity1id);
-        $categoryoption             = new \stdClass();
+        $entity1id = $this->init_create_entity('Entité Mentor');
+        $entity1 = \local_mentor_core\entity_api::get_entity($entity1id);
+        $categoryoption = new \stdClass();
         $categoryoption->categoryid = $entity1id;
-        $categoryoption->name       = 'hidden';
-        $categoryoption->value      = 1;
+        $categoryoption->name = 'hidden';
+        $categoryoption->value = 1;
         $DB->insert_record('category_options', $categoryoption);
 
-        $entity2id                  = $this->init_create_entity('Entité Mentor 2');
-        $entity2                    = \local_mentor_core\entity_api::get_entity($entity2id);
-        $categoryoption             = new \stdClass();
+        $entity2id = $this->init_create_entity('Entité Mentor 2');
+        $entity2 = \local_mentor_core\entity_api::get_entity($entity2id);
+        $categoryoption = new \stdClass();
         $categoryoption->categoryid = $entity2id;
-        $categoryoption->name       = 'hidden';
-        $categoryoption->value      = 0;
+        $categoryoption->name = 'hidden';
+        $categoryoption->value = 0;
         $DB->insert_record('category_options', $categoryoption);
 
         $role = $entity1->get_manager_role()->shortname;
@@ -3625,7 +3697,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $session = local_mentor_core\session_api::create_session($training->id, "Session course", true);
         $session->update_status(\local_mentor_core\session::STATUS_IN_PROGRESS);
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -3670,7 +3742,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertCount(0, $result);
 
         // Share the session.
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'all';
         $session->update($data);
 
@@ -3720,21 +3792,21 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $entityname = 'Entity 1';
         $this->init_create_entity($entityname);
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->search = ['value' => ""];
 
         self::assertEmpty($dbinterface->get_all_admins($data));
 
         // Create new admin.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname';
-        $user->firstname                = 'firstname';
-        $user->email                    = 'test@test.com';
-        $user->username                 = 'testusername';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $entityname;
 
         $user1id = \local_mentor_core\profile_api::create_user($user);
@@ -3748,15 +3820,15 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertArrayHasKey($user1id, $adminpilote);
 
         // Create new admin.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname2';
-        $user->firstname                = 'firstname2';
-        $user->email                    = 'test2@test.com';
-        $user->username                 = 'testusername2';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname2';
+        $user->firstname = 'firstname2';
+        $user->email = 'test2@test.com';
+        $user->username = 'testusername2';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $entityname;
 
         $user2id = \local_mentor_core\profile_api::create_user($user);
@@ -3771,7 +3843,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertArrayHasKey($user2id, $adminpilote);
 
         $data->search = ['value' => "lastname2"];
-        $adminpilote  = $dbinterface->get_all_admins($data);
+        $adminpilote = $dbinterface->get_all_admins($data);
 
         self::assertCount(1, $adminpilote);
         self::assertArrayNotHasKey($user1id, $adminpilote);
@@ -3797,8 +3869,8 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         self::assertFalse($dbinterface->is_shared_to_entity_by_session_id(1, 2));
 
-        $data                   = new stdClass();
-        $data->sessionid        = 1;
+        $data = new stdClass();
+        $data->sessionid = 1;
         $data->coursecategoryid = 2;
         $DB->insert_record('session_sharing', $data);
 
@@ -3894,11 +3966,11 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         self::assertFalse($dbi->get_course_singleactivity_type($course->id));
 
-        $fielddata           = new \stdClass();
+        $fielddata = new \stdClass();
         $fielddata->courseid = $course->id;
-        $fielddata->format   = 'singleactivity';
-        $fielddata->name     = 'activitytype';
-        $fielddata->value    = 'field value';
+        $fielddata->format = 'singleactivity';
+        $fielddata->name = 'activitytype';
+        $fielddata->value = 'field value';
 
         $DB->insert_record('course_format_options', $fielddata);
 
@@ -3920,7 +3992,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $session = $this->init_create_session();
-        $course  = $session->get_course();
+        $course = $session->get_course();
         $course2 = self::getDataGenerator()->create_course();
 
         $dbi = \local_mentor_core\database_interface::get_instance();
@@ -3977,7 +4049,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         $entityid = $this->init_create_entity();
         $training = $this->init_create_training('trainingname', 'trainingshortname', $entityid);
-        $user     = self::getDataGenerator()->create_user();
+        $user = self::getDataGenerator()->create_user();
 
         $DB->delete_records('favourite');
 
@@ -4032,7 +4104,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         $entityid = $this->init_create_entity();
         $training = $this->init_create_training('trainingname', 'trainingshortname', $entityid);
-        $user     = self::getDataGenerator()->create_user();
+        $user = self::getDataGenerator()->create_user();
 
         $DB->delete_records('favourite');
 
@@ -4040,26 +4112,26 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertEmpty($DB->get_records('favourite'));
 
         // Add favourite with defined user.
-        $favourite               = new \stdClass();
-        $favourite->component    = 'local_trainings';
-        $favourite->itemtype     = 'favourite_training';
-        $favourite->itemid       = $training->id;
-        $favourite->contextid    = $training->get_context()->id;
-        $favourite->userid       = $user->id;
-        $favourite->timecreated  = time();
+        $favourite = new \stdClass();
+        $favourite->component = 'local_trainings';
+        $favourite->itemtype = 'favourite_training';
+        $favourite->itemid = $training->id;
+        $favourite->contextid = $training->get_context()->id;
+        $favourite->userid = $user->id;
+        $favourite->timecreated = time();
         $favourite->timemodified = time();
-        $favouriteid1            = $DB->insert_record('favourite', $favourite);
+        $favouriteid1 = $DB->insert_record('favourite', $favourite);
 
         // Add favourite with global user.
-        $favourite               = new \stdClass();
-        $favourite->component    = 'local_trainings';
-        $favourite->itemtype     = 'favourite_training';
-        $favourite->itemid       = $training->id;
-        $favourite->contextid    = $training->get_context()->id;
-        $favourite->userid       = $USER->id;
-        $favourite->timecreated  = time();
+        $favourite = new \stdClass();
+        $favourite->component = 'local_trainings';
+        $favourite->itemtype = 'favourite_training';
+        $favourite->itemid = $training->id;
+        $favourite->contextid = $training->get_context()->id;
+        $favourite->userid = $USER->id;
+        $favourite->timecreated = time();
         $favourite->timemodified = time();
-        $favouriteid2            = $DB->insert_record('favourite', $favourite);
+        $favouriteid2 = $DB->insert_record('favourite', $favourite);
 
         $favourites = $DB->get_records('favourite');
         self::assertCount(2, $favourites);
@@ -4104,7 +4176,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         $entityid = $this->init_create_entity();
         $training = $this->init_create_training('trainingname', 'trainingshortname', $entityid);
-        $user     = self::getDataGenerator()->create_user();
+        $user = self::getDataGenerator()->create_user();
 
         $DB->delete_records('favourite');
 
@@ -4118,13 +4190,13 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertFalse($dbi->is_training_user_favourite_designer($training->id, $training->get_context()->id));
 
         // Add favourite with defined user.
-        $favourite               = new \stdClass();
-        $favourite->component    = 'local_trainings';
-        $favourite->itemtype     = 'favourite_training';
-        $favourite->itemid       = $training->id;
-        $favourite->contextid    = $training->get_context()->id;
-        $favourite->userid       = $user->id;
-        $favourite->timecreated  = time();
+        $favourite = new \stdClass();
+        $favourite->component = 'local_trainings';
+        $favourite->itemtype = 'favourite_training';
+        $favourite->itemid = $training->id;
+        $favourite->contextid = $training->get_context()->id;
+        $favourite->userid = $user->id;
+        $favourite->timecreated = time();
         $favourite->timemodified = time();
         $DB->insert_record('favourite', $favourite);
 
@@ -4135,13 +4207,13 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertFalse($dbi->is_training_user_favourite_designer($training->id, $training->get_context()->id));
 
         // Add favourite with global user.
-        $favourite               = new \stdClass();
-        $favourite->component    = 'local_trainings';
-        $favourite->itemtype     = 'favourite_training';
-        $favourite->itemid       = $training->id;
-        $favourite->contextid    = $training->get_context()->id;
-        $favourite->userid       = $USER->id;
-        $favourite->timecreated  = time();
+        $favourite = new \stdClass();
+        $favourite->component = 'local_trainings';
+        $favourite->itemtype = 'favourite_training';
+        $favourite->itemid = $training->id;
+        $favourite->contextid = $training->get_context()->id;
+        $favourite->userid = $USER->id;
+        $favourite->timecreated = time();
         $favourite->timemodified = time();
         $DB->insert_record('favourite', $favourite);
 
@@ -4173,7 +4245,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         $entityid = $this->init_create_entity();
         $training = $this->init_create_training('trainingname', 'trainingshortname', $entityid);
-        $user     = self::getDataGenerator()->create_user();
+        $user = self::getDataGenerator()->create_user();
 
         $DB->delete_records('favourite');
 
@@ -4187,13 +4259,13 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertFalse($dbi->get_training_user_favourite_designer_data($training->id, $training->get_context()->id));
 
         // Add favourite with defined user.
-        $favourite               = new \stdClass();
-        $favourite->component    = 'local_trainings';
-        $favourite->itemtype     = 'favourite_training';
-        $favourite->itemid       = $training->id;
-        $favourite->contextid    = $training->get_context()->id;
-        $favourite->userid       = $user->id;
-        $favourite->timecreated  = time();
+        $favourite = new \stdClass();
+        $favourite->component = 'local_trainings';
+        $favourite->itemtype = 'favourite_training';
+        $favourite->itemid = $training->id;
+        $favourite->contextid = $training->get_context()->id;
+        $favourite->userid = $user->id;
+        $favourite->timecreated = time();
         $favourite->timemodified = time();
         $DB->insert_record('favourite', $favourite);
 
@@ -4210,13 +4282,13 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertFalse($dbi->get_training_user_favourite_designer_data($training->id, $training->get_context()->id));
 
         // Add favourite with global user.
-        $favourite               = new \stdClass();
-        $favourite->component    = 'local_trainings';
-        $favourite->itemtype     = 'favourite_training';
-        $favourite->itemid       = $training->id;
-        $favourite->contextid    = $training->get_context()->id;
-        $favourite->userid       = $USER->id;
-        $favourite->timecreated  = time();
+        $favourite = new \stdClass();
+        $favourite->component = 'local_trainings';
+        $favourite->itemtype = 'favourite_training';
+        $favourite->itemid = $training->id;
+        $favourite->contextid = $training->get_context()->id;
+        $favourite->userid = $USER->id;
+        $favourite->timecreated = time();
         $favourite->timemodified = time();
         $DB->insert_record('favourite', $favourite);
 
@@ -4260,7 +4332,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $dbi = \local_mentor_core\database_interface::get_instance();
 
         $session = $this->init_create_session();
-        $user    = self::getDataGenerator()->create_user();
+        $user = self::getDataGenerator()->create_user();
 
         $DB->delete_records('favourite');
 
@@ -4314,7 +4386,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $dbi = \local_mentor_core\database_interface::get_instance();
 
         $session = $this->init_create_session();
-        $user    = self::getDataGenerator()->create_user();
+        $user = self::getDataGenerator()->create_user();
 
         $DB->delete_records('favourite');
 
@@ -4322,26 +4394,26 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertEmpty($DB->get_records('favourite'));
 
         // Add favourite with defined user.
-        $favourite               = new \stdClass();
-        $favourite->component    = 'local_session';
-        $favourite->itemtype     = 'favourite_session';
-        $favourite->itemid       = $session->id;
-        $favourite->contextid    = $session->get_context()->id;
-        $favourite->userid       = $user->id;
-        $favourite->timecreated  = time();
+        $favourite = new \stdClass();
+        $favourite->component = 'local_session';
+        $favourite->itemtype = 'favourite_session';
+        $favourite->itemid = $session->id;
+        $favourite->contextid = $session->get_context()->id;
+        $favourite->userid = $user->id;
+        $favourite->timecreated = time();
         $favourite->timemodified = time();
-        $favouriteid1            = $DB->insert_record('favourite', $favourite);
+        $favouriteid1 = $DB->insert_record('favourite', $favourite);
 
         // Add favourite with global user.
-        $favourite               = new \stdClass();
-        $favourite->component    = 'local_session';
-        $favourite->itemtype     = 'favourite_session';
-        $favourite->itemid       = $session->id;
-        $favourite->contextid    = $session->get_context()->id;
-        $favourite->userid       = $USER->id;
-        $favourite->timecreated  = time();
+        $favourite = new \stdClass();
+        $favourite->component = 'local_session';
+        $favourite->itemtype = 'favourite_session';
+        $favourite->itemid = $session->id;
+        $favourite->contextid = $session->get_context()->id;
+        $favourite->userid = $USER->id;
+        $favourite->timecreated = time();
         $favourite->timemodified = time();
-        $favouriteid2            = $DB->insert_record('favourite', $favourite);
+        $favouriteid2 = $DB->insert_record('favourite', $favourite);
 
         $favourites = $DB->get_records('favourite');
         self::assertCount(2, $favourites);
@@ -4385,7 +4457,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         $dbi = \local_mentor_core\database_interface::get_instance();
 
         $session = $this->init_create_session();
-        $user    = self::getDataGenerator()->create_user();
+        $user = self::getDataGenerator()->create_user();
 
         $DB->delete_records('favourite');
 
@@ -4399,13 +4471,13 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertFalse($dbi->get_user_favourite_session_data($session->id, $session->get_context()->id));
 
         // Add favourite with defined user.
-        $favourite               = new \stdClass();
-        $favourite->component    = 'local_session';
-        $favourite->itemtype     = 'favourite_session';
-        $favourite->itemid       = $session->id;
-        $favourite->contextid    = $session->get_context()->id;
-        $favourite->userid       = $user->id;
-        $favourite->timecreated  = time();
+        $favourite = new \stdClass();
+        $favourite->component = 'local_session';
+        $favourite->itemtype = 'favourite_session';
+        $favourite->itemid = $session->id;
+        $favourite->contextid = $session->get_context()->id;
+        $favourite->userid = $user->id;
+        $favourite->timecreated = time();
         $favourite->timemodified = time();
         $DB->insert_record('favourite', $favourite);
 
@@ -4422,13 +4494,13 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertFalse($dbi->get_user_favourite_session_data($session->id, $session->get_context()->id));
 
         // Add favourite with global user.
-        $favourite               = new \stdClass();
-        $favourite->component    = 'local_session';
-        $favourite->itemtype     = 'favourite_session';
-        $favourite->itemid       = $session->id;
-        $favourite->contextid    = $session->get_context()->id;
-        $favourite->userid       = $USER->id;
-        $favourite->timecreated  = time();
+        $favourite = new \stdClass();
+        $favourite->component = 'local_session';
+        $favourite->itemtype = 'favourite_session';
+        $favourite->itemid = $session->id;
+        $favourite->contextid = $session->get_context()->id;
+        $favourite->userid = $USER->id;
+        $favourite->timecreated = time();
         $favourite->timemodified = time();
         $DB->insert_record('favourite', $favourite);
 
@@ -4479,10 +4551,10 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertFalse($dbi->get_user_preference($USER->id, 'prefenrecename'));
 
         // Insert new preference user.
-        $preference         = new \stdClass();
+        $preference = new \stdClass();
         $preference->userid = $USER->id;
-        $preference->name   = 'preferencename';
-        $preference->value  = 'preferencevalue';
+        $preference->name = 'preferencename';
+        $preference->value = 'preferencevalue';
         $DB->insert_record('user_preferences', $preference);
 
         // Preference exist.
@@ -4550,7 +4622,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         $dbi = \local_mentor_core\database_interface::get_instance();
 
-        $user   = self::getDataGenerator()->create_user();
+        $user = self::getDataGenerator()->create_user();
         $course = self::getDataGenerator()->create_course();
 
         self::assertFalse($dbi->user_has_role_in_context($user->id, 'participant', \context_course::instance($course->id)->id));
@@ -4578,7 +4650,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $course = self::getDataGenerator()->create_course();
-        $user   = self::getDataGenerator()->create_user();
+        $user = self::getDataGenerator()->create_user();
 
         $dbi = \local_mentor_core\database_interface::get_instance();
 
@@ -4592,7 +4664,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertTrue($dbi->has_enroll_user_enabled($course->id, $user->id));
 
         // Disable enrol user.
-        $enroluserinstance         = $DB->get_record_sql('
+        $enroluserinstance = $DB->get_record_sql('
             SELECT ue.*
             FROM {user_enrolments} ue
             JOIN {enrol} e ON e.id = ue.enrolid
@@ -4643,35 +4715,35 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
             $entityid = \local_mentor_core\entity_api::create_entity(
                 array(
-                    'name'      => $entityname,
+                    'name' => $entityname,
                     'shortname' => $entityname
                 )
             );
 
             if ($i < 5) {
-                $categoryoption             = new \stdClass();
+                $categoryoption = new \stdClass();
                 $categoryoption->categoryid = $entityid;
-                $categoryoption->name       = 'hidden';
-                $categoryoption->value      = 1;
+                $categoryoption->name = 'hidden';
+                $categoryoption->value = 1;
                 $DB->insert_record('category_options', $categoryoption);
             }
 
             \local_mentor_core\entity_api::create_entity(
                 array(
-                    'name'      => 'sub' . $entityname,
+                    'name' => 'sub' . $entityname,
                     'shortname' => 'sub' . $entityname,
-                    'parentid'  => $entityid
+                    'parentid' => $entityid
                 )
             );
         }
 
-        $data               = new \stdClass();
-        $data->order        = [];
+        $data = new \stdClass();
+        $data->order = [];
         $data->order['dir'] = 'ASC';
-        $data->search       = array('value' => null);
-        $data->draw         = null;
-        $data->length       = 10;
-        $data->start        = 0;
+        $data->search = array('value' => null);
+        $data->draw = null;
+        $data->length = 10;
+        $data->start = 0;
 
         $dbi = \local_mentor_core\database_interface::get_instance();
 
@@ -4686,13 +4758,13 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::assertEquals('subentity0', current($managedentities)->name);
 
         $data->order['dir'] = 'DESC';
-        $managedentities    = $dbi->get_all_entities(true, $data, true);
+        $managedentities = $dbi->get_all_entities(true, $data, true);
         self::assertCount(20, $managedentities);
         self::assertEquals('subentity9', current($managedentities)->name);
 
         $data->order['dir'] = 'ASC';
-        $data->search       = array('value' => 'entity3');
-        $managedentities    = $dbi->get_all_entities(true, $data, true);
+        $data->search = array('value' => 'entity3');
+        $managedentities = $dbi->get_all_entities(true, $data, true);
         self::assertCount(2, $managedentities);
         self::assertEquals('entity3', current($managedentities)->name);
 
@@ -4701,25 +4773,25 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
             $entityid = \local_mentor_core\entity_api::create_entity(
                 array(
-                    'name'      => $entityname,
+                    'name' => $entityname,
                     'shortname' => $entityname,
-                    'userid'    => $newuser->id
+                    'userid' => $newuser->id
                 )
             );
 
             if ($i < 5) {
-                $categoryoption             = new \stdClass();
+                $categoryoption = new \stdClass();
                 $categoryoption->categoryid = $entityid;
-                $categoryoption->name       = 'hidden';
-                $categoryoption->value      = 1;
+                $categoryoption->name = 'hidden';
+                $categoryoption->value = 1;
                 $DB->insert_record('category_options', $categoryoption);
             }
 
             \local_mentor_core\entity_api::create_entity(
                 array(
-                    'name'      => 'sub' . $entityname,
+                    'name' => 'sub' . $entityname,
                     'shortname' => 'sub' . $entityname,
-                    'parentid'  => $entityid
+                    'parentid' => $entityid
                 )
             );
         }
@@ -4744,7 +4816,7 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $dbi          = \local_mentor_core\database_interface::get_instance();
+        $dbi = \local_mentor_core\database_interface::get_instance();
         $librarybject = $dbi->get_library_object();
         self::assertEquals($librarybject->name, \local_mentor_core\library::NAME);
         self::assertEquals($librarybject->idnumber, \local_mentor_core\library::SHORTNAME);
@@ -4801,10 +4873,10 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $entityid  = $this->init_create_entity();
-        $training  = $this->init_create_training('trainingname', 'trainingshortname', $entityid);
+        $entityid = $this->init_create_entity();
+        $training = $this->init_create_training('trainingname', 'trainingshortname', $entityid);
         $training2 = $this->init_create_training('trainingname2', 'trainingshortname2', $entityid);
-        $user      = self::getDataGenerator()->create_user();
+        $user = self::getDataGenerator()->create_user();
 
         $dbi = \local_mentor_core\database_interface::get_instance();
         self::assertFalse($dbi->get_library_publication($training->id));
@@ -4848,8 +4920,8 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $entityid  = $this->init_create_entity();
-        $training  = $this->init_create_training('trainingname', 'trainingshortname', $entityid);
+        $entityid = $this->init_create_entity();
+        $training = $this->init_create_training('trainingname', 'trainingshortname', $entityid);
 
         $dbi = \local_mentor_core\database_interface::get_instance();
         self::assertFalse($dbi->get_recyclebin_category_item('trainingshortname'));
@@ -4880,8 +4952,8 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $dbi = \local_mentor_core\database_interface::get_instance();
-        $entityid  = $this->init_create_entity();
-        $training  = $this->init_create_training('trainingname', 'trainingshortname', $entityid);
+        $entityid = $this->init_create_entity();
+        $training = $this->init_create_training('trainingname', 'trainingshortname', $entityid);
 
         $training->create_manual_enrolment_instance();
         $instance = $training->get_enrolment_instances_by_type('manual');
@@ -4891,6 +4963,192 @@ class local_mentor_core_dbinterface_testcase extends advanced_testcase {
         self::getDataGenerator()->enrol_user($USER->id, $training->get_course()->id);
 
         self::assertTrue($dbi->has_enrol_by_instance_id($instance->id, $USER->id));
+
+        self::resetAllData();
+    }
+
+    /**
+     * Test update_secondary_entities_name
+     *
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws moodle_exception
+     *
+     * @covers  \local_mentor_core\database_interface::update_secondary_entities_name
+     */
+    public function test_update_secondary_entities_name() {
+        global $DB;
+
+        $this->resetAfterTest(true);
+        $this->reset_singletons();
+        $this->init_role();
+
+        self::setAdminUser();
+
+        $dbi = \local_mentor_core\database_interface::get_instance();
+
+        $entityid1 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 1',
+            'shortname' => 'New Entity 1'
+        ]);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
+
+        $entityid2 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 2',
+            'shortname' => 'New Entity 2'
+        ]);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entityid2);
+
+        $userdata = new stdClass();
+        $userdata->lastname = 'lastname2';
+        $userdata->firstname = 'firstname2';
+        $userdata->email = 'test2@test.com';
+        $userdata->username = 'testusername2';
+        $userdata->password = 'to be generated';
+        $userdata->mnethostid = 1;
+        $userdata->confirmed = 1;
+        $userdata->auth = 'manual';
+        $userdata->profile_field_mainentity = $entity1->name;
+        $userdata->profile_field_secondaryentities = [$entity2->name];
+        $userid = \local_mentor_core\profile_api::create_user($userdata);
+
+        $userinfofield = $DB->get_record('user_info_field', ['shortname' => 'secondaryentities']);
+        $userinfodata = $DB->get_record('user_info_data', array('userid' => $userid, 'fieldid' => $userinfofield->id));
+
+        self::assertEquals($userinfodata->data, $entity2->name);
+
+        self::assertTrue($dbi->update_secondary_entities_name($entity2->name, $entity2->name . ' bis'));
+
+        $userinfodata = $DB->get_record('user_info_data', array('userid' => $userid, 'fieldid' => $userinfofield->id));
+
+        self::assertEquals($userinfodata->data, $entity2->name . ' bis');
+
+        self::resetAllData();
+    }
+
+    /**
+     * Test update_secondary_entities_name not ok
+     *
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws moodle_exception
+     *
+     * @covers  \local_mentor_core\database_interface::update_secondary_entities_name
+     */
+    public function test_update_secondary_entities_name_nok() {
+        global $DB;
+
+        $this->resetAfterTest(true);
+        $this->reset_singletons();
+        $this->init_role();
+
+        self::setAdminUser();
+
+        $dbi = \local_mentor_core\database_interface::get_instance();
+
+        $DB->delete_records('user_info_field', ['shortname' => 'secondaryentities']);
+
+        self::assertFalse($dbi->update_secondary_entities_name('falseentity', 'falseentitybis'));
+
+        self::resetAllData();
+    }
+
+    /**
+     * Test get_course_tutors
+     *
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws moodle_exception
+     *
+     * @covers  \local_mentor_core\database_interface::get_course_tutors
+     */
+    public function test_get_course_tutors() {
+        $this->resetAfterTest(true);
+        $this->reset_singletons();
+        $this->init_role();
+
+        self::setAdminUser();
+
+        $dbi = \local_mentor_core\database_interface::get_instance();
+        $course = self::getDataGenerator()->create_course();
+        $context = context_course::instance($course->id);
+        $user = self::getDataGenerator()->create_user();
+
+        self::assertEmpty($dbi->get_course_tutors($context->id));
+
+        self::getDataGenerator()->enrol_user($user->id, $course->id, \local_mentor_specialization\mentor_profile::ROLE_TUTEUR);
+
+        $tutors = $dbi->get_course_tutors($context->id);
+
+        self::assertCount(1, $tutors);
+        self::assertArrayHasKey($user->id, $tutors);
+
+        self::resetAllData();
+    }
+
+    /**
+     * Test get_course_formateurs
+     *
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws moodle_exception
+     *
+     * @covers  \local_mentor_core\database_interface::get_course_formateurs
+     */
+    public function test_get_course_formateurs() {
+        $this->resetAfterTest(true);
+        $this->reset_singletons();
+        $this->init_role();
+
+        self::setAdminUser();
+
+        $dbi = \local_mentor_core\database_interface::get_instance();
+        $course = self::getDataGenerator()->create_course();
+        $context = context_course::instance($course->id);
+        $user = self::getDataGenerator()->create_user();
+
+        self::assertEmpty($dbi->get_course_formateurs($context->id));
+
+        self::getDataGenerator()->enrol_user($user->id, $course->id, \local_mentor_specialization\mentor_profile::ROLE_FORMATEUR);
+
+        $formateurs = $dbi->get_course_formateurs($context->id);
+
+        self::assertCount(1, $formateurs);
+        self::assertArrayHasKey($user->id, $formateurs);
+
+        self::resetAllData();
+    }
+
+    /**
+     * Test get_course_demonstrateurs
+     *
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws moodle_exception
+     *
+     * @covers  \local_mentor_core\database_interface::get_course_demonstrateurs
+     */
+    public function test_get_course_demonstrateurs() {
+        $this->resetAfterTest(true);
+        $this->reset_singletons();
+        $this->init_role();
+
+        self::setAdminUser();
+
+        $dbi = \local_mentor_core\database_interface::get_instance();
+        $course = self::getDataGenerator()->create_course();
+        $context = context_course::instance($course->id);
+        $user = self::getDataGenerator()->create_user();
+
+        self::assertEmpty($dbi->get_course_demonstrateurs($context->id));
+
+        self::getDataGenerator()
+            ->enrol_user($user->id, $course->id, \local_mentor_specialization\mentor_profile::ROLE_PARTICIPANTDEMONSTRATION);
+
+        $demonstrateurs = $dbi->get_course_demonstrateurs($context->id);
+
+        self::assertCount(1, $demonstrateurs);
+        self::assertArrayHasKey($user->id, $demonstrateurs);
 
         self::resetAllData();
     }

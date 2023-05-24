@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/course/format/edadmin/lib.php');
 require_once($CFG->dirroot . '/local/entities/classes/controllers/entity_controller.php');
 
 $context = context_system::instance();
-$site    = get_site();
+$site = get_site();
 
 $title = get_string('entitymanagementtitle', 'local_entities');
 

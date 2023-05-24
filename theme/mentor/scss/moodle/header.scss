@@ -32,9 +32,9 @@
 
   .popover-region {
     @media(max-width: $size-lg) {
-        &[data-region="popover-region-messages"] {
-          margin-right: 0;
-        }
+      &[data-region="popover-region-messages"] {
+        margin-right: 0;
+      }
     }
 
     a,
@@ -67,6 +67,7 @@
   &.headroom--pinned {
     display: flex;
   }
+
   &.sr-only {
     position: absolute;
     width: 1px;
@@ -152,7 +153,7 @@
     }
   }
 
-  .usermenu  {
+  .usermenu {
     font-size: 16px;
     line-height: 1.5;
     font-weight: normal;
@@ -260,7 +261,7 @@
     .content-item-container {
       .unread,
       .view-more {
-        &,a {
+        &, a {
           color: $coursetextcolor !important;
         }
       }
@@ -291,7 +292,7 @@
 
     &.bg-gray:hover,
     &:focus, &:hover {
-      background-color: rgba(255,255,255,.25) !important;
+      background-color: rgba(255, 255, 255, .25) !important;
       border: none !important;
     }
 

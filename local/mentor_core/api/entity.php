@@ -59,7 +59,7 @@ class entity_api {
         if ($refresh || empty(self::$entities[$entityid])) {
             // An entity can be extended by a specialization plugin.
             $specialization = specialization::get_instance();
-            $entity         = $specialization->get_specialization('get_entity', $entityid);
+            $entity = $specialization->get_specialization('get_entity', $entityid);
 
             // If the entity has no specialization, then initialise the default entity class.
             if (!is_object($entity)) {
@@ -111,17 +111,18 @@ class entity_api {
      * @param bool $refresh refresh entities list from database default false
      * @param null $filter
      * @param bool $includehidden - include or not the hidden entities.
+     * @param bool $includecannotbemainentity - optional default true
      * @return entity[]
      * @throws \dml_exception
      * @throws \moodle_exception
      */
     public static function get_all_entities($mainonly = true, $exclude = [], $refresh = false, $filter = null, $includehidden
-    = true) {
+    = true, $includecannotbemainentity = true) {
         $db = database_interface::get_instance();
 
         // Entities are main course categories.
-        $entitylist = $mainonly ? $db->get_all_main_categories($refresh, $includehidden) : $db->get_all_entities($refresh,
-            $filter, $includehidden);
+        $entitylist = $mainonly ? $db->get_all_main_categories($refresh, $includehidden, $filter) : $db->get_all_entities($refresh,
+                $filter, $includehidden);
 
         $entities = [];
 
@@ -135,6 +136,10 @@ class entity_api {
             $objentity = self::get_entity($entity->id, $refresh);
 
             if (!$includehidden && $objentity->is_hidden()) {
+                continue;
+            }
+
+            if (!$includecannotbemainentity && !$objentity->can_be_main_entity(true)) {
                 continue;
             }
 
@@ -153,7 +158,7 @@ class entity_api {
      * @throws \dml_exception
      */
     public static function entity_exists($entityname, $refresh = false) {
-        $db       = database_interface::get_instance();
+        $db = database_interface::get_instance();
         $category = $db->get_course_category_by_name($entityname, $refresh);
         return !empty($category);
     }
@@ -167,7 +172,7 @@ class entity_api {
      * @throws \dml_exception
      */
     public static function main_entity_exists($entityname, $refresh = false) {
-        $db       = database_interface::get_instance();
+        $db = database_interface::get_instance();
         $category = $db->get_main_entity_by_name($entityname, $refresh);
         return !empty($category);
     }
@@ -195,7 +200,7 @@ class entity_api {
      * @throws \dml_exception
      */
     public static function sub_entity_exists($entityname, $parentid, $refresh = false) {
-        $db       = database_interface::get_instance();
+        $db = database_interface::get_instance();
         $category = $db->get_sub_entity_by_name($entityname, $parentid, $refresh);
         return !empty($category);
     }
@@ -260,8 +265,8 @@ class entity_api {
         }
 
         $entityname = $formdata['name'];
-        $userid     = isset($formdata['userid']) ? $formdata['userid'] : 0;
-        $idnumber   = $formdata['shortname'];
+        $userid = isset($formdata['userid']) ? $formdata['userid'] : 0;
+        $idnumber = $formdata['shortname'];
 
         // Check if main entity name is not used.
         if (self::main_entity_exists($entityname, true)) {
@@ -285,7 +290,7 @@ class entity_api {
         }
 
         // Create a new parent course category.
-        $db       = database_interface::get_instance();
+        $db = database_interface::get_instance();
         $category = $db->create_course_category($entityname, 0, $idnumber);
 
         // Get the new category id.
@@ -306,12 +311,12 @@ class entity_api {
 
         // Trigger an entity created event.
         $event = \local_mentor_core\event\entity_create::create(array(
-            'objectid' => $newentityid,
-            'context'  => $newentity->get_context(),
-            'other'    => array(
-                'name'               => $newentity->get_name(),
-                'managementcourseid' => $newentity->get_edadmin_courses('entities')['id']
-            )
+                'objectid' => $newentityid,
+                'context' => $newentity->get_context(),
+                'other' => array(
+                        'name' => $newentity->get_name(),
+                        'managementcourseid' => $newentity->get_edadmin_courses('entities')['id']
+                )
         ));
         $event->trigger();
 
@@ -354,10 +359,10 @@ class entity_api {
 
         // Create "Espaces" sub categories to parent if not exist.
         $parententity = self::get_entity($parentid);
-        $parent       = $parententity->get_entity_space_category();
+        $parent = $parententity->get_entity_space_category();
 
         // Create a new parent course category.
-        $db       = database_interface::get_instance();
+        $db = database_interface::get_instance();
         $category = $db->create_course_category($entityname, $parent);
 
         // Get the new category id.
@@ -373,12 +378,12 @@ class entity_api {
 
         // Trigger an entity created event.
         $event = \local_mentor_core\event\entity_create::create(array(
-            'objectid' => $newentityid,
-            'context'  => $newentity->get_context(),
-            'other'    => array(
-                'name'               => $newentity->get_name(),
-                'managementcourseid' => $newentity->get_edadmin_courses('entities')['id']
-            )
+                'objectid' => $newentityid,
+                'context' => $newentity->get_context(),
+                'other' => array(
+                        'name' => $newentity->get_name(),
+                        'managementcourseid' => $newentity->get_edadmin_courses('entities')['id']
+                )
         ));
         $event->trigger();
 
@@ -417,16 +422,16 @@ class entity_api {
 
         // Trigger an entity updated event.
         $event = \local_mentor_core\event\entity_update::create(array(
-            'objectid' => $entityid,
-            'context'  => $entity->get_context(),
-            'other'    => array(
-                'name'               => $entity->get_name(),
-                'managementcourseid' => $entity->get_edadmin_courses('entities')['id'],
-                'updatedfields'      => $updatedfields
-            )
+                'objectid' => $entityid,
+                'context' => $entity->get_context(),
+                'other' => array(
+                        'name' => $entity->get_name(),
+                        'managementcourseid' => $entity->get_edadmin_courses('entities')['id'],
+                        'updatedfields' => $updatedfields
+                )
         ));
         $event->set_legacy_logdata(array(
-            $entity->id, 'entity', 'update', 'course/view.php?id=' . $entity->get_edadmin_courses('entities')['id'], $entity->id
+                $entity->id, 'entity', 'update', 'course/view.php?id=' . $entity->get_edadmin_courses('entities')['id'], $entity->id
         ));
         $event->trigger();
 
@@ -443,13 +448,14 @@ class entity_api {
      * @param null|\stdClass $filter
      * @param bool $refresh
      * @param bool $includehidden
+     * @param bool $includeothermanage Include other entities where the user only manages the trainings and sessions
      * @return \stdClass[]
      * @throws \coding_exception
      * @throws \dml_exception
      * @throws \moodle_exception
      */
     public static function get_managed_entities_object($user = null, $mainonly = true, $filter = null, $refresh = false,
-        $includehidden = true) {
+            $includehidden = true, $includeothermanage = false) {
 
         $db = \local_mentor_core\database_interface::get_instance();
 
@@ -460,7 +466,7 @@ class entity_api {
         }
 
         $entitylist = $mainonly ? $db->get_all_main_categories($refresh, $includehidden) : $db->get_all_entities($refresh,
-            $filter, $includehidden);
+                $filter, $includehidden);
 
         // An admin can manage all the entities.
         if (is_siteadmin($user)) {
@@ -472,13 +478,24 @@ class entity_api {
 
         $managedentities = [];
 
+        $capabilities = \local_mentor_core\entity::ENTITY_MANAGER_CAPABILITIES;
+
+        // Include other entities where the user only manages the trainings and sessions.
+        if ($includeothermanage) {
+            // Entity minimum capabilities when user manage trainings and session.
+            $capabilities = [
+                    'local/mentor_core:movesessions',
+                    'local/mentor_core:movetrainings'
+            ];
+        }
+
         foreach ($entitylist as $entity) {
             $context = \context_coursecat::instance($entity->id);
 
             if (local_mentor_core_has_capabilities(
-                \local_mentor_core\entity::ENTITY_MANAGER_CAPABILITIES,
-                $context,
-                $user
+                    $capabilities,
+                    $context,
+                    $user
             )) {
                 $managedentities[$entity->id] = $entity;
             }
@@ -499,15 +516,16 @@ class entity_api {
      * @param null|\stdClass $filter
      * @param bool $refresh
      * @param bool $includehidden
+     * @param bool $includeothermanage Include other entities where the user only manages the trainings and sessions
      * @return entity[]
      * @throws \coding_exception
      * @throws \dml_exception
      * @throws \moodle_exception
      */
     public static function get_managed_entities($user = null, $mainonly = true, $filter = null, $refresh = false, $includehidden
-    = true) {
+    = true, $includeothermanage = false) {
 
-        $entities = self::get_managed_entities_object($user, $mainonly, $filter, $refresh, $includehidden);
+        $entities = self::get_managed_entities_object($user, $mainonly, $filter, $refresh, $includehidden, $includeothermanage);
 
         $managedentities = [];
 
@@ -525,13 +543,16 @@ class entity_api {
      * @param bool $mainonly
      * @param null|\stdClass $filter
      * @param bool $refresh
+     * @param bool $includehidden
+     * @param bool $includeothermanage Include other entities where the user only manages the trainings and sessions
      * @return int
      * @throws \coding_exception
      * @throws \dml_exception
      * @throws \moodle_exception
      */
-    public static function count_managed_entities($user = null, $mainonly = true, $filter = null, $refresh = false) {
-        return count(self::get_managed_entities_object($user, $mainonly, $filter, $refresh));
+    public static function count_managed_entities($user = null, $mainonly = true, $filter = null, $refresh = false, $includehidden
+    = true, $includeothermanage = false) {
+        return count(self::get_managed_entities_object($user, $mainonly, $filter, $refresh, $includehidden, $includeothermanage));
     }
 
     /**
@@ -554,7 +575,7 @@ class entity_api {
 
         // Main admin can see hidden entities.
         $includehidden = is_siteadmin();
-        $entities      = self::get_all_entities($mainonly, [], false, null, $includehidden);
+        $entities = self::get_all_entities($mainonly, [], false, null, $includehidden);
 
         // An admin can manage all trainings in this entity.
         $isadmin = is_siteadmin($user);
@@ -612,18 +633,29 @@ class entity_api {
      * @param bool $mainonly just main entity
      * @param bool $refresh true to refresh entities from database
      * @param bool $includehidden - optional default true
+     * @param bool $includecannotbemainentity - optional default true
      * @return string
      * @throws \dml_exception
      * @throws \moodle_exception
      */
-    public static function get_entities_list($mainonly = true, $refresh = false, $includehidden = true) {
+    public static function get_entities_list($mainonly = true, $refresh = false, $includehidden = true,
+            $includecannotbemainentity = true) {
+
+        // Order by entity name.
+        $filter = new \stdClass();
+        $filter->order = ['column' => 'name', 'dir' => 'asc'];
+
         // Get entities.
-        $entitieslist = self::get_all_entities($mainonly, [], $refresh, null, $includehidden);
+        $entitieslist = self::get_all_entities($mainonly, [], $refresh, $filter, $includehidden, $includecannotbemainentity);
 
         // Get all name of entities.
         $entitiesnames = array_map(function($entity) {
             return $entity->name;
         }, $entitieslist);
+
+        usort($entitiesnames, function($a, $b) {
+            return strcmp(local_mentor_core_sanitize_string($a), local_mentor_core_sanitize_string($b));
+        });
 
         return implode("\n", $entitiesnames);
     }
@@ -647,7 +679,7 @@ class entity_api {
             return self::get_sub_entity_form($url, $entityid);
         }
 
-        $form           = new entity_form($url);
+        $form = new entity_form($url);
         $specialization = specialization::get_instance();
 
         // The entity form can be overrided by a specialization plugin.
@@ -666,10 +698,10 @@ class entity_api {
         global $CFG;
         require_once($CFG->dirroot . '/local/mentor_core/forms/sub_entity_form.php');
 
-        $params         = new \stdClass();
+        $params = new \stdClass();
         $params->entity = self::get_entity($entityid);
 
-        $form           = new sub_entity_form($url, $params);
+        $form = new sub_entity_form($url, $params);
         $specialization = specialization::get_instance();
 
         // The entity form can be overriden by a specialization plugin.
@@ -757,10 +789,10 @@ class entity_api {
 
         // Just search in entities user managed.
         return array_values($db->search_main_entities_user_managed(
-            $searchtext,
-            $USER->id,
-            profile_api::get_user_manager_role_name(),
-            $includehidden
+                $searchtext,
+                $USER->id,
+                profile_api::get_user_manager_role_name(),
+                $includehidden
         ));
     }
 
@@ -900,16 +932,25 @@ class entity_api {
             $context = \context_coursecat::instance($entity->id);
 
             if (
-                local_mentor_core_has_capabilities( // Entity manager.
-                    \local_mentor_core\entity::ENTITY_MANAGER_CAPABILITIES,
-                    $context,
-                    $user
-                ) || has_capability('local/mentor_core:sharetrainings', $context) // RFC.
+                    local_mentor_core_has_capabilities( // Entity manager.
+                            \local_mentor_core\entity::ENTITY_MANAGER_CAPABILITIES,
+                            $context,
+                            $user
+                    ) || has_capability('local/mentor_core:sharetrainings', $context) // RFC.
             ) {
                 $managedentities[$entity->id] = $entity;
             }
         }
 
         return $managedentities;
+    }
+
+    /**
+     * Gives the name of the capability that allows access to the edadmin course of entities format.
+     *
+     * @return string
+     */
+    public static function get_edadmin_course_view_capability() {
+        return 'local/entities:manageentity';
     }
 }

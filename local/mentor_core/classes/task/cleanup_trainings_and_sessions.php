@@ -72,7 +72,7 @@ class cleanup_trainings_and_sessions extends \core\task\scheduled_task {
 
         foreach ($sessions as $session) {
             $DB->delete_records('session', ['id' => $session->id]);
-            mtrace('Delete session id : ' . $session->id. ' and shortname : ' . $session->courseshortname);
+            mtrace('Delete session id : ' . $session->id . ' and shortname : ' . $session->courseshortname);
         }
 
     }

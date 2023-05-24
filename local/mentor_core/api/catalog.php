@@ -65,7 +65,7 @@ class catalog_api {
             foreach ($trainings as $idx => $training) {
                 if ('' !== $training->entityname) {
                     $entities[$training->entityname] = [
-                        'id'   => $training->entityid,
+                        'id' => $training->entityid,
                         'name' => $training->entityname,
                     ];
                 }
@@ -76,7 +76,7 @@ class catalog_api {
             $paramsrenderer->entities = array_values($entities);
 
             // Trainings list.
-            $paramsrenderer->trainings      = array_values($trainings);
+            $paramsrenderer->trainings = array_values($trainings);
             $paramsrenderer->trainingscount = count($trainings);
 
             // Json encode amd data.

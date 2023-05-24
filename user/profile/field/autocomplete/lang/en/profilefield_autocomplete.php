@@ -24,12 +24,12 @@
  */
 
 $string['pluginname'] = 'Autocomplete input';
-$string['multiple']   = 'Multiple values';
+$string['multiple'] = 'Multiple values';
 
 $string['privacy:metadata:profilefield_autocomplete:userid']
-                                                                       = 'The ID of the user whose data is stored by the autocomplete user profile field';
-$string['privacy:metadata:profilefield_autocomplete:fieldid']          = 'The ID of the profile field';
-$string['privacy:metadata:profilefield_autocomplete:data']             = 'Autocomplete input user profile field user data';
+    = 'The ID of the user whose data is stored by the autocomplete user profile field';
+$string['privacy:metadata:profilefield_autocomplete:fieldid'] = 'The ID of the profile field';
+$string['privacy:metadata:profilefield_autocomplete:data'] = 'Autocomplete input user profile field user data';
 $string['privacy:metadata:profilefield_autocomplete:dataformat']
-                                                                       = 'The format of the autocomplete input user profile field user data';
+    = 'The format of the autocomplete input user profile field user data';
 $string['privacy:metadata:profilefield_autocomplete:tableexplanation'] = 'Additional profile data';

@@ -58,7 +58,7 @@ class database_interface {
     public function __construct() {
         global $DB;
 
-        $this->db                  = $DB;
+        $this->db = $DB;
         $this->courseformatoptions = [];
 
     }
@@ -85,6 +85,7 @@ class database_interface {
     public function get_all_categories() {
         return \core_course_category::get_all();
     }
+
     /**
      * Get all main category
      *
@@ -109,8 +110,8 @@ class database_interface {
         if ($forcerefresh || !isset($this->courseformatoptions[$courseid])) {
 
             $this->courseformatoptions[$courseid] = $this->db->get_records('course_format_options', array(
-                    'courseid' => $courseid,
-                    'format'   => 'edadmin'
+                'courseid' => $courseid,
+                'format' => 'edadmin'
             ));
 
         }

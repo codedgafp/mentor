@@ -77,10 +77,10 @@ $THEME->scss = function($theme) {
 
 $THEME->layouts = [
         'mydashboard' => array(
-                'file'          => 'my.php',
-                'regions'       => array('side-pre'),
+                'file' => 'my.php',
+                'regions' => array('side-pre'),
                 'defaultregion' => 'side-pre',
-                'options'       => array('nonavbar' => true, 'langmenu' => true, 'nocontextheader' => true),
+                'options' => array('nonavbar' => true, 'langmenu' => true, 'nocontextheader' => true),
         )
 ];
 

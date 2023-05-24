@@ -57,18 +57,18 @@ class sirh_controller extends controller_base {
                     $sessionid = $this->get_param('sessionid', PARAM_INT);
 
                     // Count all sessions.
-                    $data                                  = new \stdClass();
+                    $data = new \stdClass();
                     $filter['listeIdentifiantSirhOrigine'] = implode(',', $this->get_param('sirh', PARAM_TEXT));
-                    $data->recordsTotal                    = $this->count_sirh_sessions($sessionid, $filter);
+                    $data->recordsTotal = $this->count_sirh_sessions($sessionid, $filter);
 
                     // Count filtered sessions.
                     $filter['identifiantFormation'] = $this->get_param('sirhtraining', PARAM_TEXT, null);
-                    $filter['identifiantSession']   = $this->get_param('sirhsession', PARAM_TEXT, null);
-                    $filter['libelleSession']       = $this->get_param('sirhsessionname', PARAM_TEXT, null);
-                    $filter['libelleFormation']     = $this->get_param('sirhtrainingname', PARAM_TEXT, null);
-                    $filter['dateDebut']            = $this->get_param('datestart', PARAM_TEXT, null);
-                    $filter['dateFin']              = $this->get_param('dateend', PARAM_TEXT, null);
-                    $data->recordsFiltered          = $this->count_sirh_sessions($sessionid, $filter);
+                    $filter['identifiantSession'] = $this->get_param('sirhsession', PARAM_TEXT, null);
+                    $filter['libelleSession'] = $this->get_param('sirhsessionname', PARAM_TEXT, null);
+                    $filter['libelleFormation'] = $this->get_param('sirhtrainingname', PARAM_TEXT, null);
+                    $filter['dateDebut'] = $this->get_param('datestart', PARAM_TEXT, null);
+                    $filter['dateFin'] = $this->get_param('dateend', PARAM_TEXT, null);
+                    $data->recordsFiltered = $this->count_sirh_sessions($sessionid, $filter);
 
                     $order = $this->get_param('order', PARAM_RAW, null);
                     $order = is_null($order) ? $order : $order[0];
@@ -88,11 +88,11 @@ class sirh_controller extends controller_base {
                         if ($columnsorder[$order['column']] != 'actions') {
                             $filter['tris'] = $columnsorder[$order['column']] . ' ' . strtoupper($order['dir']);
                         } else {
-                            $filter['filterbyactions']    = 1;
+                            $filter['filterbyactions'] = 1;
                             $filter['filterbyactionsdir'] = strtoupper($order['dir']);
                         }
                     } else {
-                        $filter['filterbyactions']    = 1;
+                        $filter['filterbyactions'] = 1;
                         $filter['filterbyactionsdir'] = 'ASC';
                     }
 
@@ -110,26 +110,26 @@ class sirh_controller extends controller_base {
                     // Get filtered results.
                     $data->data = $this->get_sirh_sessions($sessionid, $filter);
 
-                    $data->length  = $this->get_param('length', PARAM_INT, null);
-                    $data->start   = $this->get_param('start', PARAM_INT, null);
-                    $data->order   = false;
-                    $data->order   = is_null($data->order) ? $data->order : $data->order[0];
-                    $data->draw    = $this->get_param('draw', PARAM_INT, null);
+                    $data->length = $this->get_param('length', PARAM_INT, null);
+                    $data->start = $this->get_param('start', PARAM_INT, null);
+                    $data->order = false;
+                    $data->order = is_null($data->order) ? $data->order : $data->order[0];
+                    $data->draw = $this->get_param('draw', PARAM_INT, null);
                     $data->filters = $this->get_param('filter', PARAM_RAW, []);
 
                     return $data;
                 case 'get_session_users':
-                    $sessionid    = $this->get_param('sessionid', PARAM_INT);
-                    $sirh         = $this->get_param('sirh', PARAM_TEXT);
+                    $sessionid = $this->get_param('sessionid', PARAM_INT);
+                    $sirh = $this->get_param('sirh', PARAM_TEXT);
                     $sirhtraining = $this->get_param('sirhtraining', PARAM_TEXT);
-                    $sirhsession  = $this->get_param('sirhsession', PARAM_TEXT);
-                    $nbuser       = $this->get_param('nbuser', PARAM_INT, 10);
+                    $sirhsession = $this->get_param('sirhsession', PARAM_TEXT);
+                    $nbuser = $this->get_param('nbuser', PARAM_INT, 10);
                     return $this->success($this->get_session_users($sessionid, $sirh, $sirhtraining, $sirhsession, $nbuser));
                 case 'enrol_users_sirh':
-                    $sessionid    = $this->get_param('sessionid', PARAM_INT);
-                    $sirh         = $this->get_param('sirh', PARAM_TEXT);
+                    $sessionid = $this->get_param('sessionid', PARAM_INT);
+                    $sirh = $this->get_param('sirh', PARAM_TEXT);
                     $sirhtraining = $this->get_param('sirhtraining', PARAM_TEXT);
-                    $sirhsession  = $this->get_param('sirhsession', PARAM_TEXT);
+                    $sirhsession = $this->get_param('sirhsession', PARAM_TEXT);
                     return $this->success($this->enrol_users_sirh($sessionid, $sirh, $sirhtraining, $sirhsession));
                 default:
                     return $this->error('Action not found . ');

@@ -28,11 +28,11 @@ defined('MOODLE_INTERNAL') || die();
 $tasks = array(
     array(
         'classname' => 'enrol_sirh\task\check_update_sirh',
-        'blocking'  => 0,
-        'minute'    => '0',
-        'hour'      => '1',
-        'day'       => '*',
+        'blocking' => 0,
+        'minute' => '0',
+        'hour' => '1',
+        'day' => '*',
         'dayofweek' => '*',
-        'month'     => '*'
+        'month' => '*'
     )
 );

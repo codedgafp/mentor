@@ -64,8 +64,8 @@ class log extends abstractlog {
 
         // Set new data for update.
         $this->eventdata['numberview'] = $logrecord->numberview + 1; // New view.
-        $this->eventdata['id']         = $id; // Set id for update.
-        $this->id                      = $id;
+        $this->eventdata['id'] = $id; // Set id for update.
+        $this->id = $id;
 
         // Update log record.
         $this->dbinterface->update_record($table, $this->eventdata);
@@ -85,7 +85,7 @@ class log extends abstractlog {
 
         // Set initial log record data.
         $data['timecreated'] = time();
-        $data['numberview']  = 1;
+        $data['numberview'] = 1;
 
         // Insert new log record.
         $this->id = $this->dbinterface->insert_record($table, $data);
@@ -107,8 +107,8 @@ class log extends abstractlog {
 
         // Set new data.
         $data = array(
-                'id'        => $this->id,
-                'completed' => 1
+            'id' => $this->id,
+            'completed' => 1
         );
 
         $this->eventdata['completed'] = 1;
@@ -133,9 +133,9 @@ class log extends abstractlog {
      */
     public function get_required_fields() {
         return [
-                'userlogid',
-                'sessionlogid',
-                'completed'
+            'userlogid',
+            'sessionlogid',
+            'completed'
         ];
     }
 }

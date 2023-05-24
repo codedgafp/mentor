@@ -40,9 +40,9 @@ if (!enrol_sirh_plugin_is_enabled()) {
     print_error('Plugin enrol_sirh is disabled');
 }
 
-$session  = \local_mentor_core\session_api::get_session($sessionid);
-$context  = $session->get_context();
-$entity   = $session->get_entity()->get_main_entity();
+$session = \local_mentor_core\session_api::get_session($sessionid);
+$context = $session->get_context();
+$entity = $session->get_entity()->get_main_entity();
 $sirhlist = $entity->get_sirh_list();
 
 // Check if entity has configured SIRH.
@@ -73,7 +73,7 @@ $PAGE->navbar->add($entity->get_name() . ' - Gestion des sessions', $managesessi
 $PAGE->navbar->add($title);
 
 $jsparams = [
-    'sessionid'         => $session->id,
+    'sessionid' => $session->id,
     'managesessionsurl' => $managesessionsurl
 ];
 
@@ -99,11 +99,11 @@ echo $OUTPUT->header();
 $allsirh = enrol_sirh_get_sirh_list();
 
 // Prepare template data.
-$templatedata                   = new stdClass();
-$templatedata->sirhlist         = [];
+$templatedata = new stdClass();
+$templatedata->sirhlist = [];
 $templatedata->sirhlistmultiple = count($sirhlist) > 1;
 $templatedata->defaultstartdate = date('Y-m-d', strtotime('first day of january this year'));
-$templatedata->defaultenddate   = date('Y-m-d', strtotime('last day of december this year'));
+$templatedata->defaultenddate = date('Y-m-d', strtotime('last day of december this year'));
 
 // Format SIRH list.
 if ($templatedata->sirhlistmultiple) {

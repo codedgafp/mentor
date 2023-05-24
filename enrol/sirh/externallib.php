@@ -63,7 +63,7 @@ class enrol_sirh_external extends external_api {
         self::validate_context(context_system::instance());
 
         $enrolinstance = $DB->get_record('enrol', array('id' => $params['instanceid']), '*', MUST_EXIST);
-        $course        = $DB->get_record('course', array('id' => $enrolinstance->courseid), '*', MUST_EXIST);
+        $course = $DB->get_record('course', array('id' => $enrolinstance->courseid), '*', MUST_EXIST);
         if (!core_course_category::can_view_course_info($course) && !can_access_course($course)) {
             throw new moodle_exception('coursehidden');
         }
@@ -82,17 +82,17 @@ class enrol_sirh_external extends external_api {
     public static function get_instance_info_returns() {
         return new external_single_structure(
             array(
-                'id'          => new external_value(PARAM_INT, 'id of course enrolment instance'),
-                'courseid'    => new external_value(PARAM_INT, 'id of course'),
-                'type'        => new external_value(PARAM_PLUGIN, 'type of enrolment plugin'),
-                'name'        => new external_value(PARAM_RAW, 'name of enrolment plugin'),
-                'status'      => new external_value(PARAM_RAW, 'status of enrolment plugin'),
+                'id' => new external_value(PARAM_INT, 'id of course enrolment instance'),
+                'courseid' => new external_value(PARAM_INT, 'id of course'),
+                'type' => new external_value(PARAM_PLUGIN, 'type of enrolment plugin'),
+                'name' => new external_value(PARAM_RAW, 'name of enrolment plugin'),
+                'status' => new external_value(PARAM_RAW, 'status of enrolment plugin'),
                 'customchar1' => new external_value(PARAM_RAW, 'SIRH id'),
                 'customchar2' => new external_value(PARAM_RAW, 'SIRH training id'),
                 'customchar3' => new external_value(PARAM_RAW, 'SIRH session id'),
-                'customint1'  => new external_value(PARAM_INT, 'Group id'),
-                'customint2'  => new external_value(PARAM_INT, 'Last user id to sync'),
-                'customint3'  => new external_value(PARAM_INT, 'Last date to sync'),
+                'customint1' => new external_value(PARAM_INT, 'Group id'),
+                'customint2' => new external_value(PARAM_INT, 'Last user id to sync'),
+                'customint3' => new external_value(PARAM_INT, 'Last date to sync'),
             )
         );
     }
@@ -106,9 +106,9 @@ class enrol_sirh_external extends external_api {
     public static function enrol_user_parameters() {
         return new external_function_parameters(
             array(
-                'courseid'   => new external_value(PARAM_INT, 'Id of the course'),
+                'courseid' => new external_value(PARAM_INT, 'Id of the course'),
                 'instanceid' => new external_value(PARAM_INT, 'Instance id of self enrolment plugin.', VALUE_DEFAULT, 0),
-                'userid'     => new external_value(PARAM_INT, 'User id', VALUE_DEFAULT, 0)
+                'userid' => new external_value(PARAM_INT, 'User id', VALUE_DEFAULT, 0)
             )
         );
     }
@@ -130,9 +130,9 @@ class enrol_sirh_external extends external_api {
 
         $params = self::validate_parameters(self::enrol_user_parameters(),
             array(
-                'courseid'   => $courseid,
+                'courseid' => $courseid,
                 'instanceid' => $instanceid,
-                'userid'     => $userid
+                'userid' => $userid
             ));
 
         $warnings = array();
@@ -152,7 +152,7 @@ class enrol_sirh_external extends external_api {
 
         $instance = $DB->get_record('enrol', array('id' => $instanceid));
 
-        $data         = new \stdClass();
+        $data = new \stdClass();
         $data->userid = $userid;
 
         $enrol->enrol_sirh($instance, $data);
@@ -160,8 +160,8 @@ class enrol_sirh_external extends external_api {
         // Try to enrol the user in the instance/s.
         $enrolled = true;
 
-        $result             = array();
-        $result['status']   = $enrolled;
+        $result = array();
+        $result['status'] = $enrolled;
         $result['warnings'] = $warnings;
         return $result;
     }
@@ -175,7 +175,7 @@ class enrol_sirh_external extends external_api {
     public static function enrol_user_returns() {
         return new external_single_structure(
             array(
-                'status'   => new external_value(PARAM_BOOL, 'status: true if the user is enrolled, false otherwise'),
+                'status' => new external_value(PARAM_BOOL, 'status: true if the user is enrolled, false otherwise'),
                 'warnings' => new external_warnings()
             )
         );

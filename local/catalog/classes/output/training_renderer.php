@@ -42,7 +42,7 @@ class training_renderer extends \plugin_renderer_base {
     public function display($training, $sessions) {
 
         // Get all collections.
-        $collectionsnames  = local_mentor_specialization_get_collections();
+        $collectionsnames = local_mentor_specialization_get_collections();
         $collectionscolors = local_mentor_specialization_get_collections('color');
 
         // Build collection tiles.
@@ -53,9 +53,9 @@ class training_renderer extends \plugin_renderer_base {
                 continue;
             }
 
-            $tile                        = new \stdClass();
-            $tile->name                  = $collectionsnames[$collection];
-            $tile->color                 = $collectionscolors[$collection];
+            $tile = new \stdClass();
+            $tile->name = $collectionsnames[$collection];
+            $tile->color = $collectionscolors[$collection];
             $training->collectiontiles[] = $tile;
         }
 
@@ -66,7 +66,7 @@ class training_renderer extends \plugin_renderer_base {
             $training->hasproducerorganization = true;
         }
 
-        $training->sessions           = $sessions;
+        $training->sessions = $sessions;
         $training->available_sessions = json_encode($sessions);
 
         // Init and call JS.

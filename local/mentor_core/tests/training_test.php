@@ -56,8 +56,8 @@ class local_mentor_core_training_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -139,7 +139,7 @@ class local_mentor_core_training_testcase extends advanced_testcase {
     public function init_role() {
         global $DB;
 
-        $db      = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $manager = $db->get_role_by_name('manager');
 
         if (!$manager) {
@@ -161,15 +161,15 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         $CFG->defaultauth = 'manual';
 
         // Create user.
-        $user             = new stdClass();
-        $user->lastname   = 'lastname';
-        $user->firstname  = 'firstname';
-        $user->email      = 'test@test.com';
-        $user->username   = 'testusername';
-        $user->password   = 'to be generated';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
-        $user->auth       = 'manual';
+        $user->confirmed = 1;
+        $user->auth = 'manual';
 
         $userid = local_mentor_core\profile_api::create_user($user);
         set_user_preference('auth_forcepasswordchange', 0, $user);
@@ -196,16 +196,16 @@ class local_mentor_core_training_testcase extends advanced_testcase {
 
         return [
             [
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1',
-                'regionid'  => 5, // Corse.
-                'userid'    => 2  // Set the admin user as manager of the entity.
+                'regionid' => 5, // Corse.
+                'userid' => 2  // Set the admin user as manager of the entity.
             ],
             [
-                'name'      => 'New Entity 2',
+                'name' => 'New Entity 2',
                 'shortname' => 'New Entity 2',
-                'regionid'  => 5, // Corse.
-                'userid'    => 2  // Set the admin user as manager of the entity.
+                'regionid' => 5, // Corse.
+                'userid' => 2  // Set the admin user as manager of the entity.
             ],
         ];
     }
@@ -226,14 +226,14 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         // Init test data.
         $trainingdata = new stdClass();
 
-        $trainingdata->name      = 'fullname';
+        $trainingdata->name = 'fullname';
         $trainingdata->shortname = $shortname;
-        $trainingdata->content   = 'summary';
+        $trainingdata->content = 'summary';
 
         // Create training object.
         $trainingdata->traininggoal = 'TEST TRAINING';
-        $trainingdata->thumbnail    = '';
-        $trainingdata->status       = \local_mentor_core\training::STATUS_DRAFT;
+        $trainingdata->thumbnail = '';
+        $trainingdata->status = \local_mentor_core\training::STATUS_DRAFT;
 
         try {
             // Get entity object for default category.
@@ -245,9 +245,9 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         }
 
         // Fill with entity data.
-        $formationid                     = $entity->get_entity_formation_category();
-        $trainingdata->categorychildid   = $formationid;
-        $trainingdata->categoryid        = $entity->id;
+        $formationid = $entity->get_entity_formation_category();
+        $trainingdata->categorychildid = $formationid;
+        $trainingdata->categoryid = $entity->id;
         $trainingdata->creativestructure = $entity->id;
 
         return $trainingdata;
@@ -354,7 +354,7 @@ class local_mentor_core_training_testcase extends advanced_testcase {
             self::fail($e->getMessage());
         }
 
-        $subentitydata             = $this->get_entities_data()[1];
+        $subentitydata = $this->get_entities_data()[1];
         $subentitydata['parentid'] = $entityid;
 
         // Init training data.
@@ -400,9 +400,9 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         $training = training_api::create_training($trainingdata);
 
         // Init test data.
-        $trainingdata->id           = $training->id;
+        $trainingdata->id = $training->id;
         $trainingdata->traininggoal = 'TEST NEW TRAININGGOAL';
-        $trainingdata->status       = \local_mentor_core\training::STATUS_ARCHIVED;
+        $trainingdata->status = \local_mentor_core\training::STATUS_ARCHIVED;
 
         // Check with not updater user.
         self::setUser(self::init_create_user());
@@ -450,9 +450,9 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         $training = training_api::create_training($trainingdata);
 
         // Init test data.
-        $trainingdata->id           = $training->id;
+        $trainingdata->id = $training->id;
         $trainingdata->traininggoal = 'TEST NEW TRAININGGOAL';
-        $trainingdata->status       = \local_mentor_core\training::STATUS_ARCHIVED;
+        $trainingdata->status = \local_mentor_core\training::STATUS_ARCHIVED;
 
         // Check with not updater user.
         self::setUser(self::init_create_user());
@@ -467,7 +467,7 @@ class local_mentor_core_training_testcase extends advanced_testcase {
 
         // Create database interface Mock.
         $dbinterfacemock = $this->getMockBuilder('\local_mentor_core\database_interface')
-            ->setMethods(['update_training'])
+            ->setMethods(['update_training', 'get_course'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -476,8 +476,13 @@ class local_mentor_core_training_testcase extends advanced_testcase {
             ->method('update_training')
             ->will($this->returnValue(false));
 
+        // Return course value when get_course function call.
+        $dbinterfacemock->expects($this->any())
+            ->method('get_course')
+            ->will($this->returnValue($training->get_course(true)));
+
         // Replace dbinterface data to training object with mock.
-        $reflection         = new ReflectionClass($training);
+        $reflection = new ReflectionClass($training);
         $reflectionproperty = $reflection->getProperty('dbinterface');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($training, $dbinterfacemock);
@@ -558,7 +563,7 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         /** @var training $training */
         $training = training_api::create_training($this->get_training_data());
 
-        $course          = training_api::get_training_course($training->id);
+        $course = training_api::get_training_course($training->id);
         $courseshortname = $course->shortname;
 
         $trainingobj = training_api::get_training_by_course_id($course->id);
@@ -611,9 +616,9 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         self::assertCount(1, $trainings);
 
         // Try to call the api with a stdclass instead of an integer.
-        $data           = new stdClass();
+        $data = new stdClass();
         $data->entityid = $training->get_entity()->id;
-        $trainings      = training_api::get_trainings_by_entity($data);
+        $trainings = training_api::get_trainings_by_entity($data);
 
         // Check if the entity has a training.
         self::assertCount(1, $trainings);
@@ -728,7 +733,7 @@ class local_mentor_core_training_testcase extends advanced_testcase {
 
         // Create entity.
         $entityid = entity_api::create_entity(['name' => 'test', 'shortname' => 'test']);
-        $entity   = entity_api::get_entity($entityid);
+        $entity = entity_api::get_entity($entityid);
 
         // Adding user to entity.
         $newuser = self::getDataGenerator()->create_user();
@@ -752,10 +757,10 @@ class local_mentor_core_training_testcase extends advanced_testcase {
 
         // Create entities.
         $entityid = entity_api::create_entity(['name' => 'test', 'shortname' => 'test']);
-        $entity   = entity_api::get_entity($entityid);
+        $entity = entity_api::get_entity($entityid);
 
         $entityid2 = entity_api::create_entity(['name' => 'test2', 'shortname' => 'test2']);
-        $entity2   = entity_api::get_entity($entityid2);
+        $entity2 = entity_api::get_entity($entityid2);
 
         // Adding user to entity.
         $newuser = self::getDataGenerator()->create_user();
@@ -781,9 +786,9 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         self::setAdminUser();
 
         // Create entities.
-        $entityid    = entity_api::create_entity(['name' => 'test', 'shortname' => 'test']);
+        $entityid = entity_api::create_entity(['name' => 'test', 'shortname' => 'test']);
         $subentityid = entity_api::create_sub_entity(['name' => 'sub', 'parentid' => $entityid, 'userid' => 2]);
-        $subentity   = entity_api::get_entity($subentityid);
+        $subentity = entity_api::get_entity($subentityid);
 
         $newuser = self::getDataGenerator()->create_user();
         self::setUser($newuser);
@@ -868,20 +873,20 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         }
 
         // Update status.
-        $sessionupdate         = new stdClass();
-        $sessionupdate->id     = $session->id;
+        $sessionupdate = new stdClass();
+        $sessionupdate->id = $session->id;
         $sessionupdate->status = session::STATUS_OPENED_REGISTRATION;
-        $session               = \local_mentor_core\session_api::update_session($sessionupdate);
+        $session = \local_mentor_core\session_api::update_session($sessionupdate);
 
         // Session creation.
         $session2 = session_api::create_session($training->id, 'session 2', true);
 
         // Update status.
-        $updatedata         = new stdClass();
-        $updatedata->id     = $session2->id;
+        $updatedata = new stdClass();
+        $updatedata->id = $session2->id;
         $updatedata->status = session::STATUS_IN_PROGRESS;
         $updatedata->opento = 'all';
-        $session2           = session_api::update_session($updatedata);
+        $session2 = session_api::update_session($updatedata);
 
         $trainings = training_api::get_user_available_sessions_by_trainings($newuser->id);
 
@@ -921,33 +926,33 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         require_once($CFG->dirroot . '/enrol/self/externallib.php');
 
         // Create simple user.
-        $user     = new stdClass();
+        $user = new stdClass();
         $user->id = $this->init_create_user();
 
         /** @var training $training */
         $training = training_api::create_training($this->get_training_data());
 
         // Create self enrol instance.
-        $plugin                    = enrol_get_plugin('self');
-        $instance                  = (object) $plugin->get_instance_defaults();
-        $instance->status          = 0;
-        $instance->id              = '';
-        $instance->courseid        = $training->get_course()->id;
-        $instance->customint1      = 0;
-        $instance->customint2      = 0;
-        $instance->customint3      = 0; // Max participants.
-        $instance->customint4      = 1;
-        $instance->customint5      = 0;
-        $instance->customint6      = 1; // Enable.
-        $instance->name            = '';
-        $instance->password        = '';
-        $instance->customtext1     = '';
-        $instance->returnurl       = '';
+        $plugin = enrol_get_plugin('self');
+        $instance = (object) $plugin->get_instance_defaults();
+        $instance->status = 0;
+        $instance->id = '';
+        $instance->courseid = $training->get_course()->id;
+        $instance->customint1 = 0;
+        $instance->customint2 = 0;
+        $instance->customint3 = 0; // Max participants.
+        $instance->customint4 = 1;
+        $instance->customint5 = 0;
+        $instance->customint6 = 1; // Enable.
+        $instance->name = '';
+        $instance->password = '';
+        $instance->customtext1 = '';
+        $instance->returnurl = '';
         $instance->expirythreshold = 0;
-        $instance->enrolstartdate  = 0;
-        $instance->enrolenddate    = 0;
-        $fields                    = (array) $instance;
-        $instanceid                = $plugin->add_instance($training->get_course(), $fields);
+        $instance->enrolstartdate = 0;
+        $instance->enrolenddate = 0;
+        $fields = (array) $instance;
+        $instanceid = $plugin->add_instance($training->get_course(), $fields);
 
         // Enrol user.
         self::setUser($user->id);
@@ -986,35 +991,35 @@ class local_mentor_core_training_testcase extends advanced_testcase {
 
         // Create entity.
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // Setting user data.
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@mail.fr';
-        $auth      = 'manual';
+        $email = 'user@mail.fr';
+        $auth = 'manual';
         \local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entity, [],
             null, $auth);
         $user = \core_user::get_user_by_email($email);
 
         // Create 5 training with draft status.
         for ($i = 1; $i <= 5; $i++) {
-            $trainingdata                    = new \stdClass();
-            $trainingdata->name              = 'training' . $i;
-            $trainingdata->shortname         = 'training' . $i;
-            $trainingdata->content           = 'summary';
-            $trainingdata->traininggoal      = 'TEST TRAINING';
-            $trainingdata->thumbnail         = '';
-            $trainingdata->status            = \local_mentor_core\training::STATUS_DRAFT;
-            $trainingdata->categorychildid   = $entity->get_entity_formation_category();
-            $trainingdata->categoryid        = $entity->id;
+            $trainingdata = new \stdClass();
+            $trainingdata->name = 'training' . $i;
+            $trainingdata->shortname = 'training' . $i;
+            $trainingdata->content = 'summary';
+            $trainingdata->traininggoal = 'TEST TRAINING';
+            $trainingdata->thumbnail = '';
+            $trainingdata->status = \local_mentor_core\training::STATUS_DRAFT;
+            $trainingdata->categorychildid = $entity->get_entity_formation_category();
+            $trainingdata->categoryid = $entity->id;
             $trainingdata->creativestructure = $entity->id;
-            $traningvarname                  = 'training' . $i;
-            $$traningvarname                 = \local_mentor_core\training_api::create_training($trainingdata);
-            $trainingcourse                  = $$traningvarname->get_course();
+            $traningvarname = 'training' . $i;
+            $$traningvarname = \local_mentor_core\training_api::create_training($trainingdata);
+            $trainingcourse = $$traningvarname->get_course();
 
             // Enrol user.
             self::getDataGenerator()->enrol_user($user->id, $trainingcourse->id, 'concepteur');
@@ -1036,13 +1041,13 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         self::assertEquals($trainingsdesigner[4]->id, $training1->id);
 
         // Add training3 to favourite.
-        $favourite               = new \stdClass();
-        $favourite->component    = 'local_trainings';
-        $favourite->itemtype     = 'favourite_training';
-        $favourite->itemid       = $training3->id;
-        $favourite->contextid    = $training3->get_context()->id;
-        $favourite->userid       = $user->id;
-        $favourite->timecreated  = time() + 1000;
+        $favourite = new \stdClass();
+        $favourite->component = 'local_trainings';
+        $favourite->itemtype = 'favourite_training';
+        $favourite->itemid = $training3->id;
+        $favourite->contextid = $training3->get_context()->id;
+        $favourite->userid = $user->id;
+        $favourite->timecreated = time() + 1000;
         $favourite->timemodified = time();
         $DB->insert_record('favourite', $favourite);
 
@@ -1056,13 +1061,13 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         self::assertEquals($trainingsdesigner2[4]->id, $training1->id);
 
         // Add training1 to favourite.
-        $favourite               = new \stdClass();
-        $favourite->component    = 'local_trainings';
-        $favourite->itemtype     = 'favourite_training';
-        $favourite->itemid       = $training1->id;
-        $favourite->contextid    = $training1->get_context()->id;
-        $favourite->userid       = $user->id;
-        $favourite->timecreated  = time() + 2000;
+        $favourite = new \stdClass();
+        $favourite->component = 'local_trainings';
+        $favourite->itemtype = 'favourite_training';
+        $favourite->itemid = $training1->id;
+        $favourite->contextid = $training1->get_context()->id;
+        $favourite->userid = $user->id;
+        $favourite->timecreated = time() + 2000;
         $favourite->timemodified = time();
         $DB->insert_record('favourite', $favourite);
 
@@ -1095,13 +1100,13 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $training = $this->get_training_data();
-        $entity   = \local_mentor_core\entity_api::get_entity($training->categoryid);
+        $entity = \local_mentor_core\entity_api::get_entity($training->categoryid);
 
-        $forminfos            = new stdClass();
-        $forminfos->entity    = $entity;
-        $forminfos->logourl   = 'mentor.fr';
+        $forminfos = new stdClass();
+        $forminfos->entity = $entity;
+        $forminfos->logourl = 'mentor.fr';
         $forminfos->actionurl = 'mentor.fr';
-        $url                  = 'mentor.fr';
+        $url = 'mentor.fr';
 
         $form = \local_mentor_core\training_api::get_training_form($url, $forminfos);
 
@@ -1167,10 +1172,10 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         self::setAdminUser();
 
         self::assertEquals([
-            training::STATUS_DRAFT                 => training::STATUS_DRAFT,
-            training::STATUS_TEMPLATE              => training::STATUS_TEMPLATE,
+            training::STATUS_DRAFT => training::STATUS_DRAFT,
+            training::STATUS_TEMPLATE => training::STATUS_TEMPLATE,
             training::STATUS_ELABORATION_COMPLETED => training::STATUS_ELABORATION_COMPLETED,
-            training::STATUS_ARCHIVED              => training::STATUS_ARCHIVED,
+            training::STATUS_ARCHIVED => training::STATUS_ARCHIVED,
         ], \local_mentor_core\training_api::get_status_list());
 
         self::resetAllData();
@@ -1280,7 +1285,7 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         try {
             training_api::get_training_template_params();
 
-            $params       = new stdClass();
+            $params = new stdClass();
             $params->test = 1;
             training_api::get_training_template_params($params);
 
@@ -1301,7 +1306,7 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         $this->reset_singletons();
         $this->init_role();
 
-        $training     = training_api::create_training($this->get_training_data());
+        $training = training_api::create_training($this->get_training_data());
         $trainingname = $training->name;
 
         $entity = $training->get_entity();
@@ -1337,7 +1342,7 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         $this->reset_singletons();
         $this->init_role();
 
-        $training     = training_api::create_training($this->get_training_data());
+        $training = training_api::create_training($this->get_training_data());
         $trainingname = $training->name;
 
         $entity = $training->get_entity();
@@ -1388,13 +1393,13 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         self::assertEmpty(\local_mentor_core\training_api::entity_selector_trainings_recyclebin_template($entity->id));
 
         \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Sub Entity 1',
+            'name' => 'New Sub Entity 1',
             'shortname' => 'New Sub Entity 1',
-            'parentid'  => $entity->id
+            'parentid' => $entity->id
         ]);
 
         \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 2',
+            'name' => 'New Entity 2',
             'shortname' => 'New Entity 2'
         ]);
 
@@ -1416,14 +1421,14 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         $this->init_role();
 
         $training = training_api::create_training($this->get_training_data());
-        $user     = self::getDataGenerator()->create_user();
+        $user = self::getDataGenerator()->create_user();
 
-        $favourite              = [];
+        $favourite = [];
         $favourite['component'] = 'local_trainings';
-        $favourite['itemtype']  = 'favourite_training';
-        $favourite['itemid']    = $training->id;
+        $favourite['itemtype'] = 'favourite_training';
+        $favourite['itemid'] = $training->id;
         $favourite['contextid'] = $training->get_context()->id;
-        $favourite['userid']    = $user->id;
+        $favourite['userid'] = $user->id;
 
         self::assertFalse($DB->record_exists('favourite', $favourite));
 
@@ -1449,24 +1454,24 @@ class local_mentor_core_training_testcase extends advanced_testcase {
         $this->init_role();
 
         $training = training_api::create_training($this->get_training_data());
-        $user     = self::getDataGenerator()->create_user();
+        $user = self::getDataGenerator()->create_user();
 
-        $favourite               = new \stdClass();
-        $favourite->component    = 'local_trainings';
-        $favourite->itemtype     = 'favourite_training';
-        $favourite->itemid       = $training->id;
-        $favourite->contextid    = $training->get_context()->id;
-        $favourite->userid       = $user->id;
-        $favourite->timecreated  = time();
+        $favourite = new \stdClass();
+        $favourite->component = 'local_trainings';
+        $favourite->itemtype = 'favourite_training';
+        $favourite->itemid = $training->id;
+        $favourite->contextid = $training->get_context()->id;
+        $favourite->userid = $user->id;
+        $favourite->timecreated = time();
         $favourite->timemodified = time();
         $DB->insert_record('favourite', $favourite);
 
-        $favourite              = [];
+        $favourite = [];
         $favourite['component'] = 'local_trainings';
-        $favourite['itemtype']  = 'favourite_training';
-        $favourite['itemid']    = $training->id;
+        $favourite['itemtype'] = 'favourite_training';
+        $favourite['itemid'] = $training->id;
         $favourite['contextid'] = $training->get_context()->id;
-        $favourite['userid']    = $user->id;
+        $favourite['userid'] = $user->id;
         self::assertTrue($DB->record_exists('favourite', $favourite));
 
         self::setUser($user);

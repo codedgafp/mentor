@@ -53,16 +53,16 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
 
         // Reset the mentor core specialization singleton.
         $specialization = \local_mentor_core\specialization::get_instance();
-        $reflection     = new ReflectionClass($specialization);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($specialization);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -79,23 +79,23 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
     public function init_session_creation() {
 
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
 
         $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
-        $data            = new stdClass();
-        $data->name      = 'fullname';
+        $data = new stdClass();
+        $data->name = 'fullname';
         $data->shortname = 'shortname';
-        $data->content   = 'summary';
-        $data->status    = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+        $data->content = 'summary';
+        $data->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
         // Fields for taining.
-        $data->traininggoal      = 'TEST TRAINING ';
-        $data->thumbnail         = '';
-        $formationid             = $entity->get_entity_formation_category();
-        $data->categorychildid   = $formationid;
-        $data->categoryid        = $entity->id;
+        $data->traininggoal = 'TEST TRAINING ';
+        $data->thumbnail = '';
+        $formationid = $entity->get_entity_formation_category();
+        $data->categorychildid = $formationid;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         $training = \local_mentor_core\training_api::create_training($data);
@@ -127,10 +127,10 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
         $sink = $this->redirectMessages();
 
         $assign->save_submission((object) [
-            'userid'            => $student->id,
+            'userid' => $student->id,
             'onlinetext_editor' => [
                 'itemid' => file_get_unused_draft_itemid(),
-                'text'   => 'Text',
+                'text' => 'Text',
                 'format' => FORMAT_HTML,
             ]
         ], $notices);
@@ -162,8 +162,8 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
         // Bump all timecreated and timemodified for this user back.
         try {
             $DB->execute('UPDATE {assign_submission} ' .
-                         'SET timecreated = timecreated - 1, timemodified = timemodified - 1 ' .
-                         'WHERE userid = :userid',
+                'SET timecreated = timecreated - 1, timemodified = timemodified - 1 ' .
+                'WHERE userid = :userid',
                 ['userid' => $student->id]);
         } catch (\dml_exception $e) {
             self::fail($e->getMessage());
@@ -248,7 +248,7 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
     public function init_role() {
         global $DB;
 
-        $db      = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $manager = $db->get_role_by_name('manager');
 
         if (!$manager) {
@@ -269,8 +269,8 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $plugin      = 'local_mentor_core';
-        $configname  = 'test';
+        $plugin = 'local_mentor_core';
+        $configname = 'test';
         $configvalue = 'test_function';
 
         // Config not exist.
@@ -299,16 +299,16 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $rolename   = 'admindedie';
+        $rolename = 'admindedie';
         $capability = 'moodle/user:create';
 
         // Get role.
-        $db   = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $role = $db->get_role_by_name($rolename);
 
         // Has capability.
         $hascapability = $DB->record_exists('role_capabilities', array(
-            'roleid'     => $role->id,
+            'roleid' => $role->id,
             'capability' => $capability
         ));
         self::assertTrue($hascapability);
@@ -322,7 +322,7 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         // Has not capability.
         $hascapability = $DB->record_exists('role_capabilities', array(
-            'roleid'     => $role->id,
+            'roleid' => $role->id,
             'capability' => $capability
         ));
         self::assertFalse($hascapability);
@@ -343,24 +343,24 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $rolename     = 'admindedie';
+        $rolename = 'admindedie';
         $capabilities = array(
             'moodle/user:create',
             'moodle/user:delete'
         );
 
         // Get role.
-        $db   = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $role = $db->get_role_by_name($rolename);
 
         // Has capabilities.
         $hascapability = $DB->record_exists('role_capabilities', array(
-            'roleid'     => $role->id,
+            'roleid' => $role->id,
             'capability' => $capabilities[0]
         ));
         self::assertTrue($hascapability);
         $hascapability = $DB->record_exists('role_capabilities', array(
-            'roleid'     => $role->id,
+            'roleid' => $role->id,
             'capability' => $capabilities[1]
         ));
         self::assertTrue($hascapability);
@@ -374,12 +374,12 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         // Has not capabilities.
         $hascapability = $DB->record_exists('role_capabilities', array(
-            'roleid'     => $role->id,
+            'roleid' => $role->id,
             'capability' => $capabilities[0]
         ));
         self::assertFalse($hascapability);
         $hascapability = $DB->record_exists('role_capabilities', array(
-            'roleid'     => $role->id,
+            'roleid' => $role->id,
             'capability' => $capabilities[1]
         ));
         self::assertFalse($hascapability);
@@ -400,19 +400,19 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $rolename   = 'admindedie';
+        $rolename = 'admindedie';
         $capability = 'moodle/course:configurecustomfields';
 
         // Get role.
-        $db   = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $role = $db->get_role_by_name($rolename);
 
         self::expectOutputString("Add capability " . $capability . " to role " . $role->name . "\n" .
-                                 "Add capability " . $capability . " to role " . $role->name . "\n");
+            "Add capability " . $capability . " to role " . $role->name . "\n");
 
         // Has capability.
         $hascapability = $DB->record_exists('role_capabilities', array(
-            'roleid'     => $role->id,
+            'roleid' => $role->id,
             'capability' => $capability
         ));
         self::assertFalse($hascapability);
@@ -422,7 +422,7 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         // Has not capability.
         $capabilities = $DB->get_records('role_capabilities', array(
-            'roleid'     => $role->id,
+            'roleid' => $role->id,
             'capability' => $capability
         ));
 
@@ -433,7 +433,7 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         local_mentor_core_add_capability($role, $capability);
         $updatedcapabilities = $DB->get_record('role_capabilities', array(
-                'roleid'     => $role->id,
+                'roleid' => $role->id,
                 'capability' => $capability
             )
         );
@@ -456,23 +456,23 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $rolename     = 'admindedie';
+        $rolename = 'admindedie';
         $capabilities = [
             'moodle/course:configurecustomfields',
             'moodle/my:manageblocks'
         ];
 
         // Get role.
-        $db   = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $role = $db->get_role_by_name($rolename);
 
         self::expectOutputString("Add capability " . $capabilities[0] . " to role " . $role->name . "\n" .
-                                 "Add capability " . $capabilities[1] . " to role " . $role->name . "\n");
+            "Add capability " . $capabilities[1] . " to role " . $role->name . "\n");
 
         // Has no capability.
         foreach ($capabilities as $capability) {
             self::assertFalse($DB->record_exists('role_capabilities', array(
-                'roleid'     => $role->id,
+                'roleid' => $role->id,
                 'capability' => $capability
             )));
         }
@@ -483,7 +483,7 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
         // Has capability.
         foreach ($capabilities as $capability) {
             self::assertTrue($DB->record_exists('role_capabilities', array(
-                'roleid'     => $role->id,
+                'roleid' => $role->id,
                 'capability' => $capability
             )));
         }
@@ -504,26 +504,26 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $rolename           = 'admindedie';
+        $rolename = 'admindedie';
         $capabilitynotexist = 'moodle/course:configurecustomfields';
-        $capabilityexist    = 'moodle/course:create';
+        $capabilityexist = 'moodle/course:create';
 
         // Get role.
-        $db   = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $role = $db->get_role_by_name($rolename);
 
         self::expectOutputString("Prevent capability " . $capabilitynotexist . " to role " . $role->name . "\n" .
-                                 "Prevent capability " . $capabilityexist . " to role " . $role->name . "\n");
+            "Prevent capability " . $capabilityexist . " to role " . $role->name . "\n");
 
         // Has no capability.
         self::assertFalse($DB->record_exists('role_capabilities', array(
-            'roleid'     => $role->id,
+            'roleid' => $role->id,
             'capability' => $capabilitynotexist
         )));
 
         // Has capability.
         self::assertTrue($DB->record_exists('role_capabilities', array(
-            'roleid'     => $role->id,
+            'roleid' => $role->id,
             'capability' => $capabilityexist
         )));
 
@@ -531,7 +531,7 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
         local_mentor_core_prevent_capability($role, $capabilitynotexist);
 
         $capability = $DB->get_record('role_capabilities', array(
-            'roleid'     => $role->id,
+            'roleid' => $role->id,
             'capability' => $capabilitynotexist
         ));
         self::assertIsObject($capability);
@@ -541,7 +541,7 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
         local_mentor_core_prevent_capability($role, $capabilityexist);
 
         $capability = $DB->get_record('role_capabilities', array(
-            'roleid'     => $role->id,
+            'roleid' => $role->id,
             'capability' => $capabilityexist
         ));
         self::assertIsObject($capability);
@@ -561,12 +561,12 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $coursedata            = new stdClass();
-        $coursedata->fullname  = "New course";
+        $coursedata = new stdClass();
+        $coursedata->fullname = "New course";
         $coursedata->shortname = "New course";
-        $coursedata->category  = 1;
-        $coursedata->idnumber  = 1;
-        $course                = create_course($coursedata);
+        $coursedata->category = 1;
+        $coursedata->idnumber = 1;
+        $course = create_course($coursedata);
 
         $userlist = array(
             'lastname, firstname, email, group',
@@ -594,7 +594,7 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
         $userlist = array(
             'lastname, firstname, email, group',
         );
-        $errors   = local_mentor_core_validate_users_csv($userlist, ',', $course->id);
+        $errors = local_mentor_core_validate_users_csv($userlist, ',', $course->id);
         self::assertEquals(1, $errors);
 
         $userlist = array(
@@ -758,19 +758,22 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         $userlist = array(
             array(
-                'lastname'  => 'lastname1',
+                'lastname' => 'lastname1',
                 'firstname' => 'firstname1',
-                'email'     => $USER->email,
-                'auth'      => 'manual',
+                'email' => $USER->email,
+                'auth' => 'manual',
                 'groupname' => '',
-                'role'      => 'formateur'
+                'role' => 'formateur'
             )
         );
 
         // Create session.
         $session = $this->init_session_creation();
+        $session->sessionstartdate = time();
+        $session->update($session);
+        $session->create_manual_enrolment_instance();
 
-        local_mentor_core_enrol_users_csv($session->get_course()->id, $userlist);
+        local_mentor_core_enrol_users_csv($session->get_course(true)->id, $userlist);
 
         // Switch role to participant.
         $userlist = array(
@@ -780,8 +783,8 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         // Preview array.
         $preview = [
-            'list'             => [], // Cleaned list of accounts.
-            'validlines'       => 0, // Number of lines without error.
+            'list' => [], // Cleaned list of accounts.
+            'validlines' => 0, // Number of lines without error.
             'validforcreation' => 0, // Number of lines that will create an account.
         ];
 
@@ -822,13 +825,13 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         // Preview array.
         $preview = [
-            'list'             => [], // Cleaned list of accounts.
-            'validlines'       => 0, // Number of lines without error.
+            'list' => [], // Cleaned list of accounts.
+            'validlines' => 0, // Number of lines without error.
             'validforcreation' => 0, // Number of lines that will create an account.
         ];
 
         $other = array(
-            'entityid'    => $entityid,
+            'entityid' => $entityid,
             'addtoentity' => \importcsv_form::ADD_TO_ANY_ENTITY
         );
 
@@ -877,13 +880,13 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         // Preview array.
         $preview = [
-            'list'             => [], // Cleaned list of accounts.
-            'validlines'       => 0, // Number of lines without error.
+            'list' => [], // Cleaned list of accounts.
+            'validlines' => 0, // Number of lines without error.
             'validforcreation' => 0, // Number of lines that will create an account.
         ];
 
         $other = array(
-            'entityid'    => $entityid,
+            'entityid' => $entityid,
             'addtoentity' => \importcsv_form::ADD_TO_MAIN_ENTITY
         );
 
@@ -945,13 +948,13 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         // Preview array.
         $preview = [
-            'list'             => [], // Cleaned list of accounts.
-            'validlines'       => 0, // Number of lines without error.
+            'list' => [], // Cleaned list of accounts.
+            'validlines' => 0, // Number of lines without error.
             'validforcreation' => 0, // Number of lines that will create an account.
         ];
 
         $other = array(
-            'entityid'    => $entity2id,
+            'entityid' => $entity2id,
             'addtoentity' => \importcsv_form::ADD_TO_MAIN_ENTITY
         );
 
@@ -1002,13 +1005,13 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         // Preview array.
         $preview = [
-            'list'             => [], // Cleaned list of accounts.
-            'validlines'       => 0, // Number of lines without error.
+            'list' => [], // Cleaned list of accounts.
+            'validlines' => 0, // Number of lines without error.
             'validforcreation' => 0, // Number of lines that will create an account.
         ];
 
         $other = array(
-            'entityid'    => $entityid,
+            'entityid' => $entityid,
             'addtoentity' => \importcsv_form::ADD_TO_SECONDARY_ENTITY
         );
 
@@ -1067,13 +1070,13 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         // Preview array.
         $preview = [
-            'list'             => [], // Cleaned list of accounts.
-            'validlines'       => 0, // Number of lines without error.
+            'list' => [], // Cleaned list of accounts.
+            'validlines' => 0, // Number of lines without error.
             'validforcreation' => 0, // Number of lines that will create an account.
         ];
 
         $other = array(
-            'entityid'    => $entityid,
+            'entityid' => $entityid,
             'addtoentity' => \importcsv_form::ADD_TO_SECONDARY_ENTITY
         );
 
@@ -1112,7 +1115,7 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $user            = self::getDataGenerator()->create_user();
+        $user = self::getDataGenerator()->create_user();
         $user->suspended = 1;
         // Update profile.
         user_update_user($user, false, false);
@@ -1124,9 +1127,9 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         // Preview array.
         $preview = [
-            'list'                 => [], // Cleaned list of accounts.
-            'validlines'           => 0, // Number of lines without error.
-            'validforcreation'     => 0, // Number of lines that will create an account.
+            'list' => [], // Cleaned list of accounts.
+            'validlines' => 0, // Number of lines without error.
+            'validforcreation' => 0, // Number of lines that will create an account.
             'validforreactivation' => [], // Valid accounts for reactivation.
         ];
 
@@ -1177,27 +1180,30 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         $userlist = array(
             array(
-                'lastname'  => 'lastname1',
+                'lastname' => 'lastname1',
                 'firstname' => 'firstname1',
-                'email'     => 'lastname1.firstname1@gmail.com',
-                'auth'      => 'manual',
+                'email' => 'lastname1.firstname1@gmail.com',
+                'auth' => 'manual',
                 'groupname' => 'gr1',
-                'role'      => 'FakeRole'
+                'role' => 'FakeRole'
             ),
             array(
-                'lastname'  => 'lastname1',
+                'lastname' => 'lastname1',
                 'firstname' => 'firstname2',
-                'email'     => 12,
-                'auth'      => 'manual',
+                'email' => 12,
+                'auth' => 'manual',
                 'groupname' => 'gr1',
-                'role'      => 'Tuteur'
+                'role' => 'Tuteur'
             ),
         );
 
         // Create session.
         $session = $this->init_session_creation();
+        $session->sessionstartdate = time();
+        $session->update($session);
+        $session->create_manual_enrolment_instance();
 
-        local_mentor_core_enrol_users_csv($session->get_course()->id, $userlist);
+        local_mentor_core_enrol_users_csv($session->get_course(true)->id, $userlist);
 
         // One new user.
         self::assertCount(3, $DB->get_records('user'));
@@ -1207,8 +1213,8 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
         // Error for second new user.
         self::assertEquals($notification[0]->get_message_type(), 'error');
         self::assertEquals($notification[0]->get_message(), get_string('error_line', 'local_mentor_core', 2)
-                                                            . ' : The username must be in lower case. '
-                                                            . get_string('error_ignore_line', 'local_mentor_core'));
+            . ' : The username must be in lower case. '
+            . get_string('error_ignore_line', 'local_mentor_core'));
 
         // Import success.
         self::assertEquals($notification[1]->get_message_type(), 'success');
@@ -1234,8 +1240,8 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
         // Clean notification.
         \core\notification::fetch();
 
-        $user            = self::getDataGenerator()->create_user();
-        $user->username  = $user->email;
+        $user = self::getDataGenerator()->create_user();
+        $user->username = $user->email;
         $user->suspended = 1;
         user_update_user($user, false, false);
 
@@ -1280,10 +1286,10 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         $userlist = array(
             array(
-                'lastname'  => 'lastname1',
+                'lastname' => 'lastname1',
                 'firstname' => 'firstname1',
-                'email'     => 'lastname1.firstname1@gmail.com',
-                'auth'      => 'manual'
+                'email' => 'lastname1.firstname1@gmail.com',
+                'auth' => 'manual'
             )
         );
 
@@ -1300,14 +1306,14 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         // Create users and add to entity.
         $newentityname = 'Entity1';
-        $entityid      = \local_mentor_core\entity_api::create_entity(['name' => $newentityname, 'shortname' => $newentityname]);
+        $entityid = \local_mentor_core\entity_api::create_entity(['name' => $newentityname, 'shortname' => $newentityname]);
 
         $userlist = array(
             array(
-                'lastname'  => 'lastname3',
+                'lastname' => 'lastname3',
                 'firstname' => 'firstname3',
-                'email'     => 'lastname3.firstname1@gmail.com',
-                'auth'      => 'manual'
+                'email' => 'lastname3.firstname1@gmail.com',
+                'auth' => 'manual'
             )
         );
 
@@ -1317,7 +1323,7 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
         // One new user.
         self::assertCount(4, $DB->get_records('user'));
 
-        $user    = $DB->get_record('user', ['email' => 'lastname3.firstname1@gmail.com']);
+        $user = $DB->get_record('user', ['email' => 'lastname3.firstname1@gmail.com']);
         $profile = \local_mentor_core\profile_api::get_profile($user->id);
 
         $userentity = $profile->get_main_entity();
@@ -1326,10 +1332,10 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         $userlist = array(
             array(
-                'lastname'  => 'lastname4',
+                'lastname' => 'lastname4',
                 'firstname' => 'firstname4',
-                'email'     => 'lastname4.firstname4@gmail.com',
-                'auth'      => 'manual'
+                'email' => 'lastname4.firstname4@gmail.com',
+                'auth' => 'manual'
             )
         );
 
@@ -1341,7 +1347,7 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         $user = $DB->get_record('user', ['email' => 'lastname4.firstname4@gmail.com']);
 
-        $dbi               = \local_mentor_core\database_interface::get_instance();
+        $dbi = \local_mentor_core\database_interface::get_instance();
         $secondaryentities = $dbi->get_profile_field_value($user->id, 'secondaryentities');
 
         self::assertEquals($secondaryentities, $newentityname);
@@ -1370,16 +1376,16 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         $userlist = array(
             array(
-                'lastname'  => 'lastname1',
+                'lastname' => 'lastname1',
                 'firstname' => 'firstname1',
-                'email'     => 'lastname1.firstname1@gmail.com',
-                'auth'      => 'manual'
+                'email' => 'lastname1.firstname1@gmail.com',
+                'auth' => 'manual'
             )
         );
 
         local_mentor_core_create_users_csv($userlist);
 
-        $newuser            = $DB->get_record('user', ['username' => 'lastname1.firstname1@gmail.com']);
+        $newuser = $DB->get_record('user', ['username' => 'lastname1.firstname1@gmail.com']);
         $newuser->suspended = 1;
         $DB->update_record('user', $newuser);
 
@@ -1417,10 +1423,10 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         $userlist = array(
             array(
-                'lastname'  => 'lastname1',
+                'lastname' => 'lastname1',
                 'firstname' => 'firstname1',
-                'email'     => 'lastname1.firstname1@gmail.com',
-                'auth'      => 'manual'
+                'email' => 'lastname1.firstname1@gmail.com',
+                'auth' => 'manual'
             )
         );
 
@@ -1637,7 +1643,7 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         local_mentor_core_generate_user_fields();
 
-        $userinfofields   = $DB->get_records('user_info_field');
+        $userinfofields = $DB->get_records('user_info_field');
         $userinfofieldkey = array_key_first($userinfofields);
 
         self::assertCount(1, $userinfofields);
@@ -1758,10 +1764,10 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $coursedata            = new \stdClass();
-        $coursedata->category  = 1;
+        $coursedata = new \stdClass();
+        $coursedata->category = 1;
         $coursedata->shortname = 'Course1';
-        $coursedata->fullname  = 'Course1';
+        $coursedata->fullname = 'Course1';
 
         $course = create_course($coursedata);
 
@@ -1779,14 +1785,14 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
         $this->resetAfterTest(true);
         $this->reset_singletons();
 
-        $data1        = new stdClass();
-        $data1->name  = "medium";
+        $data1 = new stdClass();
+        $data1->name = "medium";
         $data1->value = 2;
-        $data2        = new stdClass();
-        $data2->name  = "max";
+        $data2 = new stdClass();
+        $data2->name = "max";
         $data2->value = 3;
-        $data3        = new stdClass();
-        $data3->name  = "min";
+        $data3 = new stdClass();
+        $data3->name = "min";
         $data3->value = 1;
 
         $datas = array(
@@ -1823,13 +1829,13 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
 
         $fs = get_file_storage();
 
-        $filerecord            = new stdClass();
+        $filerecord = new stdClass();
         $filerecord->contextid = context_system::instance()->id;
         $filerecord->component = 'local_mentor_core';
-        $filerecord->filearea  = 'tests';
-        $filerecord->itemid    = 0;
-        $filerecord->filepath  = '/';
-        $filerecord->filename  = 'logo.png';
+        $filerecord->filearea = 'tests';
+        $filerecord->itemid = 0;
+        $filerecord->filepath = '/';
+        $filerecord->filename = 'logo.png';
 
         $file = $fs->create_file_from_pathname($filerecord, $CFG->dirroot . '/local/mentor_core/pix/logo.png');
 
@@ -1864,16 +1870,16 @@ class local_mentor_core_lib_testcase extends advanced_testcase {
         $this->resetAfterTest(true);
         $this->reset_singletons();
 
-        $content      = "test\r\ntest2";
+        $content = "test\r\ntest2";
         $finalcontent = local_mentor_core_decode_csv_content($content);
         self::assertEquals("test
 test2", $finalcontent);
 
-        $content      = "test \xEF\xBB\xBF test2";
+        $content = "test \xEF\xBB\xBF test2";
         $finalcontent = local_mentor_core_decode_csv_content($content);
         self::assertEquals('test  test2', $finalcontent);
 
-        $content      = "KLMÄšLENÃ";
+        $content = "KLMÄšLENÃ";
         $finalcontent = local_mentor_core_decode_csv_content($content);
         self::assertEquals("KLMÄšLENÃ", $finalcontent);
 
@@ -1891,12 +1897,12 @@ test2", $finalcontent);
         $this->reset_singletons();
 
         // Create course.
-        $courserecord                   = new stdClass();
+        $courserecord = new stdClass();
         $courserecord->enablecompletion = 1;
-        $course                         = $this->getDataGenerator()->create_course($courserecord);
+        $course = $this->getDataGenerator()->create_course($courserecord);
 
         // Create a mod without any completion.
-        $record         = new stdClass();
+        $record = new stdClass();
         $record->course = $course;
         $this->getDataGenerator()->create_module('forum', $record);
 
@@ -1904,8 +1910,8 @@ test2", $finalcontent);
         self::assertCount(0, $activities);
 
         // Create a mod with completion enabled.
-        $record->completion         = 1;
-        $record->completionview     = 1;
+        $record->completion = 1;
+        $record->completionview = 1;
         $record->completionexpected = 0;
         $record->completionunlocked = 1;
         $this->getDataGenerator()->create_module('url', $record);
@@ -1930,7 +1936,7 @@ test2", $finalcontent);
 
         // Create session.
         $session = $this->init_session_creation();
-        $course  = $session->get_course();
+        $course = $session->get_course();
 
         $navigationnode = new navigation_node('Test node');
 
@@ -1993,9 +1999,9 @@ test2", $finalcontent);
         $user1 = $this->getDataGenerator()->create_user();
 
         // Create course.
-        $courserecord                   = new stdClass();
+        $courserecord = new stdClass();
         $courserecord->enablecompletion = 1;
-        $course                         = $this->getDataGenerator()->create_course($courserecord);
+        $course = $this->getDataGenerator()->create_course($courserecord);
 
         // Get gradebook exclusions list for students in a course.
         $exclusions = local_mentor_core_completion_find_exclusions($course->id, $USER->id);
@@ -2007,7 +2013,7 @@ test2", $finalcontent);
         self::assertCount(0, $filteractivities);
 
         // Create a mod without any completion.
-        $record         = new stdClass();
+        $record = new stdClass();
         $record->course = $course;
         $this->getDataGenerator()->create_module('forum', $record);
 
@@ -2018,10 +2024,10 @@ test2", $finalcontent);
         self::assertCount(0, $filteractivities);
 
         // Create a mod with completion enabled.
-        $record                     = new stdClass();
-        $record->course             = $course;
-        $record->completion         = 1;
-        $record->completionview     = 1;
+        $record = new stdClass();
+        $record->course = $course;
+        $record->completion = 1;
+        $record->completionview = 1;
         $record->completionexpected = 0;
         $record->completionunlocked = 1;
         $this->getDataGenerator()->create_module('url', $record);
@@ -2045,13 +2051,13 @@ test2", $finalcontent);
         $exclusions = local_mentor_core_completion_find_exclusions($course->id, $USER->id);
 
         // Create a mod with completion enabled.
-        $record                     = new stdClass();
-        $record->course             = $course;
-        $record->completion         = 1;
-        $record->completionview     = 1;
+        $record = new stdClass();
+        $record->course = $course;
+        $record->completion = 1;
+        $record->completionview = 1;
         $record->completionexpected = 0;
         $record->completionunlocked = 1;
-        $record->visible            = 0;
+        $record->visible = 0;
         $this->getDataGenerator()->create_module('url', $record);
 
         self::setUser($user1);
@@ -2086,13 +2092,13 @@ test2", $finalcontent);
         self::setAdminUser();
 
         // Create course.
-        $courserecord                   = new stdClass();
+        $courserecord = new stdClass();
         $courserecord->enablecompletion = 1;
-        $course                         = $this->getDataGenerator()->create_course($courserecord);
-        $student                        = $this->getDataGenerator()->create_and_enrol($course, 'participant');
+        $course = $this->getDataGenerator()->create_course($courserecord);
+        $student = $this->getDataGenerator()->create_and_enrol($course, 'participant');
 
         // Create a mod without any completion.
-        $record         = new stdClass();
+        $record = new stdClass();
         $record->course = $course;
         $this->getDataGenerator()->create_module('forum', $record);
 
@@ -2101,20 +2107,20 @@ test2", $finalcontent);
 
         // Create a mod with completion enabled.
         $instance = $this->getDataGenerator()->create_module('assign', [
-            'course'              => $course->id,
-            'grade'               => 100,
-            'maxattempts'         => -1,
+            'course' => $course->id,
+            'grade' => 100,
+            'maxattempts' => -1,
             'attemptreopenmethod' => 'untilpass',
-            'completion'          => COMPLETION_TRACKING_AUTOMATIC,
-            'completionusegrade'  => 1,      // The student must receive a grade to complete.
-            'completionexpected'  => time() - DAYSECS,
-            'teamsubmission'      => 0,
+            'completion' => COMPLETION_TRACKING_AUTOMATIC,
+            'completionusegrade' => 1,      // The student must receive a grade to complete.
+            'completionexpected' => time() - DAYSECS,
+            'teamsubmission' => 0,
         ]);
-        $cm       = get_coursemodule_from_id('assign', $instance->cmid);
+        $cm = get_coursemodule_from_id('assign', $instance->cmid);
 
         // Set the passing grade.
-        $item            = \grade_item::fetch([
-            'courseid'   => $course->id, 'itemtype' => 'mod',
+        $item = \grade_item::fetch([
+            'courseid' => $course->id, 'itemtype' => 'mod',
             'itemmodule' => 'assign', 'iteminstance' => $instance->id, 'outcomeid' => null
         ]);
         $item->gradepass = 50;
@@ -2146,43 +2152,43 @@ test2", $finalcontent);
         $this->reset_singletons();
 
         // Create course.
-        $courserecord                   = new stdClass();
+        $courserecord = new stdClass();
         $courserecord->enablecompletion = 1;
-        $course                         = $this->getDataGenerator()->create_course($courserecord);
-        $student                        = $this->getDataGenerator()->create_and_enrol($course, 'participant');
+        $course = $this->getDataGenerator()->create_course($courserecord);
+        $student = $this->getDataGenerator()->create_and_enrol($course, 'participant');
 
         // Create a mod without any completion.
-        $record         = new stdClass();
+        $record = new stdClass();
         $record->course = $course;
         $this->getDataGenerator()->create_module('forum', $record);
 
         // Create a mod with completion enabled.
-        $record                     = new stdClass();
-        $record->course             = $course;
-        $record->completion         = 1;
-        $record->completionview     = 1;
+        $record = new stdClass();
+        $record->course = $course;
+        $record->completion = 1;
+        $record->completionview = 1;
         $record->completionexpected = 0;
         $record->completionunlocked = 1;
-        $record->visible            = 1;
-        $instance1                  = $this->getDataGenerator()->create_module('url', $record);
+        $record->visible = 1;
+        $instance1 = $this->getDataGenerator()->create_module('url', $record);
 
         // Create a mod with completion enabled.
-        $record                     = new stdClass();
-        $record->course             = $course;
-        $record->completion         = 1;
-        $record->completionview     = 1;
+        $record = new stdClass();
+        $record->course = $course;
+        $record->completion = 1;
+        $record->completionview = 1;
         $record->completionexpected = 0;
         $record->completionunlocked = 1;
-        $record->visible            = 1;
-        $instance2                  = $this->getDataGenerator()->create_module('url', $record);
-        $completion                 = new completion_info($course);
+        $record->visible = 1;
+        $instance2 = $this->getDataGenerator()->create_module('url', $record);
+        $completion = new completion_info($course);
 
         $cm = get_coursemodule_from_id('url', $instance2->cmid);
         $completion->update_state($cm, COMPLETION_COMPLETE, $student->id);
 
-        $exclusions  = local_mentor_core_completion_find_exclusions($course->id, $student->id);
-        $activities  = local_mentor_core_completion_get_activities($course->id);
-        $activities  = local_mentor_core_completion_filter_activities($activities, $student->id, $course->id, $exclusions);
+        $exclusions = local_mentor_core_completion_find_exclusions($course->id, $student->id);
+        $activities = local_mentor_core_completion_get_activities($course->id);
+        $activities = local_mentor_core_completion_filter_activities($activities, $student->id, $course->id, $exclusions);
         $submissions = local_mentor_core_completion_get_user_course_submissions($course->id, $student->id);
         $completions = local_mentor_core_completion_get_progress($activities, $student->id, $course, $submissions);
 
@@ -2205,27 +2211,27 @@ test2", $finalcontent);
         $this->reset_singletons();
 
         // Create course.
-        $courserecord                   = new stdClass();
+        $courserecord = new stdClass();
         $courserecord->enablecompletion = 0;
-        $course                         = $this->getDataGenerator()->create_course($courserecord);
-        $student                        = $this->getDataGenerator()->create_and_enrol($course, 'participant');
+        $course = $this->getDataGenerator()->create_course($courserecord);
+        $student = $this->getDataGenerator()->create_and_enrol($course, 'participant');
 
         $progresspercentage = local_mentor_core_completion_get_progress_percentage($course, $student->id);
         // Disable completion.
         self::assertFalse($progresspercentage);
 
         // Create course.
-        $courserecord                   = new stdClass();
+        $courserecord = new stdClass();
         $courserecord->enablecompletion = 1;
-        $course                         = $this->getDataGenerator()->create_course($courserecord);
-        $student                        = $this->getDataGenerator()->create_and_enrol($course, 'participant');
+        $course = $this->getDataGenerator()->create_course($courserecord);
+        $student = $this->getDataGenerator()->create_and_enrol($course, 'participant');
 
         $progresspercentage = local_mentor_core_completion_get_progress_percentage($course, $student->id);
         // No activities.
         self::assertFalse($progresspercentage);
 
         // Create a mod without any completion.
-        $record         = new stdClass();
+        $record = new stdClass();
         $record->course = $course;
         $this->getDataGenerator()->create_module('forum', $record);
 
@@ -2233,25 +2239,25 @@ test2", $finalcontent);
         self::assertEquals(0, $progresspercentage);
 
         // Create a mod with completion enabled.
-        $record                     = new stdClass();
-        $record->course             = $course;
-        $record->completion         = 1;
-        $record->completionview     = 1;
+        $record = new stdClass();
+        $record->course = $course;
+        $record->completion = 1;
+        $record->completionview = 1;
         $record->completionexpected = 0;
         $record->completionunlocked = 1;
-        $record->visible            = 1;
-        $instance1                  = $this->getDataGenerator()->create_module('url', $record);
+        $record->visible = 1;
+        $instance1 = $this->getDataGenerator()->create_module('url', $record);
 
         // Create a mod with completion enabled.
-        $record                     = new stdClass();
-        $record->course             = $course;
-        $record->completion         = 1;
-        $record->completionview     = 1;
+        $record = new stdClass();
+        $record->course = $course;
+        $record->completion = 1;
+        $record->completionview = 1;
         $record->completionexpected = 0;
         $record->completionunlocked = 1;
-        $record->visible            = 1;
-        $instance2                  = $this->getDataGenerator()->create_module('url', $record);
-        $completion                 = new completion_info($course);
+        $record->visible = 1;
+        $instance2 = $this->getDataGenerator()->create_module('url', $record);
+        $completion = new completion_info($course);
 
         $cm = get_coursemodule_from_id('url', $instance2->cmid);
         $completion->update_state($cm, COMPLETION_COMPLETE, $student->id);
@@ -2288,35 +2294,35 @@ test2", $finalcontent);
 
         // Main entity.
         $entityid1 = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
 
         // Main entity training.
         $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
         $entity1->update_sirh_list('RENOIRH_AES');
-        $data            = new stdClass();
-        $data->name      = 'training1';
+        $data = new stdClass();
+        $data->name = 'training1';
         $data->shortname = 'training1';
-        $data->content   = 'summary';
-        $data->status    = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+        $data->content = 'summary';
+        $data->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
         // Fields for taining.
-        $data->traininggoal      = 'TEST TRAINING ';
-        $data->thumbnail         = '';
-        $formationid             = $entity1->get_entity_formation_category();
-        $data->categorychildid   = $formationid;
-        $data->categoryid        = $entity1->id;
+        $data->traininggoal = 'TEST TRAINING ';
+        $data->thumbnail = '';
+        $formationid = $entity1->get_entity_formation_category();
+        $data->categorychildid = $formationid;
+        $data->categoryid = $entity1->id;
         $data->creativestructure = $entity1->id;
-        $training1               = \local_mentor_core\training_api::create_training($data);
+        $training1 = \local_mentor_core\training_api::create_training($data);
 
         // Not available session.
-        $sessionname1               = 'Session 1';
-        $session1                   = \local_mentor_core\session_api::create_session($training1->id, $sessionname1, true);
-        $session1->status           = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
-        $session1->opento           = 'current_entity';
-        $now                        = time();
+        $sessionname1 = 'Session 1';
+        $session1 = \local_mentor_core\session_api::create_session($training1->id, $sessionname1, true);
+        $session1->status = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
+        $session1->opento = 'current_entity';
+        $now = time();
         $session1->sessionstartdate = $now;
-        $session1->sessionenddate   = $now + 38000;
+        $session1->sessionenddate = $now + 38000;
         $session1->update($session1);
 
         $csvdata = local_mentor_core_get_available_sessions_csv_data($entityid1);
@@ -2374,36 +2380,36 @@ test2", $finalcontent);
 
         // Main entity.
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // Create profile.
-        $user             = new stdClass();
-        $user->lastname   = 'lastname';
-        $user->firstname  = 'firstname';
-        $user->email      = 'email@test.fr';
-        $user->username   = 'email@test.fr';
-        $user->password   = 'to be generated';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'email@test.fr';
+        $user->username = 'email@test.fr';
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
-        $user->auth       = 'manual';
+        $user->confirmed = 1;
+        $user->auth = 'manual';
 
         $userid = local_mentor_core\profile_api::create_user($user);
         set_user_preference('auth_forcepasswordchange', 0, $user);
 
         $field = $DB->get_record('user_info_field', ['shortname' => 'mainentity']);
 
-        $userdata          = new stdClass();
+        $userdata = new stdClass();
         $userdata->fieldid = $field->id;
-        $userdata->data    = 'New Entity 1';
-        $userdata->userid  = $userid;
+        $userdata->data = 'New Entity 1';
+        $userdata->userid = $userid;
 
         $DB->insert_record('user_info_data', $userdata);
 
         $preview = [];
-        $errors  = [];
+        $errors = [];
 
         $content = [
             'email',
@@ -2446,13 +2452,13 @@ test2", $finalcontent);
 
         // Main entity.
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         $preview = [];
-        $errors  = [];
+        $errors = [];
 
         $content = [];
         for ($i = 0; $i < 501; $i++) {
@@ -2488,13 +2494,13 @@ test2", $finalcontent);
 
         // Main entity.
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         $preview = [];
-        $errors  = [];
+        $errors = [];
 
         $content = [];
         for ($i = 0; $i < 2; $i++) {
@@ -2529,13 +2535,13 @@ test2", $finalcontent);
 
         // Main entity.
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         $preview = [];
-        $errors  = [];
+        $errors = [];
 
         $content = [
             'email',
@@ -2569,13 +2575,13 @@ test2", $finalcontent);
 
         // Main entity.
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         $preview = [];
-        $errors  = [];
+        $errors = [];
 
         $content = [
             'email',
@@ -2611,13 +2617,13 @@ test2", $finalcontent);
 
         // Main entity.
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         $preview = [];
-        $errors  = [];
+        $errors = [];
 
         $content = [
             'email',
@@ -2653,13 +2659,13 @@ test2", $finalcontent);
 
         // Main entity.
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         $preview = [];
-        $errors  = [];
+        $errors = [];
 
         $content = [
             'email',
@@ -2697,13 +2703,13 @@ test2", $finalcontent);
 
         // Main entity.
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         $preview = [];
-        $errors  = [];
+        $errors = [];
 
         $content = [
             'email',
@@ -2711,13 +2717,13 @@ test2", $finalcontent);
         ];
 
         // Two users with same email and username.
-        $user1           = self::getDataGenerator()->create_user();
-        $user1->email    = 'email@test.fr';
+        $user1 = self::getDataGenerator()->create_user();
+        $user1->email = 'email@test.fr';
         $user1->username = 'email@test.fr';
         $DB->update_record('user', $user1);
-        $user2             = self::getDataGenerator()->create_user();
-        $user2->email      = 'email@test.fr';
-        $user2->username   = 'email@test.fr';
+        $user2 = self::getDataGenerator()->create_user();
+        $user2->email = 'email@test.fr';
+        $user2->username = 'email@test.fr';
         $user2->mnethostid = 2;
         $DB->update_record('user', $user2);
 
@@ -2752,13 +2758,13 @@ test2", $finalcontent);
 
         // Main entity.
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         $preview = [];
-        $errors  = [];
+        $errors = [];
 
         $content = [
             'email',
@@ -2766,9 +2772,9 @@ test2", $finalcontent);
         ];
 
         // Create user.
-        $user1            = self::getDataGenerator()->create_user();
-        $user1->email     = 'email@test.fr';
-        $user1->username  = 'email@test.fr';
+        $user1 = self::getDataGenerator()->create_user();
+        $user1->email = 'email@test.fr';
+        $user1->username = 'email@test.fr';
         $user1->suspended = 1;
         $DB->update_record('user', $user1);
 
@@ -2804,13 +2810,13 @@ test2", $finalcontent);
 
         // Main entity.
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         $preview = [];
-        $errors  = [];
+        $errors = [];
 
         $content = [
             'email',
@@ -2819,30 +2825,30 @@ test2", $finalcontent);
 
         // Main entity.
         \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 2',
+            'name' => 'New Entity 2',
             'shortname' => 'New Entity 2'
         ]);
 
         // Create profile.
-        $user             = new stdClass();
-        $user->lastname   = 'lastname';
-        $user->firstname  = 'firstname';
-        $user->email      = 'email@test.fr';
-        $user->username   = 'email@test.fr';
-        $user->password   = 'to be generated';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'email@test.fr';
+        $user->username = 'email@test.fr';
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
-        $user->auth       = 'manual';
+        $user->confirmed = 1;
+        $user->auth = 'manual';
 
         $userid = local_mentor_core\profile_api::create_user($user);
         set_user_preference('auth_forcepasswordchange', 0, $user);
 
         $field = $DB->get_record('user_info_field', ['shortname' => 'mainentity']);
 
-        $userdata          = new stdClass();
+        $userdata = new stdClass();
         $userdata->fieldid = $field->id;
-        $userdata->data    = 'New Entity 2';
-        $userdata->userid  = $userid;
+        $userdata->data = 'New Entity 2';
+        $userdata->userid = $userid;
 
         $DB->insert_record('user_info_data', $userdata);
 
@@ -2854,7 +2860,7 @@ test2", $finalcontent);
         self::assertCount(2, $errors['list'][0]);
         self::assertEquals(2, $errors['list'][0][0]);
         self::assertEquals('L\'utilisateur n\'est pas rattaché à l\'espace dédié ' . $entity->get_name() .
-                           '. Cette ligne sera ignorée à l\'import', $errors['list'][0][1]);
+            '. Cette ligne sera ignorée à l\'import', $errors['list'][0][1]);
 
         self::resetAllData();
     }
@@ -2880,13 +2886,13 @@ test2", $finalcontent);
 
         // Main entity.
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         $preview = [];
-        $errors  = [];
+        $errors = [];
 
         $content = [
             'email',
@@ -2894,25 +2900,25 @@ test2", $finalcontent);
         ];
 
         // Create profile.
-        $user             = new stdClass();
-        $user->lastname   = 'lastname';
-        $user->firstname  = 'firstname';
-        $user->email      = 'email@test2.fr';
-        $user->username   = 'email@test2.fr';
-        $user->password   = 'to be generated';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'email@test2.fr';
+        $user->username = 'email@test2.fr';
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
-        $user->auth       = 'manual';
+        $user->confirmed = 1;
+        $user->auth = 'manual';
 
         $userid2 = local_mentor_core\profile_api::create_user($user);
         set_user_preference('auth_forcepasswordchange', 0, $user);
 
         $field = $DB->get_record('user_info_field', ['shortname' => 'mainentity']);
 
-        $userdata          = new stdClass();
+        $userdata = new stdClass();
         $userdata->fieldid = $field->id;
-        $userdata->data    = 'New Entity 1';
-        $userdata->userid  = $userid2;
+        $userdata->data = 'New Entity 1';
+        $userdata->userid = $userid2;
 
         $DB->insert_record('user_info_data', $userdata);
 
@@ -3021,9 +3027,9 @@ test2", $finalcontent);
 
         self::setAdminUser();
 
-        $newrolename      = 'New Role Test';
+        $newrolename = 'New Role Test';
         $newroleshortname = 'newroletest';
-        $contextlevels    = [
+        $contextlevels = [
             CONTEXT_COURSECAT,
             CONTEXT_COURSE
         ];
@@ -3065,7 +3071,7 @@ test2", $finalcontent);
 
         $string3
             = "Montsieur @Mentor : retrouvez ci-dessous l’ensemble des cours dans" .
-              " lesquelles vous pouvez vous inscrire en fonction des places disponibles.";
+            " lesquelles vous pouvez vous inscrire en fonction des places disponibles.";
         self::assertEquals(
             local_mentor_core_sanitize_string($string3),
             "montsieur-mentor-retrouvez-ci-dessous-l-rsquo-ensemble-des-cours-dans-" .
@@ -3085,55 +3091,55 @@ test2", $finalcontent);
         $this->reset_singletons();
 
         // No favourite.
-        $element1                   = new \stdClass();
+        $element1 = new \stdClass();
         $element1->favouritesession = false;
-        $element2                   = new \stdClass();
+        $element2 = new \stdClass();
         $element2->favouritesession = false;
 
         self::assertEquals(0, local_mentor_core_usort_favourite_session_first($element1, $element2));
 
         // Element1 has favourite.
-        $element1                   = new \stdClass();
+        $element1 = new \stdClass();
         $element1->favouritesession = new \stdClass();
-        $element2                   = new \stdClass();
+        $element2 = new \stdClass();
         $element2->favouritesession = false;
 
         self::assertEquals(-1, local_mentor_core_usort_favourite_session_first($element1, $element2));
 
         // Element2 has favourite.
-        $element1                   = new \stdClass();
+        $element1 = new \stdClass();
         $element1->favouritesession = false;
-        $element2                   = new \stdClass();
+        $element2 = new \stdClass();
         $element2->favouritesession = new \stdClass();
 
         self::assertEquals(1, local_mentor_core_usort_favourite_session_first($element1, $element2));
 
         // Same time.
-        $element1                                = new \stdClass();
-        $element1->favouritesession              = new \stdClass();
+        $element1 = new \stdClass();
+        $element1->favouritesession = new \stdClass();
         $element1->favouritesession->timecreated = time();
-        $element2                                = new \stdClass();
-        $element2->favouritesession              = new \stdClass();
+        $element2 = new \stdClass();
+        $element2->favouritesession = new \stdClass();
         $element2->favouritesession->timecreated = time();
 
         self::assertEquals(0, local_mentor_core_usort_favourite_session_first($element1, $element2));
 
         // Element1 has first favourite.
-        $element1                                = new \stdClass();
-        $element1->favouritesession              = new \stdClass();
+        $element1 = new \stdClass();
+        $element1->favouritesession = new \stdClass();
         $element1->favouritesession->timecreated = time();
-        $element2                                = new \stdClass();
-        $element2->favouritesession              = new \stdClass();
+        $element2 = new \stdClass();
+        $element2->favouritesession = new \stdClass();
         $element2->favouritesession->timecreated = time() + 2;
 
         self::assertEquals(1, local_mentor_core_usort_favourite_session_first($element1, $element2));
 
         // Element2 has first favourite.
-        $element1                                = new \stdClass();
-        $element1->favouritesession              = new \stdClass();
+        $element1 = new \stdClass();
+        $element1->favouritesession = new \stdClass();
         $element1->favouritesession->timecreated = time() + 2;
-        $element2                                = new \stdClass();
-        $element2->favouritesession              = new \stdClass();
+        $element2 = new \stdClass();
+        $element2->favouritesession = new \stdClass();
         $element2->favouritesession->timecreated = time();
 
         self::assertEquals(-1, local_mentor_core_usort_favourite_session_first($element1, $element2));
@@ -3152,7 +3158,7 @@ test2", $finalcontent);
         $this->reset_singletons();
 
         // False entity data.
-        $falseentity       = new \stdClass();
+        $falseentity = new \stdClass();
         $falseentity->name = "A-entity";
 
         // Create entity Mock.
@@ -3178,7 +3184,7 @@ test2", $finalcontent);
             ->will($this->returnValue($entitymock));
 
         // Entity data.
-        $falseentity2       = new \stdClass();
+        $falseentity2 = new \stdClass();
         $falseentity2->name = "B-entity";
 
         // Create entity Mock.
@@ -3223,11 +3229,11 @@ test2", $finalcontent);
         $this->reset_singletons();
 
         // False entity data.
-        $falseentity       = new \stdClass();
+        $falseentity = new \stdClass();
         $falseentity->name = "A-entity";
 
         // False training data.
-        $falsetraining            = new \stdClass();
+        $falsetraining = new \stdClass();
         $falsetraining->shortname = "A-training";
 
         // Create entity Mock.
@@ -3258,7 +3264,7 @@ test2", $finalcontent);
             ->will($this->returnValue($falsetraining));
 
         // False training data.
-        $falsetraining2            = new \stdClass();
+        $falsetraining2 = new \stdClass();
         $falsetraining2->shortname = "B-training";
 
         // Create entity Mock.
@@ -3308,11 +3314,11 @@ test2", $finalcontent);
         $this->reset_singletons();
 
         // False entity data.
-        $falseentity       = new \stdClass();
+        $falseentity = new \stdClass();
         $falseentity->name = "A-entity";
 
         // False training data.
-        $falsetraining            = new \stdClass();
+        $falsetraining = new \stdClass();
         $falsetraining->shortname = "A-training";
 
         // Create entity Mock.

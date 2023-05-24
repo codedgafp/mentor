@@ -7,6 +7,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    #recyclebin {
+      align-self: start;
+    }
   }
 
   #sessions-buttons-filter {
@@ -29,7 +33,7 @@
       -webkit-align-items: flex-end;
       margin-top: 5px;
 
-      @media (max-width: @responsive-filter-break) {
+      @media (max-width: calc(@responsive-filter-break + 50px)) {
         flex-direction: column;
         align-items: start;
         width: 100%;
@@ -41,7 +45,7 @@
         align-items: end;
         margin-right: 10px;
 
-        @media (max-width: @responsive-date-filter-break) {
+        @media (max-width: calc(@responsive-date-filter-break + 60px)) {
           flex-direction: column;
           align-items: baseline;
           width: 100%;

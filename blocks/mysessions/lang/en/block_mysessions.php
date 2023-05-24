@@ -23,26 +23,26 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['mysessions:addinstance']     = 'Add a new my sessions block';
-$string['mysessions:myaddinstance']   = 'Add my sessions block to Dashboard';
-$string['pluginname']                 = 'Mes sessions';
-$string['enroltosession']             = 'S\'inscrire à une session';
+$string['mysessions:addinstance'] = 'Add a new my sessions block';
+$string['mysessions:myaddinstance'] = 'Add my sessions block to Dashboard';
+$string['pluginname'] = 'Mes sessions';
+$string['enroltosession'] = 'S\'inscrire à une session';
 $string['no_sessions_enroltosession'] = 'Offre de formation Mentor';
-$string['privacy:metadata']           = 'My sessions block only shows data stored in other locations.';
+$string['privacy:metadata'] = 'My sessions block only shows data stored in other locations.';
 $string['no_sessions']
-                                      = 'Retrouvez ici les sessions de formation dans lesquelles vous êtes déjà inscrit.e. Pour vous inscrire à une session de formation, Recherchez dans l\'offre en cliquant sur le bouton ci-dessous';
+    = 'Retrouvez ici les sessions de formation dans lesquelles vous êtes déjà inscrit.e. Pour vous inscrire à une session de formation, Recherchez dans l\'offre en cliquant sur le bouton ci-dessous';
 
-$string['trainer']              = 'Formateur';
-$string['tutor']                = 'Tuteur';
-$string['comingsoon']           = 'À venir {$a}';
-$string['inprogress']           = 'En cours';
-$string['completed']            = 'Achevée';
-$string['on']                   = 'le {$a}';
-$string['next']                 = 'Suivant';
-$string['previous']             = 'Précédent';
-$string['thumbnail']            = 'Vignette';
-$string['progression']          = '{$a}%';
-$string['session']              = 'Session';
-$string['moreinfo']             = 'Plus d\'info sur {$a}';
-$string['moreinfotile']         = 'En savoir plus';
+$string['trainer'] = 'Formateur';
+$string['tutor'] = 'Tuteur';
+$string['comingsoon'] = 'À venir {$a}';
+$string['inprogress'] = 'En cours';
+$string['completed'] = 'Achevée';
+$string['on'] = 'le {$a}';
+$string['next'] = 'Suivant';
+$string['previous'] = 'Précédent';
+$string['thumbnail'] = 'Vignette';
+$string['progression'] = '{$a}%';
+$string['session'] = 'Session';
+$string['moreinfo'] = 'Plus d\'info sur {$a}';
+$string['moreinfotile'] = 'En savoir plus';
 $string['showcompletedsession'] = 'Afficher les sessions terminées';

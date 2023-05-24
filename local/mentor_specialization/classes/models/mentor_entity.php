@@ -44,6 +44,17 @@ class mentor_entity extends \local_mentor_core\entity {
     public $ishidden;
 
     /**
+     * @var bool
+     */
+    public $canbemainentity;
+
+    public const CAN_BE_MAIN_ENTITY_DATA_OPTIONS
+        = [
+            '0' => false,
+            '1' => true
+        ];
+
+    /**
      * mentor_entity constructor.
      *
      * @param entity|int $entityorid
@@ -54,7 +65,9 @@ class mentor_entity extends \local_mentor_core\entity {
         parent::__construct($entityorid);
 
         $this->dbinterfacementor = database_interface::get_instance();
-        $this->regions           = explode(',', $this->get_regions_id());
+        $regionsid = $this->get_regions_id();
+        $this->regions = !empty($regionsid) ? explode(',', $regionsid) : [];
+        $this->canbemainentity = $this->can_be_main_entity();
 
         $this->ishidden = $this->is_hidden();
     }
@@ -86,7 +99,7 @@ class mentor_entity extends \local_mentor_core\entity {
             return $option->value;
         }
 
-        return 0;
+        return '';
     }
 
     /**
@@ -110,6 +123,33 @@ class mentor_entity extends \local_mentor_core\entity {
     }
 
     /**
+     * Can be a main entity
+     *
+     * @return bool
+     * @throws \dml_exception
+     */
+    public function can_be_main_entity($refresh = false) {
+        if (empty($this->canbemainentity) || $refresh) {
+            if ($this->is_main_entity()) {
+                // Get data to DB.
+                $option = $this->dbinterfacementor->get_category_option($this->id, 'canbemainentity');
+
+                if ($option && isset($option->value)) {
+                    $this->canbemainentity = $option->value === '1';
+                } else {
+                    // Main entity : default is yes.
+                    $this->canbemainentity = true;
+                }
+            } else {
+                // No main entity : default is no.
+                $this->canbemainentity = false;
+            }
+        }
+
+        return $this->canbemainentity;
+    }
+
+    /**
      * Override the entity update process
      *
      * @param \stdClass $data
@@ -121,6 +161,12 @@ class mentor_entity extends \local_mentor_core\entity {
      */
     public function update($data, $mform = null) {
 
+        // Update hidden field.
+        if (is_siteadmin() && isset($data->hidden)) {
+            $this->update_visibility($data->hidden);
+        }
+
+        // Info : Update entities list profile selection.
         parent::update($data, $mform);
 
         if ($this->is_main_entity()) {
@@ -129,15 +175,20 @@ class mentor_entity extends \local_mentor_core\entity {
                 $this->update_regions($data->regions);
             }
 
-            // Update entity sirh list.
-            if (is_siteadmin() && isset($data->sirhlist)) {
-                $this->update_sirh_list($data->sirhlist);
-            }
-        }
+            if (is_siteadmin()) {
+                // Update entity sirh list.
+                if (isset($data->sirhlist)) {
+                    $this->update_sirh_list($data->sirhlist);
+                }
 
-        // Update hidden field.
-        if (is_siteadmin() && isset($data->hidden)) {
-            $this->update_visibility($data->hidden);
+                // Update can be main entity data option.
+                if (isset($data->canbemainentity)) {
+                    $this->update_can_be_main_entity($data->canbemainentity);
+                }
+            }
+
+            // Update list of available entities within the user profile.
+            local_mentor_core_update_entities_list();
         }
 
         return true;
@@ -200,11 +251,13 @@ class mentor_entity extends \local_mentor_core\entity {
 
         // Get users by entity.
         $entityusers = \local_mentor_core\profile_api::get_users_by_mainentity($this->name);
+        $secondaryentityusers = \local_mentor_core\profile_api::get_users_by_secondaryentity($this->name);
 
-        $newusers = array_merge($newusers, $entityusers);
+        $newusers = $newusers + $entityusers;
+        $newusers = $newusers + $secondaryentityusers;
 
         // Determine members to add and to remove.
-        $userstoadd    = array_diff_key($newusers, $oldusers);
+        $userstoadd = array_diff_key($newusers, $oldusers);
         $userstoremove = array_diff_key($oldusers, $newusers);
 
         // Remove old members.
@@ -216,6 +269,50 @@ class mentor_entity extends \local_mentor_core\entity {
         foreach ($userstoadd as $usertoadd) {
             $this->add_member($usertoadd);
         }
+    }
+
+    /**
+     * Update the option to know if the entity can be main.
+     *
+     * @param string $canbemainentity
+     * @return bool
+     */
+    public function update_can_be_main_entity($canbemainentity) {
+        // Bad response value.
+        if (!isset(self::CAN_BE_MAIN_ENTITY_DATA_OPTIONS[$canbemainentity])) {
+            return false;
+        }
+
+        // Same value.
+        if (
+            self::CAN_BE_MAIN_ENTITY_DATA_OPTIONS[$canbemainentity] ===
+            $this->canbemainentity
+        ) {
+            return false;
+        }
+
+        // Update data.
+        $this->dbinterface->update_can_be_main_entity($this->id, $canbemainentity);
+        $this->canbemainentity = self::CAN_BE_MAIN_ENTITY_DATA_OPTIONS[$canbemainentity];
+
+        // True to false.
+        if (!$this->canbemainentity) {
+            // Get the users linked with the main entity and the regions.
+            $regions = $this->dbinterfacementor->get_users_by_regions($this->regions);
+            $mail = \local_mentor_core\profile_api::get_users_by_mainentity($this->name);
+
+            // Remove the entity as the main entity from all users.
+            $this->dbinterface->remove_main_entity_to_all_user($this->id);
+
+            // Removes users from the cohort that are no longer linked to the entity.
+            $usersremovecohort = array_diff_key($mail, $regions);
+            $usersidremovecohort = array_map(function($user) {
+                return $user->id;
+            }, $usersremovecohort);
+            local_mentor_specialization_cohort_remove_members($this->get_cohort()->id, $usersidremovecohort);
+        }
+
+        return true;
     }
 
     /**
@@ -231,11 +328,12 @@ class mentor_entity extends \local_mentor_core\entity {
         // Add specific fields for main entity only.
         if ($this->is_main_entity()) {
             // Add the region id to the form data.
-            $entityobj->regions  = $this->regions;
+            $entityobj->regions = $this->regions;
             $entityobj->sirhlist = $this->get_sirh_list();
         }
 
         $entityobj->hidden = $this->is_hidden();
+        $entityobj->canbemainentity = $this->canbemainentity;
 
         return $entityobj;
     }

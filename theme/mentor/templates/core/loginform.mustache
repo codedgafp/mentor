@@ -96,7 +96,7 @@
 }}
 <div id="login-content">
     <div class="login-left col-md-12">
-        <h1>{{#str}}logintitle, theme_mentor{{/str}} <img src="{{ mentorpictureurl }}" alt="Mentor" /></h1>
+        <h1>{{#str}}logintitle, theme_mentor{{/str}} <img src="{{ mentorpictureurl }}" alt="Mentor"/></h1>
         <div id="message-information">
             <p>{{#str}}loginfirstmessage, theme_mentor{{/str}}</p>
             <p>{{#str}}loginsecondmessage, theme_mentor{{/str}}</p>
@@ -186,9 +186,9 @@
                     </div>
                     {{#agentconnectenabled}}
                         <p class="or">{{#str}} or, theme_mentor {{/str}}</p>
-                        <a id="agent-connect" href="#" class="btn">
+                        <a id="agent-connect" href="{{ agentconnecturl }}" class="btn">
                             {{# pix }} logo-agent-connect, theme_mentor, Agent connect{{/ pix }}
-                            <p>S’identifier avec <span>AgentConnect</span></p>
+                            <p>{{#str}} agentconnectbuttontext, theme_mentor {{/str}}</p>
                         </a>
                     {{/agentconnectenabled}}
                     <p class="or">{{#str}} or, theme_mentor {{/str}}</p>

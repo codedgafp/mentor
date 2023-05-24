@@ -44,9 +44,9 @@ class enrol_sirh_testcase extends advanced_testcase {
         ];
 
         // SIRH API.
-        $CFG->sirh_api_url   = "www.sirh.fr";
+        $CFG->sirh_api_url = "www.sirh.fr";
         $CFG->sirh_api_token = "FALSEKEY";
-        $CFG->defaultauth    = 'manual';
+        $CFG->defaultauth = 'manual';
     }
 
     /**
@@ -57,8 +57,8 @@ class enrol_sirh_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core specialization singleton.
         $specialization = \local_mentor_core\specialization::get_instance();
-        $reflection     = new ReflectionClass($specialization);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($specialization);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -67,8 +67,8 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         // Reset the mentor core db interface singleton.
         $dbinterface = \format_edadmin\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -85,25 +85,25 @@ class enrol_sirh_testcase extends advanced_testcase {
         global $DB;
 
         // Create user.
-        $user             = new stdClass();
-        $user->lastname   = 'lastname';
-        $user->firstname  = 'firstname';
-        $user->email      = 'test@test.com';
-        $user->username   = 'testusername';
-        $user->password   = 'to be generated';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
-        $user->auth       = 'manual';
+        $user->confirmed = 1;
+        $user->auth = 'manual';
 
         $userid = local_mentor_core\profile_api::create_user($user);
         set_user_preference('auth_forcepasswordchange', 0, $user);
 
         $field = $DB->get_record('user_info_field', ['shortname' => 'mainentity']);
 
-        $userdata          = new stdClass();
+        $userdata = new stdClass();
         $userdata->fieldid = $field->id;
-        $userdata->data    = 'New Entity 1';
-        $userdata->userid  = $userid;
+        $userdata->data = 'New Entity 1';
+        $userdata->userid = $userid;
 
         $DB->insert_record('user_info_data', $userdata);
 
@@ -124,64 +124,64 @@ class enrol_sirh_testcase extends advanced_testcase {
             'local_mentor_specialization');
 
         if ($training) {
-            $data->name      = 'fullname';
+            $data->name = 'fullname';
             $data->shortname = 'shortname';
-            $data->content   = 'summary';
-            $data->status    = 'ec';
+            $data->content = 'summary';
+            $data->status = 'ec';
         } else {
-            $data->trainingname      = 'fullname';
+            $data->trainingname = 'fullname';
             $data->trainingshortname = 'shortname';
-            $data->trainingcontent   = 'summary';
-            $data->trainingstatus    = 'ec';
+            $data->trainingcontent = 'summary';
+            $data->trainingstatus = 'ec';
         }
 
         // Fields for taining.
-        $data->teaser                       = 'http://www.edunao.com/';
-        $data->teaserpicture                = '';
-        $data->prerequisite                 = 'TEST';
-        $data->collection                   = 'accompagnement';
-        $data->traininggoal                 = 'TEST TRAINING ';
-        $data->idsirh                       = 'TEST ID SIRH';
-        $data->licenseterms                 = 'cc-sa';
-        $data->typicaljob                   = 'TEST';
-        $data->skills                       = [];
-        $data->certifying                   = '1';
-        $data->presenceestimatedtimehours   = '12';
+        $data->teaser = 'http://www.edunao.com/';
+        $data->teaserpicture = '';
+        $data->prerequisite = 'TEST';
+        $data->collection = 'accompagnement';
+        $data->traininggoal = 'TEST TRAINING ';
+        $data->idsirh = 'TEST ID SIRH';
+        $data->licenseterms = 'cc-sa';
+        $data->typicaljob = 'TEST';
+        $data->skills = [];
+        $data->certifying = '1';
+        $data->presenceestimatedtimehours = '12';
         $data->presenceestimatedtimeminutes = '10';
-        $data->remoteestimatedtimehours     = '15';
-        $data->remoteestimatedtimeminutes   = '30';
-        $data->trainingmodalities           = 'd';
-        $data->producingorganization        = 'TEST';
-        $data->producerorganizationlogo     = '';
-        $data->designers                    = 'TEST';
-        $data->contactproducerorganization  = 'TEST';
-        $data->thumbnail                    = '';
+        $data->remoteestimatedtimehours = '15';
+        $data->remoteestimatedtimeminutes = '30';
+        $data->trainingmodalities = 'd';
+        $data->producingorganization = 'TEST';
+        $data->producerorganizationlogo = '';
+        $data->designers = 'TEST';
+        $data->contactproducerorganization = 'TEST';
+        $data->thumbnail = '';
 
         // Specific fields for session (only for update).
         if ($sessionid) {
-            $data->id                      = $sessionid;
-            $data->opento                  = 'all';
-            $data->publiccible             = 'TEST';
-            $data->termsregistration       = 'autre';
+            $data->id = $sessionid;
+            $data->opento = 'all';
+            $data->publiccible = 'TEST';
+            $data->termsregistration = 'autre';
             $data->termsregistrationdetail = 'TEST';
 
-            $data->onlinesessionestimatedtimehours     = '10';
-            $data->onlinesessionestimatedtimeminutes   = '15';
-            $data->presencesessionestimatedtimehours   = '12';
+            $data->onlinesessionestimatedtimehours = '10';
+            $data->onlinesessionestimatedtimeminutes = '15';
+            $data->presencesessionestimatedtimehours = '12';
             $data->presencesessionestimatedtimeminutes = '25';
 
-            $data->sessionpermanent    = 0;
-            $data->sessionstartdate    = 1609801200;
-            $data->sessionenddate      = 1609801200;
-            $data->sessionmodalities   = 'presentiel';
-            $data->accompaniment       = 'TEST';
-            $data->maxparticipants     = 10;
-            $data->placesavailable     = 8;
-            $data->numberparticipants  = 2;
-            $data->location            = 'PARIS';
+            $data->sessionpermanent = 0;
+            $data->sessionstartdate = 1609801200;
+            $data->sessionenddate = 1609801200;
+            $data->sessionmodalities = 'presentiel';
+            $data->accompaniment = 'TEST';
+            $data->maxparticipants = 10;
+            $data->placesavailable = 8;
+            $data->numberparticipants = 2;
+            $data->location = 'PARIS';
             $data->organizingstructure = 'TEST ORGANISATION';
-            $data->sessionnumber       = 1;
-            $data->opentolist          = '';
+            $data->sessionnumber = 1;
+            $data->opentolist = '';
         }
 
         return $data;
@@ -205,9 +205,9 @@ class enrol_sirh_testcase extends advanced_testcase {
         try {
             // Get entity object for default category.
             $entityid = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1',
-                'sirhlist'  => 'RENOIRH_AES'
+                'sirhlist' => 'RENOIRH_AES'
             ]);
 
             $entity = \local_mentor_core\entity_api::get_entity($entityid);
@@ -248,7 +248,7 @@ class enrol_sirh_testcase extends advanced_testcase {
         }
 
         // Open to current entity.
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -260,10 +260,10 @@ class enrol_sirh_testcase extends advanced_testcase {
      */
     public function init_training_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -274,10 +274,10 @@ class enrol_sirh_testcase extends advanced_testcase {
      */
     public function init_session_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -300,10 +300,10 @@ class enrol_sirh_testcase extends advanced_testcase {
         $sessionid = $this->init_session_creation();
 
         // Set filter.
-        $filter                                = [];
+        $filter = [];
         $filter['listeIdentifiantSirhOrigine'] = "RENOIRH_AES";
-        $filter['nombreElementPage']           = 50;
-        $filter['numeroPage']                  = 1;
+        $filter['nombreElementPage'] = 50;
+        $filter['numeroPage'] = 1;
 
         // Call get_sirh_sessions function.
         $sirhsessions = sirh_api_test_mocked_enrol_sirh::get_sirh_sessions($sessionid, $filter);
@@ -350,31 +350,31 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
-        $courseid  = $session->get_course()->id;
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $courseid = $session->get_course()->id;
 
         // Create new self enrol instance.
-        $plugin                    = enrol_get_plugin('sirh');
-        $instance                  = (object) $plugin->get_instance_defaults();
-        $instance->status          = 0;
-        $instance->id              = '';
-        $instance->courseid        = $courseid;
+        $plugin = enrol_get_plugin('sirh');
+        $instance = (object) $plugin->get_instance_defaults();
+        $instance->status = 0;
+        $instance->id = '';
+        $instance->courseid = $courseid;
         $instance->expirythreshold = 0;
-        $instance->enrolstartdate  = 0;
-        $instance->enrolenddate    = 0;
-        $instance->timecreated     = time();
-        $instance->timemodified    = time();
-        $instance->customchar1     = 'RENOIRH_AES';
-        $instance->customchar2     = 'RENOIRH_AES_TRAINING';
-        $instance->customchar3     = 'RENOIRH_AES_SESSION';
-        $fields                    = (array) $instance;
+        $instance->enrolstartdate = 0;
+        $instance->enrolenddate = 0;
+        $instance->timecreated = time();
+        $instance->timemodified = time();
+        $instance->customchar1 = 'RENOIRH_AES';
+        $instance->customchar2 = 'RENOIRH_AES_TRAINING';
+        $instance->customchar3 = 'RENOIRH_AES_SESSION';
+        $fields = (array) $instance;
         $plugin->add_instance(get_course($courseid), $fields);
 
         // Set filter.
-        $filter                                = [];
+        $filter = [];
         $filter['listeIdentifiantSirhOrigine'] = "RENOIRH_AES";
-        $filter['nombreElementPage']           = 50;
-        $filter['numeroPage']                  = 1;
+        $filter['nombreElementPage'] = 50;
+        $filter['numeroPage'] = 1;
 
         // Call get_sirh_sessions function.
         $sirhsessions = sirh_api_test_mocked_enrol_sirh::get_sirh_sessions($sessionid, $filter);
@@ -421,31 +421,31 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
-        $courseid  = $session->get_course()->id;
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $courseid = $session->get_course()->id;
 
         // Create new self enrol instance.
-        $plugin                    = enrol_get_plugin('sirh');
-        $instance                  = (object) $plugin->get_instance_defaults();
-        $instance->status          = 0;
-        $instance->id              = '';
-        $instance->courseid        = $courseid;
+        $plugin = enrol_get_plugin('sirh');
+        $instance = (object) $plugin->get_instance_defaults();
+        $instance->status = 0;
+        $instance->id = '';
+        $instance->courseid = $courseid;
         $instance->expirythreshold = 0;
-        $instance->enrolstartdate  = 0;
-        $instance->enrolenddate    = 0;
-        $instance->timecreated     = time();
-        $instance->timemodified    = time();
-        $instance->customchar1     = 'RENOIRH_AES';
-        $instance->customchar2     = 'RENOIRH_AES_TRAINING';
-        $instance->customchar3     = 'RENOIRH_AES_SESSION';
-        $fields                    = (array) $instance;
+        $instance->enrolstartdate = 0;
+        $instance->enrolenddate = 0;
+        $instance->timecreated = time();
+        $instance->timemodified = time();
+        $instance->customchar1 = 'RENOIRH_AES';
+        $instance->customchar2 = 'RENOIRH_AES_TRAINING';
+        $instance->customchar3 = 'RENOIRH_AES_SESSION';
+        $fields = (array) $instance;
         $plugin->add_instance(get_course($courseid), $fields);
 
         // Set filter.
-        $filter                                = [];
+        $filter = [];
         $filter['listeIdentifiantSirhOrigine'] = "RENOIRH_AES,RENOIRH_AES_2";
-        $filter['nombreElementPage']           = 50;
-        $filter['numeroPage']                  = 1;
+        $filter['nombreElementPage'] = 50;
+        $filter['numeroPage'] = 1;
 
         // Call get_sirh_sessions function.
         $sirhsessions = multiple_sirh_api_test_mocked_enrol_sirh::get_sirh_sessions($sessionid, $filter);
@@ -510,33 +510,33 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
-        $courseid  = $session->get_course()->id;
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $courseid = $session->get_course()->id;
 
         // Create new self enrol instance.
-        $plugin                    = enrol_get_plugin('sirh');
-        $instance                  = (object) $plugin->get_instance_defaults();
-        $instance->status          = 0;
-        $instance->id              = '';
-        $instance->courseid        = $courseid;
+        $plugin = enrol_get_plugin('sirh');
+        $instance = (object) $plugin->get_instance_defaults();
+        $instance->status = 0;
+        $instance->id = '';
+        $instance->courseid = $courseid;
         $instance->expirythreshold = 0;
-        $instance->enrolstartdate  = 0;
-        $instance->enrolenddate    = 0;
-        $instance->timecreated     = time();
-        $instance->timemodified    = time();
-        $instance->customchar1     = 'RENOIRH_AES';
-        $instance->customchar2     = 'RENOIRH_AES_TRAINING';
-        $instance->customchar3     = 'RENOIRH_AES_SESSION';
-        $fields                    = (array) $instance;
+        $instance->enrolstartdate = 0;
+        $instance->enrolenddate = 0;
+        $instance->timecreated = time();
+        $instance->timemodified = time();
+        $instance->customchar1 = 'RENOIRH_AES';
+        $instance->customchar2 = 'RENOIRH_AES_TRAINING';
+        $instance->customchar3 = 'RENOIRH_AES_SESSION';
+        $fields = (array) $instance;
         $plugin->add_instance(get_course($courseid), $fields);
 
         // Set filter.
-        $filter                                = [];
+        $filter = [];
         $filter['listeIdentifiantSirhOrigine'] = "RENOIRH_AES,RENOIRH_AES_2";
-        $filter['nombreElementPage']           = 50;
-        $filter['numeroPage']                  = 1;
-        $filter['filterbyactions']             = 1;
-        $filter['filterbyactionsdir']          = 'ASC';
+        $filter['nombreElementPage'] = 50;
+        $filter['numeroPage'] = 1;
+        $filter['filterbyactions'] = 1;
+        $filter['filterbyactionsdir'] = 'ASC';
 
         // Call get_sirh_sessions function.
         $sirhsessions = multiple_sirh_api_test_mocked_enrol_sirh::get_sirh_sessions($sessionid, $filter);
@@ -577,10 +577,10 @@ class enrol_sirh_testcase extends advanced_testcase {
         $sessionid = $this->init_session_creation();
 
         // Set filter.
-        $filter                                = [];
+        $filter = [];
         $filter['listeIdentifiantSirhOrigine'] = ["RENOIRH_AES"];
-        $filter['nombreElementPage']           = 50;
-        $filter['numeroPage']                  = 1;
+        $filter['nombreElementPage'] = 50;
+        $filter['numeroPage'] = 1;
 
         // Does not have capacity.
         self::setGuestUser();
@@ -645,10 +645,10 @@ class enrol_sirh_testcase extends advanced_testcase {
         $sessionid = $this->init_session_creation();
 
         // Set filter with a bad SIRH.
-        $filter                                = [];
+        $filter = [];
         $filter['listeIdentifiantSirhOrigine'] = "RENOIRH_FALSE";
-        $filter['nombreElementPage']           = 50;
-        $filter['numeroPage']                  = 1;
+        $filter['nombreElementPage'] = 50;
+        $filter['numeroPage'] = 1;
 
         try {
             // Call get_sirh_sessions function.
@@ -773,12 +773,14 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
 
         // Set call function attribute.
-        $sirh         = "RENOIRH_AES";
+        $sirh = "RENOIRH_AES";
         $sirhtraining = "SIRHTRAINING1";
-        $sirhsession  = "SIRHSESSION1";
+        $sirhsession = "SIRHSESSION1";
 
         // Call enrol_users_sirh function.
         self::assertTrue(sirh_api_test_mocked_enrol_sirh::enrol_users_sirh($sessionid, $sirh, $sirhtraining, $sirhsession));
@@ -791,9 +793,9 @@ class enrol_sirh_testcase extends advanced_testcase {
                 AND e.customchar2 = :sirhtraining
                 AND e.customchar3 = :sirhsession
         ', array(
-            'sirh'         => $sirh,
+            'sirh' => $sirh,
             'sirhtraining' => $sirhtraining,
-            'sirhsession'  => $sirhsession,
+            'sirhsession' => $sirhsession,
         ));
 
         self::assertEquals($enrolinstance->courseid, $session->get_course()->id);
@@ -840,12 +842,14 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
 
         // Set call function attribute.
-        $sirh         = "RENOIRH_AES";
+        $sirh = "RENOIRH_AES";
         $sirhtraining = "SIRHTRAINING1";
-        $sirhsession  = "SIRHSESSION1";
+        $sirhsession = "SIRHSESSION1";
 
         // Call enrol_users_sirh function.
         self::assertTrue(multiple_sirh_api_test_mocked_enrol_sirh::enrol_users_sirh($sessionid, $sirh, $sirhtraining,
@@ -859,9 +863,9 @@ class enrol_sirh_testcase extends advanced_testcase {
                 AND e.customchar2 = :sirhtraining
                 AND e.customchar3 = :sirhsession
         ', array(
-            'sirh'         => $sirh,
+            'sirh' => $sirh,
             'sirhtraining' => $sirhtraining,
-            'sirhsession'  => $sirhsession,
+            'sirhsession' => $sirhsession,
         ));
 
         self::assertEquals($enrolinstance->courseid, $session->get_course()->id);
@@ -897,7 +901,7 @@ class enrol_sirh_testcase extends advanced_testcase {
         $user = $DB->get_record('user', ['username' => "user1@sirh.fr"]);
         $DB->delete_records('user_enrolments', [
             'enrolid' => $enrolinstance->id,
-            'userid'  => $user->id
+            'userid' => $user->id
         ]);
 
         $enrolusers = $DB->get_records_sql('
@@ -942,9 +946,9 @@ class enrol_sirh_testcase extends advanced_testcase {
         $sessionid = $this->init_session_creation();
 
         // Set call function attribute.
-        $sirh         = "RENOIRH_AES";
+        $sirh = "RENOIRH_AES";
         $sirhtraining = "SIRHTRAINING1";
-        $sirhsession  = "SIRHSESSION1";
+        $sirhsession = "SIRHSESSION1";
 
         // Does not have capacity.
         self::setGuestUser();
@@ -978,12 +982,14 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
 
         // Set call function attribute.
-        $sirh         = "RENOIRH_AES";
+        $sirh = "RENOIRH_AES";
         $sirhtraining = "SIRHTRAINING1";
-        $sirhsession  = "SIRHSESSION1";
+        $sirhsession = "SIRHSESSION1";
 
         \enrol_sirh\sirh_api::enrol_users_sirh($sessionid, $sirh, $sirhtraining, $sirhsession);
 
@@ -1018,12 +1024,12 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         // Set call function attribute.
-        $sirh         = "RENOIRH_AES";
+        $sirh = "RENOIRH_AES";
         $sirhtraining = "SIRHTRAINING1";
-        $sirhsession  = "SIRHSESSION1";
+        $sirhsession = "SIRHSESSION1";
 
         // Call create_enrol_sirh_instance function.
         $enrolinstanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance($session->get_course()->id, $sirh, $sirhtraining,
@@ -1061,25 +1067,27 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
 
         // Set call function attribute.
-        $sirh         = "RENOIRH_AES";
+        $sirh = "RENOIRH_AES";
         $sirhtraining = "SIRHTRAINING1";
-        $sirhsession  = "SIRHSESSION1";
+        $sirhsession = "SIRHSESSION1";
 
         // Call create_enrol_sirh_instance function.
         $enrolinstanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance($session->get_course()->id, $sirh, $sirhtraining,
             $sirhsession);
 
         $user = [
-            'email'      => 'user1@sirh.fr',
-            'firstname'  => 'user1firstname',
-            'lastname'   => 'user1lastname',
-            'password'   => 'to be generated',
+            'email' => 'user1@sirh.fr',
+            'firstname' => 'user1firstname',
+            'lastname' => 'user1lastname',
+            'password' => 'to be generated',
             'mnethostid' => 1,
-            'confirmed'  => 1,
-            'auth'       => 'manual'
+            'confirmed' => 1,
+            'auth' => 'manual'
         ];
 
         // Call create_and_enrol_user function.
@@ -1109,27 +1117,29 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
 
         // Set call function attribute.
-        $sirh         = "RENOIRH_AES";
+        $sirh = "RENOIRH_AES";
         $sirhtraining = "SIRHTRAINING1";
-        $sirhsession  = "SIRHSESSION1";
+        $sirhsession = "SIRHSESSION1";
 
         // Call create_enrol_sirh_instance funciton.
         $enrolinstanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance($session->get_course()->id, $sirh, $sirhtraining,
             $sirhsession);
 
         // Set new user.
-        $user             = new \stdClass();
-        $user->email      = 'user1@sirh.fr';
-        $user->username   = 'user1@sirh.fr';
-        $user->firstname  = 'user1firstname';
-        $user->lastname   = 'user1lastname';
-        $user->password   = 'to be generated';
+        $user = new \stdClass();
+        $user->email = 'user1@sirh.fr';
+        $user->username = 'user1@sirh.fr';
+        $user->firstname = 'user1firstname';
+        $user->lastname = 'user1lastname';
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
-        $user->auth       = 'manual';
+        $user->confirmed = 1;
+        $user->auth = 'manual';
 
         // Call create_and_enrol_user function.
         \enrol_sirh\sirh_api::create_and_enrol_user($session->get_course()->id, $enrolinstanceid, $user);
@@ -1158,27 +1168,29 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
 
         // Set call function attribute.
-        $sirh         = "RENOIRH_AES";
+        $sirh = "RENOIRH_AES";
         $sirhtraining = "SIRHTRAINING1";
-        $sirhsession  = "SIRHSESSION1";
+        $sirhsession = "SIRHSESSION1";
 
         // Call create_enrol_sirh_instance function.
         $enrolinstanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance($session->get_course()->id, $sirh, $sirhtraining,
             $sirhsession);
 
         // Set new user.
-        $user             = new \stdClass();
-        $user->email      = 'user1@sirh.fr';
-        $user->username   = 'user1@sirh.fr';
-        $user->firstname  = 'user1firstname';
-        $user->lastname   = 'user1lastname';
-        $user->password   = 'to be generated';
+        $user = new \stdClass();
+        $user->email = 'user1@sirh.fr';
+        $user->username = 'user1@sirh.fr';
+        $user->firstname = 'user1firstname';
+        $user->lastname = 'user1lastname';
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
-        $user->auth       = 'manual';
+        $user->confirmed = 1;
+        $user->auth = 'manual';
 
         // Create new user.
         $userid = \local_mentor_core\profile_api::create_user($user);
@@ -1210,12 +1222,12 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         // Set call function attribute.
-        $sirh         = "RENOIRH_AES";
+        $sirh = "RENOIRH_AES";
         $sirhtraining = "SIRHTRAINING1";
-        $sirhsession  = "SIRHSESSION1";
+        $sirhsession = "SIRHSESSION1";
 
         // Call create_enrol_sirh_instance function.
         $enrolinstanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance($session->get_course()->id, $sirh, $sirhtraining,
@@ -1274,7 +1286,7 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         try {
             // Call check_enrol_sirh_capability function.
@@ -1316,7 +1328,7 @@ class enrol_sirh_testcase extends advanced_testcase {
         $sessionid = $this->init_session_creation();
 
         // Set filter.
-        $filter                                = [];
+        $filter = [];
         $filter['listeIdentifiantSirhOrigine'] = ["RENOIRH_AES"];
 
         // Does not have capacity.
@@ -1382,7 +1394,7 @@ class enrol_sirh_testcase extends advanced_testcase {
         $sessionid = $this->init_session_creation();
 
         // Set filter with a bad SIRH.
-        $filter                                = [];
+        $filter = [];
         $filter['listeIdentifiantSirhOrigine'] = "RENOIRH_FALSE";
 
         try {
@@ -1413,7 +1425,7 @@ class enrol_sirh_testcase extends advanced_testcase {
         $sessionid = $this->init_session_creation();
 
         // Set filter.
-        $filter                                = [];
+        $filter = [];
         $filter['listeIdentifiantSirhOrigine'] = "RENOIRH_AES";
 
         // Call count_sirh_sessions function.
@@ -1455,10 +1467,10 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $course       = $this->getDataGenerator()->create_course();
-        $sirh         = 'SIRH';
+        $course = $this->getDataGenerator()->create_course();
+        $sirh = 'SIRH';
         $sirhtraining = 'SIRH training';
-        $sirhsession  = 'SIRH session';
+        $sirhsession = 'SIRH session';
 
         $instanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
             $course->id,
@@ -1495,12 +1507,12 @@ class enrol_sirh_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
-        $course    = $session->get_course();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $course = $session->get_course();
 
-        $sirh         = 'SIRH';
+        $sirh = 'SIRH';
         $sirhtraining = 'SIRH training';
-        $sirhsession  = 'SIRH session';
+        $sirhsession = 'SIRH session';
 
         $instanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
             $course->id,
@@ -1553,9 +1565,9 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         $course = $this->getDataGenerator()->create_course();
 
-        $sirh         = 'SIRH';
+        $sirh = 'SIRH';
         $sirhtraining = 'SIRH training';
-        $sirhsession  = 'SIRH session';
+        $sirhsession = 'SIRH session';
 
         $instanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
             $course->id,
@@ -1599,9 +1611,9 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         $course = $this->getDataGenerator()->create_course();
 
-        $sirh         = 'SIRH';
+        $sirh = 'SIRH';
         $sirhtraining = 'SIRH training';
-        $sirhsession  = 'SIRH session';
+        $sirhsession = 'SIRH session';
 
         $instanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
             $course->id,
@@ -1613,7 +1625,7 @@ class enrol_sirh_testcase extends advanced_testcase {
         $instance = \enrol_sirh\sirh_api::get_instance($instanceid);
 
         $sirhgroupid = \enrol_sirh\sirh_api::create_group_sirh($instance);
-        $sirhgroup   = groups_get_group($sirhgroupid);
+        $sirhgroup = groups_get_group($sirhgroupid);
 
         self::assertIsObject($sirhgroup);
         self::assertEquals(
@@ -1641,9 +1653,9 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         $course = $this->getDataGenerator()->create_course();
 
-        $sirh         = 'SIRH';
+        $sirh = 'SIRH';
         $sirhtraining = 'SIRH training';
-        $sirhsession  = 'SIRH session';
+        $sirhsession = 'SIRH session';
 
         $instanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
             $course->id,
@@ -1683,9 +1695,9 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         $course = $this->getDataGenerator()->create_course();
 
-        $sirh         = 'SIRH';
+        $sirh = 'SIRH';
         $sirhtraining = 'SIRH training';
-        $sirhsession  = 'SIRH session';
+        $sirhsession = 'SIRH session';
 
         $instanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
             $course->id,
@@ -1741,9 +1753,9 @@ class enrol_sirh_testcase extends advanced_testcase {
             array('courseid' => $course->id, 'name' => 'SIRH group 2')
         );
 
-        $sirh         = 'SIRH';
+        $sirh = 'SIRH';
         $sirhtraining = 'SIRH training';
-        $sirhsession  = 'SIRH session';
+        $sirhsession = 'SIRH session';
 
         $instanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
             $course->id,
@@ -1761,21 +1773,21 @@ class enrol_sirh_testcase extends advanced_testcase {
         self::assertEmpty(groups_get_members($group2->id));
 
         // Set user data.
-        $user1             = new \stdClass();
-        $user1->firstname  = 'firstname1';
-        $user1->lastname   = 'lastname1';
-        $user1->username   = 'username1@mail.fr';
-        $user1->email      = 'username1@mail.fr';
+        $user1 = new \stdClass();
+        $user1->firstname = 'firstname1';
+        $user1->lastname = 'lastname1';
+        $user1->username = 'username1@mail.fr';
+        $user1->email = 'username1@mail.fr';
         $user1->mnethostid = 1;
-        $user1->confirmed  = 1;
+        $user1->confirmed = 1;
 
-        $user2             = new \stdClass();
-        $user2->firstname  = 'firstname2';
-        $user2->lastname   = 'lastname2';
-        $user2->username   = 'username2@mail.fr';
-        $user2->email      = 'username2@mail.fr';
+        $user2 = new \stdClass();
+        $user2->firstname = 'firstname2';
+        $user2->lastname = 'lastname2';
+        $user2->username = 'username2@mail.fr';
+        $user2->email = 'username2@mail.fr';
         $user2->mnethostid = 1;
-        $user2->confirmed  = 1;
+        $user2->confirmed = 1;
 
         // First part.
         $userdata = [$user1];
@@ -1942,9 +1954,9 @@ class enrol_sirh_testcase extends advanced_testcase {
 
         $course = $this->getDataGenerator()->create_course();
 
-        $sirh         = 'SIRH';
+        $sirh = 'SIRH';
         $sirhtraining = 'SIRH training';
-        $sirhsession  = 'SIRH session';
+        $sirhsession = 'SIRH session';
 
         $instanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
             $course->id,
@@ -2033,15 +2045,15 @@ class sirh_test_mocked_enrol_sirh extends \enrol_sirh\sirh {
         $sirhs = [];
 
         foreach ($sirhsdata as $sirhdata) {
-            $session                   = new \stdClass();
-            $session->sirh             = $sirhdata[0];
-            $session->sirhtraining     = $sirhdata[1];
+            $session = new \stdClass();
+            $session->sirh = $sirhdata[0];
+            $session->sirhtraining = $sirhdata[1];
             $session->sirhtrainingname = $sirhdata[2];
-            $session->sirhsession      = $sirhdata[3];
-            $session->sirhsessionname  = $sirhdata[4];
-            $session->startdate        = $sirhdata[5];
-            $session->enddate          = $sirhdata[6];
-            $sirhs[]                   = $session;
+            $session->sirhsession = $sirhdata[3];
+            $session->sirhsessionname = $sirhdata[4];
+            $session->startdate = $sirhdata[5];
+            $session->enddate = $sirhdata[6];
+            $sirhs[] = $session;
         }
 
         return $sirhs;
@@ -2056,14 +2068,14 @@ class sirh_test_mocked_enrol_sirh extends \enrol_sirh\sirh {
      * @return array
      */
     public function get_session_users($sirh, $sirhtraining, $sirhsession, $nbusers = null, $lastsync = null) {
-        $user             = new \stdClass();
-        $user->email      = "user1@sirh.fr";
-        $user->username   = "user1@sirh.fr";
-        $user->lastname   = "user1lastname";
-        $user->firstname  = "user1firstname";
-        $user->password   = 'to be generated';
-        $user->confirmed  = 1;
-        $user->auth       = "manual";
+        $user = new \stdClass();
+        $user->email = "user1@sirh.fr";
+        $user->username = "user1@sirh.fr";
+        $user->lastname = "user1lastname";
+        $user->firstname = "user1firstname";
+        $user->password = 'to be generated';
+        $user->confirmed = 1;
+        $user->auth = "manual";
         $user->mnethostid = 1;
 
         return ['users' => [$user]];
@@ -2141,15 +2153,15 @@ class multiple_sirh_test_mocked_enrol_sirh extends \enrol_sirh\sirh {
         $sirhs = [];
 
         foreach ($sirhsdata as $sirhdata) {
-            $session                   = new \stdClass();
-            $session->sirh             = $sirhdata[0];
-            $session->sirhtraining     = $sirhdata[1];
+            $session = new \stdClass();
+            $session->sirh = $sirhdata[0];
+            $session->sirhtraining = $sirhdata[1];
             $session->sirhtrainingname = $sirhdata[2];
-            $session->sirhsession      = $sirhdata[3];
-            $session->sirhsessionname  = $sirhdata[4];
-            $session->startdate        = $sirhdata[5];
-            $session->enddate          = $sirhdata[6];
-            $sirhs[]                   = $session;
+            $session->sirhsession = $sirhdata[3];
+            $session->sirhsessionname = $sirhdata[4];
+            $session->startdate = $sirhdata[5];
+            $session->enddate = $sirhdata[6];
+            $sirhs[] = $session;
         }
 
         return $sirhs;
@@ -2164,24 +2176,24 @@ class multiple_sirh_test_mocked_enrol_sirh extends \enrol_sirh\sirh {
      * @return array
      */
     public function get_session_users($sirh, $sirhtraining, $sirhsession, $nbusers = null, $lastsync = null) {
-        $user             = new \stdClass();
-        $user->email      = "user1@sirh.fr";
-        $user->username   = "user1@sirh.fr";
-        $user->lastname   = "user1lastname";
-        $user->firstname  = "user1firstname";
-        $user->password   = 'to be generated';
-        $user->confirmed  = 1;
-        $user->auth       = "manual";
+        $user = new \stdClass();
+        $user->email = "user1@sirh.fr";
+        $user->username = "user1@sirh.fr";
+        $user->lastname = "user1lastname";
+        $user->firstname = "user1firstname";
+        $user->password = 'to be generated';
+        $user->confirmed = 1;
+        $user->auth = "manual";
         $user->mnethostid = 1;
 
-        $user2             = new \stdClass();
-        $user2->email      = "user2@sirh.fr";
-        $user2->username   = "user2@sirh.fr";
-        $user2->lastname   = "user2lastname";
-        $user2->firstname  = "user2firstname";
-        $user2->password   = 'to be generated';
-        $user2->confirmed  = 1;
-        $user2->auth       = "manual";
+        $user2 = new \stdClass();
+        $user2->email = "user2@sirh.fr";
+        $user2->username = "user2@sirh.fr";
+        $user2->lastname = "user2lastname";
+        $user2->firstname = "user2firstname";
+        $user2->password = 'to be generated';
+        $user2->confirmed = 1;
+        $user2->auth = "manual";
         $user2->mnethostid = 1;
 
         return ['users' => [$user, $user2]];

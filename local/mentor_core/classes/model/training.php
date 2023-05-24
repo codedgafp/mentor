@@ -32,13 +32,14 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/local/mentor_core/classes/model/model.php');
 require_once($CFG->dirroot . '/local/mentor_core/api/library.php');
 require_once($CFG->dirroot . '/course/format/edadmin/lib.php');
+require_once($CFG->dirroot . '/backup/controller/backup_controller_edu.class.php');
 
 class training extends model {
 
-    public const STATUS_DRAFT                 = 'draft';
-    public const STATUS_TEMPLATE              = 'template';
+    public const STATUS_DRAFT = 'draft';
+    public const STATUS_TEMPLATE = 'template';
     public const STATUS_ELABORATION_COMPLETED = 'elaboration_completed';
-    public const STATUS_ARCHIVED              = 'archived';
+    public const STATUS_ARCHIVED = 'archived';
 
     public const FAVOURITE_DESIGNER = 'favourite_training';
 
@@ -115,18 +116,18 @@ class training extends model {
         $this->training = $this->dbinterface->get_training_by_id($trainingid);
 
         // Convert db result into object.
-        $this->id              = $this->training->id;
+        $this->id = $this->training->id;
         $this->courseshortname = $this->training->courseshortname;
-        $this->courseid        = $this->training->courseid;
-        $this->courseformat    = $this->training->courseformat;
-        $this->name            = $this->training->name;
-        $this->shortname       = $this->training->shortname;
-        $this->content         = $this->training->content;
-        $this->status          = $this->training->status;
-        $this->traininggoal    = $this->training->traininggoal;
-        $this->thumbnail       = $this->training->thumbnail;
-        $this->contextid       = $this->training->contextid;
-        $this->entityname      = $this->get_entity(false)->name;
+        $this->courseid = $this->training->courseid;
+        $this->courseformat = $this->training->courseformat;
+        $this->name = $this->training->name;
+        $this->shortname = $this->training->shortname;
+        $this->content = $this->training->content;
+        $this->status = $this->training->status;
+        $this->traininggoal = $this->training->traininggoal;
+        $this->thumbnail = $this->training->thumbnail;
+        $this->contextid = $this->training->contextid;
+        $this->entityname = $this->get_entity(false)->name;
     }
 
     /**
@@ -329,9 +330,25 @@ class training extends model {
         }
 
         // Create a new backup file.
-        $bc = new \backup_controller(\backup::TYPE_1COURSE, $this->courseid, \backup::FORMAT_MOODLE,
+        $bc = new \backup_controller_edu(
+            \backup::TYPE_1COURSE, $this->courseid, \backup::FORMAT_MOODLE,
             \backup::INTERACTIVE_NO,
-            \backup::MODE_GENERAL, $USER->id);
+            \backup::MODE_GENERAL,
+            $USER->id,
+            [
+                'settings' => [
+                    ['name' => 'activities', 'value' => true],
+                    ['name' => 'blocks', 'value' => true],
+                    ['name' => 'files', 'value' => true],
+                    ['name' => 'filters', 'value' => true],
+                    ['name' => 'badges', 'value' => true],
+                    ['name' => 'questionbank', 'value' => true],
+                    ['name' => 'groups', 'value' => true],
+                    ['name' => 'customfield', 'value' => true],
+                    ['name' => 'contentbankcontent', 'value' => true]
+                ]
+            ]
+        );
         $bc->execute_plan();
 
         $CFG->backuptempdir = $oldbackuptempdir;
@@ -368,14 +385,14 @@ class training extends model {
         require_once($CFG->dirroot . '/backup/util/ui/import_extensions.php');
 
         $restoretarget = \backup::TARGET_EXISTING_DELETING;
-        $fp            = get_file_packer('application/vnd.moodle.backup');
+        $fp = get_file_packer('application/vnd.moodle.backup');
 
         // Get path file.
         $dirname = basename($backupfile->get_filename(), '.mbz');
 
         $courseid = $this->courseid;
 
-        $oldbackuptempdir   = $CFG->backuptempdir;
+        $oldbackuptempdir = $CFG->backuptempdir;
         $CFG->backuptempdir = isset($CFG->mentorbackuproot) ? $CFG->mentorbackuproot : $CFG->dataroot . '/mentor_backup';
 
         if (!is_dir($CFG->backuptempdir)) {
@@ -396,7 +413,7 @@ class training extends model {
         }
 
         // Restore the course.
-        $rc = new \restore_controller($dirname, $courseid, \backup::INTERACTIVE_NO, \backup::MODE_IMPORT, $userrestorebackupid,
+        $rc = new \restore_controller($dirname, $courseid, \backup::INTERACTIVE_NO, \backup::MODE_GENERAL, $userrestorebackupid,
             $restoretarget);
         $rc->execute_precheck();
         $rc->execute_plan();
@@ -407,9 +424,13 @@ class training extends model {
         $backupfile->delete();
 
         // Update the training shortname.
-        $training                  = clone($this);
+        $training = clone($this);
         $training->courseshortname = get_course($courseid)->shortname;
         $this->dbinterface->update_training($training);
+
+        // Delete all H5P owners in database.
+        // If the owner loses his 'moodle/h5p:deploy' capability and the H5P has never opened before, then it is not visible.
+        $this->dbinterface->remove_user_owner_h5p_file($this->get_context()->id);
 
         return true;
     }
@@ -425,7 +446,7 @@ class training extends model {
 
         // Check if the entity has already been retrieved.
         if ($refresh || empty($this->entity)) {
-            $entityid     = $this->dbinterface->get_course_main_category_id($this->courseid);
+            $entityid = $this->dbinterface->get_course_main_category_id($this->courseid);
             $this->entity = entity_api::get_entity($entityid, $refresh);
         }
 
@@ -503,7 +524,7 @@ class training extends model {
         $this->name = isset($data->name) ? trim($data->name) : $this->name;
 
         $this->courseshortname = isset($data->shortname) ? $data->shortname : $this->courseshortname;
-        $this->shortname       = isset($data->shortname) ? $data->shortname : $this->shortname;
+        $this->shortname = isset($data->shortname) ? $data->shortname : $this->shortname;
 
         // Training goal.
         if (isset($data->traininggoal) && is_array($data->traininggoal)) {
@@ -528,15 +549,15 @@ class training extends model {
 
         // Update the training course.
         $course = array(
-            'id'         => $this->courseid,
-            'fullname'   => $this->name,
-            'shortname'  => $this->shortname,
+            'id' => $this->courseid,
+            'fullname' => $this->name,
+            'shortname' => $this->shortname,
             'categoryid' => isset($data->categorychildid) ? $data->categorychildid : $this->get_course()->category,
-            'summary'    => $this->content
+            'summary' => $this->content
         );
 
         $oldcourse = $this->get_course();
-        $result    = self::update_training_course($course);
+        $result = self::update_training_course($course);
 
         // Check if the training course has been updated correctly.
         if (!empty($result['warnings'])) {
@@ -547,11 +568,11 @@ class training extends model {
         if (!$this->dbinterface->update_training($this)) {
             // Reverse course update.
             self::update_training_course(array(
-                'id'         => $this->courseid,
-                'fullname'   => $oldcourse->fullname,
-                'shortname'  => $oldcourse->shortname,
+                'id' => $this->courseid,
+                'fullname' => $oldcourse->fullname,
+                'shortname' => $oldcourse->shortname,
                 'categoryid' => $oldcourse->category,
-                'summary'    => $oldcourse->summary
+                'summary' => $oldcourse->summary
             ));
             throw new \Exception(get_string('trainingupdatefailed', 'local_mentor_core'));
         }
@@ -658,11 +679,11 @@ class training extends model {
         $context = $entity->get_context();
 
         // Check if the user can access the training sheet.
-        $mainentity               = $entity->get_main_entity();
-        $trainingcourse           = $mainentity->get_edadmin_courses('trainings');
-        $url                      = new \moodle_url('/course/view.php', array('id' => $trainingcourse['id']));
+        $mainentity = $entity->get_main_entity();
+        $trainingcourse = $mainentity->get_edadmin_courses('trainings');
+        $url = new \moodle_url('/course/view.php', array('id' => $trainingcourse['id']));
         $actions['trainingsheet'] = [
-            'url'     => $this->get_sheet_url()->out() . '&returnto=' . $url,
+            'url' => $this->get_sheet_url()->out() . '&returnto=' . $url,
             'tooltip' => get_string('gototrainingsheet', 'local_mentor_core')
         ];
 
@@ -730,32 +751,32 @@ class training extends model {
 
         if (!empty($destinationentity)) {
             // Move the course into the new entity.
-            $entity                    = entity_api::get_entity($destinationentity);
+            $entity = entity_api::get_entity($destinationentity);
             $training->categorychildid = $entity->get_entity_formation_category();
-            $training->categoryid      = $entity->id;
+            $training->categoryid = $entity->id;
         } else {
             $training->categorychildid = $course->category;
-            $training->categoryid      = \core_course_category::get($course->category)->parent;
+            $training->categoryid = \core_course_category::get($course->category)->parent;
         }
 
         // Name and shortname are updated after the restore.
         // This ame and shortname are used so that there is.
         // no error saying that they are used for another course.
-        $training->name      = $course->fullname;
+        $training->name = $course->fullname;
         $training->shortname = $trainingshortname;
         // Make "draft" default status value.
         $training->status = self::STATUS_DRAFT;
 
-        $coursexists     = $this->dbinterface->course_exists($training->shortname);
+        $coursexists = $this->dbinterface->course_exists($training->shortname);
         $linkcoursexists = $this->dbinterface->training_exists($training->shortname);
 
         $counter = 0;
-        $max     = 50;
+        $max = 50;
 
         while ($coursexists || $linkcoursexists) {
             $training->shortname .= ' copie';
-            $coursexists         = $this->dbinterface->course_exists($training->shortname);
-            $linkcoursexists     = $this->dbinterface->training_exists($training->shortname);
+            $coursexists = $this->dbinterface->course_exists($training->shortname);
+            $linkcoursexists = $this->dbinterface->training_exists($training->shortname);
             if ($counter++ > $max) {
                 // Remove backup file.
                 $backupfile->delete();
@@ -776,15 +797,18 @@ class training extends model {
             throw new \Exception('Restoration failed');
         }
 
+        // Reset user data.
+        $newtraining->reset();
+
         // Remove backup file.
         $backupfile->delete();
 
         // Clone 'summary' course attribute.
-        $newcourse                   = $newtraining->get_course(true);
-        $newcourse->summary          = $course->summary;
-        $newcourse->format           = $course->format;
-        $newcourse->showgrades       = $course->showgrades;
-        $newcourse->newsitems        = $course->newsitems;
+        $newcourse = $newtraining->get_course(true);
+        $newcourse->summary = $course->summary;
+        $newcourse->format = $course->format;
+        $newcourse->showgrades = $course->showgrades;
+        $newcourse->newsitems = $course->newsitems;
         $newcourse->enablecompletion = $course->enablecompletion;
         $newcourse->completionnotify = $course->completionnotify;
 
@@ -806,7 +830,7 @@ class training extends model {
         update_course($newcourse);
 
         // Copy the pictures.
-        $fs             = get_file_storage();
+        $fs = get_file_storage();
         $newpicturedata = ['contextid' => $newtraining->contextid, 'itemid' => $newtraining->id];
 
         // Copy the thumbnail.
@@ -832,7 +856,7 @@ class training extends model {
         return new \moodle_url('/local/trainings/pages/update_training.php',
             array(
                 'trainingid' => $this->id,
-                'entityid'   => $this->get_entity(false)->id
+                'entityid' => $this->get_entity(false)->id
             )
         );
     }
@@ -903,13 +927,13 @@ class training extends model {
         global $USER;
 
         // Initialise the template data.
-        $templateobj               = new \stdClass();
-        $templateobj->id           = $this->id;
-        $templateobj->name         = $this->name;
-        $templateobj->courseurl    = $this->get_url()->out();
-        $templateobj->content      = $this->content;
+        $templateobj = new \stdClass();
+        $templateobj->id = $this->id;
+        $templateobj->name = $this->name;
+        $templateobj->courseurl = $this->get_url()->out();
+        $templateobj->content = $this->content;
         $templateobj->traininggoal = local_mentor_core_clean_html($this->traininggoal);
-        $templateobj->isreviewer   = false;
+        $templateobj->isreviewer = false;
 
         // Check if the user can review the training.
         if (!has_capability('local/trainings:update', $this->get_context(), $USER)) {
@@ -920,8 +944,8 @@ class training extends model {
         $trainingentity = $this->get_entity()->get_main_entity();
 
         // Set entity data to the template.
-        $templateobj->entityid              = $trainingentity->id;
-        $templateobj->entityname            = $trainingentity->name;
+        $templateobj->entityid = $trainingentity->id;
+        $templateobj->entityname = $trainingentity->name;
         $templateobj->favouritedesignerdata = $this->get_favourite_designer_data();
 
         // Check if all enrolments user are enabled.
@@ -957,21 +981,21 @@ class training extends model {
     public function create_manual_enrolment_instance() {
 
         $course = $this->get_course();
-        $type   = 'manual';
+        $type = 'manual';
 
         if (!$this->get_enrolment_instances_by_type($type)) {
             // Create new self enrol instance.
             $plugin = enrol_get_plugin($type);
 
-            $instance                  = (object) $plugin->get_instance_defaults();
-            $instance->status          = 0;
-            $instance->id              = '';
-            $instance->courseid        = $this->courseid;
+            $instance = (object) $plugin->get_instance_defaults();
+            $instance->status = 0;
+            $instance->id = '';
+            $instance->courseid = $this->courseid;
             $instance->expirythreshold = 0;
-            $instance->enrolstartdate  = 0;
-            $instance->enrolenddate    = 0;
-            $instance->timecreated     = time();
-            $instance->timemodified    = time();
+            $instance->enrolstartdate = 0;
+            $instance->enrolenddate = 0;
+            $instance->timecreated = time();
+            $instance->timemodified = time();
 
             $fields = (array) $instance;
 
@@ -1067,34 +1091,46 @@ class training extends model {
 
     /**
      * Reset all userdata
+     *
+     * @param bool $removeenroluser Remove all user enrol.
+     * @param bool $removeenrolinstance Remove all enrolment instance.
      */
-    public function reset() {
-        $resetdata                           = new \stdClass();
-        $resetdata->reset_start_date         = 0;
-        $resetdata->reset_end_date           = 0;
-        $resetdata->reset_events             = 1;
-        $resetdata->reset_comments           = 1;
-        $resetdata->reset_completion         = 1;
+    public function reset($removeenroluser = true, $removeenrolinstance = true) {
+        $resetdata = new \stdClass();
+        $resetdata->reset_start_date = 0;
+        $resetdata->reset_end_date = 0;
+        $resetdata->reset_events = 1;
+        $resetdata->reset_comments = 1;
+        $resetdata->reset_completion = 1;
         $resetdata->delete_blog_associations = 1;
         $resetdata->reset_competency_ratings = 1;
 
-        // List course roles.
-        $resetdata->unenrol_users = array_keys($this->dbinterface->get_course_roles());
+        if ($removeenroluser) {
+            // List course roles.
+            $resetdata->unenrol_users = array_keys($this->dbinterface->get_course_roles());
+        }
 
-        $resetdata->reset_roles_overrides   = 0;
-        $resetdata->reset_roles_local       = 0;
-        $resetdata->reset_gradebook_grades  = 1;
-        $resetdata->reset_groups_remove     = 0;
-        $resetdata->reset_groupings_remove  = 0;
+        $resetdata->reset_roles_overrides = 0;
+        $resetdata->reset_roles_local = 0;
+        $resetdata->reset_gradebook_grades = 1;
+        $resetdata->reset_groups_remove = 0;
+        $resetdata->reset_groupings_remove = 0;
         $resetdata->reset_groupings_members = 0;
-        $resetdata->reset_forum_all         = 1;
-        $resetdata->reset_forum_types       = 1;
-        $resetdata->id                      = $this->courseid;
+        $resetdata->reset_forum_all = 1;
+        $resetdata->reset_forum_types = 1;
+        $resetdata->id = $this->courseid;
 
         reset_course_userdata($resetdata);
 
-        // Remove roles.
-        $this->dbinterface->unassign_roles($this->get_context()->id, $resetdata->unenrol_users);
+        if ($removeenroluser) {
+            // Remove roles.
+            $this->dbinterface->unassign_roles($this->get_context()->id, $resetdata->unenrol_users);
+        }
+
+        if ($removeenrolinstance) {
+            // Remove all enrol instance.
+            enrol_course_delete($this->get_course(true));
+        }
     }
 
     /**
@@ -1198,29 +1234,29 @@ class training extends model {
      */
     public function create_self_enrolment_instance() {
         $course = $this->get_course();
-        $type   = 'self';
+        $type = 'self';
 
         if (!$this->get_enrolment_instances_by_type($type)) {
             // Create new self enrol instance.
             $plugin = enrol_get_plugin($type);
 
-            $instance                  = (object) $plugin->get_instance_defaults();
-            $instance->status          = 0;
-            $instance->id              = '';
-            $instance->courseid        = $course->id;
-            $instance->customint1      = 0;
-            $instance->customint2      = 0;
-            $instance->customint3      = 0; // Max participants.
-            $instance->customint4      = 0;
-            $instance->customint5      = 0;
-            $instance->customint6      = 1; // Enable.
-            $instance->name            = 'Démonstration';
-            $instance->password        = '';
-            $instance->customtext1     = '';
-            $instance->returnurl       = '';
+            $instance = (object) $plugin->get_instance_defaults();
+            $instance->status = 0;
+            $instance->id = '';
+            $instance->courseid = $course->id;
+            $instance->customint1 = 0;
+            $instance->customint2 = 0;
+            $instance->customint3 = 0; // Max participants.
+            $instance->customint4 = 0;
+            $instance->customint5 = 0;
+            $instance->customint6 = 1; // Enable.
+            $instance->name = 'Démonstration';
+            $instance->password = '';
+            $instance->customtext1 = '';
+            $instance->returnurl = '';
             $instance->expirythreshold = 0;
-            $instance->enrolstartdate  = 0;
-            $instance->enrolenddate    = 0;
+            $instance->enrolstartdate = 0;
+            $instance->enrolenddate = 0;
 
             // Demo users are enrolled for 1 day.
             $instance->enrolperiod = 86400;
@@ -1270,7 +1306,7 @@ class training extends model {
      * @return bool
      */
     public function is_from_library() {
-        $libraryid      = library_api::get_library_id();
+        $libraryid = library_api::get_library_id();
         $maincategoryid = $this->get_entity()->get_main_entity()->id;
 
         return $maincategoryid == $libraryid;
@@ -1291,7 +1327,7 @@ class training extends model {
         // Check if the user can view the library.
         if (!library_api::user_has_access()) {
             return [
-                'status'   => false,
+                'status' => false,
                 'warnings' => ['message' => get_string('librarynotaccessible', 'local_mentor_core')]
             ];
         }
@@ -1299,7 +1335,7 @@ class training extends model {
         // Check if the training is a library training.
         if (!$this->is_from_library()) {
             return [
-                'status'   => false,
+                'status' => false,
                 'warnings' => ['message' => get_string('trainingnotinthelibrary', 'local_mentor_core')]
             ];
         }
@@ -1323,7 +1359,7 @@ class training extends model {
             $result = \enrol_self_external::enrol_user($this->courseid, '', $instance->id);
         } catch (Exception $e) {
             return [
-                'status'   => false,
+                'status' => false,
                 'warnings' => ['message' => $e->getMessage()]
             ];
         }

@@ -111,17 +111,17 @@ class user_renderer extends \plugin_renderer_base implements \format_edadmin\out
 
         // Get cohort id.
         $courseformatoptions = new \format_edadmin\course_format_option($course->id);
-        $cohortid            = $courseformatoptions->get_option_value('cohortlink');
+        $cohortid = $courseformatoptions->get_option_value('cohortlink');
 
         $ismanager = $entity->is_manager($USER);
 
         // Initialize params to JS.
-        $params            = new \stdClass();
-        $params->cohortid  = $cohortid;
-        $params->entityid  = $course->category;
+        $params = new \stdClass();
+        $params->cohortid = $cohortid;
+        $params->entityid = $course->category;
         $params->ismanager = $ismanager;
-        $params->isadmin   = is_siteadmin();
-        $params->entityshortname   = $entity->shortname;
+        $params->isadmin = is_siteadmin();
+        $params->entityshortname = $entity->shortname;
 
         // Get the right js file.
         $js = profile_api::get_user_javascript('local_user/local_user');
@@ -130,20 +130,20 @@ class user_renderer extends \plugin_renderer_base implements \format_edadmin\out
         $this->page->requires->js_call_amd($js, 'init', array($params));
 
         // Get the right user table template.
-        $template                 = profile_api::get_user_template('local_user/local_user');
-        $params                   = profile_api::get_user_template_params();
-        $params['ismanager']      = $ismanager;
+        $template = profile_api::get_user_template('local_user/local_user');
+        $params = profile_api::get_user_template_params();
+        $params['ismanager'] = $ismanager;
         $params['importusersurl'] = $CFG->wwwroot . '/local/user/pages/importcsv.php?entityid=' . $entity->id;
-        $params['mergeusersurl']  = $CFG->wwwroot . '/admin/tool/mergeusers/index_mentor.php';
+        $params['mergeusersurl'] = $CFG->wwwroot . '/admin/tool/mergeusers/index_mentor.php';
 
         if (has_capability('local/mentor_core:suspendusers', $entity->get_context())) {
             $params['suspendusersurl'] = $CFG->wwwroot . '/local/user/pages/suspend_users.php?entityid=' . $entity->id;
         }
 
         // Get entity context.
-        $categorycontext     = $entity->get_context();
-        $manageurl           = $CFG->wwwroot . '/admin/roles/assign.php?contextid=' . $categorycontext->id;
-        $manageurl           .= '&returnurl=' . rawurlencode('/course/view.php?id=' . $course->id);
+        $categorycontext = $entity->get_context();
+        $manageurl = $CFG->wwwroot . '/admin/roles/assign.php?contextid=' . $categorycontext->id;
+        $manageurl .= '&returnurl=' . rawurlencode('/course/view.php?id=' . $course->id);
         $params['manageurl'] = $manageurl;
 
         return $this->render_from_template($template, $params);

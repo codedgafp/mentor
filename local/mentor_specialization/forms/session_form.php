@@ -35,12 +35,12 @@ class session_form extends \moodleform {
 
     /** @var array $modalities */
     protected $modalities
-        = [
-            ''   => 'emptychoice',
-            'p'  => 'presentiel',
-            'd'  => 'online',
-            'dp' => 'mixte'
-        ];
+            = [
+                    '' => 'emptychoice',
+                    'p' => 'presentiel',
+                    'd' => 'online',
+                    'dp' => 'mixte'
+            ];
 
     /** @var array $_termsregistrationoptions */
     protected $_termsregistrationoptions = ['inscriptionlibre' => 'Inscription libre', 'autre' => 'Autre'];
@@ -71,12 +71,12 @@ class session_form extends \moodleform {
         $db = database_interface::get_instance();
 
         // Init entity object.
-        $this->entity  = $forminfos->entity;
+        $this->entity = $forminfos->entity;
         $this->session = isset($forminfos->session) ? $forminfos->session : null;
 
         $this->sharedentities = $forminfos->sharedentities;
 
-        $this->logourl  = $forminfos->logourl;
+        $this->logourl = $forminfos->logourl;
         $this->returnto = $forminfos->returnto;
 
         // Init skills.
@@ -96,7 +96,7 @@ class session_form extends \moodleform {
 
         $mform = $this->_form;
 
-        $strwarning  = get_string('requiredopentoregistration', 'local_session');
+        $strwarning = get_string('requiredopentoregistration', 'local_session');
         $warningicon = '<div class="text-warning" title="' . $strwarning .
                        '"><i class="icon fa fa-exclamation-circle text-warning fa-fw " title="' . $strwarning . '" aria-label="' .
                        $strwarning . '"></i></div>';
@@ -110,34 +110,34 @@ class session_form extends \moodleform {
 
         // Structure créatrice.
         $trainingentity = $training->get_entity();
-        $structurehtml  = '<span>' . $trainingentity->get_entity_path() . '</span>';
+        $structurehtml = '<span>' . $trainingentity->get_entity_path() . '</span>';
         $structurelabel = $trainingentity->is_main_entity() ? get_string('space', 'local_mentor_core') :
-            get_string('space', 'local_mentor_core') . '/' . get_string('subspace', 'local_mentor_core');
+                get_string('space', 'local_mentor_core') . '/' . get_string('subspace', 'local_mentor_core');
         $mform->addElement('static', 'creativestructurestatic', $structurelabel, $structurehtml);
 
         // Libellé de la formation.
         $mform->addElement('text', 'trainingname', get_string('trainingname', 'local_trainings'),
-            array('disabled' => 'disabled', 'size' => 40));
+                array('disabled' => 'disabled', 'size' => 40));
         $mform->setType('trainingname', PARAM_RAW);
 
         // Nom abrégé du cours.
         $mform->addElement('text', 'trainingshortname', get_string('shortname', 'local_trainings'),
-            array('disabled' => 'disabled', 'size' => 40));
+                array('disabled' => 'disabled', 'size' => 40));
         $mform->setType('trainingshortname', PARAM_NOTAGS);
 
         // Vignette.
         if ($thumbnail = $training->get_training_picture()) {
             $url = \moodle_url::make_pluginfile_url(
-                $thumbnail->get_contextid(),
-                $thumbnail->get_component(),
-                $thumbnail->get_filearea(),
-                $thumbnail->get_itemid(),
-                $thumbnail->get_filepath(),
-                $thumbnail->get_filename()
+                    $thumbnail->get_contextid(),
+                    $thumbnail->get_component(),
+                    $thumbnail->get_filearea(),
+                    $thumbnail->get_itemid(),
+                    $thumbnail->get_filepath(),
+                    $thumbnail->get_filename()
             );
             $mform->addElement('html',
-                '<div class="form-group row fitem"><div class="col-md-3">' . get_string('thumbnail', 'local_trainings') .
-                '</div><div class="col-md-9 form-inline felement"><img class="session-logo" src="' . $url . '" /></div></div>');
+                    '<div class="form-group row fitem"><div class="col-md-3">' . get_string('thumbnail', 'local_trainings') .
+                    '</div><div class="col-md-9 form-inline felement"><img class="session-logo" src="' . $url . '" /></div></div>');
         }
 
         // Collection.
@@ -145,7 +145,7 @@ class session_form extends \moodleform {
 
         if (isset($this->session) && $collections = $this->session->get_training()->collection) {
             $selectedcollections = explode(',', $collections);
-            $collectionshtml     = '<div class="form-autocomplete-selection">';
+            $collectionshtml = '<div class="form-autocomplete-selection">';
 
             foreach ($selectedcollections as $collection) {
                 if (!isset($collectionsnames[$collection])) {
@@ -153,7 +153,7 @@ class session_form extends \moodleform {
                 }
 
                 $collectionshtml .= \html_writer::tag('span', $collectionsnames[$collection],
-                    array('style' => 'font-size:100%;', 'class' => 'badge badge-info mb-3 mr-1', 'role' => 'listitem'));
+                        array('style' => 'font-size:100%;', 'class' => 'badge badge-info mb-3 mr-1', 'role' => 'listitem'));
             }
 
             $collectionshtml .= '</div>';
@@ -164,7 +164,7 @@ class session_form extends \moodleform {
         $mform->addElement('static', '', get_string('collections', 'local_trainings'), $collectionshtml);
 
         // Formation certifiante.
-        $radioarray   = array();
+        $radioarray = array();
         $radioarray[] = $mform->createElement('radio', 'certifying', '', get_string('yes'), 1);
         $radioarray[] = $mform->createElement('radio', 'certifying', '', get_string('no'), 0);
         $mform->addGroup($radioarray, 'certifying', get_string('certifying', 'local_trainings'), array(' '), false);
@@ -172,18 +172,18 @@ class session_form extends \moodleform {
 
         // Prérequis.
         $mform->addElement('text', 'prerequisite', get_string('prerequisite', 'local_trainings'),
-            array('disabled' => 'disabled', 'size' => 40));
+                array('disabled' => 'disabled', 'size' => 40));
         $mform->setType('prerequisite', PARAM_NOTAGS);
 
         // Catchphrase.
         $mform->addElement('text', 'catchphrase', get_string('catchphrase', 'local_mentor_specialization'),
-            array('disabled' => 'disabled', 'size' => 40));
+                array('disabled' => 'disabled', 'size' => 40));
         $mform->setType('catchphrase', PARAM_NOTAGS);
 
         // Objectifs de la formation.
         $mform->addElement('editor', 'traininggoal', get_string('traininggoal', 'local_trainings'), array
         (
-            'rows' => 8, 'cols' => 60
+                'rows' => 8, 'cols' => 60
         ));
         $mform->disabledIf('traininggoal', '');
         $mform->setType('traininggoal', PARAM_RAW);
@@ -191,7 +191,7 @@ class session_form extends \moodleform {
         // Contenu de la formation.
         $mform->addElement('editor', 'trainingcontent', get_string('trainingcontent', 'local_mentor_specialization'), array
         (
-            'rows' => 8, 'cols' => 60
+                'rows' => 8, 'cols' => 60
         ));
         $mform->disabledIf('trainingcontent', '');
         $mform->setType('trainingcontent', PARAM_RAW);
@@ -202,48 +202,48 @@ class session_form extends \moodleform {
         }
 
         $estimatedpresencetime[] = $mform->createElement('text', 'presenceestimatedtimehours', 'presenceestimatedtimehours',
-            array('disabled' => 'disabled', 'size' => 2));
+                array('disabled' => 'disabled', 'size' => 2));
         $estimatedpresencetime[] = $mform->createElement('select', 'presenceestimatedtimeminutes', 'presenceestimatedtimeminutes',
-            $minutes, array('disabled' => 'disabled'));
+                $minutes, array('disabled' => 'disabled'));
         $mform->addGroup($estimatedpresencetime, 'presenceestimatedtime', get_string('presenceestimatedtime', 'local_trainings'),
-            array(' '), false);
+                array(' '), false);
         $mform->setType('presenceestimatedtimehours', PARAM_NOTAGS);
         $mform->setDefault('presenceestimatedtimehours', '00');
 
         // Durée estimée à distance.
         $estimatedremotetime[] = $mform->createElement('text', 'remoteestimatedtimehours', 'remoteestimatedtimehours',
-            array('disabled' => 'disabled', 'size' => 2));
+                array('disabled' => 'disabled', 'size' => 2));
         $estimatedremotetime[] = $mform->createElement('select', 'remoteestimatedtimeminutes', 'remoteestimatedtimeminutes',
-            $minutes, array('disabled' => 'disabled'));
+                $minutes, array('disabled' => 'disabled'));
         $mform->addGroup($estimatedremotetime, 'remoteestimatedtime', get_string('remoteestimatedtime', 'local_trainings'),
-            array(' '), false);
+                array(' '), false);
         $mform->setType('remoteestimatedtimehours', PARAM_NOTAGS);
         $mform->setDefault('remoteestimatedtimehours', '00');
 
         // Modalités envisagées de la formation.
         $mform->addElement('select', 'trainingmodalities', get_string('trainingmodalities', 'local_trainings'),
-            array_map(function($modality) {
-                return get_string($modality, 'local_mentor_specialization');
-            }, $this->modalities), array('disabled' => 'disabled', 'style' => 'width : 405px'));
+                array_map(function($modality) {
+                    return get_string($modality, 'local_mentor_specialization');
+                }, $this->modalities), array('disabled' => 'disabled', 'style' => 'width : 405px'));
 
         // Teaser.
         $mform->addElement('text', 'teaser', get_string('teaservideo', 'local_trainings'),
-            array('disabled' => 'disabled', 'size' => 40));
+                array('disabled' => 'disabled', 'size' => 40));
         $mform->setType('teaser', PARAM_RAW);
 
         // Teaser images.
         if ($teaserpicture = $training->get_training_picture('teaserpicture')) {
             $url = \moodle_url::make_pluginfile_url(
-                $teaserpicture->get_contextid(),
-                $teaserpicture->get_component(),
-                $teaserpicture->get_filearea(),
-                $teaserpicture->get_itemid(),
-                $teaserpicture->get_filepath(),
-                $teaserpicture->get_filename()
+                    $teaserpicture->get_contextid(),
+                    $teaserpicture->get_component(),
+                    $teaserpicture->get_filearea(),
+                    $teaserpicture->get_itemid(),
+                    $teaserpicture->get_filepath(),
+                    $teaserpicture->get_filename()
             );
             $mform->addElement('html',
-                '<div class="form-group row fitem"><div class="col-md-3">' . get_string('teaserpicture', 'local_trainings') .
-                '</div><div class="col-md-9 form-inline felement"><img class="session-logo" src="' . $url . '" /></div></div>');
+                    '<div class="form-group row fitem"><div class="col-md-3">' . get_string('teaserpicture', 'local_trainings') .
+                    '</div><div class="col-md-9 form-inline felement"><img class="session-logo" src="' . $url . '" /></div></div>');
         }
 
         // Identifiant SIRH d’origine.
@@ -251,13 +251,13 @@ class session_form extends \moodleform {
         $mform->setType('idsirh', PARAM_NOTAGS);
 
         // Emploi type.
-        $jobarray   = array();
+        $jobarray = array();
         $jobarray[] = $mform->createElement('text', 'typicaljob', get_string('typicaljob', 'local_trainings'), array('size' => 40));
         $jobarray[] = $mform->createElement('static', 'typicaljobstaticrime', '',
-            \html_writer::tag('a', 'RIME', array('target' => '_blank', 'href' => get_config('local_trainings', 'rime_link'))));
+                \html_writer::tag('a', 'RIME', array('target' => '_blank', 'href' => get_config('local_trainings', 'rime_link'))));
         $jobarray[] = $mform->createElement('static', 'typicaljobstaticsep', '', \html_writer::tag('span', '&nbsp;'));
         $jobarray[] = $mform->createElement('static', 'typicaljobstaticrmm', '',
-            \html_writer::tag('a', 'RMM', array('target' => '_blank', 'href' => get_config('local_trainings', 'rmm_link'))));
+                \html_writer::tag('a', 'RMM', array('target' => '_blank', 'href' => get_config('local_trainings', 'rmm_link'))));
         $mform->addGroup($jobarray, 'typicaljobhtml', get_string('typicaljob', 'local_trainings'), array(' '), false);
         $mform->setType('typicaljob', PARAM_NOTAGS);
         $mform->disabledIf('typicaljobhtml', '');
@@ -265,14 +265,14 @@ class session_form extends \moodleform {
         // Compétences.
         if (isset($this->session) && $this->session->skills) {
             $selectedskills = explode(',', $this->session->skills);
-            $skillshtml     = '<div class="form-autocomplete-selection">';
+            $skillshtml = '<div class="form-autocomplete-selection">';
 
             foreach ($selectedskills as $skill) {
                 if (!isset($this->allskills[$skill])) {
                     continue;
                 }
                 $skillshtml .= \html_writer::tag('span', $this->allskills[$skill],
-                    array('style' => 'font-size:100%;', 'class' => 'badge badge-info mb-3 mr-1', 'role' => 'listitem'));
+                        array('style' => 'font-size:100%;', 'class' => 'badge badge-info mb-3 mr-1', 'role' => 'listitem'));
             }
             $skillshtml .= '</div>';
         } else {
@@ -283,24 +283,24 @@ class session_form extends \moodleform {
 
         // Organisme producteur.
         $mform->addElement('text', 'producingorganization', get_string('producingorganization', 'local_trainings'),
-            array('disabled' => 'disabled', 'size' => 40));
+                array('disabled' => 'disabled', 'size' => 40));
         $mform->setType('producingorganization', PARAM_NOTAGS);
 
         // Nom abrégé de l'organisme producteur.
         $mform->addElement('text', 'producerorganizationshortname',
-            get_string('producerorganizationshortname', 'local_mentor_specialization'),
-            array('disabled' => 'disabled', 'size' => 40));
+                get_string('producerorganizationshortname', 'local_mentor_specialization'),
+                array('disabled' => 'disabled', 'size' => 40));
         $mform->setType('producerorganizationshortname', PARAM_NOTAGS);
 
         // Logo de l’organisme producteur.
         if ($producerorganizationlogo = $training->get_training_picture('producerorganizationlogo')) {
             $url = \moodle_url::make_pluginfile_url(
-                $producerorganizationlogo->get_contextid(),
-                $producerorganizationlogo->get_component(),
-                $producerorganizationlogo->get_filearea(),
-                $producerorganizationlogo->get_itemid(),
-                $producerorganizationlogo->get_filepath(),
-                $producerorganizationlogo->get_filename()
+                    $producerorganizationlogo->get_contextid(),
+                    $producerorganizationlogo->get_component(),
+                    $producerorganizationlogo->get_filearea(),
+                    $producerorganizationlogo->get_itemid(),
+                    $producerorganizationlogo->get_filepath(),
+                    $producerorganizationlogo->get_filename()
             );
             $mform->addElement('html', '<div class="form-group row fitem"><div class="col-md-3">' .
                                        get_string('producerorganizationlogo', 'local_trainings') .
@@ -310,7 +310,7 @@ class session_form extends \moodleform {
 
         // Contact organisme producteur.
         $mform->addElement('text', 'contactproducerorganization', get_string('contactproducerorganization', 'local_trainings'),
-            array('disabled' => 'disabled', 'size' => 40));
+                array('disabled' => 'disabled', 'size' => 40));
         $mform->setType('contactproducerorganization', PARAM_NOTAGS);
 
         // Concepteur(s).
@@ -347,7 +347,7 @@ class session_form extends \moodleform {
         $mform->addElement('html', '<div class="block_session">');
 
         $structurelabel = $this->entity->is_main_entity() ? get_string('space', 'local_mentor_core') :
-            get_string('space', 'local_mentor_core') . '/' . get_string('subspace', 'local_mentor_core');
+                get_string('space', 'local_mentor_core') . '/' . get_string('subspace', 'local_mentor_core');
 
         $mform->addElement('static', '', $structurelabel, $this->entity->get_entity_path());
 
@@ -355,14 +355,14 @@ class session_form extends \moodleform {
         $mform->addElement('select', 'status', get_string('status', 'local_mentor_specialization'), array_map(function($status) {
             return get_string($status, 'local_mentor_specialization');
         }, $this->session->get_available_status()), array(
-            'style'                     => 'width : 405px',
-            'data-sessionstatusconfirm' => get_string('statusconfirmmessage', 'local_mentor_specialization')
+                'style' => 'width : 405px',
+                'data-sessionstatusconfirm' => get_string('statusconfirmmessage', 'local_mentor_specialization')
         ));
         $mform->addRule('status', get_string('required'), 'required');
 
         // Info popup.
         $mform->addElement('button', 'infolifecycle', get_string('infolifecycle', 'local_mentor_specialization'),
-            ['id' => 'infolifecycle']);
+                ['id' => 'infolifecycle']);
 
         $confirmpopup = '<div id="session_status_confirm" style="display:none">
             <p>' . get_string('statusconfirmmessage', 'local_mentor_specialization') . '</p>
@@ -371,8 +371,8 @@ class session_form extends \moodleform {
 
         // Libellé de la session.
         $mform->addElement('text', 'fullname',
-            get_string('fullname', 'local_mentor_specialization') . get_string('optional', 'local_mentor_specialization'),
-            array('size' => 40, 'class' => 'optional'));
+                get_string('fullname', 'local_mentor_specialization') . get_string('optional', 'local_mentor_specialization'),
+                array('size' => 40, 'class' => 'optional'));
         $mform->setType('fullname', PARAM_RAW);
         $mform->addHelpButton('fullname', 'fullname', 'local_session');
         if (!has_capability('local/mentor_specialization:changesessionfullname', $this->session->get_context())) {
@@ -399,16 +399,16 @@ class session_form extends \moodleform {
         }
 
         // Ouverte à.
-        $opentoarray   = array();
+        $opentoarray = array();
         $opentoarray[] = $mform->createElement('radio', 'opento', '',
-            get_string('notvisibleincatalog', 'local_mentor_core'), 'not_visible');
+                get_string('notvisibleincatalog', 'local_mentor_core'), 'not_visible');
         $opentoarray[] = $mform->createElement('radio', 'opento', '',
-            get_string('all_user_current_entity', 'local_mentor_core', $mainentity->shortname), 'current_entity');
+                get_string('all_user_current_entity', 'local_mentor_core', $mainentity->shortname), 'current_entity');
         $opentoarray[] = $mform->createElement('radio', 'opento', '',
-            get_string('all_user_all_entity', 'local_mentor_core'), 'all', $opentoexternalattributes);
+                get_string('all_user_all_entity', 'local_mentor_core'), 'all', $opentoexternalattributes);
         $opentoarray[] = $mform->createElement('radio', 'opento', '',
-            get_string('all_user_current_entity_others', 'local_mentor_core', $mainentity->shortname), 'other_entities',
-            $opentoexternalattributes);
+                get_string('all_user_current_entity_others', 'local_mentor_core', $mainentity->shortname), 'other_entities',
+                $opentoexternalattributes);
         $mform->addGroup($opentoarray, 'opentogroup', get_string('opento', 'local_mentor_core'), ['<br>', ''], false);
 
         if (!has_capability('local/mentor_specialization:changesessionopento', $this->session->get_context())) {
@@ -426,12 +426,12 @@ class session_form extends \moodleform {
         $mform->addElement('html', '<div id="other_session_content" class="form-group row fitem" ' . $display .
                                    '><div class="col-md-3"></div><div class="col-md-9">');
         $mform->addElement('autocomplete', 'opentolist', '', $this->sharedentities,
-            ['multiple' => true]);
+                ['multiple' => true]);
         $mform->addElement('html', '</div></div>');
 
         // Numéro de session : req-nomodif INT.
         $mform->addElement('static', 'sessionnumber', get_string('sessionnumber', 'local_mentor_specialization'),
-            $this->session->sessionnumber);
+                $this->session->sessionnumber);
 
         // Public cible : req == rfc rlf == TEXT.
         $mform->addElement('text', 'publiccible', get_string('publiccible', 'local_mentor_specialization'), array('size' => 40));
@@ -445,7 +445,7 @@ class session_form extends \moodleform {
 
         // Modalités de l’inscription.
         $mform->addElement('select', 'termsregistration', get_string('termsregistration', 'local_mentor_specialization'),
-            $this->_termsregistrationoptions, array('style' => 'width : 405px'));
+                $this->_termsregistrationoptions, array('style' => 'width : 405px'));
         $mform->addHelpButton('termsregistration', 'termsregistration', 'local_mentor_specialization');
         if (!has_capability('local/mentor_specialization:changesessiontermsregistration', $this->session->get_context())) {
             $mform->disabledIf('termsregistration', '');
@@ -455,7 +455,7 @@ class session_form extends \moodleform {
 
         $mform->addElement('html', '<div id="termsregistrationdetail-bloc" style="display: ' . $display . ';">');
         $mform->addElement('editor', 'termsregistrationdetail',
-            get_string('termsregistrationdetail', 'local_mentor_specialization'));
+                get_string('termsregistrationdetail', 'local_mentor_specialization'));
         $mform->setType('termsregistrationdetail', PARAM_RAW);
         $mform->addElement('html', '</div>');
 
@@ -465,17 +465,17 @@ class session_form extends \moodleform {
         }
 
         $onlinesessionestimatedtime[] = $mform->createElement('text', 'onlinesessionestimatedtimehours',
-            'onlinesessionestimatedtimehours',
-            array('size' => 2));
+                'onlinesessionestimatedtimehours',
+                array('size' => 2));
         $onlinesessionestimatedtime[] = $mform->createElement('static', '', '', get_string('hours', 'local_mentor_specialization'));
         $onlinesessionestimatedtime[] = $mform->createElement('select', 'onlinesessionestimatedtimeminutes',
-            'onlinesessionestimatedtimeminutes',
-            $minutes);
+                'onlinesessionestimatedtimeminutes',
+                $minutes);
         $onlinesessionestimatedtime[] = $mform->createElement('static', '', '',
-            get_string('minutes', 'local_mentor_specialization'));
+                get_string('minutes', 'local_mentor_specialization'));
         $mform->addGroup($onlinesessionestimatedtime, 'onlinesessionestimatedtime',
-            get_string('onlinesessionestimatedtime', 'local_mentor_specialization') . $warningicon,
-            array(' '), false);
+                get_string('onlinesessionestimatedtime', 'local_mentor_specialization') . $warningicon,
+                array(' '), false);
         $mform->setType('onlinesessionestimatedtimehours', PARAM_NOTAGS);
         if (!has_capability('local/mentor_specialization:changesessiononlinetime', $this->session->get_context())) {
             $mform->disabledIf('onlinesessionestimatedtime', '');
@@ -485,18 +485,18 @@ class session_form extends \moodleform {
 
         // Durée estimée en présence : req == rfc rlf ==  [XX]h [YY]min.
         $presencesessionestimatedtime[] = $mform->createElement('text', 'presencesessionestimatedtimehours',
-            'presencesessionestimatedtimehours',
-            array('size' => 2));
+                'presencesessionestimatedtimehours',
+                array('size' => 2));
         $presencesessionestimatedtime[] = $mform->createElement('static', '', '',
-            get_string('hours', 'local_mentor_specialization'));
+                get_string('hours', 'local_mentor_specialization'));
         $presencesessionestimatedtime[] = $mform->createElement('select', 'presencesessionestimatedtimeminutes',
-            'presencesessionestimatedtimeminutes',
-            $minutes);
+                'presencesessionestimatedtimeminutes',
+                $minutes);
         $presencesessionestimatedtime[] = $mform->createElement('static', '', '',
-            get_string('minutes', 'local_mentor_specialization'));
+                get_string('minutes', 'local_mentor_specialization'));
         $mform->addGroup($presencesessionestimatedtime, 'presencesessionestimatedtime',
-            get_string('presencesessionestimatedtime', 'local_mentor_specialization') . $warningicon,
-            array(' '), false);
+                get_string('presencesessionestimatedtime', 'local_mentor_specialization') . $warningicon,
+                array(' '), false);
         $mform->setType('presencesessionestimatedtimehours', PARAM_NOTAGS);
         if (!has_capability('local/mentor_specialization:changesessionpresencetime', $this->session->get_context())) {
             $mform->disabledIf('presencesessionestimatedtime', '');
@@ -505,11 +505,11 @@ class session_form extends \moodleform {
         }
 
         // Session permanente : rfc rlf ==  [XX]h [YY]min == CHECKBOX.
-        $sessionpermanentarray   = array();
+        $sessionpermanentarray = array();
         $sessionpermanentarray[] = $mform->createElement('radio', 'sessionpermanent', '', get_string('yes'), 1);
         $sessionpermanentarray[] = $mform->createElement('radio', 'sessionpermanent', '', get_string('no'), 0);
         $mform->addGroup($sessionpermanentarray, 'sessionpermanent', get_string('sessionpermanent', 'local_mentor_specialization'),
-            array(' '), false);
+                array(' '), false);
         $mform->addHelpButton('sessionpermanent', 'sessionpermanent', 'local_mentor_specialization');
 
         if (!has_capability('local/mentor_specialization:changesessionpermanentsession', $this->session->get_context())) {
@@ -519,12 +519,12 @@ class session_form extends \moodleform {
         // Date de début de la session de formation : req == rfc rlf == DATE.
         if (!has_capability('local/mentor_specialization:changesessionstartdate', $this->session->get_context())
             || in_array($this->session->status, [
-                session::STATUS_OPENED_REGISTRATION, session::STATUS_IN_PROGRESS,
-                session::STATUS_COMPLETED, session::STATUS_ARCHIVED
-            ])) {
+                        session::STATUS_OPENED_REGISTRATION, session::STATUS_IN_PROGRESS,
+                        session::STATUS_COMPLETED, session::STATUS_ARCHIVED
+                ])) {
             $mform->addElement('date_selector', 'sessionstartdate_disabled',
-                get_string('sessionstartdate', 'local_mentor_core') . $warningicon,
-                [], array('disabled'));
+                    get_string('sessionstartdate', 'local_mentor_core') . $warningicon,
+                    [], array('disabled'));
             $mform->disabledIf('sessionstartdate_disabled', '');
             $mform->setDefault('sessionstartdate_disabled', $this->session->sessionstartdate);
 
@@ -532,19 +532,19 @@ class session_form extends \moodleform {
             $mform->setType('sessionstartdate', PARAM_INT);
         } else if (in_array($this->session->status, [session::STATUS_IN_PREPARATION])) {
             $mform->addElement('date_selector', 'sessionstartdate',
-                get_string('sessionstartdate', 'local_mentor_core') . $warningicon
-                , array('optional' => true));
+                    get_string('sessionstartdate', 'local_mentor_core') . $warningicon
+                    , array('optional' => true));
         } else {
             $mform->addElement('date_selector', 'sessionstartdate',
-                get_string('sessionstartdate', 'local_mentor_core') . $warningicon);
+                    get_string('sessionstartdate', 'local_mentor_core') . $warningicon);
         }
 
         // Date de fin de la session de formation : rfc rlf  == DATE.
         if (!has_capability('local/mentor_specialization:changesessionenddate', $this->session->get_context())
             || in_array($this->session->status, ['archived'])) {
             $mform->addElement('date_selector', 'sessionenddate_disabled',
-                get_string('sessionenddate', 'local_mentor_core') . $warningicon,
-                [], array('disabled'));
+                    get_string('sessionenddate', 'local_mentor_core') . $warningicon,
+                    [], array('disabled'));
             $mform->disabledIf('sessionenddate_disabled', '');
             $mform->setDefault('sessionenddate_disabled', $this->session->sessionenddate);
 
@@ -552,17 +552,17 @@ class session_form extends \moodleform {
             $mform->setType('sessionenddate', PARAM_INT);
         } else {
             $mform->addElement('date_selector', 'sessionenddate',
-                get_string('sessionenddate', 'local_mentor_core') . $warningicon,
-                array('optional' => true));
+                    get_string('sessionenddate', 'local_mentor_core') . $warningicon,
+                    array('optional' => true));
         }
 
         // Modalités de la session == SELECTLIST.
         $mform->addElement('select', 'sessionmodalities', get_string('sessionmodalities', 'local_mentor_specialization'),
-            [
-                'presentiel' => get_string('presentiel', 'local_mentor_specialization'),
-                'online'     => get_string('online', 'local_mentor_specialization'),
-                'mixte'      => get_string('mixte', 'local_mentor_specialization')
-            ], array('style' => 'width : 405px'));
+                [
+                        'presentiel' => get_string('presentiel', 'local_mentor_specialization'),
+                        'online' => get_string('online', 'local_mentor_specialization'),
+                        'mixte' => get_string('mixte', 'local_mentor_specialization')
+                ], array('style' => 'width : 405px'));
 
         if (!has_capability('local/mentor_specialization:changesessionsessionmodalities', $this->session->get_context())) {
             $mform->disabledIf('sessionmodalities', '');
@@ -574,7 +574,7 @@ class session_form extends \moodleform {
 
         // Accompagnement : req == rfc rlf == TEXT.
         $mform->addElement('text', 'accompaniment', get_string('accompaniment', 'local_mentor_specialization') . $warningicon,
-            array('size' => 40));
+                array('size' => 40));
         $mform->setType('accompaniment', PARAM_NOTAGS);
         if (!has_capability('local/mentor_specialization:changesessionaccompaniment', $this->session->get_context())) {
             $mform->disabledIf('accompaniment', '');
@@ -582,8 +582,8 @@ class session_form extends \moodleform {
 
         // Nombre maximum de participants : rfc rlf == TEXT.
         $mform->addElement('text', 'maxparticipants',
-            get_string('maxparticipants', 'local_mentor_core') . get_string('optional', 'local_mentor_specialization'),
-            array('size' => 40, 'class' => 'optional'));
+                get_string('maxparticipants', 'local_mentor_core') . get_string('optional', 'local_mentor_specialization'),
+                array('size' => 40, 'class' => 'optional'));
         $mform->setType('maxparticipants', PARAM_RAW_TRIMMED);
         $mform->setDefault('maxparticipants', '');
         if (!has_capability('local/mentor_specialization:changesessionmaxparticipants', $this->session->get_context())) {
@@ -592,16 +592,16 @@ class session_form extends \moodleform {
 
         // Places disponibles : req  (si "Nombre maximum de participants" renseigné) == nomodif.
         $mform->addElement('static', 'placesavailable', get_string('placesavailable', 'local_mentor_specialization'),
-            $this->session->placesavailable);
+                $this->session->placesavailable);
 
         // Nombre de participants inscrits: req-nomodif.
         $mform->addElement('static', 'numberparticipants', get_string('numberparticipants', 'local_mentor_specialization'),
-            $this->session->get_participants_number());
+                $this->session->get_participants_number());
 
         // Lieu(x) de formation :rfc rlf == TEXT.
         $mform->addElement('text', 'location',
-            get_string('location', 'local_mentor_specialization') . get_string('optional', 'local_mentor_specialization'),
-            array('size' => 40, 'class' => 'optional'));
+                get_string('location', 'local_mentor_specialization') . get_string('optional', 'local_mentor_specialization'),
+                array('size' => 40, 'class' => 'optional'));
         $mform->setType('location', PARAM_NOTAGS);
         if (!has_capability('local/mentor_specialization:changesessionlocation', $this->session->get_context())) {
             $mform->disabledIf('location', '');
@@ -610,7 +610,7 @@ class session_form extends \moodleform {
         // Structure organisatrice :rfc rlf == TEXT.
         $mform->addElement('text', 'organizingstructure', get_string('organizingstructure', 'local_mentor_specialization') .
                                                           get_string('optional', 'local_mentor_specialization'),
-            array('size' => 40, 'class' => 'optional'));
+                array('size' => 40, 'class' => 'optional'));
         $mform->setType('organizingstructure', PARAM_NOTAGS);
         if (!has_capability('local/mentor_specialization:changesessionorganizingstructure', $this->session->get_context())) {
             $mform->disabledIf('organizingstructure', '');

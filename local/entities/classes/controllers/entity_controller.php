@@ -56,21 +56,21 @@ class entity_controller extends controller_base {
                     $entityid = $this->get_param('entityid', PARAM_INT);
                     return $this->success(self::has_sub_entities($entityid));
                 case 'get_managed_entities' :
-                    $data                  = new \stdClass();
-                    $data->start           = 0;
-                    $data->length          = 0;
-                    $data->search          = false;
-                    $data->order           = false;
-                    $data->recordsTotal    = self::count_managed_entities();
-                    $data->search          = $this->get_param('search', PARAM_RAW, null);
+                    $data = new \stdClass();
+                    $data->start = 0;
+                    $data->length = 0;
+                    $data->search = false;
+                    $data->order = false;
+                    $data->recordsTotal = self::count_managed_entities();
+                    $data->search = $this->get_param('search', PARAM_RAW, null);
                     $data->recordsFiltered = self::count_managed_entities(null, false, $data);
-                    $data->order           = $this->get_param('order', PARAM_RAW, null);
-                    $data->order           = is_null($data->order) ? $data->order : $data->order[0];
-                    $data->draw            = $this->get_param('draw', PARAM_INT, null);
-                    $data->length          = $this->get_param('length', PARAM_INT, null);
-                    $data->start           = $this->get_param('start', PARAM_INT, null);
-                    $data->data            = self::get_managed_entities(null, false, $data);
-                    $data->success         = true;
+                    $data->order = $this->get_param('order', PARAM_RAW, null);
+                    $data->order = is_null($data->order) ? $data->order : $data->order[0];
+                    $data->draw = $this->get_param('draw', PARAM_INT, null);
+                    $data->length = $this->get_param('length', PARAM_INT, null);
+                    $data->start = $this->get_param('start', PARAM_INT, null);
+                    $data->data = self::get_managed_entities(null, false, $data);
+                    $data->success = true;
                     return $data;
                 // Add cases here.
                 default:
@@ -123,6 +123,7 @@ class entity_controller extends controller_base {
      *
      * @param null $user
      * @param bool $mainonly
+     * @param \stdClass $filter
      * @return local_mentor_core\entity[]
      * @throws \coding_exception
      * @throws \dml_exception
@@ -131,7 +132,7 @@ class entity_controller extends controller_base {
     public static function get_managed_entities($user = null, $mainonly = false, $filter = null) {
 
         $includehidden = is_siteadmin();
-        $entities      = local_mentor_core\entity_api::get_managed_entities($user, $mainonly, $filter, true, $includehidden);
+        $entities = local_mentor_core\entity_api::get_managed_entities($user, $mainonly, $filter, true, $includehidden, true);
 
         $managedentities = [];
 

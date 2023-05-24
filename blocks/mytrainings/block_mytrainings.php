@@ -128,7 +128,7 @@ class block_mytrainings extends block_base {
 
         // Get template with data rendarable.
         $renderable = new \block_mytrainings\output\mytrainings($this->config);
-        $content    = $renderer->render($renderable);
+        $content = $renderer->render($renderable);
 
         // Create content for the block.
         $this->content = new stdClass();

@@ -73,7 +73,7 @@ class archivedsessions implements renderable, templatable {
         $sessionsenrol = \local_mentor_core\session_api::get_user_sessions($USER->id);
 
         // Data for the training and session sheet.
-        $trainings     = [];
+        $trainings = [];
         $finalsessions = [];
         foreach ($sessionsenrol as $sessionenrol) {
 
@@ -91,7 +91,7 @@ class archivedsessions implements renderable, templatable {
                 $trainings[$sessionenrol->trainingid] = \local_mentor_core\training_api::get_training($sessionenrol->trainingid)
                     ->convert_for_template();
             }
-            $trainings[$sessionenrol->trainingid]->sessions   = [];
+            $trainings[$sessionenrol->trainingid]->sessions = [];
             $trainings[$sessionenrol->trainingid]->sessions[] = $sessionenrol;
         }
 
@@ -105,11 +105,11 @@ class archivedsessions implements renderable, templatable {
         });
 
         // Create data for the template block.
-        $templateparams                = new \stdClass();
-        $templateparams->trainings     = $trainings;
-        $templateparams->sessions      = $finalsessions;
+        $templateparams = new \stdClass();
+        $templateparams->trainings = $trainings;
+        $templateparams->sessions = $finalsessions;
         $templateparams->sessionscount = count($finalsessions);
-        $templateparams->catalogurl    = $CFG->wwwroot . '/local/catalog/index.php';
+        $templateparams->catalogurl = $CFG->wwwroot . '/local/catalog/index.php';
 
         // Return data for the template block.
         return $templateparams;

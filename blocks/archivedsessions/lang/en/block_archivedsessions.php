@@ -23,28 +23,28 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['archivedsessions:addinstance']   = 'Add a new archived sessions block';
+$string['archivedsessions:addinstance'] = 'Add a new archived sessions block';
 $string['archivedsessions:myaddinstance'] = 'Add archived sessions block to Dashboard';
-$string['pluginname']                     = 'Sessions archivées';
-$string['privacy:metadata']               = 'Archived sessions block only shows data stored in other locations.';
+$string['pluginname'] = 'Sessions archivées';
+$string['privacy:metadata'] = 'Archived sessions block only shows data stored in other locations.';
 
-$string['trainer']      = 'Formateur';
-$string['tutor']        = 'Tuteur';
-$string['comingsoon']   = 'À venir {$a}';
-$string['inprogress']   = 'En cours';
-$string['completed']    = 'Achevée';
-$string['on']           = 'le {$a}';
-$string['next']         = 'Suivant';
-$string['previous']     = 'Précédent';
-$string['thumbnail']    = 'Vignette';
-$string['progression']  = '{$a}%';
-$string['session']      = 'Session';
-$string['moreinfo']     = 'Plus d\'info sur {$a}';
+$string['trainer'] = 'Formateur';
+$string['tutor'] = 'Tuteur';
+$string['comingsoon'] = 'À venir {$a}';
+$string['inprogress'] = 'En cours';
+$string['completed'] = 'Achevée';
+$string['on'] = 'le {$a}';
+$string['next'] = 'Suivant';
+$string['previous'] = 'Précédent';
+$string['thumbnail'] = 'Vignette';
+$string['progression'] = '{$a}%';
+$string['session'] = 'Session';
+$string['moreinfo'] = 'Plus d\'info sur {$a}';
 $string['moreinfotile'] = 'En savoir plus';
-$string['showless']     = 'Réduire';
-$string['showmore']     = 'Voir plus';
+$string['showless'] = 'Réduire';
+$string['showmore'] = 'Voir plus';
 $string['helpbuttontext']
-                        = 'Pour en savoir plus sur les sessions archivées, vous pouvez consulter la <a href=&quot;{$a}&quot;>
+    = 'Pour en savoir plus sur les sessions archivées, vous pouvez consulter la <a href=&quot;{$a}&quot;>
 Foire Aux Questions</a>';
 $string['helpbuttontexttitle'] = 'Aide sur Sessions archivées';
 

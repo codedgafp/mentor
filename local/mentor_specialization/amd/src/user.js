@@ -218,8 +218,14 @@ define([
         var thatBis = this;
 
         var warningMessageDisplayClass = 'user-admin-form-warning-none';
-        // Get all entity data select.
-        var formEntityList = $.map($('#user-admin-form-add-entity').find('option'), function (opt) {
+
+        // Get all main entity data select.
+        var formMainEntityList = $.map($('#user-admin-form-add-entity').find('option'), function (opt) {
+            return {value: opt.value, text: opt.text};
+        });
+
+        // Get all secondary entity data select.
+        var formSecondaryEntityList = $.map($('#user-admin-form-add-secondary-entities').find('option'), function (opt) {
             return {value: opt.value, text: opt.text};
         });
 
@@ -251,8 +257,8 @@ define([
                                         M.table.ajax.reload();
                                         $('.user-admin-form-warning').addClass(warningMessageDisplayClass).html('');
                                         $('#user-admin-form-add')[0].reset();
-                                        thatBis.secondaryEntitiesFilterForm(formEntityList);
-                                        thatBis.mainEntityFilterForm(formEntityList);
+                                        thatBis.secondaryEntitiesFilterForm(formSecondaryEntityList);
+                                        thatBis.mainEntityFilterForm(formMainEntityList);
                                         that.dialog("destroy");
                                     } else {
                                         var warningMessage = '';
@@ -277,8 +283,8 @@ define([
                     click: function (e) {//Just close the modal
                         $('.user-admin-form-warning').addClass(warningMessageDisplayClass).html('');
                         $('#user-admin-form-add')[0].reset();
-                        thatBis.secondaryEntitiesFilterForm(formEntityList);
-                        thatBis.mainEntityFilterForm(formEntityList);
+                        thatBis.secondaryEntitiesFilterForm(formSecondaryEntityList);
+                        thatBis.mainEntityFilterForm(formMainEntityList);
                         $(this).dialog("destroy");
                     }
                 }
@@ -286,8 +292,8 @@ define([
             close: function (event, ui) {
                 $('.user-admin-form-warning').addClass(warningMessageDisplayClass).html('');
                 $('#user-admin-form-add')[0].reset();
-                thatBis.secondaryEntitiesFilterForm(formEntityList);
-                thatBis.mainEntityFilterForm(formEntityList);
+                thatBis.secondaryEntitiesFilterForm(formSecondaryEntityList);
+                thatBis.mainEntityFilterForm(formMainEntityList);
                 $(this).dialog("destroy");
             },
         });
@@ -297,12 +303,12 @@ define([
 
         // When user change main entity select.
         $('#user-admin-form-add-entity').change(function () {
-            thatBis.secondaryEntitiesFilterForm(formEntityList);
+            thatBis.secondaryEntitiesFilterForm(formSecondaryEntityList);
         });
 
         // When user change secondary entities select.
         $('#user-admin-form-add-secondary-entities').change(function () {
-            thatBis.mainEntityFilterForm(formEntityList);
+            thatBis.mainEntityFilterForm(formMainEntityList);
         });
         /**
          * Setting main entity select input.
@@ -346,8 +352,7 @@ define([
             var secondaryEntitiesSelect = $('#user-admin-form-add-secondary-entities').val();
 
             // Remove entity already selected.
-            // "slice(1)" -> remove "...choose" choice
-            var filterSecondaryEntitiesFormList = formEntityList.slice(1).filter(function (opt) {
+            var filterSecondaryEntitiesFormList = formEntityList.filter(function (opt) {
                 return mainEntitySelect !== opt.value;
             });
 

@@ -71,6 +71,30 @@ function theme_mentor_page_init(moodle_page $page) {
             }
         }
     }
+
+    // Add a body class if the current course page is roles assign.
+    if ($page->pagetype === 'admin-roles-assign' && $page->context->contextlevel === CONTEXT_COURSECAT) {
+        require_once($CFG->dirroot . '/local/mentor_core/api/entity.php');
+        // Check if context entity is not main entity.
+        $entity = \local_mentor_core\entity_api::get_entity($page->context->instanceid);
+        if (!$entity->is_main_entity()) {
+            $page->add_body_class('sub-entity');
+
+            // List of role except.
+            // TODO : to settings ?
+            $execeptrolesshortname = [
+                    'respformation'
+            ];
+
+            // Replace shortname role to name role.
+            $exceptrolesname = array_map(function($roleshortname) {
+                return \local_mentor_core\database_interface::get_instance()->get_role_by_name($roleshortname)->name;
+            }, $execeptrolesshortname);
+
+            // Call Js.
+            $page->requires->js_call_amd('theme_mentor/roles_assign', 'init', [$exceptrolesname, is_siteadmin()]);
+        }
+    }
 }
 
 /**
@@ -78,12 +102,12 @@ function theme_mentor_page_init(moodle_page $page) {
  * $CFG->browserrequirements must be defined in config.php
  * ex :
  * $CFG->browserrequirements = [
-    "Edge"    => 79,
-    "Chrome"  => 66,
-    "Firefox" => 78,
-    "Safari"  => 15,
-    "Opera"   => 53
-    ];
+ * "Edge"    => 79,
+ * "Chrome"  => 66,
+ * "Firefox" => 78,
+ * "Safari"  => 15,
+ * "Opera"   => 53
+ * ];
  *
  * @return boolean
  */

@@ -27,24 +27,24 @@ defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
 
-        'enrol/sirh:config'  => array(
+    'enrol/sirh:config' => array(
 
-                'captype'      => 'write',
-                'contextlevel' => CONTEXT_COURSE,
-                'archetypes'   => array(
-                        'editingteacher' => CAP_ALLOW,
-                        'manager'        => CAP_ALLOW,
-                )
-        ),
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW,
+        )
+    ),
 
     /* This is used only when sync suspends users instead of full unenrolment. */
-        'enrol/sirh:unenrol' => array(
+    'enrol/sirh:unenrol' => array(
 
-                'captype'      => 'write',
-                'contextlevel' => CONTEXT_COURSE,
-                'archetypes'   => array(
-                        'manager' => CAP_ALLOW,
-                )
-        ),
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+            'manager' => CAP_ALLOW,
+        )
+    ),
 
 );

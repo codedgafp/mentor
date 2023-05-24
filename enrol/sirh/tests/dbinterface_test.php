@@ -39,13 +39,11 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \enrol_sirh\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
-
-        \local_mentor_core\training_api::clear_cache();
     }
 
     /**
@@ -62,64 +60,64 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
             'local_mentor_specialization');
 
         if ($training) {
-            $data->name      = 'fullname';
+            $data->name = 'fullname';
             $data->shortname = 'shortname';
-            $data->content   = 'summary';
-            $data->status    = 'ec';
+            $data->content = 'summary';
+            $data->status = 'ec';
         } else {
-            $data->trainingname      = 'fullname';
+            $data->trainingname = 'fullname';
             $data->trainingshortname = 'shortname';
-            $data->trainingcontent   = 'summary';
-            $data->trainingstatus    = 'ec';
+            $data->trainingcontent = 'summary';
+            $data->trainingstatus = 'ec';
         }
 
         // Fields for taining.
-        $data->teaser                       = 'http://www.edunao.com/';
-        $data->teaserpicture                = '';
-        $data->prerequisite                 = 'TEST';
-        $data->collection                   = 'accompagnement';
-        $data->traininggoal                 = 'TEST TRAINING ';
-        $data->idsirh                       = 'TEST ID SIRH';
-        $data->licenseterms                 = 'cc-sa';
-        $data->typicaljob                   = 'TEST';
-        $data->skills                       = [];
-        $data->certifying                   = '1';
-        $data->presenceestimatedtimehours   = '12';
+        $data->teaser = 'http://www.edunao.com/';
+        $data->teaserpicture = '';
+        $data->prerequisite = 'TEST';
+        $data->collection = 'accompagnement';
+        $data->traininggoal = 'TEST TRAINING ';
+        $data->idsirh = 'TEST ID SIRH';
+        $data->licenseterms = 'cc-sa';
+        $data->typicaljob = 'TEST';
+        $data->skills = [];
+        $data->certifying = '1';
+        $data->presenceestimatedtimehours = '12';
         $data->presenceestimatedtimeminutes = '10';
-        $data->remoteestimatedtimehours     = '15';
-        $data->remoteestimatedtimeminutes   = '30';
-        $data->trainingmodalities           = 'd';
-        $data->producingorganization        = 'TEST';
-        $data->producerorganizationlogo     = '';
-        $data->designers                    = 'TEST';
-        $data->contactproducerorganization  = 'TEST';
-        $data->thumbnail                    = '';
+        $data->remoteestimatedtimehours = '15';
+        $data->remoteestimatedtimeminutes = '30';
+        $data->trainingmodalities = 'd';
+        $data->producingorganization = 'TEST';
+        $data->producerorganizationlogo = '';
+        $data->designers = 'TEST';
+        $data->contactproducerorganization = 'TEST';
+        $data->thumbnail = '';
 
         // Specific fields for session (only for update).
         if ($sessionid) {
-            $data->id                      = $sessionid;
-            $data->opento                  = 'all';
-            $data->publiccible             = 'TEST';
-            $data->termsregistration       = 'autre';
+            $data->id = $sessionid;
+            $data->opento = 'all';
+            $data->publiccible = 'TEST';
+            $data->termsregistration = 'autre';
             $data->termsregistrationdetail = 'TEST';
 
-            $data->onlinesessionestimatedtimehours     = '10';
-            $data->onlinesessionestimatedtimeminutes   = '15';
-            $data->presencesessionestimatedtimehours   = '12';
+            $data->onlinesessionestimatedtimehours = '10';
+            $data->onlinesessionestimatedtimeminutes = '15';
+            $data->presencesessionestimatedtimehours = '12';
             $data->presencesessionestimatedtimeminutes = '25';
 
-            $data->sessionpermanent    = 0;
-            $data->sessionstartdate    = 1609801200;
-            $data->sessionenddate      = 1609801200;
-            $data->sessionmodalities   = 'presentiel';
-            $data->accompaniment       = 'TEST';
-            $data->maxparticipants     = 10;
-            $data->placesavailable     = 8;
-            $data->numberparticipants  = 2;
-            $data->location            = 'PARIS';
+            $data->sessionpermanent = 0;
+            $data->sessionstartdate = 1609801200;
+            $data->sessionenddate = 1609801200;
+            $data->sessionmodalities = 'presentiel';
+            $data->accompaniment = 'TEST';
+            $data->maxparticipants = 10;
+            $data->placesavailable = 8;
+            $data->numberparticipants = 2;
+            $data->location = 'PARIS';
             $data->organizingstructure = 'TEST ORGANISATION';
-            $data->sessionnumber       = 1;
-            $data->opentolist          = '';
+            $data->sessionnumber = 1;
+            $data->opentolist = '';
         }
 
         return $data;
@@ -143,9 +141,9 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
         try {
             // Get entity object for default category.
             $entityid = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1',
-                'sirhlist'  => 'RENOIRH_AES'
+                'sirhlist' => 'RENOIRH_AES'
             ]);
 
             $entity = \local_mentor_core\entity_api::get_entity($entityid);
@@ -186,7 +184,7 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
         }
 
         // Open to current entity.
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -198,10 +196,10 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
      */
     public function init_training_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -212,10 +210,10 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
      */
     public function init_session_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -234,10 +232,10 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
 
         $this->getDataGenerator()->create_user(array(
             'username' => 'test@gmail.com',
-            'email'    => 'test@gmail.com'
+            'email' => 'test@gmail.com'
         ));
 
-        $dbi  = \enrol_sirh\database_interface::get_instance();
+        $dbi = \enrol_sirh\database_interface::get_instance();
         $user = $dbi->get_user_by_email('test@gmail.com');
 
         self::assertIsObject($user);
@@ -257,7 +255,7 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
         $this->resetAfterTest(true);
         $this->reset_singletons();
 
-        $dbi  = \enrol_sirh\database_interface::get_instance();
+        $dbi = \enrol_sirh\database_interface::get_instance();
         $user = $dbi->get_user_by_email('test@gmail.com');
 
         self::assertFalse($user);
@@ -277,10 +275,10 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $course       = $this->getDataGenerator()->create_course();
-        $sirh         = 'SIRH';
+        $course = $this->getDataGenerator()->create_course();
+        $sirh = 'SIRH';
         $sirhtraining = 'SIRH training';
-        $sirhsession  = 'SIRH session';
+        $sirhsession = 'SIRH session';
 
         $instanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
             $course->id,
@@ -289,7 +287,7 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
             $sirhsession
         );
 
-        $dbi           = \enrol_sirh\database_interface::get_instance();
+        $dbi = \enrol_sirh\database_interface::get_instance();
         $usersinstance = $dbi->get_instance_users_sirh($instanceid);
 
         self::assertEmpty($usersinstance);
@@ -297,7 +295,7 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
         $user = $this->getDataGenerator()->create_user();
         \enrol_sirh_external::enrol_user($course->id, $instanceid, $user->id);
 
-        $dbi           = \enrol_sirh\database_interface::get_instance();
+        $dbi = \enrol_sirh\database_interface::get_instance();
         $usersinstance = $dbi->get_instance_users_sirh($instanceid);
 
         self::assertCount(1, $usersinstance);
@@ -319,12 +317,12 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
-        $course    = $session->get_course();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $course = $session->get_course();
 
-        $sirh         = 'SIRH';
+        $sirh = 'SIRH';
         $sirhtraining = 'SIRH training';
-        $sirhsession  = 'SIRH session';
+        $sirhsession = 'SIRH session';
 
         $instanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
             $course->id,
@@ -333,7 +331,7 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
             $sirhsession
         );
 
-        $dbi      = \enrol_sirh\database_interface::get_instance();
+        $dbi = \enrol_sirh\database_interface::get_instance();
         $instance = $dbi->get_instance_sirh(
             $course->id,
             $sirh,
@@ -364,9 +362,9 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
         self::setAdminUser();
         $course = $this->getDataGenerator()->create_course();
 
-        $sirh         = 'SIRH';
+        $sirh = 'SIRH';
         $sirhtraining = 'SIRH training';
-        $sirhsession  = 'SIRH session';
+        $sirhsession = 'SIRH session';
 
         \enrol_sirh\sirh_api::create_enrol_sirh_instance(
             $course->id,
@@ -375,7 +373,7 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
             $sirhsession
         );
 
-        $dbi      = \enrol_sirh\database_interface::get_instance();
+        $dbi = \enrol_sirh\database_interface::get_instance();
         $instance = $dbi->get_instance_sirh(
             $course->id,
             $sirh,
@@ -401,12 +399,12 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
-        $course    = $session->get_course();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $course = $session->get_course();
 
-        $sirh         = 'SIRH';
+        $sirh = 'SIRH';
         $sirhtraining = 'SIRH training';
-        $sirhsession  = 'SIRH session';
+        $sirhsession = 'SIRH session';
 
         $instanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
             $course->id,
@@ -415,7 +413,7 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
             $sirhsession
         );
 
-        $dbi      = \enrol_sirh\database_interface::get_instance();
+        $dbi = \enrol_sirh\database_interface::get_instance();
         $instance = $dbi->get_instance_sirh_by_id($instanceid);
 
         self::assertIsObject($instance);
@@ -460,12 +458,12 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
         $course = $this->getDataGenerator()->create_course();
 
         // Group creation.
-        $group           = new stdClass();
-        $group->name     = 'testgroup';
+        $group = new stdClass();
+        $group->name = 'testgroup';
         $group->courseid = $course->id;
-        $groupid         = groups_create_group($group);
+        $groupid = groups_create_group($group);
 
-        $dbi       = \enrol_sirh\database_interface::get_instance();
+        $dbi = \enrol_sirh\database_interface::get_instance();
         $groupdata = $dbi->get_course_group_by_name($course->id, 'testgroup');
 
         self::assertIsObject($groupdata);
@@ -508,7 +506,7 @@ class enrol_sirh_dbinterface_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $user   = $this->getDataGenerator()->create_user();
+        $user = $this->getDataGenerator()->create_user();
         $course = $this->getDataGenerator()->create_course();
 
         $instanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance(

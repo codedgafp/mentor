@@ -40,7 +40,7 @@ class local_mentor_core_front_controller_testcase extends advanced_testcase {
      */
     public function access_protected($obj, $prop) {
         $reflection = new ReflectionClass($obj);
-        $property   = $reflection->getProperty($prop);
+        $property = $reflection->getProperty($prop);
         $property->setAccessible(true);
         return $property->getValue($obj);
     }
@@ -57,13 +57,13 @@ class local_mentor_core_front_controller_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $frontcontroller = new \local_mentor_core\front_controller(
-            'mentor_core/tests',
-            'local_mentor_core\\',
-            array(
-                'plugintype' => 'local',
-                'controller' => 'test',
-                'action'     => 'test_action'
-            )
+                'mentor_core/tests',
+                'local_mentor_core\\',
+                array(
+                        'plugintype' => 'local',
+                        'controller' => 'test',
+                        'action' => 'test_action'
+                )
         );
 
         self::assertEquals('test_controller', $this->access_protected($frontcontroller, 'controller'));
@@ -95,20 +95,20 @@ class local_mentor_core_front_controller_testcase extends advanced_testcase {
 
         try {
             new \local_mentor_core\front_controller(
-                'mentor_core/tests',
-                'local_mentor_core\\',
-                array(
-                    'plugintype' => 'local',
-                    'controller' => 'test_false',
-                    'action'     => 'test_action'
-                )
+                    'mentor_core/tests',
+                    'local_mentor_core\\',
+                    array(
+                            'plugintype' => 'local',
+                            'controller' => 'test_false',
+                            'action' => 'test_action'
+                    )
             );
             self::fail();
         } catch (\moodle_exception $e) {
             self::assertEquals(
-                $e->getMessage(),
-                'error/Controller file not found : ' . $CFG->dirroot .
-                "/local/mentor_core/tests/classes/controllers/test_false_controller.php\n\$a contents: "
+                    $e->getMessage(),
+                    'error/Controller file not found : ' . $CFG->dirroot .
+                    "/local/mentor_core/tests/classes/controllers/test_false_controller.php\n\$a contents: "
             );
         }
 
@@ -130,19 +130,19 @@ class local_mentor_core_front_controller_testcase extends advanced_testcase {
 
         try {
             new \local_mentor_core\front_controller(
-                'mentor_core/tests',
-                'local_mentor_core\\',
-                array(
-                    'plugintype' => 'local',
-                    'controller' => 'false_test',
-                    'action'     => 'test_action'
-                )
+                    'mentor_core/tests',
+                    'local_mentor_core\\',
+                    array(
+                            'plugintype' => 'local',
+                            'controller' => 'false_test',
+                            'action' => 'test_action'
+                    )
             );
             self::fail();
         } catch (\InvalidArgumentException $e) {
             self::assertEquals(
-                $e->getMessage(),
-                "The controller 'false_test_controller' has not been defined."
+                    $e->getMessage(),
+                    "The controller 'false_test_controller' has not been defined."
             );
         }
 
@@ -162,19 +162,19 @@ class local_mentor_core_front_controller_testcase extends advanced_testcase {
 
         try {
             new \local_mentor_core\front_controller(
-                'mentor_core/tests',
-                'local_mentor_core\\',
-                array(
-                    'plugintype' => 'local',
-                    'controller' => 'test',
-                    'action'     => 'false_action'
-                )
+                    'mentor_core/tests',
+                    'local_mentor_core\\',
+                    array(
+                            'plugintype' => 'local',
+                            'controller' => 'test',
+                            'action' => 'false_action'
+                    )
             );
             self::fail();
         } catch (\InvalidArgumentException $e) {
             self::assertEquals(
-                $e->getMessage(),
-                "The controller action 'false_action' is undefined fot the controller 'local_mentor_core\\test_controller'."
+                    $e->getMessage(),
+                    "The controller action 'false_action' is undefined fot the controller 'local_mentor_core\\test_controller'."
             );
         }
 
@@ -192,13 +192,13 @@ class local_mentor_core_front_controller_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $frontcontroller = new \local_mentor_core\front_controller(
-            'mentor_core/tests',
-            'local_mentor_core\\',
-            array(
-                'plugintype' => 'local',
-                'controller' => 'test',
-                'action'     => 'test_action'
-            )
+                'mentor_core/tests',
+                'local_mentor_core\\',
+                array(
+                        'plugintype' => 'local',
+                        'controller' => 'test',
+                        'action' => 'test_action'
+                )
         );
 
         $result = $frontcontroller->execute();

@@ -40,9 +40,9 @@ use core_privacy\local\request\approved_userlist;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements
-        \core_privacy\local\metadata\provider,
-        \core_privacy\local\request\core_userlist_provider,
-        \core_privacy\local\request\plugin\provider {
+    \core_privacy\local\metadata\provider,
+    \core_privacy\local\request\core_userlist_provider,
+    \core_privacy\local\request\plugin\provider {
 
     /**
      * Returns meta data about this system.
@@ -52,10 +52,10 @@ class provider implements
      */
     public static function get_metadata(collection $collection): collection {
         return $collection->add_database_table('user_info_data', [
-                'userid'     => 'privacy:metadata:profilefield_autocomplete:userid',
-                'fieldid'    => 'privacy:metadata:profilefield_autocomplete:fieldid',
-                'data'       => 'privacy:metadata:profilefield_autocomplete:data',
-                'dataformat' => 'privacy:metadata:profilefield_autocomplete:dataformat'
+            'userid' => 'privacy:metadata:profilefield_autocomplete:userid',
+            'fieldid' => 'privacy:metadata:profilefield_autocomplete:fieldid',
+            'data' => 'privacy:metadata:profilefield_autocomplete:data',
+            'dataformat' => 'privacy:metadata:profilefield_autocomplete:dataformat'
         ], 'privacy:metadata:profilefield_autocomplete:tableexplanation');
     }
 
@@ -66,17 +66,17 @@ class provider implements
      * @return  contextlist $contextlist  The contextlist containing the list of contexts used in this plugin.
      */
     public static function get_contexts_for_userid(int $userid): contextlist {
-        $sql         = "SELECT ctx.id
+        $sql = "SELECT ctx.id
                   FROM {user_info_data} uda
                   JOIN {user_info_field} uif ON uda.fieldid = uif.id
                   JOIN {context} ctx ON ctx.instanceid = uda.userid
                        AND ctx.contextlevel = :contextlevel
                  WHERE uda.userid = :userid
                        AND uif.datatype = :datatype";
-        $params      = [
-                'userid'       => $userid,
-                'contextlevel' => CONTEXT_USER,
-                'datatype'     => 'autocomplete'
+        $params = [
+            'userid' => $userid,
+            'contextlevel' => CONTEXT_USER,
+            'datatype' => 'autocomplete'
         ];
         $contextlist = new contextlist();
         $contextlist->add_from_sql($sql, $params);
@@ -104,8 +104,8 @@ class provider implements
                        AND uif.datatype = :datatype";
 
         $params = [
-                'userid'   => $context->instanceid,
-                'datatype' => 'autocomplete'
+            'userid' => $context->instanceid,
+            'datatype' => 'autocomplete'
         ];
 
         $userlist->add_from_sql('userid', $sql, $params);
@@ -125,12 +125,12 @@ class provider implements
                 $results = static::get_records($user->id);
                 foreach ($results as $result) {
                     $data = (object) [
-                            'name'        => $result->name,
-                            'description' => $result->description,
-                            'data'        => $result->data
+                        'name' => $result->name,
+                        'description' => $result->description,
+                        'data' => $result->data
                     ];
                     \core_privacy\local\request\writer::with_context($context)->export_data([
-                            get_string('pluginname', 'profilefield_autocomplete')
+                        get_string('pluginname', 'profilefield_autocomplete')
                     ], $data);
                 }
             }
@@ -186,8 +186,8 @@ class provider implements
         global $DB;
 
         $params = [
-                'userid'   => $userid,
-                'datatype' => 'autocomplete'
+            'userid' => $userid,
+            'datatype' => 'autocomplete'
         ];
 
         $DB->delete_records_select('user_info_data', "fieldid IN (
@@ -204,14 +204,14 @@ class provider implements
     protected static function get_records($userid) {
         global $DB;
 
-        $sql    = "SELECT *
+        $sql = "SELECT *
                   FROM {user_info_data} uda
                   JOIN {user_info_field} uif ON uda.fieldid = uif.id
                  WHERE uda.userid = :userid
                        AND uif.datatype = :datatype";
         $params = [
-                'userid'   => $userid,
-                'datatype' => 'autocomplete'
+            'userid' => $userid,
+            'datatype' => 'autocomplete'
         ];
 
         return $DB->get_records_sql($sql, $params);

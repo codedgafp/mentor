@@ -24,25 +24,25 @@
  */
 
 $string['pluginname'] = 'Profil utilisateur';
-$string['adduser']    = 'Ajouter un utilisateur';
+$string['adduser'] = 'Ajouter un utilisateur';
 $string['emailchangepending']
-                      = 'Modification en cours. Un lien de validation a été envoyé à l\'adresse : {$a->preference_newemail}.';
+    = 'Modification en cours. Un lien de validation a été envoyé à l\'adresse : {$a->preference_newemail}.';
 
-$string['warning']                = 'Avertissement';
+$string['warning'] = 'Avertissement';
 $string['suspenduserwarning']
-                                  = 'Attention, vous allez suspendre un compte utilisateur. L\'utilisateur ne pourra plus se connecter à Mentor.
+    = 'Attention, vous allez suspendre un compte utilisateur. L\'utilisateur ne pourra plus se connecter à Mentor.
 Si vous ne souhaitez pas continuer, veuillez cliquer sur Annuler et décocher la case Compte suspendu.';
 $string['unsuspenduserwarning']
-                                  = 'Attention, vous allez réactiver un compte utilisateur.';
+    = 'Attention, vous allez réactiver un compte utilisateur.';
 $string['changemainentity']
-                                  = 'Attention, vous allez modifier l\'entité principale de l\'utilisateur. Vous ne pourrez plus modifier cet utilisateur si vous n\'êtes pas administrateur de la nouvelle entité principale.
+    = 'Attention, vous allez modifier l\'entité principale de l\'utilisateur. Vous ne pourrez plus modifier cet utilisateur si vous n\'êtes pas administrateur de la nouvelle entité principale.
 Si vous ne souhaitez pas continuer, veuillez cliquer sur Annuler et remettre à jour l\'entité principale avec sa valeur précédente.';
 $string['changesecondaryentities']
-                                  = 'Attention, vous allez modifier une ou plusieurs entités secondaires de l\'utilisateur.';
+    = 'Attention, vous allez modifier une ou plusieurs entités secondaires de l\'utilisateur.';
 $string['userreceivenotification']
-                                  = 'L\'utilisateur recevra une notification des modifications effectuées sur son profil.';
-$string['wanttocontinue']         = 'Voulez-vous continuer ?';
-$string['disabledaccountobject']  = 'Mentor : Suspension de votre compte';
+    = 'L\'utilisateur recevra une notification des modifications effectuées sur son profil.';
+$string['wanttocontinue'] = 'Voulez-vous continuer ?';
+$string['disabledaccountobject'] = 'Mentor : Suspension de votre compte';
 $string['disabledaccountcontent'] = 'Bonjour,
 
 Votre compte utilisateur sur la plateforme Mentor ({$a->wwwroot}) a été suspendu par un administrateur.
@@ -50,8 +50,8 @@ Votre compte utilisateur sur la plateforme Mentor ({$a->wwwroot}) a été suspen
 Si vous avez besoin d\'accéder de nouveau à Mentor, veuillez contacter votre gestionnaire ou responsable de formation.
 
 L\'équipe du programme Mentor';
-$string['enabledaccountobject']   = 'Mentor : Réactivation de votre compte';
-$string['enabledaccountcontent']  = 'Bonjour,
+$string['enabledaccountobject'] = 'Mentor : Réactivation de votre compte';
+$string['enabledaccountcontent'] = 'Bonjour,
 
 Votre compte utilisateur sur la plateforme Mentor ({$a->wwwroot}) a été réactivé par un administrateur.
 
@@ -60,5 +60,5 @@ Si vous rencontrez des difficultés d\'accès, veuillez contacter votre gestionn
 Vous pouvez aussi utiliser le lien mot de passe oublié : {$a->forgetpasswordurl}
 
 L\'équipe du programme Mentor';
-$string['mainentity']             = 'Entité de rattachement principale';
-$string['secondaryentities']      = 'Entité(s) de rattachement secondaire(s)';
+$string['mainentity'] = 'Entité de rattachement principale';
+$string['secondaryentities'] = 'Entité(s) de rattachement secondaire(s)';

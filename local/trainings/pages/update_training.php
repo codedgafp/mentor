@@ -36,7 +36,7 @@ require_once($CFG->dirroot . '/local/mentor_core/api/library.php');
 require_login();
 
 $trainingid = required_param('trainingid', PARAM_INT);
-$returnto   = optional_param('returnto', null, PARAM_LOCALURL);
+$returnto = optional_param('returnto', null, PARAM_LOCALURL);
 
 if (!$trainingid) {
     throw new \coding_exception('The entity ID must be set.');
@@ -95,13 +95,13 @@ if ($logo) {
     );
 }
 
-$forminfos            = new stdClass();
-$forminfos->training  = $training;
-$forminfos->entity    = $entity;
-$forminfos->logourl   = $logourl;
-$forminfos->publish    = \local_mentor_core\library_api::get_library_publication($training->id);
+$forminfos = new stdClass();
+$forminfos->training = $training;
+$forminfos->entity = $entity;
+$forminfos->logourl = $logourl;
+$forminfos->publish = \local_mentor_core\library_api::get_library_publication($training->id);
 $forminfos->actionurl = $url->out();
-$forminfos->returnto  = empty($returnto) ? $training->get_url() : $returnto;
+$forminfos->returnto = empty($returnto) ? $training->get_url() : $returnto;
 
 $form = \local_mentor_core\training_api::get_training_form($url->out(), $forminfos);
 

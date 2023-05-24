@@ -49,18 +49,18 @@ class entity_form extends \moodleform {
         parse_str(parse_url($action)['query'], $params);
 
         // Course context instance.
-        $courseid      = $params['id'];
-        $course        = get_course($courseid);
+        $courseid = $params['id'];
+        $course = get_course($courseid);
         $coursecontext = \context_course::instance($courseid);
-        $this->entity  = entity_api::get_entity($course->category);
+        $this->entity = entity_api::get_entity($course->category, false);
 
         // DB interface.
         $dbinterface = database_interface::get_instance();
 
         // Fields attributes.
         $namecategoryattributes = ['size' => '50'];
-        $regionattributes       = ['multiple' => 'multiple'];
-        $displaylogopicker      = true;
+        $regionattributes = ['multiple' => 'multiple'];
+        $displaylogopicker = true;
 
         // Check capabilites.
         if (!has_capability('local/mentor_specialization:changeentityname', $coursecontext)) {
@@ -85,13 +85,21 @@ class entity_form extends \moodleform {
 
         // Entity shortname.
         $mform->addElement('text', 'shortname',
-            get_string('shortname', 'local_entities') . get_string('maxcaracters', 'local_mentor_specialization', 18),
-            $namecategoryattributes);
+                get_string('shortname', 'local_entities') . get_string('maxcaracters', 'local_mentor_specialization', 18),
+                $namecategoryattributes);
         if (is_siteadmin()) {
             $mform->addRule('shortname', get_string('required'), 'required');
         }
         $mform->setType('shortname', PARAM_NOTAGS);
         $mform->addRule('shortname', get_string('entityshortnamelimit', 'local_mentor_core', 18), 'maxlength', 18, 'client');
+
+        // Entity can be main entity.
+        if (has_capability('local/entities:manageentity', $this->entity->get_context())) {
+            $mform->addElement('advcheckbox', 'canbemainentity', get_string('mainentity', 'local_mentor_specialization'), ' ');
+            if (!is_siteadmin()) {
+                $mform->disabledIf('canbemainentity', '');
+            }
+        }
 
         // Regions selector.
         $allregions = $dbinterface->get_all_regions();
@@ -104,7 +112,7 @@ class entity_form extends \moodleform {
             }
 
             $mform->addElement('autocomplete', 'regions', get_string('region', 'local_mentor_specialization'), $regionsoptions,
-                $regionattributes);
+                    $regionattributes);
         } else {
             $regions = $this->entity->regions;
 
@@ -112,7 +120,7 @@ class entity_form extends \moodleform {
                 $regionshtml = '<div class="form-autocomplete-selection">';
                 foreach ($regions as $region) {
                     $regionshtml .= \html_writer::tag('span', $allregions[$region]->name,
-                        array('style' => 'font-size:100%;', 'class' => 'badge badge-info mb-3 mr-1', 'role' => 'listitem'));
+                            array('style' => 'font-size:100%;', 'class' => 'badge badge-info mb-3 mr-1', 'role' => 'listitem'));
                 }
                 $regionshtml .= '</div>';
 
@@ -128,7 +136,7 @@ class entity_form extends \moodleform {
 
         // Entity logo.
         $mform->addElement('filepicker', 'logo', 'Logo', null,
-            array('accepted_types' => $acceptedtypes, 'subdirs' => 0, 'maxfiles' => 1, 'maxbytes' => 1024000));
+                array('accepted_types' => $acceptedtypes, 'subdirs' => 0, 'maxfiles' => 1, 'maxbytes' => 1024000));
 
         if (false === $displaylogopicker) {
             $mform->addElement('html', '</div>');
@@ -137,12 +145,12 @@ class entity_form extends \moodleform {
 
             if ($logo) {
                 $logourl = \moodle_url::make_pluginfile_url(
-                    $logo->get_contextid(),
-                    $logo->get_component(),
-                    $logo->get_filearea(),
-                    $logo->get_itemid(),
-                    $logo->get_filepath(),
-                    $logo->get_filename()
+                        $logo->get_contextid(),
+                        $logo->get_component(),
+                        $logo->get_filearea(),
+                        $logo->get_itemid(),
+                        $logo->get_filepath(),
+                        $logo->get_filename()
                 );
 
                 $thumbnailhtml = '<img class="session-logo" src="' . $logourl . '" />';
@@ -156,11 +164,11 @@ class entity_form extends \moodleform {
         // Identifiants SIRH.
         if (is_siteadmin()) {
             $mform->addElement(
-                'autocomplete',
-                'sirhlist',
-                'Identifiant SIRH d\'origine',
-                $allsirh,
-                ['multiple' => true]
+                    'autocomplete',
+                    'sirhlist',
+                    'Identifiant SIRH d\'origine',
+                    $allsirh,
+                    ['multiple' => true]
             );
 
             // Hide the entity.
@@ -177,7 +185,7 @@ class entity_form extends \moodleform {
                     $sirhhtml = '<div class="form-autocomplete-selection">';
                     foreach ($selectedsirh as $sirh) {
                         $sirhhtml .= \html_writer::tag('span', $allsirh[$sirh],
-                            array('style' => 'font-size:100%;', 'class' => 'badge badge-info mb-3 mr-1', 'role' => 'listitem'));
+                                array('style' => 'font-size:100%;', 'class' => 'badge badge-info mb-3 mr-1', 'role' => 'listitem'));
                     }
                     $sirhhtml .= '</div>';
 
@@ -229,7 +237,7 @@ class entity_form extends \moodleform {
 
         // Check if entity name is already used.
         if (!empty($data['shortname']) && \local_mentor_core\entity_api::shortname_exists($data['shortname'],
-                $this->entity->id)) {
+                        $this->entity->id)) {
             $errors['shortname'] = get_string('errorentityshortnameexist', 'local_mentor_core');
         }
 

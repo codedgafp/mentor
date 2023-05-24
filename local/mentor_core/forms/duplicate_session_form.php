@@ -48,9 +48,9 @@ class duplicate_session_form extends \moodleform {
     public function __construct($action = null, $customdata = null, $method = 'post', $target = '', $attributes = null,
         $editable = true, $ajaxformdata = null) {
 
-        $this->sessionid    = $customdata['sessionid'];
+        $this->sessionid = $customdata['sessionid'];
         $this->entitieslist = $customdata['entitieslist'];
-        $this->entitiesjs   = $customdata['entitiesjs'];
+        $this->entitiesjs = $customdata['entitiesjs'];
 
         parent::__construct($action, $customdata, $method, $target, $attributes, $editable, $ajaxformdata);
     }
@@ -72,7 +72,7 @@ class duplicate_session_form extends \moodleform {
         ));
         $mform->addRule('duplicationtype', get_string('required'), 'required', null, 'client');
 
-        $strrequired  = get_string("required");
+        $strrequired = get_string("required");
         $requiredicon = '<i class="icon fa fa-exclamation-circle text-danger fa-fw" title="' . $strrequired . '" aria-label="' .
                         $strrequired . '"></i>';
 
@@ -195,7 +195,7 @@ class duplicate_session_form extends \moodleform {
      * @param mixed $value
      */
     public function set_value($elementname, $value) {
-        $mform   = $this->_form;
+        $mform = $this->_form;
         $element = $mform->getElement($elementname);
         $element->setValue($value);
     }

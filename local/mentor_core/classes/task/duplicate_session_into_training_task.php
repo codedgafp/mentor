@@ -60,21 +60,21 @@ class duplicate_session_into_training_task extends \core\task\adhoc_task {
             return SESSION_NOT_FOUND;
         }
 
-        $session          = session_api::get_session($data->sessionid);
+        $session = session_api::get_session($data->sessionid);
         $sessionurlcourse = $session->get_url()->out();
 
-        $training          = $session->duplicate_into_training();
+        $training = $session->duplicate_into_training();
         $trainingurlcourse = $training->get_url()->out();
 
-        $creator     = \core_user::get_user($this->get_userid());
+        $creator = \core_user::get_user($this->get_userid());
         $supportuser = \core_user::get_support_user();
 
         // Get the content of the email.
-        $content     = get_string('duplicate_session_into_training_email', 'local_mentor_core', array(
-            'sessionurlsheet'  => $sessionurlcourse,
+        $content = get_string('duplicate_session_into_training_email', 'local_mentor_core', array(
+            'sessionurlsheet' => $sessionurlcourse,
             'trainingurlsheet' => $trainingurlcourse,
             'trainingfullname' => $training->name,
-            'sessionfullname'  => $session->fullname
+            'sessionfullname' => $session->fullname
         ));
         $contenthtml = text_to_html($content, false, false, true);
 

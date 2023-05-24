@@ -54,44 +54,44 @@ class training_controller extends controller_base {
                 case 'get_trainings_by_entity':
 
                     // Get count all trainings record by entity.
-                    $data                 = new \stdClass();
-                    $data->entityid       = $this->get_param('entityid', PARAM_INT);
-                    $data->start          = 0;
-                    $data->length         = 0;
-                    $data->status         = false;
-                    $data->datefrom       = false;
-                    $data->dateto         = false;
-                    $data->search         = false;
-                    $data->order          = false;
-                    $data->filters        = [];
+                    $data = new \stdClass();
+                    $data->entityid = $this->get_param('entityid', PARAM_INT);
+                    $data->start = 0;
+                    $data->length = 0;
+                    $data->status = false;
+                    $data->datefrom = false;
+                    $data->dateto = false;
+                    $data->search = false;
+                    $data->order = false;
+                    $data->filters = [];
                     $data->onlymainentity = $this->get_param('onlymainentity', PARAM_INT, true) ? true : false;
-                    $data->recordsTotal   = self::count_trainings_by_entity($data);
+                    $data->recordsTotal = self::count_trainings_by_entity($data);
 
                     // Get count all trainings record by entity with filter.
-                    $data->status          = $this->get_param('status', PARAM_TEXT, null);
-                    $data->dateto          = $this->get_param('dateto', PARAM_INT, null);
-                    $data->datefrom        = $this->get_param('datefrom', PARAM_INT, null);
-                    $data->draw            = $this->get_param('draw', PARAM_INT, null);
-                    $data->order           = $this->get_param('order', PARAM_RAW, null);
-                    $data->order           = is_null($data->order) ? $data->order : $data->order[0];
-                    $data->search          = $this->get_param('search', PARAM_RAW, null);
-                    $data->filters         = $this->get_param('filter', PARAM_RAW, []);
+                    $data->status = $this->get_param('status', PARAM_TEXT, null);
+                    $data->dateto = $this->get_param('dateto', PARAM_INT, null);
+                    $data->datefrom = $this->get_param('datefrom', PARAM_INT, null);
+                    $data->draw = $this->get_param('draw', PARAM_INT, null);
+                    $data->order = $this->get_param('order', PARAM_RAW, null);
+                    $data->order = is_null($data->order) ? $data->order : $data->order[0];
+                    $data->search = $this->get_param('search', PARAM_RAW, null);
+                    $data->filters = $this->get_param('filter', PARAM_RAW, []);
                     $data->recordsFiltered = self::count_trainings_by_entity($data);
 
                     // Get trainings record by entity with filter, lentgh and start.
                     $data->length = $this->get_param('length', PARAM_INT, null);
-                    $data->start  = $this->get_param('start', PARAM_INT, null);
-                    $data->data   = self::get_trainings_by_entity($data);
+                    $data->start = $this->get_param('start', PARAM_INT, null);
+                    $data->data = self::get_trainings_by_entity($data);
                     return $data;
                 case 'duplicate_training':
-                    $trainingid        = $this->get_param('trainingid', PARAM_INT);
+                    $trainingid = $this->get_param('trainingid', PARAM_INT);
                     $trainingshortname = $this->get_param('trainingshortname', PARAM_TEXT);
                     $destinationentity = $this->get_param('destinationentity', PARAM_INT);
 
                     return $this->success(self::duplicate_training($trainingid, $trainingshortname, $destinationentity));
 
                 case 'move_training':
-                    $trainingid        = $this->get_param('trainingid', PARAM_INT);
+                    $trainingid = $this->get_param('trainingid', PARAM_INT);
                     $destinationentity = $this->get_param('destinationentity', PARAM_INT);
 
                     return $this->success(self::move_training($trainingid, $destinationentity));

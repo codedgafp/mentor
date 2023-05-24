@@ -53,11 +53,11 @@ $moodleusers = $DB->get_fieldset_select('user', 'username', 'auth = \'ldap_syncp
 
 // Open an ldap connection.
 $auth = new auth_plugin_ldap_syncplus();
-$con  = $auth->ldap_connect();
+$con = $auth->ldap_connect();
 
 // Paramètres de la recherche ldap.
-$basedn     = $config;
-$filter     = "(&(objectClass=person)(cn=*))";
+$basedn = $config;
+$filter = "(&(objectClass=person)(cn=*))";
 $attributes = ['cn'];
 
 // Cherche des résultats dans le ldap.

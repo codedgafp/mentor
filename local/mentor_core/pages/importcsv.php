@@ -45,7 +45,7 @@ $systemcontext = context_system::instance();
 $courseid = required_param('courseid', PARAM_INT);
 
 // Course context.
-$course        = get_course($courseid);
+$course = get_course($courseid);
 $coursecontext = context_course::instance($courseid);
 
 // Check capabilities.
@@ -59,7 +59,7 @@ $PAGE->set_title(get_string('enrolusers', 'local_mentor_core'));
 $PAGE->set_heading($course->fullname);
 
 $params = [
-    'modaltitle'   => get_string('import_modal_title', 'local_mentor_core'),
+    'modaltitle' => get_string('import_modal_title', 'local_mentor_core'),
     'modalcontent' => get_string('import_modal_content', 'local_mentor_core'),
 ];
 
@@ -76,11 +76,11 @@ echo $OUTPUT->heading(get_string('import_and_enrol_heading', 'local_mentor_core'
 $anchorurl = new moodle_url('/local/mentor_core/pages/importcsv.php', ['courseid' => $courseid], 'import-reports');
 
 // Import CSV form.
-$csvmform    = new importcsv_form($anchorurl->out(), []);
+$csvmform = new importcsv_form($anchorurl->out(), []);
 $csvformdata = $csvmform->get_data();
 
 // Import users form.
-$importusersform     = new importusers_form([],
+$importusersform = new importusers_form([],
     new moodle_url('/local/mentor_core/pages/importcsv.php', ['courseid' => $courseid]));
 $importusersformdata = $importusersform->get_data();
 
@@ -122,17 +122,17 @@ if (null !== $csvformdata) {
 
         // Errors array.
         $warnings = [
-            'list'           => [], // Errors list.
+            'list' => [], // Errors list.
             'groupsnotfound' => [], // List of not found group name.
-            'rolenotfound'   => [], // List of not found role name.
-            'loseprivilege'  => [], // List of users who could have lost their privilege.
+            'rolenotfound' => [], // List of not found role name.
+            'loseprivilege' => [], // List of users who could have lost their privilege.
         ];
 
         // Preview array.
         $preview = [
-            'list'                 => [], // Cleaned list of accounts.
-            'validlines'           => 0, // Number of lines without error.
-            'validforcreation'     => 0, // Number of lines that will create an account.
+            'list' => [], // Cleaned list of accounts.
+            'validlines' => 0, // Number of lines without error.
+            'validforcreation' => 0, // Number of lines that will create an account.
             'validforreactivation' => [], // Valid accounts for reactivation.
         ];
 
@@ -146,7 +146,7 @@ if (null !== $csvformdata) {
             $out .= html_writer::tag('h5', get_string('preview_table', 'local_mentor_core'), ['class' => 'report-title']);
 
             // Building preview table.
-            $previewstable       = new html_table();
+            $previewstable = new html_table();
             $previewstable->head = [
                 get_string('csv_line', 'local_mentor_core'),
                 get_string('lastname'),
@@ -156,7 +156,7 @@ if (null !== $csvformdata) {
                 get_string('group'),
             ];
             $previewstable->data = array_slice($preview['list'], 0, 10);
-            $out                 .= html_writer::table($previewstable);
+            $out .= html_writer::table($previewstable);
 
             // Add validated data into the import users form.
             $importusersform = new importusers_form($preview['list'], $preview['validforreactivation'],
@@ -183,10 +183,10 @@ if (null !== $csvformdata) {
             \core\notification::warning(get_string('errors_detected', 'local_mentor_core'));
 
             // Building errors report table.
-            $errorstable       = new html_table();
+            $errorstable = new html_table();
             $errorstable->head = ['Ligne', get_string('error')];
             $errorstable->data = $errors['list'];
-            $out               .= html_writer::table($errorstable);
+            $out .= html_writer::table($errorstable);
         }
 
         // Display warnings bloc.
@@ -195,14 +195,14 @@ if (null !== $csvformdata) {
             \core\notification::warning(get_string('warnings_detected', 'local_mentor_core'));
 
             // Building errors report table.
-            $warningstable       = new html_table();
+            $warningstable = new html_table();
             $warningstable->head = ['Ligne', get_string('warning', 'local_mentor_core')];
             $warningstable->data = $warnings['list'];
-            $out                 .= html_writer::table($warningstable);
+            $out .= html_writer::table($warningstable);
         }
 
         // Check available places.
-        $session         = \local_mentor_core\session_api::get_session_by_course_id($courseid);
+        $session = \local_mentor_core\session_api::get_session_by_course_id($courseid);
         $availableplaces = $session->get_available_places();
 
         if (is_int($availableplaces)) {

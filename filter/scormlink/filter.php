@@ -79,18 +79,18 @@ class filter_scormlink extends moodle_text_filter {
             }
 
             $newmatch = $match[0];
-            $newurl   = $match[2];
+            $newurl = $match[2];
 
             // Replace href by onclick.
             $replacehref = str_replace('href="', 'href="#" onclick="window.open(\'', $newmatch);
-            $newmatch    = str_replace($newmatch, $replacehref, $newmatch);
+            $newmatch = str_replace($newmatch, $replacehref, $newmatch);
 
             // Add JS at the end of the URL.
             $newmatch = str_replace($match[2], $match[2] . "','_blank').focus();return false;", $newmatch);
 
             // Replace link.
             $replaceurl = str_replace("/mod/scorm/view.php?id=", "/local/mentor_core/pages/scorm.php?cmid=", $newurl);
-            $newmatch   = str_replace($newurl, $replaceurl, $newmatch);
+            $newmatch = str_replace($newurl, $replaceurl, $newmatch);
 
             // Replace occurency in the global text.
             $text = str_replace($match[0], $newmatch, $text);

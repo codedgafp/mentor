@@ -35,26 +35,26 @@ require_once($CFG->dirroot . '/lib/filterlib.php');
  */
 function local_mentor_specialization_get_regions() {
     return [
-        '84'  => 'Auvergne-Rhône-Alpes',
-        '27'  => 'Bourgogne-Franche-Comté',
-        '53'  => 'Bretagne',
-        '24'  => 'Centre-Val de Loire',
-        '94'  => 'Corse',
-        '44'  => 'Grand Est',
-        '01'  => 'Guadeloupe',
-        '03'  => 'Guyane',
-        '32'  => 'Hauts-de-France',
-        '11'  => 'Ile-de-France',
-        '04'  => 'La Réunion',
-        '02'  => 'Martinique',
-        '06'  => 'Mayotte',
-        '28'  => 'Normandie',
-        '75'  => 'Nouvelle-Aquitaine',
-        '76'  => 'Occitanie',
-        '52'  => 'Pays de la Loire',
-        '93'  => 'Provence-Alpes-Côte d\'Azur',
-        '900' => 'Collectivités d\'Outremer',
-        '988' => 'Nouvelle-Calédonie'
+            '84' => 'Auvergne-Rhône-Alpes',
+            '27' => 'Bourgogne-Franche-Comté',
+            '53' => 'Bretagne',
+            '24' => 'Centre-Val de Loire',
+            '94' => 'Corse',
+            '44' => 'Grand Est',
+            '01' => 'Guadeloupe',
+            '03' => 'Guyane',
+            '32' => 'Hauts-de-France',
+            '11' => 'Ile-de-France',
+            '04' => 'La Réunion',
+            '02' => 'Martinique',
+            '06' => 'Mayotte',
+            '28' => 'Normandie',
+            '75' => 'Nouvelle-Aquitaine',
+            '76' => 'Occitanie',
+            '52' => 'Pays de la Loire',
+            '93' => 'Provence-Alpes-Côte d\'Azur',
+            '900' => 'Collectivités d\'Outremer',
+            '988' => 'Nouvelle-Calédonie'
     ];
 }
 
@@ -66,114 +66,114 @@ function local_mentor_specialization_get_regions() {
 function local_mentor_specialization_get_departments() {
     return [
         // Department is optional so we need to add an empty value.
-        ''                         => '',
-        'Ain'                      => '01 - Ain',
-        'Aisne'                    => '02 - Aisne',
-        'Allier'                   => '03 - Allier',
-        'Alpes-de-Haute-Provence'  => '04 - Alpes-de-Haute-Provence',
-        'Hautes-Alpes'             => '05 - Hautes-Alpes',
-        'Alpes-Maritimes'          => '06 - Alpes-Maritimes',
-        'Ardèche'                  => '07 - Ardèche',
-        'Ardennes'                 => '08 - Ardennes',
-        'Ariège'                   => '09 - Ariège',
-        'Aube'                     => '10 - Aube',
-        'Aude'                     => '11 - Aude',
-        'Aveyron'                  => '12 - Aveyron',
-        'Bouches-du-Rhône'         => '13 - Bouches-du-Rhône',
-        'Calvados'                 => '14 - Calvados',
-        'Cantal'                   => '15 - Cantal',
-        'Charente'                 => '16 - Charente',
-        'Charente-Maritime'        => '17 - Charente-Maritime',
-        'Cher'                     => '18 - Cher',
-        'Corrèze'                  => '19 - Corrèze',
-        'Corse-du-Sud'             => '2A - Corse-du-Sud',
-        'Haute-Corse'              => '2B - Haute-Corse',
-        'Côte-d\'Or'               => '21 - Côte-d\'Or',
-        'Côtes-d\'Armor'           => '22 - Côtes-d\'Armor',
-        'Creuse'                   => '23 - Creuse',
-        'Dordogne'                 => '24 - Dordogne',
-        'Doubs'                    => '25 - Doubs',
-        'Drôme'                    => '26 - Drôme',
-        'Eure'                     => '27 - Eure',
-        'Eure-et-Loir'             => '28 - Eure-et-Loir',
-        'Finistère'                => '29 - Finistère',
-        'Gard'                     => '30 - Gard',
-        'Haute-Garonne'            => '31 - Haute-Garonne',
-        'Gers'                     => '32 - Gers',
-        'Gironde'                  => '33 - Gironde',
-        'Hérault'                  => '34 - Hérault',
-        'Ille-et-Vilaine'          => '35 - Ille-et-Vilaine',
-        'Indre'                    => '36 - Indre',
-        'Indre-et-Loire'           => '37 - Indre-et-Loire',
-        'Isère'                    => '38 - Isère',
-        'Jura'                     => '39 - Jura',
-        'Landes'                   => '40 - Landes',
-        'Loir-et-Cher'             => '41 - Loir-et-Cher',
-        'Loire'                    => '42 - Loire',
-        'Haute-Loire'              => '43 - Haute-Loire',
-        'Loire-Atlantique'         => '44 - Loire-Atlantique',
-        'Loiret'                   => '45 - Loiret',
-        'Lot'                      => '46 - Lot',
-        'Lot-et-Garonne'           => '47 - Lot-et-Garonne',
-        'Lozère'                   => '48 - Lozère',
-        'Maine-et-Loire'           => '49 - Maine-et-Loire',
-        'Manche'                   => '50 - Manche',
-        'Marne'                    => '51 - Marne',
-        'Haute-Marne'              => '52 - Haute-Marne',
-        'Mayenne'                  => '53 - Mayenne',
-        'Meurthe-et-Moselle'       => '54 - Meurthe-et-Moselle',
-        'Meuse'                    => '55 - Meuse',
-        'Morbihan'                 => '56 - Morbihan',
-        'Moselle'                  => '57 - Moselle',
-        'Nièvre'                   => '58 - Nièvre',
-        'Nord'                     => '59 - Nord',
-        'Oise'                     => '60 - Oise',
-        'Orne'                     => '61 - Orne',
-        'Pas-de-Calais'            => '62 - Pas-de-Calais',
-        'Puy-de-Dôme'              => '63 - Puy-de-Dôme',
-        'Pyrénées-Atlantiques'     => '64 - Pyrénées-Atlantiques',
-        'Hautes-Pyrénées'          => '65 - Hautes-Pyrénées',
-        'Pyrénées-Orientales'      => '66 - Pyrénées-Orientales',
-        'Bas-Rhin'                 => '67 - Bas-Rhin',
-        'Haut-Rhin'                => '68 - Haut-Rhin',
-        'Rhône'                    => '69 - Rhône',
-        'Haute-Saône'              => '70 - Haute-Saône',
-        'Saône-et-Loire'           => '71 - Saône-et-Loire',
-        'Sarthe'                   => '72 - Sarthe',
-        'Savoie'                   => '73 - Savoie',
-        'Haute-Savoie'             => '74 - Haute-Savoie',
-        'Paris'                    => '75 - Paris',
-        'Seine-Maritime'           => '76 - Seine-Maritime',
-        'Seine-et-Marne'           => '77 - Seine-et-Marne',
-        'Yvelines'                 => '78 - Yvelines',
-        'Deux-Sèvres'              => '79 - Deux-Sèvres',
-        'Somme'                    => '80 - Somme',
-        'Tarn'                     => '81 - Tarn',
-        'Tarn-et-Garonne'          => '82 - Tarn-et-Garonne',
-        'Var'                      => '83 - Var',
-        'Vaucluse'                 => '84 - Vaucluse',
-        'Vendée'                   => '85 - Vendée',
-        'Vienne'                   => '86 - Vienne',
-        'Haute-Vienne'             => '87 - Haute-Vienne',
-        'Vosges'                   => '88 - Vosges',
-        'Yonne'                    => '89 - Yonne',
-        'Territoire de Belfort'    => '90 - Territoire de Belfort',
-        'Essonne'                  => '91 - Essonne',
-        'Hauts-de-Seine'           => '92 - Hauts-de-Seine',
-        'Seine-Saint-Denis'        => '93 - Seine-Saint-Denis',
-        'Val-de-Marne'             => '94 - Val-de-Marne',
-        'Val-d\'Oise'              => '95 - Val-d\'Oise',
-        'Guadeloupe'               => '971 - Guadeloupe',
-        'Martinique'               => '972 - Martinique',
-        'Guyane'                   => '973 - Guyane',
-        'La Réunion'               => '974 - La Réunion',
-        'Mayotte'                  => '976 - Mayotte',
-        'Saint-Pierre-et-Miquelon' => '975 - Saint-Pierre-et-Miquelon',
-        'Saint-Barthélemy'         => '977 - Saint-Barthélemy',
-        'Saint-Martin'             => '978 - Saint-Martin',
-        'Wallis et Futuna'         => '986 - Wallis et Futuna',
-        'Polynésie française'      => '987 - Polynésie française',
-        'Nouvelle-Calédonie'       => '988 - Nouvelle-Calédonie'
+            '' => '',
+            'Ain' => '01 - Ain',
+            'Aisne' => '02 - Aisne',
+            'Allier' => '03 - Allier',
+            'Alpes-de-Haute-Provence' => '04 - Alpes-de-Haute-Provence',
+            'Hautes-Alpes' => '05 - Hautes-Alpes',
+            'Alpes-Maritimes' => '06 - Alpes-Maritimes',
+            'Ardèche' => '07 - Ardèche',
+            'Ardennes' => '08 - Ardennes',
+            'Ariège' => '09 - Ariège',
+            'Aube' => '10 - Aube',
+            'Aude' => '11 - Aude',
+            'Aveyron' => '12 - Aveyron',
+            'Bouches-du-Rhône' => '13 - Bouches-du-Rhône',
+            'Calvados' => '14 - Calvados',
+            'Cantal' => '15 - Cantal',
+            'Charente' => '16 - Charente',
+            'Charente-Maritime' => '17 - Charente-Maritime',
+            'Cher' => '18 - Cher',
+            'Corrèze' => '19 - Corrèze',
+            'Corse-du-Sud' => '2A - Corse-du-Sud',
+            'Haute-Corse' => '2B - Haute-Corse',
+            'Côte-d\'Or' => '21 - Côte-d\'Or',
+            'Côtes-d\'Armor' => '22 - Côtes-d\'Armor',
+            'Creuse' => '23 - Creuse',
+            'Dordogne' => '24 - Dordogne',
+            'Doubs' => '25 - Doubs',
+            'Drôme' => '26 - Drôme',
+            'Eure' => '27 - Eure',
+            'Eure-et-Loir' => '28 - Eure-et-Loir',
+            'Finistère' => '29 - Finistère',
+            'Gard' => '30 - Gard',
+            'Haute-Garonne' => '31 - Haute-Garonne',
+            'Gers' => '32 - Gers',
+            'Gironde' => '33 - Gironde',
+            'Hérault' => '34 - Hérault',
+            'Ille-et-Vilaine' => '35 - Ille-et-Vilaine',
+            'Indre' => '36 - Indre',
+            'Indre-et-Loire' => '37 - Indre-et-Loire',
+            'Isère' => '38 - Isère',
+            'Jura' => '39 - Jura',
+            'Landes' => '40 - Landes',
+            'Loir-et-Cher' => '41 - Loir-et-Cher',
+            'Loire' => '42 - Loire',
+            'Haute-Loire' => '43 - Haute-Loire',
+            'Loire-Atlantique' => '44 - Loire-Atlantique',
+            'Loiret' => '45 - Loiret',
+            'Lot' => '46 - Lot',
+            'Lot-et-Garonne' => '47 - Lot-et-Garonne',
+            'Lozère' => '48 - Lozère',
+            'Maine-et-Loire' => '49 - Maine-et-Loire',
+            'Manche' => '50 - Manche',
+            'Marne' => '51 - Marne',
+            'Haute-Marne' => '52 - Haute-Marne',
+            'Mayenne' => '53 - Mayenne',
+            'Meurthe-et-Moselle' => '54 - Meurthe-et-Moselle',
+            'Meuse' => '55 - Meuse',
+            'Morbihan' => '56 - Morbihan',
+            'Moselle' => '57 - Moselle',
+            'Nièvre' => '58 - Nièvre',
+            'Nord' => '59 - Nord',
+            'Oise' => '60 - Oise',
+            'Orne' => '61 - Orne',
+            'Pas-de-Calais' => '62 - Pas-de-Calais',
+            'Puy-de-Dôme' => '63 - Puy-de-Dôme',
+            'Pyrénées-Atlantiques' => '64 - Pyrénées-Atlantiques',
+            'Hautes-Pyrénées' => '65 - Hautes-Pyrénées',
+            'Pyrénées-Orientales' => '66 - Pyrénées-Orientales',
+            'Bas-Rhin' => '67 - Bas-Rhin',
+            'Haut-Rhin' => '68 - Haut-Rhin',
+            'Rhône' => '69 - Rhône',
+            'Haute-Saône' => '70 - Haute-Saône',
+            'Saône-et-Loire' => '71 - Saône-et-Loire',
+            'Sarthe' => '72 - Sarthe',
+            'Savoie' => '73 - Savoie',
+            'Haute-Savoie' => '74 - Haute-Savoie',
+            'Paris' => '75 - Paris',
+            'Seine-Maritime' => '76 - Seine-Maritime',
+            'Seine-et-Marne' => '77 - Seine-et-Marne',
+            'Yvelines' => '78 - Yvelines',
+            'Deux-Sèvres' => '79 - Deux-Sèvres',
+            'Somme' => '80 - Somme',
+            'Tarn' => '81 - Tarn',
+            'Tarn-et-Garonne' => '82 - Tarn-et-Garonne',
+            'Var' => '83 - Var',
+            'Vaucluse' => '84 - Vaucluse',
+            'Vendée' => '85 - Vendée',
+            'Vienne' => '86 - Vienne',
+            'Haute-Vienne' => '87 - Haute-Vienne',
+            'Vosges' => '88 - Vosges',
+            'Yonne' => '89 - Yonne',
+            'Territoire de Belfort' => '90 - Territoire de Belfort',
+            'Essonne' => '91 - Essonne',
+            'Hauts-de-Seine' => '92 - Hauts-de-Seine',
+            'Seine-Saint-Denis' => '93 - Seine-Saint-Denis',
+            'Val-de-Marne' => '94 - Val-de-Marne',
+            'Val-d\'Oise' => '95 - Val-d\'Oise',
+            'Guadeloupe' => '971 - Guadeloupe',
+            'Martinique' => '972 - Martinique',
+            'Guyane' => '973 - Guyane',
+            'La Réunion' => '974 - La Réunion',
+            'Mayotte' => '976 - Mayotte',
+            'Saint-Pierre-et-Miquelon' => '975 - Saint-Pierre-et-Miquelon',
+            'Saint-Barthélemy' => '977 - Saint-Barthélemy',
+            'Saint-Martin' => '978 - Saint-Martin',
+            'Wallis et Futuna' => '986 - Wallis et Futuna',
+            'Polynésie française' => '987 - Polynésie française',
+            'Nouvelle-Calédonie' => '988 - Nouvelle-Calédonie'
     ];
 }
 
@@ -184,153 +184,153 @@ function local_mentor_specialization_get_departments() {
  */
 function local_mentor_specialization_get_regions_and_departments() {
     return [
-        'Auvergne-Rhône-Alpes'        => [
-            '01 - Ain',
-            '03 - Allier',
-            '07 - Ardèche',
-            '15 - Cantal',
-            '26 - Drôme',
-            '38 - Isère',
-            '42 - Loire',
-            '43 - Haute-Loire',
-            '63 - Puy-de-Dôme',
-            '69 - Rhône',
-            '73 - Savoie',
-            '74 - Haute-Savoie'
-        ],
-        'Bourgogne-Franche-Comté'     => [
-            '21 - Côte-d\'Or',
-            '25 - Doubs',
-            '39 - Jura',
-            '58 - Nièvre',
-            '70 - Haute-Saône',
-            '71 - Saône-et-Loire',
-            '89 - Yonne',
-            '90 - Territoire de Belfort'
-        ],
-        'Bretagne'                    => [
-            '22 - Côtes-d\'Armor',
-            '29 - Finistère',
-            '35 - Ille-et-Vilaine',
-            '56 - Morbihan'
-        ],
-        'Centre-Val de Loire'         => [
-            '18 - Cher',
-            '28 - Eure-et-Loir',
-            '36 - Indre',
-            '37 - Indre-et-Loire',
-            '41 - Loir-et-Cher',
-            '45 - Loiret'
-        ],
-        'Collectivités d\'Outremer'   => [
-            '975 - Saint-Pierre-et-Miquelon',
-            '977 - Saint-Barthélemy',
-            '978 - Saint-Martin',
-            '986 - Wallis et Futuna',
-            '987 - Polynésie française',
-        ],
-        'Corse'                       => [
-            '2A - Corse-du-Sud',
-            '2B - Haute-Corse'
-        ],
-        'Grand Est'                   => [
-            '08 - Ardennes',
-            '10 - Aube',
-            '51 - Marne',
-            '52 - Haute-Marne',
-            '54 - Meurthe-et-Moselle',
-            '55 - Meuse',
-            '57 - Moselle',
-            '67 - Bas-Rhin',
-            '68 - Haut-Rhin',
-            '88 - Vosges'
-        ],
-        'Guadeloupe'                  => [
-            '971 - Guadeloupe'
-        ],
-        'Guyane'                      => [
-            '973 - Guyane'
-        ],
-        'Hauts-de-France'             => [
-            '02 - Aisne',
-            '59 - Nord',
-            '60 - Oise',
-            '62 - Pas-de-Calais',
-            '80 - Somme'
-        ],
-        'Ile-de-France'               => [
-            '75 - Paris',
-            '77 - Seine-et-Marne',
-            '78 - Yvelines',
-            '91 - Essonne',
-            '92 - Hauts-de-Seine',
-            '93 - Seine-Saint-Denis',
-            '94 - Val-de-Marne',
-            '95 - Val-d\'Oise',
-        ],
-        'La Réunion'                  => [
-            '974 - La Réunion'
-        ],
-        'Martinique'                  => [
-            '972 - Martinique'
-        ],
-        'Mayotte'                     => [
-            '976 - Mayotte'
-        ],
-        'Normandie'                   => [
-            '14 - Calvados',
-            '27 - Eure',
-            '50 - Manche',
-            '61 - Orne',
-            '76 - Seine-Maritime'
-        ],
-        'Nouvelle-Aquitaine'          => [
-            '16 - Charente',
-            '17 - Charente-Maritime',
-            '19 - Corrèze',
-            '23 - Creuse',
-            '24 - Dordogne',
-            '33 - Gironde',
-            '40 - Landes',
-            '47 - Lot-et-Garonne',
-            '64 - Pyrénées-Atlantiques',
-            '79 - Deux-Sèvres',
-            '86 - Vienne',
-            '87 - Haute-Vienne'
-        ],
-        'Nouvelle-Calédonie'          => [
-            '988 - Nouvelle-Calédonie'
-        ],
-        'Occitanie'                   => [
-            '09 - Ariège',
-            '11 - Aude',
-            '12 - Aveyron',
-            '30 - Gard',
-            '31 - Haute-Garonne',
-            '32 - Gers',
-            '34 - Hérault',
-            '46 - Lot',
-            '48 - Lozère',
-            '65 - Hautes-Pyrénées',
-            '66 - Pyrénées-Orientales',
-            '81 - Tarn',
-            '82 - Tarn-et-Garonne'
-        ],
-        'Pays de la Loire'            => [
-            '44 - Loire-Atlantique',
-            '49 - Maine-et-Loire',
-            '53 - Mayenne',
-            '72 - Sarthe',
-            '85 - Vendée'
-        ],
-        'Provence-Alpes-Côte d\'Azur' => [
-            '04 - Alpes-de-Haute-Provence',
-            '05 - Hautes-Alpes',
-            '06 - Alpes-Maritimes',
-            '13 - Bouches-du-Rhône',
-            '83 - Var',
-            '84 - Vaucluse'
-        ]
+            'Auvergne-Rhône-Alpes' => [
+                    '01 - Ain',
+                    '03 - Allier',
+                    '07 - Ardèche',
+                    '15 - Cantal',
+                    '26 - Drôme',
+                    '38 - Isère',
+                    '42 - Loire',
+                    '43 - Haute-Loire',
+                    '63 - Puy-de-Dôme',
+                    '69 - Rhône',
+                    '73 - Savoie',
+                    '74 - Haute-Savoie'
+            ],
+            'Bourgogne-Franche-Comté' => [
+                    '21 - Côte-d\'Or',
+                    '25 - Doubs',
+                    '39 - Jura',
+                    '58 - Nièvre',
+                    '70 - Haute-Saône',
+                    '71 - Saône-et-Loire',
+                    '89 - Yonne',
+                    '90 - Territoire de Belfort'
+            ],
+            'Bretagne' => [
+                    '22 - Côtes-d\'Armor',
+                    '29 - Finistère',
+                    '35 - Ille-et-Vilaine',
+                    '56 - Morbihan'
+            ],
+            'Centre-Val de Loire' => [
+                    '18 - Cher',
+                    '28 - Eure-et-Loir',
+                    '36 - Indre',
+                    '37 - Indre-et-Loire',
+                    '41 - Loir-et-Cher',
+                    '45 - Loiret'
+            ],
+            'Collectivités d\'Outremer' => [
+                    '975 - Saint-Pierre-et-Miquelon',
+                    '977 - Saint-Barthélemy',
+                    '978 - Saint-Martin',
+                    '986 - Wallis et Futuna',
+                    '987 - Polynésie française',
+            ],
+            'Corse' => [
+                    '2A - Corse-du-Sud',
+                    '2B - Haute-Corse'
+            ],
+            'Grand Est' => [
+                    '08 - Ardennes',
+                    '10 - Aube',
+                    '51 - Marne',
+                    '52 - Haute-Marne',
+                    '54 - Meurthe-et-Moselle',
+                    '55 - Meuse',
+                    '57 - Moselle',
+                    '67 - Bas-Rhin',
+                    '68 - Haut-Rhin',
+                    '88 - Vosges'
+            ],
+            'Guadeloupe' => [
+                    '971 - Guadeloupe'
+            ],
+            'Guyane' => [
+                    '973 - Guyane'
+            ],
+            'Hauts-de-France' => [
+                    '02 - Aisne',
+                    '59 - Nord',
+                    '60 - Oise',
+                    '62 - Pas-de-Calais',
+                    '80 - Somme'
+            ],
+            'Ile-de-France' => [
+                    '75 - Paris',
+                    '77 - Seine-et-Marne',
+                    '78 - Yvelines',
+                    '91 - Essonne',
+                    '92 - Hauts-de-Seine',
+                    '93 - Seine-Saint-Denis',
+                    '94 - Val-de-Marne',
+                    '95 - Val-d\'Oise',
+            ],
+            'La Réunion' => [
+                    '974 - La Réunion'
+            ],
+            'Martinique' => [
+                    '972 - Martinique'
+            ],
+            'Mayotte' => [
+                    '976 - Mayotte'
+            ],
+            'Normandie' => [
+                    '14 - Calvados',
+                    '27 - Eure',
+                    '50 - Manche',
+                    '61 - Orne',
+                    '76 - Seine-Maritime'
+            ],
+            'Nouvelle-Aquitaine' => [
+                    '16 - Charente',
+                    '17 - Charente-Maritime',
+                    '19 - Corrèze',
+                    '23 - Creuse',
+                    '24 - Dordogne',
+                    '33 - Gironde',
+                    '40 - Landes',
+                    '47 - Lot-et-Garonne',
+                    '64 - Pyrénées-Atlantiques',
+                    '79 - Deux-Sèvres',
+                    '86 - Vienne',
+                    '87 - Haute-Vienne'
+            ],
+            'Nouvelle-Calédonie' => [
+                    '988 - Nouvelle-Calédonie'
+            ],
+            'Occitanie' => [
+                    '09 - Ariège',
+                    '11 - Aude',
+                    '12 - Aveyron',
+                    '30 - Gard',
+                    '31 - Haute-Garonne',
+                    '32 - Gers',
+                    '34 - Hérault',
+                    '46 - Lot',
+                    '48 - Lozère',
+                    '65 - Hautes-Pyrénées',
+                    '66 - Pyrénées-Orientales',
+                    '81 - Tarn',
+                    '82 - Tarn-et-Garonne'
+            ],
+            'Pays de la Loire' => [
+                    '44 - Loire-Atlantique',
+                    '49 - Maine-et-Loire',
+                    '53 - Mayenne',
+                    '72 - Sarthe',
+                    '85 - Vendée'
+            ],
+            'Provence-Alpes-Côte d\'Azur' => [
+                    '04 - Alpes-de-Haute-Provence',
+                    '05 - Hautes-Alpes',
+                    '06 - Alpes-Maritimes',
+                    '13 - Bouches-du-Rhône',
+                    '83 - Var',
+                    '84 - Vaucluse'
+            ]
     ];
 }
 
@@ -343,29 +343,29 @@ function local_mentor_specialization_get_profile_fields_values() {
     // Colonnes: shortname , name, datatype, description, descriptionformat, categoryid, sortorder.
     // required, locked, visible, forceunique, signup, defaultdata, defaultdataformat, param1, param2.
     return [
-        ['status', 'Statut', 'menu', '', 1, 1, 4, 1, 0, 1, 0, 0, 'Autre', 0, 'local_mentor_specialization_list_status'],
-        ['sexe', 'Sexe', 'menu', '', 1, 1, 2, 1, 0, 1, 0, 0, '', 0, 'local_mentor_specialization_list_sexe'],
-        [
-            'birthyear', 'Année de naissance', 'menu', '', 1, 1, 3, 1, 0, 1, 0, 0, '', 0,
-            'local_mentor_specialization_list_years'
-        ],
-        ['category', 'Catégorie', 'menu', '', 1, 1, 5, 1, 0, 1, 0, 0, '', 0, 'local_mentor_specialization_list_categories'],
-        [
-            'mainentity', 'Entité de rattachement principale', 'menu', '', 1, 1, 7, 1, 0, 2, 0, 0, '', 0,
-            'local_mentor_specialization_list_entities'
-        ],
-        [
-            'secondaryentities', 'Entité(s) de rattachement secondaire(s)', 'autocomplete', '', 1, 1, 8, 0,
-            0, 2, 0, 0, '', 0, 'local_mentor_specialization_list_entities', 1
-        ],
-        ['attachmentstructure', 'Structure de rattachement ', 'text', '', 1, 1, 9, 0, 0, 2, 0, 0, '', 1],
-        ['affectation', 'Affectation', 'text', '', 1, 1, 10, 0, 0, 2, 0, 0, '', 0, '30', '2048', '0', '', ''],
-        ['region', 'Région', 'menu', '', 1, 1, 11, 1, 0, 2, 0, 0, '', 0, 'local_mentor_specialization_list_regions'],
-        [
-            'department', 'Département', 'menu', '', 1, 1, 12, 0, 0, 2, 0, 0, '', 0,
-            'local_mentor_specialization_list_departments'
-        ],
-        ['roleMentor', 'Rôle Mentor', 'text', '', 1, 1, 13, 0, 1, 0, 0, 0, '', 0, '30', '2048', '0', '', '']
+            ['status', 'Statut', 'menu', '', 1, 1, 4, 1, 0, 1, 0, 0, 'Autre', 0, 'local_mentor_specialization_list_status'],
+            ['sexe', 'Sexe', 'menu', '', 1, 1, 2, 1, 0, 1, 0, 0, '', 0, 'local_mentor_specialization_list_sexe'],
+            [
+                    'birthyear', 'Année de naissance', 'menu', '', 1, 1, 3, 1, 0, 1, 0, 0, '', 0,
+                    'local_mentor_specialization_list_years'
+            ],
+            ['category', 'Catégorie', 'menu', '', 1, 1, 5, 1, 0, 1, 0, 0, '', 0, 'local_mentor_specialization_list_categories'],
+            [
+                    'mainentity', 'Entité de rattachement principale', 'menu', '', 1, 1, 7, 1, 0, 2, 0, 0, '', 0,
+                    'local_mentor_specialization_list_entities'
+            ],
+            [
+                    'secondaryentities', 'Entité(s) de rattachement secondaire(s)', 'autocomplete', '', 1, 1, 8, 0,
+                    0, 2, 0, 0, '', 0, 'local_mentor_specialization_list_entities', 1
+            ],
+            ['attachmentstructure', 'Structure de rattachement ', 'text', '', 1, 1, 9, 0, 0, 2, 0, 0, '', 1],
+            ['affectation', 'Affectation', 'text', '', 1, 1, 10, 0, 0, 2, 0, 0, '', 0, '30', '2048', '0', '', ''],
+            ['region', 'Région', 'menu', '', 1, 1, 11, 1, 0, 2, 0, 0, '', 0, 'local_mentor_specialization_list_regions'],
+            [
+                    'department', 'Département', 'menu', '', 1, 1, 12, 0, 0, 2, 0, 0, '', 0,
+                    'local_mentor_specialization_list_departments'
+            ],
+            ['roleMentor', 'Rôle Mentor', 'text', '', 1, 1, 13, 0, 1, 0, 0, 0, '', 0, '30', '2048', '0', '', '']
     ];
 }
 
@@ -376,27 +376,27 @@ function local_mentor_specialization_get_profile_fields_values() {
  * @return stdClass
  */
 function local_mentor_specialization_create_field_object_to_use($values) {
-    $field                    = new stdClass();
-    $field->shortname         = array_key_exists(0, $values) ? $values[0] : null;
-    $field->name              = array_key_exists(1, $values) ? $values[1] : null;
-    $field->datatype          = array_key_exists(2, $values) ? $values[2] : null;
-    $field->description       = array_key_exists(3, $values) ? $values[3] : null;
+    $field = new stdClass();
+    $field->shortname = array_key_exists(0, $values) ? $values[0] : null;
+    $field->name = array_key_exists(1, $values) ? $values[1] : null;
+    $field->datatype = array_key_exists(2, $values) ? $values[2] : null;
+    $field->description = array_key_exists(3, $values) ? $values[3] : null;
     $field->descriptionformat = array_key_exists(4, $values) ? $values[4] : null;
-    $field->categoryid        = array_key_exists(5, $values) ? $values[5] : null;
-    $field->sortorder         = array_key_exists(6, $values) ? $values[6] : null;
-    $field->required          = array_key_exists(7, $values) ? $values[7] : null;
-    $field->locked            = array_key_exists(8, $values) ? $values[8] : null;
-    $field->visible           = array_key_exists(9, $values) ? $values[9] : null;
-    $field->forceunique       = array_key_exists(10, $values) ? $values[10] : null;
-    $field->signup            = array_key_exists(11, $values) ? $values[11] : null;
-    $field->defaultdata       = array_key_exists(12, $values) ? $values[12] : null;
+    $field->categoryid = array_key_exists(5, $values) ? $values[5] : null;
+    $field->sortorder = array_key_exists(6, $values) ? $values[6] : null;
+    $field->required = array_key_exists(7, $values) ? $values[7] : null;
+    $field->locked = array_key_exists(8, $values) ? $values[8] : null;
+    $field->visible = array_key_exists(9, $values) ? $values[9] : null;
+    $field->forceunique = array_key_exists(10, $values) ? $values[10] : null;
+    $field->signup = array_key_exists(11, $values) ? $values[11] : null;
+    $field->defaultdata = array_key_exists(12, $values) ? $values[12] : null;
     $field->defaultdataformat = array_key_exists(13, $values) ? $values[13] : null;
 
     // If it begin with "list_", excute associated funtion.
     // Else insert value.
     if (array_key_exists(14, $values)) {
         preg_match('/^local_mentor_specialization_list_/i', $values[14]) ? $field->param1 = call_user_func($values[14]) :
-            $values[14];
+                $values[14];
     } else {
         $field->param1 = null;
     }
@@ -417,12 +417,12 @@ function local_mentor_specialization_create_field_object_to_use($values) {
 function local_mentor_specialization_list_categories() {
 
     $categories = [
-        'Ouvriers d’Etat',
-        'A+',
-        'A',
-        'B',
-        'C',
-        'Sans objet'
+            'Ouvriers d’Etat',
+            'A+',
+            'A',
+            'B',
+            'C',
+            'Sans objet'
     ];
 
     return implode("\n", $categories);
@@ -445,11 +445,11 @@ function local_mentor_specialization_list_sexe() {
 function local_mentor_specialization_list_status() {
 
     $status = [
-        'Fonctionnaire',
-        'Contractuel',
-        'Ouvriers d’Etat ',
-        'Apprenti',
-        'Autre'
+            'Fonctionnaire',
+            'Contractuel',
+            'Ouvriers d’Etat ',
+            'Apprenti',
+            'Autre'
     ];
 
     return implode("\n", $status);
@@ -518,7 +518,7 @@ function local_mentor_specialization_get_collections($data = 'name') {
 
     $collections = [];
     foreach (explode("\n", $collectionlist) as $collectionitem) {
-        $items                  = explode("|", $collectionitem);
+        $items = explode("|", $collectionitem);
         $collections[$items[0]] = ('color' === $data) ? $items[2] : $items[1];
     }
 
@@ -643,7 +643,7 @@ function local_mentor_specialization_generate_regions() {
     $regions = local_mentor_specialization_get_regions();
 
     foreach ($regions as $key => $value) {
-        $region       = new stdClass();
+        $region = new stdClass();
         $region->code = $key;
         $region->name = $value;
 
@@ -688,18 +688,18 @@ function local_mentor_specialization_remove_capabilities_change_fields_for_role(
 
     if ($training) {
         $capabilities = [
-            'local/mentor_core:changefullname',
-            'local/mentor_core:changeshortname',
-            'local/mentor_core:changecontent',
-            'local/mentor_core:changetraininggoal',
-            'local/mentor_specialization:changecollection',
-            'local/mentor_specialization:changeidsirh',
-            'local/mentor_specialization:changeskills'
+                'local/mentor_core:changefullname',
+                'local/mentor_core:changeshortname',
+                'local/mentor_core:changecontent',
+                'local/mentor_core:changetraininggoal',
+                'local/mentor_specialization:changecollection',
+                'local/mentor_specialization:changeidsirh',
+                'local/mentor_specialization:changeskills'
         ];
     } else {
         $capabilities = [
-            'local/entities:manageentity',
-            'local/entities:renamesubentity'
+                'local/entities:manageentity',
+                'local/entities:renamesubentity'
         ];
     }
 
@@ -724,21 +724,21 @@ function local_mentor_specialization_remove_session_capabilities_change_fields_f
     global $DB;
 
     $capabilities = [
-        'local/mentor_specialization:changesessionfullname',
-        'local/mentor_specialization:changesessionshortname',
-        'local/mentor_specialization:changesessionopento',
-        'local/mentor_specialization:changesessionpubliccible',
-        'local/mentor_specialization:changesessiononlinetime',
-        'local/mentor_specialization:changesessionpresencetime',
-        'local/mentor_specialization:changesessionpermanentsession',
-        'local/mentor_specialization:changesessionstartdate',
-        'local/mentor_specialization:changesessionenddate',
-        'local/mentor_specialization:changesessionaccompaniment',
-        'local/mentor_specialization:changesessionsessionmodalities',
-        'local/mentor_specialization:changesessiontermsregistration',
-        'local/mentor_specialization:changesessionmaxparticipants',
-        'local/mentor_specialization:changesessionlocation',
-        'local/mentor_specialization:changesessionorganizingstructure'
+            'local/mentor_specialization:changesessionfullname',
+            'local/mentor_specialization:changesessionshortname',
+            'local/mentor_specialization:changesessionopento',
+            'local/mentor_specialization:changesessionpubliccible',
+            'local/mentor_specialization:changesessiononlinetime',
+            'local/mentor_specialization:changesessionpresencetime',
+            'local/mentor_specialization:changesessionpermanentsession',
+            'local/mentor_specialization:changesessionstartdate',
+            'local/mentor_specialization:changesessionenddate',
+            'local/mentor_specialization:changesessionaccompaniment',
+            'local/mentor_specialization:changesessionsessionmodalities',
+            'local/mentor_specialization:changesessiontermsregistration',
+            'local/mentor_specialization:changesessionmaxparticipants',
+            'local/mentor_specialization:changesessionlocation',
+            'local/mentor_specialization:changesessionorganizingstructure'
     ];
 
     $userrole = $DB->get_record('role', ['shortname' => $role]);
@@ -780,13 +780,13 @@ function local_mentor_specialization_add_capabilities_change_fields_to_role($rol
     global $DB;
 
     $capabilities = [
-        'local/mentor_core:changefullname',
-        'local/mentor_core:changeshortname',
-        'local/mentor_core:changecontent',
-        'local/mentor_core:changetraininggoal',
-        'local/mentor_specialization:changecollection',
-        'local/mentor_specialization:changeidsirh',
-        'local/mentor_specialization:changeskills'
+            'local/mentor_core:changefullname',
+            'local/mentor_core:changeshortname',
+            'local/mentor_core:changecontent',
+            'local/mentor_core:changetraininggoal',
+            'local/mentor_specialization:changecollection',
+            'local/mentor_specialization:changeidsirh',
+            'local/mentor_specialization:changeskills'
     ];
 
     $userrole = $DB->get_record('role', ['shortname' => $role]);
@@ -810,21 +810,21 @@ function local_mentor_specialization_add_capabilities_change_fields_to_role($rol
 function local_mentor_specialization_manage_role_authorization() {
     global $DB;
 
-    $participant           = $DB->get_record('role', ['shortname' => 'participant']);
-    $admindedie            = $DB->get_record('role', ['shortname' => 'admindedie']);
-    $respformation         = $DB->get_record('role', ['shortname' => 'respformation']);
-    $reflocal              = $DB->get_record('role', ['shortname' => 'referentlocal']);
-    $concepteur            = $DB->get_record('role', ['shortname' => 'concepteur']);
-    $formateur             = $DB->get_record('role', ['shortname' => 'formateur']);
-    $tuteur                = $DB->get_record('role', ['shortname' => 'tuteur']);
+    $participant = $DB->get_record('role', ['shortname' => 'participant']);
+    $admindedie = $DB->get_record('role', ['shortname' => 'admindedie']);
+    $respformation = $DB->get_record('role', ['shortname' => 'respformation']);
+    $reflocal = $DB->get_record('role', ['shortname' => 'referentlocal']);
+    $concepteur = $DB->get_record('role', ['shortname' => 'concepteur']);
+    $formateur = $DB->get_record('role', ['shortname' => 'formateur']);
+    $tuteur = $DB->get_record('role', ['shortname' => 'tuteur']);
     $participantnonediteur = $DB->get_record('role', ['shortname' => 'participantnonediteur']);
-    $reflocalnonediteur    = $DB->get_record('role', ['shortname' => 'reflocalnonediteur']);
-    $coursecreator         = $DB->get_record('role', ['shortname' => 'coursecreator']);
-    $teacher               = $DB->get_record('role', ['shortname' => 'teacher']);
-    $editingteacher        = $DB->get_record('role', ['shortname' => 'editingteacher']);
-    $guest                 = $DB->get_record('role', ['shortname' => 'guest']);
-    $user                  = $DB->get_record('role', ['shortname' => 'user']);
-    $frontpage             = $DB->get_record('role', ['shortname' => 'frontpage']);
+    $reflocalnonediteur = $DB->get_record('role', ['shortname' => 'reflocalnonediteur']);
+    $coursecreator = $DB->get_record('role', ['shortname' => 'coursecreator']);
+    $teacher = $DB->get_record('role', ['shortname' => 'teacher']);
+    $editingteacher = $DB->get_record('role', ['shortname' => 'editingteacher']);
+    $guest = $DB->get_record('role', ['shortname' => 'guest']);
+    $user = $DB->get_record('role', ['shortname' => 'user']);
+    $frontpage = $DB->get_record('role', ['shortname' => 'frontpage']);
 
     // Manage roles not assignable.
     $DB->delete_records('role_allow_assign', ['allowassign' => $admindedie->id]);
@@ -838,39 +838,39 @@ function local_mentor_specialization_manage_role_authorization() {
     $DB->delete_records('role_allow_assign', ['roleid' => $tuteur->id]);
 
     local_mentor_specialization_assign_roles($respformation->id, [
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id
     ]);
 
     local_mentor_specialization_assign_roles($reflocal->id, [
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id
     ]);
 
     local_mentor_specialization_assign_roles($tuteur->id, [
-        $participant->id,
+            $participant->id,
     ]);
 
     local_mentor_specialization_assign_roles($admindedie->id, [
-        $respformation->id,
-        $reflocal->id,
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id,
+            $respformation->id,
+            $reflocal->id,
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id,
     ]);
 
     local_mentor_specialization_assign_roles($tuteur->id, [
-        $participant->id,
+            $participant->id,
     ]);
 
     local_mentor_specialization_assign_roles($formateur->id, [
-        $tuteur->id,
+            $tuteur->id,
     ]);
 
     local_mentor_specialization_assign_roles($concepteur->id, [
-        $tuteur->id,
+            $tuteur->id,
     ]);
 
     // Manage role not overridable.
@@ -887,31 +887,31 @@ function local_mentor_specialization_manage_role_authorization() {
     $DB->delete_records('role_allow_override', ['roleid' => $editingteacher->id, 'allowoverride' => $participant->id]);
 
     local_mentor_specialization_override_roles($respformation->id, [
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id
     ]);
 
     local_mentor_specialization_override_roles($reflocal->id, [
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id
     ]);
 
     local_mentor_specialization_override_roles($admindedie->id, [
-        $respformation->id,
-        $reflocal->id,
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id
+            $respformation->id,
+            $reflocal->id,
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id
     ]);
 
     local_mentor_specialization_override_roles($concepteur->id, [
-        $tuteur->id
+            $tuteur->id
     ]);
 
     local_mentor_specialization_override_roles($formateur->id, [
-        $tuteur->id
+            $tuteur->id
     ]);
 
     // Manage switchable roles.
@@ -934,40 +934,40 @@ function local_mentor_specialization_manage_role_authorization() {
     $DB->delete_records('role_allow_switch', ['allowswitch' => $guest->id]);
 
     local_mentor_specialization_switch_roles($concepteur->id, [
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id
     ]);
 
     local_mentor_specialization_switch_roles($formateur->id, [
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id
     ]);
 
     local_mentor_specialization_switch_roles($respformation->id, [
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id
     ]);
 
     local_mentor_specialization_switch_roles($reflocal->id, [
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id
     ]);
 
     local_mentor_specialization_switch_roles($admindedie->id, [
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id,
-        $respformation->id,
-        $reflocal->id,
-        $participantnonediteur->id,
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id,
+            $respformation->id,
+            $reflocal->id,
+            $participantnonediteur->id,
     ]);
 
     local_mentor_specialization_switch_roles($tuteur->id, [
-        $participant->id
+            $participant->id
     ]);
 
     // Manage role viewable.
@@ -988,77 +988,77 @@ function local_mentor_specialization_manage_role_authorization() {
     $DB->delete_records('role_allow_view', ['allowview' => $guest->id]);
 
     local_mentor_specialization_view_roles($reflocalnonediteur->id, [
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id,
-        $participant->id,
-        $participantnonediteur->id
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id,
+            $participant->id,
+            $participantnonediteur->id
     ]);
 
     local_mentor_specialization_view_roles($respformation->id, [
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id,
-        $respformation->id,
-        $participantnonediteur->id,
-        $reflocal->id
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id,
+            $respformation->id,
+            $participantnonediteur->id,
+            $reflocal->id
     ]);
 
     local_mentor_specialization_view_roles($reflocal->id, [
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id,
-        $respformation->id,
-        $participantnonediteur->id,
-        $reflocal->id
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id,
+            $respformation->id,
+            $participantnonediteur->id,
+            $reflocal->id
     ]);
 
     local_mentor_specialization_view_roles($admindedie->id, [
-        $respformation->id,
-        $reflocal->id,
-        $reflocalnonediteur->id,
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id,
-        $participantnonediteur->id
+            $respformation->id,
+            $reflocal->id,
+            $reflocalnonediteur->id,
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id,
+            $participantnonediteur->id
     ]);
 
     local_mentor_specialization_view_roles($participant->id, [
-        $concepteur->id,
-        $formateur->id,
-        $tuteur->id,
-        $participant->id,
-        $participantnonediteur->id
+            $concepteur->id,
+            $formateur->id,
+            $tuteur->id,
+            $participant->id,
+            $participantnonediteur->id
     ]);
 
     local_mentor_specialization_view_roles($participantnonediteur->id, [
-        $formateur->id,
-        $tuteur->id,
-        $concepteur->id,
-        $participantnonediteur->id,
-        $participant->id
+            $formateur->id,
+            $tuteur->id,
+            $concepteur->id,
+            $participantnonediteur->id,
+            $participant->id
     ]);
 
     local_mentor_specialization_view_roles($tuteur->id, [
-        $participant->id,
-        $participantnonediteur->id,
-        $formateur->id,
-        $concepteur->id,
-        $tuteur->id
+            $participant->id,
+            $participantnonediteur->id,
+            $formateur->id,
+            $concepteur->id,
+            $tuteur->id
     ]);
 
     local_mentor_specialization_view_roles($formateur->id, [
-        $tuteur->id,
-        $participantnonediteur->id,
-        $formateur->id,
-        $concepteur->id,
+            $tuteur->id,
+            $participantnonediteur->id,
+            $formateur->id,
+            $concepteur->id,
     ]);
 
     local_mentor_specialization_view_roles($concepteur->id, [
-        $tuteur->id,
-        $participantnonediteur->id,
-        $formateur->id,
-        $concepteur->id,
+            $tuteur->id,
+            $participantnonediteur->id,
+            $formateur->id,
+            $concepteur->id,
     ]);
 
 }
@@ -1078,8 +1078,8 @@ function local_mentor_specialization_assign_roles($roleid, $roles) {
             continue;
         }
 
-        $assignobj              = new \stdClass();
-        $assignobj->roleid      = $roleid;
+        $assignobj = new \stdClass();
+        $assignobj->roleid = $roleid;
         $assignobj->allowassign = $role;
         $DB->insert_record('role_allow_assign', $assignobj);
     }
@@ -1100,8 +1100,8 @@ function local_mentor_specialization_override_roles($roleid, $roles) {
         if ($DB->record_exists('role_allow_override', ['roleid' => $roleid, 'allowoverride' => $role])) {
             continue;
         }
-        $overrideobj                = new \stdClass();
-        $overrideobj->roleid        = $roleid;
+        $overrideobj = new \stdClass();
+        $overrideobj->roleid = $roleid;
         $overrideobj->allowoverride = $role;
         $DB->insert_record('role_allow_override', $overrideobj);
     }
@@ -1123,8 +1123,8 @@ function local_mentor_specialization_switch_roles($roleid, $roles) {
             continue;
         }
 
-        $switchobj              = new \stdClass();
-        $switchobj->roleid      = $roleid;
+        $switchobj = new \stdClass();
+        $switchobj->roleid = $roleid;
         $switchobj->allowswitch = $role;
         $DB->insert_record('role_allow_switch', $switchobj);
     }
@@ -1145,8 +1145,8 @@ function local_mentor_specialization_view_roles($roleid, $views) {
             continue;
         }
 
-        $viewobj            = new \stdClass();
-        $viewobj->roleid    = $roleid;
+        $viewobj = new \stdClass();
+        $viewobj->roleid = $roleid;
         $viewobj->allowview = $view;
         $DB->insert_record('role_allow_view', $viewobj);
     }
@@ -1506,7 +1506,7 @@ function local_mentor_specialization_init_config() {
 
     if ($manager = $DB->get_record('role', ['shortname' => 'manager'])) {
         mtrace('Create role: Administrateur d\'espace dédié');
-        $manager->name      = 'Administrateur d\'espace dédié';
+        $manager->name = 'Administrateur d\'espace dédié';
         $manager->shortname = 'admindedie';
         $DB->update_record('role', $manager);
     }
@@ -1515,7 +1515,7 @@ function local_mentor_specialization_init_config() {
 
     if ($student = $DB->get_record('role', ['shortname' => 'student'])) {
         mtrace('Create role: Participant');
-        $student->name      = 'Participant';
+        $student->name = 'Participant';
         $student->shortname = 'participant';
         $DB->update_record('role', $student);
     }
@@ -1527,7 +1527,7 @@ function local_mentor_specialization_init_config() {
     if (!$noteditingstudent = $DB->get_record('role', ['shortname' => 'participantnonediteur'])) {
         mtrace('Create role: Participant non éditeur');
         $noteditingstudent = local_mentor_duplicate_role('participant', 'participantnonediteur', 'Participant non contributeur',
-            'student');
+                'student');
     }
 
     if (!$respformation = $DB->get_record('role', ['shortname' => 'respformation'])) {
@@ -1558,7 +1558,7 @@ function local_mentor_specialization_init_config() {
     if (!$participantdemonstration = $DB->get_record('role', ['shortname' => 'participantdemonstration'])) {
         mtrace('Create role: Participant démonstration');
         $participantdemonstration = local_mentor_duplicate_role('guest', 'participantdemonstration', 'Participant démonstration',
-            'guest');
+                'guest');
     }
 
     /***** Disable plugins***/
@@ -1636,105 +1636,105 @@ function local_mentor_specialization_init_config() {
 
     // Participant non contributeur.
     $noteditingstudentcapabilities = [
-        'moodle/course:configurecustomfields',
-        'moodle/course:recommendactivity',
-        'moodle/competency:evidencedelete',
-        'moodle/competency:plancomment',
-        'moodle/competency:plancommentown',
-        'moodle/competency:planrequestreview',
-        'moodle/competency:planrequestreviewown',
-        'moodle/competency:planreview',
-        'moodle/competency:userevidencemanageown',
-        'enrol/self:unenrolself',
-        'moodle/comment:post',
-        'moodle/comment:view',
-        'moodle/competency:coursecompetencygradable',
-        'moodle/question:flag',
-        'moodle/rating:rate',
-        'mod/bigbluebuttonbn:join',
-        'mod/chat:chat',
-        'mod/choice:choose',
-        'mod/choicegroup:choose',
-        'mod/coursebadges:choose',
-        'mod/coursebadges:deletechoice',
-        'mod/data:comment',
-        'mod/data:writeentry',
-        'mod/feedback:complete',
-        'mod/forum:addquestion',
-        'mod/forum:allowforcesubscribe',
-        'mod/forum:canoverridecutoff',
-        'mod/forum:canoverridediscussionlock',
-        'mod/forum:canposttomygroups',
-        'mod/forum:createattachment',
-        'mod/forum:deleteanypost',
-        'mod/forum:deleteownpost',
-        'mod/forum:exportownpost',
-        'mod/forum:replynews',
-        'mod/forum:replypost',
-        'mod/forum:startdiscussion',
-        'mod/glossary:comment',
-        'mod/glossary:managecategories',
-        'mod/glossary:managecomments',
-        'mod/glossary:manageentries',
-        'mod/glossary:rate',
-        'mod/glossary:write',
-        'mod/h5pactivity:submit',
-        'mod/lti:view',
-        'mod/questionnaire:submit',
-        'mod/quiz:attempt',
-        'mod/scorm:savetrack',
-        'mod/scorm:skipview',
-        'mod/survey:participate',
-        'mod/wiki:createpage',
-        'mod/wiki:editcomment',
-        'mod/wiki:editpage',
-        'mod/wiki:viewcomment',
-        'mod/workshop:exportsubmissions',
-        'mod/workshop:peerassess',
-        'mod/workshop:submit',
-        'mod/workshop:view'
+            'moodle/course:configurecustomfields',
+            'moodle/course:recommendactivity',
+            'moodle/competency:evidencedelete',
+            'moodle/competency:plancomment',
+            'moodle/competency:plancommentown',
+            'moodle/competency:planrequestreview',
+            'moodle/competency:planrequestreviewown',
+            'moodle/competency:planreview',
+            'moodle/competency:userevidencemanageown',
+            'enrol/self:unenrolself',
+            'moodle/comment:post',
+            'moodle/comment:view',
+            'moodle/competency:coursecompetencygradable',
+            'moodle/question:flag',
+            'moodle/rating:rate',
+            'mod/bigbluebuttonbn:join',
+            'mod/chat:chat',
+            'mod/choice:choose',
+            'mod/choicegroup:choose',
+            'mod/coursebadges:choose',
+            'mod/coursebadges:deletechoice',
+            'mod/data:comment',
+            'mod/data:writeentry',
+            'mod/feedback:complete',
+            'mod/forum:addquestion',
+            'mod/forum:allowforcesubscribe',
+            'mod/forum:canoverridecutoff',
+            'mod/forum:canoverridediscussionlock',
+            'mod/forum:canposttomygroups',
+            'mod/forum:createattachment',
+            'mod/forum:deleteanypost',
+            'mod/forum:deleteownpost',
+            'mod/forum:exportownpost',
+            'mod/forum:replynews',
+            'mod/forum:replypost',
+            'mod/forum:startdiscussion',
+            'mod/glossary:comment',
+            'mod/glossary:managecategories',
+            'mod/glossary:managecomments',
+            'mod/glossary:manageentries',
+            'mod/glossary:rate',
+            'mod/glossary:write',
+            'mod/h5pactivity:submit',
+            'mod/lti:view',
+            'mod/questionnaire:submit',
+            'mod/quiz:attempt',
+            'mod/scorm:savetrack',
+            'mod/scorm:skipview',
+            'mod/survey:participate',
+            'mod/wiki:createpage',
+            'mod/wiki:editcomment',
+            'mod/wiki:editpage',
+            'mod/wiki:viewcomment',
+            'mod/workshop:exportsubmissions',
+            'mod/workshop:peerassess',
+            'mod/workshop:submit',
+            'mod/workshop:view'
     ];
     local_mentor_core_remove_capabilities($noteditingstudent, $noteditingstudentcapabilities);
 
     // Participant démonstration.
     $participantdemonstrationcapabilities = [
-        'block/completion_progress:showbar',
-        'block/summary:canseehiddensections',
-        'booktool/print:print',
-        'mod/assignment:view',
-        'mod/assign:view',
-        'mod/bigbluebuttonbn:view',
-        'mod/book:read',
-        'mod/book:viewhiddenchapters',
-        'mod/chat:view',
-        'mod/choice:view',
-        'mod/customcert:view',
-        'mod/data:view',
-        'mod/data:viewentry',
-        'mod/feedback:view',
-        'mod/folder:view',
-        'mod/forum:viewdiscussion',
-        'mod/glossary:view',
-        'mod/h5pactivity:view',
-        'mod/imscp:view',
-        'mod/label:view',
-        'mod/lesson:view',
-        'mod/page:view',
-        'mod/questionnaire:view',
-        'mod/quiz:view',
-        'mod/resource:view',
-        'mod/url:view',
-        'mod/via:view',
-        'mod/wiki:viewpage',
-        'mod/workshop:view',
-        'moodle/block:view',
-        'moodle/blog:search',
-        'moodle/blog:view',
-        'moodle/comment:view',
-        'moodle/course:ignoreavailabilityrestrictions',
-        'moodle/course:viewhiddenactivities',
-        'moodle/course:viewhiddensections',
-        'moodle/search:query',
+            'block/completion_progress:showbar',
+            'block/summary:canseehiddensections',
+            'booktool/print:print',
+            'mod/assignment:view',
+            'mod/assign:view',
+            'mod/bigbluebuttonbn:view',
+            'mod/book:read',
+            'mod/book:viewhiddenchapters',
+            'mod/chat:view',
+            'mod/choice:view',
+            'mod/customcert:view',
+            'mod/data:view',
+            'mod/data:viewentry',
+            'mod/feedback:view',
+            'mod/folder:view',
+            'mod/forum:viewdiscussion',
+            'mod/glossary:view',
+            'mod/h5pactivity:view',
+            'mod/imscp:view',
+            'mod/label:view',
+            'mod/lesson:view',
+            'mod/page:view',
+            'mod/questionnaire:view',
+            'mod/quiz:view',
+            'mod/resource:view',
+            'mod/url:view',
+            'mod/via:view',
+            'mod/wiki:viewpage',
+            'mod/workshop:view',
+            'moodle/block:view',
+            'moodle/blog:search',
+            'moodle/blog:view',
+            'moodle/comment:view',
+            'moodle/course:ignoreavailabilityrestrictions',
+            'moodle/course:viewhiddenactivities',
+            'moodle/course:viewhiddensections',
+            'moodle/search:query',
     ];
 
     local_mentor_core_add_capabilities($participantdemonstration, $participantdemonstrationcapabilities);
@@ -1838,197 +1838,197 @@ function local_mentor_specialization_init_config() {
     if (!$noteditingreflocal = $DB->get_record('role', ['shortname' => 'reflocalnonediteur'])) {
         mtrace('Create role: Référent local non éditeur');
         $noteditingreflocal = local_mentor_duplicate_role('referentlocal', 'reflocalnonediteur', 'Référent local non éditeur',
-            'manager');
+                'manager');
     }
 
     // Remove role capabilities.
     $noteditingreflocalcapabilities = [
         // Mentor capabilities.
-        'local/mentor_core:importusers',
-        'local/trainings:manage',
-        'local/trainings:create',
-        'local/trainings:update',
-        'local/trainings:delete',
-        'local/session:manage',
-        'local/session:create',
-        'local/session:update',
-        'local/session:delete',
-        'local/session:changefullname',
-        'local/session:changeshortname',
-        'local/mentor_core:changeshortname',
-        'local/mentor_core:changefullname',
-        'local/mentor_core:changethumbnail',
-        'local/mentor_core:changetrainingstatus',
-        'local/mentor_core:changecontent',
-        'local/mentor_core:changetraininggoal',
-        'local/mentor_core:changesessionfullname',
-        'local/mentor_core:changesessionshortname',
-        'local/mentor_core:sharetrainings',
-        'local/mentor_core:importusers',
-        'local/mentor_specialization:changecollection',
-        'local/mentor_specialization:changeidsirh',
-        'local/mentor_specialization:changeskills',
-        'local/mentor_specialization:changeteaser',
-        'local/mentor_specialization:changeproducingorganization',
-        'local/mentor_specialization:changetypicaljob',
-        'local/mentor_specialization:changecontactproducerorganization',
-        'local/mentor_specialization:changeproducerorganizationshortname',
-        'local/mentor_specialization:changedesigners',
-        'local/mentor_specialization:changecertifying',
-        'local/mentor_specialization:changelicenseterms',
-        'local/mentor_specialization:changeprerequisite',
-        'local/mentor_specialization:changepresenceestimatedtimehours',
-        'local/mentor_specialization:changeremoteestimatedtimehours',
-        'local/mentor_specialization:changetrainingmodalities',
-        'local/mentor_specialization:changeproducerorganizationlogo',
-        'local/mentor_specialization:changeteaserpicture',
-        'local/mentor_specialization:changecatchphrase',
+            'local/mentor_core:importusers',
+            'local/trainings:manage',
+            'local/trainings:create',
+            'local/trainings:update',
+            'local/trainings:delete',
+            'local/session:manage',
+            'local/session:create',
+            'local/session:update',
+            'local/session:delete',
+            'local/session:changefullname',
+            'local/session:changeshortname',
+            'local/mentor_core:changeshortname',
+            'local/mentor_core:changefullname',
+            'local/mentor_core:changethumbnail',
+            'local/mentor_core:changetrainingstatus',
+            'local/mentor_core:changecontent',
+            'local/mentor_core:changetraininggoal',
+            'local/mentor_core:changesessionfullname',
+            'local/mentor_core:changesessionshortname',
+            'local/mentor_core:sharetrainings',
+            'local/mentor_core:importusers',
+            'local/mentor_specialization:changecollection',
+            'local/mentor_specialization:changeidsirh',
+            'local/mentor_specialization:changeskills',
+            'local/mentor_specialization:changeteaser',
+            'local/mentor_specialization:changeproducingorganization',
+            'local/mentor_specialization:changetypicaljob',
+            'local/mentor_specialization:changecontactproducerorganization',
+            'local/mentor_specialization:changeproducerorganizationshortname',
+            'local/mentor_specialization:changedesigners',
+            'local/mentor_specialization:changecertifying',
+            'local/mentor_specialization:changelicenseterms',
+            'local/mentor_specialization:changeprerequisite',
+            'local/mentor_specialization:changepresenceestimatedtimehours',
+            'local/mentor_specialization:changeremoteestimatedtimehours',
+            'local/mentor_specialization:changetrainingmodalities',
+            'local/mentor_specialization:changeproducerorganizationlogo',
+            'local/mentor_specialization:changeteaserpicture',
+            'local/mentor_specialization:changecatchphrase',
         // Student capabilities.
-        'moodle/course:configurecustomfields',
-        'moodle/course:recommendactivity',
-        'moodle/competency:evidencedelete',
-        'moodle/competency:plancomment',
-        'moodle/competency:plancommentown',
-        'moodle/competency:planrequestreview',
-        'moodle/competency:planrequestreviewown',
-        'moodle/competency:planreview',
-        'moodle/competency:userevidencemanageown',
-        'enrol/self:unenrolself',
-        'moodle/comment:post',
-        'moodle/comment:view',
-        'moodle/competency:coursecompetencygradable',
-        'moodle/question:flag',
-        'moodle/rating:rate',
-        'mod/bigbluebuttonbn:join',
-        'mod/chat:chat',
-        'mod/choice:choose',
-        'mod/choicegroup:choose',
-        'mod/coursebadges:choose',
-        'mod/coursebadges:deletechoice',
-        'mod/data:comment',
-        'mod/data:writeentry',
-        'mod/feedback:complete',
-        'mod/forum:addquestion',
-        'mod/forum:allowforcesubscribe',
-        'mod/forum:canoverridecutoff',
-        'mod/forum:canoverridediscussionlock',
-        'mod/forum:canposttomygroups',
-        'mod/forum:createattachment',
-        'mod/forum:deleteanypost',
-        'mod/forum:deleteownpost',
-        'mod/forum:exportownpost',
-        'mod/forum:replynews',
-        'mod/forum:replypost',
-        'mod/forum:startdiscussion',
-        'mod/glossary:comment',
-        'mod/glossary:managecategories',
-        'mod/glossary:managecomments',
-        'mod/glossary:manageentries',
-        'mod/glossary:rate',
-        'mod/glossary:write',
-        'mod/h5pactivity:submit',
-        'mod/lti:view',
-        'mod/questionnaire:submit',
-        'mod/quiz:attempt',
-        'mod/scorm:savetrack',
-        'mod/scorm:skipview',
-        'mod/survey:participate',
-        'mod/wiki:createpage',
-        'mod/wiki:editcomment',
-        'mod/wiki:editpage',
-        'mod/wiki:viewcomment',
-        'mod/workshop:exportsubmissions',
-        'mod/workshop:peerassess',
-        'mod/workshop:submit',
-        'mod/workshop:view',
+            'moodle/course:configurecustomfields',
+            'moodle/course:recommendactivity',
+            'moodle/competency:evidencedelete',
+            'moodle/competency:plancomment',
+            'moodle/competency:plancommentown',
+            'moodle/competency:planrequestreview',
+            'moodle/competency:planrequestreviewown',
+            'moodle/competency:planreview',
+            'moodle/competency:userevidencemanageown',
+            'enrol/self:unenrolself',
+            'moodle/comment:post',
+            'moodle/comment:view',
+            'moodle/competency:coursecompetencygradable',
+            'moodle/question:flag',
+            'moodle/rating:rate',
+            'mod/bigbluebuttonbn:join',
+            'mod/chat:chat',
+            'mod/choice:choose',
+            'mod/choicegroup:choose',
+            'mod/coursebadges:choose',
+            'mod/coursebadges:deletechoice',
+            'mod/data:comment',
+            'mod/data:writeentry',
+            'mod/feedback:complete',
+            'mod/forum:addquestion',
+            'mod/forum:allowforcesubscribe',
+            'mod/forum:canoverridecutoff',
+            'mod/forum:canoverridediscussionlock',
+            'mod/forum:canposttomygroups',
+            'mod/forum:createattachment',
+            'mod/forum:deleteanypost',
+            'mod/forum:deleteownpost',
+            'mod/forum:exportownpost',
+            'mod/forum:replynews',
+            'mod/forum:replypost',
+            'mod/forum:startdiscussion',
+            'mod/glossary:comment',
+            'mod/glossary:managecategories',
+            'mod/glossary:managecomments',
+            'mod/glossary:manageentries',
+            'mod/glossary:rate',
+            'mod/glossary:write',
+            'mod/h5pactivity:submit',
+            'mod/lti:view',
+            'mod/questionnaire:submit',
+            'mod/quiz:attempt',
+            'mod/scorm:savetrack',
+            'mod/scorm:skipview',
+            'mod/survey:participate',
+            'mod/wiki:createpage',
+            'mod/wiki:editcomment',
+            'mod/wiki:editpage',
+            'mod/wiki:viewcomment',
+            'mod/workshop:exportsubmissions',
+            'mod/workshop:peerassess',
+            'mod/workshop:submit',
+            'mod/workshop:view',
         // Teacher capabilities.
-        'moodle/course:manageactivities',
-        'moodle/cohort:assign',
-        'enrol/manual:enrol',
-        'enrol/manual:manage',
-        'enrol/self:config',
-        'moodle/course:enrolconfig',
-        'moodle/course:sectionvisibility',
-        'moodle/course:setcurrentsection',
-        'moodle/restore:restoresection',
-        'moodle/course:movesections',
-        'moodle/site:approvecourse',
-        'moodle/competency:coursecompetencymanage',
-        'moodle/course:changecategory',
-        'moodle/course:changefullname',
-        'moodle/course:changeidnumber',
-        'moodle/course:changelockedcustomfields',
-        'moodle/course:changeshortname',
-        'moodle/course:changesummary',
-        'moodle/course:delete',
-        'moodle/course:enrolreview',
-        'moodle/course:managegroups',
-        'moodle/course:renameroles',
-        'moodle/course:tag',
-        'moodle/course:update',
-        'moodle/course:activityvisibility',
-        'block/course_summary:addinstance',
-        'report/courseoverview:view',
-        'moodle/course:create',
-        'moodle/course:managefiles',
-        'moodle/course:managescales',
-        'moodle/course:markcomplete',
-        'moodle/course:overridecompletion',
-        'moodle/course:reset',
-        'moodle/course:reviewotherusers',
-        'moodle/course:setforcedlanguage',
-        'moodle/course:visibility',
-        'moodle/restore:restorecourse',
-        'moodle/competency:coursecompetencyconfigure',
-        'moodle/block:edit',
-        'moodle/site:manageblocks',
-        'moodle/competency:competencygrade',
-        'moodle/grade:edit',
-        'moodle/grade:export',
-        'moodle/grade:import',
-        'moodle/grade:manage',
-        'moodle/grade:hide',
-        'moodle/badges:manageglobalsettings',
-        'moodle/badges:awardbadge',
-        'moodle/badges:configurecriteria',
-        'moodle/badges:configuredetails',
-        'moodle/badges:configuremessages',
-        'moodle/badges:createbadge',
-        'moodle/badges:deletebadge',
-        'moodle/badges:revokebadge',
-        'moodle/badges:viewawarded',
-        'moodle/competency:planmanage',
-        'moodle/competency:planmanagedraft',
-        'moodle/competency:planview',
-        'moodle/competency:planviewdraft',
-        'moodle/competency:usercompetencyreview',
-        'moodle/competency:usercompetencyview',
-        'moodle/competency:userevidencemanage',
-        'moodle/competency:userevidenceview',
-        'moodle/competency:competencymanage',
-        'moodle/competency:templatemanage',
-        'moodle/competency:templateview',
-        'moodle/competency:competencygrade',
-        'gradereport/grader:view',
-        'gradereport/history:view',
-        'gradereport/outcomes:view',
-        'gradereport/singleview:view',
-        'gradereport/user:view',
-        'moodle/site:viewreports',
-        'report/completion:view',
-        'moodle/grade:import',
-        'moodle/restore:restoretargetimport',
-        'repository/contentbank:accesscoursecontent',
-        'moodle/question:add',
-        'moodle/question:editall',
-        'moodle/question:editmine',
-        'moodle/question:managecategory',
-        'moodle/question:moveall',
-        'moodle/question:config',
-        'moodle/site:uploadusers',
-        'moodle/backup:backuptargetimport',
-        'moodle/grade:import',
-        'moodle/restore:restoretargetimport',
+            'moodle/course:manageactivities',
+            'moodle/cohort:assign',
+            'enrol/manual:enrol',
+            'enrol/manual:manage',
+            'enrol/self:config',
+            'moodle/course:enrolconfig',
+            'moodle/course:sectionvisibility',
+            'moodle/course:setcurrentsection',
+            'moodle/restore:restoresection',
+            'moodle/course:movesections',
+            'moodle/site:approvecourse',
+            'moodle/competency:coursecompetencymanage',
+            'moodle/course:changecategory',
+            'moodle/course:changefullname',
+            'moodle/course:changeidnumber',
+            'moodle/course:changelockedcustomfields',
+            'moodle/course:changeshortname',
+            'moodle/course:changesummary',
+            'moodle/course:delete',
+            'moodle/course:enrolreview',
+            'moodle/course:managegroups',
+            'moodle/course:renameroles',
+            'moodle/course:tag',
+            'moodle/course:update',
+            'moodle/course:activityvisibility',
+            'block/course_summary:addinstance',
+            'report/courseoverview:view',
+            'moodle/course:create',
+            'moodle/course:managefiles',
+            'moodle/course:managescales',
+            'moodle/course:markcomplete',
+            'moodle/course:overridecompletion',
+            'moodle/course:reset',
+            'moodle/course:reviewotherusers',
+            'moodle/course:setforcedlanguage',
+            'moodle/course:visibility',
+            'moodle/restore:restorecourse',
+            'moodle/competency:coursecompetencyconfigure',
+            'moodle/block:edit',
+            'moodle/site:manageblocks',
+            'moodle/competency:competencygrade',
+            'moodle/grade:edit',
+            'moodle/grade:export',
+            'moodle/grade:import',
+            'moodle/grade:manage',
+            'moodle/grade:hide',
+            'moodle/badges:manageglobalsettings',
+            'moodle/badges:awardbadge',
+            'moodle/badges:configurecriteria',
+            'moodle/badges:configuredetails',
+            'moodle/badges:configuremessages',
+            'moodle/badges:createbadge',
+            'moodle/badges:deletebadge',
+            'moodle/badges:revokebadge',
+            'moodle/badges:viewawarded',
+            'moodle/competency:planmanage',
+            'moodle/competency:planmanagedraft',
+            'moodle/competency:planview',
+            'moodle/competency:planviewdraft',
+            'moodle/competency:usercompetencyreview',
+            'moodle/competency:usercompetencyview',
+            'moodle/competency:userevidencemanage',
+            'moodle/competency:userevidenceview',
+            'moodle/competency:competencymanage',
+            'moodle/competency:templatemanage',
+            'moodle/competency:templateview',
+            'moodle/competency:competencygrade',
+            'gradereport/grader:view',
+            'gradereport/history:view',
+            'gradereport/outcomes:view',
+            'gradereport/singleview:view',
+            'gradereport/user:view',
+            'moodle/site:viewreports',
+            'report/completion:view',
+            'moodle/grade:import',
+            'moodle/restore:restoretargetimport',
+            'repository/contentbank:accesscoursecontent',
+            'moodle/question:add',
+            'moodle/question:editall',
+            'moodle/question:editmine',
+            'moodle/question:managecategory',
+            'moodle/question:moveall',
+            'moodle/question:config',
+            'moodle/site:uploadusers',
+            'moodle/backup:backuptargetimport',
+            'moodle/grade:import',
+            'moodle/restore:restoretargetimport',
     ];
     local_mentor_core_remove_capabilities($noteditingreflocal, $noteditingreflocalcapabilities);
 
@@ -2042,17 +2042,17 @@ function local_mentor_specialization_init_config() {
 
     // Set right context levels to the following roles.
     $rolescontexts = [
-        'admindedie'            => [CONTEXT_COURSECAT],
-        'editingteacher'        => [],
-        'teacher'               => [],
-        'formateur'             => [CONTEXT_COURSE, CONTEXT_MODULE],
-        'tuteur'                => [CONTEXT_COURSE, CONTEXT_MODULE],
-        'concepteur'            => [CONTEXT_COURSE, CONTEXT_MODULE],
-        'participant'           => [CONTEXT_COURSE, CONTEXT_MODULE],
-        'participantnonediteur' => [CONTEXT_COURSE, CONTEXT_MODULE],
-        'referentlocal'         => [CONTEXT_COURSECAT],
-        'reflocalnonediteur'    => [CONTEXT_COURSECAT],
-        'respformation'         => [CONTEXT_COURSECAT]
+            'admindedie' => [CONTEXT_COURSECAT],
+            'editingteacher' => [],
+            'teacher' => [],
+            'formateur' => [CONTEXT_COURSE, CONTEXT_MODULE],
+            'tuteur' => [CONTEXT_COURSE, CONTEXT_MODULE],
+            'concepteur' => [CONTEXT_COURSE, CONTEXT_MODULE],
+            'participant' => [CONTEXT_COURSE, CONTEXT_MODULE],
+            'participantnonediteur' => [CONTEXT_COURSE, CONTEXT_MODULE],
+            'referentlocal' => [CONTEXT_COURSECAT],
+            'reflocalnonediteur' => [CONTEXT_COURSECAT],
+            'respformation' => [CONTEXT_COURSECAT]
     ];
 
     foreach ($rolescontexts as $rolename => $contexts) {
@@ -2069,10 +2069,10 @@ function local_mentor_specialization_init_config() {
         // Prepare data objects for insert.
         $rolestoinsert = [];
         foreach ($contexts as $context) {
-            $rolecontextelevel               = new stdClass();
-            $rolecontextelevel->roleid       = $role->id;
+            $rolecontextelevel = new stdClass();
+            $rolecontextelevel->roleid = $role->id;
             $rolecontextelevel->contextlevel = $context;
-            $rolestoinsert[]                 = $rolecontextelevel;
+            $rolestoinsert[] = $rolecontextelevel;
         }
 
         // Insert new role context levels.
@@ -2083,8 +2083,8 @@ function local_mentor_specialization_init_config() {
     local_mentor_core_set_enrol_plugins_enabled();
 
     local_mentor_core_set_moodle_config('profileroles',
-        $participant->id . ',' . $noteditingstudent->id . ',' . $concepteur->id . ','
-        . $formateur->id . ',' . $tuteur->id);
+            $participant->id . ',' . $noteditingstudent->id . ',' . $concepteur->id . ','
+            . $formateur->id . ',' . $tuteur->id);
 
     // Move capabilities.
     local_mentor_core_add_capability($admindedie, 'local/mentor_core:movetrainings');
@@ -2147,10 +2147,10 @@ function local_mentor_specialization_init_config() {
     // Atto video.
     $attotoolbar = get_config('editor_atto', 'toolbar');
     $attotoolbar = str_replace('media, recordrtc, managefiles, h5p, snippet', 'video, recordrtc, managefiles, h5p, snippet',
-        $attotoolbar);
+            $attotoolbar);
     if (strpos($attotoolbar, 'fontawesomepicker') === false) {
         $attotoolbar = str_replace('emojipicker', 'fontawesomepicker, emojipicker',
-            $attotoolbar);
+                $attotoolbar);
     }
     $attotoolbar = str_replace('fontawesomepicker, fontawesomepicker', 'fontawesomepicker', $attotoolbar);
 
@@ -2177,8 +2177,8 @@ function local_mentor_specialization_init_config() {
     local_mentor_core_remove_capability($noteditingreflocal, 'mod/questionnaire:createpublic');
 
     // MENTOR_RQM-715.
-    $sitecourse            = $DB->get_record('course', ['format' => 'site']);
-    $sitecourse->fullname  = 'Mentor';
+    $sitecourse = $DB->get_record('course', ['format' => 'site']);
+    $sitecourse->fullname = 'Mentor';
     $sitecourse->shortname = 'Mentor';
     $DB->update_record('course', $sitecourse);
 
@@ -2214,12 +2214,16 @@ function local_mentor_specialization_init_config() {
 
     // User menu items.
     local_mentor_core_set_moodle_config('customusermenuitems',
-        'messages,message|/message/index.php|t/message
+            'messages,message|/message/index.php|t/message
 preferences,moodle|/user/preferences.php|t/preferences');
 
     // Remove capabilities to all role.
     local_mentor_core_remove_capability_for_all('enrol/cohort:config');
     local_mentor_core_remove_capability_for_all('enrol/cohort:unenrol');
+
+    // Add capability to library publish.
+    local_mentor_core_add_capability($admindedie, 'local/library:publish');
+    local_mentor_core_add_capability($respformation, 'local/library:publish');
 }
 
 /**
@@ -2237,11 +2241,11 @@ function local_mentor_specialization_init_static_pages() {
     $files = array_diff(scandir($filedir), ['..', '.']);
 
     $filerecord = [
-        'contextid' => 1,
-        'component' => 'local_staticpage',
-        'filearea'  => 'documents',
-        'itemid'    => 0,
-        'filepath'  => '/'
+            'contextid' => 1,
+            'component' => 'local_staticpage',
+            'filearea' => 'documents',
+            'itemid' => 0,
+            'filepath' => '/'
     ];
 
     // Read all static page files.
@@ -2275,7 +2279,7 @@ function local_mentor_specialization_import_usertours() {
     // Read all user tour files.
     foreach ($files as $file) {
         $filepath = $jsondir . '/' . $file;
-        $json     = file_get_contents($filepath);
+        $json = file_get_contents($filepath);
 
         // Create the user tour in database.
         if ($tour = \tool_usertours\manager::import_tour_from_json($json)) {
@@ -2302,13 +2306,13 @@ function local_mentor_specialization_init_logo() {
     $fs->delete_area_files(1, 'core_admin', 'logocompact');
 
     // Store file.
-    $file            = new stdClass();
+    $file = new stdClass();
     $file->contextid = 1;
     $file->component = 'core_admin';
-    $file->filearea  = 'logo';
-    $file->itemid    = 0;
-    $file->filepath  = '/';
-    $file->filename  = $filename;
+    $file->filearea = 'logo';
+    $file->itemid = 0;
+    $file->filepath = '/';
+    $file->filename = $filename;
 
     $fs->create_file_from_pathname($file, $pathname);
 
@@ -2359,27 +2363,27 @@ function local_mentor_specialization_init_bigbluebutton_settings() {
     // Set the default presentation file.
     $fs = get_file_storage();
 
-    $file            = new stdClass();
+    $file = new stdClass();
     $file->contextid = context_system::instance()->id;
     $file->component = 'mod_bigbluebuttonbn';
-    $file->filearea  = 'presentationdefault';
-    $file->itemid    = '0';
-    $file->filepath  = '/';
-    $file->filename  = 'background.pptx';
+    $file->filearea = 'presentationdefault';
+    $file->itemid = '0';
+    $file->filepath = '/';
+    $file->filename = 'background.pptx';
 
     if (!$fs->file_exists($file->contextid, $file->component, $file->filearea, $file->itemid, $file->filepath, $file->filename)) {
 
         $fs->create_file_from_pathname($file,
-            $CFG->dirroot . '/local/mentor_specialization/data/mod_bigbluebuttonbn/background.pptx');
+                $CFG->dirroot . '/local/mentor_specialization/data/mod_bigbluebuttonbn/background.pptx');
 
         local_mentor_core_set_moodle_config('presentationdefault', '/background.pptx', 'mod_bigbluebuttonbn');
     }
 
     // Set the default moderator.
-    $formateur  = $DB->get_record('role', ['shortname' => 'formateur']);
+    $formateur = $DB->get_record('role', ['shortname' => 'formateur']);
     $concepteur = $DB->get_record('role', ['shortname' => 'concepteur']);
-    $tuteur     = $DB->get_record('role', ['shortname' => 'tuteur']);
-    $roles      = $formateur->id . ',' . $concepteur->id . ',' . $tuteur->id;
+    $tuteur = $DB->get_record('role', ['shortname' => 'tuteur']);
+    $roles = $formateur->id . ',' . $concepteur->id . ',' . $tuteur->id;
 
     local_mentor_core_set_moodle_config('bigbluebuttonbn_participant_moderator_default', $roles, 'mod_bigbluebuttonbn');
     local_mentor_core_set_moodle_config('bigbluebuttonbn_participant_moderator_default', $roles);
@@ -2390,37 +2394,37 @@ function local_mentor_specialization_init_bigbluebutton_settings() {
  */
 function local_mentor_specialization_init_allowed_email_addresses() {
     set_config('allowemailaddresses',
-        'agriculture.gouv.fr onf.fr inao.gouv.fr anses.fr agrocampus-ouest.fr educagri.fr' .
-        ' agroparistech.fr engees.unistra.fr ensfea.fr ecole-paysage.fr oniris-nantes.fr' .
-        ' vetagro-sup.fr agrosupdijon.fr agencebio.org asp-public.fr cnpf.fr cerema.fr enpc.fr' .
-        ' franceagrimer.fr ifce.fr inra.fr irstea.fr odeadom.fr oncfs.gouv.fr eridan.social.gouv.fr' .
-        ' ars.sante.fr cab.formation.gouv.fr cab.social-sante.gouv.fr travail.gouv.fr .travail.gouv.fr' .
-        ' cbcm.social.gouv.fr creps-dijon.sports.gouv.fr creps-pap.sports.gouv.fr dcstep.gouv.fr' .
-        ' dieccte.gouv.fr direccte.gouv.fr drjscs.gouv.fr emploi.gouv.fr externes.cbcm.social.gouv.fr' .
-        ' externes.sg.social.gouv.fr externes.social.gouv.fr famille.gouv.fr formation.gouv.fr igas.gouv.fr' .
-        ' injep.fr jeunesse-sports.gouv.fr miprof.gouv.fr orion.gouv.to.res precarite.gouv.fr sante.gouv.fr' .
-        ' sante.gouv.fr.to.res sante-jeunesse-sports.gouv.fr sante-travail.gouv.fr service-civique.gouv.fr' .
-        ' sg.social.gouv.fr social.gouv.fr solidarite.gouv.fr ville.gouv.fr externes.sante.gouv.fr' .
-        ' sports.gouv.fr cnefop.gouv.fr externes.emploi.gouv.fr ddc.social.gouv.fr externes.ddc.social.gouv.fr' .
-        ' cab.social.gouv.fr ci.handicap.gouv.fr diffusion.jeunesse-sports.gouv.fr feddf.gouv.fr femmes.gouv.fr' .
-        ' fvjs.gouv.fr social-sante.gouv.fr ville-jeunesse-sports.gouv.fr externes.ville-jeunesse-sports.gouv.fr' .
-        ' externes.social-sante.gouv.fr externes.fvjs.gouv.fr externes.femmes.gouv.fr externes.feddf.gouv.fr' .
-        ' externes.diffusion.ville-jeunesse-sports.gouv.fr externes.diffusion.jeunesse-sports.gouv.fr ' .
-        'externes.ci.handicap.gouv.fr externes.cab.social.gouv.fr externes.sante-travail.gouv.fr ' .
-        'externes.ville.gouv.fr externes.sports.gouv.fr diges.gouv.fr concours.social.gouv.fr associations.gouv.fr ' .
-        'sante.fr externes.diges.gouv.fr externes.concours.social.gouv.fr externes.associations.gouv.fr ' .
-        'externes.sante.fr cohesionsociale.gouv.fr externes.cohesionsociale.gouv.fr filieresport.sports.gouv.fr' .
-        ' externes.filieresport.sports.gouv.fr externes.lafrancesengage.fr lafrancesengage.fr' .
-        ' engagement-civique.gouv.fr externes.ars.sante.fr externes.igas.gouv.fr cnpe.social.gouv.fr ' .
-        'externes.cnpe.social.gouv.fr retraites.gouv.fr externes.retraites.gouv.fr diffusion.sports.gouv.fr' .
-        ' externes.diffusion.sports.gouv.fr guichet-unique.sante.fr travail-emploi.gouv.fr association.gouv.fr' .
-        ' cnaop.gouv.fr cncp.gouv.fr cnle.gouv.fr cyberveille-sante.gouv.fr designation-prudhommes.gouv.fr' .
-        ' egalite-citoyennete-participez.gouv.fr hosp-eelections2018.fr ivg.gouv.fr jeunes.gouv.fr' .
-        ' mesdroitssociaux.gouv.fr moncompteformation.gouv.fr onpes.gouv.fr personnes-agees.gouv.fr' .
-        ' reforme-retraite.gouv.fr solidarites-sante.gouv.fr stop-violences-femmes.gouv.fr travailler-mieux.gouv.fr' .
-        ' agencedusport.fr cnds.sports.gouv.fr externes.cnds.sports.gouv.fr externes.agencedusport.fr arsoc.fax ' .
-        'externes.service-civique.gouv.fr externes.engagement-civique.gouv.fr geodae.sante.gouv.fr finances.gouv.fr' .
-        ' dgfip.finances.gouv.fr');
+            'agriculture.gouv.fr onf.fr inao.gouv.fr anses.fr agrocampus-ouest.fr educagri.fr' .
+            ' agroparistech.fr engees.unistra.fr ensfea.fr ecole-paysage.fr oniris-nantes.fr' .
+            ' vetagro-sup.fr agrosupdijon.fr agencebio.org asp-public.fr cnpf.fr cerema.fr enpc.fr' .
+            ' franceagrimer.fr ifce.fr inra.fr irstea.fr odeadom.fr oncfs.gouv.fr eridan.social.gouv.fr' .
+            ' ars.sante.fr cab.formation.gouv.fr cab.social-sante.gouv.fr travail.gouv.fr .travail.gouv.fr' .
+            ' cbcm.social.gouv.fr creps-dijon.sports.gouv.fr creps-pap.sports.gouv.fr dcstep.gouv.fr' .
+            ' dieccte.gouv.fr direccte.gouv.fr drjscs.gouv.fr emploi.gouv.fr externes.cbcm.social.gouv.fr' .
+            ' externes.sg.social.gouv.fr externes.social.gouv.fr famille.gouv.fr formation.gouv.fr igas.gouv.fr' .
+            ' injep.fr jeunesse-sports.gouv.fr miprof.gouv.fr orion.gouv.to.res precarite.gouv.fr sante.gouv.fr' .
+            ' sante.gouv.fr.to.res sante-jeunesse-sports.gouv.fr sante-travail.gouv.fr service-civique.gouv.fr' .
+            ' sg.social.gouv.fr social.gouv.fr solidarite.gouv.fr ville.gouv.fr externes.sante.gouv.fr' .
+            ' sports.gouv.fr cnefop.gouv.fr externes.emploi.gouv.fr ddc.social.gouv.fr externes.ddc.social.gouv.fr' .
+            ' cab.social.gouv.fr ci.handicap.gouv.fr diffusion.jeunesse-sports.gouv.fr feddf.gouv.fr femmes.gouv.fr' .
+            ' fvjs.gouv.fr social-sante.gouv.fr ville-jeunesse-sports.gouv.fr externes.ville-jeunesse-sports.gouv.fr' .
+            ' externes.social-sante.gouv.fr externes.fvjs.gouv.fr externes.femmes.gouv.fr externes.feddf.gouv.fr' .
+            ' externes.diffusion.ville-jeunesse-sports.gouv.fr externes.diffusion.jeunesse-sports.gouv.fr ' .
+            'externes.ci.handicap.gouv.fr externes.cab.social.gouv.fr externes.sante-travail.gouv.fr ' .
+            'externes.ville.gouv.fr externes.sports.gouv.fr diges.gouv.fr concours.social.gouv.fr associations.gouv.fr ' .
+            'sante.fr externes.diges.gouv.fr externes.concours.social.gouv.fr externes.associations.gouv.fr ' .
+            'externes.sante.fr cohesionsociale.gouv.fr externes.cohesionsociale.gouv.fr filieresport.sports.gouv.fr' .
+            ' externes.filieresport.sports.gouv.fr externes.lafrancesengage.fr lafrancesengage.fr' .
+            ' engagement-civique.gouv.fr externes.ars.sante.fr externes.igas.gouv.fr cnpe.social.gouv.fr ' .
+            'externes.cnpe.social.gouv.fr retraites.gouv.fr externes.retraites.gouv.fr diffusion.sports.gouv.fr' .
+            ' externes.diffusion.sports.gouv.fr guichet-unique.sante.fr travail-emploi.gouv.fr association.gouv.fr' .
+            ' cnaop.gouv.fr cncp.gouv.fr cnle.gouv.fr cyberveille-sante.gouv.fr designation-prudhommes.gouv.fr' .
+            ' egalite-citoyennete-participez.gouv.fr hosp-eelections2018.fr ivg.gouv.fr jeunes.gouv.fr' .
+            ' mesdroitssociaux.gouv.fr moncompteformation.gouv.fr onpes.gouv.fr personnes-agees.gouv.fr' .
+            ' reforme-retraite.gouv.fr solidarites-sante.gouv.fr stop-violences-femmes.gouv.fr travailler-mieux.gouv.fr' .
+            ' agencedusport.fr cnds.sports.gouv.fr externes.cnds.sports.gouv.fr externes.agencedusport.fr arsoc.fax ' .
+            'externes.service-civique.gouv.fr externes.engagement-civique.gouv.fr geodae.sante.gouv.fr finances.gouv.fr' .
+            ' dgfip.finances.gouv.fr');
 }
 
 /**
@@ -2491,10 +2495,10 @@ function local_mentor_specialization_disable_module($modulename) {
     // Increment course.cacherev for courses where we just made something invisible.
     // This will force cache rebuilding on the next request.
     increment_revision_number('course', 'cacherev',
-        "id IN (SELECT DISTINCT course
+            "id IN (SELECT DISTINCT course
                                 FROM {course_modules}
                                WHERE visibleold=1 AND module=?)",
-        array($module->id));
+            array($module->id));
     core_plugin_manager::reset_caches();
 }
 
@@ -2579,7 +2583,7 @@ function local_mentor_specialization_extend_navigation(global_navigation $naviga
         $keys = $mycourses->get_children_key_list();
 
         foreach ($keys as $key) {
-            $elem            = $mycourses->get($key);
+            $elem = $mycourses->get($key);
             $subchildrenkeys = $elem->get_children_key_list();
 
             foreach ($subchildrenkeys as $subchildrenkey) {
@@ -2604,7 +2608,7 @@ function local_mentor_specialization_init_theme_mentor_settings() {
 
     if (empty(get_config('theme_mentor', 'textinfofooter'))) {
         local_mentor_core_set_moodle_config('textinfofooter',
-            'Le site n\'a pas fait l\'objet d\'un audit accessibilité. Celui-ci est prévu courant novembre', 'theme_mentor');
+                'Le site n\'a pas fait l\'objet d\'un audit accessibilité. Celui-ci est prévu courant novembre', 'theme_mentor');
     }
 
     if (empty(get_config('theme_mentor', 'about'))) {
@@ -2613,7 +2617,7 @@ function local_mentor_specialization_init_theme_mentor_settings() {
 
     if (empty(get_config('theme_mentor', 'legalnotice'))) {
         local_mentor_core_set_moodle_config('legalnotice', $CFG->wwwroot . '/local/staticpage/view.php?page=mentionslegales',
-            'theme_mentor');
+                'theme_mentor');
     }
 
     if (empty(get_config('theme_mentor', 'faq'))) {
@@ -2622,25 +2626,25 @@ function local_mentor_specialization_init_theme_mentor_settings() {
 
     if (empty(get_config('theme_mentor', 'sitemap'))) {
         local_mentor_core_set_moodle_config('sitemap', $CFG->wwwroot . '/local/staticpage/view.php?page=plandusite',
-            'theme_mentor');
+                'theme_mentor');
     }
 
     if (empty(get_config('theme_mentor', 'externallinks'))) {
         local_mentor_core_set_moodle_config('externallinks', 'legifrance.gouv.fr|gouvernement.fr|service-public.fr|data.gouv.fr',
-            'theme_mentor');
+                'theme_mentor');
     }
 
     if (empty(get_config('theme_mentor', 'mentorlicence'))) {
         local_mentor_core_set_moodle_config('mentorlicence',
-            'Sauf mention contraire, tous les contenus de ce site sont sous ' .
-            '<a href="https://www.etalab.gouv.fr/">licence etalab-2.0</a>',
-            'theme_mentor');
+                'Sauf mention contraire, tous les contenus de ce site sont sous ' .
+                '<a href="https://www.etalab.gouv.fr/">licence etalab-2.0</a>',
+                'theme_mentor');
     }
 
     if (empty(get_config('theme_mentor', 'personaldata'))) {
         local_mentor_core_set_moodle_config('personaldata',
-            $CFG->wwwroot . '/local/staticpage/view.php?page=donneespersonnelles',
-            'theme_mentor');
+                $CFG->wwwroot . '/local/staticpage/view.php?page=donneespersonnelles',
+                'theme_mentor');
     }
 }
 
@@ -2659,7 +2663,7 @@ function local_mentor_specialization_set_role_order($roleorder) {
     $maxsortorderexisting = 1000;
 
     // Get list of current roles.
-    $listroles   = $DB->get_records('role', [], '', 'shortname, id, sortorder');
+    $listroles = $DB->get_records('role', [], '', 'shortname, id, sortorder');
     $defineroles = [];
 
     foreach ($roleorder as $role) {
@@ -2680,7 +2684,7 @@ function local_mentor_specialization_set_role_order($roleorder) {
     try {
         $DB->execute('UPDATE {role}
         SET sortorder = sortorder - :maxorderexisting',
-            ['maxorderexisting' => $maxsortorderexisting - 1]
+                ['maxorderexisting' => $maxsortorderexisting - 1]
         );
     } catch (\dml_exception $e) {
         mtrace('ERROR : Set role order');
@@ -2694,4 +2698,158 @@ function local_mentor_specialization_set_role_order($roleorder) {
  */
 function local_mentor_core_set_enrol_plugins_enabled() {
     local_mentor_core_set_moodle_config('enrol_plugins_enabled', 'manual,guest,self,meta,sirh,cohort');
+}
+
+/**
+ * Check if the user has a role that allows access to the library.
+ *
+ * @param int $userid
+ * @return bool
+ * @throws dml_exception
+ * @throws moodle_exception
+ */
+function local_mentor_specialization_check_if_user_has_role_to_access_the_library($userid) {
+    global $DB;
+
+    // Get all entities.
+    $allentities = \local_mentor_core\entity_api::get_all_entities(
+            false, [\local_mentor_core\library_api::get_library_id()], true
+    );
+    $allcontextentitiesid = array_map(function($allentities) {
+        return $allentities->get_context()->id;
+    }, $allentities);
+    $allcontextentitiesidstring = implode(",", $allcontextentitiesid);
+
+    // List of roles that allow access to the library.
+    $roleshortnamelistestring = implode("','", \local_mentor_specialization\mentor_library::ROLES_ACCESS);
+
+    return $DB->record_exists_sql('
+                SELECT ra.id
+                FROM {role_assignments} ra
+                JOIN {role} r ON r.id = ra.roleid
+                WHERE
+                    ra.contextid  IN (' . $allcontextentitiesidstring . ') AND
+                    r.shortname IN (\'' . $roleshortnamelistestring . '\') AND
+                    ra.userid = :userid',
+            array('userid' => $userid));
+}
+
+/**
+ * Check access to the library for all users.
+ * If user has access, assign "visiteurbiblio" role to user.
+ *
+ * @return void
+ * @throws coding_exception
+ * @throws dml_exception
+ * @throws moodle_exception
+ */
+function local_mentor_specialization_check_access_to_the_library_for_all_users() {
+    global $DB, $CFG;
+
+    require_once($CFG->dirroot . '/local/mentor_specialization/classes/models/mentor_library.php');
+
+    // Get database interface.
+    $dbi = \local_mentor_specialization\database_interface::get_instance();
+
+    // Get admin and guest user.
+    $admin = get_admin();
+    $guest = guest_user();
+
+    // Get all active users without admin and guest.
+    $usersid = $DB->get_fieldset_sql('
+        SELECT u.id id
+        FROM {user} u
+        WHERE u.id != :adminid AND
+            u.id != :guestid AND
+            u.deleted = 0 AND
+            u.suspended = 0 AND
+            u.confirmed = 1
+    ', array('adminid' => $admin->id, 'guestid' => $guest->id));
+
+    // Get "visiteurbiblio" role.
+    $rolevisiteurbiblio = $dbi->get_role_by_name(\local_mentor_specialization\mentor_library::ROLE_VISITEURBIBLIO);
+
+    // Get library.
+    $library = \local_mentor_core\library_api::get_library();
+
+    foreach ($usersid as $userid) {
+        if ((local_mentor_specialization_check_if_user_has_role_to_access_the_library($userid))) {
+            // Assign "visiteurbiblio" role to user.
+            role_assign($rolevisiteurbiblio->id, $userid, $library->get_context()->id);
+        }
+    }
+}
+
+/**
+ * Add cohort members
+ *
+ * @param int $cohortid
+ * @param int[] $usersid
+ * @return void
+ */
+function local_mentor_specialization_cohort_add_members($cohortid, $usersid) {
+    global $DB;
+
+    if (empty($usersid)) {
+        return;
+    }
+
+    $records = [];
+
+    foreach ($usersid as $userid) {
+        if ($DB->record_exists('cohort_members', array('cohortid' => $cohortid, 'userid' => $userid))) {
+            // No duplicates!
+            continue;
+        }
+
+        $record = new stdClass();
+        $record->cohortid = $cohortid;
+        $record->userid = $userid;
+        $record->timeadded = time();
+        $records[] = $record;
+    }
+
+    $DB->insert_records('cohort_members', $records);
+
+    $cohort = $DB->get_record('cohort', array('id' => $cohortid), '*', MUST_EXIST);
+
+    foreach ($records as $record) {
+        $event = \core\event\cohort_member_added::create(array(
+                'context' => context::instance_by_id($cohort->contextid),
+                'objectid' => $cohortid,
+                'relateduserid' => $record->userid,
+        ));
+        $event->add_record_snapshot('cohort', $cohort);
+        $event->trigger();
+    }
+}
+
+/**
+ * Remove cohort members
+ *
+ * @param int $cohortid
+ * @param int[] $usersid
+ * @return void
+ */
+function local_mentor_specialization_cohort_remove_members($cohortid, $usersid) {
+    global $DB;
+
+    if (empty($usersid)) {
+        return;
+    }
+
+    list($sql, $params) = $DB->get_in_or_equal($usersid, SQL_PARAMS_NAMED);
+    $DB->delete_records_select('cohort_members', "userid  $sql", $params);
+
+    $cohort = $DB->get_record('cohort', array('id' => $cohortid), '*', MUST_EXIST);
+
+    foreach ($usersid as $userid) {
+        $event = \core\event\cohort_member_removed::create(array(
+                'context' => context::instance_by_id($cohort->contextid),
+                'objectid' => $cohortid,
+                'relateduserid' => $userid,
+        ));
+        $event->add_record_snapshot('cohort', $cohort);
+        $event->trigger();
+    }
 }

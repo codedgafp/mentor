@@ -56,8 +56,8 @@ class logstore_mentor2_models_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core specialization singleton.
         $specialization = \local_mentor_core\specialization::get_instance();
-        $reflection     = new ReflectionClass($specialization);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($specialization);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -110,8 +110,8 @@ class logstore_mentor2_models_testcase extends advanced_testcase {
 
         $entity = new \logstore_mentor2\models\entity(array(
             'entityid' => 0,
-            'name'     => 'Entity name',
-            'regions'  => 'Region name'
+            'name' => 'Entity name',
+            'regions' => 'Region name'
         ));
 
         $requiredfields = $entity->get_required_fields();
@@ -141,7 +141,7 @@ class logstore_mentor2_models_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $log = new \logstore_mentor2\models\log(array(
-            'userlogid'    => 1,
+            'userlogid' => 1,
             'sessionlogid' => 2
         ));
 
@@ -199,13 +199,13 @@ class logstore_mentor2_models_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $session = new \logstore_mentor2\models\session(array(
-            'sessionid'              => 1,
-            'entitylogid'            => 2,
-            'subentitylogid'         => 3,
-            'trainingentitylogid'    => 4,
+            'sessionid' => 1,
+            'entitylogid' => 2,
+            'subentitylogid' => 3,
+            'trainingentitylogid' => 4,
             'trainingsubentitylogid' => 5,
-            'status'                 => 1,
-            'shared'                 => 0
+            'status' => 1,
+            'shared' => 0
         ));
 
         $requiredfields = $session->get_required_fields();
@@ -239,13 +239,13 @@ class logstore_mentor2_models_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $user = new \logstore_mentor2\models\user(array(
-            'userid'      => 1,
+            'userid' => 1,
             'entitylogid' => 2,
-            'trainer'     => 0,
-            'status'      => 1,
-            'category'    => 3,
+            'trainer' => 0,
+            'status' => 1,
+            'category' => 3,
             'regionlogid' => 4,
-            'department'  => 5
+            'department' => 5
         ));
 
         $requiredfields = $user->get_required_fields();

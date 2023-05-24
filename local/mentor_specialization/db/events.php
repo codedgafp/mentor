@@ -27,41 +27,56 @@ defined('MOODLE_INTERNAL') || die();
 
 $observers = array(
 
-    array(
-        'eventname' => '\core\event\role_assigned',
-        'callback'  => 'local_mentor_specialization_observer::assign_reflocalnonediteur',
-    ),
-    array(
-        'eventname' => '\core\event\role_unassigned',
-        'callback'  => 'local_mentor_specialization_observer::unassign_reflocalnonediteur',
-    ),
-    array(
-        'eventname' => '\core\event\user_deleted',
-        'callback'  => 'local_mentor_specialization_observer::delete_user',
-    ),
-    array(
-        'eventname' => '\core\event\role_assigned',
-        'callback'  => 'local_mentor_specialization_observer::sync_profile_role_assigned_ldap',
-    ),
+        array(
+                'eventname' => '\core\event\role_assigned',
+                'callback' => 'local_mentor_specialization_observer::assign_reflocalnonediteur',
+        ),
+        array(
+                'eventname' => '\core\event\role_unassigned',
+                'callback' => 'local_mentor_specialization_observer::unassign_reflocalnonediteur',
+        ),
+        array(
+                'eventname' => '\core\event\user_deleted',
+                'callback' => 'local_mentor_specialization_observer::delete_user',
+        ),
+        array(
+                'eventname' => '\core\event\role_assigned',
+                'callback' => 'local_mentor_specialization_observer::sync_profile_role_assigned_ldap',
+        ),
 
-    array(
-        'eventname' => '\core\event\role_unassigned',
-        'callback'  => 'local_mentor_specialization_observer::sync_profile_role_unassigned_ldap',
-    ),
+        array(
+                'eventname' => '\core\event\role_unassigned',
+                'callback' => 'local_mentor_specialization_observer::sync_profile_role_unassigned_ldap',
+        ),
 
-    array(
-        'eventname' => '\core\event\user_loggedin',
-        'callback'  => 'local_mentor_specialization_observer::sync_profile_role_login_ldap',
-        'priority'  => 9999,
-    ),
+        array(
+                'eventname' => '\core\event\user_loggedin',
+                'callback' => 'local_mentor_specialization_observer::sync_profile_role_login_ldap',
+                'priority' => 9999,
+        ),
 
-    array(
-        'eventname' => '\core\event\user_created',
-        'callback'  => 'local_mentor_specialization_observer::remove_required_user_info_data_if_empty'
-    ),
+        array(
+                'eventname' => '\core\event\user_created',
+                'callback' => 'local_mentor_specialization_observer::remove_required_user_info_data_if_empty'
+        ),
 
-    array(
-        'eventname' => '\core\event\user_updated',
-        'callback'  => 'local_mentor_specialization_observer::manager_change_user_entities_notification',
-    ),
+        array(
+                'eventname' => '\core\event\user_updated',
+                'callback' => 'local_mentor_specialization_observer::manager_change_user_entities_notification',
+        ),
+
+        array(
+                'eventname' => '\core\event\role_assigned',
+                'callback' => 'local_mentor_specialization_observer::assign_visiteurbiblio',
+        ),
+
+        array(
+                'eventname' => '\core\event\role_unassigned',
+                'callback' => 'local_mentor_specialization_observer::unassigned_visiteurbiblio',
+        ),
+
+        array(
+                'eventname' => '\core\event\role_assigned',
+                'callback' => 'local_mentor_specialization_observer::enrol_session_send_mail',
+        ),
 );

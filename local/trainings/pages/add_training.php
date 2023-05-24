@@ -84,9 +84,9 @@ if ($logo) {
     );
 }
 
-$forminfos            = new stdClass();
-$forminfos->entity    = $entity;
-$forminfos->logourl   = $logourl;
+$forminfos = new stdClass();
+$forminfos->entity = $entity;
+$forminfos->logourl = $logourl;
 $forminfos->actionurl = $url->out();
 
 $form = \local_mentor_core\training_api::get_training_form($url->out(), $forminfos);

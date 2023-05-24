@@ -66,16 +66,16 @@ class duplicate_training_task extends \core\task\adhoc_task {
         $newtraining = $oldtraining->duplicate($data->trainingshortname, $destinationentity);
 
         // Get recipient and sender.
-        $creator     = \core_user::get_user($this->get_userid());
+        $creator = \core_user::get_user($this->get_userid());
         $supportuser = \core_user::get_support_user();
 
         // Get the content of the email.
-        $content     = get_string('duplicate_training_email', 'local_mentor_core', array(
-            'newtrainingurlsheet'  => $newtraining->get_sheet_url($newtraining->get_url()->out())->out(),
-            'newtrainingfullname'  => $newtraining->name,
+        $content = get_string('duplicate_training_email', 'local_mentor_core', array(
+            'newtrainingurlsheet' => $newtraining->get_sheet_url($newtraining->get_url()->out())->out(),
+            'newtrainingfullname' => $newtraining->name,
             'newtrainingshortname' => $newtraining->shortname,
-            'oldtrainingurlsheet'  => $oldtraining->get_sheet_url($oldtraining->get_url()->out())->out(),
-            'oldtrainingfullname'  => $oldtraining->name,
+            'oldtrainingurlsheet' => $oldtraining->get_sheet_url($oldtraining->get_url()->out())->out(),
+            'oldtrainingfullname' => $oldtraining->name,
             'oldtrainingshortname' => $oldtraining->shortname,
         ));
         $contenthtml = text_to_html($content, false, false, true);

@@ -40,8 +40,8 @@ class local_library_lib_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -66,14 +66,14 @@ class local_library_lib_testcase extends advanced_testcase {
         self::setAdminUser();
 
         // Remove library entity and config.
-        $dbi      = \local_mentor_core\database_interface::get_instance();
+        $dbi = \local_mentor_core\database_interface::get_instance();
         $category = core_course_category::get($dbi->get_library_object()->id);
         $category->delete_full(false);
         unset_config(\local_mentor_core\library::CONFIG_VALUE_ID);
 
-        $library    = \local_mentor_core\library::get_instance();
+        $library = \local_mentor_core\library::get_instance();
         $reflection = new ReflectionClass($library);
-        $instance   = $reflection->getProperty('instance');
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -97,7 +97,7 @@ class local_library_lib_testcase extends advanced_testcase {
             array('name' => \local_mentor_core\library::NAME, 'idnumber' => \local_mentor_core\library::SHORTNAME)
         ));
 
-        $libraryobject    = $DB->get_record('course_categories',
+        $libraryobject = $DB->get_record('course_categories',
             array('name' => \local_mentor_core\library::NAME, 'idnumber' => \local_mentor_core\library::SHORTNAME)
         );
         $librarysingleton = \local_mentor_core\library_api::get_library();
@@ -145,13 +145,28 @@ class local_library_lib_testcase extends advanced_testcase {
         // With admin.
         self::setAdminUser();
 
+        // Remove library entity and config.
+        $dbi = \local_mentor_core\database_interface::get_instance();
+        $category = core_course_category::get($dbi->get_library_object()->id);
+        $category->delete_full(false);
+        unset_config(\local_mentor_core\library::CONFIG_VALUE_ID);
+
+        $library = \local_mentor_core\library::get_instance();
+        $reflection = new ReflectionClass($library);
+        $instance = $reflection->getProperty('instance');
+        $instance->setAccessible(true); // Now we can modify that :).
+        $instance->setValue(null, null); // Instance is gone.
+        $instance->setAccessible(false); // Clean up.
+
+        local_library_init_config();
+
         // With simple course.
         $course = $this->getDataGenerator()->create_course();
         $PAGE->set_url(course_get_url($course->id));
         $PAGE->set_context(context_course::instance($course->id));
         $PAGE->set_course($course);
 
-        $admin       = $USER;
+        $admin = $USER;
         $settingsnav = new settings_navigation($PAGE);
         $settingsnav->initialise();
         $settingsnav->extend_for_user($admin->id);
@@ -160,25 +175,25 @@ class local_library_lib_testcase extends advanced_testcase {
         self::assertNotContains('trainingtolibrary', $settingnode->get_children_key_list());
 
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // With training course.
-        $data                    = new \stdClass();
-        $data->name              = 'fullname';
-        $data->shortname         = 'shortname';
-        $data->content           = 'summary';
-        $data->status            = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
-        $data->traininggoal      = 'TEST TRAINING ';
-        $data->thumbnail         = '';
-        $data->categorychildid   = $entity->get_entity_formation_category();
-        $data->categoryid        = $entity->id;
+        $data = new \stdClass();
+        $data->name = 'fullname';
+        $data->shortname = 'shortname';
+        $data->content = 'summary';
+        $data->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+        $data->traininggoal = 'TEST TRAINING ';
+        $data->thumbnail = '';
+        $data->categorychildid = $entity->get_entity_formation_category();
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
-        $training                = \local_mentor_core\training_api::create_training($data);
-        $trainingcontext         = $training->get_context();
-        $trainingcourse          = $training->get_course();
+        $training = \local_mentor_core\training_api::create_training($data);
+        $trainingcontext = $training->get_context();
+        $trainingcourse = $training->get_course();
 
         $PAGE->set_url(course_get_url($trainingcourse->id));
         $PAGE->set_context($trainingcontext);
@@ -192,7 +207,7 @@ class local_library_lib_testcase extends advanced_testcase {
         self::assertContains('trainingtolibrary', $settingnode->get_children_key_list());
 
         // With Administrateur espace dedie.
-        $admindedie     = $this->getDataGenerator()->create_user();
+        $admindedie = $this->getDataGenerator()->create_user();
         $admindedierole = $DB->get_record('role', array('shortname' => 'admindedie'));
         $this->getDataGenerator()->role_assign(
             $admindedierole->id,
@@ -210,10 +225,10 @@ class local_library_lib_testcase extends advanced_testcase {
         $settingsnav->extend_for_user($admindedie->id);
 
         self::assertNotFalse($settingnode = $settingsnav->find('courseadmin', navigation_node::TYPE_COURSE));
-        self::assertNotContains('trainingtolibrary', $settingnode->get_children_key_list());
+        self::assertContains('trainingtolibrary', $settingnode->get_children_key_list());
 
         // With Responsable de formation central.
-        $respformation     = $this->getDataGenerator()->create_user();
+        $respformation = $this->getDataGenerator()->create_user();
         $respformationrole = $DB->get_record('role', array('shortname' => 'respformation'));
         $this->getDataGenerator()->role_assign(
             $respformationrole->id,
@@ -231,10 +246,10 @@ class local_library_lib_testcase extends advanced_testcase {
         $settingsnav->extend_for_user($respformation->id);
 
         self::assertNotFalse($settingnode = $settingsnav->find('courseadmin', navigation_node::TYPE_COURSE));
-        self::assertNotContains('trainingtolibrary', $settingnode->get_children_key_list());
+        self::assertContains('trainingtolibrary', $settingnode->get_children_key_list());
 
         // With Referent local de formation.
-        $referentlocal     = $this->getDataGenerator()->create_user();
+        $referentlocal = $this->getDataGenerator()->create_user();
         $referentlocalrole = $DB->get_record('role', array('shortname' => 'referentlocal'));
         $this->getDataGenerator()->role_assign(
             $referentlocalrole->id,
@@ -255,7 +270,7 @@ class local_library_lib_testcase extends advanced_testcase {
         self::assertNotContains('trainingtolibrary', $settingnode->get_children_key_list());
 
         // With Participant.
-        $participant     = $this->getDataGenerator()->create_user();
+        $participant = $this->getDataGenerator()->create_user();
         $participantrole = $DB->get_record('role', array('shortname' => 'participant'));
         $this->getDataGenerator()->role_assign(
             $participantrole->id,

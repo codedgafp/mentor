@@ -54,8 +54,8 @@ class importusers_form extends moodleform {
      * @param null $ajaxformdata
      */
     public function __construct($users = [], $userstoreactivate = [], $action = null, $customdata = null, $method = 'post',
-        $target = '', $attributes =
-    null,
+        $target = '', $attributes
+        = null,
         $editable = true, $ajaxformdata = null) {
 
         $this->users = $users;

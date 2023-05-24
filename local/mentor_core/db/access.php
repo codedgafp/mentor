@@ -28,69 +28,69 @@ defined('MOODLE_INTERNAL') || die();
 $capabilities = array(
 
     'local/mentor_core:changefullname' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
             'manager' => CAP_ALLOW,
         ),
         'clonepermissionsfrom' => 'moodle/course:update'
     ),
 
     'local/mentor_core:changeshortname' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
             'manager' => CAP_ALLOW,
         ),
         'clonepermissionsfrom' => 'moodle/course:update'
     ),
 
-    'local/mentor_core:changecontent'         => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
+    'local/mentor_core:changecontent' => array(
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
             'manager' => CAP_ALLOW,
         ),
         'clonepermissionsfrom' => 'moodle/course:update'
     ),
     'local/mentor_core:changesessionfullname' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
             'manager' => CAP_ALLOW,
         ),
         'clonepermissionsfrom' => 'moodle/course:update'
     ),
 
     'local/mentor_core:changesessionshortname' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
             'manager' => CAP_ALLOW,
         ),
         'clonepermissionsfrom' => 'moodle/course:update'
     ),
 
     'local/mentor_core:changesessionopentoexternal' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSECAT,
-        'archetypes'           => array(
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSECAT,
+        'archetypes' => array(
             'manager' => CAP_ALLOW,
         ),
         'clonepermissionsfrom' => 'moodle/course:update'
     ),
 
     'local/mentor_core:sharetrainings' => array(
-        'riskbitmask'  => RISK_XSS,
-        'captype'      => 'write',
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
 
@@ -98,10 +98,10 @@ $capabilities = array(
     ),
 
     'local/mentor_core:sharetrainingssubentities' => array(
-        'riskbitmask'  => RISK_XSS,
-        'captype'      => 'write',
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
 
@@ -109,10 +109,10 @@ $capabilities = array(
     ),
 
     'local/mentor_core:movetrainings' => array(
-        'riskbitmask'  => RISK_XSS,
-        'captype'      => 'write',
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
 
@@ -120,10 +120,10 @@ $capabilities = array(
     ),
 
     'local/mentor_core:movetrainingsinotherentities' => array(
-        'riskbitmask'  => RISK_XSS,
-        'captype'      => 'write',
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
 
@@ -131,10 +131,10 @@ $capabilities = array(
     ),
 
     'local/mentor_core:movesessions' => array(
-        'riskbitmask'  => RISK_XSS,
-        'captype'      => 'write',
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
 
@@ -142,10 +142,10 @@ $capabilities = array(
     ),
 
     'local/mentor_core:movesessionsinotherentities' => array(
-        'riskbitmask'  => RISK_XSS,
-        'captype'      => 'write',
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
 
@@ -153,56 +153,56 @@ $capabilities = array(
     ),
 
     'local/mentor_core:importusers' => array(
-        'riskbitmask'  => RISK_SPAM,
-        'captype'      => 'write',
+        'riskbitmask' => RISK_SPAM,
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
     ),
 
     'local/mentor_core:suspendusers' => array(
-        'riskbitmask'  => RISK_SPAM,
-        'captype'      => 'write',
+        'riskbitmask' => RISK_SPAM,
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
     ),
 
     'local/mentor_core:duplicatesessionintotraining' => array(
-        'riskbitmask'  => RISK_SPAM,
-        'captype'      => 'write',
+        'riskbitmask' => RISK_SPAM,
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
     ),
 
     'local/mentor_core:changetraininggoal' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
             'manager' => CAP_ALLOW,
         ),
         'clonepermissionsfrom' => 'moodle/course:update'
     ),
 
     'local/mentor_core:changetrainingstatus' => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
             'manager' => CAP_ALLOW,
         ),
         'clonepermissionsfrom' => 'moodle/course:update'
     ),
-    'local/mentor_core:changethumbnail'      => array(
-        'riskbitmask'          => RISK_XSS,
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => array(
+    'local/mentor_core:changethumbnail' => array(
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
             'manager' => CAP_ALLOW,
         ),
         'clonepermissionsfrom' => 'moodle/course:update'

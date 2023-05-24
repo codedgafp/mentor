@@ -30,13 +30,13 @@ function atto_video_strings_for_js() {
     global $PAGE;
 
     $strings = array(
-            'save',
-            'fillurl',
-            'inserturl',
-            'errorvalidurl',
-            'errorallowedurl',
-            'erroremptyurl',
-            'allowed_domain'
+        'save',
+        'fillurl',
+        'inserturl',
+        'errorvalidurl',
+        'errorallowedurl',
+        'erroremptyurl',
+        'allowed_domain'
     );
 
     $PAGE->requires->strings_for_js($strings, 'atto_video');

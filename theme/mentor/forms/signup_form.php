@@ -134,28 +134,31 @@ class signup_form extends \moodleform {
         $mform->addElement('select', 'profile_field_category', get_string('formcategory', 'theme_mentor'), $categorylist);
         $mform->addRule('profile_field_category', '', 'required');
 
-        // Get all entities can become main or secondary entity.
-        $listmainentities      = explode("\n", \local_mentor_core\entity_api::get_entities_list(true, true, false));
-        $listmainentities      = array_combine($listmainentities, $listmainentities);
-        $listsecondaryentities = $listmainentities;
-        $listmainentities      = ['' => get_string('choose') . '...'] + $listmainentities;
+        // Get all entities can become main entity.
+        $listmainentities = explode("\n", \local_mentor_core\entity_api::get_entities_list(true, true, false, false));
+        $listmainentities = array_combine($listmainentities, $listmainentities);
+        $listmainentities = ['' => get_string('choose') . '...'] + $listmainentities;
 
         // Mainentity.
         $mform->addElement('select', 'profile_field_mainentity', get_string('formmainentity', 'theme_mentor'), $listmainentities);
         $mform->addRule('profile_field_mainentity', '', 'required');
         $mform->addElement('static', 'mainentitypolicyinfo', '', get_string('formmainentityinformation', 'theme_mentor'));
 
+        // Get all entities can become secondary entity.
+        $listsecondaryentities = explode("\n", \local_mentor_core\entity_api::get_entities_list(true, true, false));
+        $listsecondaryentities = array_combine($listsecondaryentities, $listsecondaryentities);
+
         // Secondary entities.
         $mform->addElement('autocomplete', 'profile_field_secondaryentities', get_string('formsecondaryentities', 'theme_mentor'),
-            $listsecondaryentities,
-            ['multiple' => true]
+                $listsecondaryentities,
+                ['multiple' => true]
         );
         $mform->addElement('static', 'secondaryentitiespolicyinfo', '',
-            get_string('formsecondaryentitiesinformation', 'theme_mentor'));
+                get_string('formsecondaryentitiesinformation', 'theme_mentor'));
 
         // Attachment structure.
         $mform->addElement('text', 'profile_field_attachmentstructure', get_string('formattachmentstructure', 'theme_mentor'),
-            array('size' => 40));
+                array('size' => 40));
         $mform->setType('profile_field_attachmentstructure', PARAM_RAW_TRIMMED);
 
         // Affectation.
@@ -179,18 +182,18 @@ class signup_form extends \moodleform {
         $legalmentionurl = get_config('theme_mentor', 'legalnotice');
         if (!empty($legalmentionurl)) {
             $mform->addElement('html',
-                '<a href="' . $legalmentionurl . '" class="signup-link" target="_blank" rel="help opener">' .
-                get_string('legalnotice', 'theme_mentor') .
-                '</a>');
+                    '<a href="' . $legalmentionurl . '" class="signup-link" target="_blank" rel="help opener">' .
+                    get_string('legalnotice', 'theme_mentor') .
+                    '</a>');
         }
 
         // Personal data.
         $personaldataurl = get_config('theme_mentor', 'personaldata');
         if (!empty($personaldataurl)) {
             $mform->addElement('html',
-                '<a href="' . $personaldataurl . '" class="signup-link" target="_blank" rel="help opener">' .
-                get_string('personaldata', 'theme_mentor') .
-                '</a>');
+                    '<a href="' . $personaldataurl . '" class="signup-link" target="_blank" rel="help opener">' .
+                    get_string('personaldata', 'theme_mentor') .
+                    '</a>');
         }
 
         $this->add_action_buttons(true, get_string('createaccount', 'theme_mentor'));
@@ -213,11 +216,11 @@ class signup_form extends \moodleform {
         $data = $this->clean_data($data);
 
         $errors = parent::validation($data, $files);
-        $db     = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
 
         $requiredfields = [
-            'firstname', 'lastname', 'profile_field_sexe', 'profile_field_birthyear', 'profile_field_status',
-            'profile_field_category', 'profile_field_mainentity', 'profile_field_region'
+                'firstname', 'lastname', 'profile_field_sexe', 'profile_field_birthyear', 'profile_field_status',
+                'profile_field_category', 'profile_field_mainentity', 'profile_field_region'
         ];
 
         // Check required fields and display a custom message.
@@ -283,10 +286,10 @@ class signup_form extends \moodleform {
     private function clean_data($data) {
 
         $fields = [
-            'firstname',
-            'lastname',
-            'profile_field_affectation',
-            'profile_field_attachmentstructure'
+                'firstname',
+                'lastname',
+                'profile_field_affectation',
+                'profile_field_attachmentstructure'
         ];
 
         foreach ($fields as $field) {

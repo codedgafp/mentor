@@ -50,8 +50,56 @@
 }}
 
 <div id="sessions-buttons">
-    <div id="create-session">
-        <a href="{{ trainingadmincourselink }}" class="btn btn-primary">{{# str }} createsession, local_mentor_specialization {{/ str }}</a>
+    <div id="sessions-buttons-filter">
+        <div id="filter-title">
+            <i class="fa fa-filter" aria-hidden="true"></i>{{# str }} sortby, local_mentor_specialization {{/ str }}
+        </div>
+        <div id="filter-actions">
+            <div id="filter-input">
+                <div id="sub-entity-filter">
+                    <label for="sub-entity-select" class="fr-text--sm">{{# str }} subentity, local_mentor_core {{/ str }}</label>
+                    <select name="sub-entity-select" class="custom-select" id="sub-entity-select" multiple="multiple">
+                        <option value="{{ entityid }}">{{# str }} none, local_mentor_specialization {{/ str }}</option>
+                        {{# subentitiesfilter }}
+                            <option value="{{ id }}">{{ name }}</option>
+                        {{/ subentitiesfilter }}
+                    </select>
+                </div>
+                <div id="collection-filter">
+                    <label for="collection-select" class="fr-text--sm">{{# str }} collections, local_mentor_specialization {{/ str }}</label>
+                    <select name="collection-select" class="custom-select" id="collection-select" multiple="multiple">
+                        {{# collections }}
+                            <option value="{{ key }}">{{ value }}</option>
+                        {{/ collections }}
+                    </select>
+                </div>
+                <div id="start-filter">
+                    <label for="start-select" class="fr-text--sm">{{# str }} sessionperiod, local_mentor_specialization {{/ str }}</label>
+                    <div id="date-filter">
+                        <div>
+                            <input type="date" id="start-select" name="start-select" placeholder="{{# str }} start, local_mentor_specialization {{/ str }}">
+                        </div>
+                        <div>
+                            <label for="end-select"></label>
+                            <input type="date" id="end-select" name="end-select" placeholder="{{# str }} end, local_mentor_specialization {{/ str }}">
+                        </div>
+                    </div>
+                </div>
+                <div id="status-filter">
+                    <label for="status-select" class="fr-text--sm">{{# str }} status, local_mentor_specialization {{/ str }}</label>
+                    <select name="status-select" class="custom-select" id="status-select" multiple="multiple">
+                        {{# status }}
+                            <option value="{{ key }}">{{ value }}</option>
+                        {{/ status }}
+                    </select>
+                </div>
+            </div>
+            <div class="filters-button">
+                <button id="filter-apply" class="btn btn-primary"><i class="fa fa-filter" aria-hidden="true"></i>{{# str }} applyfilters, local_mentor_specialization {{/ str
+                }}</button>
+                <button id="filter-reset" class="btn btn-link">{{# str }} resetfilters, local_mentor_specialization {{/ str }}</button>
+            </div>
+        </div>
     </div>
     {{# recyclebinlink }}
         <a href="{{ recyclebinlink }}" id="recyclebin" class="btn btn-secondary" target="_blank" title="Corbeille" rel="opener">
@@ -60,57 +108,6 @@
             </span>
         </a>
     {{/recyclebinlink}}
-</div>
-<div id="sessions-buttons-filter">
-    <div id="filter-title">
-        <i class="fa fa-filter" aria-hidden="true"></i>{{# str }} sortby, local_mentor_specialization {{/ str }}
-    </div>
-    <div id="filter-actions">
-        <div id="filter-input">
-            <div id="sub-entity-filter">
-                <label for="sub-entity-select" class="fr-text--sm">{{# str }} subentity, local_mentor_core {{/ str }}</label>
-                <select name="sub-entity-select" class="custom-select" id="sub-entity-select" multiple="multiple">
-                    <option value="{{ entityid }}">{{# str }} none, local_mentor_specialization {{/ str }}</option>
-                    {{# subentitiesfilter }}
-                        <option value="{{ id }}">{{ name }}</option>
-                    {{/ subentitiesfilter }}
-                </select>
-            </div>
-            <div id="collection-filter">
-                <label for="collection-select" class="fr-text--sm">{{# str }} collections, local_mentor_specialization {{/ str }}</label>
-                <select name="collection-select" class="custom-select" id="collection-select" multiple="multiple">
-                    {{# collections }}
-                        <option value="{{ key }}">{{ value }}</option>
-                    {{/ collections }}
-                </select>
-            </div>
-            <div id="start-filter">
-                <label for="start-select" class="fr-text--sm">{{# str }} sessionperiod, local_mentor_specialization {{/ str }}</label>
-                <div id="date-filter">
-                    <div>
-                        <input type="date" id="start-select" name="start-select" placeholder="{{# str }} start, local_mentor_specialization {{/ str }}">
-                    </div>
-                    <div>
-                        <label for="end-select"></label>
-                        <input type="date" id="end-select" name="end-select" placeholder="{{# str }} end, local_mentor_specialization {{/ str }}">
-                    </div>
-                </div>
-            </div>
-            <div id="status-filter">
-                <label for="status-select" class="fr-text--sm">{{# str }} status, local_mentor_specialization {{/ str }}</label>
-                <select name="status-select" class="custom-select" id="status-select" multiple="multiple">
-                    {{# status }}
-                        <option value="{{ key }}">{{ value }}</option>
-                    {{/ status }}
-                </select>
-            </div>
-        </div>
-        <div class="filters-button">
-            <button id="filter-apply" class="btn btn-primary"><i class="fa fa-filter" aria-hidden="true"></i>{{# str }} applyfilters, local_mentor_specialization {{/ str
-            }}</button>
-            <button id="filter-reset" class="btn btn-link">{{# str }} resetfilters, local_mentor_specialization {{/ str }}</button>
-        </div>
-    </div>
 </div>
 <table id="session-table">
     <thead>

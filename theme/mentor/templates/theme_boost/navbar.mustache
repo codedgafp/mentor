@@ -19,46 +19,48 @@
 }}
 <nav class="fixed-top navbar navbar-light bg-white navbar-expand moodle-has-zindex" aria-label="{{#str}}sitemenubar, admin{{/str}}">
 
-        <div data-region="drawer-toggle" class="d-inline-block mr-3">
-            <button aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" type="button" class="btn nav-link float-sm-left mr-1 btn-light bg-gray" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav">{{#pix}}i/menubars{{/pix}}<span class="sr-only">{{#str}}sidepanel, core{{/str}}</span></button>
-        </div>
+    <div data-region="drawer-toggle" class="d-inline-block mr-3">
+        <button aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" type="button"
+                class="btn nav-link float-sm-left mr-1 btn-light bg-gray" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav">{{#pix}}i/menubars{{/pix}}
+            <span class="sr-only">{{#str}}sidepanel, core{{/str}}</span></button>
+    </div>
 
-        <a href="{{{ config.wwwroot }}}" class="navbar-brand aabtn {{# output.should_display_navbar_logo }}has-logo{{/ output.should_display_navbar_logo }}
-            {{^ output.should_display_navbar_logo }}
+    <a href="{{{ config.wwwroot }}}" class="navbar-brand aabtn {{# output.should_display_navbar_logo }}has-logo{{/ output.should_display_navbar_logo }}
+        {{^ output.should_display_navbar_logo }}
                 d-none d-sm-inline
             {{/ output.should_display_navbar_logo }}
                 ">
-            {{# output.should_display_navbar_logo }}
-                <span class="logo d-sm-inline">
+        {{# output.should_display_navbar_logo }}
+            <span class="logo d-sm-inline">
                     <img src="{{output.get_compact_logo_url}}" alt="Mentor - République française">
                 </span>
-            {{/ output.should_display_navbar_logo }}
-        </a>
+        {{/ output.should_display_navbar_logo }}
+    </a>
 
-        <a class="site-title" href="{{{ config.wwwroot }}}">
-            <span class="main-title">mentor.gouv.fr{{{ output.site_type }}}</span>
-            <span class="sub-title d-none d-sm-inline">La plateforme interministérielle de formation</span>
-        </a>
+    <a class="site-title" href="{{{ config.wwwroot }}}">
+        <span class="main-title">mentor.gouv.fr{{{ output.site_type }}}</span>
+        <span class="sub-title d-none d-sm-inline">La plateforme interministérielle de formation</span>
+    </a>
 
-        <ul class="navbar-nav d-none d-md-flex ml-auto mentor-links">
-            <!-- custom_menu -->
-            {{{ output.custom_menu }}}
-            <!-- page_heading_menu -->
-            {{{ output.page_heading_menu }}}
-        </ul>
-        <ul class="nav navbar-nav">
-            <li class="d-none d-lg-block">
-                {{{ output.search_box }}}
-            </li>
-            <!-- navbar_plugin_output -->
-            <li class="nav-item moodle-items">
-                {{{ output.navbar_plugin_output }}}
-            </li>
-            <!-- user_menu -->
-            <li class="nav-item d-flex align-items-center usermenu-item">
-                {{{ output.user_menu }}}
-            </li>
-        </ul>
-        <!-- search_box -->
+    <ul class="navbar-nav d-none d-md-flex ml-auto mentor-links">
+        <!-- custom_menu -->
+        {{{ output.custom_menu }}}
+        <!-- page_heading_menu -->
+        {{{ output.page_heading_menu }}}
+    </ul>
+    <ul class="nav navbar-nav">
+        <li class="d-none d-lg-block">
+            {{{ output.search_box }}}
+        </li>
+        <!-- navbar_plugin_output -->
+        <li class="nav-item moodle-items">
+            {{{ output.navbar_plugin_output }}}
+        </li>
+        <!-- user_menu -->
+        <li class="nav-item d-flex align-items-center usermenu-item">
+            {{{ output.user_menu }}}
+        </li>
+    </ul>
+    <!-- search_box -->
 </nav>
 

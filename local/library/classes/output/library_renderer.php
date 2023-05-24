@@ -57,7 +57,7 @@ class library_renderer extends \plugin_renderer_base {
             ], 'local_library');
 
             // Init and call JS to library.
-            $jsparams              = new \stdClass();
+            $jsparams = new \stdClass();
             $jsparams->collections = local_mentor_specialization_get_collections();
             $this->page->requires->js_call_amd('local_library/local_library', 'init', $jsparams);
         }

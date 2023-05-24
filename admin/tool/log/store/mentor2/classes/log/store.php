@@ -120,100 +120,100 @@ class store implements \tool_log\log\writer {
             // Get or create entity log.
             $data = [
                 'entityid' => $mainentity->id,
-                'name'     => $mainentity->name,
-                'regions'  => $mainentity->regions
+                'name' => $mainentity->name,
+                'regions' => $mainentity->regions
             ];
 
-            $userentitylog   = new \logstore_mentor2\models\entity($data);
+            $userentitylog = new \logstore_mentor2\models\entity($data);
             $userentitylogid = $userentitylog->get_or_create_record('entity2');
 
             $userprofilefields = (array) profile_user_record($event['userid'], false);
 
-            $userregionlog   = new \logstore_mentor2\models\region(['name' => $userprofilefields['region']]);
+            $userregionlog = new \logstore_mentor2\models\region(['name' => $userprofilefields['region']]);
             $userregionlogid = $userregionlog->get_or_create_record('region2');
 
             // Create data to log store.
             $data = array(
-                'userid'      => $event['userid'],
-                'trainer'     => !$session->is_participant($event['userid']) && ($session->is_trainer($event['userid']) ||
-                                                                                 $session->is_tutor($event['userid'])),
+                'userid' => $event['userid'],
+                'trainer' => !$session->is_participant($event['userid']) && ($session->is_trainer($event['userid']) ||
+                                                                             $session->is_tutor($event['userid'])),
                 'entitylogid' => $userentitylogid,
-                'status'      => $userprofilefields['status'],
-                'category'    => $userprofilefields['category'],
-                'department'  => $userprofilefields['department'],
+                'status' => $userprofilefields['status'],
+                'category' => $userprofilefields['category'],
+                'department' => $userprofilefields['department'],
                 'regionlogid' => $userregionlogid,
             );
 
             // Get or create user log store record.
-            $userlog   = new \logstore_mentor2\models\user($data);
+            $userlog = new \logstore_mentor2\models\user($data);
             $userlogid = $userlog->get_or_create_record('user2');
 
             // Session sub entity.
             $sessionsubentity = $session->get_entity();
-            $data             = [
+            $data = [
                 'entityid' => $sessionsubentity->id,
-                'name'     => $sessionsubentity->name,
-                'regions'  => $sessionsubentity->regions
+                'name' => $sessionsubentity->name,
+                'regions' => $sessionsubentity->regions
             ];
 
-            $sessionsubentitylog   = new \logstore_mentor2\models\entity($data);
+            $sessionsubentitylog = new \logstore_mentor2\models\entity($data);
             $sessionsubentitylogid = $sessionsubentitylog->get_or_create_record('entity2');
 
             // Session main entity.
             $sessionmainentity = $sessionsubentity->get_main_entity();
-            $data              = [
+            $data = [
                 'entityid' => $sessionmainentity->id,
-                'name'     => $sessionmainentity->name,
-                'regions'  => $sessionmainentity->regions
+                'name' => $sessionmainentity->name,
+                'regions' => $sessionmainentity->regions
             ];
 
-            $sessionentitylog   = new \logstore_mentor2\models\entity($data);
+            $sessionentitylog = new \logstore_mentor2\models\entity($data);
             $sessionentitylogid = $sessionentitylog->get_or_create_record('entity2');
 
             // Training sub entity.
             $training = $session->get_training();
 
             $trainingsubentity = $training->get_entity();
-            $data              = [
+            $data = [
                 'entityid' => $trainingsubentity->id,
-                'name'     => $trainingsubentity->name,
-                'regions'  => $trainingsubentity->regions
+                'name' => $trainingsubentity->name,
+                'regions' => $trainingsubentity->regions
             ];
 
-            $trainingsubentitylog   = new \logstore_mentor2\models\entity($data);
+            $trainingsubentitylog = new \logstore_mentor2\models\entity($data);
             $trainingsubentitylogid = $trainingsubentitylog->get_or_create_record('entity2');
 
             // Training main entity.
             $trainingmainentity = $trainingsubentity->get_main_entity();
-            $data               = [
+            $data = [
                 'entityid' => $trainingmainentity->id,
-                'name'     => $trainingmainentity->name,
-                'regions'  => $trainingmainentity->regions
+                'name' => $trainingmainentity->name,
+                'regions' => $trainingmainentity->regions
             ];
 
-            $trainingentitylog   = new \logstore_mentor2\models\entity($data);
+            $trainingentitylog = new \logstore_mentor2\models\entity($data);
             $trainingentitylogid = $trainingentitylog->get_or_create_record('entity2');
 
             $data = array(
-                'sessionid'              => $session->id,
-                'shared'                 => $session->is_shared(),
-                'status'                 => $session->status,
-                'entitylogid'            => $sessionentitylogid,
-                'subentitylogid'         => $sessionsubentitylogid,
-                'trainingentitylogid'    => $trainingentitylogid,
+                'sessionid' => $session->id,
+                'shared' => $session->is_shared(),
+                'status' => $session->status,
+                'entitylogid' => $sessionentitylogid,
+                'subentitylogid' => $sessionsubentitylogid,
+                'trainingentitylogid' => $trainingentitylogid,
                 'trainingsubentitylogid' => $trainingsubentitylogid
             );
 
             // Get or create session log store record.
             $sessionlog = new \logstore_mentor2\models\session($data);
 
-            $param        = ['collections' => explode(',', $training->collection)];
+            $param = ['collections' => explode(',', $training->collection)];
             $sessionlogid = $sessionlog->get_or_create_record('session2', $param);
 
             // Create final log.
             $finallogdata = array(
                 'sessionlogid' => $sessionlogid,
-                'userlogid'    => $userlogid
+                'userlogid' => $userlogid
             );
 
             // Get or create log store record.

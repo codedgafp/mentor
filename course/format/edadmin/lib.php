@@ -85,7 +85,7 @@ class format_edadmin extends format_base {
      * @return stdClass
      */
     public function supports_ajax() {
-        $ajaxsupport          = new stdClass();
+        $ajaxsupport = new stdClass();
         $ajaxsupport->capable = true;
         return $ajaxsupport;
     }
@@ -97,7 +97,7 @@ class format_edadmin extends format_base {
      */
     public function get_default_blocks() {
         return array(
-            BLOCK_POS_LEFT  => array(),
+            BLOCK_POS_LEFT => array(),
             BLOCK_POS_RIGHT => array()
         );
     }
@@ -133,20 +133,20 @@ class format_edadmin extends format_base {
         static $courseformatoptions = false;
         if ($courseformatoptions === false) {
             $courseformatoptions = array(
-                'formattype'   => array(
+                'formattype' => array(
                     'type' => PARAM_TEXT,
                 ),
                 'categorylink' => array(
                     'type' => PARAM_INT
                 ),
-                'cohortlink'   => array(
+                'cohortlink' => array(
                     'type' => PARAM_INT
                 )
             );
         }
 
         // Category.
-        $listallcategories           = self::get_all_categories(true);
+        $listallcategories = self::get_all_categories(true);
         $elementattributescategories = array();
 
         foreach ($listallcategories as $category) {
@@ -155,32 +155,32 @@ class format_edadmin extends format_base {
 
         if ($foreditform && !isset($courseformatoptions['numdiscussions']['label'])) {
             $courseformatoptionsedit = array(
-                'formattype'   => array(
-                    'label'              => new lang_string('edadmintype', 'format_edadmin'),
-                    'help'               => 'edadmintype',
-                    'help_component'     => 'format_edadmin',
-                    'element_type'       => 'select',
+                'formattype' => array(
+                    'label' => new lang_string('edadmintype', 'format_edadmin'),
+                    'help' => 'edadmintype',
+                    'help_component' => 'format_edadmin',
+                    'element_type' => 'select',
                     'element_attributes' => array(
                         $this->get_all_admin_type()
                     ),
                 ),
                 'categorylink' => array(
-                    'label'              => new lang_string('edadmicategory', 'format_edadmin'),
-                    'help'               => 'edadmicategory',
-                    'help_component'     => 'format_edadmin',
-                    'element_type'       => 'select',
+                    'label' => new lang_string('edadmicategory', 'format_edadmin'),
+                    'help' => 'edadmicategory',
+                    'help_component' => 'format_edadmin',
+                    'element_type' => 'select',
                     'element_attributes' => array(
                         $elementattributescategories
                     ),
                 ),
-                'cohortlink'   => array(
-                    'label'          => new lang_string('edadmincohort', 'format_edadmin'),
-                    'help'           => 'edadmincohort',
+                'cohortlink' => array(
+                    'label' => new lang_string('edadmincohort', 'format_edadmin'),
+                    'help' => 'edadmincohort',
                     'help_component' => 'format_edadmin',
-                    'element_type'   => 'text',
+                    'element_type' => 'text',
                 )
             );
-            $courseformatoptions     = array_merge_recursive($courseformatoptions, $courseformatoptionsedit);
+            $courseformatoptions = array_merge_recursive($courseformatoptions, $courseformatoptionsedit);
         }
         return $courseformatoptions;
     }

@@ -39,13 +39,13 @@ class sirh_testcase extends advanced_testcase {
     public function reset_singletons() {
         global $CFG;
 
-        $CFG->sirh_api_url   = "www.sirh.fr";
+        $CFG->sirh_api_url = "www.sirh.fr";
         $CFG->sirh_api_token = "FALSEKEY";
 
         // Reset the mentor core specialization singleton.
-        $sirh       = \enrol_sirh\sirh::get_instance();
+        $sirh = \enrol_sirh\sirh::get_instance();
         $reflection = new ReflectionClass($sirh);
-        $instance   = $reflection->getProperty('instance');
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -58,12 +58,12 @@ class sirh_testcase extends advanced_testcase {
         global $CFG;
 
         // SIRH API.
-        $CFG->sirh_api_url   = "www.sirh.fr";
+        $CFG->sirh_api_url = "www.sirh.fr";
         $CFG->sirh_api_token = "FALSEKEY";
     }
 
     protected static function get_method($name) {
-        $class  = new ReflectionClass('enrol_sirh\sirh');
+        $class = new ReflectionClass('enrol_sirh\sirh');
         $method = $class->getMethod($name);
         $method->setAccessible(true);
         return $method;
@@ -113,15 +113,15 @@ class sirh_testcase extends advanced_testcase {
         self::assertEquals($sirhapi->options['base_url'], $CFG->sirh_api_url);
         self::assertEquals($sirhapi->options['curl_options'], [
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING       => '',
-            CURLOPT_MAXREDIRS      => 10,
-            CURLOPT_TIMEOUT        => 0,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
             CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION   => 'CURL_HTTP_VERSION_1_1',
-            CURLOPT_CUSTOMREQUEST  => 'GET'
+            CURLOPT_HTTP_VERSION => 'CURL_HTTP_VERSION_1_1',
+            CURLOPT_CUSTOMREQUEST => 'GET'
         ]);
         self::assertEquals($sirhapi->options['headers'], [
-            'Accept'        => 'application/json',
+            'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . $CFG->sirh_api_token
         ]);
 
@@ -142,11 +142,11 @@ class sirh_testcase extends advanced_testcase {
 
         $sirh = \enrol_sirh\sirh::get_instance();
 
-        $result                        = new \stdClass();
+        $result = new \stdClass();
         $result->response_status_lines = ['HTTP/1.1 200'];
 
         $reflection = new \ReflectionClass(get_class($sirh));
-        $method     = $reflection->getMethod('check_status');
+        $method = $reflection->getMethod('check_status');
         $method->setAccessible(true);
 
         self::assertEmpty($method->invokeArgs($sirh, [$result]));
@@ -199,13 +199,13 @@ class sirh_testcase extends advanced_testcase {
 
         $sirh = \enrol_sirh\sirh::get_instance();
 
-        $result                        = new RestClient();
+        $result = new RestClient();
         $result->response_status_lines = ['HTTP/1.1 200'];
         $result->response
-                                       = '{"contenu":[{"identifiantSirhOrigine": "SIRH", ' .
-                                         '"identifiantFormation": "SIRHTRAINING","libelleFormation": ' .
-                                         '"SIRHTRAININGNAME","identifiantSession": "SIRHSESSION","libelleSession": ' .
-                                         '"SIRHSESSIONAME","dateDebut": "2020-06-22", "dateFin": "2020-06-30"}]}';
+            = '{"contenu":[{"identifiantSirhOrigine": "SIRH", ' .
+              '"identifiantFormation": "SIRHTRAINING","libelleFormation": ' .
+              '"SIRHTRAININGNAME","identifiantSession": "SIRHSESSION","libelleSession": ' .
+              '"SIRHSESSIONAME","dateDebut": "2020-06-22", "dateFin": "2020-06-30"}]}';
 
         // Create REST Client Mock.
         $restclientmock = $this->getMockBuilder('\RestClient')
@@ -220,7 +220,7 @@ class sirh_testcase extends advanced_testcase {
             ->will($this->returnValue($result));
 
         // Replace dbinterface data with database interface Mock in training Mock.
-        $reflection         = new ReflectionClass($sirh);
+        $reflection = new ReflectionClass($sirh);
         $reflectionproperty = $reflection->getProperty('sirhapi');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($sirh, $restclientmock);
@@ -256,9 +256,9 @@ class sirh_testcase extends advanced_testcase {
 
         $sirh = \enrol_sirh\sirh::get_instance();
 
-        $result                        = new RestClient();
+        $result = new RestClient();
         $result->response_status_lines = ['HTTP/1.1 400'];
-        $result->response              = '';
+        $result->response = '';
 
         // Create REST Client Mock.
         $restclientmock = $this->getMockBuilder('\RestClient')
@@ -271,7 +271,7 @@ class sirh_testcase extends advanced_testcase {
             ->method('get')
             ->will($this->returnValue($result));
 
-        $reflection         = new ReflectionClass($sirh);
+        $reflection = new ReflectionClass($sirh);
         $reflectionproperty = $reflection->getProperty('sirhapi');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($sirh, $restclientmock);
@@ -298,9 +298,9 @@ class sirh_testcase extends advanced_testcase {
 
         $sirh = \enrol_sirh\sirh::get_instance();
 
-        $result                        = new RestClient();
+        $result = new RestClient();
         $result->response_status_lines = ['HTTP/1.1 200'];
-        $result->response              = '{"totalElements":1}';
+        $result->response = '{"totalElements":1}';
 
         // Create REST Client Mock.
         $restclientmock = $this->getMockBuilder('\RestClient')
@@ -313,7 +313,7 @@ class sirh_testcase extends advanced_testcase {
             ->method('get')
             ->will($this->returnValue($result));
 
-        $reflection         = new ReflectionClass($sirh);
+        $reflection = new ReflectionClass($sirh);
         $reflectionproperty = $reflection->getProperty('sirhapi');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($sirh, $restclientmock);
@@ -341,10 +341,10 @@ class sirh_testcase extends advanced_testcase {
 
         $sirh = \enrol_sirh\sirh::get_instance();
 
-        $result                        = new RestClient();
+        $result = new RestClient();
         $result->response_status_lines = ['HTTP/1.1 400'];
         $result->response
-                                       = '{"totalElements":1}';
+            = '{"totalElements":1}';
 
         // Create REST Client Mock.
         $restclientmock = $this->getMockBuilder('\RestClient')
@@ -357,7 +357,7 @@ class sirh_testcase extends advanced_testcase {
             ->method('get')
             ->will($this->returnValue($result));
 
-        $reflection         = new ReflectionClass($sirh);
+        $reflection = new ReflectionClass($sirh);
         $reflectionproperty = $reflection->getProperty('sirhapi');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($sirh, $restclientmock);
@@ -386,26 +386,26 @@ class sirh_testcase extends advanced_testcase {
 
         $result = new RestClient();
 
-        $data                             = new \stdClass();
+        $data = new \stdClass();
         $data->NombreUtilisateursInscrits = 3;
-        $data->IndicateurMajSession       = false;
-        $data->IndicateurMajInscriptions  = true;
-        $data->SessionSirh                = [];
+        $data->IndicateurMajSession = false;
+        $data->IndicateurMajInscriptions = true;
+        $data->SessionSirh = [];
 
-        $user1         = new \stdClass();
-        $user1->nom    = 'lastname1';
+        $user1 = new \stdClass();
+        $user1->nom = 'lastname1';
         $user1->prenom = 'firstname1';
-        $user1->email  = 'user1@mail.fr';
+        $user1->email = 'user1@mail.fr';
 
-        $user2         = new \stdClass();
-        $user2->nom    = 'Lastname2';
+        $user2 = new \stdClass();
+        $user2->nom = 'Lastname2';
         $user2->prenom = 'Firstname2';
-        $user2->email  = 'User2@Mail.fr';
+        $user2->email = 'User2@Mail.fr';
 
-        $user3         = new \stdClass();
-        $user3->nom    = 'LASTNAME3';
+        $user3 = new \stdClass();
+        $user3->nom = 'LASTNAME3';
         $user3->prenom = 'FIRSTNAME3';
-        $user3->email  = 'USER3@MAIL.FR';
+        $user3->email = 'USER3@MAIL.FR';
 
         $data->UtilisateurSirh = [$user1, $user2, $user3];
 
@@ -424,7 +424,7 @@ class sirh_testcase extends advanced_testcase {
             ->method('get')
             ->will($this->returnValue($result));
 
-        $reflection         = new ReflectionClass($sirh);
+        $reflection = new ReflectionClass($sirh);
         $reflectionproperty = $reflection->getProperty('sirhapi');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($sirh, $restclientmock);
@@ -485,26 +485,26 @@ class sirh_testcase extends advanced_testcase {
 
         $result = new RestClient();
 
-        $data                             = new \stdClass();
+        $data = new \stdClass();
         $data->NombreUtilisateursInscrits = 3;
-        $data->IndicateurMajSession       = false;
-        $data->IndicateurMajInscriptions  = true;
-        $data->SessionSirh                = [];
+        $data->IndicateurMajSession = false;
+        $data->IndicateurMajInscriptions = true;
+        $data->SessionSirh = [];
 
-        $user1         = new \stdClass();
-        $user1->nom    = 'lastname1';
+        $user1 = new \stdClass();
+        $user1->nom = 'lastname1';
         $user1->prenom = 'firstname1';
-        $user1->email  = 'user1@mail.fr';
+        $user1->email = 'user1@mail.fr';
 
-        $user2         = new \stdClass();
-        $user2->nom    = 'Lastname2';
+        $user2 = new \stdClass();
+        $user2->nom = 'Lastname2';
         $user2->prenom = 'Firstname2';
-        $user2->email  = 'User2@Mail.fr';
+        $user2->email = 'User2@Mail.fr';
 
-        $user3         = new \stdClass();
-        $user3->nom    = 'LASTNAME3';
+        $user3 = new \stdClass();
+        $user3->nom = 'LASTNAME3';
         $user3->prenom = 'FIRSTNAME3';
-        $user3->email  = 'USER3@MAIL.FR';
+        $user3->email = 'USER3@MAIL.FR';
 
         $data->UtilisateurSirh = [$user1, $user2, $user3];
 
@@ -523,7 +523,7 @@ class sirh_testcase extends advanced_testcase {
             ->method('get')
             ->will($this->returnValue($result));
 
-        $reflection         = new ReflectionClass($sirh);
+        $reflection = new ReflectionClass($sirh);
         $reflectionproperty = $reflection->getProperty('sirhapi');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($sirh, $restclientmock);

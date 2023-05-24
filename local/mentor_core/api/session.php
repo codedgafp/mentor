@@ -66,7 +66,7 @@ class session_api {
 
         if ($refresh || !isset(self::$sessions[$sessionid])) {
             $specialization = specialization::get_instance();
-            $session        = $specialization->get_specialization('get_session', null, $sessionidorinstance);
+            $session = $specialization->get_specialization('get_session', null, $sessionidorinstance);
 
             // The session has no specialization, use the standard behaviour.
             if (!is_object($session)) {
@@ -101,7 +101,7 @@ class session_api {
         }
 
         // Return default data is the function has no specialization.
-        $db                 = database_interface::get_instance();
+        $db = database_interface::get_instance();
         $listsessionsrecord = $db->get_sessions_by_entity_id($data);
 
         $listsession = [];
@@ -115,17 +115,17 @@ class session_api {
             }
 
             $listsession[] = [
-                'id'              => $session->id,
-                'fullname'        => $session->fullname,
-                'link'            => $session->get_url()->out(),
-                'shortname'       => $session->shortname,
-                'status'          => get_string($session->status, 'local_mentor_core'),
+                'id' => $session->id,
+                'fullname' => $session->fullname,
+                'link' => $session->get_url()->out(),
+                'shortname' => $session->shortname,
+                'status' => get_string($session->status, 'local_mentor_core'),
                 'statusshortname' => $session->status,
-                'timecreated'     => $session->get_course()->timecreated,
-                'shared'          => $session->is_shared(),
-                'nbparticipant'   => $session->numberparticipants,
-                'hasusers'        => count($session->get_course_users()),
-                'actions'         => $session->get_actions(),
+                'timecreated' => $session->get_course()->timecreated,
+                'shared' => $session->is_shared(),
+                'nbparticipant' => $session->numberparticipants,
+                'hasusers' => count($session->get_course_users()),
+                'actions' => $session->get_actions(),
             ];
         }
 
@@ -156,7 +156,7 @@ class session_api {
         }
 
         // Return default data is the function has no specialization.
-        $db                 = database_interface::get_instance();
+        $db = database_interface::get_instance();
         $listsessionsrecord = $db->get_sessions_by_training_id($trainingid, $orderby);
 
         $listsession = [];
@@ -193,7 +193,7 @@ class session_api {
         }
 
         // Return default data is the function has no specialization.
-        $db                 = database_interface::get_instance();
+        $db = database_interface::get_instance();
         $listsessionsrecord = $db->get_sessions_by_entity_id($data);
 
         $sessioncount = 0;
@@ -221,7 +221,7 @@ class session_api {
      */
     public static function count_sessions_by_entity_id($data) {
 
-        $db                  = database_interface::get_instance();
+        $db = database_interface::get_instance();
         $countsessionsrecord = $db->count_sessions_by_entity_id($data);
 
         $specialization = specialization::get_instance();
@@ -274,9 +274,9 @@ class session_api {
         $adhoctask = new \local_mentor_core\task\create_session_task();
 
         $adhoctask->set_custom_data([
-            'trainingid'  => $trainingid,
+            'trainingid' => $trainingid,
             'sessionname' => $sessionname,
-            'entityid'    => $entityid
+            'entityid' => $entityid
         ]);
 
         $adhoctask->set_userid($USER->id);
@@ -336,7 +336,7 @@ class session_api {
      */
     public static function get_next_training_session_index($trainingid) {
         $dbinterface = database_interface::get_instance();
-        $training    = training_api::get_training($trainingid);
+        $training = training_api::get_training($trainingid);
 
         return $dbinterface->get_next_training_session_index($training->shortname);
     }
@@ -362,8 +362,8 @@ class session_api {
      * @throws dml_exception
      */
     public static function get_next_available_shortname_index($shortname) {
-        $dbinterface     = database_interface::get_instance();
-        $nextindex       = 1;
+        $dbinterface = database_interface::get_instance();
+        $nextindex = 1;
         $shortnameexists = true;
 
         while ($shortnameexists) {
@@ -461,8 +461,8 @@ class session_api {
         // Trigger an session updated event.
         $event = \local_mentor_core\event\session_update::create(array(
             'objectid' => $session->id,
-            'context'  => $session->get_context(),
-            'other'    => array(
+            'context' => $session->get_context(),
+            'other' => array(
                 'updatedfields' => $updatedfields
             )
         ));
@@ -488,7 +488,7 @@ class session_api {
         global $CFG;
         require_once($CFG->dirroot . '/local/mentor_core/forms/session_form.php');
 
-        $form           = new session_form($url, $params);
+        $form = new session_form($url, $params);
         $specialization = specialization::get_instance();
 
         return $specialization->get_specialization('get_session_form', $form, $params);
@@ -543,13 +543,13 @@ class session_api {
      */
     public static function get_status_list() {
         return [
-            session::STATUS_IN_PREPARATION      => session::STATUS_IN_PREPARATION,
+            session::STATUS_IN_PREPARATION => session::STATUS_IN_PREPARATION,
             session::STATUS_OPENED_REGISTRATION => session::STATUS_OPENED_REGISTRATION,
-            session::STATUS_IN_PROGRESS         => session::STATUS_IN_PROGRESS,
-            session::STATUS_COMPLETED           => session::STATUS_COMPLETED,
-            session::STATUS_ARCHIVED            => session::STATUS_ARCHIVED,
-            session::STATUS_REPORTED            => session::STATUS_REPORTED,
-            session::STATUS_CANCELLED           => session::STATUS_CANCELLED,
+            session::STATUS_IN_PROGRESS => session::STATUS_IN_PROGRESS,
+            session::STATUS_COMPLETED => session::STATUS_COMPLETED,
+            session::STATUS_ARCHIVED => session::STATUS_ARCHIVED,
+            session::STATUS_REPORTED => session::STATUS_REPORTED,
+            session::STATUS_CANCELLED => session::STATUS_CANCELLED,
         ];
     }
 
@@ -666,16 +666,16 @@ class session_api {
         $enrolcourses = $db->get_user_courses($userid);
 
         // To Save session template by status.
-        $enrolsessions               = array();
+        $enrolsessions = array();
         $enrolsessions['comingsoon'] = array();
         $enrolsessions['inprogress'] = array();
-        $enrolsessions['completed']  = array();
+        $enrolsessions['completed'] = array();
 
         // To sort session by status.
-        $sortarray               = array();
+        $sortarray = array();
         $sortarray['comingsoon'] = array();
         $sortarray['inprogress'] = array();
-        $sortarray['completed']  = array();
+        $sortarray['completed'] = array();
 
         foreach ($enrolcourses as $enrolcourse) {
 
@@ -690,7 +690,7 @@ class session_api {
             }
 
             // Set session data for template.
-            $lightersessionobject           = $session->convert_for_template();
+            $lightersessionobject = $session->convert_for_template();
             $lightersessionobject->progress = $session->get_progression($userid);
             if ($lightersessionobject->progress !== false) {
                 $lightersessionobject->showProgress = true;
@@ -702,17 +702,17 @@ class session_api {
                 switch ($lightersessionobject->status) {
                     case session::STATUS_IN_PROGRESS :
                         $enrolsessions['inprogress'][] = $lightersessionobject;
-                        $sortarray['inprogress'][]     = $lightersessionobject->sessionstartdate ?? 0;
+                        $sortarray['inprogress'][] = $lightersessionobject->sessionstartdate ?? 0;
                         break;
                     case session::STATUS_OPENED_REGISTRATION :
                     case session::STATUS_IN_PREPARATION :
                     case session::STATUS_REPORTED :
                         $enrolsessions['comingsoon'][] = $lightersessionobject;
-                        $sortarray['comingsoon'][]     = $lightersessionobject->sessionstartdate ?? 0;
+                        $sortarray['comingsoon'][] = $lightersessionobject->sessionstartdate ?? 0;
                         break;
                     default :
                         $enrolsessions['completed'][] = $lightersessionobject;
-                        $sortarray['completed'][]     = $lightersessionobject->sessionstartdate ?? 0;
+                        $sortarray['completed'][] = $lightersessionobject->sessionstartdate ?? 0;
                 }
             }
         }
@@ -767,10 +767,10 @@ class session_api {
     public static function get_session_enrolment_data($sessionid) {
 
         $specialization = specialization::get_instance();
-        $data           = $specialization->get_specialization('get_session_enrolment_data', new stdClass(), $sessionid);
+        $data = $specialization->get_specialization('get_session_enrolment_data', new stdClass(), $sessionid);
 
         if (empty((array) $data)) {
-            $session                      = self::get_session($sessionid);
+            $session = self::get_session($sessionid);
             $data->hasselfregistrationkey = $session->has_registration_key();
         }
 
@@ -870,9 +870,9 @@ class session_api {
         $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // Get the entity's sessions recycle bin.
-        $sessioncategoryid      = $entity->get_entity_session_category();
+        $sessioncategoryid = $entity->get_entity_session_category();
         $contextsessioncategory = \context_coursecat::instance($sessioncategoryid);
-        $recyclebin             = new \tool_recyclebin\category_bin($contextsessioncategory->instanceid);
+        $recyclebin = new \tool_recyclebin\category_bin($contextsessioncategory->instanceid);
 
         // Check permissions.
         if (!$recyclebin->can_restore()) {
@@ -891,7 +891,7 @@ class session_api {
         $user = get_admin();
 
         // Get the backup file.
-        $fs    = get_file_storage();
+        $fs = get_file_storage();
         $files = $fs->get_area_files($contextsessioncategory->id, 'tool_recyclebin', TOOL_RECYCLEBIN_COURSECAT_BIN_FILEAREA,
             $item->id,
             'itemid, filepath, filename', false);
@@ -908,7 +908,7 @@ class session_api {
         $file = reset($files);
 
         // Get a backup temp directory name and create it.
-        $tempdir     = \restore_controller::get_tempdir_name($contextsessioncategory->id, $user->id);
+        $tempdir = \restore_controller::get_tempdir_name($contextsessioncategory->id, $user->id);
         $fulltempdir = make_backup_temp_directory($tempdir);
 
         // Extract the backup to tmpdir.
@@ -916,11 +916,11 @@ class session_api {
         $fb->extract_to_pathname($file, $fulltempdir);
 
         // Build a course.
-        $course            = new \stdClass();
-        $course->category  = $sessioncategoryid;
+        $course = new \stdClass();
+        $course->category = $sessioncategoryid;
         $course->shortname = $item->shortname;
-        $course->fullname  = $item->fullname;
-        $course->summary   = '';
+        $course->fullname = $item->fullname;
+        $course->summary = '';
 
         // Create a new course.
         $course = create_course($course);
@@ -934,7 +934,7 @@ class session_api {
             $tempdir,
             $course->id,
             \backup::INTERACTIVE_NO,
-            \backup::MODE_AUTOMATED,
+            \backup::MODE_GENERAL,
             $user->id,
             \backup::TARGET_NEW_COURSE
         );
@@ -972,7 +972,7 @@ class session_api {
         // Fire event.
         $event = \tool_recyclebin\event\category_bin_item_restored::create(array(
             'objectid' => $item->id,
-            'context'  => $contextsessioncategory
+            'context' => $contextsessioncategory
         ));
         $event->add_record_snapshot('tool_recyclebin_category', $item);
         $event->trigger();
@@ -987,7 +987,7 @@ class session_api {
 
             // Restore shortname and fullname course to link with session.
             $courseaftercontroller->shortname = $item->shortname;
-            $courseaftercontroller->fullname  = $item->fullname;
+            $courseaftercontroller->fullname = $item->fullname;
             update_course($courseaftercontroller);
         }
 
@@ -1009,7 +1009,7 @@ class session_api {
         global $USER, $PAGE, $OUTPUT;
 
         // Get managed entities if user has any.
-        $managedentities         = \local_mentor_core\entity_api::get_managed_entities($USER);
+        $managedentities = \local_mentor_core\entity_api::get_managed_entities($USER);
         $trainingmanagedentities = \local_mentor_core\training_api::get_entities_training_managed();
 
         $managedentities = $managedentities + $trainingmanagedentities;
@@ -1019,16 +1019,16 @@ class session_api {
         }
 
         // Create an entity selector if it manages several entities.
-        $data                 = new \stdClass();
+        $data = new \stdClass();
         $data->switchentities = [];
 
         foreach ($managedentities as $managedentity) {
             if (!$managedentity->is_main_entity()) {
                 continue;
             }
-            $entitydata           = new \stdClass();
-            $entitydata->name     = $managedentity->name;
-            $entitydata->link     = new \moodle_url('/local/session/pages/recyclebin_sessions.php',
+            $entitydata = new \stdClass();
+            $entitydata->name = $managedentity->name;
+            $entitydata->link = new \moodle_url('/local/session/pages/recyclebin_sessions.php',
                 array('entityid' => $managedentity->id));
             $entitydata->selected = $entityid == $managedentity->id;
 
@@ -1054,9 +1054,9 @@ class session_api {
         $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // Get the entity's sessions recycle bin.
-        $sessioncategoryid      = $entity->get_entity_session_category();
+        $sessioncategoryid = $entity->get_entity_session_category();
         $contextsessioncategory = \context_coursecat::instance($sessioncategoryid);
-        $recyclebin             = new \tool_recyclebin\category_bin($contextsessioncategory->instanceid);
+        $recyclebin = new \tool_recyclebin\category_bin($contextsessioncategory->instanceid);
 
         // Get session's course item.
         $item = $recyclebin->get_item($itemid);
@@ -1092,7 +1092,7 @@ class session_api {
         require_once($CFG->dirroot . '/local/mentor_core/classes/task/duplicate_session_as_new_training_task.php');
 
         // Clean names.
-        $trainingfullname  = strip_tags(trim($trainingfullname));
+        $trainingfullname = strip_tags(trim($trainingfullname));
         $trainingshortname = strip_tags(trim($trainingshortname));
 
         $dbinterface = database_interface::get_instance();
@@ -1133,10 +1133,10 @@ class session_api {
         $adhoctask = new \local_mentor_core\task\duplicate_session_as_new_training_task();
 
         $adhoctask->set_custom_data([
-            'sessionid'         => $sessionid,
+            'sessionid' => $sessionid,
             'trainingshortname' => $trainingshortname,
-            'trainingfullname'  => $trainingfullname,
-            'entityid'          => $entityid,
+            'trainingfullname' => $trainingfullname,
+            'entityid' => $entityid,
         ]);
 
         // Use the current user id to launch the adhoc task.
@@ -1302,5 +1302,14 @@ class session_api {
      */
     public static function clear_cache() {
         self::$sessions = [];
+    }
+
+    /**
+     * Gives the name of the capability that allows access to the edadmin course of the session format.
+     *
+     * @return string
+     */
+    public static function get_edadmin_course_view_capability() {
+        return 'local/mentor_core:movesessions';
     }
 }

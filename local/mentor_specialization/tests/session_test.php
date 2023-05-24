@@ -38,7 +38,7 @@ require_once($CFG->dirroot . '/local/mentor_core/api/profile.php');
 class local_mentor_specialization_session_testcase extends advanced_testcase {
 
     public const UNAUTHORISED_CODE = 2020120810;
-    public const DEFAULT_USER      = 2;
+    public const DEFAULT_USER = 2;
 
     /**
      * Init $CFG
@@ -60,8 +60,8 @@ class local_mentor_specialization_session_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core specialization singleton.
         $specialization = \local_mentor_core\specialization::get_instance();
-        $reflection     = new ReflectionClass($specialization);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($specialization);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -80,25 +80,25 @@ class local_mentor_specialization_session_testcase extends advanced_testcase {
         global $DB;
 
         // Create user.
-        $user             = new stdClass();
-        $user->lastname   = 'lastname';
-        $user->firstname  = 'firstname';
-        $user->email      = 'test@test.com';
-        $user->username   = 'testusername';
-        $user->password   = 'to be generated';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
-        $user->auth       = 'manual';
+        $user->confirmed = 1;
+        $user->auth = 'manual';
 
         $userid = local_mentor_core\profile_api::create_user($user);
         set_user_preference('auth_forcepasswordchange', 0, $user);
 
         $field = $DB->get_record('user_info_field', ['shortname' => 'mainentity']);
 
-        $userdata          = new stdClass();
+        $userdata = new stdClass();
         $userdata->fieldid = $field->id;
-        $userdata->data    = 'New Entity 1';
-        $userdata->userid  = $userid;
+        $userdata->data = 'New Entity 1';
+        $userdata->userid = $userid;
 
         $DB->insert_record('user_info_data', $userdata);
 
@@ -119,64 +119,64 @@ class local_mentor_specialization_session_testcase extends advanced_testcase {
             'local_mentor_specialization');
 
         if ($training) {
-            $data->name      = 'fullname';
+            $data->name = 'fullname';
             $data->shortname = 'shortname';
-            $data->content   = 'summary';
-            $data->status    = 'ec';
+            $data->content = 'summary';
+            $data->status = 'ec';
         } else {
-            $data->trainingname      = 'fullname';
+            $data->trainingname = 'fullname';
             $data->trainingshortname = 'shortname';
-            $data->trainingcontent   = 'summary';
-            $data->trainingstatus    = 'ec';
+            $data->trainingcontent = 'summary';
+            $data->trainingstatus = 'ec';
         }
 
         // Fields for taining.
-        $data->teaser                       = 'http://www.edunao.com/';
-        $data->teaserpicture                = '';
-        $data->prerequisite                 = 'TEST';
-        $data->collection                   = 'accompagnement';
-        $data->traininggoal                 = 'TEST TRAINING ';
-        $data->idsirh                       = 'TEST ID SIRH';
-        $data->licenseterms                 = 'cc-sa';
-        $data->typicaljob                   = 'TEST';
-        $data->skills                       = [];
-        $data->certifying                   = '1';
-        $data->presenceestimatedtimehours   = '12';
+        $data->teaser = 'http://www.edunao.com/';
+        $data->teaserpicture = '';
+        $data->prerequisite = 'TEST';
+        $data->collection = 'accompagnement';
+        $data->traininggoal = 'TEST TRAINING ';
+        $data->idsirh = 'TEST ID SIRH';
+        $data->licenseterms = 'cc-sa';
+        $data->typicaljob = 'TEST';
+        $data->skills = [];
+        $data->certifying = '1';
+        $data->presenceestimatedtimehours = '12';
         $data->presenceestimatedtimeminutes = '10';
-        $data->remoteestimatedtimehours     = '15';
-        $data->remoteestimatedtimeminutes   = '30';
-        $data->trainingmodalities           = 'd';
-        $data->producingorganization        = 'TEST';
-        $data->producerorganizationlogo     = '';
-        $data->designers                    = 'TEST';
-        $data->contactproducerorganization  = 'TEST';
-        $data->thumbnail                    = '';
+        $data->remoteestimatedtimehours = '15';
+        $data->remoteestimatedtimeminutes = '30';
+        $data->trainingmodalities = 'd';
+        $data->producingorganization = 'TEST';
+        $data->producerorganizationlogo = '';
+        $data->designers = 'TEST';
+        $data->contactproducerorganization = 'TEST';
+        $data->thumbnail = '';
 
         // Specific fields for session (only for update).
         if ($sessionid) {
-            $data->id                      = $sessionid;
-            $data->opento                  = 'all';
-            $data->publiccible             = 'TEST';
-            $data->termsregistration       = 'autre';
+            $data->id = $sessionid;
+            $data->opento = 'all';
+            $data->publiccible = 'TEST';
+            $data->termsregistration = 'autre';
             $data->termsregistrationdetail = 'TEST';
 
-            $data->onlinesessionestimatedtimehours     = '10';
-            $data->onlinesessionestimatedtimeminutes   = '15';
-            $data->presencesessionestimatedtimehours   = '12';
+            $data->onlinesessionestimatedtimehours = '10';
+            $data->onlinesessionestimatedtimeminutes = '15';
+            $data->presencesessionestimatedtimehours = '12';
             $data->presencesessionestimatedtimeminutes = '25';
 
-            $data->sessionpermanent    = 0;
-            $data->sessionstartdate    = 1609801200;
-            $data->sessionenddate      = 1609801200;
-            $data->sessionmodalities   = 'presentiel';
-            $data->accompaniment       = 'TEST';
-            $data->maxparticipants     = 10;
-            $data->placesavailable     = 8;
-            $data->numberparticipants  = 2;
-            $data->location            = 'PARIS';
+            $data->sessionpermanent = 0;
+            $data->sessionstartdate = 1609801200;
+            $data->sessionenddate = 1609801200;
+            $data->sessionmodalities = 'presentiel';
+            $data->accompaniment = 'TEST';
+            $data->maxparticipants = 10;
+            $data->placesavailable = 8;
+            $data->numberparticipants = 2;
+            $data->location = 'PARIS';
             $data->organizingstructure = 'TEST ORGANISATION';
-            $data->sessionnumber       = 1;
-            $data->opentolist          = '';
+            $data->sessionnumber = 1;
+            $data->opentolist = '';
         }
 
         return $data;
@@ -200,10 +200,10 @@ class local_mentor_specialization_session_testcase extends advanced_testcase {
         try {
             // Get entity object for default category.
             $entityid = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1',
-                'regions'   => [5], // Corse.
-                'userid'    => 2  // Set the admin user as manager of the entity.
+                'regions' => [5], // Corse.
+                'userid' => 2  // Set the admin user as manager of the entity.
             ]);
 
             $entity = \local_mentor_core\entity_api::get_entity($entityid);
@@ -244,7 +244,7 @@ class local_mentor_specialization_session_testcase extends advanced_testcase {
         }
 
         // Open to current entity.
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -256,10 +256,10 @@ class local_mentor_specialization_session_testcase extends advanced_testcase {
      */
     public function init_training_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -270,10 +270,10 @@ class local_mentor_specialization_session_testcase extends advanced_testcase {
      */
     public function init_session_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -374,16 +374,16 @@ class local_mentor_specialization_session_testcase extends advanced_testcase {
         }
 
         // Set data passed as an argument.
-        $datasessionandfilter           = new stdClass();
+        $datasessionandfilter = new stdClass();
         $datasessionandfilter->entityid = $session->get_entity()->id;
-        $datasessionandfilter->status   = null;
-        $datasessionandfilter->dateto   = null;
+        $datasessionandfilter->status = null;
+        $datasessionandfilter->dateto = null;
         $datasessionandfilter->datefrom = null;
-        $datasessionandfilter->draw     = 1;
-        $datasessionandfilter->length   = 10;
-        $datasessionandfilter->start    = 0;
-        $datasessionandfilter->order    = ['column' => 0, 'dir' => 'asc'];
-        $datasessionandfilter->search   = ['value' => '', 'regex' => 'false'];
+        $datasessionandfilter->draw = 1;
+        $datasessionandfilter->length = 10;
+        $datasessionandfilter->start = 0;
+        $datasessionandfilter->order = ['column' => 0, 'dir' => 'asc'];
+        $datasessionandfilter->search = ['value' => '', 'regex' => 'false'];
 
         // Test session not found.
         try {
@@ -422,16 +422,16 @@ class local_mentor_specialization_session_testcase extends advanced_testcase {
         }
 
         // Set data passed as an argument.
-        $datasessionandfilter           = new stdClass();
+        $datasessionandfilter = new stdClass();
         $datasessionandfilter->entityid = $session->get_entity()->id;
-        $datasessionandfilter->status   = null;
-        $datasessionandfilter->dateto   = null;
+        $datasessionandfilter->status = null;
+        $datasessionandfilter->dateto = null;
         $datasessionandfilter->datefrom = null;
-        $datasessionandfilter->draw     = 1;
-        $datasessionandfilter->length   = 10;
-        $datasessionandfilter->start    = 0;
-        $datasessionandfilter->order    = ['column' => 0, 'dir' => 'asc'];
-        $datasessionandfilter->search   = ['value' => '', 'regex' => 'false'];
+        $datasessionandfilter->draw = 1;
+        $datasessionandfilter->length = 10;
+        $datasessionandfilter->start = 0;
+        $datasessionandfilter->order = ['column' => 0, 'dir' => 'asc'];
+        $datasessionandfilter->search = ['value' => '', 'regex' => 'false'];
 
         // Test session not found.
         try {
@@ -526,12 +526,12 @@ class local_mentor_specialization_session_testcase extends advanced_testcase {
         $data = new stdClass();
 
         // New session data.
-        $data->id                                  = $sessionid;
-        $data->fullname                            = 'NEWFULLNAME';
-        $data->presencesessionestimatedtimehours   = 1;
+        $data->id = $sessionid;
+        $data->fullname = 'NEWFULLNAME';
+        $data->presencesessionestimatedtimehours = 1;
         $data->presencesessionestimatedtimeminutes = 45;
-        $data->onlinesessionestimatedtimehours     = 2;
-        $data->onlinesessionestimatedtimeminutes   = 30;
+        $data->onlinesessionestimatedtimehours = 2;
+        $data->onlinesessionestimatedtimeminutes = 30;
 
         try {
             $session = \local_mentor_core\session_api::update_session($data);
@@ -580,7 +580,7 @@ class local_mentor_specialization_session_testcase extends advanced_testcase {
         // Set data session form.
         $sessionentity = $session->get_entity();
 
-        $logo    = $sessionentity->get_logo();
+        $logo = $sessionentity->get_logo();
         $logourl = '';
         if ($logo) {
             $logourl = moodle_url::make_pluginfile_url(
@@ -594,19 +594,19 @@ class local_mentor_specialization_session_testcase extends advanced_testcase {
         }
 
         $sharedentities = [];
-        $allentities    = \local_mentor_core\entity_api::get_all_entities(true, [$sessionentity->id]);
+        $allentities = \local_mentor_core\entity_api::get_all_entities(true, [$sessionentity->id]);
         foreach ($allentities as $entity) {
             $sharedentities[$entity->id] = $entity->name;
         }
 
-        $formparams                 = new stdClass();
-        $formparams->session        = $session;
-        $formparams->returnto       = $session->get_url();
-        $formparams->session        = $session;
-        $formparams->entity         = $sessionentity;
+        $formparams = new stdClass();
+        $formparams->session = $session;
+        $formparams->returnto = $session->get_url();
+        $formparams->session = $session;
+        $formparams->entity = $sessionentity;
         $formparams->sharedentities = $sharedentities;
-        $formparams->logourl        = $logourl;
-        $formparams->actionurl      = $session->get_sheet_url()->out();
+        $formparams->logourl = $logourl;
+        $formparams->actionurl = $session->get_sheet_url()->out();
 
         // Get session form.
         try {
@@ -853,7 +853,7 @@ class local_mentor_specialization_session_testcase extends advanced_testcase {
         $session->status = \local_mentor_core\session::STATUS_IN_PROGRESS;
         \local_mentor_core\session_api::update_session($session);
 
-        $user     = new stdClass();
+        $user = new stdClass();
         $user->id = self::DEFAULT_USER;
         $session->get_entity()->add_member($user);
 
@@ -1112,9 +1112,9 @@ class local_mentor_specialization_session_testcase extends advanced_testcase {
 
         // Create new enrity.
         $newentityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 2',
+            'name' => 'New Entity 2',
             'shortname' => 'New Entity 2',
-            'userid'    => 2  // Set the admin user as manager of the entity.
+            'userid' => 2  // Set the admin user as manager of the entity.
         ]);
 
         // Move session in new entity.
@@ -1155,16 +1155,16 @@ class local_mentor_specialization_session_testcase extends advanced_testcase {
         }
 
         // Set data passed as an argument.
-        $datasessionandfilter           = new stdClass();
+        $datasessionandfilter = new stdClass();
         $datasessionandfilter->entityid = $session->get_entity()->id;
-        $datasessionandfilter->status   = null;
-        $datasessionandfilter->dateto   = null;
+        $datasessionandfilter->status = null;
+        $datasessionandfilter->dateto = null;
         $datasessionandfilter->datefrom = null;
-        $datasessionandfilter->draw     = 1;
-        $datasessionandfilter->length   = 10;
-        $datasessionandfilter->start    = 0;
-        $datasessionandfilter->order    = ['column' => 0, 'dir' => 'asc'];
-        $datasessionandfilter->search   = ['value' => '', 'regex' => 'false'];
+        $datasessionandfilter->draw = 1;
+        $datasessionandfilter->length = 10;
+        $datasessionandfilter->start = 0;
+        $datasessionandfilter->order = ['column' => 0, 'dir' => 'asc'];
+        $datasessionandfilter->search = ['value' => '', 'regex' => 'false'];
 
         // Test session not found.
         try {

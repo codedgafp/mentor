@@ -29,13 +29,13 @@ class session extends abstractlog {
 
     public function get_required_fields() {
         return [
-                'sessionid',
-                'entitylogid',
-                'subentitylogid',
-                'trainingentitylogid',
-                'trainingsubentitylogid',
-                'status',
-                'shared'
+            'sessionid',
+            'entitylogid',
+            'subentitylogid',
+            'trainingentitylogid',
+            'trainingsubentitylogid',
+            'status',
+            'shared'
         ];
     }
 
@@ -61,13 +61,13 @@ class session extends abstractlog {
 
         // Return id if exists.
         $existingsessions = $DB->get_records('logstore_mentor_session2', [
-                'sessionid'              => $this->eventdata['sessionid'],
-                'shared'                 => $this->eventdata['shared'],
-                'status'                 => $this->eventdata['status'],
-                'entitylogid'            => $this->eventdata['entitylogid'],
-                'subentitylogid'         => $this->eventdata['subentitylogid'],
-                'trainingentitylogid'    => $this->eventdata['trainingentitylogid'],
-                'trainingsubentitylogid' => $this->eventdata['trainingsubentitylogid']
+            'sessionid' => $this->eventdata['sessionid'],
+            'shared' => $this->eventdata['shared'],
+            'status' => $this->eventdata['status'],
+            'entitylogid' => $this->eventdata['entitylogid'],
+            'subentitylogid' => $this->eventdata['subentitylogid'],
+            'trainingentitylogid' => $this->eventdata['trainingentitylogid'],
+            'trainingsubentitylogid' => $this->eventdata['trainingsubentitylogid']
         ]);
 
         // A record already exists.

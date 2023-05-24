@@ -98,15 +98,13 @@ function local_library_extend_settings_navigation($settingsnav, $context) {
         return;
     }
 
-    // User must be able to share the training.
-    if (
-        !is_siteadmin()
-    ) {
+    // If the course is not linked to a training then return.
+    if (!$training = \local_mentor_core\training_api::get_training_by_course_id($PAGE->course->id)) {
         return;
     }
 
-    // If the course is not linked to a training then return.
-    if (!$training = \local_mentor_core\training_api::get_training_by_course_id($PAGE->course->id)) {
+    // User must be able to share the training.
+    if (!has_capability('local/library:publish', $training->get_context())) {
         return;
     }
 
@@ -114,8 +112,8 @@ function local_library_extend_settings_navigation($settingsnav, $context) {
     if ($settingnode = $settingsnav->find('courseadmin', navigation_node::TYPE_COURSE)) {
 
         if ($training->status === \local_mentor_core\training::STATUS_ELABORATION_COMPLETED) {
-            $name         = get_string('publishtraininglibrary', 'local_library');
-            $url          = new \moodle_url('/local/library/pages/publication.php', array('trainingid' => $training->id));
+            $name = get_string('publishtraininglibrary', 'local_library');
+            $url = new \moodle_url('/local/library/pages/publication.php', array('trainingid' => $training->id));
             $workflownode = navigation_node::create(
                 $name,
                 $url,
@@ -127,4 +125,32 @@ function local_library_extend_settings_navigation($settingsnav, $context) {
             $settingnode->add_node($workflownode, 'questionbank');
         }
     }
+}
+
+/**
+ * Extends the global navigation tree by adding library link if user has access.
+ *
+ * @param global_navigation $navigation
+ * @return void
+ * @throws coding_exception
+ */
+function local_library_extend_navigation(global_navigation $navigation) {
+    global $PAGE;
+
+    // In library page, it added 'library' link to nav-bar.
+    if (strpos($PAGE->url, '/local/library/index.php')) {
+        return;
+    }
+
+    // Check library user access.
+    if (!\local_mentor_core\library_api::user_has_access()) {
+        return;
+    }
+
+    // Add library link access to flatnavigation.
+    $mainnode = $navigation->add(
+        get_string('pluginname', 'local_library'),
+        new moodle_url('/local/library/index.php')
+    );
+    $mainnode->showinflatnavigation = true;
 }

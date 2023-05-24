@@ -36,8 +36,8 @@ class local_user_controller_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -73,12 +73,12 @@ class local_user_controller_testcase extends advanced_testcase {
         self::assertFalse($DB->record_exists('user_preferences', array('userid' => $user->id)));
 
         $params = [
-            'controller'     => 'user',
-            'action'         => 'set_user_preference',
-            'format'         => 'json',
-            'userid'         => $user->id,
+            'controller' => 'user',
+            'action' => 'set_user_preference',
+            'format' => 'json',
+            'userid' => $user->id,
             'preferencename' => 'preferencename',
-            'value'          => 'preferencevalue'
+            'value' => 'preferencevalue'
         ];
 
         // Call front controller.
@@ -105,11 +105,11 @@ class local_user_controller_testcase extends advanced_testcase {
         self::assertFalse($DB->record_exists('user_preferences', array('userid' => $USER->id)));
 
         $params = [
-            'controller'     => 'user',
-            'action'         => 'set_user_preference',
-            'format'         => 'json',
+            'controller' => 'user',
+            'action' => 'set_user_preference',
+            'format' => 'json',
             'preferencename' => 'preferencename',
-            'value'          => 'preferencevalue'
+            'value' => 'preferencevalue'
         ];
 
         // Call front controller.

@@ -273,14 +273,28 @@ class mentor_specialization {
     public function get_user_template_params($params) {
         $dbinterface = \local_mentor_specialization\database_interface::get_instance();
 
-        $listentities       = \local_mentor_core\entity_api::get_all_entities(true, [], false, null, false);
-        $params['entities'] = array_merge([0 => ''], $listentities);
+        $listmainentities = \local_mentor_core\entity_api::get_all_entities(true, [], true, null, false, false);
 
-        $noregion          = new \stdClass();
-        $noregion->id      = 0;
-        $noregion->name    = get_string('none', 'local_mentor_core');
-        $regions           = $dbinterface->get_all_regions();
-        $regionsoptions    = array_merge([$noregion], $regions);
+        // Sort entity by shortname.
+        uasort($listmainentities, function($a, $b) {
+            return strcmp(local_mentor_core_sanitize_string($a->shortname), local_mentor_core_sanitize_string($b->shortname));
+        });
+
+        $params['mainentities'] = array_merge([0 => ''], $listmainentities);
+        $listsecondaryentities = \local_mentor_core\entity_api::get_all_entities(true, [], true, null, false);
+
+        // Sort entity by shortname.
+        uasort($listsecondaryentities, function($a, $b) {
+            return strcmp(local_mentor_core_sanitize_string($a->shortname), local_mentor_core_sanitize_string($b->shortname));
+        });
+
+        $params['secondarymainentities'] = array_merge([0 => ''], $listsecondaryentities);
+
+        $noregion = new \stdClass();
+        $noregion->id = 0;
+        $noregion->name = get_string('none', 'local_mentor_core');
+        $regions = $dbinterface->get_all_regions();
+        $regionsoptions = array_merge([$noregion], $regions);
         $params['regions'] = $regionsoptions;
         return $params;
     }
@@ -296,14 +310,14 @@ class mentor_specialization {
     public function get_training_template_params($params) {
 
         // Create collection list.
-        $collections         = local_mentor_specialization_get_collections();
+        $collections = local_mentor_specialization_get_collections();
         $params->collections = [];
         foreach ($collections as $key => $val) {
             $params->collections[] = array("key" => $key, "value" => $val);
         }
 
         // Create status liste.
-        $status         = \local_mentor_core\training_api::get_status_list();
+        $status = \local_mentor_core\training_api::get_status_list();
         $params->status = [];
         foreach ($status as $key => $val) {
             $params->status[] = array("key" => $key, "value" => get_string($val, 'local_trainings'));
@@ -322,14 +336,14 @@ class mentor_specialization {
     public function get_session_template_params($params) {
 
         // Create collection list.
-        $collections         = local_mentor_specialization_get_collections();
+        $collections = local_mentor_specialization_get_collections();
         $params->collections = [];
         foreach ($collections as $key => $val) {
             $params->collections[] = array("key" => $key, "value" => $val);
         }
 
         // Create status liste.
-        $status         = \local_mentor_core\session_api::get_status_list();
+        $status = \local_mentor_core\session_api::get_status_list();
         $params->status = [];
         foreach ($status as $key => $val) {
             $params->status[] = array("key" => $key, "value" => get_string($val, 'local_mentor_specialization'));
@@ -408,10 +422,10 @@ class mentor_specialization {
      */
     public function get_sessions_by_entity($data) {
 
-        $db                 = database_interface::get_instance();
+        $db = database_interface::get_instance();
         $listsessionsrecord = $db->get_sessions_by_entity_id($data);
-        $listsession        = array();
-        $trainings          = array();
+        $listsession = array();
+        $trainings = array();
 
         foreach ($listsessionsrecord as $sessionrecord) {
 
@@ -434,23 +448,23 @@ class mentor_specialization {
             $entity = $session->get_entity();
 
             $listsession[] = array(
-                'id'               => $session->id,
-                'link'             => $session->get_url()->out(),
-                'shortname'        => $session->shortname,
-                'status'           => get_string($session->status, 'local_mentor_core'),
-                'statusshortname'  => $session->status,
-                'timecreated'      => $session->sessionstartdate,
-                'nbparticipant'    => $sessionrecord->numberparticipants,
-                'shared'           => $session->is_shared(),
+                'id' => $session->id,
+                'link' => $session->get_url()->out(),
+                'shortname' => $session->shortname,
+                'status' => get_string($session->status, 'local_mentor_core'),
+                'statusshortname' => $session->status,
+                'timecreated' => $session->sessionstartdate,
+                'nbparticipant' => $sessionrecord->numberparticipants,
+                'shared' => $session->is_shared(),
                 'trainingfullname' => $trainings[$session->trainingid]->name,
-                'subentityname'    => !$entity->is_main_entity() ? $entity->get_name() : '',
-                'sessionname'      => $session->get_course()->fullname,
-                'actions'          => $session->get_actions(),
-                'sessionnumber'    => '#' . $session->sessionnumber,
-                'collection'       => $session->collection,
-                'collectionstr'    => str_replace(';', "<br/>", $trainings[$session->trainingid]->collectionstr),
-                'entityid'         => $entity->id,
-                'maxparticipants'  => $sessionrecord->maxparticipants,
+                'subentityname' => !$entity->is_main_entity() ? $entity->get_name() : '',
+                'sessionname' => $session->get_course()->fullname,
+                'actions' => $session->get_actions(),
+                'sessionnumber' => '#' . $session->sessionnumber,
+                'collection' => $session->collection,
+                'collectionstr' => str_replace(';', "<br/>", $trainings[$session->trainingid]->collectionstr),
+                'entityid' => $entity->id,
+                'maxparticipants' => $sessionrecord->maxparticipants,
             );
 
         }
@@ -499,9 +513,9 @@ class mentor_specialization {
      * @throws \moodle_exception
      */
     public function count_session_record($data) {
-        $db                 = database_interface::get_instance();
+        $db = database_interface::get_instance();
         $listsessionsrecord = $db->get_sessions_by_entity_id($data);
-        $countsession       = count($listsessionsrecord);
+        $countsession = count($listsessionsrecord);
 
         foreach ($listsessionsrecord as $sessionrecord) {
             $context = \context_course::instance($sessionrecord->courseid);
@@ -538,7 +552,7 @@ class mentor_specialization {
     public function prepare_update_session_editor_data($data) {
 
         $data->termsregistrationdetail = [
-            'text'   => $data->termsregistrationdetail,
+            'text' => $data->termsregistrationdetail,
             'format' => FORMAT_HTML
         ];
 
@@ -574,16 +588,16 @@ class mentor_specialization {
         $trainings = \local_mentor_core\training_api::get_user_available_sessions_by_trainings($USER->id, true);
 
         // Get all collections.
-        $collectionsnames  = local_mentor_specialization_get_collections();
+        $collectionsnames = local_mentor_specialization_get_collections();
         $collectionscolors = local_mentor_specialization_get_collections('color');
 
         // Fill entities and collections list.
-        $entities    = [];
+        $entities = [];
         $collections = [];
         foreach ($trainings as $idx => $training) {
             if ('' !== $training->entityname) {
                 $entities[$training->entityname] = [
-                    'id'   => $training->entityid,
+                    'id' => $training->entityid,
                     'name' => $training->entityname,
                 ];
             }
@@ -602,9 +616,9 @@ class mentor_specialization {
                     continue;
                 }
 
-                $tile                               = new \stdClass();
-                $tile->name                         = $collectionsnames[$collection];
-                $tile->color                        = $collectionscolors[$collection];
+                $tile = new \stdClass();
+                $tile->name = $collectionsnames[$collection];
+                $tile->color = $collectionscolors[$collection];
                 $trainings[$idx]->collectiontiles[] = $tile;
             }
         }
@@ -618,11 +632,11 @@ class mentor_specialization {
         $paramsrenderer->entities = array_values($entities);
 
         // Trainings list.
-        $paramsrenderer->trainings      = array_values($trainings);
+        $paramsrenderer->trainings = array_values($trainings);
         $paramsrenderer->trainingscount = count($trainings);
 
         // Json encode amd data.
-        $paramsrenderer->available_trainings   = json_encode($trainings, JSON_HEX_TAG);
+        $paramsrenderer->available_trainings = json_encode($trainings, JSON_HEX_TAG);
         $paramsrenderer->trainings_dictionnary = json_encode(local_catalog_get_dictionnary($trainings));
 
         // Variable used for performance tests.
@@ -646,7 +660,7 @@ class mentor_specialization {
         global $CFG;
         require_once($CFG->dirroot . '/local/mentor_core/api/session.php');
 
-        $db       = \local_mentor_specialization\database_interface::get_instance();
+        $db = \local_mentor_specialization\database_interface::get_instance();
         $sessions = $db->get_user_available_sessions($userid);
 
         foreach ($sessions as $session) {
@@ -655,7 +669,7 @@ class mentor_specialization {
             if (!isset($trainings[$session->trainingid])) {
                 // Get a light version of the training.
                 try {
-                    $training           = self::get_training($session->trainingid);
+                    $training = self::get_training($session->trainingid);
                     $trainingmainentity = $training->get_entity(false)
                         ->get_main_entity();
 
@@ -664,32 +678,32 @@ class mentor_specialization {
                         continue;
                     }
 
-                    $trainings[$session->trainingid]                                = new \stdClass();
-                    $trainings[$session->trainingid]->id                            = $training->id;
-                    $trainings[$session->trainingid]->trainingsheeturl              = $CFG->wwwroot .
-                                                                                      '/local/catalog/pages/training.php?trainingid=' .
-                                                                                      $training->id;
-                    $trainings[$session->trainingid]->name                          = $training->name;
-                    $trainings[$session->trainingid]->thumbnail                     = $training->get_file_url();
-                    $trainings[$session->trainingid]->entityid                      = $trainingmainentity->id;
-                    $trainings[$session->trainingid]->entityname                    = $trainingmainentity->shortname;
-                    $trainings[$session->trainingid]->entityfullname                = $trainingmainentity->name;
-                    $trainings[$session->trainingid]->producingorganization         = $training->producingorganization;
+                    $trainings[$session->trainingid] = new \stdClass();
+                    $trainings[$session->trainingid]->id = $training->id;
+                    $trainings[$session->trainingid]->trainingsheeturl = $CFG->wwwroot .
+                        '/local/catalog/pages/training.php?trainingid=' .
+                        $training->id;
+                    $trainings[$session->trainingid]->name = $training->name;
+                    $trainings[$session->trainingid]->thumbnail = $training->get_file_url();
+                    $trainings[$session->trainingid]->entityid = $trainingmainentity->id;
+                    $trainings[$session->trainingid]->entityname = $trainingmainentity->shortname;
+                    $trainings[$session->trainingid]->entityfullname = $trainingmainentity->name;
+                    $trainings[$session->trainingid]->producingorganization = $training->producingorganization;
                     $trainings[$session->trainingid]->producerorganizationshortname = $training->producerorganizationshortname;
-                    $trainings[$session->trainingid]->catchphrase                   = $training->catchphrase;
-                    $trainings[$session->trainingid]->collection                    = $training->collection;
-                    $trainings[$session->trainingid]->collectionstr                 = $training->collectionstr;
-                    $trainings[$session->trainingid]->typicaljob                    = $training->typicaljob;
-                    $trainings[$session->trainingid]->skills                        = $training->get_skills_name();
-                    $trainings[$session->trainingid]->content                       = html_entity_decode($training->content);
-                    $trainings[$session->trainingid]->idsirh                        = $training->idsirh;
+                    $trainings[$session->trainingid]->catchphrase = $training->catchphrase;
+                    $trainings[$session->trainingid]->collection = $training->collection;
+                    $trainings[$session->trainingid]->collectionstr = $training->collectionstr;
+                    $trainings[$session->trainingid]->typicaljob = $training->typicaljob;
+                    $trainings[$session->trainingid]->skills = $training->get_skills_name();
+                    $trainings[$session->trainingid]->content = html_entity_decode($training->content);
+                    $trainings[$session->trainingid]->idsirh = $training->idsirh;
                 } catch (dml_missing_record_exception $e) {
                     // When the course does not exist in the database.
                     continue;
                 }
 
-                $trainings[$session->trainingid]->sessions              = [];
-                $trainings[$session->trainingid]->haspermanentsessions  = false;
+                $trainings[$session->trainingid]->sessions = [];
+                $trainings[$session->trainingid]->haspermanentsessions = false;
                 $trainings[$session->trainingid]->hasinprogresssessions = false;
             }
 
@@ -707,7 +721,7 @@ class mentor_specialization {
 
             // Get a light version of the session.
             if (!$onlytrainings) {
-                $sessionobject                               = \local_mentor_core\session_api::get_session($session->id);
+                $sessionobject = \local_mentor_core\session_api::get_session($session->id);
                 $trainings[$session->trainingid]->sessions[] = $sessionobject->convert_for_template();
             }
 
@@ -775,11 +789,11 @@ class mentor_specialization {
 
         // Self enrolment.
         if ($session->termsregistration == 'inscriptionlibre') {
-            $data->selfenrolment          = 1;
+            $data->selfenrolment = 1;
             $data->hasselfregistrationkey = $session->has_registration_key();
         } else {
             $data->selfenrolment = 0;
-            $data->message       = $session->termsregistrationdetail;
+            $data->message = $session->termsregistrationdetail;
         }
 
         return $data;
@@ -831,7 +845,7 @@ class mentor_specialization {
         }
 
         // Assign ref local role to user.
-        $db           = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $reflocalrole = $db->get_role_by_name('referentlocal');
         role_assign($reflocalrole->id, $formdata['reflocalid'], $newentity->get_context());
 
@@ -861,26 +875,26 @@ class mentor_specialization {
         $trainingsarray = array();
 
         foreach ($trainingsrecord as $key => $training) {
-            $training       = self::get_training($training->id);
+            $training = self::get_training($training->id);
             $trainingentity = $training->get_entity(false);
 
             // The user has access if it is a master entity or if he manages formations on this entity or its sub-entity.
             if ($trainingentity->is_main_entity() || $trainingentity->is_trainings_manager($USER)) {
                 $trainingsarray[] = array(
-                    'id'            => $training->id,
-                    'name'          => $training->name,
-                    'idsirh'        => $training->idsirh,
-                    'status'        => $training->status,
-                    'entityid'      => $trainingentity->id,
+                    'id' => $training->id,
+                    'name' => $training->name,
+                    'idsirh' => $training->idsirh,
+                    'status' => $training->status,
+                    'entityid' => $trainingentity->id,
                     'subentityname' => !$trainingentity->is_main_entity() ?
                         $trainingentity->get_name() : '',
                     'collectionstr' => $training->collectionstr,
-                    'url'           => $training->get_url()->out(),
-                    'actions'       => $training->get_actions(),
-                    'shortname'     => $training->courseshortname,
-                    'sessions'      => $training->get_session_number(),
-                    'urlsessions'   => $trainingentity->get_main_entity()->get_edadmin_courses('session')['link'] .
-                                       '&trainingid=' . $training->id,
+                    'url' => $training->get_url()->out(),
+                    'actions' => $training->get_actions(),
+                    'shortname' => $training->courseshortname,
+                    'sessions' => $training->get_session_number(),
+                    'urlsessions' => $trainingentity->get_main_entity()->get_edadmin_courses('session')['link'] .
+                        '&trainingid=' . $training->id,
 
                 );
             }

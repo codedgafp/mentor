@@ -41,17 +41,19 @@
     }
 }}
 
-<p class="font-weight-bold">
-    <i class="fa fa-calendar-o icon" aria-hidden="true"></i>{{ sessionstartdate }}
-    {{# placesavailable }} -
-        {{#placesavailablemoreone}}
-            {{# str }} placesavailable, local_mentor_core, <span class="font-weight-bold">{{ placesavailable }}</span> {{/str}}
-        {{/placesavailablemoreone}}
-        {{^placesavailablemoreone}}
-            {{# str }} placeavailable, local_mentor_core, <span class="font-weight-bold">{{ placesavailable }}</span> {{/str}}
-        {{/placesavailablemoreone}}
-    {{/ placesavailable }}
-</p>
+{{^ sessionpermanent }}
+    <p class="font-weight-bold">
+        <i class="fa fa-calendar-o icon" aria-hidden="true"></i>{{ sessionstartdate }}
+        {{# placesavailable }} -
+            {{#placesavailablemoreone}}
+                {{# str }} placesavailable, local_mentor_core, <span class="font-weight-bold">{{ placesavailable }}</span> {{/str}}
+            {{/placesavailablemoreone}}
+            {{^placesavailablemoreone}}
+                {{# str }} placeavailable, local_mentor_core, <span class="font-weight-bold">{{ placesavailable }}</span> {{/str}}
+            {{/placesavailablemoreone}}
+        {{/ placesavailable }}
+    </p>
+{{/sessionpermanent}}
 
 {{#onlinesession}}
     <p>

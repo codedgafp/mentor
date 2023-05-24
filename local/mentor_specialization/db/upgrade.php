@@ -62,7 +62,7 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
 
             // Insert list of regions to table.
             foreach ($regions as $key => $value) {
-                $region       = new stdClass();
+                $region = new stdClass();
                 $region->code = $key;
                 $region->name = $value;
 
@@ -84,7 +84,7 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
 
         // Insert list of regions to table.
         foreach ($regions as $key => $value) {
-            $region       = new stdClass();
+            $region = new stdClass();
             $region->code = $key;
             $region->name = $value;
 
@@ -99,24 +99,24 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
 
         // Training table fields.
         $trainingfields = [
-            'teaser'                      => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'prerequisite'                => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'collection'                  => [XMLDB_TYPE_CHAR, '455', true, false, false],
-            'creativestructure'           => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'idsirh'                      => [XMLDB_TYPE_CHAR, '45', null, null, null],
-            'licenseterms'                => [XMLDB_TYPE_CHAR, '255', null, null, null],
-            'typicaljob'                  => [XMLDB_TYPE_CHAR, '255', null, null, null],
-            'skills'                      => [XMLDB_TYPE_CHAR, '255', null, null, null],
-            'certifying'                  => [XMLDB_TYPE_INTEGER, '1', null, null, null],
-            'presenceestimatedtime'       => [XMLDB_TYPE_INTEGER, '10', null, null, null],
-            'remoteestimatedtime'         => [XMLDB_TYPE_INTEGER, '10', null, null, null],
-            'trainingmodalities'          => [XMLDB_TYPE_CHAR, '45', null, null, null],
-            'producingorganization'       => [XMLDB_TYPE_CHAR, '255', null, null, null],
-            'producerorganizationlogo'    => [XMLDB_TYPE_CHAR, '255', null, null, null],
-            'designers'                   => [XMLDB_TYPE_CHAR, '255', null, null, null],
-            'contactproducerorganization' => [XMLDB_TYPE_CHAR, '255', null, null, null],
-            'timecreated'                 => [XMLDB_TYPE_INTEGER, '10', null, null, null],
-            'teaserpicture'               => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'teaser' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'prerequisite' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'collection' => [XMLDB_TYPE_CHAR, '455', true, false, false],
+                'creativestructure' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'idsirh' => [XMLDB_TYPE_CHAR, '45', null, null, null],
+                'licenseterms' => [XMLDB_TYPE_CHAR, '255', null, null, null],
+                'typicaljob' => [XMLDB_TYPE_CHAR, '255', null, null, null],
+                'skills' => [XMLDB_TYPE_CHAR, '255', null, null, null],
+                'certifying' => [XMLDB_TYPE_INTEGER, '1', null, null, null],
+                'presenceestimatedtime' => [XMLDB_TYPE_INTEGER, '10', null, null, null],
+                'remoteestimatedtime' => [XMLDB_TYPE_INTEGER, '10', null, null, null],
+                'trainingmodalities' => [XMLDB_TYPE_CHAR, '45', null, null, null],
+                'producingorganization' => [XMLDB_TYPE_CHAR, '255', null, null, null],
+                'producerorganizationlogo' => [XMLDB_TYPE_CHAR, '255', null, null, null],
+                'designers' => [XMLDB_TYPE_CHAR, '255', null, null, null],
+                'contactproducerorganization' => [XMLDB_TYPE_CHAR, '255', null, null, null],
+                'timecreated' => [XMLDB_TYPE_INTEGER, '10', null, null, null],
+                'teaserpicture' => [XMLDB_TYPE_CHAR, '255', true, false, false],
         ];
 
         // Adding fields to database.
@@ -133,43 +133,43 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
 
         // Session table fields.
         $sessionfields = [
-            'trainingname'                 => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'trainingshortname'            => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'trainingcontent'              => [XMLDB_TYPE_TEXT, null, null, null, null],
-            'teaser'                       => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'prerequisite'                 => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'collection'                   => [XMLDB_TYPE_CHAR, '455', true, false, false],
-            'creativestructure'            => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'traininggoal'                 => [XMLDB_TYPE_TEXT, '255', null, null, null],
-            'idsirh'                       => [XMLDB_TYPE_CHAR, '45', null, null, null],
-            'typicaljob'                   => [XMLDB_TYPE_CHAR, '255', null, null, null],
-            'skills'                       => [XMLDB_TYPE_CHAR, '255', null, null, null],
-            'certifying'                   => [XMLDB_TYPE_INTEGER, '1', null, null, null],
-            'presenceestimatedtime'        => [XMLDB_TYPE_INTEGER, '10', null, null, null],
-            'remoteestimatedtime'          => [XMLDB_TYPE_INTEGER, '10', null, null, null],
-            'trainingmodalities'           => [XMLDB_TYPE_CHAR, '45', null, null, null],
-            'producingorganization'        => [XMLDB_TYPE_CHAR, '255', null, null, null],
-            'producerorganizationlogo'     => [XMLDB_TYPE_CHAR, '255', null, null, null],
-            'contactproducerorganization'  => [XMLDB_TYPE_CHAR, '255', null, null, null],
-            'thumbnail'                    => [XMLDB_TYPE_CHAR, '255', null, null, null],
-            'teaserpicture'                => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'designers'                    => [XMLDB_TYPE_CHAR, '255', null, null, null],
-            'timecreated'                  => [XMLDB_TYPE_INTEGER, '10', null, null, null],
-            'status_training'              => [XMLDB_TYPE_CHAR, '45', null, null, null],
-            'licenseterms'                 => [XMLDB_TYPE_CHAR, '255', null, null, null],
-            'publiccible'                  => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'termsregistration'            => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'termsregistrationdetail'      => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'onlinesessionestimatedtime'   => [XMLDB_TYPE_INTEGER, '10', true, false, false],
-            'presencesessionestimatedtime' => [XMLDB_TYPE_INTEGER, '10', true, false, false],
-            'sessionpermanent'             => [XMLDB_TYPE_INTEGER, '1', null, null, null],
-            'sessionmodalities'            => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'accompaniment'                => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'placesavailable'              => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'numberparticipants'           => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'location'                     => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'organizingstructure'          => [XMLDB_TYPE_CHAR, '255', true, false, false],
-            'sessionnumber'                => [XMLDB_TYPE_INTEGER, '10', null, null, null],
+                'trainingname' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'trainingshortname' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'trainingcontent' => [XMLDB_TYPE_TEXT, null, null, null, null],
+                'teaser' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'prerequisite' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'collection' => [XMLDB_TYPE_CHAR, '455', true, false, false],
+                'creativestructure' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'traininggoal' => [XMLDB_TYPE_TEXT, '255', null, null, null],
+                'idsirh' => [XMLDB_TYPE_CHAR, '45', null, null, null],
+                'typicaljob' => [XMLDB_TYPE_CHAR, '255', null, null, null],
+                'skills' => [XMLDB_TYPE_CHAR, '255', null, null, null],
+                'certifying' => [XMLDB_TYPE_INTEGER, '1', null, null, null],
+                'presenceestimatedtime' => [XMLDB_TYPE_INTEGER, '10', null, null, null],
+                'remoteestimatedtime' => [XMLDB_TYPE_INTEGER, '10', null, null, null],
+                'trainingmodalities' => [XMLDB_TYPE_CHAR, '45', null, null, null],
+                'producingorganization' => [XMLDB_TYPE_CHAR, '255', null, null, null],
+                'producerorganizationlogo' => [XMLDB_TYPE_CHAR, '255', null, null, null],
+                'contactproducerorganization' => [XMLDB_TYPE_CHAR, '255', null, null, null],
+                'thumbnail' => [XMLDB_TYPE_CHAR, '255', null, null, null],
+                'teaserpicture' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'designers' => [XMLDB_TYPE_CHAR, '255', null, null, null],
+                'timecreated' => [XMLDB_TYPE_INTEGER, '10', null, null, null],
+                'status_training' => [XMLDB_TYPE_CHAR, '45', null, null, null],
+                'licenseterms' => [XMLDB_TYPE_CHAR, '255', null, null, null],
+                'publiccible' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'termsregistration' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'termsregistrationdetail' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'onlinesessionestimatedtime' => [XMLDB_TYPE_INTEGER, '10', true, false, false],
+                'presencesessionestimatedtime' => [XMLDB_TYPE_INTEGER, '10', true, false, false],
+                'sessionpermanent' => [XMLDB_TYPE_INTEGER, '1', null, null, null],
+                'sessionmodalities' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'accompaniment' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'placesavailable' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'numberparticipants' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'location' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'organizingstructure' => [XMLDB_TYPE_CHAR, '255', true, false, false],
+                'sessionnumber' => [XMLDB_TYPE_INTEGER, '10', null, null, null],
         ];
 
         // Adding fields to database.
@@ -189,9 +189,9 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
     }
 
     if ($oldversion < 2021031700) {
-        $userfieldid             = $DB->get_field('user_info_field', 'id', ['shortname' => 'department']);
+        $userfieldid = $DB->get_field('user_info_field', 'id', ['shortname' => 'department']);
         $userdataparmentfieldata = $DB->get_records('user_info_data', ['fieldid' => $userfieldid]);
-        $deparmentlist           = local_mentor_specialization_get_departments();
+        $deparmentlist = local_mentor_specialization_get_departments();
 
         foreach ($userdataparmentfieldata as $userdataparmentfiel) {
             if (array_key_exists($userdataparmentfiel->data, $deparmentlist)) {
@@ -202,9 +202,9 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
     }
 
     if ($oldversion < 2021042101) {
-        $oldcapability         = 'local/mentor_specialization:changetraininggoal';
+        $oldcapability = 'local/mentor_specialization:changetraininggoal';
         $olddatabasecapability = $DB->get_record('capabilities', ['name' => $oldcapability]);
-        $newcapability         = 'local/mentor_core:changetraininggoal';
+        $newcapability = 'local/mentor_core:changetraininggoal';
 
         if ($olddatabasecapability) {
             if ($DB->record_exists('capabilities', ['name' => $newcapability])) {
@@ -212,7 +212,7 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
                     $DB->delete_records('capabilities', ['name' => $oldcapability]);
                 }
             } else {
-                $olddatabasecapability->name      = $newcapability;
+                $olddatabasecapability->name = $newcapability;
                 $olddatabasecapability->component = 'local_mentor_core';
                 $DB->update_record('capabilities', $olddatabasecapability);
             }
@@ -233,7 +233,7 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
 
         // Insert list of regions to table.
         foreach ($regions as $key => $value) {
-            $region       = new stdClass();
+            $region = new stdClass();
             $region->code = $key;
             $region->name = $value;
 
@@ -242,9 +242,9 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
             }
         }
 
-        $userfieldid             = $DB->get_field('user_info_field', 'id', ['shortname' => 'department']);
+        $userfieldid = $DB->get_field('user_info_field', 'id', ['shortname' => 'department']);
         $userdataparmentfieldata = $DB->get_records('user_info_data', ['fieldid' => $userfieldid]);
-        $deparmentlist           = local_mentor_specialization_get_departments();
+        $deparmentlist = local_mentor_specialization_get_departments();
 
         foreach ($userdataparmentfieldata as $userdataparmentfiel) {
             if (array_key_exists($userdataparmentfiel->data, $deparmentlist)) {
@@ -324,9 +324,9 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
     if ($oldversion < 2022030200) {
         // Setting config.
         local_mentor_core_set_moodle_config('externallinks', 'legifrance.gouv.fr|gouvernement.fr|service-public.fr|data.gouv.fr',
-            'theme_mentor');
+                'theme_mentor');
         local_mentor_core_set_moodle_config('about', $CFG->wwwroot . '/local/staticpage/view.php?page=ensavoirplus',
-            'theme_mentor');
+                'theme_mentor');
     }
 
     if ($oldversion < 2022030301) {
@@ -370,10 +370,10 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
 
         // Populate the table.
         foreach ($options as $option) {
-            $record             = new stdClass();
+            $record = new stdClass();
             $record->categoryid = $option->categoryid;
-            $record->name       = 'regionid';
-            $record->value      = $option->regionid;
+            $record->name = 'regionid';
+            $record->value = $option->regionid;
 
             $DB->insert_record('category_options', $record);
         }
@@ -383,22 +383,22 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
 
         // Mentor role specified order.
         $roleorder = [
-            'admindedie',
-            'respformation',
-            'referentlocal',
-            'reflocalnonediteur',
-            'concepteur',
-            'formateur',
-            'tuteur',
-            'participant',
-            'participantnonediteur',
-            'dpo',
-            'coursecreator',
-            'editingteacher',
-            'teacher',
-            'user',
-            'frontpage',
-            'guest',
+                'admindedie',
+                'respformation',
+                'referentlocal',
+                'reflocalnonediteur',
+                'concepteur',
+                'formateur',
+                'tuteur',
+                'participant',
+                'participantnonediteur',
+                'dpo',
+                'coursecreator',
+                'editingteacher',
+                'teacher',
+                'user',
+                'frontpage',
+                'guest',
         ];
 
         local_mentor_specialization_set_role_order($roleorder);
@@ -421,14 +421,14 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
 
         foreach ($courses as $course) {
             $course->startdate = is_null($course->startdate) ? 0 : $course->startdate;
-            $course->enddate   = is_null($course->enddate) ? 0 : $course->enddate;
+            $course->enddate = is_null($course->enddate) ? 0 : $course->enddate;
             $DB->update_record('course', $course);
         }
     }
 
     // Fix empty collection logs.
     if ($oldversion < 2022060101) {
-        $tablelogstorementorsession    = new xmldb_table('logstore_mentor_session');
+        $tablelogstorementorsession = new xmldb_table('logstore_mentor_session');
         $tablelogstorementorcollection = new xmldb_table('logstore_mentor_collection');
 
         if ($dbman->table_exists($tablelogstorementorsession) && $dbman->table_exists($tablelogstorementorcollection)) {
@@ -449,7 +449,7 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
         ");
 
             foreach ($emptylogs as $emptylog) {
-                $coll               = new stdClass();
+                $coll = new stdClass();
                 $coll->sessionlogid = $emptylog->id;
 
                 $collections = explode(',', $emptylog->collection);
@@ -481,7 +481,7 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
     if ($oldversion < 2022082400) {
         $categories = $DB->get_records('course_categories');
         foreach ($categories as $category) {
-            $category->name     = str_replace('&#39;', "'", $category->name);
+            $category->name = str_replace('&#39;', "'", $category->name);
             $category->idnumber = str_replace('&#39;', "'", $category->idnumber);
 
             $DB->update_record('course_categories', $category);
@@ -495,6 +495,23 @@ function xmldb_local_mentor_specialization_upgrade($oldversion) {
         $allentity = \local_mentor_core\entity_api::get_all_entities(true, [], true);
         foreach ($allentity as $entity) {
             $entity->create_cohort_enrol_page_contact();
+        }
+    }
+
+    // Check access to the library.
+    if ($oldversion < 2022121600) {
+        local_mentor_specialization_check_access_to_the_library_for_all_users();
+    }
+
+    // Check if 'Custom welcome message' to self enrol exist.
+    // Else no send course welcome message.
+    if ($oldversion < 2022122000) {
+        $selfenrols = $DB->get_records('enrol', array('enrol' => 'self'));
+        foreach ($selfenrols as $selfenrol) {
+            if (empty($selfenrol->customtext1) || is_null($selfenrol->customtext1)) {
+                $selfenrol->customint4 = 0;
+                $DB->update_record('enrol', $selfenrol);
+            }
         }
     }
 

@@ -39,7 +39,7 @@ require_login();
 
 // Get optional params.
 $trainingid = optional_param('trainingid', null, PARAM_INT);
-$sessionid  = optional_param('sessionid', null, PARAM_INT);
+$sessionid = optional_param('sessionid', null, PARAM_INT);
 
 // Set context Page.
 $context = context_system::instance();
@@ -61,11 +61,11 @@ try {
             $trainingtemplate = $training->convert_for_template();
 
             $trainingtemplate->accesscourse = true;
-            $templaterederer                = $renderer->display($trainingtemplate, false);
+            $templaterederer = $renderer->display($trainingtemplate, false);
 
             // Set data Page.
             $title = $training->name;
-            $url   = new moodle_url('/local/trainings/pages/training.php', ["trainingid" => $trainingid]);
+            $url = new moodle_url('/local/trainings/pages/training.php', ["trainingid" => $trainingid]);
         }
     }
 
@@ -75,8 +75,8 @@ try {
 
         // Check if the user has access to the session to access the training sheet.
         if (has_capability('local/session:manage', $session->get_entity()->get_context()) || is_enrolled($session->get_context())) {
-            $training                        = $session->get_training();
-            $trainingtemplate                = $training->convert_for_template();
+            $training = $session->get_training();
+            $trainingtemplate = $training->convert_for_template();
             $trainingtemplate->hasonesession = true;
 
             if (
@@ -93,22 +93,22 @@ try {
 
             // Set data Page.
             $title = $training->name;
-            $url   = new moodle_url('/local/trainings/pages/training.php', ["sessionid" => $sessionid]);
+            $url = new moodle_url('/local/trainings/pages/training.php', ["sessionid" => $sessionid]);
         }
     }
 
     // Check if renderer is setting.
     // If not, user not have data access.
     if (!isset($templaterederer)) {
-        $title           = get_string('notaccesstraining', 'local_catalog');
+        $title = get_string('notaccesstraining', 'local_catalog');
         $templaterederer = $renderer->not_access(get_string('notaccesstraining', 'local_catalog'));
-        $url             = new moodle_url('/local/trainings/pages/training.php');
+        $url = new moodle_url('/local/trainings/pages/training.php');
     }
 } catch (\Exception $e) {
     // An error catch when recovering data.
-    $title           = get_string('notaccesstraining', 'local_catalog');
+    $title = get_string('notaccesstraining', 'local_catalog');
     $templaterederer = $renderer->not_access(get_string('notaccesstraining', 'local_catalog'));
-    $url             = new moodle_url('/local/trainings/pages/training.php');
+    $url = new moodle_url('/local/trainings/pages/training.php');
 }
 
 $PAGE->set_url($url);

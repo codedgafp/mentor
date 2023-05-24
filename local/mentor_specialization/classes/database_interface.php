@@ -92,10 +92,10 @@ class database_interface extends \local_mentor_core\database_interface {
             $this->db->update_record('category_options', $categoryoptions);
         } else {
             // Create category options.
-            $categoryoptions             = new \stdClass();
+            $categoryoptions = new \stdClass();
             $categoryoptions->categoryid = $entityid;
-            $categoryoptions->name       = 'regionid';
-            $categoryoptions->value      = $regionsid;
+            $categoryoptions->name = 'regionid';
+            $categoryoptions->value = $regionsid;
             $this->db->insert_record('category_options', $categoryoptions);
         }
         return true;
@@ -117,10 +117,10 @@ class database_interface extends \local_mentor_core\database_interface {
             $this->db->update_record('category_options', $categoryoptions);
         } else {
             // Create category options.
-            $categoryoptions             = new \stdClass();
+            $categoryoptions = new \stdClass();
             $categoryoptions->categoryid = $entityid;
-            $categoryoptions->name       = 'hidden';
-            $categoryoptions->value      = $hidden;
+            $categoryoptions->name = 'hidden';
+            $categoryoptions->value = $hidden;
             $this->db->insert_record('category_options', $categoryoptions);
         }
         return true;
@@ -146,13 +146,36 @@ class database_interface extends \local_mentor_core\database_interface {
             $this->db->update_record('category_options', $categoryoptions);
         } else {
             // Create category options.
-            $categoryoptions             = new \stdClass();
+            $categoryoptions = new \stdClass();
             $categoryoptions->categoryid = $entityid;
-            $categoryoptions->name       = 'sirhlist';
-            $categoryoptions->value      = $sirhlist;
+            $categoryoptions->name = 'sirhlist';
+            $categoryoptions->value = $sirhlist;
             $this->db->insert_record('category_options', $categoryoptions);
         }
         return true;
+    }
+
+    /**
+     * Update entity sirh list
+     *
+     * @param int $entityid
+     * @param string $canbemainentity
+     * @throws \dml_exception
+     */
+    public function update_can_be_main_entity($entityid, $canbemainentity) {
+
+        // Update category options.
+        if ($categoryoptions = $this->get_category_option($entityid, 'canbemainentity')) {
+            $categoryoptions->value = $canbemainentity;
+            $this->db->update_record('category_options', $categoryoptions);
+        } else {
+            // Create category options.
+            $categoryoptions = new \stdClass();
+            $categoryoptions->categoryid = $entityid;
+            $categoryoptions->name = 'canbemainentity';
+            $categoryoptions->value = $canbemainentity;
+            $this->db->insert_record('category_options', $categoryoptions);
+        }
     }
 
     /**
@@ -182,9 +205,9 @@ class database_interface extends \local_mentor_core\database_interface {
                 uo.name = :name
                 AND
                 " . $compare
-            , array(
-                'name' => 'regionid',
-            ));
+                , array(
+                        'name' => 'regionid',
+                ));
     }
 
     /**
@@ -195,28 +218,6 @@ class database_interface extends \local_mentor_core\database_interface {
      */
     public function get_all_regions() {
         return $this->db->get_records('regions', null, 'name ASC');
-    }
-
-    /**
-     * Get all users by regionid
-     *
-     * @param int $regionid
-     * @return \stdClass[]
-     * @throws \dml_exception
-     */
-    public function get_users_by_region($regionid) {
-
-        return $this->db->get_records_sql('
-            SELECT u.*
-            FROM {user} u
-            JOIN {user_info_data} uid ON u.id = uid.userid
-            JOIN {user_info_field} uif ON uif.id = uid.fieldid
-            JOIN {regions} r ON r.name = uid.data
-            WHERE
-                uif.shortname = :fieldname
-                AND
-                r.id = :regionid
-        ', array('fieldname' => 'region', 'regionid' => $regionid));
     }
 
     /**
@@ -259,7 +260,7 @@ class database_interface extends \local_mentor_core\database_interface {
                 uif.shortname = :fieldname
                 AND
                 ' . $or
-            , $params);
+                , $params);
     }
 
     /**
@@ -335,12 +336,12 @@ class database_interface extends \local_mentor_core\database_interface {
                     AND (con.contextlevel = :contextlevel OR con2.contextlevel = :contextlevel2)';
 
         $params = array(
-            'participant'           => 'participant',
-            'participantnonediteur' => 'participantnonediteur',
-            'entityid'              => $data->entityid,
-            'entityid2'             => $data->entityid,
-            'contextlevel'          => CONTEXT_COURSE,
-            'contextlevel2'         => CONTEXT_COURSE
+                'participant' => 'participant',
+                'participantnonediteur' => 'participantnonediteur',
+                'entityid' => $data->entityid,
+                'entityid2' => $data->entityid,
+                'contextlevel' => CONTEXT_COURSE,
+                'contextlevel2' => CONTEXT_COURSE
         );
 
         // Filters.
@@ -390,10 +391,10 @@ class database_interface extends \local_mentor_core\database_interface {
         }
 
         return $this->db->get_records_sql(
-            $request,
-            $params,
-            $data->start,
-            $data->length
+                $request,
+                $params,
+                $data->start,
+                $data->length
         );
     }
 
@@ -425,12 +426,12 @@ class database_interface extends \local_mentor_core\database_interface {
                     AND (con.contextlevel = :contextlevel OR con2.contextlevel = :contextlevel2)';
 
         $params = array(
-            'participant'           => 'participant',
-            'participantnonediteur' => 'participantnonediteur',
-            'entityid'              => $data->entityid,
-            'entityid2'             => $data->entityid,
-            'contextlevel'          => CONTEXT_COURSE,
-            'contextlevel2'         => CONTEXT_COURSE
+                'participant' => 'participant',
+                'participantnonediteur' => 'participantnonediteur',
+                'entityid' => $data->entityid,
+                'entityid2' => $data->entityid,
+                'contextlevel' => CONTEXT_COURSE,
+                'contextlevel2' => CONTEXT_COURSE
         );
 
         // Filters.
@@ -440,8 +441,8 @@ class database_interface extends \local_mentor_core\database_interface {
         $request .= $this->generate_sessions_by_entity_id_search($data, $params);
 
         return $this->db->count_records_sql(
-            $request,
-            $params
+                $request,
+                $params
         );
     }
 
@@ -464,7 +465,7 @@ class database_interface extends \local_mentor_core\database_interface {
                     if ($key) {
                         $request .= ' OR ';
                     }
-                    $request                      .= ' cc4.id = :subentityid' . $key;
+                    $request .= ' cc4.id = :subentityid' . $key;
                     $params['subentityid' . $key] = $subentityid;
                 }
                 $request .= ' ) ';
@@ -477,7 +478,7 @@ class database_interface extends \local_mentor_core\database_interface {
                     if ($key) {
                         $request .= ' OR ';
                     }
-                    $request                     .= $this->db->sql_like('t.collection', ':collection' . $key, false, false);
+                    $request .= $this->db->sql_like('t.collection', ':collection' . $key, false, false);
                     $params['collection' . $key] = '%' . $this->db->sql_like_escape($collection) . '%';
                 }
                 $request .= ' ) ';
@@ -490,7 +491,7 @@ class database_interface extends \local_mentor_core\database_interface {
                     if ($key) {
                         $request .= ' OR ';
                     }
-                    $request                 .= ' s.status = :status' . $key;
+                    $request .= ' s.status = :status' . $key;
                     $params['status' . $key] = $status;
                 }
                 $request .= ' ) ';
@@ -498,11 +499,11 @@ class database_interface extends \local_mentor_core\database_interface {
 
             // Date filter.
             if (isset($data->filters['startdate']) && !empty($data->filters['startdate'])) {
-                $request             .= ' AND s.sessionstartdate > :startdate ';
+                $request .= ' AND s.sessionstartdate > :startdate ';
                 $params['startdate'] = $data->filters['startdate'];
             }
             if (isset($data->filters['enddate']) && !empty($data->filters['enddate'])) {
-                $request           .= ' AND s.sessionstartdate < :enddate ';
+                $request .= ' AND s.sessionstartdate < :enddate ';
                 $params['enddate'] = $data->filters['enddate'];
             }
         }
@@ -545,11 +546,11 @@ class database_interface extends \local_mentor_core\database_interface {
                 list($querypartsql, $querypartparams) = $this->generate_session_sql_search_exact_expression(trim($searchvalue));
 
                 // Assign response.
-                $params  = array_merge($params, $querypartparams);
+                $params = array_merge($params, $querypartparams);
                 $request .= $querypartsql;
             } else {
-                $searchvalue     = $data->search['value'];
-                $searchvalue     = str_replace("&#39;", "\'", $searchvalue);
+                $searchvalue = $data->search['value'];
+                $searchvalue = str_replace("&#39;", "\'", $searchvalue);
                 $listsearchvalue = explode(" ", $searchvalue);
 
                 $firstloop = true;
@@ -560,38 +561,38 @@ class database_interface extends \local_mentor_core\database_interface {
                     }
 
                     if ($firstloop) {
-                        $request   .= ' ( ';
+                        $request .= ' ( ';
                         $firstloop = false;
                     } else {
                         $request .= ' AND ( ';
                     }
-                    $request                          .= $this->db->sql_like('co2.fullname', ':trainingname' . $key, false, false);
-                    $params['trainingname' . $key]    = '%' . $this->db->sql_like_escape($partsearchvalue) . '%';
-                    $request                          .= ' OR ' .
-                                                         $this->db->sql_like('s.courseshortname', ':courseshortname' . $key, false,
-                                                             false);
+                    $request .= $this->db->sql_like('co2.fullname', ':trainingname' . $key, false, false);
+                    $params['trainingname' . $key] = '%' . $this->db->sql_like_escape($partsearchvalue) . '%';
+                    $request .= ' OR ' .
+                                $this->db->sql_like('s.courseshortname', ':courseshortname' . $key, false,
+                                        false);
                     $params['courseshortname' . $key] = '%' . $this->db->sql_like_escape($partsearchvalue) . '%';
-                    $request                          .= ' OR ' .
-                                                         $this->db->sql_like('cc4.name', ':entityname' . $key, false,
-                                                             false) .
-                                                         ' ) ';
-                    $params['entityname' . $key]      = '%' . $this->db->sql_like_escape($partsearchvalue) . '%';
+                    $request .= ' OR ' .
+                                $this->db->sql_like('cc4.name', ':entityname' . $key, false,
+                                        false) .
+                                ' ) ';
+                    $params['entityname' . $key] = '%' . $this->db->sql_like_escape($partsearchvalue) . '%';
                 }
             }
 
             // Get part of query with params for status.
             list($querystatuspartsql, $querystatuspartparams) = $this->generate_session_sql_search_by_status($searchvalue,
-                $strictsearch);
+                    $strictsearch);
             // Assign response.
-            $params  = array_merge($params, $querystatuspartparams);
+            $params = array_merge($params, $querystatuspartparams);
             $request .= $querystatuspartsql;
 
             // Get part of query with params for collection.
             list($querycollectionpartsql, $querycollectionpartparams)
-                = $this->generate_session_sql_search_by_collection($searchvalue,
-                $strictsearch);
+                    = $this->generate_session_sql_search_by_collection($searchvalue,
+                    $strictsearch);
             // Assign response.
-            $params  = array_merge($params, $querycollectionpartparams);
+            $params = array_merge($params, $querycollectionpartparams);
             $request .= $querycollectionpartsql;
 
             // Closes 'AND' parenthese.
@@ -614,10 +615,10 @@ class database_interface extends \local_mentor_core\database_interface {
         $searchvalue = str_replace("\'", "'", $searchvalue);
 
         $request = '';
-        $params  = [];
+        $params = [];
 
         // Get list collection and there string.
-        $listcollection       = local_mentor_specialization_get_collections();
+        $listcollection = local_mentor_specialization_get_collections();
         $listcollectionsearch = [];
 
         // Search if "searchvalue" is in string collection.
@@ -639,8 +640,8 @@ class database_interface extends \local_mentor_core\database_interface {
         // If search collection is true, add conditional request.
         if (!empty($listcollectionsearch)) {
             foreach ($listcollectionsearch as $key => $collectionstring) {
-                $request                     .= ' OR ';
-                $request                     .= $this->db->sql_like('t.collection', ':collection' . $key, false, false);
+                $request .= ' OR ';
+                $request .= $this->db->sql_like('t.collection', ':collection' . $key, false, false);
                 $params['collection' . $key] = '%' . $this->db->sql_like_escape($key) . '%';
             }
         }
@@ -658,11 +659,11 @@ class database_interface extends \local_mentor_core\database_interface {
      */
     public function generate_session_sql_search_by_status($searchvalue, $strictsearch = false) {
         $request = '';
-        $params  = [];
+        $params = [];
 
         // Get list status and there string.
-        $liststatus       = \local_mentor_core\session_api::get_status_list();
-        $lisstatusstring  = array_map(function($status) {
+        $liststatus = \local_mentor_core\session_api::get_status_list();
+        $lisstatusstring = array_map(function($status) {
             return strtolower(get_string($status, 'local_mentor_core'));
         }, $liststatus);
         $liststatussearch = [];
@@ -686,8 +687,8 @@ class database_interface extends \local_mentor_core\database_interface {
         // If search status is true, add conditional request.
         if (!empty($liststatussearch)) {
             foreach ($liststatussearch as $key => $statusstring) {
-                $request                 .= ' OR ';
-                $request                 .= 's.status = :status' . $key;
+                $request .= ' OR ';
+                $request .= 's.status = :status' . $key;
                 $params['status' . $key] = $key;
             }
         }
@@ -703,22 +704,22 @@ class database_interface extends \local_mentor_core\database_interface {
      */
     public function generate_session_sql_search_exact_expression($expression) {
         $request = '';
-        $params  = [];
+        $params = [];
 
         if (mb_strlen($expression) === 0) {
             return [$request, $params];
         }
 
-        $request                   .= $this->db->sql_equal('t.courseshortname', ':trainingname', false, false);
-        $params['trainingname']    = $expression;
-        $request                   .= ' OR ' .
-                                      $this->db->sql_equal('s.courseshortname', ':courseshortname', false,
-                                          false);
+        $request .= $this->db->sql_equal('t.courseshortname', ':trainingname', false, false);
+        $params['trainingname'] = $expression;
+        $request .= ' OR ' .
+                    $this->db->sql_equal('s.courseshortname', ':courseshortname', false,
+                            false);
         $params['courseshortname'] = $expression;
-        $request                   .= ' OR ' .
-                                      $this->db->sql_equal('cc4.name', ':entityname', false,
-                                          false);
-        $params['entityname']      = $expression;
+        $request .= ' OR ' .
+                    $this->db->sql_equal('cc4.name', ':entityname', false,
+                            false);
+        $params['entityname'] = $expression;
 
         return [$request, $params];
     }
@@ -749,11 +750,11 @@ class database_interface extends \local_mentor_core\database_interface {
                 UPDATE {enrol}
                 SET roleid = :newroleid
                 WHERE courseid = :courseid AND roleid = :oldroleid',
-                [
-                    'newroleid' => $endrole->id,
-                    'courseid'  => $courseid,
-                    'oldroleid' => $fromrole->id
-                ]
+                    [
+                            'newroleid' => $endrole->id,
+                            'courseid' => $courseid,
+                            'oldroleid' => $fromrole->id
+                    ]
             );
         } catch (\dml_exception $e) {
             \core\notification::error("ERROR : Update enrolment methods!!!\n" . $e->getMessage());
@@ -768,11 +769,11 @@ class database_interface extends \local_mentor_core\database_interface {
                 UPDATE {role_assignments}
                 SET roleid = :newroleid
                 WHERE contextid = :contextid AND roleid = :oldroleid',
-                [
-                    'newroleid' => $endrole->id,
-                    'contextid' => $context->id,
-                    'oldroleid' => $fromrole->id
-                ]
+                    [
+                            'newroleid' => $endrole->id,
+                            'contextid' => $context->id,
+                            'oldroleid' => $fromrole->id
+                    ]
             );
         } catch (\dml_exception $e) {
             \core\notification::error("ERROR : Update role assignments!!!\n" . $e->getMessage());
@@ -824,10 +825,10 @@ class database_interface extends \local_mentor_core\database_interface {
                     AND (r.shortname = :participant OR r.shortname = :participantnonediteur)";
 
         return $this->db->record_exists_sql($sql, array(
-            'userid'                => $userid,
-            'contextid'             => $contextid,
-            'participant'           => \local_mentor_specialization\mentor_profile::ROLE_PARTICIPANT,
-            'participantnonediteur' => \local_mentor_specialization\mentor_profile::ROLE_PARTICIPANTNONEDITEUR
+                'userid' => $userid,
+                'contextid' => $contextid,
+                'participant' => \local_mentor_specialization\mentor_profile::ROLE_PARTICIPANT,
+                'participantnonediteur' => \local_mentor_specialization\mentor_profile::ROLE_PARTICIPANTNONEDITEUR
         ));
     }
 
@@ -850,9 +851,9 @@ class database_interface extends \local_mentor_core\database_interface {
         ';
 
         return $this->db->get_records_sql($sql, [
-            'contextid'             => $contextid,
-            'participant'           => \local_mentor_specialization\mentor_profile::ROLE_PARTICIPANT,
-            'participantnonediteur' => \local_mentor_specialization\mentor_profile::ROLE_PARTICIPANTNONEDITEUR
+                'contextid' => $contextid,
+                'participant' => \local_mentor_specialization\mentor_profile::ROLE_PARTICIPANT,
+                'participantnonediteur' => \local_mentor_specialization\mentor_profile::ROLE_PARTICIPANTNONEDITEUR
         ]);
     }
 
@@ -894,17 +895,17 @@ class database_interface extends \local_mentor_core\database_interface {
         // Get resultat request without condition and filter.
         if (!is_object($data)) {
             return $this->db->get_records_sql($request,
-                array(
-                    'entityid'  => $data,
-                    'entityid2' => $data
-                )
+                    array(
+                            'entityid' => $data,
+                            'entityid2' => $data
+                    )
             );
         }
 
         // Intitialize params to request.
         $params = array(
-            'entityid'  => $data->entityid,
-            'entityid2' => $data->entityid
+                'entityid' => $data->entityid,
+                'entityid2' => $data->entityid
         );
 
         // Filters.
@@ -939,10 +940,10 @@ class database_interface extends \local_mentor_core\database_interface {
 
         // Execute request with conditions and filters.
         return $this->db->get_records_sql(
-            $request,
-            $params,
-            $data->start,
-            $data->length
+                $request,
+                $params,
+                $data->start,
+                $data->length
         );
     }
 
@@ -984,17 +985,17 @@ class database_interface extends \local_mentor_core\database_interface {
         // Get resultat request without condition and filter.
         if (!is_object($data)) {
             return $this->db->count_records_sql($request,
-                array(
-                    'entityid'  => $data,
-                    'entityid2' => $data
-                )
+                    array(
+                            'entityid' => $data,
+                            'entityid2' => $data
+                    )
             );
         }
 
         // Intitialize params to request.
         $params = array(
-            'entityid'  => $data->entityid,
-            'entityid2' => $data->entityid
+                'entityid' => $data->entityid,
+                'entityid2' => $data->entityid
         );
 
         // Filters.
@@ -1005,8 +1006,8 @@ class database_interface extends \local_mentor_core\database_interface {
 
         // Execute request with conditions and filters.
         return $this->db->count_records_sql(
-            $request,
-            $params
+                $request,
+                $params
         );
     }
 
@@ -1028,7 +1029,7 @@ class database_interface extends \local_mentor_core\database_interface {
                     if ($key) {
                         $request .= ' OR ';
                     }
-                    $request                      .= ' cc3.id = :subentityid' . $key;
+                    $request .= ' cc3.id = :subentityid' . $key;
                     $params['subentityid' . $key] = $subentityid;
                 }
                 $request .= ' ) ';
@@ -1041,7 +1042,7 @@ class database_interface extends \local_mentor_core\database_interface {
                     if ($key) {
                         $request .= ' OR ';
                     }
-                    $request                     .= $this->db->sql_like('t.collection', ':collection' . $key, false, false);
+                    $request .= $this->db->sql_like('t.collection', ':collection' . $key, false, false);
                     $params['collection' . $key] = '%' . $this->db->sql_like_escape($collection) . '%';
                 }
                 $request .= ' ) ';
@@ -1054,7 +1055,7 @@ class database_interface extends \local_mentor_core\database_interface {
                     if ($key) {
                         $request .= ' OR ';
                     }
-                    $request                 .= ' t.status = :status' . $key;
+                    $request .= ' t.status = :status' . $key;
                     $params['status' . $key] = $status;
                 }
                 $request .= ' ) ';
@@ -1076,7 +1077,7 @@ class database_interface extends \local_mentor_core\database_interface {
     public function generate_trainings_by_entity_id_search($data, &$params) {
         $request = '';
 
-        if ($data->search && $data->search['value'] && mb_strlen(trim($data->search['value'])) > 1) {
+        if (isset($data->search) && $data->search && $data->search['value'] && mb_strlen(trim($data->search['value'])) > 1) {
             // Condition is closed after status and collection checks.
             $request .= ' AND ( ';
 
@@ -1084,7 +1085,7 @@ class database_interface extends \local_mentor_core\database_interface {
             $strictsearch = false;
 
             // Get list status and there string.
-            $liststatus      = \local_mentor_core\training_api::get_status_list();
+            $liststatus = \local_mentor_core\training_api::get_status_list();
             $lisstatusstring = array_map(function($status) {
                 return strtolower(get_string($status, 'local_mentor_specialization'));
             }, $liststatus);
@@ -1111,13 +1112,13 @@ class database_interface extends \local_mentor_core\database_interface {
 
                 // Get part of query with params.
                 list($querypartsql, $querypartparams) = $this->generate_training_sql_search_exact_expression($searchvalue,
-                    $searchvaluestatus);
+                        $searchvaluestatus);
 
                 // Assign response.
-                $params  = array_merge($params, $querypartparams);
+                $params = array_merge($params, $querypartparams);
                 $request .= $querypartsql;
             } else {
-                $strreplace      = str_replace("&#39;", "\'", $data->search['value']);
+                $strreplace = str_replace("&#39;", "\'", $data->search['value']);
                 $listsearchvalue = explode(" ", $strreplace);
 
                 $firstloop = true;
@@ -1131,48 +1132,48 @@ class database_interface extends \local_mentor_core\database_interface {
                     $searchvaluecollection = $this->get_collection_search_value_trainings($listcollection, $partsearchvalue);
 
                     if ($firstloop) {
-                        $request   .= ' ( ';
+                        $request .= ' ( ';
                         $firstloop = false;
                     } else {
                         $request .= ' AND ( ';
                     }
 
-                    $request                          .= $this->db->sql_like('cc3.name', ':subentityname' . $key, false,
-                        false);
-                    $params['subentityname' . $key]   = '%' . $this->db->sql_like_escape($partsearchvalue) . '%';
-                    $request                          .= ' OR ';
-                    $request                          .= $this->db->sql_like('t.courseshortname', ':trainingname' . $key, false,
-                        false);
-                    $params['trainingname' . $key]    = '%' . $this->db->sql_like_escape($partsearchvalue) . '%';
-                    $request                          .= ' OR ';
-                    $request                          .= $this->db->sql_like('co.fullname', ':trainingnameco' . $key, false,
-                        false);
-                    $params['trainingnameco' . $key]  = '%' . $this->db->sql_like_escape($partsearchvalue) . '%';
-                    $request                          .= ' OR ';
-                    $request                          .= $this->db->sql_like('co2.fullname', ':trainingnameco2' . $key, false,
-                        false);
+                    $request .= $this->db->sql_like('cc3.name', ':subentityname' . $key, false,
+                            false);
+                    $params['subentityname' . $key] = '%' . $this->db->sql_like_escape($partsearchvalue) . '%';
+                    $request .= ' OR ';
+                    $request .= $this->db->sql_like('t.courseshortname', ':trainingname' . $key, false,
+                            false);
+                    $params['trainingname' . $key] = '%' . $this->db->sql_like_escape($partsearchvalue) . '%';
+                    $request .= ' OR ';
+                    $request .= $this->db->sql_like('co.fullname', ':trainingnameco' . $key, false,
+                            false);
+                    $params['trainingnameco' . $key] = '%' . $this->db->sql_like_escape($partsearchvalue) . '%';
+                    $request .= ' OR ';
+                    $request .= $this->db->sql_like('co2.fullname', ':trainingnameco2' . $key, false,
+                            false);
                     $params['trainingnameco2' . $key] = '%' . $this->db->sql_like_escape($partsearchvalue) . '%';
-                    $request                          .= ' OR ';
-                    $request                          .= $this->db->sql_like('t.idsirh', ':idsirh' . $key, false,
-                            false) .
-                                                         ' ) ';
-                    $params['idsirh' . $key]          = '%' . $this->db->sql_like_escape($partsearchvalue) . '%';
+                    $request .= ' OR ';
+                    $request .= $this->db->sql_like('t.idsirh', ':idsirh' . $key, false,
+                                    false) .
+                                ' ) ';
+                    $params['idsirh' . $key] = '%' . $this->db->sql_like_escape($partsearchvalue) . '%';
                 }
             }
 
             // Get part of query with params for status.
             list($querystatuspartsql, $querystatuspartparams)
-                = $this->generate_training_sql_search_by_status($searchvaluestatus,
-                $strictsearch);
+                    = $this->generate_training_sql_search_by_status($searchvaluestatus,
+                    $strictsearch);
             // Assign response.
-            $params  = array_merge($params, $querystatuspartparams);
+            $params = array_merge($params, $querystatuspartparams);
             $request .= $querystatuspartsql;
 
             // Get part of query with params for collection.
             list($querycollectionpartsql, $querycollectionpartparams)
-                = $this->generate_training_sql_search_by_collection($searchvaluecollection, $strictsearch);
+                    = $this->generate_training_sql_search_by_collection($searchvaluecollection, $strictsearch);
             // Assign response.
-            $params  = array_merge($params, $querycollectionpartparams);
+            $params = array_merge($params, $querycollectionpartparams);
             $request .= $querycollectionpartsql;
 
             // Closes 'AND' parenthese.
@@ -1254,31 +1255,31 @@ class database_interface extends \local_mentor_core\database_interface {
      */
     public function generate_training_sql_search_exact_expression($expression) {
         $request = '';
-        $params  = [];
+        $params = [];
 
         if (mb_strlen($expression) === 0) {
             return [$request, $params];
         }
 
-        $request                   .= $this->db->sql_equal('cc3.name', ':subentityname', false,
-            false);
-        $params['subentityname']   = $this->db->sql_like_escape($expression);
-        $request                   .= ' OR ';
-        $request                   .= $this->db->sql_equal('t.courseshortname', ':trainingname', false,
-            false);
-        $params['trainingname']    = $this->db->sql_like_escape($expression);
-        $request                   .= ' OR ';
-        $request                   .= $this->db->sql_equal('co.fullname', ':trainingnameco', false,
-            false);
-        $params['trainingnameco']  = $this->db->sql_like_escape($expression);
-        $request                   .= ' OR ';
-        $request                   .= $this->db->sql_equal('co2.fullname', ':trainingnameco2', false,
-            false);
+        $request .= $this->db->sql_equal('cc3.name', ':subentityname', false,
+                false);
+        $params['subentityname'] = $this->db->sql_like_escape($expression);
+        $request .= ' OR ';
+        $request .= $this->db->sql_equal('t.courseshortname', ':trainingname', false,
+                false);
+        $params['trainingname'] = $this->db->sql_like_escape($expression);
+        $request .= ' OR ';
+        $request .= $this->db->sql_equal('co.fullname', ':trainingnameco', false,
+                false);
+        $params['trainingnameco'] = $this->db->sql_like_escape($expression);
+        $request .= ' OR ';
+        $request .= $this->db->sql_equal('co2.fullname', ':trainingnameco2', false,
+                false);
         $params['trainingnameco2'] = $this->db->sql_like_escape($expression);
-        $request                   .= ' OR ';
-        $request                   .= $this->db->sql_equal('t.idsirh', ':idsirh', false,
-            false);
-        $params['idsirh']          = $this->db->sql_like_escape($expression);
+        $request .= ' OR ';
+        $request .= $this->db->sql_equal('t.idsirh', ':idsirh', false,
+                false);
+        $params['idsirh'] = $this->db->sql_like_escape($expression);
 
         return [$request, $params];
     }
@@ -1292,19 +1293,19 @@ class database_interface extends \local_mentor_core\database_interface {
      */
     public function generate_training_sql_search_by_status($searchvalue, $strictsearch = false) {
         $request = '';
-        $params  = [];
+        $params = [];
 
         // If search status is true, add conditional request.
         if (!empty($searchvalue)) {
             $cptstatussearch = 0;
             if ($strictsearch) {
-                $request                .= ' OR ';
-                $request                .= 't.status = :statussearch';
+                $request .= ' OR ';
+                $request .= 't.status = :statussearch';
                 $params['statussearch'] = (is_array($searchvalue)) ? key($searchvalue) : $searchvalue;
             } else {
                 foreach ($searchvalue as $key => $statusstring) {
-                    $request                                   .= ' OR ';
-                    $request                                   .= 't.status = :statussearch' . $cptstatussearch;
+                    $request .= ' OR ';
+                    $request .= 't.status = :statussearch' . $cptstatussearch;
                     $params['statussearch' . $cptstatussearch] = $key;
                     $cptstatussearch++;
                 }
@@ -1323,19 +1324,19 @@ class database_interface extends \local_mentor_core\database_interface {
      */
     public function generate_training_sql_search_by_collection($searchvalue, $strictsearch = false) {
         $request = '';
-        $params  = [];
+        $params = [];
 
         // If search collection is true, add conditional request.
         if (!empty($searchvalue)) {
             if ($strictsearch) {
-                $request                    .= ' OR ';
-                $request                    .= $this->db->sql_like('t.collection', ':collectionsearch');
+                $request .= ' OR ';
+                $request .= $this->db->sql_like('t.collection', ':collectionsearch');
                 $params['collectionsearch'] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
             } else {
                 foreach ($searchvalue as $key => $collectionstring) {
-                    $request                           .= ' OR ';
-                    $request                           .= $this->db->sql_like('t.collection', ':collectionsearch' . $key, false,
-                        false);
+                    $request .= ' OR ';
+                    $request .= $this->db->sql_like('t.collection', ':collectionsearch' . $key, false,
+                            false);
                     $params['collectionsearch' . $key] = '%' . $this->db->sql_like_escape($key) . '%';
                 }
             }
@@ -1394,7 +1395,25 @@ class database_interface extends \local_mentor_core\database_interface {
                     cc.parent = :entityid
                 ORDER BY
                     l.timemodified DESC, co.fullname ASC',
-            array('entityid' => \local_mentor_core\library_api::get_library_id())
+                array('entityid' => \local_mentor_core\library_api::get_library_id())
+        );
+    }
+
+    /**
+     * Remove the entity as the main entity from all users.
+     *
+     * @param int $entityid
+     * @return void
+     * @throws \dml_exception
+     * @throws \moodle_exception
+     */
+    public function remove_main_entity_to_all_user($entityid) {
+        $entity = \core_course_category::get($entityid);
+        $userinfofield = $this->db->get_record('user_info_field', ['shortname' => 'mainentity']);
+        $this->db->delete_records_select(
+                'user_info_data',
+                'fieldid = :fieldid AND ' . $this->db->sql_compare_text('data') . ' = ' . $this->db->sql_compare_text(':data'),
+                ['fieldid' => $userinfofield->id, 'data' => $entity->name]
         );
     }
 }

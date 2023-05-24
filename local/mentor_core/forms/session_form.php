@@ -45,12 +45,12 @@ class session_form extends \moodleform {
     public function __construct($action, $data) {
 
         // Init entity object.
-        $this->entity  = $data->entity;
+        $this->entity = $data->entity;
         $this->session = isset($data->session) ? $data->session : null;
 
         $this->sharedentities = $data->sharedentities;
 
-        $this->logourl  = $data->logourl;
+        $this->logourl = $data->logourl;
         $this->returnto = $data->returnto;
 
         parent::__construct($data->actionurl);
@@ -100,7 +100,7 @@ class session_form extends \moodleform {
             array('optional' => true));
 
         // Open session to other entities.
-        $opentoarray   = array();
+        $opentoarray = array();
         $opentoarray[] = $mform->createElement('radio', 'opento', '',
             get_string('notvisibleincatalog', 'local_mentor_core', $this->entity->name), 'not_visible');
         $opentoarray[] = $mform->createElement('radio', 'opento', '',

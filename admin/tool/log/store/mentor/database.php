@@ -32,11 +32,11 @@ echo '<li><a href="' . $dataurl . 'mentor_session.php">logstore_mentor_session</
 echo '<li><a href="' . $dataurl . 'mentor_collection.php">logstore_mentor_collection</a></li>';
 echo '</ul>';
 
-$startdate  = 1624019934; // Le 18/6/2021 à 12:38:54.
-$enddate    = 1624543219; // Le 25/6/2021 à 12:38:54.
-$status     = 'inprogress';
+$startdate = 1624019934; // Le 18/6/2021 à 12:38:54.
+$enddate = 1624543219; // Le 25/6/2021 à 12:38:54.
+$status = 'inprogress';
 $collection = 'achat';
-$entity     = 100;
+$entity = 100;
 
 /*
 print_object('Agents uniques par période (par collection)');

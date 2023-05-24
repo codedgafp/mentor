@@ -64,8 +64,8 @@ class local_mentor_specialization_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core specialization singleton.
         $specialization = \local_mentor_core\specialization::get_instance();
-        $reflection     = new ReflectionClass($specialization);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($specialization);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -87,64 +87,64 @@ class local_mentor_specialization_testcase extends advanced_testcase {
             'local_mentor_specialization');
 
         if ($training) {
-            $data->name      = 'fullname';
+            $data->name = 'fullname';
             $data->shortname = 'shortname';
-            $data->content   = 'summary';
-            $data->status    = 'ec';
+            $data->content = 'summary';
+            $data->status = 'ec';
         } else {
-            $data->trainingname      = 'fullname';
+            $data->trainingname = 'fullname';
             $data->trainingshortname = 'shortname';
-            $data->trainingcontent   = 'summary';
-            $data->trainingstatus    = 'ec';
+            $data->trainingcontent = 'summary';
+            $data->trainingstatus = 'ec';
         }
 
         // Fields for training.
-        $data->teaser                       = 'http://www.edunao.com/';
-        $data->teaserpicture                = '';
-        $data->prerequisite                 = 'TEST';
-        $data->collection                   = 'accompagnement';
-        $data->traininggoal                 = 'TEST TRAINING ';
-        $data->idsirh                       = 'TEST ID SIRH';
-        $data->licenseterms                 = 'cc-sa';
-        $data->typicaljob                   = 'TEST';
-        $data->skills                       = [];
-        $data->certifying                   = '1';
-        $data->presenceestimatedtimehours   = '12';
+        $data->teaser = 'http://www.edunao.com/';
+        $data->teaserpicture = '';
+        $data->prerequisite = 'TEST';
+        $data->collection = 'accompagnement';
+        $data->traininggoal = 'TEST TRAINING ';
+        $data->idsirh = 'TEST ID SIRH';
+        $data->licenseterms = 'cc-sa';
+        $data->typicaljob = 'TEST';
+        $data->skills = [];
+        $data->certifying = '1';
+        $data->presenceestimatedtimehours = '12';
         $data->presenceestimatedtimeminutes = '10';
-        $data->remoteestimatedtimehours     = '15';
-        $data->remoteestimatedtimeminutes   = '30';
-        $data->trainingmodalities           = 'd';
-        $data->producingorganization        = 'TEST';
-        $data->producerorganizationlogo     = '';
-        $data->designers                    = 'TEST';
-        $data->contactproducerorganization  = 'TEST';
-        $data->thumbnail                    = '';
+        $data->remoteestimatedtimehours = '15';
+        $data->remoteestimatedtimeminutes = '30';
+        $data->trainingmodalities = 'd';
+        $data->producingorganization = 'TEST';
+        $data->producerorganizationlogo = '';
+        $data->designers = 'TEST';
+        $data->contactproducerorganization = 'TEST';
+        $data->thumbnail = '';
 
         // Specific fields for session (only for update).
         if ($sessionid) {
-            $data->id                      = $sessionid;
-            $data->opento                  = 'all';
-            $data->publiccible             = 'TEST';
-            $data->termsregistration       = 'autre';
+            $data->id = $sessionid;
+            $data->opento = 'all';
+            $data->publiccible = 'TEST';
+            $data->termsregistration = 'autre';
             $data->termsregistrationdetail = 'TEST';
 
-            $data->onlinesessionestimatedtimehours     = '10';
-            $data->onlinesessionestimatedtimeminutes   = '15';
-            $data->presencesessionestimatedtimehours   = '12';
+            $data->onlinesessionestimatedtimehours = '10';
+            $data->onlinesessionestimatedtimeminutes = '15';
+            $data->presencesessionestimatedtimehours = '12';
             $data->presencesessionestimatedtimeminutes = '25';
 
-            $data->sessionpermanent    = 0;
-            $data->sessionstartdate    = 1609801200;
-            $data->sessionenddate      = 1609801200;
-            $data->sessionmodalities   = 'presentiel';
-            $data->accompaniment       = 'TEST';
-            $data->maxparticipants     = 10;
-            $data->placesavailable     = 8;
-            $data->numberparticipants  = 2;
-            $data->location            = 'PARIS';
+            $data->sessionpermanent = 0;
+            $data->sessionstartdate = 1609801200;
+            $data->sessionenddate = 1609801200;
+            $data->sessionmodalities = 'presentiel';
+            $data->accompaniment = 'TEST';
+            $data->maxparticipants = 10;
+            $data->placesavailable = 8;
+            $data->numberparticipants = 2;
+            $data->location = 'PARIS';
             $data->organizingstructure = 'TEST ORGANISATION';
-            $data->sessionnumber       = 1;
-            $data->opentolist          = '';
+            $data->sessionnumber = 1;
+            $data->opentolist = '';
         }
 
         return $data;
@@ -155,10 +155,10 @@ class local_mentor_specialization_testcase extends advanced_testcase {
      */
     public function init_training_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -182,7 +182,7 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         try {
             // Get entity object for default category.
             $entityid = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1'
             ]);
 
@@ -221,7 +221,7 @@ class local_mentor_specialization_testcase extends advanced_testcase {
             self::fail($e->getMessage());
         }
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -239,40 +239,40 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         // Init test data.
         $trainingdata = new stdClass();
 
-        $trainingdata->name      = 'fullname';
+        $trainingdata->name = 'fullname';
         $trainingdata->shortname = 'shortname';
-        $trainingdata->content   = 'summary';
+        $trainingdata->content = 'summary';
 
         // Create training object.
-        $trainingdata->teaser                       = 'http://www.edunao.com/';
-        $trainingdata->teaserpicture                = '';
-        $trainingdata->prerequisite                 = 'TEST';
-        $trainingdata->collection                   = 'accompagnement';
-        $trainingdata->traininggoal                 = 'TEST TRAINING ';
-        $trainingdata->idsirh                       = 'TEST ID SIRH';
-        $trainingdata->licenseterms                 = 'cc-sa';
-        $trainingdata->typicaljob                   = 'TEST';
-        $trainingdata->skills                       = [1, 3];
-        $trainingdata->certifying                   = '1';
-        $trainingdata->presenceestimatedtimehours   = '12';
+        $trainingdata->teaser = 'http://www.edunao.com/';
+        $trainingdata->teaserpicture = '';
+        $trainingdata->prerequisite = 'TEST';
+        $trainingdata->collection = 'accompagnement';
+        $trainingdata->traininggoal = 'TEST TRAINING ';
+        $trainingdata->idsirh = 'TEST ID SIRH';
+        $trainingdata->licenseterms = 'cc-sa';
+        $trainingdata->typicaljob = 'TEST';
+        $trainingdata->skills = [1, 3];
+        $trainingdata->certifying = '1';
+        $trainingdata->presenceestimatedtimehours = '12';
         $trainingdata->presenceestimatedtimeminutes = '10';
-        $trainingdata->remoteestimatedtimehours     = '15';
-        $trainingdata->remoteestimatedtimeminutes   = '30';
-        $trainingdata->trainingmodalities           = 'd';
-        $trainingdata->producingorganization        = 'TEST';
-        $trainingdata->producerorganizationlogo     = '';
-        $trainingdata->designers                    = 'TEST';
-        $trainingdata->contactproducerorganization  = 'TEST';
-        $trainingdata->thumbnail                    = '';
-        $trainingdata->status                       = \local_mentor_core\training::STATUS_DRAFT;
+        $trainingdata->remoteestimatedtimehours = '15';
+        $trainingdata->remoteestimatedtimeminutes = '30';
+        $trainingdata->trainingmodalities = 'd';
+        $trainingdata->producingorganization = 'TEST';
+        $trainingdata->producerorganizationlogo = '';
+        $trainingdata->designers = 'TEST';
+        $trainingdata->contactproducerorganization = 'TEST';
+        $trainingdata->thumbnail = '';
+        $trainingdata->status = \local_mentor_core\training::STATUS_DRAFT;
 
         try {
             // Get entity object for default category.
             $entityid = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1',
-                'regions'   => [5], // Corse.
-                'userid'    => 2  // Set the admin user as manager of the entity.
+                'regions' => [5], // Corse.
+                'userid' => 2  // Set the admin user as manager of the entity.
             ]);
 
             $entity = \local_mentor_core\entity_api::get_entity($entityid);
@@ -281,9 +281,9 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         }
 
         // Fill with entity data.
-        $formationid                     = $entity->get_entity_formation_category();
-        $trainingdata->categorychildid   = $formationid;
-        $trainingdata->categoryid        = $entity->id;
+        $formationid = $entity->get_entity_formation_category();
+        $trainingdata->categorychildid = $formationid;
+        $trainingdata->categoryid = $entity->id;
         $trainingdata->creativestructure = $entity->id;
 
         return $trainingdata;
@@ -312,21 +312,21 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $course = $session->get_course();
 
         // Create user.
-        $user             = new stdClass();
-        $user->lastname   = 'lastname';
-        $user->firstname  = 'firstname';
-        $user->email      = 'test@test.com';
-        $user->username   = 'testusername';
-        $user->password   = 'to be generated';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
-        $user->auth       = 'manual';
+        $user->confirmed = 1;
+        $user->auth = 'manual';
 
         $userid = local_mentor_core\profile_api::create_user($user);
 
         // Group creation.
-        $group           = new stdClass();
-        $group->name     = 'testgroup';
+        $group = new stdClass();
+        $group->name = 'testgroup';
         $group->courseid = $course->id;
         groups_create_group($group);
 
@@ -357,8 +357,8 @@ class local_mentor_specialization_testcase extends advanced_testcase {
 
         // Preview array.
         $preview = [
-            'list'             => [], // Cleaned list of accounts.
-            'validlines'       => 0, // Number of lines without error.
+            'list' => [], // Cleaned list of accounts.
+            'validlines' => 0, // Number of lines without error.
             'validforcreation' => 0, // Number of lines that will create an account.
         ];
 
@@ -377,27 +377,27 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $expectedpreview = [
             [
                 'linenumber' => 7,
-                'lastname'   => 'dididi',
-                'firstname'  => 'dididi',
-                'email'      => 'dididi@aaa.com',
-                'role'       => 'Participant',
-                'groupname'  => 'dididi',
+                'lastname' => 'dididi',
+                'firstname' => 'dididi',
+                'email' => 'dididi@aaa.com',
+                'role' => 'Participant',
+                'groupname' => 'dididi',
             ],
             [
                 'linenumber' => 8,
-                'lastname'   => 'lastname',
-                'firstname'  => 'firstname',
-                'email'      => 'test@test.com',
-                'role'       => 'Participant',
-                'groupname'  => 'dididi',
+                'lastname' => 'lastname',
+                'firstname' => 'firstname',
+                'email' => 'test@test.com',
+                'role' => 'Participant',
+                'groupname' => 'dididi',
             ],
             [
                 'linenumber' => 9,
-                'lastname'   => 'dididi',
-                'firstname'  => 'dididi',
-                'email'      => 'participant1@test.com',
-                'role'       => 'Tuteur',
-                'groupname'  => 'testgroup',
+                'lastname' => 'dididi',
+                'firstname' => 'dididi',
+                'email' => 'participant1@test.com',
+                'role' => 'Tuteur',
+                'groupname' => 'testgroup',
             ],
         ];
 
@@ -422,15 +422,15 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         self::assertEquals($expectederrors, $errors['list']);
 
         // Check with 2 users (User 1 with his username equals to User 2 email).
-        $user2             = new stdClass();
-        $user2->lastname   = 'lastname';
-        $user2->firstname  = 'firstname';
-        $user2->email      = 'test22@test.com';
-        $user2->username   = 'test@test.com';
-        $user2->password   = 'to be generated';
+        $user2 = new stdClass();
+        $user2->lastname = 'lastname';
+        $user2->firstname = 'firstname';
+        $user2->email = 'test22@test.com';
+        $user2->username = 'test@test.com';
+        $user2->password = 'to be generated';
         $user2->mnethostid = 1;
-        $user2->confirmed  = 1;
-        $user2->auth       = 'manual';
+        $user2->confirmed = 1;
+        $user2->auth = 'manual';
 
         local_mentor_core\profile_api::create_user($user2);
 
@@ -442,14 +442,14 @@ class local_mentor_specialization_testcase extends advanced_testcase {
 
         // Errors array.
         $errors = [
-            'list'           => [], // Errors list.
+            'list' => [], // Errors list.
             'groupsnotfound' => [], // List of not found group name.
         ];
 
         // Preview array.
         $preview = [
-            'list'             => [], // Cleaned list of accounts.
-            'validlines'       => 0, // Number of lines without error.
+            'list' => [], // Cleaned list of accounts.
+            'validlines' => 0, // Number of lines without error.
             'validforcreation' => 0, // Number of lines that will create an account.
         ];
 
@@ -477,6 +477,8 @@ class local_mentor_specialization_testcase extends advanced_testcase {
 
         // Session creation.
         $session = session_api::create_session($training->id, 'session 1', true);
+        $session->sessionstartdate = time();
+        $session->update($session);
 
         // Create self enrolment instance.
         $session->create_self_enrolment_instance();
@@ -485,21 +487,21 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $course = $session->get_course();
 
         // Group creation.
-        $group           = new stdClass();
-        $group->name     = 'testgroup';
+        $group = new stdClass();
+        $group->name = 'testgroup';
         $group->courseid = $course->id;
         groups_create_group($group);
 
         // Create user.
-        $user             = new stdClass();
-        $user->lastname   = 'lastname';
-        $user->firstname  = 'firstname';
-        $user->email      = 'test@test.com';
-        $user->username   = 'test@test.com';
-        $user->password   = 'to be generated';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'test@test.com';
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
-        $user->auth       = 'manual';
+        $user->confirmed = 1;
+        $user->auth = 'manual';
 
         local_mentor_core\profile_api::create_user($user);
 
@@ -508,15 +510,15 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         // Users to enrol.
         $users = [
             [
-                'lastname'  => 'lastname',
+                'lastname' => 'lastname',
                 'firstname' => 'firstname',
-                'email'     => 'test@test.com',
+                'email' => 'test@test.com',
                 'groupname' => 'testgroup',
             ],
             [
-                'lastname'  => 'lastname2',
+                'lastname' => 'lastname2',
                 'firstname' => 'firstname2',
-                'email'     => 'test2@test.com',
+                'email' => 'test2@test.com',
                 'groupname' => null,
             ]
         ];
@@ -540,18 +542,18 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         // Users to update role.
         $users = [
             [
-                'lastname'  => 'lastname',
+                'lastname' => 'lastname',
                 'firstname' => 'firstname',
-                'email'     => 'test@test.com',
+                'email' => 'test@test.com',
                 'groupname' => 'testgroup',
-                'role'      => 'formateur',
+                'role' => 'formateur',
             ],
             [
-                'lastname'  => 'lastname2',
+                'lastname' => 'lastname2',
                 'firstname' => 'firstname2',
-                'email'     => 'test2@test.com',
+                'email' => 'test2@test.com',
                 'groupname' => null,
-                'role'      => 'formateur',
+                'role' => 'formateur',
             ]
         ];
 
@@ -584,15 +586,15 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $this->init_config();
         $this->reset_singletons();
 
-        $user             = new stdClass();
-        $user->lastname   = 'lastname';
-        $user->firstname  = 'firstname';
-        $user->email      = 'test@test.com';
-        $user->username   = 'test@test.com';
-        $user->password   = 'to be generated';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'test@test.com';
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
-        $user->auth       = 'manual';
+        $user->confirmed = 1;
+        $user->auth = 'manual';
 
         $userid = local_mentor_core\profile_api::create_user($user);
 
@@ -614,8 +616,8 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $this->init_config();
         $this->reset_singletons();
 
-        $specialization     = new \local_mentor_specialization\mentor_specialization();
-        $extrahtml          = '<p>Test</p>';
+        $specialization = new \local_mentor_specialization\mentor_specialization();
+        $extrahtml = '<p>Test</p>';
         $subentityformfield = $specialization->get_specialization('get_sub_entity_form_fields', $extrahtml);
 
         $renderer = $PAGE->get_renderer('local_mentor_specialization', 'entity');
@@ -639,22 +641,22 @@ class local_mentor_specialization_testcase extends advanced_testcase {
 
         // Create new entity.
         \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1',
-            'userid'    => 2  // Set the admin user as manager of the entity.
+            'userid' => 2  // Set the admin user as manager of the entity.
         ]);
 
         $specialization = new \local_mentor_specialization\mentor_specialization();
-        $params         = [];
-        $params         = $specialization->get_specialization('get_user_template_params', $params);
+        $params = [];
+        $params = $specialization->get_specialization('get_user_template_params', $params);
 
         $listentities = \local_mentor_core\entity_api::get_all_entities();
-        self::assertEquals(array_merge([0 => ''], $listentities), $params['entities']);
+        self::assertEquals(count(array_merge([0 => ''], $listentities)), count($params['mainentities']));
 
-        $noregion       = new \stdClass();
-        $noregion->id   = 0;
+        $noregion = new \stdClass();
+        $noregion->id = 0;
         $noregion->name = get_string('none', 'local_mentor_core');
-        $regions        = $dbinterface->get_all_regions();
+        $regions = $dbinterface->get_all_regions();
         self::assertEquals(array_merge([$noregion], $regions), $params['regions']);
 
         self::resetAllData();
@@ -675,28 +677,28 @@ class local_mentor_specialization_testcase extends advanced_testcase {
             'local_mentor_specialization');
 
         $specialization = new \local_mentor_specialization\mentor_specialization();
-        $params         = new stdClass();
-        $params         = $specialization->get_specialization('get_training_template_params', $params);
+        $params = new stdClass();
+        $params = $specialization->get_specialization('get_training_template_params', $params);
 
         self::assertCount(1, $params->collections);
         self::assertEquals($params->collections[0]['key'], 'accompagnement');
         self::assertEquals($params->collections[0]['value'], 'Accompagnement des transitions professionnelles');
 
         self::assertCount(4, $params->status);
-        $draft          = [];
-        $draft['key']   = 'draft';
+        $draft = [];
+        $draft['key'] = 'draft';
         $draft['value'] = 'Brouillon';
         self::assertTrue(in_array($draft, $params->status));
-        $template          = [];
-        $template['key']   = 'template';
+        $template = [];
+        $template['key'] = 'template';
         $template['value'] = 'Gabarit';
         self::assertTrue(in_array($template, $params->status));
-        $elaborationcompleted          = [];
-        $elaborationcompleted['key']   = 'elaboration_completed';
+        $elaborationcompleted = [];
+        $elaborationcompleted['key'] = 'elaboration_completed';
         $elaborationcompleted['value'] = 'Elaboration terminée';
         self::assertTrue(in_array($elaborationcompleted, $params->status));
-        $archived          = [];
-        $archived['key']   = 'archived';
+        $archived = [];
+        $archived['key'] = 'archived';
         $archived['value'] = 'Archivée';
         self::assertTrue(in_array($archived, $params->status));
 
@@ -718,40 +720,40 @@ class local_mentor_specialization_testcase extends advanced_testcase {
             'local_mentor_specialization');
 
         $specialization = new \local_mentor_specialization\mentor_specialization();
-        $params         = new stdClass();
-        $params         = $specialization->get_specialization('get_session_template_params', $params);
+        $params = new stdClass();
+        $params = $specialization->get_specialization('get_session_template_params', $params);
 
         self::assertCount(1, $params->collections);
         self::assertEquals($params->collections[0]['key'], 'accompagnement');
         self::assertEquals($params->collections[0]['value'], 'Accompagnement des transitions professionnelles');
 
         self::assertCount(7, $params->status);
-        $inpreparation          = [];
-        $inpreparation['key']   = 'inpreparation';
+        $inpreparation = [];
+        $inpreparation['key'] = 'inpreparation';
         $inpreparation['value'] = 'En préparation';
         self::assertTrue(in_array($inpreparation, $params->status));
-        $openedregistration          = [];
-        $openedregistration['key']   = 'openedregistration';
+        $openedregistration = [];
+        $openedregistration['key'] = 'openedregistration';
         $openedregistration['value'] = 'Inscriptions ouvertes';
         self::assertTrue(in_array($openedregistration, $params->status));
-        $inprogress          = [];
-        $inprogress['key']   = 'inprogress';
+        $inprogress = [];
+        $inprogress['key'] = 'inprogress';
         $inprogress['value'] = 'En cours';
         self::assertTrue(in_array($inprogress, $params->status));
-        $completed          = [];
-        $completed['key']   = 'completed';
+        $completed = [];
+        $completed['key'] = 'completed';
         $completed['value'] = 'Terminée';
         self::assertTrue(in_array($completed, $params->status));
-        $archived          = [];
-        $archived['key']   = 'archived';
+        $archived = [];
+        $archived['key'] = 'archived';
         $archived['value'] = 'Archivée';
         self::assertTrue(in_array($archived, $params->status));
-        $reported          = [];
-        $reported['key']   = 'reported';
+        $reported = [];
+        $reported['key'] = 'reported';
         $reported['value'] = 'Reportée';
         self::assertTrue(in_array($reported, $params->status));
-        $cancelled          = [];
-        $cancelled['key']   = 'cancelled';
+        $cancelled = [];
+        $cancelled['key'] = 'cancelled';
         $cancelled['value'] = 'Annulée';
         self::assertTrue(in_array($cancelled, $params->status));
 
@@ -770,7 +772,7 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $this->reset_singletons();
 
         $specialization = new \local_mentor_specialization\mentor_specialization();
-        $usertemplate   = $specialization->get_specialization('get_user_template', '');
+        $usertemplate = $specialization->get_specialization('get_user_template', '');
 
         self::assertEquals($usertemplate, 'local_mentor_specialization/user');
 
@@ -807,7 +809,7 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $this->init_config();
         $this->reset_singletons();
 
-        $specialization   = new \local_mentor_specialization\mentor_specialization();
+        $specialization = new \local_mentor_specialization\mentor_specialization();
         $entityjavascript = $specialization->get_specialization('get_entity_javascript', '');
 
         self::assertEquals($entityjavascript, 'local_mentor_specialization/entities');
@@ -830,21 +832,21 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
-        $params                = [];
-        $data                  = new stdClass();
-        $data->entityid        = $session->get_entity()->id;
-        $data->search          = [];
+        $params = [];
+        $data = new stdClass();
+        $data->entityid = $session->get_entity()->id;
+        $data->search = [];
         $data->search['value'] = '';
-        $data->order           = 0;
-        $data->start           = 0;
-        $data->length          = 50;
-        $params['data']        = $data;
+        $data->order = 0;
+        $data->start = 0;
+        $data->length = 50;
+        $params['data'] = $data;
 
         // One session when user is admin.
         $specialization = new \local_mentor_specialization\mentor_specialization();
-        $countsession   = $specialization->get_specialization('count_session_record', null, $params);
+        $countsession = $specialization->get_specialization('count_session_record', null, $params);
         self::assertEquals(1, $countsession);
 
         // One session when user is manager.
@@ -875,30 +877,30 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $this->reset_singletons();
 
         $termsregistrationdetail = 'termsregistrationdetailtest';
-        $placesavailable         = 10;
+        $placesavailable = 10;
 
-        $data                          = new stdClass();
+        $data = new stdClass();
         $data->termsregistrationdetail = $termsregistrationdetail;
-        $data->placesavailable         = $placesavailable;
+        $data->placesavailable = $placesavailable;
 
         $specialization = new \local_mentor_specialization\mentor_specialization();
-        $newdata        = $specialization->get_specialization('prepare_update_session_editor_data', $data);
+        $newdata = $specialization->get_specialization('prepare_update_session_editor_data', $data);
 
         self::assertEquals($newdata->termsregistrationdetail, array(
-            'text'   => $termsregistrationdetail,
+            'text' => $termsregistrationdetail,
             'format' => FORMAT_HTML
         ));
         self::assertEquals($newdata->placesavailable, 10);
 
-        $placesavailable2               = -2;
-        $data2                          = new stdClass();
+        $placesavailable2 = -2;
+        $data2 = new stdClass();
         $data2->termsregistrationdetail = $termsregistrationdetail;
-        $data2->placesavailable         = $placesavailable2;
+        $data2->placesavailable = $placesavailable2;
 
         $newdata2 = $specialization->get_specialization('prepare_update_session_editor_data', $data2);
 
         self::assertEquals($newdata2->termsregistrationdetail, array(
-            'text'   => $termsregistrationdetail,
+            'text' => $termsregistrationdetail,
             'format' => FORMAT_HTML
         ));
         self::assertEquals($newdata2->placesavailable, '<span style="color: red;">' . $placesavailable2 . '</span>');
@@ -919,12 +921,12 @@ class local_mentor_specialization_testcase extends advanced_testcase {
 
         $termsregistrationdetail = 'termsregistrationdetailtest';
 
-        $data                                  = new stdClass();
-        $data->termsregistrationdetail         = [];
+        $data = new stdClass();
+        $data->termsregistrationdetail = [];
         $data->termsregistrationdetail['text'] = $termsregistrationdetail;
 
         $specialization = new \local_mentor_specialization\mentor_specialization();
-        $newdata        = $specialization->get_specialization('convert_update_session_editor_data', $data);
+        $newdata = $specialization->get_specialization('convert_update_session_editor_data', $data);
 
         self::assertIsNotArray($newdata->termsregistrationdetail);
         self::assertEquals($newdata->termsregistrationdetail, $termsregistrationdetail);
@@ -951,7 +953,7 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $sessonid = $this->init_session_creation('sessionname');
-        $session  = \local_mentor_core\session_api::get_session($sessonid);
+        $session = \local_mentor_core\session_api::get_session($sessonid);
         $session->update_status(\local_mentor_core\session::STATUS_OPENED_REGISTRATION);
         $trainings
             = \local_mentor_core\training_api::get_user_available_sessions_by_trainings($USER->id);
@@ -971,7 +973,7 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         self::assertIsArray($paramsrenderer->entities);
         self::assertCount(1, $paramsrenderer->entities);
         self::assertEquals($paramsrenderer->entities[0], array(
-            'id'   => $session->get_entity()->id,
+            'id' => $session->get_entity()->id,
             'name' => $session->get_entity()->shortname
         ));
 
@@ -991,11 +993,11 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         // Available trainings.
         self::assertObjectHasAttribute('available_trainings', $paramsrenderer);
         self::assertIsString($paramsrenderer->available_trainings);
-        $collection                    = new stdClass();
-        $collection->name              = 'Accompagnement des transitions professionnelles';
-        $collection->color             = '#CECECE';
+        $collection = new stdClass();
+        $collection->name = 'Accompagnement des transitions professionnelles';
+        $collection->color = '#CECECE';
         $trainings[0]->collectiontiles = array($collection);
-        $trainings[0]->sessions        = [];
+        $trainings[0]->sessions = [];
         self::assertEquals($paramsrenderer->available_trainings, json_encode($trainings, JSON_HEX_TAG));
 
         // Training dictionnary.
@@ -1018,10 +1020,10 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $this->reset_singletons();
 
         $specialization = new \local_mentor_specialization\mentor_specialization();
-        $footer         = $specialization->get_specialization('get_footer', '');
+        $footer = $specialization->get_specialization('get_footer', '');
 
         self::assertEquals($footer, '<div id="regions" style="display:none;">' .
-                                    json_encode(local_mentor_specialization_get_regions_and_departments()) . '</div>');
+            json_encode(local_mentor_specialization_get_regions_and_departments()) . '</div>');
 
         self::resetAllData();
     }
@@ -1037,11 +1039,11 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $this->init_config();
         $this->reset_singletons();
 
-        $data           = new stdClass();
-        $sessionid      = $this->init_session_creation();
-        $session        = \local_mentor_core\session_api::get_session($sessionid);
+        $data = new stdClass();
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $specialization = new \local_mentor_specialization\mentor_specialization();
-        $data           = $specialization->get_specialization('get_session_enrolment_data', $data, $sessionid);
+        $data = $specialization->get_specialization('get_session_enrolment_data', $data, $sessionid);
 
         // Training count.
         self::assertObjectHasAttribute('selfenrolment', $data);
@@ -1067,16 +1069,16 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $this->init_config();
         $this->reset_singletons();
 
-        $sessionid                         = $this->init_session_creation();
-        $newdatasession                    = new stdClass();
-        $newdatasession->id                = $sessionid;
+        $sessionid = $this->init_session_creation();
+        $newdatasession = new stdClass();
+        $newdatasession->id = $sessionid;
         $newdatasession->termsregistration = 'inscriptionlibre';
         \local_mentor_core\session_api::update_session($newdatasession);
 
-        $data           = new stdClass();
-        $session        = \local_mentor_core\session_api::get_session($sessionid);
+        $data = new stdClass();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $specialization = new \local_mentor_specialization\mentor_specialization();
-        $data           = $specialization->get_specialization('get_session_enrolment_data', $data, $sessionid);
+        $data = $specialization->get_specialization('get_session_enrolment_data', $data, $sessionid);
 
         // Termsregistration is not 'inscriptionlibre'.
         // Training count.
@@ -1103,7 +1105,7 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $this->init_config();
         $this->reset_singletons();
 
-        $specialization        = new \local_mentor_specialization\mentor_specialization();
+        $specialization = new \local_mentor_specialization\mentor_specialization();
         $trainingsheettemplate = $specialization->get_specialization('get_training_sheet_template', '');
 
         self::assertEquals($trainingsheettemplate, 'local_mentor_specialization/catalog/training-sheet');
@@ -1122,7 +1124,7 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $this->init_config();
         $this->reset_singletons();
 
-        $specialization       = new \local_mentor_specialization\mentor_specialization();
+        $specialization = new \local_mentor_specialization\mentor_specialization();
         $sessionsheettemplate = $specialization->get_specialization('get_session_sheet_template', '');
 
         self::assertEquals($sessionsheettemplate, 'local_mentor_specialization/catalog/session-sheet');
@@ -1141,7 +1143,7 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $this->init_config();
         $this->reset_singletons();
 
-        $specialization  = new \local_mentor_specialization\mentor_specialization();
+        $specialization = new \local_mentor_specialization\mentor_specialization();
         $usermanagerrole = $specialization->get_specialization('get_user_manager_role_name', '');
 
         self::assertEquals($usermanagerrole, 'admindedie');
@@ -1163,7 +1165,7 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $this->reset_singletons();
 
         $specialization = new \local_mentor_specialization\mentor_specialization();
-        $signupurl      = $specialization->get_specialization('get_signup_url');
+        $signupurl = $specialization->get_specialization('get_signup_url');
 
         self::assertEquals($signupurl->out(), $CFG->wwwroot . '/theme/mentor/pages/verify_email.php');
 
@@ -1183,21 +1185,21 @@ class local_mentor_specialization_testcase extends advanced_testcase {
 
         // Get entity object for default category.
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
-        $data           = new \stdClass();
+        $data = new \stdClass();
         $data->entityid = $entityid;
-        $data->start    = 0;
-        $data->length   = 0;
-        $data->status   = false;
+        $data->start = 0;
+        $data->length = 0;
+        $data->status = false;
         $data->datefrom = false;
-        $data->dateto   = false;
-        $data->search   = false;
-        $data->order    = false;
-        $data->filters  = [];
+        $data->dateto = false;
+        $data->search = false;
+        $data->order = false;
+        $data->filters = [];
         $specialization = new \local_mentor_specialization\mentor_specialization();
         self::assertEquals(0, $specialization->get_specialization('count_trainings_by_entity', null, [
             'data' => $data,
@@ -1207,16 +1209,16 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $data = $this->init_training_entity($data, $entity);
         \local_mentor_core\training_api::create_training($data);
 
-        $data           = new \stdClass();
+        $data = new \stdClass();
         $data->entityid = $entityid;
-        $data->start    = 0;
-        $data->length   = 0;
-        $data->status   = false;
+        $data->start = 0;
+        $data->length = 0;
+        $data->status = false;
         $data->datefrom = false;
-        $data->dateto   = false;
-        $data->search   = false;
-        $data->order    = false;
-        $data->filters  = [];
+        $data->dateto = false;
+        $data->search = false;
+        $data->order = false;
+        $data->filters = [];
         self::assertEquals(1, $specialization->get_specialization('count_trainings_by_entity', null, [
             'data' => $data,
         ]));
@@ -1236,12 +1238,12 @@ class local_mentor_specialization_testcase extends advanced_testcase {
         $this->reset_singletons();
 
         $specialization = new \local_mentor_specialization\mentor_specialization();
-        $library        = $specialization->get_specialization('get_library');
+        $library = $specialization->get_specialization('get_library');
 
         self::assertIsObject($library);
         self::assertInstanceOf('\local_mentor_core\library', $library);
 
-        $dbi            = \local_mentor_specialization\database_interface::get_instance();
+        $dbi = \local_mentor_specialization\database_interface::get_instance();
         $librairyobject = $dbi->get_library_object();
         self::assertEquals($library->id, $librairyobject->id);
         self::assertEquals($library->name, $librairyobject->name);

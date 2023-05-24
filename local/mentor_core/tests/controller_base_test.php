@@ -40,7 +40,7 @@ class local_mentor_core_controller_base_testcase extends advanced_testcase {
      */
     public function access_protected($obj, $prop) {
         $reflection = new ReflectionClass($obj);
-        $property   = $reflection->getProperty($prop);
+        $property = $reflection->getProperty($prop);
         $property->setAccessible(true);
         return $property->getValue($obj);
     }
@@ -55,8 +55,8 @@ class local_mentor_core_controller_base_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $controllermock = $this->getMockForAbstractClass(
-            '\local_mentor_core\controller_base',
-            array(array('key' => 'value'))
+                '\local_mentor_core\controller_base',
+                array(array('key' => 'value'))
         );
 
         $controllerabseparams = $this->access_protected($controllermock, 'params');
@@ -78,8 +78,8 @@ class local_mentor_core_controller_base_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $controllermock = $this->getMockForAbstractClass(
-            '\local_mentor_core\controller_base',
-            array(array('key' => 'value'))
+                '\local_mentor_core\controller_base',
+                array(array('key' => 'value'))
         );
 
         self::assertEquals('value', $controllermock->get_param('key'));
@@ -98,8 +98,8 @@ class local_mentor_core_controller_base_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $controllermock = $this->getMockForAbstractClass(
-            '\local_mentor_core\controller_base',
-            array(array('key' => 10))
+                '\local_mentor_core\controller_base',
+                array(array('key' => 10))
         );
 
         self::assertEquals(10, $controllermock->get_param('key', PARAM_INT));
@@ -118,8 +118,8 @@ class local_mentor_core_controller_base_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $controllermock = $this->getMockForAbstractClass(
-            '\local_mentor_core\controller_base',
-            array(array('key' => 'value'))
+                '\local_mentor_core\controller_base',
+                array(array('key' => 'value'))
         );
 
         try {
@@ -127,8 +127,8 @@ class local_mentor_core_controller_base_testcase extends advanced_testcase {
             self::fail();
         } catch (\moodle_exception $e) {
             self::assertEquals(
-                $e->getMessage(),
-                "error/param : key must be an integer for the value : value\n\$a contents: "
+                    $e->getMessage(),
+                    "error/param : key must be an integer for the value : value\n\$a contents: "
             );
         }
 
@@ -146,8 +146,8 @@ class local_mentor_core_controller_base_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $controllermock = $this->getMockForAbstractClass(
-            '\local_mentor_core\controller_base',
-            array(array('key' => 'value'))
+                '\local_mentor_core\controller_base',
+                array(array('key' => 'value'))
         );
 
         self::assertEquals('value', $controllermock->get_param('key', PARAM_RAW));
@@ -166,13 +166,13 @@ class local_mentor_core_controller_base_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $controllermock = $this->getMockForAbstractClass(
-            '\local_mentor_core\controller_base',
-            array(array())
+                '\local_mentor_core\controller_base',
+                array(array())
         );
 
         self::assertEquals(
-            'defaultvalue',
-            $controllermock->get_param('key', PARAM_INT, 'defaultvalue')
+                'defaultvalue',
+                $controllermock->get_param('key', PARAM_INT, 'defaultvalue')
         );
 
         $this->resetAllData();
@@ -188,8 +188,8 @@ class local_mentor_core_controller_base_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $controllermock = $this->getMockForAbstractClass(
-            '\local_mentor_core\controller_base',
-            array(array())
+                '\local_mentor_core\controller_base',
+                array(array())
         );
 
         $success = $controllermock->success('success message');
@@ -213,8 +213,8 @@ class local_mentor_core_controller_base_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $controllermock = $this->getMockForAbstractClass(
-            '\local_mentor_core\controller_base',
-            array(array())
+                '\local_mentor_core\controller_base',
+                array(array())
         );
 
         $success = $controllermock->error('success message');

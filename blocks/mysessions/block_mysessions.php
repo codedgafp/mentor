@@ -83,7 +83,8 @@ class block_mysessions extends block_base {
         $params = [
             // Get show completed session user preference.
             // If equals 1 or false (no preference register) is true.
-            'showsessioncompleted' => \local_mentor_core\profile_api::get_user_preference($USER->id, 'block_mysessions_completed')
+            'showsessioncompleted' => \local_mentor_core\profile_api::get_user_preference($USER->id,
+                    'block_mysessions_completed')
                                       !== '0'
         ];
 
@@ -105,9 +106,9 @@ class block_mysessions extends block_base {
         $renderable = new \block_mysessions\output\mysessions($this->config);
 
         // Create content for the block.
-        $this->content         = new stdClass();
-        $this->content->text   = '<h2>' . $this->title . '</h2>';
-        $this->content->text   .= $renderer->render($renderable);
+        $this->content = new stdClass();
+        $this->content->text = '<h2>' . $this->title . '</h2>';
+        $this->content->text .= $renderer->render($renderable);
         $this->content->footer = '';
 
         // Return content block.

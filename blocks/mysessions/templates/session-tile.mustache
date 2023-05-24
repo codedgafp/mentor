@@ -16,17 +16,17 @@
 }}
 
 <a
-    class="block-session-tile {{# iscompleted }}is-completed{{/ iscompleted }}
-    {{# isparticipant }}{{#isopenedregistration}}no-link{{/isopenedregistration}}{{/isparticipant}}"
-    style="display: none;"
+        class="block-session-tile {{# iscompleted }}is-completed{{/ iscompleted }}
+            {{# isparticipant }}{{#isopenedregistration}}no-link{{/isopenedregistration}}{{/isparticipant}}"
+        style="display: none;"
     {{# isparticipant }}
         {{^isopenedregistration}}
-            href="{{{ courseurl }}}"
+        href="{{{ courseurl }}}"
         {{/isopenedregistration}}
     {{/isparticipant}}
     {{^ isparticipant }}href="{{{ courseurl }}}"{{/isparticipant}}
-    tabindex="0"
-    title="{{fullname}}">
+        tabindex="0"
+        title="{{fullname}}">
     <div class="session-tile-thumbnail">
         <div class="session-tile-thumbnail-size">
             {{#thumbnail}}

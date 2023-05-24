@@ -98,12 +98,12 @@ class pdf_export extends \TCPDF {
     public function setTrainings($trainings) {
 
         foreach ($trainings as $trainingid) {
-            $training                     = \local_mentor_core\training_api::get_training($trainingid);
+            $training = \local_mentor_core\training_api::get_training($trainingid);
             $this->trainings[$trainingid] = $training;
 
             // Get trainings collections.
             $collectionsImploded = $training->get_collections();
-            $collections         = explode(';', $collectionsImploded);
+            $collections = explode(';', $collectionsImploded);
 
             foreach ($collections as $collection) {
                 if (!isset($this->collections[$collection])) {
@@ -171,7 +171,7 @@ class pdf_export extends \TCPDF {
         $this->setPrintHeader(false);
 
         $counttrainings = count($this->trainings);
-        $index          = 0;
+        $index = 0;
 
         $alreadyprintedtrainings = [];
 
@@ -215,7 +215,7 @@ class pdf_export extends \TCPDF {
 
         // Logo.
         $logorepublique = $CFG->dirroot . '/local/catalog/pix/logo_republique.png';
-        $logomentor     = $CFG->dirroot . '/local/catalog/pix/logo_mentor.png';
+        $logomentor = $CFG->dirroot . '/local/catalog/pix/logo_mentor.png';
         $this->Image($logorepublique, 10, 8, 30, '', 'PNG', '', 'T', true, 500, '', false, false, 0, false, false, false);
 
         // Background.
@@ -379,7 +379,7 @@ class pdf_export extends \TCPDF {
         }
 
         $tagvs = array(
-            'p'  => array(1 => array('n' => 1, 'h' => 0)),
+            'p' => array(1 => array('n' => 1, 'h' => 0)),
             'br' => array(0 => array('n' => 0.3, 'h' => 0), 1 => array('n' => 0, 'h' => 0)),
         );
         $this->setHtmlVSpace($tagvs);
@@ -422,12 +422,12 @@ class pdf_export extends \TCPDF {
         // Teaser or Thumbnail.
         if ($thumbnail = $training->get_training_picture('teaserpicture')) {
             $data = base64_encode($thumbnail->get_content());
-            $img  = base64_decode(preg_replace('#^data:image/[^;]+;base64,#', '', $data));
+            $img = base64_decode(preg_replace('#^data:image/[^;]+;base64,#', '', $data));
             $this->Image("@" . $img, 155, $mainentityy, 40, 20);
 
         } else if ($thumbnail = $training->get_training_picture()) {
             $data = base64_encode($thumbnail->get_content());
-            $img  = base64_decode(preg_replace('#^data:image/[^;]+;base64,#', '', $data));
+            $img = base64_decode(preg_replace('#^data:image/[^;]+;base64,#', '', $data));
             $this->Image("@" . $img, 155, $mainentityy, 40, 20);
         }
 
@@ -445,8 +445,8 @@ class pdf_export extends \TCPDF {
             $table .= '<td style="width: 80px;vertical-align: middle;line-height: 50%;">';
             if ($producerorganizationlogo) {
                 $img_base64_encoded = 'data:image/png;base64,' . base64_encode($producerorganizationlogo->get_content());
-                $table              .= '<img src="@' . preg_replace('#^data:image/[^;]+;base64,#', '', $img_base64_encoded) .
-                                       '" width="60px">';
+                $table .= '<img src="@' . preg_replace('#^data:image/[^;]+;base64,#', '', $img_base64_encoded) .
+                          '" width="60px">';
             }
             $table .= '</td>';
 
@@ -480,7 +480,7 @@ class pdf_export extends \TCPDF {
 
         // Training goal.
         $tagvs = array(
-            'p'  => array(1 => array('n' => 1, 'h' => 0)),
+            'p' => array(1 => array('n' => 1, 'h' => 0)),
             'br' => array(0 => array('n' => 0.5, 'h' => 0), 1 => array('n' => 0, 'h' => 0)),
         );
         $this->setHtmlVSpace($tagvs);
@@ -492,7 +492,7 @@ class pdf_export extends \TCPDF {
 
         // Sessions.
         // Get all available sessions.
-        $sessions          = $training->get_sessions('sessionpermanent DESC, startdate ASC');
+        $sessions = $training->get_sessions('sessionpermanent DESC, startdate ASC');
         $availablesessions = [];
         foreach ($sessions as $session) {
 
@@ -521,7 +521,7 @@ class pdf_export extends \TCPDF {
                 // Set session start and end date.
                 if (!empty($session->sessionstartdate) && !$session->sessionpermanent) {
                     $sessionstartdate = $session->sessionstartdate;
-                    $startdate        = new \DateTime("@$sessionstartdate");
+                    $startdate = new \DateTime("@$sessionstartdate");
                     $startdate->setTimezone($dtz);
                     $html .= $startdate->format('d/m/Y');
                 } else {

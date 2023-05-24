@@ -39,8 +39,8 @@ class local_mentor_core_event_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -67,8 +67,8 @@ class local_mentor_core_event_testcase extends advanced_testcase {
         $this->init_database();
 
         return [
-            'name'      => 'New Entity 1',
-            'shortname' => 'New Entity 1'
+                'name' => 'New Entity 1',
+                'shortname' => 'New Entity 1'
         ];
     }
 
@@ -81,23 +81,23 @@ class local_mentor_core_event_testcase extends advanced_testcase {
     public function init_training_creation() {
 
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
-            'shortname' => 'New Entity 1'
+                'name' => 'New Entity 1',
+                'shortname' => 'New Entity 1'
         ]);
 
         $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
-        $data            = new stdClass();
-        $data->name      = 'fullname';
+        $data = new stdClass();
+        $data->name = 'fullname';
         $data->shortname = 'shortname';
-        $data->content   = 'summary';
-        $data->status    = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+        $data->content = 'summary';
+        $data->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
         // Fields for taining.
-        $data->traininggoal      = 'TEST TRAINING ';
-        $data->thumbnail         = '';
-        $formationid             = $entity->get_entity_formation_category();
-        $data->categorychildid   = $formationid;
-        $data->categoryid        = $entity->id;
+        $data->traininggoal = 'TEST TRAINING ';
+        $data->thumbnail = '';
+        $formationid = $entity->get_entity_formation_category();
+        $data->categorychildid = $formationid;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -112,23 +112,23 @@ class local_mentor_core_event_testcase extends advanced_testcase {
     public function init_session_creation() {
 
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
-            'shortname' => 'New Entity 1'
+                'name' => 'New Entity 1',
+                'shortname' => 'New Entity 1'
         ]);
 
         $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
-        $data            = new stdClass();
-        $data->name      = 'fullname';
+        $data = new stdClass();
+        $data->name = 'fullname';
         $data->shortname = 'shortname';
-        $data->content   = 'summary';
-        $data->status    = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+        $data->content = 'summary';
+        $data->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
         // Fields for taining.
-        $data->traininggoal      = 'TEST TRAINING ';
-        $data->thumbnail         = '';
-        $formationid             = $entity->get_entity_formation_category();
-        $data->categorychildid   = $formationid;
-        $data->categoryid        = $entity->id;
+        $data->traininggoal = 'TEST TRAINING ';
+        $data->thumbnail = '';
+        $formationid = $entity->get_entity_formation_category();
+        $data->categorychildid = $formationid;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         $training = \local_mentor_core\training_api::create_training($data);
@@ -164,25 +164,25 @@ class local_mentor_core_event_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $entitydata = $this->get_entities_data();
-        $entityid   = \local_mentor_core\entity_api::create_entity($entitydata);
-        $entity     = \local_mentor_core\entity_api::get_entity($entityid);
+        $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // Entity created event.
         $event = \local_mentor_core\event\entity_create::create(array(
-            'objectid' => $entityid,
-            'context'  => $entity->get_context(),
-            'other'    => array(
-                'name'               => $entity->get_name(),
-                'managementcourseid' => $entity->get_edadmin_courses('entities')['id']
-            )
+                'objectid' => $entityid,
+                'context' => $entity->get_context(),
+                'other' => array(
+                        'name' => $entity->get_name(),
+                        'managementcourseid' => $entity->get_edadmin_courses('entities')['id']
+                )
         ));
 
         self::assertInstanceOf('local_mentor_core\event\entity_create', $event);
         self::assertEquals($event::get_name(), get_string('evententitycreated', 'local_mentor_core'));
         self::assertEquals($event->get_url()->out(),
-            $CFG->wwwroot . '/course/view.php?id=' . $entity->get_edadmin_courses('entities')['id']);
+                $CFG->wwwroot . '/course/view.php?id=' . $entity->get_edadmin_courses('entities')['id']);
         self::assertEquals($event->get_description(),
-            "The user with id '2' created the entity with course category id '$entityid'.");
+                "The user with id '2' created the entity with course category id '$entityid'.");
         $objectidmapping = $event::get_objectid_mapping();
         self::assertEquals($objectidmapping['db'], 'course_categories');
         self::assertEquals($objectidmapping['restore'], core\event\base::NOT_MAPPED);
@@ -211,28 +211,28 @@ class local_mentor_core_event_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $entitydata = $this->get_entities_data();
-        $entityid   = \local_mentor_core\entity_api::create_entity($entitydata);
-        $entity     = \local_mentor_core\entity_api::get_entity($entityid);
+        $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
-        $newdata       = new stdClass();
+        $newdata = new stdClass();
         $newdata->name = 'Name updated';
 
         $result = \local_mentor_core\entity_api::update_entity($entity->id, $newdata);
 
         // Entity update event.
         $event = \local_mentor_core\event\entity_update::create(array(
-            'objectid' => $entityid,
-            'context'  => $entity->get_context(),
-            'other'    => array(
-                'name'               => $entity->get_name(),
-                'managementcourseid' => $entity->get_edadmin_courses('entities')['id']
-            )
+                'objectid' => $entityid,
+                'context' => $entity->get_context(),
+                'other' => array(
+                        'name' => $entity->get_name(),
+                        'managementcourseid' => $entity->get_edadmin_courses('entities')['id']
+                )
         ));
 
         self::assertInstanceOf('local_mentor_core\event\entity_update', $event);
         self::assertEquals($event::get_name(), get_string('evententityupdated', 'local_mentor_core'));
         self::assertEquals($event->get_url()->out(),
-            $CFG->wwwroot . '/course/view.php?id=' . $entity->get_edadmin_courses('entities')['id']);
+                $CFG->wwwroot . '/course/view.php?id=' . $entity->get_edadmin_courses('entities')['id']);
         self::assertEquals($event::get_legacy_eventname(), 'entity_updated');
         self::assertEquals($event->get_description(), "The user with id '2' updated the entity with category id '$entityid'.");
 
@@ -240,14 +240,14 @@ class local_mentor_core_event_testcase extends advanced_testcase {
         $reflectionmethod->setAccessible(true);
         $legacylogdata = $reflectionmethod->invoke($event);
         self::assertEquals(
-            $legacylogdata,
-            [
-                "1",
-                "entity",
-                "update",
-                "course/view.php?id=" . $entity->get_edadmin_courses('entities')['id'],
-                $entityid
-            ]
+                $legacylogdata,
+                [
+                        "1",
+                        "entity",
+                        "update",
+                        "course/view.php?id=" . $entity->get_edadmin_courses('entities')['id'],
+                        $entityid
+                ]
         );
 
         $objectidmapping = $event::get_objectid_mapping();
@@ -276,18 +276,18 @@ class local_mentor_core_event_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $trainingdata = $this->init_training_creation();
-        $training     = \local_mentor_core\training_api::create_training($trainingdata);
+        $training = \local_mentor_core\training_api::create_training($trainingdata);
 
         // Training created event.
         $event = \local_mentor_core\event\training_create::create(array(
-            'objectid' => $training->id,
-            'context'  => $training->get_context()
+                'objectid' => $training->id,
+                'context' => $training->get_context()
         ));
 
         self::assertInstanceOf('local_mentor_core\event\training_create', $event);
         self::assertEquals($event::get_name(), get_string('eventtrainingcreated', 'local_mentor_core'));
         self::assertEquals($event->get_url()->out(),
-            $CFG->wwwroot . '/local/trainings/pages/update_training.php?trainingid=' . $training->id);
+                $CFG->wwwroot . '/local/trainings/pages/update_training.php?trainingid=' . $training->id);
         self::assertEquals($event->get_description(), "The user with id '2' created the training with id '$training->id'.");
 
         $reflectionmethod = new ReflectionMethod('local_mentor_core\event\training_create', 'get_legacy_eventdata');
@@ -324,26 +324,26 @@ class local_mentor_core_event_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $trainingdata = $this->init_training_creation();
-        $training     = \local_mentor_core\training_api::create_training($trainingdata);
+        $training = \local_mentor_core\training_api::create_training($trainingdata);
 
         // Init test data.
-        $trainingdata->id           = $training->id;
+        $trainingdata->id = $training->id;
         $trainingdata->traininggoal = 'TEST NEW TRAININGGOAL';
-        $trainingdata->status       = \local_mentor_core\training::STATUS_ARCHIVED;
+        $trainingdata->status = \local_mentor_core\training::STATUS_ARCHIVED;
 
         $training = \local_mentor_core\training_api::update_training($trainingdata);
 
         // Training updated event.
         $event = \local_mentor_core\event\training_update::create(array(
-            'objectid' => $training->id,
-            'context'  => $training->get_context()
+                'objectid' => $training->id,
+                'context' => $training->get_context()
         ));
         $event->set_legacy_logdata(array('test'));
 
         self::assertInstanceOf('local_mentor_core\event\training_update', $event);
         self::assertEquals($event::get_name(), get_string('eventtrainingupdated', 'local_mentor_core'));
         self::assertEquals($event->get_url()->out(),
-            $CFG->wwwroot . '/local/trainings/pages/update_training.php?trainingid=' . $training->id);
+                $CFG->wwwroot . '/local/trainings/pages/update_training.php?trainingid=' . $training->id);
         self::assertEquals($event::get_legacy_eventname(), 'training_updated');
         self::assertEquals($event->get_description(), "The user with id '2' updated the training with id '$training->id'.");
 
@@ -385,14 +385,14 @@ class local_mentor_core_event_testcase extends advanced_testcase {
 
         // Session created event.
         $event = \local_mentor_core\event\session_create::create(array(
-            'objectid' => $session->id,
-            'context'  => $session->get_context()
+                'objectid' => $session->id,
+                'context' => $session->get_context()
         ));
 
         self::assertInstanceOf('local_mentor_core\event\session_create', $event);
         self::assertEquals($event::get_name(), get_string('eventsessioncreated', 'local_mentor_core'));
         self::assertEquals($event->get_url()->out(),
-            $CFG->wwwroot . '/local/session/pages/update_session.php?sessionid=' . $session->id);
+                $CFG->wwwroot . '/local/session/pages/update_session.php?sessionid=' . $session->id);
         self::assertEquals($event->get_description(), "The user with id '2' created the session with id '$session->id'.");
         $objectidmapping = $event::get_objectid_mapping();
         self::assertEquals($objectidmapping['db'], 'session');
@@ -423,24 +423,24 @@ class local_mentor_core_event_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $session = $this->init_session_creation();
-        $data    = new stdClass();
+        $data = new stdClass();
 
         // New session data.
-        $data->id              = $session->id;
+        $data->id = $session->id;
         $data->maxparticipants = 12;
-        $session               = \local_mentor_core\session_api::update_session($data);
+        $session = \local_mentor_core\session_api::update_session($data);
 
         // Session updated event.
         $event = \local_mentor_core\event\session_update::create(array(
-            'objectid' => $session->id,
-            'context'  => $session->get_context()
+                'objectid' => $session->id,
+                'context' => $session->get_context()
         ));
         $event->set_legacy_logdata(array('test'));
 
         self::assertInstanceOf('local_mentor_core\event\session_update', $event);
         self::assertEquals($event::get_name(), get_string('eventsessionupdated', 'local_mentor_core'));
         self::assertEquals($event->get_url()->out(),
-            $CFG->wwwroot . '/local/session/pages/update_session.php?sessionid=' . $session->id);
+                $CFG->wwwroot . '/local/session/pages/update_session.php?sessionid=' . $session->id);
         self::assertEquals($event::get_legacy_eventname(), 'session_updated');
         self::assertEquals($event->get_description(), "The user with id '2' updated the session with id '$session->id'.");
 

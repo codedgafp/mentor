@@ -102,15 +102,15 @@ class block_myentity extends block_base {
         $logo = $mainentity->get_logo();
 
         if ($logo) {
-            $url    = moodle_url::make_pluginfile_url(
-                    $logo->get_contextid(),
-                    $logo->get_component(),
-                    $logo->get_filearea(),
-                    $logo->get_itemid(),
-                    $logo->get_filepath(),
-                    $logo->get_filename()
+            $url = moodle_url::make_pluginfile_url(
+                $logo->get_contextid(),
+                $logo->get_component(),
+                $logo->get_filearea(),
+                $logo->get_itemid(),
+                $logo->get_filepath(),
+                $logo->get_filename()
             );
-            $alt    = get_string('entitylogoalt', 'block_myentity');
+            $alt = get_string('entitylogoalt', 'block_myentity');
             $output .= '<div id="entity-logo"><img src="' . $url . '" alt="' . $alt . '" title="' . $alt . '"/></div>';
         }
 
@@ -141,8 +141,8 @@ class block_myentity extends block_base {
         }
 
         // Create content for the block.
-        $this->content         = new stdClass();
-        $this->content->text   = $output;
+        $this->content = new stdClass();
+        $this->content->text = $output;
         $this->content->footer = '';
 
         // Return content block.

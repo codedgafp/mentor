@@ -33,13 +33,13 @@ class user extends abstractlog {
 
     public function get_required_fields() {
         return [
-                'userid',
-                'entitylogid',
-                'trainer',
-                'status',
-                'category',
-                'regionlogid',
-                'department'
+            'userid',
+            'entitylogid',
+            'trainer',
+            'status',
+            'category',
+            'regionlogid',
+            'department'
         ];
     }
 }

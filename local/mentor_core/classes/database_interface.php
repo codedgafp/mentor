@@ -64,7 +64,7 @@ class database_interface {
 
         $this->db = $DB;
 
-        $this->entities   = $this->get_all_entities(false);
+        $this->entities = $this->get_all_entities(false);
         $this->mainentity = $this->get_all_main_categories(false);
     }
 
@@ -260,9 +260,9 @@ class database_interface {
                 ' . $and . '
             AND cc.name LIKE \'%' . $searchtext . '%\'',
             array(
-                'userid'        => $userid,
+                'userid' => $userid,
                 'roleshortname' => $roleshortname,
-                'contextlevel'  => CONTEXT_COURSECAT
+                'contextlevel' => CONTEXT_COURSECAT
             )
         );
     }
@@ -270,7 +270,7 @@ class database_interface {
     /**
      * Get all users by mainentity
      *
-     * @param string mainentity
+     * @param string $mainentity
      * @return \stdClass[]
      * @throws \dml_exception
      */
@@ -286,6 +286,46 @@ class database_interface {
                 AND
                 uid.data = :data
         ', array('fieldname' => 'mainentity', 'data' => $mainentity));
+    }
+
+    /**
+     * Get all users by mainentity
+     *
+     * @param string $secondaryentity
+     * @return \stdClass[]
+     * @throws \dml_exception
+     */
+    public function get_users_by_secondaryentity($secondaryentity) {
+
+        $users = [];
+
+        $usersdata = $this->db->get_records_sql('
+            SELECT u.id, u.*, uid.data
+            FROM {user} u
+            JOIN {user_info_data} uid ON u.id = uid.userid
+            JOIN {user_info_field} uif ON uif.id = uid.fieldid
+            WHERE uif.shortname = :fieldname
+            AND (' . $this->db->sql_like('uid.data', ':data', false, false) . '
+            OR uid.data = :data2)
+        ', array(
+            'fieldname' => 'secondaryentities',
+            'data' => '%' . $this->db->sql_like_escape($secondaryentity) . '%',
+            'data2' => $secondaryentity
+        ));
+
+        foreach ($usersdata as $userdata) {
+            $secondaryentities = explode(', ', $userdata->data);
+            $key = array_search($secondaryentity, $secondaryentities);
+
+            if ($key === false) {
+                continue;
+            }
+
+            unset($userdata->data);
+            $users[$userdata->id] = $userdata;
+        }
+
+        return $users;
     }
 
     /**
@@ -366,12 +406,12 @@ class database_interface {
      * @throws \moodle_exception
      */
     public function create_course_category($entityname, $parent = 0, $idnumber = '') {
-        $data              = new \stdClass();
-        $data->name        = $entityname;
-        $data->idnumber    = $idnumber;
-        $data->parent      = $parent;
+        $data = new \stdClass();
+        $data->name = $entityname;
+        $data->idnumber = $idnumber;
+        $data->parent = $parent;
         $data->description = '';
-        $category          = \core_course_category::create($data);
+        $category = \core_course_category::create($data);
 
         // Refresh entities cache.
         $this->get_all_entities(true);
@@ -388,7 +428,7 @@ class database_interface {
      * @return \stdClass[]
      * @throws \dml_exception
      */
-    public function get_all_main_categories($refresh = false, $includehidden = true) {
+    public function get_all_main_categories($refresh = false, $includehidden = true, $filter = null) {
         if ($refresh || empty($this->mainentities)) {
 
             $and = '';
@@ -398,13 +438,23 @@ class database_interface {
                 $and = " AND cc.id NOT IN (SELECT categoryid FROM {category_options} WHERE value = '1' AND name='hidden')";
             }
 
-            $this->mainentities = $this->db->get_records_sql('
+            $request = '
                 SELECT cc.*, cc.idnumber as shortname
                 FROM {course_categories} cc
                 WHERE depth = 1
-                ' . $and . '
-                ORDER BY shortname ASC, name ASC'
-            );
+                ' . $and;
+
+            if (is_null($filter)) {
+                // Default filter.
+                $request .= ' ORDER BY shortname ASC, name ASC';
+            } else {
+                // Check order by filter.
+                if (isset($filter->order)) {
+                    $request .= ' ORDER BY ' . $filter->order['column'] . ' ' . $filter->order['dir'];
+                }
+            }
+
+            $this->mainentities = $this->db->get_records_sql($request);
         }
 
         return $this->mainentities;
@@ -449,28 +499,31 @@ class database_interface {
                 OR cc2.name = :subentitycategory)
                 ' . $and;
 
-                if (!is_null($filter->search['value'])) {
+                $params = ['subentitycategory' => \local_mentor_core\entity::SUB_ENTITY_CATEGORY];
+
+                if (isset($filter->search) && !is_null($filter->search['value'])) {
                     $request .= 'AND (' .
-                                $this->db->sql_like('cc.name', ':search1', false, false) . ' OR ' .
-                                $this->db->sql_like('cc3.name', ':search2', false, false) . ' OR ' .
-                                $this->db->sql_like('cc.idnumber', ':search3', false, false) . ' OR ' .
-                                $this->db->sql_like('cc3.idnumber', ':search4', false, false) .
-                                ')';
+                        $this->db->sql_like('cc.name', ':search1', false, false) . ' OR ' .
+                        $this->db->sql_like('cc3.name', ':search2', false, false) . ' OR ' .
+                        $this->db->sql_like('cc.idnumber', ':search3', false, false) . ' OR ' .
+                        $this->db->sql_like('cc3.idnumber', ':search4', false, false) .
+                        ')';
+
+                    $likeescape = $this->db->sql_like_escape($filter->search['value']);
+                    $params += [
+                        'search1' => '%' . $likeescape . '%',
+                        'search2' => '%' . $likeescape . '%',
+                        'search3' => '%' . $likeescape . '%',
+                        'search4' => '%' . $likeescape . '%'
+                    ];
                 }
 
                 $request .= 'ORDER BY CONCAT(COALESCE(cc3.name, \'\'), cc.name) ' . $filter->order['dir'] .
-                            ', CONCAT(COALESCE(cc3.idnumber, \'\'), cc.idnumber) ' . $filter->order['dir'];
+                    ', CONCAT(COALESCE(cc3.idnumber, \'\'), cc.idnumber) ' . $filter->order['dir'];
 
-                $likeescape     = $this->db->sql_like_escape($filter->search['value']);
                 $this->entities = $this->db->get_records_sql(
                     $request,
-                    array(
-                        'subentitycategory' => \local_mentor_core\entity::SUB_ENTITY_CATEGORY,
-                        'search1'           => '%' . $likeescape . '%',
-                        'search2'           => '%' . $likeescape . '%',
-                        'search3'           => '%' . $likeescape . '%',
-                        'search4'           => '%' . $likeescape . '%'
-                    )
+                    $params
                 );
             }
         }
@@ -495,7 +548,7 @@ class database_interface {
                 ORDER BY name ASC'
             , array(
                 'subentitycategory' => \local_mentor_core\entity::SUB_ENTITY_CATEGORY,
-                'entityid'          => $entityid
+                'entityid' => $entityid
             ));
     }
 
@@ -611,7 +664,7 @@ class database_interface {
             WHERE idnumber = :idnumber AND name = :name
         ', [
             'idnumber' => \local_mentor_core\library::SHORTNAME,
-            'name'     => \local_mentor_core\library::NAME
+            'name' => \local_mentor_core\library::NAME
         ]);
     }
 
@@ -735,7 +788,7 @@ class database_interface {
             if (!$course) {
                 return false;
             }
-            $this->courses[$course->id]         = $course;
+            $this->courses[$course->id] = $course;
             $this->courseshortnames[$shortname] = $course->id;
         }
 
@@ -762,8 +815,8 @@ class database_interface {
                 AND cfp.name = :type',
             array(
                 'category' => $categoryid,
-                'format'   => 'edadmin',
-                'type'     => 'formattype'
+                'format' => 'edadmin',
+                'type' => 'formattype'
             )
         );
     }
@@ -778,7 +831,7 @@ class database_interface {
      * @throws \dml_exception
      */
     public function update_course_name($courseid, $coursename, $fullname = null) {
-        $course     = new \stdClass();
+        $course = new \stdClass();
         $course->id = $courseid;
 
         if ($fullname) {
@@ -891,7 +944,7 @@ class database_interface {
         if ($forcerefresh || !isset($this->courseformatoptions[$courseid])) {
             $this->courseformatoptions[$courseid] = $this->db->get_records('course_format_options', array(
                 'courseid' => $courseid,
-                'format'   => $format
+                'format' => $format
             ));
         }
 
@@ -910,12 +963,12 @@ class database_interface {
         $this->db->delete_records('course_format_options', ['courseid' => $courseid, 'format' => $format]);
 
         foreach ($options as $option) {
-            $insert            = new \stdClass();
-            $insert->courseid  = $courseid;
-            $insert->format    = $format;
+            $insert = new \stdClass();
+            $insert->courseid = $courseid;
+            $insert->format = $format;
             $insert->sectionid = $option->sectionid;
-            $insert->name      = $option->name;
-            $insert->value     = $option->value;
+            $insert->name = $option->name;
+            $insert->value = $option->value;
 
             $this->add_course_format_option($insert);
         }
@@ -1067,7 +1120,7 @@ class database_interface {
     public function check_if_user_is_cohort_member($userid, $cohortid) {
         return $this->db->record_exists('cohort_members',
             array(
-                'userid'   => $userid,
+                'userid' => $userid,
                 'cohortid' => $cohortid
             )
         );
@@ -1224,8 +1277,8 @@ class database_interface {
         try {
             $this->db->delete_records('session_sharing', array('sessionid' => $sessionid));
             foreach ($entitiesid as $entity) {
-                $sessionshare                   = new \stdClass();
-                $sessionshare->sessionid        = $sessionid;
+                $sessionshare = new \stdClass();
+                $sessionshare->sessionid = $sessionid;
                 $sessionshare->coursecategoryid = $entity;
                 $this->db->insert_record('session_sharing', $sessionshare);
             }
@@ -1405,6 +1458,45 @@ class database_interface {
     }
 
     /**
+     * Update the secondary entity name in all user profiles
+     *
+     * @param string $oldname
+     * @param string $newname
+     * @return bool
+     * @throws \dml_exception
+     */
+    public function update_secondary_entities_name($oldname, $newname) {
+        // Check if the secondary profile field exists.
+        if (!$secondaryentityfield = $this->db->get_record('user_info_field', ['shortname' => 'secondaryentities'])) {
+            return false;
+        }
+
+        $usersdatafield = $this->db->get_records_sql('
+            SELECT uid.*
+            FROM {user_info_data} uid
+            WHERE uid.fieldid = :fieldid
+            AND (' . $this->db->sql_like('uid.data', ':data', false, false) . '
+            OR uid.data = :data2)
+        ', array(
+            'fieldid' => $secondaryentityfield->id,
+            'data' => '%' . $this->db->sql_like_escape($oldname) . '%',
+            'data2' => $oldname
+        ));
+
+        foreach ($usersdatafield as $userdatafield) {
+            $secondaryentities = explode(', ', $userdatafield->data);
+            $key = array_search($oldname, $secondaryentities);
+            if ($key !== false) {
+                $secondaryentities[$key] = $newname;
+                $userdatafield->data = implode(', ', $secondaryentities);
+                $this->db->update_record('user_info_data', $userdatafield);
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Get the main category id of a given course
      *
      * @param int $courseid
@@ -1493,8 +1585,8 @@ class database_interface {
      * @throws \dml_exception
      */
     public function update_session_status($sessionid, $newstatus) {
-        $session         = new \stdClass();
-        $session->id     = $sessionid;
+        $session = new \stdClass();
+        $session->id = $sessionid;
         $session->status = $newstatus;
         return $this->db->update_record('session', $session);
     }
@@ -1574,27 +1666,27 @@ class database_interface {
                 WHERE cc.parent = :entityid OR cc4.parent = :entityid2';
 
         $params = array(
-            'entityid'  => $data->entityid,
+            'entityid' => $data->entityid,
             'entityid2' => $data->entityid
         );
 
         // Filter on session status.
         if ($data->status) {
-            $request          .= ' AND s.status = :status';
+            $request .= ' AND s.status = :status';
             $params['status'] = $data->status;
         }
 
         // Filter on end date.
         if ($data->dateto) {
-            $request           .= ' AND (co.timecreated > :dateto OR co2.timecreated > :dateto2)';
-            $params['dateto']  = $data->dateto;
+            $request .= ' AND (co.timecreated > :dateto OR co2.timecreated > :dateto2)';
+            $params['dateto'] = $data->dateto;
             $params['dateto2'] = $data->dateto;
         }
 
         // Filter on start date.
         if ($data->datefrom) {
-            $request             .= ' AND (co.timecreated < :datefrom OR co2.timecreated < :datefrom2)';
-            $params['datefrom']  = $data->datefrom;
+            $request .= ' AND (co.timecreated < :datefrom OR co2.timecreated < :datefrom2)';
+            $params['datefrom'] = $data->datefrom;
             $params['datefrom2'] = $data->datefrom;
         }
 
@@ -1633,24 +1725,24 @@ class database_interface {
                 WHERE cc.parent = :entityid OR cc4.parent = :entityid2';
 
         $params = array(
-            'entityid'  => $data->entityid,
+            'entityid' => $data->entityid,
             'entityid2' => $data->entityid
         );
 
         if ($data->status) {
-            $request          .= ' AND s.status = :status';
+            $request .= ' AND s.status = :status';
             $params['status'] = $data->status;
         }
 
         if ($data->dateto) {
-            $request           .= ' AND (co.timecreated > :dateto OR co2.timecreated > :dateto2)';
-            $params['dateto']  = $data->dateto;
+            $request .= ' AND (co.timecreated > :dateto OR co2.timecreated > :dateto2)';
+            $params['dateto'] = $data->dateto;
             $params['dateto2'] = $data->dateto;
         }
 
         if ($data->datefrom) {
-            $request             .= ' AND (co.timecreated < :datefrom OR co2.timecreated < :datefrom2)';
-            $params['datefrom']  = $data->datefrom;
+            $request .= ' AND (co.timecreated < :datefrom OR co2.timecreated < :datefrom2)';
+            $params['datefrom'] = $data->datefrom;
             $params['datefrom2'] = $data->datefrom;
         }
 
@@ -1756,9 +1848,9 @@ class database_interface {
                     (cc.parent = :entityid OR cc5.parent = :entityid2)
                     AND (con.contextlevel = :contextlevel OR con2.contextlevel = :contextlevel2)',
             [
-                'entityid'      => $entityid,
-                'entityid2'     => $entityid,
-                'contextlevel'  => CONTEXT_COURSE,
+                'entityid' => $entityid,
+                'entityid2' => $entityid,
+                'contextlevel' => CONTEXT_COURSE,
                 'contextlevel2' => CONTEXT_COURSE,
             ]);
     }
@@ -1803,7 +1895,7 @@ class database_interface {
                     s.id, c.id, con.id, c.fullname, c.shortname, c.timecreated
             ", [
             'openedregistration' => session::STATUS_OPENED_REGISTRATION, 'inprogress' => session::STATUS_IN_PROGRESS,
-            'contextlevel'       => CONTEXT_COURSE
+            'contextlevel' => CONTEXT_COURSE
         ]);
 
         return $results;
@@ -1829,7 +1921,7 @@ class database_interface {
             GROUP BY s.id, c.id, con.id, c.fullname, c.shortname, c.timecreated
         ", [
             'openedregistration' => session::STATUS_OPENED_REGISTRATION, 'inprogress' => session::STATUS_IN_PROGRESS,
-            'contextlevel'       => CONTEXT_COURSE
+            'contextlevel' => CONTEXT_COURSE
         ]);
     }
 
@@ -1873,8 +1965,8 @@ class database_interface {
 
         return $this->db->get_records_sql($request, [
             'openedregistration' => session::STATUS_OPENED_REGISTRATION,
-            'inprogress'         => session::STATUS_IN_PROGRESS,
-            'contextlevel'       => CONTEXT_COURSE
+            'inprogress' => session::STATUS_IN_PROGRESS,
+            'contextlevel' => CONTEXT_COURSE
         ]);
     }
 
@@ -1907,8 +1999,8 @@ class database_interface {
             GROUP BY s.id, c.id, con.id, c.fullname, c.shortname, c.timecreated
         ", [
             'openedregistration' => session::STATUS_OPENED_REGISTRATION,
-            'inprogress'         => session::STATUS_IN_PROGRESS,
-            'contextlevel'       => CONTEXT_COURSE
+            'inprogress' => session::STATUS_IN_PROGRESS,
+            'contextlevel' => CONTEXT_COURSE
         ]);
     }
 
@@ -2005,10 +2097,10 @@ class database_interface {
                 )
         ',
             [
-                'trainingid'         => $trainingid,
-                'inpreparation'      => \local_mentor_core\session::STATUS_IN_PREPARATION,
+                'trainingid' => $trainingid,
+                'inpreparation' => \local_mentor_core\session::STATUS_IN_PREPARATION,
                 'openedregistration' => \local_mentor_core\session::STATUS_OPENED_REGISTRATION,
-                'inprogress'         => \local_mentor_core\session::STATUS_IN_PROGRESS
+                'inprogress' => \local_mentor_core\session::STATUS_IN_PROGRESS
             ],
             MUST_EXIST
         );
@@ -2068,8 +2160,8 @@ class database_interface {
             array(
                 'contextid' => $contextid,
                 'component' => $component,
-                'filearea'  => $filearea,
-                'filename'  => '.'
+                'filearea' => $filearea,
+                'filename' => '.'
             )
         );
     }
@@ -2127,12 +2219,12 @@ class database_interface {
     public function get_next_available_training_name($trainingname) {
 
         $nameok = false;
-        $i      = 1;
+        $i = 1;
 
-        $createsessiontasks     = $this->get_tasks_adhoc('\local_mentor_core\task\create_session_task');
+        $createsessiontasks = $this->get_tasks_adhoc('\local_mentor_core\task\create_session_task');
         $duplicatetrainingtasks = $this->get_tasks_adhoc('\local_mentor_core\task\duplicate_training_task');
-        $duplicatesessiontasks  = $this->get_tasks_adhoc('\local_mentor_core\task\duplicate_session_as_new_training_task');
-        $importtoentitytasks  = $this->get_tasks_adhoc('\local_library\task\import_to_entity_task');
+        $duplicatesessiontasks = $this->get_tasks_adhoc('\local_mentor_core\task\duplicate_session_as_new_training_task');
+        $importtoentitytasks = $this->get_tasks_adhoc('\local_library\task\import_to_entity_task');
 
         while (!$nameok) {
 
@@ -2217,11 +2309,11 @@ class database_interface {
     public function get_next_training_session_index($trainingname) {
 
         $nameok = false;
-        $i      = 1;
+        $i = 1;
 
-        $createsessiontasks     = $this->get_tasks_adhoc('\local_mentor_core\task\create_session_task');
+        $createsessiontasks = $this->get_tasks_adhoc('\local_mentor_core\task\create_session_task');
         $duplicatetrainingtasks = $this->get_tasks_adhoc('\local_mentor_core\task\duplicate_training_task');
-        $duplicatesessiontasks  = $this->get_tasks_adhoc('\local_mentor_core\task\duplicate_session_as_new_training_task');
+        $duplicatesessiontasks = $this->get_tasks_adhoc('\local_mentor_core\task\duplicate_session_as_new_training_task');
 
         while (!$nameok) {
 
@@ -2354,8 +2446,8 @@ class database_interface {
         // Check if user is admin.
         if (is_siteadmin($userid)) {
             return (object) [
-                'id'        => 0,
-                'name'      => 'Administrateur pilote',
+                'id' => 0,
+                'name' => 'Administrateur pilote',
                 'shortname' => 'admin'
             ];
         }
@@ -2434,21 +2526,21 @@ class database_interface {
 
                 $adminrequest .= ' AND ( ';
 
-                $adminrequest               .= $this->db->sql_like('u.firstname', ':firstname' . $key, false, false);
+                $adminrequest .= $this->db->sql_like('u.firstname', ':firstname' . $key, false, false);
                 $params['firstname' . $key] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
-                $adminrequest               .= ' OR ';
+                $adminrequest .= ' OR ';
 
-                $adminrequest              .= $this->db->sql_like('u.lastname', ':lastname' . $key, false, false);
+                $adminrequest .= $this->db->sql_like('u.lastname', ':lastname' . $key, false, false);
                 $params['lastname' . $key] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
-                $adminrequest              .= ' OR ';
+                $adminrequest .= ' OR ';
 
-                $adminrequest           .= $this->db->sql_like('u.email', ':email' . $key, false, false);
+                $adminrequest .= $this->db->sql_like('u.email', ':email' . $key, false, false);
                 $params['email' . $key] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
-                $adminrequest           .= ' OR ';
+                $adminrequest .= ' OR ';
 
-                $adminrequest                .= $this->db->sql_like('uid.data', ':mainentity' . $key, false, false);
+                $adminrequest .= $this->db->sql_like('uid.data', ':mainentity' . $key, false, false);
                 $params['mainentity' . $key] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
-                $adminrequest                .= ' OR ';
+                $adminrequest .= ' OR ';
 
                 $adminrequest .= "position('" . $searchvalue . "' IN 'Administrateur pilote') > 0";
 
@@ -2527,27 +2619,27 @@ class database_interface {
 
                 $request .= ' AND ( ';
 
-                $request                    .= $this->db->sql_like('u.firstname', ':firstname' . $key, false, false);
+                $request .= $this->db->sql_like('u.firstname', ':firstname' . $key, false, false);
                 $params['firstname' . $key] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
-                $request                    .= ' OR ';
+                $request .= ' OR ';
 
-                $request                   .= $this->db->sql_like('u.lastname', ':lastname' . $key, false, false);
+                $request .= $this->db->sql_like('u.lastname', ':lastname' . $key, false, false);
                 $params['lastname' . $key] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
-                $request                   .= ' OR ';
+                $request .= ' OR ';
 
-                $request                .= $this->db->sql_like('u.email', ':email' . $key, false, false);
+                $request .= $this->db->sql_like('u.email', ':email' . $key, false, false);
                 $params['email' . $key] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
-                $request                .= ' OR ';
+                $request .= ' OR ';
 
-                $request                     .= $this->db->sql_like('uid.data', ':mainentity' . $key, false, false);
+                $request .= $this->db->sql_like('uid.data', ':mainentity' . $key, false, false);
                 $params['mainentity' . $key] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
-                $request                     .= ' OR ';
+                $request .= ' OR ';
 
-                $request                   .= $this->db->sql_like('r.name', ':rolename' . $key, false, false);
+                $request .= $this->db->sql_like('r.name', ':rolename' . $key, false, false);
                 $params['rolename' . $key] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
-                $request                   .= ' OR ';
+                $request .= ' OR ';
 
-                $request               .= $this->db->sql_like('cc.name', ':name' . $key, false, false);
+                $request .= $this->db->sql_like('cc.name', ':name' . $key, false, false);
                 $params['name' . $key] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
 
                 $request .= ' ) ';
@@ -2620,23 +2712,23 @@ class database_interface {
 
                 $request .= ' AND ( ';
 
-                $request                    .= $this->db->sql_like('u.firstname', ':firstname' . $key, false, false);
+                $request .= $this->db->sql_like('u.firstname', ':firstname' . $key, false, false);
                 $params['firstname' . $key] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
-                $request                    .= ' OR ';
+                $request .= ' OR ';
 
-                $request                   .= $this->db->sql_like('u.lastname', ':lastname' . $key, false, false);
+                $request .= $this->db->sql_like('u.lastname', ':lastname' . $key, false, false);
                 $params['lastname' . $key] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
-                $request                   .= ' OR ';
+                $request .= ' OR ';
 
-                $request                .= $this->db->sql_like('u.email', ':email' . $key, false, false);
+                $request .= $this->db->sql_like('u.email', ':email' . $key, false, false);
                 $params['email' . $key] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
-                $request                .= ' OR ';
+                $request .= ' OR ';
 
-                $request                   .= $this->db->sql_like('r.name', ':rolename' . $key, false, false);
+                $request .= $this->db->sql_like('r.name', ':rolename' . $key, false, false);
                 $params['rolename' . $key] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
-                $request                   .= ' OR ';
+                $request .= ' OR ';
 
-                $request               .= $this->db->sql_like('cc.name', ':name' . $key, false, false);
+                $request .= $this->db->sql_like('cc.name', ':name' . $key, false, false);
                 $params['name' . $key] = '%' . $this->db->sql_like_escape($searchvalue) . '%';
 
                 $request .= ' ) ';
@@ -2721,11 +2813,11 @@ class database_interface {
             $this->db->update_record('user_info_data', $profilefieldvalue);
         } else if (!$profilefieldvalue) {
             // Value does not exist.
-            $profilefield              = $this->db->get_record('user_info_field', ['shortname' => $rolename]);
-            $profilefielddata          = new \stdClass();
-            $profilefielddata->userid  = $userid;
+            $profilefield = $this->db->get_record('user_info_field', ['shortname' => $rolename]);
+            $profilefielddata = new \stdClass();
+            $profilefielddata->userid = $userid;
             $profilefielddata->fieldid = $profilefield->id;
-            $profilefielddata->data    = $value;
+            $profilefielddata->data = $value;
 
             $this->db->insert_record('user_info_data', $profilefielddata);
         }
@@ -2827,8 +2919,8 @@ class database_interface {
     public function get_course_singleactivity_type($courseid) {
         return $this->db->get_field('course_format_options', 'value', [
             'courseid' => $courseid,
-            'format'   => 'singleactivity',
-            'name'     => 'activitytype'
+            'format' => 'singleactivity',
+            'name' => 'activitytype'
         ]);
     }
 
@@ -2861,13 +2953,13 @@ class database_interface {
      * @throws \dml_exception
      */
     public function add_user_favourite($component, $itemtype, $itemid, $contextid, $userid) {
-        $favourite               = new \stdClass();
-        $favourite->component    = $component;
-        $favourite->itemtype     = $itemtype;
-        $favourite->itemid       = $itemid;
-        $favourite->contextid    = $contextid;
-        $favourite->userid       = $userid;
-        $favourite->timecreated  = time();
+        $favourite = new \stdClass();
+        $favourite->component = $component;
+        $favourite->itemtype = $itemtype;
+        $favourite->itemid = $itemid;
+        $favourite->contextid = $contextid;
+        $favourite->userid = $userid;
+        $favourite->timecreated = time();
         $favourite->timemodified = time();
 
         return $this->db->insert_record('favourite', $favourite);
@@ -2885,12 +2977,12 @@ class database_interface {
      * @throws \dml_exception
      */
     public function remove_user_favourite($component, $itemtype, $itemid, $contextid, $userid) {
-        $favourite              = [];
+        $favourite = [];
         $favourite['component'] = $component;
-        $favourite['itemtype']  = $itemtype;
-        $favourite['itemid']    = $itemid;
+        $favourite['itemtype'] = $itemtype;
+        $favourite['itemid'] = $itemid;
         $favourite['contextid'] = $contextid;
-        $favourite['userid']    = $userid;
+        $favourite['userid'] = $userid;
 
         return $this->db->delete_records('favourite', $favourite);
     }
@@ -2907,12 +2999,12 @@ class database_interface {
      * @throws \dml_exception
      */
     public function is_user_favourite($component, $itemtype, $itemid, $contextid, $userid) {
-        $favourite              = [];
+        $favourite = [];
         $favourite['component'] = $component;
-        $favourite['itemtype']  = $itemtype;
-        $favourite['itemid']    = $itemid;
+        $favourite['itemtype'] = $itemtype;
+        $favourite['itemid'] = $itemid;
         $favourite['contextid'] = $contextid;
-        $favourite['userid']    = $userid;
+        $favourite['userid'] = $userid;
 
         return $this->db->record_exists('favourite', $favourite);
     }
@@ -2929,12 +3021,12 @@ class database_interface {
      * @throws \dml_exception
      */
     public function get_user_favourite($component, $itemtype, $itemid, $contextid, $userid) {
-        $favourite              = [];
+        $favourite = [];
         $favourite['component'] = $component;
-        $favourite['itemtype']  = $itemtype;
-        $favourite['itemid']    = $itemid;
+        $favourite['itemtype'] = $itemtype;
+        $favourite['itemid'] = $itemid;
         $favourite['contextid'] = $contextid;
-        $favourite['userid']    = $userid;
+        $favourite['userid'] = $userid;
 
         return $this->db->get_record('favourite', $favourite);
     }
@@ -3138,10 +3230,10 @@ class database_interface {
             $preference->value = $value;
             $this->db->update_record('user_preferences', $preference);
         } else {
-            $preference         = new \stdClass();
+            $preference = new \stdClass();
             $preference->userid = $userid;
-            $preference->name   = $preferencename;
-            $preference->value  = $value;
+            $preference->name = $preferencename;
+            $preference->value = $value;
             $this->db->insert_record('user_preferences', $preference);
         }
 
@@ -3226,20 +3318,20 @@ class database_interface {
     public function publish_to_library($trainingid, $originaltrainingid, $userid) {
         // If link exist.
         if ($traininglibrary = $this->get_library_publication($originaltrainingid)) {
-            $traininglibrary->trainingid   = $trainingid;
+            $traininglibrary->trainingid = $trainingid;
             $traininglibrary->timemodified = time();
-            $traininglibrary->userid       = $userid;
+            $traininglibrary->userid = $userid;
             $this->db->update_record('library', $traininglibrary);
             return $traininglibrary->id;
         }
 
         // Add new link.
-        $data                     = new \stdClass();
-        $data->trainingid         = $trainingid;
+        $data = new \stdClass();
+        $data->trainingid = $trainingid;
         $data->originaltrainingid = $originaltrainingid;
-        $data->timecreated        = time();
-        $data->timemodified       = time();
-        $data->userid             = $userid;
+        $data->timecreated = time();
+        $data->timemodified = time();
+        $data->userid = $userid;
         return $this->db->insert_record('library', $data);
     }
 
@@ -3266,5 +3358,98 @@ class database_interface {
         global $DB;
 
         return $DB->record_exists('user_enrolments', array('userid' => $userid, 'enrolid' => $instanceid));
+    }
+
+    /**
+     * Get course tutors
+     *
+     * @param int $contextid
+     * @return array
+     * @throws \dml_exception
+     */
+    public function get_course_tutors($contextid) {
+        $sql = '
+            SELECT DISTINCT(u.id), u.*
+            FROM {user} u
+            JOIN {role_assignments} ra ON ra.userid = u.id
+            JOIN {role} r ON r.id = ra.roleid
+            WHERE
+                ra.contextid = :contextid
+                AND r.shortname = :concepteur
+        ';
+
+        return $this->db->get_records_sql($sql, [
+            'contextid' => $contextid,
+            'concepteur' => \local_mentor_specialization\mentor_profile::ROLE_TUTEUR,
+        ]);
+    }
+
+    /**
+     * Get course formateurs
+     *
+     * @param int $contextid
+     * @return array
+     * @throws \dml_exception
+     */
+    public function get_course_formateurs($contextid) {
+        $sql = '
+            SELECT DISTINCT(u.id), u.*
+            FROM {user} u
+            JOIN {role_assignments} ra ON ra.userid = u.id
+            JOIN {role} r ON r.id = ra.roleid
+            WHERE
+                ra.contextid = :contextid
+                AND r.shortname = :concepteur
+        ';
+
+        return $this->db->get_records_sql($sql, [
+            'contextid' => $contextid,
+            'concepteur' => \local_mentor_specialization\mentor_profile::ROLE_FORMATEUR,
+        ]);
+    }
+
+    /**
+     * Get course demonstrateurs
+     *
+     * @param int $contextid
+     * @return array
+     * @throws \dml_exception
+     */
+    public function get_course_demonstrateurs($contextid) {
+        $sql = '
+            SELECT DISTINCT(u.id), u.*
+            FROM {user} u
+            JOIN {role_assignments} ra ON ra.userid = u.id
+            JOIN {role} r ON r.id = ra.roleid
+            WHERE
+                ra.contextid = :contextid
+                AND r.shortname = :concepteur
+        ';
+
+        return $this->db->get_records_sql($sql, [
+            'contextid' => $contextid,
+            'concepteur' => \local_mentor_specialization\mentor_profile::ROLE_PARTICIPANTDEMONSTRATION,
+        ]);
+    }
+
+    /**
+     * Delete all H5P owners in database.
+     *
+     * @param int $contextid
+     * @return void
+     * @throws \dml_exception
+     */
+    public function remove_user_owner_h5p_file($contextid) {
+        $this->db->execute('
+            UPDATE {files}
+            SET userid = null
+            WHERE id IN (
+                SELECT f.id
+                FROM {files} f
+                         JOIN {context} c ON c.id = f.contextid
+                WHERE (c.id = ' . $contextid . ' OR c.path like \'%/' . $contextid . '/%\') AND
+                    f.mimetype like \'application/zip.h5p\'
+            )'
+        );
     }
 }

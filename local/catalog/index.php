@@ -38,7 +38,7 @@ if (!is_null($trainingid)) {
 }
 
 $context = context_system::instance();
-$site    = get_site();
+$site = get_site();
 
 // Settings first element page.
 $PAGE->set_url('/local/catalog/index.php');

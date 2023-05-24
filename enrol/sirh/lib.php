@@ -116,15 +116,15 @@ class enrol_sirh_plugin extends enrol_plugin {
             // The sync script can only add roles, for perf reasons it does not modify them.
             $params = array(
                 'contextid' => $context->id,
-                'roleid'    => $instance->roleid,
+                'roleid' => $instance->roleid,
                 'component' => 'enrol_sirh',
-                'itemid'    => $instance->id
+                'itemid' => $instance->id
             );
             role_unassign_all($params);
         }
 
         // If there are string.
-        $data->customint1            = intval($data->customint1);
+        $data->customint1 = intval($data->customint1);
         $oldinstancedata->customint1 = intval($oldinstancedata->customint1);
 
         // Get all SIRH instance users.
@@ -132,7 +132,7 @@ class enrol_sirh_plugin extends enrol_plugin {
 
         if ($data->customint1 === \syncsirh_form::ADD_TO_NO_GROUP) {
             // Remove SIRH instance group date to database.
-            $data->customint1     = null;
+            $data->customint1 = null;
             $instance->customint1 = null;
         }
 
@@ -167,7 +167,7 @@ class enrol_sirh_plugin extends enrol_plugin {
     public function enrol_sirh(stdClass $instance, $data = null) {
 
         $timestart = time();
-        $timeend   = 0;
+        $timeend = 0;
 
         $this->enrol_user($instance, $data->userid, $this->get_config('roleid'), $timestart, $timeend);
 
@@ -275,7 +275,7 @@ class enrol_sirh_plugin extends enrol_plugin {
         $mform->setType('customchar3', PARAM_RAW);
 
         // Group id.
-        $coursegroupe    = groups_get_course_data($instance->courseid)->groups;
+        $coursegroupe = groups_get_course_data($instance->courseid)->groups;
         $coursegroupdata = [];
         foreach ($coursegroupe as $group) {
             $coursegroupdata[$group->id] = $group->name;
@@ -341,16 +341,16 @@ class enrol_sirh_plugin extends enrol_plugin {
             // SIRH session.
             'customchar3' => PARAM_RAW,
             // Group id.
-            'customint1'  => PARAM_INT,
+            'customint1' => PARAM_INT,
             // Last user to sync.
-            'customint2'  => PARAM_INT,
+            'customint2' => PARAM_INT,
             // Last date to sync.
-            'customint3'  => PARAM_INT,
-            'roleid'      => PARAM_INT,
+            'customint3' => PARAM_INT,
+            'roleid' => PARAM_INT,
         );
 
         $typeerrors = $this->validate_param_types($data, $tovalidate);
-        $errors     = array_merge($errors, $typeerrors);
+        $errors = array_merge($errors, $typeerrors);
 
         return $errors;
     }

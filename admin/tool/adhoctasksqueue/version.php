@@ -25,6 +25,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2022092301;
-$plugin->requires  = 2014051219;
+$plugin->version = 2022092301;
+$plugin->requires = 2014051219;
 $plugin->component = 'tool_adhoctasksqueue';

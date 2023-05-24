@@ -44,11 +44,15 @@ class local_mentor_specialization_observer {
             return false;
         }
 
-        $userid   = $event->relateduserid;
-        $roleid   = $event->objectid;
+        $userid = $event->relateduserid;
+        $roleid = $event->objectid;
         $entityid = $event->contextinstanceid;
 
-        $entity = \local_mentor_core\entity_api::get_entity($entityid);
+        try {
+            $entity = \local_mentor_core\entity_api::get_entity($entityid);
+        } catch (\Exception $e) {
+            return false;
+        }
 
         // Not assign "reflocal non editeur" role to user if is main entity.
         if ($entity->is_main_entity()) {
@@ -88,8 +92,8 @@ class local_mentor_specialization_observer {
             return false;
         }
 
-        $userid   = $event->relateduserid;
-        $roleid   = $event->objectid;
+        $userid = $event->relateduserid;
+        $roleid = $event->objectid;
         $entityid = $event->contextinstanceid;
 
         $reflocal = $DB->get_record('role', ['shortname' => 'referentlocal']);
@@ -161,7 +165,7 @@ class local_mentor_specialization_observer {
         try {
             // Open an ldap connection.
             $auth = new auth_plugin_ldap_syncplus();
-            $con  = $auth->ldap_connect();
+            $con = $auth->ldap_connect();
 
             $dn = 'cn=' . $email . ',' . $config;
 
@@ -312,7 +316,7 @@ class local_mentor_specialization_observer {
         // Create and send the email.
 
         // Get recipient and sender.
-        $creator     = \core_user::get_user($olddatauser->id);
+        $creator = \core_user::get_user($olddatauser->id);
         $supportuser = \core_user::get_support_user();
 
         // Create content.
@@ -321,24 +325,24 @@ class local_mentor_specialization_observer {
         // If it exist, add new main entity to mail.
         if (!empty($newdatauser->profile_field_mainentity)) {
             $mainentity = \local_mentor_core\entity_api::get_entity_by_name($newdatauser->profile_field_mainentity);
-            $content    .= "Entité principale : " . $mainentity->name . "\n";
+            $content .= "Entité principale : " . $mainentity->name . "\n";
         }
 
         // If they exist, add all secondary entities to mail.
         if (!empty($newdatauser->profile_field_secondaryentities)) {
-            $content           .= "Entité(s) secondaire(s) : \n";
+            $content .= "Entité(s) secondaire(s) : \n";
             $secondaryentities = explode(', ', $newdatauser->profile_field_secondaryentities);
 
             foreach ($secondaryentities as $secondaryentityname) {
                 $secondaryentity = \local_mentor_core\entity_api::get_entity_by_name($secondaryentityname);
-                $content         .= "  - " . $secondaryentity->name . "\n";
+                $content .= "  - " . $secondaryentity->name . "\n";
             }
         }
 
         // Finally mail content.
-        $content     = get_string('email_user_entity_update_content', 'local_mentor_specialization', array(
+        $content = get_string('email_user_entity_update_content', 'local_mentor_specialization', array(
             'entitylist' => $content,
-            'wwwroot'    => $CFG->wwwroot
+            'wwwroot' => $CFG->wwwroot
         ));
         $contenthtml = text_to_html($content, false, false, true);
 
@@ -350,5 +354,187 @@ class local_mentor_specialization_observer {
             $content,
             $contenthtml
         );
+    }
+
+    /**
+     * Assign "visiteurbiblio" role on the library entity when entity admin role is given to the user
+     *
+     * @param \core\event\role_assigned $event
+     * @throws Exception
+     */
+    public static function assign_visiteurbiblio(\core\event\role_assigned $event) {
+        global $DB;
+        $contextlevel = $event->contextlevel;
+
+        // The assignment is not on a coursecat context level.
+        if ($contextlevel != CONTEXT_COURSECAT) {
+            return false;
+        }
+
+        // Get user id.
+        $userid = $event->relateduserid;
+
+        // Check if user has already library access.
+        if (\local_mentor_core\library_api::user_has_access($userid)) {
+            return true;
+        }
+
+        // Get role allow.
+        $roleid = $event->objectid;
+
+        $dbi = \local_mentor_specialization\database_interface::get_instance();
+
+        // Get "visiteurbiblio" role.
+        $rolevisiteurbiblio = $dbi->get_role_by_name(\local_mentor_specialization\mentor_library::ROLE_VISITEURBIBLIO);
+
+        // Get library.
+        $library = \local_mentor_core\library_api::get_library();
+
+        // Checks if the given role is a role that allows access to the library.
+        foreach (\local_mentor_specialization\mentor_library::ROLES_ACCESS as $rolehortname) {
+            if ($DB->get_record('role', array('id' => $roleid, 'shortname' => $rolehortname))) {
+                role_assign($rolevisiteurbiblio->id, $userid, $library->get_context()->id);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Unassigned "visiteurbiblio" role on the library entity
+     * when all administrator roles on the entity are removed from the user.
+     *
+     * @param \core\event\role_unassigned $event
+     * @throws Exception
+     */
+    public static function unassigned_visiteurbiblio(\core\event\role_unassigned $event) {
+        $contextlevel = $event->contextlevel;
+
+        // The assignment is not on a coursecat context level.
+        if ($contextlevel != CONTEXT_COURSECAT) {
+            return false;
+        }
+
+        // Get user id.
+        $userid = $event->relateduserid;
+
+        // Check if user not has library access.
+        if (!\local_mentor_core\library_api::user_has_access($userid)) {
+            return true;
+        }
+
+        // Checks if the given role is a role that allows access to the library.
+        if (local_mentor_specialization_check_if_user_has_role_to_access_the_library($userid)) {
+            return false;
+        }
+
+        $dbi = \local_mentor_specialization\database_interface::get_instance();
+
+        // Get "visiteurbiblio" role.
+        $rolevisiteurbiblio = $dbi->get_role_by_name(\local_mentor_specialization\mentor_library::ROLE_VISITEURBIBLIO);
+
+        // Get library.
+        $library = \local_mentor_core\library_api::get_library();
+
+        // Unassign "visiteurbiblio" role to user.
+        role_unassign($rolevisiteurbiblio->id, $userid, $library->get_context()->id);
+        return true;
+    }
+
+    /**
+     * Check user role assign and enrol type use
+     * to session to know if the mail is sent
+     *
+     * @param \core\event\role_assigned $event
+     * @return bool
+     * @throws Exception
+     */
+    public static function enrol_session_send_mail(\core\event\role_assigned $event) {
+        global $DB;
+
+        $userid = $event->relateduserid;
+        $roleid = $event->objectid;
+        $courseid = $event->contextinstanceid;
+        $contextlevel = $event->contextlevel;
+
+        $rolecondition = [
+            'participant',
+            'formateur',
+            'tuteur'
+        ];
+
+        $enrolscondition = [
+            'manual',
+            'sirh'
+        ];
+
+        // Check if is course context.
+        if ($contextlevel !== CONTEXT_COURSE) {
+            return false;
+        }
+
+        // Check if is right role assign for send mail.
+        $roleassign = $DB->get_record('role', ['id' => $roleid]);
+
+        if (!in_array($roleassign->shortname, $rolecondition)) {
+            return false;
+        }
+
+        // Check if is session.
+        $dbi = \local_mentor_specialization\database_interface::get_instance();
+
+        if (!$sessiondata = $dbi->get_session_by_course_id($courseid)) {
+            return false;
+        }
+
+        // Check if last enrol link with user and course id is right type.
+        // INFO : There is no link between enrol and role assignment.
+        $lastenrol = $DB->get_record_sql('
+            SELECT e.*
+            FROM {enrol} e
+            JOIN {user_enrolments} ue ON ue.enrolid = e.id
+            WHERE ue.userid = :userid AND
+                e.courseid = :courseid
+            ORDER BY ue.timemodified DESC
+            ', [
+            'userid' => $userid,
+            'courseid' => $courseid
+        ], IGNORE_MULTIPLE);
+
+        if (!in_array($lastenrol->enrol, $enrolscondition)) {
+            return false;
+        }
+
+        // Data for message.
+        $session = \local_mentor_core\session_api::get_session($sessiondata->id);
+        $user = core_user::get_user($userid);
+        $infodata = new \stdClass();
+        $infodata->firstname = $user->firstname;
+        $infodata->lastname = $user->lastname;
+        $infodata->rolename = strtolower($roleassign->name);
+        $infodata->fullname = $session->fullname ?: $session->trainingname;
+        $sessionstartdate = $session->sessionstartdate;
+        $dtz = new \DateTimeZone('Europe/Paris');
+        $startdate = new \DateTime("@$sessionstartdate");
+        $startdate->setTimezone($dtz);
+        $infodata->startdate = $startdate->format('d/m/Y');
+        $infodata->dashboardurl = (new \moodle_url('/my'))->out(false);
+
+        // Message text.
+        $messagetext = $session->status !== \local_mentor_core\session::STATUS_IN_PREPARATION ?
+            get_string('email_enrol_user_session_content', 'local_mentor_specialization', $infodata) :
+            get_string('email_enrol_user_session_content_no_start_date', 'local_mentor_specialization', $infodata);
+
+        // Message subject.
+        $subject = get_string('email_enrol_user_session_object', 'local_mentor_specialization', $infodata->fullname);
+
+        // Message HTML.
+        $messagehtml = text_to_html($messagetext, false, false, true);
+
+        // Send a report email to user.
+        $supportuser = \core_user::get_support_user();
+        email_to_user($user, $supportuser, $subject, $messagetext, $messagehtml);
+        return true;
     }
 }

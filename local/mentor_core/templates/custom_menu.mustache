@@ -17,14 +17,14 @@
                             {{/ id }}
                                 role="menuitem">
                             {{# href }}
-                                <a href="{{ href }}">
+                                <a href="{{ href }}" {{# target }} target="{{ target }}" {{/ target }}>
                                     {{{ text }}}
                                 </a>
                             {{/ href }}
                             {{^ href }}
                                 <div
-                                    class="tabindex"
-                                    tabindex="0"
+                                        class="tabindex"
+                                        tabindex="0"
                                     {{# onclick }}
                                         onclick="{{ onclick }}"
                                         onkeyup="if(event.key === 'Enter') this.click();"

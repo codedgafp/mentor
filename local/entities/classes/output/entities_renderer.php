@@ -85,7 +85,7 @@ class entities_renderer extends \plugin_renderer_base implements \format_edadmin
                 // Update entity if exist.
                 if (isset($datas->idcategory) && !empty($datas->idcategory)) {
                     $datas->name = $datas->namecategory;
-                    $datas->id   = $datas->idcategory;
+                    $datas->id = $datas->idcategory;
                     \local_mentor_core\entity_api::update_entity($entity->id, $datas, $form);
                 }
 
@@ -107,8 +107,8 @@ class entities_renderer extends \plugin_renderer_base implements \format_edadmin
         }
 
         $categorycontext = \context_coursecat::instance($course->category);
-        $manageurl       = $CFG->wwwroot . '/admin/roles/assign.php?contextid=' . $categorycontext->id;
-        $manageurl       .= '&returnurl=' . rawurlencode('/course/view.php?id=' . $course->id);
+        $manageurl = $CFG->wwwroot . '/admin/roles/assign.php?contextid=' . $categorycontext->id;
+        $manageurl .= '&returnurl=' . rawurlencode('/course/view.php?id=' . $course->id);
 
         // Manage roles button.
         echo '<div id="manageroles"><a href="' . $manageurl . '" target="__blank" class="btn-secondary">' .
@@ -140,6 +140,19 @@ class entities_renderer extends \plugin_renderer_base implements \format_edadmin
 
         // Get entity form data.
         $entityobj = $entity->get_form_data();
+
+        // Add strings for JS.
+        $this->page->requires->strings_for_js(array(
+            'warning'
+        ), 'local_mentor_core');
+
+        $this->page->requires->strings_for_js(array(
+            'canbemainentity_popup_content'
+        ), 'local_mentor_specialization');
+
+        // Get the right JS to use and call it.
+        $js = entity_api::get_entity_javascript('local_entities/local_entities');
+        $this->page->requires->js_call_amd($js, 'adminFormEvent', [$entity->can_be_main_entity(true)]);
 
         // Set data for form.
         $form->set_data($entityobj);

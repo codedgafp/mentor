@@ -49,8 +49,8 @@ class local_mentor_specialization_dbinterface_testcase extends advanced_testcase
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -67,10 +67,10 @@ class local_mentor_specialization_dbinterface_testcase extends advanced_testcase
         $this->init_database();
 
         return [
-            'name'      => 'New Entity 1',
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1',
-            'regions'   => [5], // Corse.
-            'userid'    => 2  // Set the admin user as manager of the entity.
+            'regions' => [5], // Corse.
+            'userid' => 2  // Set the admin user as manager of the entity.
         ];
     }
 
@@ -87,11 +87,11 @@ class local_mentor_specialization_dbinterface_testcase extends advanced_testcase
     public function init_competencies() {
         global $CFG;
 
-        $text      = file_get_contents($CFG->dirroot .
-                                       '/local/mentor_specialization/data/competencies/competencies_comma_separated.csv');
-        $encoding  = 'UTF-8';
+        $text = file_get_contents($CFG->dirroot .
+            '/local/mentor_specialization/data/competencies/competencies_comma_separated.csv');
+        $encoding = 'UTF-8';
         $delimiter = 'comma';
-        $importer  = new \tool_lpimportcsv\framework_importer($text, $encoding, $delimiter, 0, null, true);
+        $importer = new \tool_lpimportcsv\framework_importer($text, $encoding, $delimiter, 0, null, true);
         $importer->import();
     }
 
@@ -111,64 +111,64 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
             'local_mentor_specialization');
 
         if ($training) {
-            $data->name      = 'fullname';
+            $data->name = 'fullname';
             $data->shortname = 'shortname';
-            $data->content   = 'summary';
-            $data->status    = 'ec';
+            $data->content = 'summary';
+            $data->status = 'ec';
         } else {
-            $data->trainingname      = 'fullname';
+            $data->trainingname = 'fullname';
             $data->trainingshortname = 'shortname';
-            $data->trainingcontent   = 'summary';
-            $data->trainingstatus    = 'ec';
+            $data->trainingcontent = 'summary';
+            $data->trainingstatus = 'ec';
         }
 
         // Fields for taining.
-        $data->teaser                       = 'http://www.edunao.com/';
-        $data->teaserpicture                = '';
-        $data->prerequisite                 = 'TEST';
-        $data->collection                   = 'accompagnement';
-        $data->traininggoal                 = 'TEST TRAINING ';
-        $data->idsirh                       = 'TEST ID SIRH';
-        $data->licenseterms                 = 'cc-sa';
-        $data->typicaljob                   = 'TEST';
-        $data->skills                       = [];
-        $data->certifying                   = '1';
-        $data->presenceestimatedtimehours   = '12';
+        $data->teaser = 'http://www.edunao.com/';
+        $data->teaserpicture = '';
+        $data->prerequisite = 'TEST';
+        $data->collection = 'accompagnement';
+        $data->traininggoal = 'TEST TRAINING ';
+        $data->idsirh = 'TEST ID SIRH';
+        $data->licenseterms = 'cc-sa';
+        $data->typicaljob = 'TEST';
+        $data->skills = [];
+        $data->certifying = '1';
+        $data->presenceestimatedtimehours = '12';
         $data->presenceestimatedtimeminutes = '10';
-        $data->remoteestimatedtimehours     = '15';
-        $data->remoteestimatedtimeminutes   = '30';
-        $data->trainingmodalities           = 'd';
-        $data->producingorganization        = 'TEST';
-        $data->producerorganizationlogo     = '';
-        $data->designers                    = 'TEST';
-        $data->contactproducerorganization  = 'TEST';
-        $data->thumbnail                    = '';
+        $data->remoteestimatedtimehours = '15';
+        $data->remoteestimatedtimeminutes = '30';
+        $data->trainingmodalities = 'd';
+        $data->producingorganization = 'TEST';
+        $data->producerorganizationlogo = '';
+        $data->designers = 'TEST';
+        $data->contactproducerorganization = 'TEST';
+        $data->thumbnail = '';
 
         // Specific fields for session (only for update).
         if ($sessionid) {
-            $data->id                      = $sessionid;
-            $data->opento                  = 'all';
-            $data->publiccible             = 'TEST';
-            $data->termsregistration       = 'inscriptionlibre';
+            $data->id = $sessionid;
+            $data->opento = 'all';
+            $data->publiccible = 'TEST';
+            $data->termsregistration = 'inscriptionlibre';
             $data->termsregistrationdetail = 'TEST';
 
-            $data->onlinesessionestimatedtimehours     = '10';
-            $data->onlinesessionestimatedtimeminutes   = '15';
-            $data->presencesessionestimatedtimehours   = '12';
+            $data->onlinesessionestimatedtimehours = '10';
+            $data->onlinesessionestimatedtimeminutes = '15';
+            $data->presencesessionestimatedtimehours = '12';
             $data->presencesessionestimatedtimeminutes = '25';
 
-            $data->sessionpermanent    = 0;
-            $data->sessionstartdate    = 1609801200;
-            $data->sessionenddate      = 1609801200;
-            $data->sessionmodalities   = 'presentiel';
-            $data->accompaniment       = 'TEST';
-            $data->maxparticipants     = 10;
-            $data->placesavailable     = 8;
-            $data->numberparticipants  = 2;
-            $data->location            = 'PARIS';
+            $data->sessionpermanent = 0;
+            $data->sessionstartdate = 1609801200;
+            $data->sessionenddate = 1609801200;
+            $data->sessionmodalities = 'presentiel';
+            $data->accompaniment = 'TEST';
+            $data->maxparticipants = 10;
+            $data->placesavailable = 8;
+            $data->numberparticipants = 2;
+            $data->location = 'PARIS';
             $data->organizingstructure = 'TEST ORGANISATION';
-            $data->sessionnumber       = 1;
-            $data->opentolist          = '';
+            $data->sessionnumber = 1;
+            $data->opentolist = '';
         }
 
         return $data;
@@ -179,10 +179,10 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
      */
     public function init_training_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -206,7 +206,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         try {
             // Get entity object for default category.
             $entityid = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1'
             ]);
 
@@ -350,7 +350,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
 
         // Create entity.
         $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         $resultrequest = $dbinterface->get_cohorts_by_region($entitydata['regions'][0]);
 
@@ -404,7 +404,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
 
         $dbinterface = \local_mentor_specialization\database_interface::get_instance();
 
-        $allskills  = $dbinterface->get_skills();
+        $allskills = $dbinterface->get_skills();
         $skillsdata = $DB->get_records_sql('
                 SELECT *
                 FROM {competency} c
@@ -441,7 +441,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid, true);
+        $session = \local_mentor_core\session_api::get_session($sessionid, true);
         $session->create_self_enrolment_instance();
         $session->enable_self_enrolment_instance();
 
@@ -491,7 +491,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid, true);
+        $session = \local_mentor_core\session_api::get_session($sessionid, true);
         $session->create_self_enrolment_instance();
         $session->enable_self_enrolment_instance();
 
@@ -504,7 +504,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         \enrol_self_external::enrol_user($courseid, null, $session->get_enrolment_instances_by_type('self')->id);
         self::setAdminUser();
 
-        $existrole1   = 'role1';
+        $existrole1 = 'role1';
         $notexistrole = 'participant';
 
         $dbinterface = \local_mentor_specialization\database_interface::get_instance();
@@ -539,7 +539,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         // Create DB Mock.
         $DB = $this->createMock(get_class($DB));
 
-        $role     = new \stdClass();
+        $role = new \stdClass();
         $role->id = 1;
 
         $DB->expects($this->any())
@@ -553,7 +553,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         $dbinterface = \local_mentor_specialization\database_interface::get_instance();
 
         // Replace dbinterface data with database interface Mock in training Mock.
-        $reflection         = new ReflectionClass($dbinterface);
+        $reflection = new ReflectionClass($dbinterface);
         $reflectionproperty = $reflection->getProperty('db');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($dbinterface, $DB);
@@ -576,13 +576,13 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
 
         // Second notification.
 
-        $course  = self::getDataGenerator()->create_course();
+        $course = self::getDataGenerator()->create_course();
         $context = \context_course::instance($course->id);
 
         // Create DB Mock.
         $DB = $this->createMock(get_class($DB));
 
-        $role     = new \stdClass();
+        $role = new \stdClass();
         $role->id = 1;
 
         $DB->expects($this->any())
@@ -598,7 +598,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
             ->will($this->throwException(new \dml_exception('DB Error!!!')));
 
         // Replace dbinterface data with database interface Mock in training Mock.
-        $reflection         = new ReflectionClass($dbinterface);
+        $reflection = new ReflectionClass($dbinterface);
         $reflectionproperty = $reflection->getProperty('db');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($dbinterface, $DB);
@@ -637,11 +637,11 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::setAdminUser();
 
         // Create session.
-        $sessionid         = $this->init_session_creation();
-        $session           = \local_mentor_core\session_api::get_session($sessionid, true);
-        $sessioncourseid   = $session->get_course()->id;
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid, true);
+        $sessioncourseid = $session->get_course()->id;
         $sessioncoursemods = get_course_mods($sessioncourseid);
-        $currentmod        = current($sessioncoursemods);
+        $currentmod = current($sessioncoursemods);
 
         self::assertCount(1, $sessioncoursemods);
         self::assertEquals($currentmod->visible, 1);
@@ -650,7 +650,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         $dbinterface->disable_course_mods($sessioncourseid, $currentmod->modname);
 
         $sessioncoursemods = get_course_mods($sessioncourseid);
-        $currentmod        = current($sessioncoursemods);
+        $currentmod = current($sessioncoursemods);
 
         self::assertCount(1, $sessioncoursemods);
         self::assertEquals($currentmod->visible, 0);
@@ -680,7 +680,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid, true);
+        $session = \local_mentor_core\session_api::get_session($sessionid, true);
         $session->create_self_enrolment_instance();
         $session->enable_self_enrolment_instance();
 
@@ -725,7 +725,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid, true);
+        $session = \local_mentor_core\session_api::get_session($sessionid, true);
         $session->create_self_enrolment_instance();
         $session->enable_self_enrolment_instance();
 
@@ -744,7 +744,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
 
         // Session has one participant.
         $sessionparticipants = $dbinterface->get_course_participants($session->get_context()->id);
-        $sessionparticipant  = current($sessionparticipants);
+        $sessionparticipant = current($sessionparticipants);
 
         self::assertCount(1, $sessionparticipants);
         self::assertEquals($sessionparticipant->id, $user->id);
@@ -774,33 +774,33 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::setAdminUser();
 
         // Create trainings.
-        $trainingdata1            = $this->init_session_data(true);
-        $entityid1                = \local_mentor_core\entity_api::create_entity([
+        $trainingdata1 = $this->init_session_data(true);
+        $entityid1 = \local_mentor_core\entity_api::create_entity([
             'name' => 'New Entity 1', 'shortname' => 'New Entity 1'
         ]);
-        $entity1                  = \local_mentor_core\entity_api::get_entity($entityid1);
-        $trainingdata1            = $this->init_training_entity($trainingdata1, $entity1);
-        $training1                = \local_mentor_core\training_api::create_training($trainingdata1);
-        $trainingdata2            = $this->init_session_data(true);
-        $trainingdata2->name      = 'fullname2';
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
+        $trainingdata1 = $this->init_training_entity($trainingdata1, $entity1);
+        $training1 = \local_mentor_core\training_api::create_training($trainingdata1);
+        $trainingdata2 = $this->init_session_data(true);
+        $trainingdata2->name = 'fullname2';
         $trainingdata2->shortname = 'shortname2';
-        $entityid2                = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 2',
+        $entityid2 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 2',
             'shortname' => 'New Entity 2'
         ]);
-        $entity2                  = \local_mentor_core\entity_api::get_entity($entityid2);
-        $trainingdata2            = $this->init_training_entity($trainingdata2, $entity2);
-        $training2                = \local_mentor_core\training_api::create_training($trainingdata2);
-        $trainingdata3            = $this->init_session_data(true);
-        $trainingdata3->name      = 'fullname3';
+        $entity2 = \local_mentor_core\entity_api::get_entity($entityid2);
+        $trainingdata2 = $this->init_training_entity($trainingdata2, $entity2);
+        $training2 = \local_mentor_core\training_api::create_training($trainingdata2);
+        $trainingdata3 = $this->init_session_data(true);
+        $trainingdata3->name = 'fullname3';
         $trainingdata3->shortname = 'shortname3';
-        $entityid3                = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 3',
+        $entityid3 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 3',
             'parentid' => $entity1->id
         ]);
-        $entity3                  = \local_mentor_core\entity_api::get_entity($entityid3);
-        $trainingdata3            = $this->init_training_entity($trainingdata3, $entity3);
-        $training3                = \local_mentor_core\training_api::create_training($trainingdata3);
+        $entity3 = \local_mentor_core\entity_api::get_entity($entityid3);
+        $trainingdata3 = $this->init_training_entity($trainingdata3, $entity3);
+        $training3 = \local_mentor_core\training_api::create_training($trainingdata3);
 
         // Session in main entity.
         $session1 = \local_mentor_core\session_api::create_session($training1->id, 'Sessionname1', true);
@@ -811,13 +811,13 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         // Sessions in sub-entity.
         $session3 = \local_mentor_core\session_api::create_session($training3->id, 'Sessionname3', true);
 
-        $data                  = new stdClass();
-        $data->entityid        = $entity1->id;
-        $data->search          = [];
+        $data = new stdClass();
+        $data->entityid = $entity1->id;
+        $data->search = [];
         $data->search['value'] = '';
-        $data->order           = false;
-        $data->start           = 0;
-        $data->length          = 10;
+        $data->order = false;
+        $data->start = 0;
+        $data->length = 10;
 
         // Get sessions in main entity with sub-entity.
         $sessionsbyentity = $dbinterface->get_sessions_by_entity_id($data);
@@ -863,72 +863,72 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::setAdminUser();
 
         // Create training in main entity.
-        $trainingdata1         = $this->init_session_data(true);
+        $trainingdata1 = $this->init_session_data(true);
         $trainingdata1->status = \local_mentor_core\training::STATUS_DRAFT;
-        $entityid1             = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+        $entityid1 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity1               = \local_mentor_core\entity_api::get_entity($entityid1);
-        $trainingdata1         = $this->init_training_entity($trainingdata1, $entity1);
-        $training1             = \local_mentor_core\training_api::create_training($trainingdata1);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
+        $trainingdata1 = $this->init_training_entity($trainingdata1, $entity1);
+        $training1 = \local_mentor_core\training_api::create_training($trainingdata1);
 
         // Create training in sub entity.
-        $trainingdata2             = $this->init_session_data(true);
-        $trainingdata2->name       = 'fullname2';
-        $trainingdata2->shortname  = 'shortname2';
+        $trainingdata2 = $this->init_session_data(true);
+        $trainingdata2->name = 'fullname2';
+        $trainingdata2->shortname = 'shortname2';
         $trainingdata2->collection = 'preparation';
-        $trainingdata2->status     = \local_mentor_core\training::STATUS_TEMPLATE;
-        $entityid2                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 2',
+        $trainingdata2->status = \local_mentor_core\training::STATUS_TEMPLATE;
+        $entityid2 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 2',
             'parentid' => $entity1->id
         ]);
-        $entity2                   = \local_mentor_core\entity_api::get_entity($entityid2);
-        $trainingdata2             = $this->init_training_entity($trainingdata2, $entity2);
-        $training2                 = \local_mentor_core\training_api::create_training($trainingdata2);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entityid2);
+        $trainingdata2 = $this->init_training_entity($trainingdata2, $entity2);
+        $training2 = \local_mentor_core\training_api::create_training($trainingdata2);
 
         // Create training in sub entity.
-        $trainingdata3             = $this->init_session_data(true);
-        $trainingdata3->name       = 'fullname3';
-        $trainingdata3->shortname  = 'shortname3';
+        $trainingdata3 = $this->init_session_data(true);
+        $trainingdata3->name = 'fullname3';
+        $trainingdata3->shortname = 'shortname3';
         $trainingdata3->collection = 'accompagnement, transformation';
-        $trainingdata3->status     = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
-        $entityid3                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 3',
+        $trainingdata3->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+        $entityid3 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 3',
             'parentid' => $entity1->id
         ]);
-        $entity3                   = \local_mentor_core\entity_api::get_entity($entityid3);
-        $trainingdata3             = $this->init_training_entity($trainingdata3, $entity3);
-        $training3                 = \local_mentor_core\training_api::create_training($trainingdata3);
+        $entity3 = \local_mentor_core\entity_api::get_entity($entityid3);
+        $trainingdata3 = $this->init_training_entity($trainingdata3, $entity3);
+        $training3 = \local_mentor_core\training_api::create_training($trainingdata3);
 
         // Session in main entity.
-        $session1               = \local_mentor_core\session_api::create_session($training1->id, 'Sessionname1', true);
-        $data                   = new \stdClass();
-        $data->status           = \local_mentor_core\session::STATUS_IN_PROGRESS;
+        $session1 = \local_mentor_core\session_api::create_session($training1->id, 'Sessionname1', true);
+        $data = new \stdClass();
+        $data->status = \local_mentor_core\session::STATUS_IN_PROGRESS;
         $data->sessionstartdate = 5;
         $session1->update($data);
 
         // Sessions in sub-entity.
-        $session2               = \local_mentor_core\session_api::create_session($training2->id, 'Sessionname2', true);
-        $data                   = new \stdClass();
-        $data->status           = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
+        $session2 = \local_mentor_core\session_api::create_session($training2->id, 'Sessionname2', true);
+        $data = new \stdClass();
+        $data->status = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
         $data->sessionstartdate = 10;
         $session2->update($data);
 
         $session3 = \local_mentor_core\session_api::create_session($training3->id, 'Sessionname3', true);
         $session3->update_status(\local_mentor_core\session::STATUS_COMPLETED);
-        $data                   = new \stdClass();
-        $data->status           = \local_mentor_core\session::STATUS_COMPLETED;
+        $data = new \stdClass();
+        $data->status = \local_mentor_core\session::STATUS_COMPLETED;
         $data->sessionstartdate = 15;
         $session3->update($data);
 
-        $data                  = new stdClass();
-        $data->entityid        = $entity1->id;
-        $data->search          = [];
+        $data = new stdClass();
+        $data->entityid = $entity1->id;
+        $data->search = [];
         $data->search['value'] = '';
-        $data->order           = false;
-        $data->start           = 0;
-        $data->length          = 10;
+        $data->order = false;
+        $data->start = 0;
+        $data->length = 10;
 
         // Get sessions in main entity without filter.
         $sessionsbyentity = $dbinterface->get_sessions_by_entity_id($data);
@@ -943,7 +943,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($session3->id, $sessionsbyentity[$session3->id]->id);
         self::assertEquals($session3->shortname, $sessionsbyentity[$session3->id]->shortname);
 
-        $data->filters              = [];
+        $data->filters = [];
         $data->filters['subentity'] = [$entity2->id];
 
         // Get sessions in main entity with filter (one sub entity).
@@ -965,7 +965,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($session3->id, $sessionsbyentity[$session3->id]->id);
         self::assertEquals($session3->shortname, $sessionsbyentity[$session3->id]->shortname);
 
-        $data->filters               = [];
+        $data->filters = [];
         $data->filters['collection'] = ['accompagnement'];
 
         // Get sessions in main entity with filter (one collection).
@@ -990,7 +990,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($session3->id, $sessionsbyentity[$session3->id]->id);
         self::assertEquals($session3->shortname, $sessionsbyentity[$session3->id]->shortname);
 
-        $data->filters           = [];
+        $data->filters = [];
         $data->filters['status'] = [\local_mentor_core\session::STATUS_IN_PROGRESS];
 
         // Get sessions in main entity with filter (one status).
@@ -1015,7 +1015,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($session3->id, $sessionsbyentity[$session3->id]->id);
         self::assertEquals($session3->shortname, $sessionsbyentity[$session3->id]->shortname);
 
-        $data->filters              = [];
+        $data->filters = [];
         $data->filters['startdate'] = 11;
 
         // Get sessions in main entity with filter (start date).
@@ -1025,7 +1025,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($session3->id, $sessionsbyentity[$session3->id]->id);
         self::assertEquals($session3->shortname, $sessionsbyentity[$session3->id]->shortname);
 
-        $data->filters            = [];
+        $data->filters = [];
         $data->filters['enddate'] = 11;
 
         // Get sessions in main entity with filter (end date).
@@ -1038,9 +1038,9 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($session2->id, $sessionsbyentity[$session2->id]->id);
         self::assertEquals($session2->shortname, $sessionsbyentity[$session2->id]->shortname);
 
-        $data->filters              = [];
+        $data->filters = [];
         $data->filters['startdate'] = 9;
-        $data->filters['enddate']   = 20;
+        $data->filters['enddate'] = 20;
 
         // Get sessions in main entity with filter (start date and end date).
         $sessionsbyentity = $dbinterface->get_sessions_by_entity_id($data);
@@ -1076,72 +1076,72 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::setAdminUser();
 
         // Create training in main entity.
-        $trainingdata1         = $this->init_session_data(true);
+        $trainingdata1 = $this->init_session_data(true);
         $trainingdata1->status = \local_mentor_core\training::STATUS_DRAFT;
-        $entityid1             = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+        $entityid1 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity1               = \local_mentor_core\entity_api::get_entity($entityid1);
-        $trainingdata1         = $this->init_training_entity($trainingdata1, $entity1);
-        $training1             = \local_mentor_core\training_api::create_training($trainingdata1);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
+        $trainingdata1 = $this->init_training_entity($trainingdata1, $entity1);
+        $training1 = \local_mentor_core\training_api::create_training($trainingdata1);
 
         // Create training in sub entity.
-        $trainingdata2             = $this->init_session_data(true);
-        $trainingdata2->name       = 'fullname2';
-        $trainingdata2->shortname  = 'shortname2';
+        $trainingdata2 = $this->init_session_data(true);
+        $trainingdata2->name = 'fullname2';
+        $trainingdata2->shortname = 'shortname2';
         $trainingdata2->collection = 'preparation';
-        $trainingdata2->status     = \local_mentor_core\training::STATUS_TEMPLATE;
-        $entityid2                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 2',
+        $trainingdata2->status = \local_mentor_core\training::STATUS_TEMPLATE;
+        $entityid2 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 2',
             'parentid' => $entity1->id
         ]);
-        $entity2                   = \local_mentor_core\entity_api::get_entity($entityid2);
-        $trainingdata2             = $this->init_training_entity($trainingdata2, $entity2);
-        $training2                 = \local_mentor_core\training_api::create_training($trainingdata2);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entityid2);
+        $trainingdata2 = $this->init_training_entity($trainingdata2, $entity2);
+        $training2 = \local_mentor_core\training_api::create_training($trainingdata2);
 
         // Create training in sub entity.
-        $trainingdata3             = $this->init_session_data(true);
-        $trainingdata3->name       = 'fullname3';
-        $trainingdata3->shortname  = 'shortname3';
+        $trainingdata3 = $this->init_session_data(true);
+        $trainingdata3->name = 'fullname3';
+        $trainingdata3->shortname = 'shortname3';
         $trainingdata3->collection = 'accompagnement, transformation';
-        $trainingdata3->status     = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
-        $entityid3                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 3',
+        $trainingdata3->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+        $entityid3 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 3',
             'parentid' => $entity1->id
         ]);
-        $entity3                   = \local_mentor_core\entity_api::get_entity($entityid3);
-        $trainingdata3             = $this->init_training_entity($trainingdata3, $entity3);
-        $training3                 = \local_mentor_core\training_api::create_training($trainingdata3);
+        $entity3 = \local_mentor_core\entity_api::get_entity($entityid3);
+        $trainingdata3 = $this->init_training_entity($trainingdata3, $entity3);
+        $training3 = \local_mentor_core\training_api::create_training($trainingdata3);
 
         // Session in main entity.
-        $session1               = \local_mentor_core\session_api::create_session($training1->id, 'Sessionname1', true);
-        $data                   = new \stdClass();
-        $data->status           = \local_mentor_core\session::STATUS_IN_PROGRESS;
+        $session1 = \local_mentor_core\session_api::create_session($training1->id, 'Sessionname1', true);
+        $data = new \stdClass();
+        $data->status = \local_mentor_core\session::STATUS_IN_PROGRESS;
         $data->sessionstartdate = 5;
         $session1->update($data);
 
         // Sessions in sub-entity.
-        $session2               = \local_mentor_core\session_api::create_session($training2->id, 'SessionnameBis2', true);
-        $data                   = new \stdClass();
-        $data->status           = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
+        $session2 = \local_mentor_core\session_api::create_session($training2->id, 'SessionnameBis2', true);
+        $data = new \stdClass();
+        $data->status = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
         $data->sessionstartdate = 10;
         $session2->update($data);
 
         $session3 = \local_mentor_core\session_api::create_session($training3->id, 'SessionnameBis3', true);
         $session3->update_status(\local_mentor_core\session::STATUS_COMPLETED);
-        $data                   = new \stdClass();
-        $data->status           = \local_mentor_core\session::STATUS_COMPLETED;
+        $data = new \stdClass();
+        $data->status = \local_mentor_core\session::STATUS_COMPLETED;
         $data->sessionstartdate = 15;
         $session3->update($data);
 
-        $data                  = new stdClass();
-        $data->entityid        = $entity1->id;
-        $data->search          = [];
+        $data = new stdClass();
+        $data->entityid = $entity1->id;
+        $data->search = [];
         $data->search['value'] = '';
-        $data->order           = false;
-        $data->start           = 0;
-        $data->length          = 10;
+        $data->order = false;
+        $data->start = 0;
+        $data->length = 10;
 
         // Get sessions in main entity without search.
         $sessionsbyentity = $dbinterface->get_sessions_by_entity_id($data);
@@ -1224,74 +1224,74 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::setAdminUser();
 
         // Create training in main entity.
-        $trainingdata1         = $this->init_session_data(true);
+        $trainingdata1 = $this->init_session_data(true);
         $trainingdata1->status = \local_mentor_core\training::STATUS_DRAFT;
-        $entityid1             = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+        $entityid1 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity1               = \local_mentor_core\entity_api::get_entity($entityid1);
-        $trainingdata1         = $this->init_training_entity($trainingdata1, $entity1);
-        $training1             = \local_mentor_core\training_api::create_training($trainingdata1);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
+        $trainingdata1 = $this->init_training_entity($trainingdata1, $entity1);
+        $training1 = \local_mentor_core\training_api::create_training($trainingdata1);
 
         // Create training in sub entity.
-        $trainingdata2             = $this->init_session_data(true);
-        $trainingdata2->name       = 'fullname2';
-        $trainingdata2->shortname  = 'shortname2';
+        $trainingdata2 = $this->init_session_data(true);
+        $trainingdata2->name = 'fullname2';
+        $trainingdata2->shortname = 'shortname2';
         $trainingdata2->collection = 'preparation';
-        $trainingdata2->status     = \local_mentor_core\training::STATUS_TEMPLATE;
-        $entityid2                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 3',
+        $trainingdata2->status = \local_mentor_core\training::STATUS_TEMPLATE;
+        $entityid2 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 3',
             'parentid' => $entity1->id
         ]);
-        $entity2                   = \local_mentor_core\entity_api::get_entity($entityid2);
-        $trainingdata2             = $this->init_training_entity($trainingdata2, $entity2);
-        $training2                 = \local_mentor_core\training_api::create_training($trainingdata2);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entityid2);
+        $trainingdata2 = $this->init_training_entity($trainingdata2, $entity2);
+        $training2 = \local_mentor_core\training_api::create_training($trainingdata2);
 
         // Create training in sub entity.
-        $trainingdata3             = $this->init_session_data(true);
-        $trainingdata3->name       = 'fullname3';
-        $trainingdata3->shortname  = 'shortname3';
+        $trainingdata3 = $this->init_session_data(true);
+        $trainingdata3->name = 'fullname3';
+        $trainingdata3->shortname = 'shortname3';
         $trainingdata3->collection = 'accompagnement, transformation';
-        $trainingdata3->status     = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
-        $entityid3                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 2',
+        $trainingdata3->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+        $entityid3 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 2',
             'parentid' => $entity1->id
         ]);
-        $entity3                   = \local_mentor_core\entity_api::get_entity($entityid3);
-        $trainingdata3             = $this->init_training_entity($trainingdata3, $entity3);
-        $training3                 = \local_mentor_core\training_api::create_training($trainingdata3);
+        $entity3 = \local_mentor_core\entity_api::get_entity($entityid3);
+        $trainingdata3 = $this->init_training_entity($trainingdata3, $entity3);
+        $training3 = \local_mentor_core\training_api::create_training($trainingdata3);
 
         // Session in main entity.
-        $session1               = \local_mentor_core\session_api::create_session($training1->id, 'Sessionname1', true);
-        $data                   = new \stdClass();
-        $data->id               = $session1->id;
-        $data->status           = \local_mentor_core\session::STATUS_IN_PROGRESS;
+        $session1 = \local_mentor_core\session_api::create_session($training1->id, 'Sessionname1', true);
+        $data = new \stdClass();
+        $data->id = $session1->id;
+        $data->status = \local_mentor_core\session::STATUS_IN_PROGRESS;
         $data->sessionstartdate = 5;
-        $data->sessionnumber    = 20;
+        $data->sessionnumber = 20;
         $DB->update_record('session', $data);
 
         // Sessions in sub-entity.
-        $session2               = \local_mentor_core\session_api::create_session($training2->id, 'SessionnameBis2', true);
-        $data                   = new \stdClass();
-        $data->status           = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
+        $session2 = \local_mentor_core\session_api::create_session($training2->id, 'SessionnameBis2', true);
+        $data = new \stdClass();
+        $data->status = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
         $data->sessionstartdate = 2;
         $session2->update($data);
 
         $session3 = \local_mentor_core\session_api::create_session($training3->id, 'SessionnameBis3', true);
         $session3->update_status(\local_mentor_core\session::STATUS_COMPLETED);
-        $data                   = new \stdClass();
-        $data->status           = \local_mentor_core\session::STATUS_COMPLETED;
+        $data = new \stdClass();
+        $data->status = \local_mentor_core\session::STATUS_COMPLETED;
         $data->sessionstartdate = 15;
         $session3->update($data);
 
-        $data                  = new stdClass();
-        $data->entityid        = $entity1->id;
-        $data->search          = [];
+        $data = new stdClass();
+        $data->entityid = $entity1->id;
+        $data->search = [];
         $data->search['value'] = '';
-        $data->order           = false;
-        $data->start           = 0;
-        $data->length          = 10;
+        $data->order = false;
+        $data->start = 0;
+        $data->length = 10;
 
         // Get sessions in main entity without order.
         $sessionsbyentity = $dbinterface->get_sessions_by_entity_id($data);
@@ -1307,9 +1307,9 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($session3->id, $sessionsbyentitydata[2]->id);
         self::assertEquals($session3->shortname, $sessionsbyentitydata[2]->shortname);
 
-        $data->order           = [];
+        $data->order = [];
         $data->order['column'] = 0;
-        $data->order['dir']    = 'asc';
+        $data->order['dir'] = 'asc';
 
         // Get sessions in main entity without search ASC (Entity name).
         $sessionsbyentity = $dbinterface->get_sessions_by_entity_id($data);
@@ -1342,9 +1342,9 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($session1->id, $sessionsbyentitydata[2]->id);
         self::assertEquals($session1->shortname, $sessionsbyentitydata[2]->shortname);
 
-        $data->order           = [];
+        $data->order = [];
         $data->order['column'] = 2;
-        $data->order['dir']    = 'asc';
+        $data->order['dir'] = 'asc';
 
         // Get sessions in main entity without search ASC (Session name).
         $sessionsbyentity = $dbinterface->get_sessions_by_entity_id($data);
@@ -1376,9 +1376,9 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($session1->id, $sessionsbyentitydata[2]->id);
         self::assertEquals($session1->shortname, $sessionsbyentitydata[2]->shortname);
 
-        $data->order           = [];
+        $data->order = [];
         $data->order['column'] = 3;
-        $data->order['dir']    = 'asc';
+        $data->order['dir'] = 'asc';
 
         // Get sessions in main entity without search ASC (Session shortname).
         $sessionsbyentity = $dbinterface->get_sessions_by_entity_id($data);
@@ -1410,9 +1410,9 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($session1->id, $sessionsbyentitydata[2]->id);
         self::assertEquals($session1->shortname, $sessionsbyentitydata[2]->shortname);
 
-        $data->order           = [];
+        $data->order = [];
         $data->order['column'] = 4;
-        $data->order['dir']    = 'asc';
+        $data->order['dir'] = 'asc';
 
         // Get sessions in main entity without search ASC (Session number).
         $sessionsbyentity = $dbinterface->get_sessions_by_entity_id($data);
@@ -1444,9 +1444,9 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($session3->id, $sessionsbyentitydata[2]->id);
         self::assertEquals($session3->shortname, $sessionsbyentitydata[2]->shortname);
 
-        $data->order           = [];
+        $data->order = [];
         $data->order['column'] = 5;
-        $data->order['dir']    = 'asc';
+        $data->order['dir'] = 'asc';
 
         // Get sessions in main entity without search ASC (Session start date).
         $sessionsbyentity = $dbinterface->get_sessions_by_entity_id($data);
@@ -1501,69 +1501,69 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::setAdminUser();
 
         // Create training in main entity.
-        $trainingdata1         = $this->init_session_data(true);
+        $trainingdata1 = $this->init_session_data(true);
         $trainingdata1->status = \local_mentor_core\training::STATUS_DRAFT;
-        $entityid1             = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+        $entityid1 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity1               = \local_mentor_core\entity_api::get_entity($entityid1);
-        $trainingdata1         = $this->init_training_entity($trainingdata1, $entity1);
-        $training1             = \local_mentor_core\training_api::create_training($trainingdata1);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
+        $trainingdata1 = $this->init_training_entity($trainingdata1, $entity1);
+        $training1 = \local_mentor_core\training_api::create_training($trainingdata1);
 
         // Create training in sub entity.
-        $trainingdata2             = $this->init_session_data(true);
-        $trainingdata2->name       = 'fullname2';
-        $trainingdata2->shortname  = 'shortname2';
+        $trainingdata2 = $this->init_session_data(true);
+        $trainingdata2->name = 'fullname2';
+        $trainingdata2->shortname = 'shortname2';
         $trainingdata2->collection = 'preparation';
-        $trainingdata2->status     = \local_mentor_core\training::STATUS_TEMPLATE;
-        $entityid2                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 2',
+        $trainingdata2->status = \local_mentor_core\training::STATUS_TEMPLATE;
+        $entityid2 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 2',
             'parentid' => $entity1->id
         ]);
-        $entity2                   = \local_mentor_core\entity_api::get_entity($entityid2);
-        $trainingdata2             = $this->init_training_entity($trainingdata2, $entity2);
-        $training2                 = \local_mentor_core\training_api::create_training($trainingdata2);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entityid2);
+        $trainingdata2 = $this->init_training_entity($trainingdata2, $entity2);
+        $training2 = \local_mentor_core\training_api::create_training($trainingdata2);
 
         // Create training in sub entity.
-        $trainingdata3             = $this->init_session_data(true);
-        $trainingdata3->name       = 'fullname3';
-        $trainingdata3->shortname  = 'shortname3';
+        $trainingdata3 = $this->init_session_data(true);
+        $trainingdata3->name = 'fullname3';
+        $trainingdata3->shortname = 'shortname3';
         $trainingdata3->collection = 'accompagnement, transformation';
-        $trainingdata3->status     = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
-        $entityid3                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 3',
+        $trainingdata3->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+        $entityid3 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 3',
             'parentid' => $entity1->id
         ]);
-        $entity3                   = \local_mentor_core\entity_api::get_entity($entityid3);
-        $trainingdata3             = $this->init_training_entity($trainingdata3, $entity3);
-        $training3                 = \local_mentor_core\training_api::create_training($trainingdata3);
+        $entity3 = \local_mentor_core\entity_api::get_entity($entityid3);
+        $trainingdata3 = $this->init_training_entity($trainingdata3, $entity3);
+        $training3 = \local_mentor_core\training_api::create_training($trainingdata3);
 
         // Session in main entity.
-        $session1               = \local_mentor_core\session_api::create_session($training1->id, 'Sessionname1', true);
-        $data                   = new \stdClass();
-        $data->status           = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
+        $session1 = \local_mentor_core\session_api::create_session($training1->id, 'Sessionname1', true);
+        $data = new \stdClass();
+        $data->status = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
         $data->sessionstartdate = 5;
         $session1->update($data);
 
         // Sessions in sub-entity.
-        $session2               = \local_mentor_core\session_api::create_session($training2->id, 'SessionnameBis2', true);
-        $data                   = new \stdClass();
-        $data->status           = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
+        $session2 = \local_mentor_core\session_api::create_session($training2->id, 'SessionnameBis2', true);
+        $data = new \stdClass();
+        $data->status = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
         $data->sessionstartdate = 10;
         $session2->update($data);
 
         $session3 = \local_mentor_core\session_api::create_session($training3->id, 'SessionnameBis3', true);
         $session3->update_status(\local_mentor_core\session::STATUS_COMPLETED);
-        $data                   = new \stdClass();
-        $data->status           = \local_mentor_core\session::STATUS_COMPLETED;
+        $data = new \stdClass();
+        $data->status = \local_mentor_core\session::STATUS_COMPLETED;
         $data->sessionstartdate = 15;
         $session3->update($data);
 
-        $data                  = new \stdClass();
-        $data->entityid        = $entity1->id;
-        $data->filters         = [];
-        $data->search          = [];
+        $data = new \stdClass();
+        $data->entityid = $entity1->id;
+        $data->filters = [];
+        $data->search = [];
         $data->search['value'] = '';
 
         // Count sessions in main entity without filter.
@@ -1628,10 +1628,10 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
 
         // Create training in main entity.
         $trainingdata1 = $this->init_session_data(true);
-        $entityid1     = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
-        $entity1       = \local_mentor_core\entity_api::get_entity($entityid1);
+        $entityid1 = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
         $trainingdata1 = $this->init_training_entity($trainingdata1, $entity1);
-        $training1     = \local_mentor_core\training_api::create_training($trainingdata1);
+        $training1 = \local_mentor_core\training_api::create_training($trainingdata1);
 
         // Test training in main entity.
         $trainingsbyentity1 = $dbinterface->get_trainings_by_entity_id($entity1->id, true);
@@ -1641,16 +1641,16 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training1->shortname, $trainingsbyentity1[$training1->id]->courseshortname);
 
         // Create training in other main entity.
-        $trainingdata2            = $this->init_session_data(true);
-        $trainingdata2->name      = 'fullname2';
+        $trainingdata2 = $this->init_session_data(true);
+        $trainingdata2->name = 'fullname2';
         $trainingdata2->shortname = 'shortname2';
-        $entityid2                = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 2',
+        $entityid2 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 2',
             'shortname' => 'New Entity 2'
         ]);
-        $entity2                  = \local_mentor_core\entity_api::get_entity($entityid2);
-        $trainingdata2            = $this->init_training_entity($trainingdata2, $entity2);
-        $training2                = \local_mentor_core\training_api::create_training($trainingdata2);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entityid2);
+        $trainingdata2 = $this->init_training_entity($trainingdata2, $entity2);
+        $training2 = \local_mentor_core\training_api::create_training($trainingdata2);
 
         // Test training in other main entity.
         $trainingsbyentity2 = $dbinterface->get_trainings_by_entity_id($entity2->id, true);
@@ -1660,16 +1660,16 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training2->shortname, $trainingsbyentity2[$training2->id]->courseshortname);
 
         // Create training in sub entity.
-        $trainingdata3            = $this->init_session_data(true);
-        $trainingdata3->name      = 'fullname3';
+        $trainingdata3 = $this->init_session_data(true);
+        $trainingdata3->name = 'fullname3';
         $trainingdata3->shortname = 'shortname3';
-        $entityid3                = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 3',
+        $entityid3 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 3',
             'parentid' => $entity1->id
         ]);
-        $entity3                  = \local_mentor_core\entity_api::get_entity($entityid3);
-        $trainingdata3            = $this->init_training_entity($trainingdata3, $entity3);
-        $training3                = \local_mentor_core\training_api::create_training($trainingdata3);
+        $entity3 = \local_mentor_core\entity_api::get_entity($entityid3);
+        $trainingdata3 = $this->init_training_entity($trainingdata3, $entity3);
+        $training3 = \local_mentor_core\training_api::create_training($trainingdata3);
 
         // Test training in main entity with sub entity.
         $trainingsbyentity3 = $dbinterface->get_trainings_by_entity_id($entity1->id, false);
@@ -1705,40 +1705,40 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
 
         // Create training in main entity.
         $trainingdata1 = $this->init_session_data(true);
-        $entityid1     = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
-        $entity1       = \local_mentor_core\entity_api::get_entity($entityid1);
+        $entityid1 = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
         $trainingdata1 = $this->init_training_entity($trainingdata1, $entity1);
-        $training1     = \local_mentor_core\training_api::create_training($trainingdata1);
+        $training1 = \local_mentor_core\training_api::create_training($trainingdata1);
 
         // Test training in main entity.
         self::assertEquals(1, $dbinterface->count_trainings_by_entity_id($entity1->id, true));
 
         // Create training in other main entity.
-        $trainingdata2            = $this->init_session_data(true);
-        $trainingdata2->name      = 'fullname2';
+        $trainingdata2 = $this->init_session_data(true);
+        $trainingdata2->name = 'fullname2';
         $trainingdata2->shortname = 'shortname2';
-        $entityid2                = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 2',
+        $entityid2 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 2',
             'shortname' => 'New Entity 2'
         ]);
-        $entity2                  = \local_mentor_core\entity_api::get_entity($entityid2);
-        $trainingdata2            = $this->init_training_entity($trainingdata2, $entity2);
-        $training2                = \local_mentor_core\training_api::create_training($trainingdata2);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entityid2);
+        $trainingdata2 = $this->init_training_entity($trainingdata2, $entity2);
+        $training2 = \local_mentor_core\training_api::create_training($trainingdata2);
 
         // Test training in other main entity.
         self::assertEquals(1, $dbinterface->count_trainings_by_entity_id($entity2->id, true));
 
         // Create training in sub entity.
-        $trainingdata3            = $this->init_session_data(true);
-        $trainingdata3->name      = 'fullname3';
+        $trainingdata3 = $this->init_session_data(true);
+        $trainingdata3->name = 'fullname3';
         $trainingdata3->shortname = 'shortname3';
-        $entityid3                = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 3',
+        $entityid3 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 3',
             'parentid' => $entity1->id
         ]);
-        $entity3                  = \local_mentor_core\entity_api::get_entity($entityid3);
-        $trainingdata3            = $this->init_training_entity($trainingdata3, $entity3);
-        $training3                = \local_mentor_core\training_api::create_training($trainingdata3);
+        $entity3 = \local_mentor_core\entity_api::get_entity($entityid3);
+        $trainingdata3 = $this->init_training_entity($trainingdata3, $entity3);
+        $training3 = \local_mentor_core\training_api::create_training($trainingdata3);
 
         // Test training in main entity with sub entity.
         self::assertEquals(2, $dbinterface->count_trainings_by_entity_id($entity1->id, false));
@@ -1767,52 +1767,52 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::setAdminUser();
 
         // Create training in main entity.
-        $trainingdata1         = $this->init_session_data(true);
+        $trainingdata1 = $this->init_session_data(true);
         $trainingdata1->status = \local_mentor_core\training::STATUS_DRAFT;
-        $entityid1             = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+        $entityid1 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity1               = \local_mentor_core\entity_api::get_entity($entityid1);
-        $trainingdata1         = $this->init_training_entity($trainingdata1, $entity1);
-        $training1             = \local_mentor_core\training_api::create_training($trainingdata1);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
+        $trainingdata1 = $this->init_training_entity($trainingdata1, $entity1);
+        $training1 = \local_mentor_core\training_api::create_training($trainingdata1);
 
         // Create training in sub entity.
-        $trainingdata2             = $this->init_session_data(true);
-        $trainingdata2->name       = 'fullname2';
-        $trainingdata2->shortname  = 'shortname2';
+        $trainingdata2 = $this->init_session_data(true);
+        $trainingdata2->name = 'fullname2';
+        $trainingdata2->shortname = 'shortname2';
         $trainingdata2->collection = 'preparation';
-        $trainingdata2->status     = \local_mentor_core\training::STATUS_TEMPLATE;
-        $entityid2                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 2',
+        $trainingdata2->status = \local_mentor_core\training::STATUS_TEMPLATE;
+        $entityid2 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 2',
             'parentid' => $entity1->id
         ]);
-        $entity2                   = \local_mentor_core\entity_api::get_entity($entityid2);
-        $trainingdata2             = $this->init_training_entity($trainingdata2, $entity2);
-        $training2                 = \local_mentor_core\training_api::create_training($trainingdata2);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entityid2);
+        $trainingdata2 = $this->init_training_entity($trainingdata2, $entity2);
+        $training2 = \local_mentor_core\training_api::create_training($trainingdata2);
 
         // Create training in sub entity.
-        $trainingdata3             = $this->init_session_data(true);
-        $trainingdata3->name       = 'fullname3';
-        $trainingdata3->shortname  = 'shortname3';
+        $trainingdata3 = $this->init_session_data(true);
+        $trainingdata3->name = 'fullname3';
+        $trainingdata3->shortname = 'shortname3';
         $trainingdata3->collection = 'accompagnement, transformation';
-        $trainingdata3->status     = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
-        $entityid3                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 3',
+        $trainingdata3->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+        $entityid3 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 3',
             'parentid' => $entity1->id
         ]);
-        $entity3                   = \local_mentor_core\entity_api::get_entity($entityid3);
-        $trainingdata3             = $this->init_training_entity($trainingdata3, $entity3);
-        $training3                 = \local_mentor_core\training_api::create_training($trainingdata3);
+        $entity3 = \local_mentor_core\entity_api::get_entity($entityid3);
+        $trainingdata3 = $this->init_training_entity($trainingdata3, $entity3);
+        $training3 = \local_mentor_core\training_api::create_training($trainingdata3);
 
         // Test training in main entity without filter.
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = '';
-        $datarequest->order           = false;
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
         self::assertCount(3, $trainingsbyentity);
@@ -1827,15 +1827,15 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training3->shortname, $trainingsbyentity[$training3->id]->courseshortname);
 
         // Test training in main entity with filter (one sub entity).
-        $datarequest                       = new stdClass();
-        $datarequest->entityid             = $entity1->id;
-        $datarequest->filters              = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->filters = [];
         $datarequest->filters['subentity'] = [$entity2->id];
-        $datarequest->search               = [];
-        $datarequest->search['value']      = '';
-        $datarequest->order                = false;
-        $datarequest->start                = 0;
-        $datarequest->length               = 10;
+        $datarequest->search = [];
+        $datarequest->search['value'] = '';
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
         self::assertCount(1, $trainingsbyentity);
@@ -1844,15 +1844,15 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training2->shortname, $trainingsbyentity[$training2->id]->courseshortname);
 
         // Test training in main entity with filter (two sub entity).
-        $datarequest                       = new stdClass();
-        $datarequest->entityid             = $entity1->id;
-        $datarequest->filters              = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->filters = [];
         $datarequest->filters['subentity'] = [$entity2->id, $entity3->id];
-        $datarequest->search               = [];
-        $datarequest->search['value']      = '';
-        $datarequest->order                = false;
-        $datarequest->start                = 0;
-        $datarequest->length               = 10;
+        $datarequest->search = [];
+        $datarequest->search['value'] = '';
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
         self::assertCount(2, $trainingsbyentity);
@@ -1864,15 +1864,15 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training3->shortname, $trainingsbyentity[$training3->id]->courseshortname);
 
         // Test training in main entity with filter (one collection).
-        $datarequest                        = new stdClass();
-        $datarequest->entityid              = $entity1->id;
-        $datarequest->filters               = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->filters = [];
         $datarequest->filters['collection'] = ['accompagnement'];
-        $datarequest->search                = [];
-        $datarequest->search['value']       = '';
-        $datarequest->order                 = false;
-        $datarequest->start                 = 0;
-        $datarequest->length                = 10;
+        $datarequest->search = [];
+        $datarequest->search['value'] = '';
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
         self::assertCount(2, $trainingsbyentity);
@@ -1884,15 +1884,15 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training3->shortname, $trainingsbyentity[$training3->id]->courseshortname);
 
         // Test training in main entity with filter (two collection).
-        $datarequest                        = new stdClass();
-        $datarequest->entityid              = $entity1->id;
-        $datarequest->filters               = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->filters = [];
         $datarequest->filters['collection'] = ['preparation', 'transformation'];
-        $datarequest->search                = [];
-        $datarequest->search['value']       = '';
-        $datarequest->order                 = false;
-        $datarequest->start                 = 0;
-        $datarequest->length                = 10;
+        $datarequest->search = [];
+        $datarequest->search['value'] = '';
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
         self::assertCount(2, $trainingsbyentity);
@@ -1904,15 +1904,15 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training3->shortname, $trainingsbyentity[$training3->id]->courseshortname);
 
         // Test training in main entity with filter (one status).
-        $datarequest                    = new stdClass();
-        $datarequest->entityid          = $entity1->id;
-        $datarequest->filters           = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->filters = [];
         $datarequest->filters['status'] = [\local_mentor_core\training::STATUS_DRAFT];
-        $datarequest->search            = [];
-        $datarequest->search['value']   = '';
-        $datarequest->order             = false;
-        $datarequest->start             = 0;
-        $datarequest->length            = 10;
+        $datarequest->search = [];
+        $datarequest->search['value'] = '';
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
         self::assertCount(1, $trainingsbyentity);
@@ -1921,18 +1921,18 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training1->shortname, $trainingsbyentity[$training1->id]->courseshortname);
 
         // Test training in main entity with filter (two status).
-        $datarequest                    = new stdClass();
-        $datarequest->entityid          = $entity1->id;
-        $datarequest->filters           = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->filters = [];
         $datarequest->filters['status'] = [
             \local_mentor_core\training::STATUS_TEMPLATE,
             \local_mentor_core\training::STATUS_ELABORATION_COMPLETED
         ];
-        $datarequest->search            = [];
-        $datarequest->search['value']   = '';
-        $datarequest->order             = false;
-        $datarequest->start             = 0;
-        $datarequest->length            = 10;
+        $datarequest->search = [];
+        $datarequest->search['value'] = '';
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
         self::assertCount(2, $trainingsbyentity);
@@ -1968,134 +1968,134 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::setAdminUser();
 
         // Create training in main entity.
-        $trainingdata1         = $this->init_session_data(true);
+        $trainingdata1 = $this->init_session_data(true);
         $trainingdata1->status = \local_mentor_core\training::STATUS_DRAFT;
-        $entityid1             = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+        $entityid1 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity1               = \local_mentor_core\entity_api::get_entity($entityid1);
-        $trainingdata1         = $this->init_training_entity($trainingdata1, $entity1);
-        $training1             = \local_mentor_core\training_api::create_training($trainingdata1);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
+        $trainingdata1 = $this->init_training_entity($trainingdata1, $entity1);
+        $training1 = \local_mentor_core\training_api::create_training($trainingdata1);
 
         // Create training in sub entity.
-        $trainingdata2             = $this->init_session_data(true);
-        $trainingdata2->name       = 'fullname2';
-        $trainingdata2->shortname  = 'shortname2';
+        $trainingdata2 = $this->init_session_data(true);
+        $trainingdata2->name = 'fullname2';
+        $trainingdata2->shortname = 'shortname2';
         $trainingdata2->collection = 'preparation';
-        $trainingdata2->status     = \local_mentor_core\training::STATUS_TEMPLATE;
-        $entityid2                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 2',
+        $trainingdata2->status = \local_mentor_core\training::STATUS_TEMPLATE;
+        $entityid2 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 2',
             'parentid' => $entity1->id
         ]);
-        $entity2                   = \local_mentor_core\entity_api::get_entity($entityid2);
-        $trainingdata2             = $this->init_training_entity($trainingdata2, $entity2);
-        $training2                 = \local_mentor_core\training_api::create_training($trainingdata2);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entityid2);
+        $trainingdata2 = $this->init_training_entity($trainingdata2, $entity2);
+        $training2 = \local_mentor_core\training_api::create_training($trainingdata2);
 
         // Create training in sub entity.
-        $trainingdata3             = $this->init_session_data(true);
-        $trainingdata3->name       = 'fullname3';
-        $trainingdata3->shortname  = 'shortname3';
+        $trainingdata3 = $this->init_session_data(true);
+        $trainingdata3->name = 'fullname3';
+        $trainingdata3->shortname = 'shortname3';
         $trainingdata3->collection = 'accompagnement, transformation';
-        $trainingdata3->status     = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
-        $entityid3                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 3',
+        $trainingdata3->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+        $entityid3 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 3',
             'parentid' => $entity1->id
         ]);
-        $entity3                   = \local_mentor_core\entity_api::get_entity($entityid3);
-        $trainingdata3             = $this->init_training_entity($trainingdata3, $entity3);
-        $training3                 = \local_mentor_core\training_api::create_training($trainingdata3);
+        $entity3 = \local_mentor_core\entity_api::get_entity($entityid3);
+        $trainingdata3 = $this->init_training_entity($trainingdata3, $entity3);
+        $training3 = \local_mentor_core\training_api::create_training($trainingdata3);
 
         // Test training in main entity without filter.
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = '';
-        $datarequest->order           = false;
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         self::assertEquals(1, $dbinterface->count_trainings_by_entity_id($datarequest, true));
         self::assertEquals(3, $dbinterface->count_trainings_by_entity_id($datarequest, false));
 
         // Test training in main entity with filter (one sub entity).
-        $datarequest                       = new stdClass();
-        $datarequest->entityid             = $entity1->id;
-        $datarequest->filters              = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->filters = [];
         $datarequest->filters['subentity'] = [$entity2->id];
-        $datarequest->search               = [];
-        $datarequest->search['value']      = '';
-        $datarequest->order                = false;
-        $datarequest->start                = 0;
-        $datarequest->length               = 10;
+        $datarequest->search = [];
+        $datarequest->search['value'] = '';
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         self::assertEquals(1, $dbinterface->count_trainings_by_entity_id($datarequest, false));
 
         // Test training in main entity with filter (two sub entity).
-        $datarequest                       = new stdClass();
-        $datarequest->entityid             = $entity1->id;
-        $datarequest->filters              = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->filters = [];
         $datarequest->filters['subentity'] = [$entity2->id, $entity3->id];
-        $datarequest->search               = [];
-        $datarequest->search['value']      = '';
-        $datarequest->order                = false;
-        $datarequest->start                = 0;
-        $datarequest->length               = 10;
+        $datarequest->search = [];
+        $datarequest->search['value'] = '';
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         self::assertEquals(2, $dbinterface->count_trainings_by_entity_id($datarequest, false));
 
         // Test training in main entity with filter (one collection).
-        $datarequest                        = new stdClass();
-        $datarequest->entityid              = $entity1->id;
-        $datarequest->filters               = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->filters = [];
         $datarequest->filters['collection'] = ['accompagnement'];
-        $datarequest->search                = [];
-        $datarequest->search['value']       = '';
-        $datarequest->order                 = false;
-        $datarequest->start                 = 0;
-        $datarequest->length                = 10;
+        $datarequest->search = [];
+        $datarequest->search['value'] = '';
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         self::assertEquals(2, $dbinterface->count_trainings_by_entity_id($datarequest, false));
 
         // Test training in main entity with filter (two collection).
-        $datarequest                        = new stdClass();
-        $datarequest->entityid              = $entity1->id;
-        $datarequest->filters               = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->filters = [];
         $datarequest->filters['collection'] = ['preparation', 'transformation'];
-        $datarequest->search                = [];
-        $datarequest->search['value']       = '';
-        $datarequest->order                 = false;
-        $datarequest->start                 = 0;
-        $datarequest->length                = 10;
+        $datarequest->search = [];
+        $datarequest->search['value'] = '';
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         self::assertEquals(2, $dbinterface->count_trainings_by_entity_id($datarequest, false));
 
         // Test training in main entity with filter (one status).
-        $datarequest                    = new stdClass();
-        $datarequest->entityid          = $entity1->id;
-        $datarequest->filters           = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->filters = [];
         $datarequest->filters['status'] = [\local_mentor_core\training::STATUS_DRAFT];
-        $datarequest->search            = [];
-        $datarequest->search['value']   = '';
-        $datarequest->order             = false;
-        $datarequest->start             = 0;
-        $datarequest->length            = 10;
+        $datarequest->search = [];
+        $datarequest->search['value'] = '';
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         self::assertEquals(1, $dbinterface->count_trainings_by_entity_id($datarequest, false));
 
         // Test training in main entity with filter (two status).
-        $datarequest                    = new stdClass();
-        $datarequest->entityid          = $entity1->id;
-        $datarequest->filters           = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->filters = [];
         $datarequest->filters['status'] = [
             \local_mentor_core\training::STATUS_TEMPLATE,
             \local_mentor_core\training::STATUS_ELABORATION_COMPLETED
         ];
-        $datarequest->search            = [];
-        $datarequest->search['value']   = '';
-        $datarequest->order             = false;
-        $datarequest->start             = 0;
-        $datarequest->length            = 10;
+        $datarequest->search = [];
+        $datarequest->search['value'] = '';
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         self::assertEquals(2, $dbinterface->count_trainings_by_entity_id($datarequest, false));
 
@@ -2123,54 +2123,54 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::setAdminUser();
 
         // Create training in main entity.
-        $trainingdata1            = $this->init_session_data(true);
-        $trainingdata1->status    = \local_mentor_core\training::STATUS_DRAFT;
-        $trainingdata1->name      = 'fullname1';
+        $trainingdata1 = $this->init_session_data(true);
+        $trainingdata1->status = \local_mentor_core\training::STATUS_DRAFT;
+        $trainingdata1->name = 'fullname1';
         $trainingdata1->shortname = 'shortname1';
-        $entityid1                = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+        $entityid1 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity1                  = \local_mentor_core\entity_api::get_entity($entityid1);
-        $trainingdata1            = $this->init_training_entity($trainingdata1, $entity1);
-        $training1                = \local_mentor_core\training_api::create_training($trainingdata1);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
+        $trainingdata1 = $this->init_training_entity($trainingdata1, $entity1);
+        $training1 = \local_mentor_core\training_api::create_training($trainingdata1);
 
         // Create training in other main entity.
-        $trainingdata2             = $this->init_session_data(true);
-        $trainingdata2->name       = 'fullname2';
-        $trainingdata2->shortname  = 'shortnamebis2';
+        $trainingdata2 = $this->init_session_data(true);
+        $trainingdata2->name = 'fullname2';
+        $trainingdata2->shortname = 'shortnamebis2';
         $trainingdata2->collection = 'preparation';
-        $trainingdata2->status     = \local_mentor_core\training::STATUS_TEMPLATE;
-        $entityid2                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 2',
+        $trainingdata2->status = \local_mentor_core\training::STATUS_TEMPLATE;
+        $entityid2 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 2',
             'parentid' => $entity1->id
         ]);
-        $entity2                   = \local_mentor_core\entity_api::get_entity($entityid2);
-        $trainingdata2             = $this->init_training_entity($trainingdata2, $entity2);
-        $training2                 = \local_mentor_core\training_api::create_training($trainingdata2);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entityid2);
+        $trainingdata2 = $this->init_training_entity($trainingdata2, $entity2);
+        $training2 = \local_mentor_core\training_api::create_training($trainingdata2);
 
         // Create training in sub entity.
-        $trainingdata3             = $this->init_session_data(true);
-        $trainingdata3->name       = 'fullname3';
-        $trainingdata3->shortname  = 'shortnamebis3';
+        $trainingdata3 = $this->init_session_data(true);
+        $trainingdata3->name = 'fullname3';
+        $trainingdata3->shortname = 'shortnamebis3';
         $trainingdata3->collection = 'accompagnement, transformation';
-        $trainingdata3->status     = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
-        $entityid3                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 3',
+        $trainingdata3->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+        $entityid3 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 3',
             'parentid' => $entity1->id
         ]);
-        $entity3                   = \local_mentor_core\entity_api::get_entity($entityid3);
-        $trainingdata3             = $this->init_training_entity($trainingdata3, $entity3);
-        $training3                 = \local_mentor_core\training_api::create_training($trainingdata3);
+        $entity3 = \local_mentor_core\entity_api::get_entity($entityid3);
+        $trainingdata3 = $this->init_training_entity($trainingdata3, $entity3);
+        $training3 = \local_mentor_core\training_api::create_training($trainingdata3);
 
         // Test training in main entity without search.
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = '';
-        $datarequest->order           = false;
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
         self::assertCount(3, $trainingsbyentity);
@@ -2185,13 +2185,13 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training3->shortname, $trainingsbyentity[$training3->id]->courseshortname);
 
         // Test training in main entity with search.
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = 'fullname1';
-        $datarequest->order           = false;
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
         self::assertCount(1, $trainingsbyentity);
@@ -2200,13 +2200,13 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training1->shortname, $trainingsbyentity[$training1->id]->courseshortname);
 
         // Test training in main entity with search.
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = 'shortnamebis';
-        $datarequest->order           = false;
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
         self::assertCount(2, $trainingsbyentity);
@@ -2241,76 +2241,76 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::setAdminUser();
 
         // Create training in main entity.
-        $trainingdata1            = $this->init_session_data(true);
-        $trainingdata1->status    = \local_mentor_core\training::STATUS_DRAFT;
-        $trainingdata1->name      = 'fullname1';
+        $trainingdata1 = $this->init_session_data(true);
+        $trainingdata1->status = \local_mentor_core\training::STATUS_DRAFT;
+        $trainingdata1->name = 'fullname1';
         $trainingdata1->shortname = 'shortname1';
-        $entityid1                = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+        $entityid1 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity1                  = \local_mentor_core\entity_api::get_entity($entityid1);
-        $trainingdata1            = $this->init_training_entity($trainingdata1, $entity1);
-        $training1                = \local_mentor_core\training_api::create_training($trainingdata1);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
+        $trainingdata1 = $this->init_training_entity($trainingdata1, $entity1);
+        $training1 = \local_mentor_core\training_api::create_training($trainingdata1);
 
         // Create training in other main entity.
-        $trainingdata2             = $this->init_session_data(true);
-        $trainingdata2->name       = 'fullname2';
-        $trainingdata2->shortname  = 'shortnamebis2';
+        $trainingdata2 = $this->init_session_data(true);
+        $trainingdata2->name = 'fullname2';
+        $trainingdata2->shortname = 'shortnamebis2';
         $trainingdata2->collection = 'preparation';
-        $trainingdata2->status     = \local_mentor_core\training::STATUS_TEMPLATE;
-        $entityid2                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 2',
+        $trainingdata2->status = \local_mentor_core\training::STATUS_TEMPLATE;
+        $entityid2 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 2',
             'parentid' => $entity1->id
         ]);
-        $entity2                   = \local_mentor_core\entity_api::get_entity($entityid2);
-        $trainingdata2             = $this->init_training_entity($trainingdata2, $entity2);
-        $training2                 = \local_mentor_core\training_api::create_training($trainingdata2);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entityid2);
+        $trainingdata2 = $this->init_training_entity($trainingdata2, $entity2);
+        $training2 = \local_mentor_core\training_api::create_training($trainingdata2);
 
         // Create training in sub entity.
-        $trainingdata3             = $this->init_session_data(true);
-        $trainingdata3->name       = 'fullname3';
-        $trainingdata3->shortname  = 'shortnamebis3';
+        $trainingdata3 = $this->init_session_data(true);
+        $trainingdata3->name = 'fullname3';
+        $trainingdata3->shortname = 'shortnamebis3';
         $trainingdata3->collection = 'accompagnement, transformation';
-        $trainingdata3->status     = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
-        $entityid3                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 3',
+        $trainingdata3->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+        $entityid3 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 3',
             'parentid' => $entity1->id
         ]);
-        $entity3                   = \local_mentor_core\entity_api::get_entity($entityid3);
-        $trainingdata3             = $this->init_training_entity($trainingdata3, $entity3);
-        $training3                 = \local_mentor_core\training_api::create_training($trainingdata3);
+        $entity3 = \local_mentor_core\entity_api::get_entity($entityid3);
+        $trainingdata3 = $this->init_training_entity($trainingdata3, $entity3);
+        $training3 = \local_mentor_core\training_api::create_training($trainingdata3);
 
         // Test training in main entity without search.
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = '';
-        $datarequest->order           = false;
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         self::assertEquals(3, $dbinterface->count_trainings_by_entity_id($datarequest, false));
 
         // Test training in main entity with search.
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = 'fullname1';
-        $datarequest->order           = false;
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         self::assertEquals(1, $dbinterface->count_trainings_by_entity_id($datarequest, false));
 
         // Test training in main entity with search.
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = 'shortnamebis';
-        $datarequest->order           = false;
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         self::assertEquals(2, $dbinterface->count_trainings_by_entity_id($datarequest, false));
 
@@ -2337,58 +2337,58 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::setAdminUser();
 
         // Create training in main entity.
-        $trainingdata1             = $this->init_session_data(true);
-        $trainingdata1->status     = \local_mentor_core\training::STATUS_DRAFT;
-        $trainingdata1->name       = 'fullname1';
-        $trainingdata1->shortname  = 'shortname1';
+        $trainingdata1 = $this->init_session_data(true);
+        $trainingdata1->status = \local_mentor_core\training::STATUS_DRAFT;
+        $trainingdata1->name = 'fullname1';
+        $trainingdata1->shortname = 'shortname1';
         $trainingdata1->collection = 'transformation';
-        $trainingdata1->idsirh     = 'a';
-        $entityid1                 = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+        $trainingdata1->idsirh = 'a';
+        $entityid1 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity1                   = \local_mentor_core\entity_api::get_entity($entityid1);
-        $trainingdata1             = $this->init_training_entity($trainingdata1, $entity1);
-        $training1                 = \local_mentor_core\training_api::create_training($trainingdata1);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
+        $trainingdata1 = $this->init_training_entity($trainingdata1, $entity1);
+        $training1 = \local_mentor_core\training_api::create_training($trainingdata1);
 
         // Create training in other main entity.
-        $trainingdata2             = $this->init_session_data(true);
-        $trainingdata2->name       = 'fullname2';
-        $trainingdata2->shortname  = 'shortnamebis2';
+        $trainingdata2 = $this->init_session_data(true);
+        $trainingdata2->name = 'fullname2';
+        $trainingdata2->shortname = 'shortnamebis2';
         $trainingdata2->collection = 'accompagnement';
-        $trainingdata2->idsirh     = 'c';
-        $trainingdata2->status     = \local_mentor_core\training::STATUS_TEMPLATE;
-        $entityid2                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 2',
+        $trainingdata2->idsirh = 'c';
+        $trainingdata2->status = \local_mentor_core\training::STATUS_TEMPLATE;
+        $entityid2 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 2',
             'parentid' => $entity1->id
         ]);
-        $entity2                   = \local_mentor_core\entity_api::get_entity($entityid2);
-        $trainingdata2             = $this->init_training_entity($trainingdata2, $entity2);
-        $training2                 = \local_mentor_core\training_api::create_training($trainingdata2);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entityid2);
+        $trainingdata2 = $this->init_training_entity($trainingdata2, $entity2);
+        $training2 = \local_mentor_core\training_api::create_training($trainingdata2);
 
         // Create training in sub entity.
-        $trainingdata3             = $this->init_session_data(true);
-        $trainingdata3->name       = 'fullname3';
-        $trainingdata3->shortname  = 'shortnamebis3';
+        $trainingdata3 = $this->init_session_data(true);
+        $trainingdata3->name = 'fullname3';
+        $trainingdata3->shortname = 'shortnamebis3';
         $trainingdata3->collection = 'preparation';
-        $trainingdata3->idsirh     = 'b';
-        $trainingdata3->status     = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
-        $entityid3                 = \local_mentor_core\entity_api::create_entity([
-            'name'     => 'New Entity 3',
+        $trainingdata3->idsirh = 'b';
+        $trainingdata3->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+        $entityid3 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 3',
             'parentid' => $entity1->id
         ]);
-        $entity3                   = \local_mentor_core\entity_api::get_entity($entityid3);
-        $trainingdata3             = $this->init_training_entity($trainingdata3, $entity3);
-        $training3                 = \local_mentor_core\training_api::create_training($trainingdata3);
+        $entity3 = \local_mentor_core\entity_api::get_entity($entityid3);
+        $trainingdata3 = $this->init_training_entity($trainingdata3, $entity3);
+        $training3 = \local_mentor_core\training_api::create_training($trainingdata3);
 
         // Test training in main entity without order.
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = '';
-        $datarequest->order           = false;
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order = false;
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
         self::assertCount(3, $trainingsbyentity);
@@ -2403,15 +2403,15 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training3->shortname, $trainingsbyentity[$training3->id]->courseshortname);
 
         // Test training in main entity with order ASC (sub-entity name).
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = '';
-        $datarequest->order           = [];
+        $datarequest->order = [];
         $datarequest->order['column'] = 0;
-        $datarequest->order['dir']    = 'asc';
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order['dir'] = 'asc';
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
 
@@ -2429,15 +2429,15 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training3->shortname, $trainingsbyentity[2]->courseshortname);
 
         // Test training in main entity with order DESC (sub-entity name).
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = '';
-        $datarequest->order           = [];
+        $datarequest->order = [];
         $datarequest->order['column'] = 0;
-        $datarequest->order['dir']    = 'desc';
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order['dir'] = 'desc';
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
 
@@ -2455,15 +2455,15 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training1->shortname, $trainingsbyentity[2]->courseshortname);
 
         // Test training in main entity with order ASC (collection name).
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = '';
-        $datarequest->order           = [];
+        $datarequest->order = [];
         $datarequest->order['column'] = 1;
-        $datarequest->order['dir']    = 'asc';
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order['dir'] = 'asc';
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
 
@@ -2481,15 +2481,15 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training1->shortname, $trainingsbyentity[2]->courseshortname);
 
         // Test training in main entity with order DESC (collection name).
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = '';
-        $datarequest->order           = [];
+        $datarequest->order = [];
         $datarequest->order['column'] = 1;
-        $datarequest->order['dir']    = 'desc';
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order['dir'] = 'desc';
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
 
@@ -2507,15 +2507,15 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training2->shortname, $trainingsbyentity[2]->courseshortname);
 
         // Test training in main entity with order ASC (shortname name).
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = '';
-        $datarequest->order           = [];
+        $datarequest->order = [];
         $datarequest->order['column'] = 2;
-        $datarequest->order['dir']    = 'asc';
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order['dir'] = 'asc';
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
 
@@ -2533,15 +2533,15 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training3->shortname, $trainingsbyentity[2]->courseshortname);
 
         // Test training in main entity with order DESC (shortname name).
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = '';
-        $datarequest->order           = [];
+        $datarequest->order = [];
         $datarequest->order['column'] = 2;
-        $datarequest->order['dir']    = 'desc';
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order['dir'] = 'desc';
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
 
@@ -2559,15 +2559,15 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training1->shortname, $trainingsbyentity[2]->courseshortname);
 
         // Test training in main entity with order ASC (Id SIRH name).
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = '';
-        $datarequest->order           = [];
+        $datarequest->order = [];
         $datarequest->order['column'] = 3;
-        $datarequest->order['dir']    = 'asc';
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order['dir'] = 'asc';
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
 
@@ -2585,15 +2585,15 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
         self::assertEquals($training2->shortname, $trainingsbyentity[2]->courseshortname);
 
         // Test training in main entity with order DESC (Id SIRH name).
-        $datarequest                  = new stdClass();
-        $datarequest->entityid        = $entity1->id;
-        $datarequest->search          = [];
+        $datarequest = new stdClass();
+        $datarequest->entityid = $entity1->id;
+        $datarequest->search = [];
         $datarequest->search['value'] = '';
-        $datarequest->order           = [];
+        $datarequest->order = [];
         $datarequest->order['column'] = 3;
-        $datarequest->order['dir']    = 'desc';
-        $datarequest->start           = 0;
-        $datarequest->length          = 10;
+        $datarequest->order['dir'] = 'desc';
+        $datarequest->start = 0;
+        $datarequest->length = 10;
 
         $trainingsbyentity = $dbinterface->get_trainings_by_entity_id($datarequest, false);
 
@@ -2629,7 +2629,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
 
         // Create entity.
         $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // With array and empty sirh data.
         $sirhlist = [
@@ -2680,7 +2680,7 @@ transformation|Transformation de l\'action publique|rgba(255, 141, 126, 0.4)",
 
         // Create entity.
         $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // With array and empty sirh data.
         $sirhlist = 'SIRH1,SIRH2';
@@ -2862,7 +2862,7 @@ numerique|Numérique et système d\'information et de communication|rgba(106, 10
         self::setAdminUser();
 
         // Get list status and there string.
-        $liststatus      = \local_mentor_core\training_api::get_status_list();
+        $liststatus = \local_mentor_core\training_api::get_status_list();
         $lisstatusstring = array_map(function($status) {
             return strtolower(get_string($status, 'local_mentor_specialization'));
         }, $liststatus);
@@ -3006,11 +3006,11 @@ numerique|Numérique et système d\'information et de communication|rgba(106, 10
         $dbinterface = \local_mentor_specialization\database_interface::get_instance();
 
         // Get list status and there string.
-        $liststatus      = \local_mentor_core\training_api::get_status_list();
+        $liststatus = \local_mentor_core\training_api::get_status_list();
         $lisstatusstring = array_map(function($status) {
             return strtolower(get_string($status, 'local_mentor_specialization'));
         }, $liststatus);
-        $statusresult    = $dbinterface->get_status_search_value_trainings($lisstatusstring, "Brouillon");
+        $statusresult = $dbinterface->get_status_search_value_trainings($lisstatusstring, "Brouillon");
 
         $sqlgenerate = $dbinterface->generate_training_sql_search_by_status($statusresult);
 
@@ -3092,22 +3092,22 @@ numerique|Numérique et système d\'information et de communication|rgba(106, 10
 
         // Create entity.
         $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // Create a training course.
         $trainingdata = $this->init_session_data(true);
         $trainingdata = $this->init_training_entity($trainingdata, $entity);
-        $training     = \local_mentor_core\training_api::create_training($trainingdata);
+        $training = \local_mentor_core\training_api::create_training($trainingdata);
 
         // Create a session course.
-        $session                = local_mentor_core\session_api::create_session($training->id, "Session course", true);
+        $session = local_mentor_core\session_api::create_session($training->id, "Session course", true);
         $session->sessionnumber = 1;
         $session->update($session);
 
         self::assertEquals(1, $dbinterface->get_max_training_session_index($training->id));
 
         // Create a session course.
-        $session                = local_mentor_core\session_api::create_session($training->id, "Session course 2", true);
+        $session = local_mentor_core\session_api::create_session($training->id, "Session course 2", true);
         $session->sessionnumber = 2;
         $session->update($session);
 
@@ -3177,14 +3177,15 @@ numerique|Numérique et système d\'information et de communication|rgba(106, 10
 
         self::assertEmpty($dbinterface->get_library_trainings());
 
-        $entityid     = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
+        $entityid = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 1',
             'shortname' => 'New Entity 1'
         ]);
-        $entity       = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
         $trainingdata = $this->init_session_data(true);
         $trainingdata = $this->init_training_entity($trainingdata, $entity);
-        $training     = \local_mentor_core\training_api::create_training($trainingdata);
+        $trainingdata->shortname = 'Training1';
+        $training = \local_mentor_core\training_api::create_training($trainingdata);
 
         \local_mentor_core\library_api::publish_to_library($training->id, true);
         $newtraininglibraryid = $DB->get_field('library', 'trainingid', array('originaltrainingid' => $training->id));
@@ -3195,8 +3196,8 @@ numerique|Numérique et système d\'information et de communication|rgba(106, 10
 
         sleep(2);
 
-        $trainingdata->shortname = 'Training';
-        $training2     = \local_mentor_core\training_api::create_training($trainingdata);
+        $trainingdata->shortname = 'Training2';
+        $training2 = \local_mentor_core\training_api::create_training($trainingdata);
 
         \local_mentor_core\library_api::publish_to_library($training2->id, true);
         $newtraininglibraryid2 = $DB->get_field('library', 'trainingid', array('originaltrainingid' => $training2->id));
@@ -3221,6 +3222,42 @@ numerique|Numérique et système d\'information et de communication|rgba(106, 10
         $orderlibrayrtrinings = array_values($librayrtrinings);
         self::assertEquals($orderlibrayrtrinings[0]->id, $newtraininglibraryid3);
         self::assertEquals($orderlibrayrtrinings[1]->id, $newtraininglibraryid2);
+
+        self::resetAllData();
+    }
+
+    /**
+     * Test get_sirh_instances
+     *
+     * @covers \local_mentor_specialization\database_interface::get_sirh_instances
+     */
+    public function test_get_sirh_instances() {
+        global $DB;
+
+        $this->resetAfterTest(true);
+        self::setAdminUser();
+        $this->reset_singletons();
+
+        \local_mentor_core\library_api::get_or_create_library();
+
+        $DB->delete_records('enrol');
+
+        $dbinterface = \local_mentor_specialization\database_interface::get_instance();
+        $course = self::getDataGenerator()->create_course();
+        $user = self::getDataGenerator()->create_user();
+
+        self::assertEmpty($dbinterface->get_sirh_instances($course->id));
+
+        $DB->insert_record('enrol', [
+            'enrol' => 'sirh',
+            'courseid' => $course->id,
+        ]);
+
+        $instances = $dbinterface->get_sirh_instances($course->id);
+        self::assertCount(1, $instances);
+        $instance = current($instances);
+        self::assertEquals($instance->enrol, 'sirh');
+        self::assertEquals($instance->courseid, $course->id);
 
         self::resetAllData();
     }

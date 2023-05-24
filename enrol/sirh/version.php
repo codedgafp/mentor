@@ -25,10 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version      = 2022091900;   // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires     = 2020060900;   // Requires this Moodle version.
-$plugin->component    = 'enrol_sirh'; // Full name of the plugin (used for diagnostics).
+$plugin->version = 2022091900;   // The current plugin version (Date: YYYYMMDDXX).
+$plugin->requires = 2020060900;   // Requires this Moodle version.
+$plugin->component = 'enrol_sirh'; // Full name of the plugin (used for diagnostics).
 $plugin->dependencies = array(
-        'local_mentor_core' => 2020112700,
+    'local_mentor_core' => 2020112700,
 );
 

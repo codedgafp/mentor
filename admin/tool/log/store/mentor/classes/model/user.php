@@ -33,9 +33,9 @@ class user extends abstractlog {
 
     public function get_required_fields() {
         return [
-                'userid',
-                'entity',
-                'trainer'
+            'userid',
+            'entity',
+            'trainer'
         ];
     }
 }

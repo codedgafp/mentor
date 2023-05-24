@@ -28,10 +28,22 @@ namespace local_mentor_specialization;
 defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/local/mentor_core/classes/model/model.php');
 require_once($CFG->dirroot . '/local/mentor_core/classes/model/library.php');
+require_once($CFG->dirroot . '/local/mentor_specialization/classes/models/mentor_profile.php');
 
 class mentor_library extends \local_mentor_core\library {
 
     public const HIDDEN = 1;
+
+    public const ROLE_VISITEURBIBLIO = 'visiteurbiblio';
+
+    // List of roles that allow access to the library.
+    public const ROLES_ACCESS
+            = [
+                    \local_mentor_specialization\mentor_profile::ROLE_ADMINDIE,
+                    \local_mentor_specialization\mentor_profile::ROLE_RESPFORMATION,
+                    \local_mentor_specialization\mentor_profile::ROLE_REFERENTLOCAL,
+                    \local_mentor_specialization\mentor_profile::ROLE_REFERENTLOCALNONEDITEUR
+            ];
 
     /**
      * library constructor.

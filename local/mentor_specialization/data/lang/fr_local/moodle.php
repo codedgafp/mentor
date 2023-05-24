@@ -88,7 +88,7 @@ Dans la plupart des programmes de courriel, ce lien devrait apparaître sous la 
 Si vous avez besoin d\'aide, veuillez contacter l\'administrateur du site, {$a->admin}';
 
 $string['passwordforgotteninstructions2']
-    = 'Pour recevoir un nouveau mot de passe, veuillez indiquer ci-dessous votre adresse de courriel. Si les données correspondantes se trouvent dans la base de données, un message vous sera envoyé par courriel, avec des instructions vous permettant de vous connecter.';
+        = 'Pour recevoir un nouveau mot de passe, veuillez indiquer ci-dessous votre adresse de courriel. Si les données correspondantes se trouvent dans la base de données, un message vous sera envoyé par courriel, avec des instructions vous permettant de vous connecter.';
 
 $string['emailpasswordconfirmmaybesent']
-    = '<p>Si vous avez fourni une adresse de courriel correcte, un message vous a été envoyé par courriel.</p> <p>Ce message contient de simples instructions pour confirmer et terminer la modification du mot de passe. Si vous n\'arrivez toujours pas à vous connecter, veuillez contacter l\'administrateur du site.</p>';
+        = '<p>Si vous avez fourni une adresse de courriel correcte, un message vous a été envoyé par courriel.</p> <p>Ce message contient de simples instructions pour confirmer et terminer la modification du mot de passe. Si vous n\'arrivez toujours pas à vous connecter, veuillez contacter l\'administrateur du site.</p>';

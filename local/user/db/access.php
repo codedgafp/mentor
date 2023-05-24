@@ -30,9 +30,9 @@ $capabilities = array(
     'local/user:manageusers' => array(
         'riskbitmask' => RISK_XSS,
 
-        'captype'      => 'write',
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
 

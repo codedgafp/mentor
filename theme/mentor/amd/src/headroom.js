@@ -10,12 +10,10 @@
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define([], factory);
-    }
-    else if (typeof exports === 'object') {
+    } else if (typeof exports === 'object') {
         // COMMONJS
         module.exports = factory();
-    }
-    else {
+    } else {
         // BROWSER
         root.Headroom = factory();
     }
@@ -101,8 +99,7 @@
                 // Recurse into object except if the object is a DOM element
                 if (typeof result[key] === 'object' && !isDOMElement(result[key])) {
                     result[key] = extend(result[key], replacement[key]);
-                }
-                else {
+                } else {
                     result[key] = result[key] || replacement[key];
                 }
             }
@@ -423,15 +420,13 @@
 
             if (currentScrollY + this.getViewportHeight() >= this.getScrollerHeight()) {
                 this.bottom();
-            }
-            else {
+            } else {
                 this.notBottom();
             }
 
             if (this.shouldUnpin(currentScrollY, toleranceExceeded)) {
                 this.unpin();
-            }
-            else if (this.shouldPin(currentScrollY, toleranceExceeded)) {
+            } else if (this.shouldPin(currentScrollY, toleranceExceeded)) {
                 this.pin();
             }
 

@@ -23,10 +23,10 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['myentity:addinstance']   = 'Add a new my entity block';
+$string['myentity:addinstance'] = 'Add a new my entity block';
 $string['myentity:myaddinstance'] = 'Add my entity block to Dashboard';
-$string['pluginname']             = 'Mon entité de rattachement';
-$string['privacy:metadata']       = 'My entity block only shows data stored in other locations.';
-$string['seemore']                = 'En savoir plus';
-$string['contact']                = 'Contact';
-$string['entitylogoalt']          = 'Logo de l\'entité de rattachement principale de l’utilisateur';
+$string['pluginname'] = 'Mon entité de rattachement';
+$string['privacy:metadata'] = 'My entity block only shows data stored in other locations.';
+$string['seemore'] = 'En savoir plus';
+$string['contact'] = 'Contact';
+$string['entitylogoalt'] = 'Logo de l\'entité de rattachement principale de l’utilisateur';

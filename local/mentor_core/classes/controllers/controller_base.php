@@ -55,7 +55,7 @@ abstract class controller_base {
      */
     public function __construct($params) {
 
-        $this->params      = $params;
+        $this->params = $params;
         $this->dbinterface = database_interface::get_instance();
 
     }
@@ -108,8 +108,8 @@ abstract class controller_base {
     public function success($message = '') {
 
         return array(
-                'success' => true,
-                'message' => $message
+            'success' => true,
+            'message' => $message
         );
     }
 
@@ -121,8 +121,8 @@ abstract class controller_base {
      */
     public function error($message = '') {
         return array(
-                'success' => false,
-                'message' => $message
+            'success' => false,
+            'message' => $message
         );
     }
 

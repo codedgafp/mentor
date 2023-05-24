@@ -43,7 +43,7 @@ require_once($CFG->dirroot . '/local/mentor_core/lib.php');
  */
 class profile_api {
 
-    public const EMAIL_USED        = -1;
+    public const EMAIL_USED = -1;
     public const EMAIL_NOT_ALLOWED = -2;
 
     private static $profiles = [];
@@ -121,7 +121,7 @@ class profile_api {
     }
 
     /**
-     * Get users by mainentity
+     * Get users by main entity
      *
      * @param string $mainentity
      * @return \stdClass[] users
@@ -130,6 +130,18 @@ class profile_api {
     public static function get_users_by_mainentity($mainentity) {
         $db = database_interface::get_instance();
         return $db->get_users_by_mainentity($mainentity);
+    }
+
+    /**
+     * Get users by secondary entity
+     *
+     * @param string $secondaryentity
+     * @return \stdClass[] users
+     * @throws \dml_exception
+     */
+    public static function get_users_by_secondaryentity($secondaryentity) {
+        $db = database_interface::get_instance();
+        return $db->get_users_by_secondaryentity($secondaryentity);
     }
 
     /**
@@ -238,9 +250,9 @@ class profile_api {
         $db = database_interface::get_instance();
 
         // Clear lastname and firstname.
-        $lastname  = str_replace(['<', '>'], '', $lastname);
+        $lastname = str_replace(['<', '>'], '', $lastname);
         $firstname = str_replace(['<', '>'], '', $firstname);
-        $email     = strtolower($email);
+        $email = strtolower($email);
 
         // Check if lastname is empty.
         if (empty($lastname)) {
@@ -268,14 +280,14 @@ class profile_api {
         }
 
         // Create user object for create user function.
-        $user             = new \stdClass();
-        $user->lastname   = $lastname;
-        $user->firstname  = $firstname;
-        $user->email      = $email;
-        $user->username   = $email;
-        $user->password   = 'to be generated';
+        $user = new \stdClass();
+        $user->lastname = $lastname;
+        $user->firstname = $firstname;
+        $user->email = $email;
+        $user->username = $email;
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
+        $user->confirmed = 1;
         if (!is_null($auth)) {
             $user->auth = $auth;
         }
@@ -285,13 +297,13 @@ class profile_api {
 
             if (is_number($entity)) {
                 $entityobject = entity_api::get_entity($entity);
-                $entityname   = $entityobject->name;
+                $entityname = $entityobject->name;
             } else if (is_object($entity)) {
                 $entityobject = $entity;
-                $entityname   = $entity->name;
+                $entityname = $entity->name;
             } else if (is_string($entity)) {
                 $entityobject = entity_api::get_entity_by_name($entity);
-                $entityname   = $entityobject->name;
+                $entityname = $entityobject->name;
             }
 
             $user->profile_field_mainentity = $entityname;
@@ -305,13 +317,13 @@ class profile_api {
             foreach ($secondaryentities as $secondaryentity) {
                 if (is_number($secondaryentity)) {
                     $entityobject = entity_api::get_entity($secondaryentity);
-                    $entityname   = $entityobject->name;
+                    $entityname = $entityobject->name;
                 } else if (is_object($secondaryentity)) {
                     $entityobject = $secondaryentity;
-                    $entityname   = $entityobject->name;
+                    $entityname = $entityobject->name;
                 } else if (is_string($secondaryentity)) {
                     $entityobject = entity_api::get_entity_by_name($secondaryentity);
-                    $entityname   = $entityobject->name;
+                    $entityname = $entityobject->name;
                 }
 
                 $user->profile_field_secondaryentities[] = $entityname;
@@ -357,7 +369,7 @@ class profile_api {
         if (empty($user->auth)) {
             // Create user into LDAP.
             $user->auth = 'ldap_syncplus';
-            $auth       = get_auth_plugin($user->auth);
+            $auth = get_auth_plugin($user->auth);
 
             // Check if the user has been created into the ldap.
             if (!$auth->user_create($user, $user->password)) {
@@ -380,9 +392,9 @@ class profile_api {
 
         // Set required fields for the fullname() function.
         $user->firstnamephonetic = '';
-        $user->lastnamephonetic  = '';
-        $user->middlename        = '';
-        $user->alternatename     = '';
+        $user->lastnamephonetic = '';
+        $user->middlename = '';
+        $user->alternatename = '';
 
         // Manage password.
         setnew_password_and_mail($user);
@@ -424,7 +436,7 @@ class profile_api {
         $db = database_interface::get_instance();
 
         // Get all admins and category users.
-        $mainadmins     = $db->get_all_admins($data);
+        $mainadmins = $db->get_all_admins($data);
         $categoryadmins = $db->get_all_category_users($data);
 
         // Merge admin and category admins.
@@ -443,36 +455,36 @@ class profile_api {
 
             // Check entity name for category roles.
             if (is_numeric($role->categoryid)) {
-                $entity                    = entity_api::get_entity($role->categoryid, false);
+                $entity = entity_api::get_entity($role->categoryid, false);
                 $formattedrole->entityname = $entity->get_entity_path();
             } else {
                 // Admin case.
                 $formattedrole->entityname = '-';
             }
 
-            $formattedrole->categoryid          = $role->categoryid;
-            $formattedrole->parentid            = $role->parentid;
-            $formattedrole->rolename            = $role->rolename;
-            $formattedrole->firstname           = $role->firstname;
-            $formattedrole->lastname            = $role->lastname;
-            $formattedrole->email               = $role->email;
-            $formattedrole->lastaccess          = $role->lastaccess;
-            $formattedrole->lastaccessstr       = $role->lastaccess == 0 ? get_string('neverconnected', 'local_user') : format_time
+            $formattedrole->categoryid = $role->categoryid;
+            $formattedrole->parentid = $role->parentid;
+            $formattedrole->rolename = $role->rolename;
+            $formattedrole->firstname = $role->firstname;
+            $formattedrole->lastname = $role->lastname;
+            $formattedrole->email = $role->email;
+            $formattedrole->lastaccess = $role->lastaccess;
+            $formattedrole->lastaccessstr = $role->lastaccess == 0 ? get_string('neverconnected', 'local_user') : format_time
             ($currenttime - $role->lastaccess);
             $formattedrole->timemodifiednumeric = $role->timemodified;
-            $formattedrole->timemodified        = "-";
+            $formattedrole->timemodified = "-";
 
             if (is_numeric($role->timemodified)) {
-                $dtz              = new \DateTimeZone('Europe/Paris');
+                $dtz = new \DateTimeZone('Europe/Paris');
                 $timemodifieddate = new \DateTime("@$role->timemodified");
                 $timemodifieddate->setTimezone($dtz);
                 $formattedrole->timemodified = $timemodifieddate->format('d/m/Y');
             }
 
-            $formattedrole->email       = $role->email;
-            $formattedrole->userid      = $role->userid;
+            $formattedrole->email = $role->email;
+            $formattedrole->userid = $role->userid;
             $formattedrole->profilelink = $CFG->wwwroot . '/user/profile.php?id=' . $role->userid;
-            $formattedrole->mainentity  = $role->mainentity;
+            $formattedrole->mainentity = $role->mainentity;
 
             if (!isset($mainentities[$role->mainentity])) {
                 $mainentities[$role->mainentity] = entity_api::get_entity_by_name($role->mainentity);
@@ -536,7 +548,7 @@ class profile_api {
     public static function has_profile_config_access($profileid) {
         global $USER;
 
-        $profile    = self::get_profile($profileid);
+        $profile = self::get_profile($profileid);
         $mainentity = $profile->get_main_entity();
 
         if (!$mainentity) {
@@ -556,7 +568,7 @@ class profile_api {
      * @throws \moodle_exception
      */
     public static function set_user_preference($userid, $preferencename, $value) {
-        $profile    = self::get_profile($userid);
+        $profile = self::get_profile($userid);
 
         return $profile->set_preference($preferencename, $value);
     }
@@ -570,8 +582,17 @@ class profile_api {
      * @throws \moodle_exception
      */
     public static function get_user_preference($userid, $preferencename) {
-        $profile    = self::get_profile($userid);
+        $profile = self::get_profile($userid);
 
         return $profile->get_preference($preferencename);
+    }
+
+    /**
+     * Gives the name of the capability that allows access to the edadmin course of the user format.
+     *
+     * @return string
+     */
+    public static function get_edadmin_course_view_capability() {
+        return 'local/entities:manageentity';
     }
 }

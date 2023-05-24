@@ -41,7 +41,7 @@ $context = $session->get_context();
 
 require_capability('local/mentor_core:duplicatesessionintotraining', $context);
 
-$url   = new moodle_url('/local/mentor_core/pages/duplicatesession.php', ['sessionid' => $sessionid]);
+$url = new moodle_url('/local/mentor_core/pages/duplicatesession.php', ['sessionid' => $sessionid]);
 $title = get_string('duplicatesessionintotrainingtitle', 'local_mentor_core', $session->fullname);
 
 // Set page config.
@@ -95,9 +95,9 @@ $form = new \local_mentor_core\duplicate_session_form(null,
     ['sessionid' => $sessionid, 'entitieslist' => $entitieslist, 'entitiesjs' => $entitiesjs]);
 
 // Get next available index.
-$nextindex     = \local_mentor_core\session_api::get_next_available_shortname_index($session->shortname);
+$nextindex = \local_mentor_core\session_api::get_next_available_shortname_index($session->shortname);
 $nextshortname = $session->shortname . ' ' . $nextindex;
-$nextfullname  = $session->fullname . ' ' . $nextindex;
+$nextfullname = $session->fullname . ' ' . $nextindex;
 
 // Set form data.
 $form->set_data(['sessionid' => $sessionid, 'fullname' => $nextfullname, 'shortname' => $nextshortname]);
@@ -123,9 +123,9 @@ if ($form->is_cancelled()) {
     }
 
     // Get next available index.
-    $nextindex     = \local_mentor_core\session_api::get_next_available_shortname_index($session->shortname);
+    $nextindex = \local_mentor_core\session_api::get_next_available_shortname_index($session->shortname);
     $nextshortname = $session->shortname . ' ' . $nextindex;
-    $nextfullname  = $session->fullname . ' ' . $nextindex;
+    $nextfullname = $session->fullname . ' ' . $nextindex;
 
     $form->set_value('shortname', $nextshortname);
     $form->set_value('fullname', $nextfullname);

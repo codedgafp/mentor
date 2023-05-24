@@ -126,12 +126,12 @@ class entity extends model {
             throw new \moodle_exception('errorcategoryisnotentity', 'local_mentor_core', '', $category);
         }
 
-        $this->id         = $category->id;
-        $this->name       = $category->name;
-        $this->parentid   = $category->parentid;
-        $this->shortname  = $category->shortname;
+        $this->id = $category->id;
+        $this->name = $category->name;
+        $this->parentid = $category->parentid;
+        $this->shortname = $category->shortname;
         $this->entitypath = $this->get_entity_path();
-        $this->members    = array();
+        $this->members = array();
     }
 
     /**
@@ -165,8 +165,8 @@ class entity extends model {
 
         if ($this->name != $data->name) {
             $namehaschanged = true;
-            $oldname        = $this->name;
-            $this->name     = $data->name;
+            $oldname = $this->name;
+            $this->name = $data->name;
         }
 
         $this->shortname = isset($data->shortname) ? trim($data->shortname) : $this->shortname;
@@ -185,6 +185,9 @@ class entity extends model {
             if ($this->is_main_entity()) {
                 // Update the main entity of all users.
                 $this->dbinterface->update_main_entities_name($oldname, $data->name);
+
+                // Update the main secondary of all users.
+                $this->dbinterface->update_secondary_entities_name($oldname, $data->name);
 
                 // Update contact page name.
                 $this->update_contact_page_name();
@@ -271,7 +274,7 @@ class entity extends model {
         }
 
         // Update cohort name.
-        $cohort       = $this->get_cohort();
+        $cohort = $this->get_cohort();
         $cohort->name = $name;
         return $this->dbinterface->update_cohort($cohort);
     }
@@ -285,13 +288,13 @@ class entity extends model {
      */
     private function create_contact_page() {
 
-        $course               = new \stdClass();
-        $course->fullname     = $this->name . ' - Page de contact';
-        $course->shortname    = $this->get_entity_path() . ' - Page de contact';
-        $course->category     = $this->get_entity_pages_category();
-        $course->format       = 'singleactivity';
+        $course = new \stdClass();
+        $course->fullname = $this->name . ' - Page de contact';
+        $course->shortname = $this->get_entity_path() . ' - Page de contact';
+        $course->category = $this->get_entity_pages_category();
+        $course->format = 'singleactivity';
         $course->activitytype = 'page';
-        $course->idnumber     = 'contact_' . $this->id;
+        $course->idnumber = 'contact_' . $this->id;
 
         // Create a single activity course of type Page.
         $course = create_course($course);
@@ -299,15 +302,15 @@ class entity extends model {
         // Allow a guest access to the course.
         $plugin = enrol_get_plugin('guest');
 
-        $instance                  = (object) $plugin->get_instance_defaults();
-        $instance->status          = 0;
-        $instance->id              = '';
-        $instance->courseid        = $course->id;
+        $instance = (object) $plugin->get_instance_defaults();
+        $instance->status = 0;
+        $instance->id = '';
+        $instance->courseid = $course->id;
         $instance->expirythreshold = 0;
-        $instance->enrolstartdate  = 0;
-        $instance->enrolenddate    = 0;
-        $instance->timecreated     = time();
-        $instance->timemodified    = time();
+        $instance->enrolstartdate = 0;
+        $instance->enrolenddate = 0;
+        $instance->timecreated = time();
+        $instance->timemodified = time();
 
         $fields = (array) $instance;
 
@@ -348,17 +351,17 @@ class entity extends model {
         // Create cohort sync enrol to the course.
         $plugin = enrol_get_plugin('cohort');
 
-        $instance                  = (object) $plugin->get_instance_defaults();
-        $instance->status          = 0;
-        $instance->id              = '';
-        $instance->courseid        = $course->id;
+        $instance = (object) $plugin->get_instance_defaults();
+        $instance->status = 0;
+        $instance->id = '';
+        $instance->courseid = $course->id;
         $instance->expirythreshold = 0;
-        $instance->enrolstartdate  = 0;
-        $instance->enrolenddate    = 0;
-        $instance->timecreated     = time();
-        $instance->timemodified    = time();
-        $instance->customint1      = $this->get_cohort()->id;
-        $instance->customint2      = 0;
+        $instance->enrolstartdate = 0;
+        $instance->enrolenddate = 0;
+        $instance->timecreated = time();
+        $instance->timemodified = time();
+        $instance->customint1 = $this->get_cohort()->id;
+        $instance->customint2 = 0;
 
         $fields = (array) $instance;
 
@@ -385,12 +388,12 @@ class entity extends model {
             return false;
         }
 
-        $course            = new \stdClass();
-        $course->fullname  = 'Présentation de l\'espace Mentor ' . $this->name;
+        $course = new \stdClass();
+        $course->fullname = 'Présentation de l\'espace Mentor ' . $this->name;
         $course->shortname = 'Présentation de l\'espace Mentor ' . $this->name;
-        $course->category  = $this->get_entity_pages_category();
-        $course->format    = 'topics';
-        $course->idnumber  = 'presentation_' . $this->id;
+        $course->category = $this->get_entity_pages_category();
+        $course->format = 'topics';
+        $course->idnumber = 'presentation_' . $this->id;
 
         // Create a single activity course of type Page.
         $course = create_course($course);
@@ -398,15 +401,15 @@ class entity extends model {
         // Allow a guest access to the course.
         $plugin = enrol_get_plugin('guest');
 
-        $instance                  = (object) $plugin->get_instance_defaults();
-        $instance->status          = 0;
-        $instance->id              = '';
-        $instance->courseid        = $course->id;
+        $instance = (object) $plugin->get_instance_defaults();
+        $instance->status = 0;
+        $instance->id = '';
+        $instance->courseid = $course->id;
         $instance->expirythreshold = 0;
-        $instance->enrolstartdate  = 0;
-        $instance->enrolenddate    = 0;
-        $instance->timecreated     = time();
-        $instance->timemodified    = time();
+        $instance->enrolstartdate = 0;
+        $instance->enrolenddate = 0;
+        $instance->timecreated = time();
+        $instance->timemodified = time();
 
         $fields = (array) $instance;
 
@@ -527,8 +530,8 @@ class entity extends model {
      * @throws \moodle_exception
      */
     public function update_contact_page_name() {
-        $course            = $this->get_contact_page_course();
-        $course->fullname  = $this->name . ' - Page de contact';
+        $course = $this->get_contact_page_course();
+        $course->fullname = $this->name . ' - Page de contact';
         $course->shortname = $this->get_entity_path(true) . ' - Page de contact';
         update_course($course);
     }
@@ -543,7 +546,7 @@ class entity extends model {
         $course = $this->get_presentation_page_course();
 
         if ($course) {
-            $course->fullname  = 'Présentation de l\'espace Mentor ' . $this->name;
+            $course->fullname = 'Présentation de l\'espace Mentor ' . $this->name;
             $course->shortname = 'Présentation de l\'espace Mentor ' . $this->name;
             update_course($course);
         }
@@ -569,7 +572,7 @@ class entity extends model {
         $edadmincourses = $db->get_edadmin_courses_by_category($this->id);
 
         if (!$this->is_main_entity()) {
-            $parententity         = $this->get_main_entity();
+            $parententity = $this->get_main_entity();
             $parentedadmincourses = $parententity->get_edadmin_courses();
 
             // Add main entity course edadmin link.
@@ -590,6 +593,11 @@ class entity extends model {
 
             $formattype = $edadmincourse->formattype;
 
+            // When the user only manages courses and sessions.
+            if (!$this->is_manager() && in_array($formattype, ['entities', 'user'])) {
+                continue;
+            }
+
             // If is not main entity, skip the Edadmin courses that are in exception.
             // If this course is to be viewed, it will have been added the course of the previous main entity.
             if (!$this->is_main_entity() && in_array($formattype, self::SUB_ENTITY_EDADMIN_EXCEPT)) {
@@ -601,13 +609,13 @@ class entity extends model {
             }
 
             // Set course data.
-            $this->lastedadmincourses[$formattype]['cohortid']  = $this->get_cohort()->id;
-            $this->lastedadmincourses[$formattype]['link']      = (new \moodle_url('/course/view.php',
+            $this->lastedadmincourses[$formattype]['cohortid'] = $this->get_cohort()->id;
+            $this->lastedadmincourses[$formattype]['link'] = (new \moodle_url('/course/view.php',
                 array('id' => $edadmincourse->id))
             )->out();
-            $this->lastedadmincourses[$formattype]['name']      = $edadmincourse->fullname;
+            $this->lastedadmincourses[$formattype]['name'] = $edadmincourse->fullname;
             $this->lastedadmincourses[$formattype]['shortname'] = $edadmincourse->shortname;
-            $this->lastedadmincourses[$formattype]['id']        = $edadmincourse->id;
+            $this->lastedadmincourses[$formattype]['id'] = $edadmincourse->id;
 
             if (!empty($type) && isset($this->lastedadmincourses[$type])) {
                 return $this->lastedadmincourses[$type];
@@ -636,7 +644,7 @@ class entity extends model {
      * @throws \dml_exception
      * @throws \moodle_exception
      */
-    public function get_edadmin_courses_url($type = 'training') {
+    public function get_edadmin_courses_url($type = 'trainings') {
         global $CFG;
 
         if (
@@ -651,7 +659,8 @@ class entity extends model {
 
         if (!$this->is_main_entity()) {
             $parententity = $this->get_main_entity();
-            return $parententity->get_edadmin_courses_url($type) . '&subentityid=' . $this->id;
+            $parenturl = $parententity->get_edadmin_courses_url($type);
+            return !empty($parenturl) ? $parenturl . '&subentityid=' . $this->id : '';
         }
 
         // Get all edadmin course of the entity category.
@@ -720,7 +729,7 @@ class entity extends model {
         $role = $this->get_manager_role();
 
         $contextid = $this->get_context()->id;
-        $roleid    = $role->id;
+        $roleid = $role->id;
 
         role_assign($roleid, $userid, $contextid);
 
@@ -748,10 +757,10 @@ class entity extends model {
      * @throws \coding_exception
      */
     private function create_cohort() {
-        $cohort            = new \stdClass();
-        $cohort->name      = $this->name;
+        $cohort = new \stdClass();
+        $cohort->name = $this->name;
         $cohort->contextid = $this->get_context()->id;
-        $cohort->id        = cohort_add_cohort($cohort);
+        $cohort->id = cohort_add_cohort($cohort);
 
         $this->cohort = $cohort;
 
@@ -782,6 +791,11 @@ class entity extends model {
 
             $typename = substr($typename, strrpos($typename, '::'));
 
+            // When the user only manages courses and sessions.
+            if (!$this->is_manager() && in_array($typename, ['entities', 'user'])) {
+                continue;
+            }
+
             // If is not main entity, skip the Edadmin courses that are in exception.
             if (!$this->is_main_entity() && in_array($typename, self::SUB_ENTITY_EDADMIN_EXCEPT)) {
                 continue;
@@ -794,22 +808,22 @@ class entity extends model {
 
                 // Minimum data to create a course.
                 $newcourse = array(
-                    'fullname'            => $this->name . ' - ' . $langstringtypename->out(),
-                    'shortname'           => $this->get_entity_path() . ' - ' . $langstringtypename->out(),
-                    'categoryid'          => $this->id,
-                    'format'              => 'edadmin',
+                    'fullname' => $this->name . ' - ' . $langstringtypename->out(),
+                    'shortname' => $this->get_entity_path() . ' - ' . $langstringtypename->out(),
+                    'categoryid' => $this->id,
+                    'format' => 'edadmin',
                     'courseformatoptions' =>
                         array(
                             array(
-                                'name'  => 'formattype',
+                                'name' => 'formattype',
                                 'value' => $typename
                             ),
                             array(
-                                'name'  => 'categorylink',
+                                'name' => 'categorylink',
                                 'value' => $this->id
                             ),
                             array(
-                                'name'  => 'cohortlink',
+                                'name' => 'cohortlink',
                                 'value' => $cohortid
                             )
                         )
@@ -827,7 +841,7 @@ class entity extends model {
 
         // Set edadmin courses object.
         foreach ($typenamelist as $typename) {
-            $this->{$typename}        = $existingcourses[$typename] ?? '';
+            $this->{$typename} = $existingcourses[$typename] ?? '';
             $this->courses[$typename] = $this->{$typename};
         }
 
@@ -853,8 +867,8 @@ class entity extends model {
             }
 
             $langstringtypename = new \lang_string('edadmin' . $formattype . 'coursetitle', 'local_' . $formattype);
-            $fullname           = $this->name . ' - ' . $langstringtypename->out();
-            $shortname          = $this->get_entity_path(true) . ' - ' . $langstringtypename->out();
+            $fullname = $this->name . ' - ' . $langstringtypename->out();
+            $shortname = $this->get_entity_path(true) . ' - ' . $langstringtypename->out();
 
             // Rename the edadmin course.
             $this->dbinterface->update_course_name($course['id'], $shortname, $fullname);
@@ -1070,11 +1084,11 @@ class entity extends model {
         if (!$entitychild) {
             try {
                 // Init object for children category.
-                $trainingchild               = new \stdClass();
-                $trainingchild->name         = $categoryname;
-                $trainingchild->depth        = 2;
-                $trainingchild->parent       = $this->id;
-                $trainingchild->sortorder    = MAX_COURSES_IN_CATEGORY;
+                $trainingchild = new \stdClass();
+                $trainingchild->name = $categoryname;
+                $trainingchild->depth = 2;
+                $trainingchild->parent = $this->id;
+                $trainingchild->sortorder = MAX_COURSES_IN_CATEGORY;
                 $trainingchild->timemodified = time();
 
                 // Create children category.
@@ -1110,10 +1124,10 @@ class entity extends model {
         global $CFG;
 
         // Get entity by id.
-        $entityobj               = new \stdClass();
+        $entityobj = new \stdClass();
         $entityobj->namecategory = $this->name;
-        $entityobj->idcategory   = $this->id;
-        $entityobj->shortname    = $this->shortname;
+        $entityobj->idcategory = $this->id;
+        $entityobj->shortname = $this->shortname;
 
         // If is not main entity.
         if (!$this->is_main_entity()) {
@@ -1172,7 +1186,7 @@ class entity extends model {
      * @throws \moodle_exception
      */
     public function change_parent_entity($newparententityid) {
-        $coursecat       = $this->get_course_category();
+        $coursecat = $this->get_course_category();
         $newparententity = new entity($newparententityid);
         $coursecat->change_parent($newparententity->get_entity_space_category());
         $this->parentid = $newparententityid;
@@ -1197,7 +1211,7 @@ class entity extends model {
         }
 
         // Generate entity path for sub entity.
-        $parententity     = new entity($this->parentid);
+        $parententity = new entity($this->parentid);
         $this->entitypath = $parententity->get_entity_path($refresh) . ' / ' . $this->name;
 
         return $this->entitypath;
@@ -1354,7 +1368,7 @@ class entity extends model {
      * @throws \moodle_exception
      */
     private function get_recyclebin_items($categoryid, &$items) {
-        $category   = \context_coursecat::instance($categoryid);
+        $category = \context_coursecat::instance($categoryid);
         $recyclebin = new \tool_recyclebin\category_bin($category->instanceid);
 
         // Get all recycle bin items.
@@ -1368,12 +1382,12 @@ class entity extends model {
         // Set entity's trainings recycle bin table.
         foreach ($recyclebinitems as $recyclebinitem) {
 
-            $item              = new \stdClass();
-            $item->id          = $recyclebinitem->id;
-            $item->contextid   = $category->id;
-            $item->instanceid  = $category->instanceid;
-            $item->entityid    = $this->id;
-            $item->name        = $recyclebinitem->name;
+            $item = new \stdClass();
+            $item->id = $recyclebinitem->id;
+            $item->contextid = $category->id;
+            $item->instanceid = $category->instanceid;
+            $item->entityid = $this->id;
+            $item->name = $recyclebinitem->name;
             $item->timecreated = userdate($recyclebinitem->timecreated);
 
             // Sub-entity name row.
@@ -1510,5 +1524,15 @@ class entity extends model {
      */
     public function is_hidden() {
         return 0;
+    }
+
+    /**
+     * Can be a main entity
+     *
+     * @return bool
+     * @throws \dml_exception
+     */
+    public function can_be_main_entity($refresh = false) {
+        return true;
     }
 }

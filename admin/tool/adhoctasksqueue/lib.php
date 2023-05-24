@@ -182,8 +182,8 @@ class adhoctasks_api {
         http_response_code($httpstatus);
 
         // Build mandatory datas.
-        $generic            = [];
-        $generic['status']  = $httpstatus;
+        $generic = [];
+        $generic['status'] = $httpstatus;
         $generic['message'] = $message;
 
         // Add other data if necessary.

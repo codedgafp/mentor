@@ -73,22 +73,22 @@ class duplicate_session_as_new_training_task extends \core\task\adhoc_task {
 
         mtrace('Training created : ' . $newtraining->id . ' - ' . $newtraining->shortname);
 
-        $creator     = \core_user::get_user($this->get_userid());
+        $creator = \core_user::get_user($this->get_userid());
         $supportuser = \core_user::get_support_user();
 
         // Get the content of the email.
-        $content     = get_string('duplicate_session_new_training_email', 'local_mentor_core', array(
-                'sessionurlsheet'      => $session->get_url()->out(),
-                'trainingurlsheet'     => $newtraining->get_sheet_url()->out(),
-                'trainingfullname'     => $newtraining->name,
-                'sessionfullname'      => $session->fullname
+        $content = get_string('duplicate_session_new_training_email', 'local_mentor_core', array(
+            'sessionurlsheet' => $session->get_url()->out(),
+            'trainingurlsheet' => $newtraining->get_sheet_url()->out(),
+            'trainingfullname' => $newtraining->name,
+            'sessionfullname' => $session->fullname
         ));
         $contenthtml = text_to_html($content, false, false, true);
 
         // Send the email.
         email_to_user($creator, $supportuser,
-                get_string('duplicate_session_new_training_object_email', 'local_mentor_core', $session->fullname), $content,
-                $contenthtml);
+            get_string('duplicate_session_new_training_object_email', 'local_mentor_core', $session->fullname), $content,
+            $contenthtml);
 
         return $newtraining;
     }

@@ -50,8 +50,8 @@ class theme_mentor_core_renderer_testcase extends \advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -71,14 +71,14 @@ class theme_mentor_core_renderer_testcase extends \advanced_testcase {
         // Init test data.
         $trainingdata = new \stdClass();
 
-        $trainingdata->name      = 'fullname';
+        $trainingdata->name = 'fullname';
         $trainingdata->shortname = 'shortname';
-        $trainingdata->content   = 'summary';
+        $trainingdata->content = 'summary';
 
         // Create training object.
         $trainingdata->traininggoal = 'TEST TRAINING';
-        $trainingdata->thumbnail    = '';
-        $trainingdata->status       = \local_mentor_core\training::STATUS_DRAFT;
+        $trainingdata->thumbnail = '';
+        $trainingdata->status = \local_mentor_core\training::STATUS_DRAFT;
 
         try {
             // Get entity object for default category.
@@ -90,9 +90,9 @@ class theme_mentor_core_renderer_testcase extends \advanced_testcase {
         }
 
         // Fill with entity data.
-        $formationid                     = $entity->get_entity_formation_category();
-        $trainingdata->categorychildid   = $formationid;
-        $trainingdata->categoryid        = $entity->id;
+        $formationid = $entity->get_entity_formation_category();
+        $trainingdata->categorychildid = $formationid;
+        $trainingdata->categoryid = $entity->id;
         $trainingdata->creativestructure = $entity->id;
 
         return $trainingdata;
@@ -203,14 +203,14 @@ class theme_mentor_core_renderer_testcase extends \advanced_testcase {
 
         $CFG->sitetype = 'dev';
         self::assertEquals('<span id="site-type" class="type-' . $CFG->sitetype . '"> ' . $CFG->sitetype . '</span>',
-            $renderer->site_type());
+                $renderer->site_type());
 
         $CFG->sitetype = 'prod';
         self::assertEmpty($renderer->site_type());
 
         $CFG->sitetype = 'test_type';
         self::assertEquals('<span id="site-type" class="type-' . $CFG->sitetype . '"> ' . $CFG->sitetype . '</span>',
-            $renderer->site_type());
+                $renderer->site_type());
 
         self::resetAllData();
     }
@@ -230,12 +230,12 @@ class theme_mentor_core_renderer_testcase extends \advanced_testcase {
         $renderer = new \theme_mentor_core_renderer($PAGE, 'target');
 
         $cataloglink = $CFG->wwwroot . '/local/catalog/index.php';
-        $render      = '<li class="nav-item catalog">';
-        $render      .= '<a class="nav-item nav-link" href="' . $cataloglink . '">';
-        $render      .= $renderer->pix_icon('offre', '', 'theme_mentor');
-        $render      .= '<span>' . get_string('trainingcatalog', 'theme_mentor') . '</span>';
-        $render      .= '</a>';
-        $render      .= '</li>';
+        $render = '<li class="nav-item catalog">';
+        $render .= '<a class="nav-item nav-link" href="' . $cataloglink . '">';
+        $render .= $renderer->pix_icon('offre', '', 'theme_mentor');
+        $render .= '<span>' . get_string('trainingcatalog', 'theme_mentor') . '</span>';
+        $render .= '</a>';
+        $render .= '</li>';
 
         self::assertEquals($render, $renderer->custom_menu());
 
@@ -484,7 +484,7 @@ class theme_mentor_core_renderer_testcase extends \advanced_testcase {
 
         self::setAdminUser();
 
-        $renderer       = new \theme_mentor_core_renderer($PAGE, 'target');
+        $renderer = new \theme_mentor_core_renderer($PAGE, 'target');
         $rendererparent = new \core_renderer($PAGE, 'target');
 
         // With standard header.
@@ -492,15 +492,15 @@ class theme_mentor_core_renderer_testcase extends \advanced_testcase {
 
         // Header with training status.
         $trainingdata = $this->get_training_data(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
-        $training     = \local_mentor_core\training_api::create_training($trainingdata);
-        $COURSE->id   = $training->get_course()->id;
+        $training = \local_mentor_core\training_api::create_training($trainingdata);
+        $COURSE->id = $training->get_course()->id;
         self::assertEquals($rendererparent->course_header() . '<div id="course-status">' .
                            get_string($training->status, 'local_trainings') . '</div>', $renderer->course_header());
 
         // Header with session status.
         $sessionname = 'TESTUNITCREATESESSION';
-        $session     = \local_mentor_core\session_api::create_session($training->id, $sessionname, true);
-        $COURSE->id  = $session->get_course()->id;
+        $session = \local_mentor_core\session_api::create_session($training->id, $sessionname, true);
+        $COURSE->id = $session->get_course()->id;
         self::assertEquals($rendererparent->course_header() . '<div id="course-status">' .
                            get_string($session->status, 'local_session') . '</div>', $renderer->course_header());
 
@@ -521,7 +521,7 @@ class theme_mentor_core_renderer_testcase extends \advanced_testcase {
         $this->reset_singletons();
         $this->init_config();
 
-        $renderer       = new \theme_mentor_core_renderer($PAGE, 'target');
+        $renderer = new \theme_mentor_core_renderer($PAGE, 'target');
         $rendererparent = new \core_renderer($PAGE, 'target');
 
         $output = $rendererparent->standard_footer_html();
@@ -551,8 +551,8 @@ class theme_mentor_core_renderer_testcase extends \advanced_testcase {
         self::setAdminUser();
 
         \local_mentor_core\library_api::get_or_create_library();
-        $trainingdata    = $this->get_training_data(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
-        $training        = \local_mentor_core\training_api::create_training($trainingdata);
+        $trainingdata = $this->get_training_data(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
+        $training = \local_mentor_core\training_api::create_training($trainingdata);
         $traininglibrary = \local_mentor_core\library_api::publish_to_library($training->id, true);
 
         // Make sure a debugging message is triggered.
@@ -565,8 +565,8 @@ class theme_mentor_core_renderer_testcase extends \advanced_testcase {
         $output = $renderer->header();
 
         self::assertStringContainsString(
-            'demo-course',
-            $output
+                'demo-course',
+                $output
         );
         self::resetAllData();
     }
@@ -594,8 +594,8 @@ class theme_mentor_core_renderer_testcase extends \advanced_testcase {
         $renderer->header();
 
         self::assertStringNotContainsString(
-            'demo-course',
-            $PAGE->bodyclasses
+                'demo-course',
+                $PAGE->bodyclasses
         );
 
         self::resetAllData();

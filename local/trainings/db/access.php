@@ -30,9 +30,9 @@ $capabilities = array(
     'local/trainings:manage' => array(
         'riskbitmask' => RISK_XSS,
 
-        'captype'      => 'write',
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
 
@@ -42,9 +42,9 @@ $capabilities = array(
     'local/trainings:create' => array(
         'riskbitmask' => RISK_XSS,
 
-        'captype'      => 'write',
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
 
@@ -53,9 +53,9 @@ $capabilities = array(
     'local/trainings:createinsubentity' => array(
         'riskbitmask' => RISK_XSS,
 
-        'captype'      => 'write',
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => [
+        'archetypes' => [
             'manager' => CAP_ALLOW
         ],
 
@@ -64,12 +64,12 @@ $capabilities = array(
     'local/trainings:update' => array(
         'riskbitmask' => RISK_XSS,
 
-        'captype'      => 'write',
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
-        'archetypes'   => array(
-            'manager'        => CAP_ALLOW,
+        'archetypes' => array(
+            'manager' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
-            'manager'        => CAP_ALLOW
+            'manager' => CAP_ALLOW
         ),
 
         'clonepermissionsfrom' => 'moodle/course:update'
@@ -78,20 +78,20 @@ $capabilities = array(
     'local/trainings:delete' => array(
         'riskbitmask' => RISK_XSS,
 
-        'captype'      => 'write',
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
 
         'clonepermissionsfrom' => 'moodle/course:delete'
     ),
-    'local/trainings:view'   => array(
+    'local/trainings:view' => array(
         'riskbitmask' => RISK_XSS,
 
-        'captype'      => 'read',
+        'captype' => 'read',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => array(
+        'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
 

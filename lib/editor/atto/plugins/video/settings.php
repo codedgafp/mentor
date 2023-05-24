@@ -33,8 +33,8 @@ if (is_siteadmin()) {
 
     // Allowed domains.
     $settings->add(new admin_setting_configtextarea('atto_video/alloweddomains',
-            get_string('allowed_domains', 'atto_video'),
-            get_string('allowed_domains_desc', 'atto_video'),
-            'https://video.mentor.gouv.fr'));
+        get_string('allowed_domains', 'atto_video'),
+        get_string('allowed_domains_desc', 'atto_video'),
+        'https://video.mentor.gouv.fr'));
 
 }

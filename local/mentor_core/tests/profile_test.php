@@ -40,8 +40,8 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -124,14 +124,14 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
     public function init_role() {
         global $DB;
 
-        $db      = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $manager = $db->get_role_by_name('manager');
 
         // Create the manager role if it doesn't exist.
         if (!$manager) {
             $otherrole = $DB->get_record('role', array('archetype' => 'manager'), '*', IGNORE_MULTIPLE);
             $this->duplicate_role($otherrole->shortname, 'manager', 'Manager',
-                'manager');
+                    'manager');
         }
     }
 
@@ -143,9 +143,9 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
     public function get_entities_data() {
 
         return [
-            'name'      => 'New Entity 1',
-            'shortname' => 'New Entity 1',
-            'userid'    => 2  // Set the admin user as manager of the entity.
+                'name' => 'New Entity 1',
+                'shortname' => 'New Entity 1',
+                'userid' => 2  // Set the admin user as manager of the entity.
         ];
     }
 
@@ -160,25 +160,25 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
         global $DB;
 
         // Create user.
-        $user             = new stdClass();
-        $user->lastname   = 'lastname';
-        $user->firstname  = 'firstname';
-        $user->email      = 'test@test.com';
-        $user->username   = 'testusername';
-        $user->password   = 'to be generated';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
-        $user->auth       = 'manual';
+        $user->confirmed = 1;
+        $user->auth = 'manual';
 
         $userid = local_mentor_core\profile_api::create_user($user);
         set_user_preference('auth_forcepasswordchange', 0, $user);
 
         $field = $DB->get_record('user_info_field', ['shortname' => 'mainentity']);
 
-        $userdata          = new stdClass();
+        $userdata = new stdClass();
         $userdata->fieldid = $field->id;
-        $userdata->data    = 'New Entity 1';
-        $userdata->userid  = $userid;
+        $userdata->data = 'New Entity 1';
+        $userdata->userid = $userid;
 
         $DB->insert_record('user_info_data', $userdata);
 
@@ -194,8 +194,8 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
     public function init_create_entity($entityname = 'New Entity 1') {
 
         $entitydata = [
-            'name'      => $entityname,
-            'shortname' => $entityname
+                'name' => $entityname,
+                'shortname' => $entityname
         ];
 
         // Test standard Entity creation.
@@ -223,32 +223,32 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
         // Init test data.
         $trainingdata = new stdClass();
 
-        $trainingdata->name      = $name;
+        $trainingdata->name = $name;
         $trainingdata->shortname = $shortname;
-        $trainingdata->content   = 'summary';
+        $trainingdata->content = 'summary';
 
         // Create training object.
-        $trainingdata->teaser                       = 'http://www.edunao.com/';
-        $trainingdata->teaserpicture                = '';
-        $trainingdata->prerequisite                 = 'TEST';
-        $trainingdata->collection                   = 'accompagnement';
-        $trainingdata->traininggoal                 = 'TEST TRAINING ';
-        $trainingdata->idsirh                       = 'TEST ID SIRH';
-        $trainingdata->licenseterms                 = 'cc-sa';
-        $trainingdata->typicaljob                   = 'TEST';
-        $trainingdata->skills                       = [1, 3];
-        $trainingdata->certifying                   = '1';
-        $trainingdata->presenceestimatedtimehours   = '12';
+        $trainingdata->teaser = 'http://www.edunao.com/';
+        $trainingdata->teaserpicture = '';
+        $trainingdata->prerequisite = 'TEST';
+        $trainingdata->collection = 'accompagnement';
+        $trainingdata->traininggoal = 'TEST TRAINING ';
+        $trainingdata->idsirh = 'TEST ID SIRH';
+        $trainingdata->licenseterms = 'cc-sa';
+        $trainingdata->typicaljob = 'TEST';
+        $trainingdata->skills = [1, 3];
+        $trainingdata->certifying = '1';
+        $trainingdata->presenceestimatedtimehours = '12';
         $trainingdata->presenceestimatedtimeminutes = '10';
-        $trainingdata->remoteestimatedtimehours     = '15';
-        $trainingdata->remoteestimatedtimeminutes   = '30';
-        $trainingdata->trainingmodalities           = 'd';
-        $trainingdata->producingorganization        = 'TEST';
-        $trainingdata->producerorganizationlogo     = '';
-        $trainingdata->designers                    = 'TEST';
-        $trainingdata->contactproducerorganization  = 'TEST';
-        $trainingdata->thumbnail                    = '';
-        $trainingdata->status                       = \local_mentor_core\training::STATUS_DRAFT;
+        $trainingdata->remoteestimatedtimehours = '15';
+        $trainingdata->remoteestimatedtimeminutes = '30';
+        $trainingdata->trainingmodalities = 'd';
+        $trainingdata->producingorganization = 'TEST';
+        $trainingdata->producerorganizationlogo = '';
+        $trainingdata->designers = 'TEST';
+        $trainingdata->contactproducerorganization = 'TEST';
+        $trainingdata->thumbnail = '';
+        $trainingdata->status = \local_mentor_core\training::STATUS_DRAFT;
 
         try {
             $entity = \local_mentor_core\entity_api::get_entity($entityid);
@@ -257,9 +257,9 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
         }
 
         // Fill with entity data.
-        $formationid                     = $entity->get_entity_formation_category();
-        $trainingdata->categorychildid   = $formationid;
-        $trainingdata->categoryid        = $entity->id;
+        $formationid = $entity->get_entity_formation_category();
+        $trainingdata->categorychildid = $formationid;
+        $trainingdata->categoryid = $entity->id;
         $trainingdata->creativestructure = $entity->id;
 
         return \local_mentor_core\training_api::create_training($trainingdata);
@@ -285,7 +285,7 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
             self::fail($e->getMessage());
         }
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -414,7 +414,7 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $entityid = \local_mentor_core\entity_api::create_entity($this->get_entities_data());
-        $userid   = $this->init_create_user();
+        $userid = $this->init_create_user();
 
         self::setUser($userid);
 
@@ -507,14 +507,14 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
 
         // New user without main entity.
         $newuser = self::getDataGenerator()->create_user();
-        $result  = \local_mentor_core\profile_api::get_user_logo($newuser->id);
+        $result = \local_mentor_core\profile_api::get_user_logo($newuser->id);
         self::assertFalse($result);
 
         // Create a user with a main entity.
         $entityname = 'New Entity 1';
-        $entityid   = \local_mentor_core\entity_api::create_entity(['name' => $entityname, 'shortname' => $entityname]);
-        $userid     = self::init_create_user();
-        $result     = \local_mentor_core\profile_api::get_user_logo($userid);
+        $entityid = \local_mentor_core\entity_api::create_entity(['name' => $entityname, 'shortname' => $entityname]);
+        $userid = self::init_create_user();
+        $result = \local_mentor_core\profile_api::get_user_logo($userid);
 
         // The entity has no logo.
         self::assertFalse($result);
@@ -522,14 +522,14 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
         // Set an entity logo.
         $fs = get_file_storage();
 
-        $entity     = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
         $filerecord = [
-            'component' => 'local_entities',
-            'filearea'  => 'logo',
-            'contextid' => $entity->get_context()->id,
-            'itemid'    => 0,
-            'filepath'  => '/',
-            'filename'  => 'logo.png'
+                'component' => 'local_entities',
+                'filearea' => 'logo',
+                'contextid' => $entity->get_context()->id,
+                'itemid' => 0,
+                'filepath' => '/',
+                'filename' => 'logo.png'
         ];
 
         $fs->create_file_from_pathname($filerecord, $CFG->dirroot . '/local/mentor_core/pix/logo.png');
@@ -590,40 +590,40 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
-        $region   = 'Corse';
-        $auth     = 'manual';
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
+        $region = 'Corse';
+        $auth = 'manual';
 
         // Whith entity id.
-        $lastname  = "user1";
+        $lastname = "user1";
         $firstname = "user1";
-        $email     = "user1@gouv.fr";
+        $email = "user1@gouv.fr";
 
         self::assertCount(0, $entity->get_members());
         self::assertTrue(\local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entityid, [], $region,
-            $auth));
+                $auth));
         self::assertCount(1, $entity->get_members());
 
         // Whith entity object.
-        $lastname  = "user2";
+        $lastname = "user2";
         $firstname = "user2";
-        $email     = "user2@gouv.fr";
+        $email = "user2@gouv.fr";
 
         self::assertCount(1, $entity->get_members());
         self::assertTrue(\local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entity, [], $region,
-            $auth));
+                $auth));
         self::assertCount(2, $entity->get_members());
 
         // Whith entity name.
-        $lastname   = "user3";
-        $firstname  = "user3";
-        $email      = "user3@gouv.fr";
+        $lastname = "user3";
+        $firstname = "user3";
+        $email = "user3@gouv.fr";
         $entityname = $entity->get_name();
 
         self::assertCount(2, $entity->get_members());
         self::assertTrue(\local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entityname, [],
-            $region,
-            $auth));
+                $region,
+                $auth));
         self::assertCount(3, $entity->get_members());
 
         $this->resetAllData();
@@ -646,44 +646,44 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $entityid  = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
+        $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
         $entity2id = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 2', 'shortname' => 'New Entity 2']);
-        $entity2   = \local_mentor_core\entity_api::get_entity($entity2id);
-        $region    = 'Corse';
-        $auth      = 'manual';
+        $entity2 = \local_mentor_core\entity_api::get_entity($entity2id);
+        $region = 'Corse';
+        $auth = 'manual';
 
         // Whith entity id.
-        $lastname  = "user1";
+        $lastname = "user1";
         $firstname = "user1";
-        $email     = "user1@gouv.fr";
+        $email = "user1@gouv.fr";
 
         self::assertCount(0, $entity2->get_members());
         self::assertTrue(\local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entityid, [$entity2id],
-            $region,
-            $auth));
+                $region,
+                $auth));
         self::assertCount(1, $entity2->get_members());
 
         // Whith entity object.
-        $lastname  = "user2";
+        $lastname = "user2";
         $firstname = "user2";
-        $email     = "user2@gouv.fr";
+        $email = "user2@gouv.fr";
 
         self::assertCount(1, $entity2->get_members());
         self::assertTrue(\local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entityid, [$entity2],
-            $region,
-            $auth));
+                $region,
+                $auth));
         self::assertCount(2, $entity2->get_members());
 
         // Whith entity name.
-        $lastname    = "user3";
-        $firstname   = "user3";
-        $email       = "user3@gouv.fr";
+        $lastname = "user3";
+        $firstname = "user3";
+        $email = "user3@gouv.fr";
         $entity2name = $entity2->get_name();
 
         self::assertCount(2, $entity2->get_members());
         self::assertTrue(\local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entityid,
-            [$entity2name], $region,
-            $auth));
+                [$entity2name], $region,
+                $auth));
         self::assertCount(3, $entity2->get_members());
 
         $this->resetAllData();
@@ -703,21 +703,21 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $entityid  = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
-        $region    = 'Corse';
-        $auth      = 'manual';
-        $lastname  = "user1";
+        $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
+        $region = 'Corse';
+        $auth = 'manual';
+        $lastname = "user1";
         $firstname = "user1";
-        $email     = "user1@gouv.fr";
+        $email = "user1@gouv.fr";
 
         self::assertTrue(\local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entityid, [], $region,
-            $auth));
+                $auth));
 
         // User exist.
         self::assertEquals(\local_mentor_core\profile_api::EMAIL_USED,
-            \local_mentor_core\profile_api::create_and_add_user($lastname, $firstname,
-                $email, $entityid,
-                $region, [], $auth));
+                \local_mentor_core\profile_api::create_and_add_user($lastname, $firstname,
+                        $email, $entityid,
+                        $region, [], $auth));
 
         $this->resetAllData();
     }
@@ -737,20 +737,20 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
         self::setAdminUser();
 
         set_config('allowemailaddresses',
-            'agriculture.gouv.fr');
+                'agriculture.gouv.fr');
 
-        $entityid  = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
-        $region    = 'Corse';
-        $auth      = 'manual';
-        $lastname  = "user1";
+        $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 1', 'shortname' => 'New Entity 1']);
+        $region = 'Corse';
+        $auth = 'manual';
+        $lastname = "user1";
         $firstname = "user1";
-        $email     = "user1.gouv.fr.fr";
+        $email = "user1.gouv.fr.fr";
 
         self::assertTrue(\local_mentor_core\profile_api::EMAIL_NOT_ALLOWED === \local_mentor_core\profile_api::create_and_add_user
-            ($lastname, $firstname,
-                $email, $entityid,
-                [], $region,
-                $auth));
+                ($lastname, $firstname,
+                        $email, $entityid,
+                        [], $region,
+                        $auth));
 
         $this->resetAllData();
     }
@@ -772,24 +772,24 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
         $db = \local_mentor_core\database_interface::get_instance();
 
         $entitydata = [
-            [
-                'name'      => 'New Entity 1',
-                'shortname' => 'New Entity 1',
-                'userid'    => 2  // Set the admin user as manager of the entity.
-            ],
-            [
-                'name'      => 'New Entity 2',
-                'shortname' => 'New Entity 2',
-                'userid'    => 2  // Set the admin user as manager of the entity.
-            ],
+                [
+                        'name' => 'New Entity 1',
+                        'shortname' => 'New Entity 1',
+                        'userid' => 2  // Set the admin user as manager of the entity.
+                ],
+                [
+                        'name' => 'New Entity 2',
+                        'shortname' => 'New Entity 2',
+                        'userid' => 2  // Set the admin user as manager of the entity.
+                ],
         ];
 
         $userid1 = self::init_create_user();
 
         $entityidid1 = \local_mentor_core\entity_api::create_entity($entitydata[0]);
-        $entity1     = \local_mentor_core\entity_api::get_entity($entityidid1);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityidid1);
         $entityidid2 = \local_mentor_core\entity_api::create_entity($entitydata[1]);
-        $entity2     = \local_mentor_core\entity_api::get_entity($entityidid2);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entityidid2);
 
         $entity1->assign_manager($userid1);
 
@@ -797,7 +797,7 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
 
         role_assign($reflocrole->id, $userid1, $entity2->get_context()->id);
 
-        self::assertEquals('referentlocal', \local_mentor_core\profile_api::get_highest_role_by_user($userid1)->shortname);
+        self::assertEquals('visiteurbiblio', \local_mentor_core\profile_api::get_highest_role_by_user($userid1)->shortname);
 
         $this->resetAllData();
     }
@@ -816,11 +816,11 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $data          = new \stdClass();
-        $data->start   = 0;
-        $data->length  = 0;
-        $data->search  = false;
-        $data->order   = false;
+        $data = new \stdClass();
+        $data->start = 0;
+        $data->length = 0;
+        $data->search = false;
+        $data->order = false;
         $data->filters = [];
 
         $userroles = \local_mentor_core\profile_api::get_all_users_roles($data);
@@ -828,27 +828,27 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
         self::assertEmpty($userroles);
 
         $entityid1 = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 1',
-            'shortname' => 'New Entity 1'
+                'name' => 'New Entity 1',
+                'shortname' => 'New Entity 1'
         ]);
-        $entity1   = \local_mentor_core\entity_api::get_entity($entityid1);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
 
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname2';
-        $user->firstname                = 'firstname2';
-        $user->email                    = 'test2@test.com';
-        $user->username                 = 'testusername2';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname2';
+        $user->firstname = 'firstname2';
+        $user->email = 'test2@test.com';
+        $user->username = 'testusername2';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $entity1->name;
         $userid = local_mentor_core\profile_api::create_user($user);
 
         $entity1->assign_manager($userid);
 
         $userroles = \local_mentor_core\profile_api::get_all_users_roles($data);
-        $now       = time();
+        $now = time();
 
         self::assertCount(1, $userroles);
 
@@ -861,7 +861,7 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
         self::assertEquals($userroles[0]->email, $user->email);
         self::assertEquals($userroles[0]->lastaccess, "0");
         self::assertEquals($userroles[0]->lastaccessstr, "Jamais");
-        $dtz       = new \DateTimeZone('Europe/Paris');
+        $dtz = new \DateTimeZone('Europe/Paris');
         $startdate = new \DateTime("@$now");
         $startdate->setTimezone($dtz);
         $dateformat = $startdate->format('d/m/Y');
@@ -934,7 +934,7 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
 
         // Create Entities.
         $entityid1 = self::init_create_entity();
-        $entity1   = \local_mentor_core\entity_api::get_entity($entityid1);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
         $entityid2 = self::init_create_entity('New entity 2');
 
         // Create user.
@@ -943,45 +943,45 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
         $entity1->assign_manager($user1->id);
 
         // Create user.
-        $user2                           = new stdClass();
-        $user2->lastname                 = 'lastname1';
-        $user2->firstname                = 'firstname1';
-        $user2->email                    = 'test1@test.com';
-        $user2->username                 = 'testusername1';
-        $user2->password                 = 'to be generated';
-        $user2->mnethostid               = 1;
-        $user2->confirmed                = 1;
-        $user2->auth                     = 'manual';
+        $user2 = new stdClass();
+        $user2->lastname = 'lastname1';
+        $user2->firstname = 'firstname1';
+        $user2->email = 'test1@test.com';
+        $user2->username = 'testusername1';
+        $user2->password = 'to be generated';
+        $user2->mnethostid = 1;
+        $user2->confirmed = 1;
+        $user2->auth = 'manual';
         $user2->profile_field_mainentity = 'New Entity 1';
 
         $userid2 = local_mentor_core\profile_api::create_user($user2);
         set_user_preference('auth_forcepasswordchange', 0, $user2);
 
         // Create user.
-        $user3                           = new stdClass();
-        $user3->lastname                 = 'lastname2';
-        $user3->firstname                = 'firstname2';
-        $user3->email                    = 'test2@test.com';
-        $user3->username                 = 'testusername2';
-        $user3->password                 = 'to be generated';
-        $user3->mnethostid               = 1;
-        $user3->confirmed                = 1;
-        $user3->auth                     = 'manual';
+        $user3 = new stdClass();
+        $user3->lastname = 'lastname2';
+        $user3->firstname = 'firstname2';
+        $user3->email = 'test2@test.com';
+        $user3->username = 'testusername2';
+        $user3->password = 'to be generated';
+        $user3->mnethostid = 1;
+        $user3->confirmed = 1;
+        $user3->auth = 'manual';
         $user3->profile_field_mainentity = 'New entity 2';
 
         $userid3 = local_mentor_core\profile_api::create_user($user3);
         set_user_preference('auth_forcepasswordchange', 0, $user3);
 
         // Create user.
-        $user4             = new stdClass();
-        $user4->lastname   = 'lastname3';
-        $user4->firstname  = 'firstname3';
-        $user4->email      = 'test3@test.com';
-        $user4->username   = 'testusername3';
-        $user4->password   = 'to be generated';
+        $user4 = new stdClass();
+        $user4->lastname = 'lastname3';
+        $user4->firstname = 'firstname3';
+        $user4->email = 'test3@test.com';
+        $user4->username = 'testusername3';
+        $user4->password = 'to be generated';
         $user4->mnethostid = 1;
-        $user4->confirmed  = 1;
-        $user4->auth       = 'manual';
+        $user4->confirmed = 1;
+        $user4->auth = 'manual';
         // Without main entity.
         $user4->profile_field_mainentity = '';
 
@@ -1013,7 +1013,7 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
 
         // Create Entities.
         $entityid1 = self::init_create_entity();
-        $entity1   = \local_mentor_core\entity_api::get_entity($entityid1);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
 
         // Create user.
         $user1 = self::getDataGenerator()->create_user();
@@ -1021,15 +1021,15 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
         $entity1->assign_manager($user1->id);
 
         // Create user.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname1';
-        $user->firstname                = 'firstname1';
-        $user->email                    = 'test1@test.com';
-        $user->username                 = 'testusername1';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname1';
+        $user->firstname = 'firstname1';
+        $user->email = 'test1@test.com';
+        $user->username = 'testusername1';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = 'New Entity 1';
 
         $userid = local_mentor_core\profile_api::create_user($user);
@@ -1072,7 +1072,7 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
 
         // Create Entities.
         $entityid1 = self::init_create_entity();
-        $entity1   = \local_mentor_core\entity_api::get_entity($entityid1);
+        $entity1 = \local_mentor_core\entity_api::get_entity($entityid1);
 
         // Create user.
         $user1 = self::getDataGenerator()->create_user();
@@ -1080,15 +1080,15 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
         $entity1->assign_manager($user1->id);
 
         // Create user.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname1';
-        $user->firstname                = 'firstname1';
-        $user->email                    = 'test1@test.com';
-        $user->username                 = 'testusername1';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname1';
+        $user->firstname = 'firstname1';
+        $user->email = 'test1@test.com';
+        $user->username = 'testusername1';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = 'New Entity 1';
 
         $userid = local_mentor_core\profile_api::create_user($user);
@@ -1098,10 +1098,10 @@ class local_mentor_core_profile_testcase extends advanced_testcase {
         self::assertFalse(\local_mentor_core\profile_api::get_user_preference($userid, 'preferencename'));
 
         // Set new preference.
-        $preference         = new \stdClass();
+        $preference = new \stdClass();
         $preference->userid = $userid;
-        $preference->name   = 'preferencename';
-        $preference->value  = 'preferencevalue';
+        $preference->name = 'preferencename';
+        $preference->value = 'preferencevalue';
         $DB->insert_record('user_preferences', $preference);
 
         // Preference exist.

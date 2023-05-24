@@ -6,21 +6,21 @@
 var cardEvents = function (addCard) {
 
     // Add card
-    $(addCard).on('click', function(eventClick) {
+    $(addCard).on('click', function (eventClick) {
         var cardMentor = $(eventClick.target).parent();
         $(cardMentor.clone()).insertAfter(cardMentor);
     });
 
     // Remove card
     var closeCard = $(addCard).next();
-    $(closeCard).on('click', function(eventClick) {
+    $(closeCard).on('click', function (eventClick) {
         var cardMentor = $(eventClick.target).parent();
         cardMentor.remove();
     });
 };
 
 // Wait DOM load
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     // Check if is atto editor page
     if (document.getElementById('id_introeditoreditable')) {
         // Add events in cards existingg

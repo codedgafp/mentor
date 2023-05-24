@@ -52,24 +52,24 @@ class logstore_mentor2_store_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core specialization singleton.
         $specialization = \local_mentor_core\specialization::get_instance();
-        $reflection     = new ReflectionClass($specialization);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($specialization);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
 
         // Reset the database interface.
         $dbi = \logstore_mentor2\database_interface\database_interface::get_instance();
-        $reflection     = new ReflectionClass($dbi);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbi);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
 
         // Reset the database interface.
         $dbi = \local_mentor_core\database_interface::get_instance();
-        $reflection     = new ReflectionClass($dbi);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbi);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -89,25 +89,25 @@ class logstore_mentor2_store_testcase extends advanced_testcase {
         global $DB;
 
         // Create user.
-        $user             = new stdClass();
-        $user->lastname   = 'lastname';
-        $user->firstname  = 'firstname';
-        $user->email      = 'test@test.com';
-        $user->username   = 'testusername';
-        $user->password   = 'to be generated';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
-        $user->auth       = 'manual';
+        $user->confirmed = 1;
+        $user->auth = 'manual';
 
         $userid = local_mentor_core\profile_api::create_user($user);
         set_user_preference('auth_forcepasswordchange', 0, $user);
 
         $field = $DB->get_record('user_info_field', ['shortname' => 'mainentity']);
 
-        $userdata          = new stdClass();
+        $userdata = new stdClass();
         $userdata->fieldid = $field->id;
-        $userdata->data    = 'New Entity 1';
-        $userdata->userid  = $userid;
+        $userdata->data = 'New Entity 1';
+        $userdata->userid = $userid;
 
         $DB->insert_record('user_info_data', $userdata);
 
@@ -128,64 +128,64 @@ class logstore_mentor2_store_testcase extends advanced_testcase {
             'local_mentor_specialization');
 
         if ($training) {
-            $data->name      = 'fullname';
+            $data->name = 'fullname';
             $data->shortname = 'shortname';
-            $data->content   = 'summary';
-            $data->status    = 'ec';
+            $data->content = 'summary';
+            $data->status = 'ec';
         } else {
-            $data->trainingname      = 'fullname';
+            $data->trainingname = 'fullname';
             $data->trainingshortname = 'shortname';
-            $data->trainingcontent   = 'summary';
-            $data->trainingstatus    = 'ec';
+            $data->trainingcontent = 'summary';
+            $data->trainingstatus = 'ec';
         }
 
         // Fields for taining.
-        $data->teaser                       = 'http://www.edunao.com/';
-        $data->teaserpicture                = '';
-        $data->prerequisite                 = 'TEST';
-        $data->collection                   = 'accompagnement';
-        $data->traininggoal                 = 'TEST TRAINING ';
-        $data->idsirh                       = 'TEST ID SIRH';
-        $data->licenseterms                 = 'cc-sa';
-        $data->typicaljob                   = 'TEST';
-        $data->skills                       = [];
-        $data->certifying                   = '1';
-        $data->presenceestimatedtimehours   = '12';
+        $data->teaser = 'http://www.edunao.com/';
+        $data->teaserpicture = '';
+        $data->prerequisite = 'TEST';
+        $data->collection = 'accompagnement';
+        $data->traininggoal = 'TEST TRAINING ';
+        $data->idsirh = 'TEST ID SIRH';
+        $data->licenseterms = 'cc-sa';
+        $data->typicaljob = 'TEST';
+        $data->skills = [];
+        $data->certifying = '1';
+        $data->presenceestimatedtimehours = '12';
         $data->presenceestimatedtimeminutes = '10';
-        $data->remoteestimatedtimehours     = '15';
-        $data->remoteestimatedtimeminutes   = '30';
-        $data->trainingmodalities           = 'd';
-        $data->producingorganization        = 'TEST';
-        $data->producerorganizationlogo     = '';
-        $data->designers                    = 'TEST';
-        $data->contactproducerorganization  = 'TEST';
-        $data->thumbnail                    = '';
+        $data->remoteestimatedtimehours = '15';
+        $data->remoteestimatedtimeminutes = '30';
+        $data->trainingmodalities = 'd';
+        $data->producingorganization = 'TEST';
+        $data->producerorganizationlogo = '';
+        $data->designers = 'TEST';
+        $data->contactproducerorganization = 'TEST';
+        $data->thumbnail = '';
 
         // Specific fields for session (only for update).
         if ($sessionid) {
-            $data->id                      = $sessionid;
-            $data->opento                  = 'all';
-            $data->publiccible             = 'TEST';
-            $data->termsregistration       = 'autre';
+            $data->id = $sessionid;
+            $data->opento = 'all';
+            $data->publiccible = 'TEST';
+            $data->termsregistration = 'autre';
             $data->termsregistrationdetail = 'TEST';
 
-            $data->onlinesessionestimatedtimehours     = '10';
-            $data->onlinesessionestimatedtimeminutes   = '15';
-            $data->presencesessionestimatedtimehours   = '12';
+            $data->onlinesessionestimatedtimehours = '10';
+            $data->onlinesessionestimatedtimeminutes = '15';
+            $data->presencesessionestimatedtimehours = '12';
             $data->presencesessionestimatedtimeminutes = '25';
 
-            $data->sessionpermanent    = 0;
-            $data->sessionstartdate    = 1609801200;
-            $data->sessionenddate      = 1609801200;
-            $data->sessionmodalities   = 'presentiel';
-            $data->accompaniment       = 'TEST';
-            $data->maxparticipants     = 10;
-            $data->placesavailable     = 8;
-            $data->numberparticipants  = 2;
-            $data->location            = 'PARIS';
+            $data->sessionpermanent = 0;
+            $data->sessionstartdate = 1609801200;
+            $data->sessionenddate = 1609801200;
+            $data->sessionmodalities = 'presentiel';
+            $data->accompaniment = 'TEST';
+            $data->maxparticipants = 10;
+            $data->placesavailable = 8;
+            $data->numberparticipants = 2;
+            $data->location = 'PARIS';
             $data->organizingstructure = 'TEST ORGANISATION';
-            $data->sessionnumber       = 1;
-            $data->opentolist          = '';
+            $data->sessionnumber = 1;
+            $data->opentolist = '';
         }
 
         return $data;
@@ -209,10 +209,10 @@ class logstore_mentor2_store_testcase extends advanced_testcase {
         try {
             // Get entity object for default category.
             $entityid = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1',
-                'regions'   => [5], // Corse.
-                'userid'    => 2  // Set the admin user as manager of the entity.
+                'regions' => [5], // Corse.
+                'userid' => 2  // Set the admin user as manager of the entity.
             ]);
 
             $entity = \local_mentor_core\entity_api::get_entity($entityid);
@@ -253,7 +253,7 @@ class logstore_mentor2_store_testcase extends advanced_testcase {
         }
 
         // Open to current entity.
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -265,10 +265,10 @@ class logstore_mentor2_store_testcase extends advanced_testcase {
      */
     public function init_training_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -308,7 +308,7 @@ class logstore_mentor2_store_testcase extends advanced_testcase {
         // Test all plugins are disabled by this command.
         set_config('enabled_stores', '', 'tool_log');
         $manager = get_log_manager(true);
-        $stores  = $manager->get_readers();
+        $stores = $manager->get_readers();
         self::assertCount(0, $stores);
 
         // Enable logging plugin.
@@ -320,6 +320,8 @@ class logstore_mentor2_store_testcase extends advanced_testcase {
         $sessionid = $this->init_session_creation();
 
         $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
 
         // Set the same main entity for the user and for the session.
         $profile->set_main_entity($session->get_entity());
@@ -524,19 +526,19 @@ class logstore_mentor2_store_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $newcourse = self::getDataGenerator()->create_course();
-        $user      = self::getDataGenerator()->create_user();
+        $user = self::getDataGenerator()->create_user();
 
         // Course is not a session.
         $event1 = \core\event\course_viewed::create(
             array(
                 'context' => context_course::instance($newcourse->id),
-                'userid'  => $user->id,
-                'other'   => array('sample' => 5, 'xx' => 10)
+                'userid' => $user->id,
+                'other' => array('sample' => 5, 'xx' => 10)
             )
         );
 
         $manager = get_log_manager(true);
-        $store   = new \logstore_mentor2\log\store($manager);
+        $store = new \logstore_mentor2\log\store($manager);
         $store->write($event1);
 
         $logs = $DB->get_records('logstore_mentor_log2');
@@ -546,8 +548,8 @@ class logstore_mentor2_store_testcase extends advanced_testcase {
         $event2 = \core\event\course_updated::create(
             array(
                 'context' => context_course::instance($newcourse->id),
-                'userid'  => $user->id,
-                'other'   => array('sample' => 5, 'xx' => 10)
+                'userid' => $user->id,
+                'other' => array('sample' => 5, 'xx' => 10)
             )
         );
 
@@ -555,7 +557,9 @@ class logstore_mentor2_store_testcase extends advanced_testcase {
         $store->write($event2);
 
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
 
         $logs = $DB->get_records('logstore_mentor_log2');
         self::assertCount(0, $logs);
@@ -563,8 +567,8 @@ class logstore_mentor2_store_testcase extends advanced_testcase {
         $event3 = \core\event\course_viewed::create(
             array(
                 'context' => $session->get_context(),
-                'userid'  => $user->id,
-                'other'   => array('sample' => 5, 'xx' => 10)
+                'userid' => $user->id,
+                'other' => array('sample' => 5, 'xx' => 10)
             )
         );
         $store->write($event3);
@@ -579,8 +583,8 @@ class logstore_mentor2_store_testcase extends advanced_testcase {
         $event4 = \core\event\course_viewed::create(
             array(
                 'context' => $session->get_context(),
-                'userid'  => $user->id,
-                'other'   => array('sample' => 5, 'xx' => 10)
+                'userid' => $user->id,
+                'other' => array('sample' => 5, 'xx' => 10)
             )
         );
         $store->write($event4);
@@ -599,8 +603,8 @@ class logstore_mentor2_store_testcase extends advanced_testcase {
         $event5 = \core\event\course_viewed::create(
             array(
                 'context' => $session->get_context(),
-                'userid'  => $user->id,
-                'other'   => array('sample' => 5, 'xx' => 10)
+                'userid' => $user->id,
+                'other' => array('sample' => 5, 'xx' => 10)
             )
         );
         $store->write($event5);
@@ -616,8 +620,8 @@ class logstore_mentor2_store_testcase extends advanced_testcase {
         $event6 = \core\event\course_viewed::create(
             array(
                 'context' => $session->get_context(),
-                'userid'  => $user->id,
-                'other'   => array('sample' => 5, 'xx' => 10)
+                'userid' => $user->id,
+                'other' => array('sample' => 5, 'xx' => 10)
             )
         );
         $store->write($event6);

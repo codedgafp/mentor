@@ -26,40 +26,40 @@
 defined('MOODLE_INTERNAL') || die();
 
 $tasks = array(
-    array(
-        'classname' => 'local_mentor_specialization\task\open_sessions',
-        'blocking'  => 0,
-        'minute'    => '*/5',
-        'hour'      => '*',
-        'day'       => '*',
-        'dayofweek' => '*',
-        'month'     => '*'
-    ),
-    array(
-        'classname' => 'local_mentor_specialization\task\close_sessions',
-        'blocking'  => 0,
-        'minute'    => '*/5',
-        'hour'      => '*',
-        'day'       => '*',
-        'dayofweek' => '*',
-        'month'     => '*'
-    ),
-    array(
-        'classname' => 'local_mentor_specialization\task\archive_sessions',
-        'blocking'  => 0,
-        'minute'    => '*/5',
-        'hour'      => '*',
-        'day'       => '*',
-        'dayofweek' => '*',
-        'month'     => '*'
-    ),
-    array(
-        'classname' => 'local_mentor_specialization\task\email_disabled_accounts',
-        'blocking'  => 0,
-        'minute'    => '*/10',
-        'hour'      => '*',
-        'day'       => '*',
-        'dayofweek' => '*',
-        'month'     => '*'
-    )
+        array(
+                'classname' => 'local_mentor_specialization\task\open_sessions',
+                'blocking' => 0,
+                'minute' => '*/5',
+                'hour' => '*',
+                'day' => '*',
+                'dayofweek' => '*',
+                'month' => '*'
+        ),
+        array(
+                'classname' => 'local_mentor_specialization\task\close_sessions',
+                'blocking' => 0,
+                'minute' => '*/5',
+                'hour' => '*',
+                'day' => '*',
+                'dayofweek' => '*',
+                'month' => '*'
+        ),
+        array(
+                'classname' => 'local_mentor_specialization\task\archive_sessions',
+                'blocking' => 0,
+                'minute' => '*/5',
+                'hour' => '*',
+                'day' => '*',
+                'dayofweek' => '*',
+                'month' => '*'
+        ),
+        array(
+                'classname' => 'local_mentor_specialization\task\email_disabled_accounts',
+                'blocking' => 0,
+                'minute' => '*/10',
+                'hour' => '*',
+                'day' => '*',
+                'dayofweek' => '*',
+                'month' => '*'
+        )
 );

@@ -72,6 +72,7 @@ class profile_define_autocomplete extends profile_define_base {
 
     /**
      * Processes data before it is saved.
+     *
      * @param array|stdClass $data
      * @return array|stdClass
      */

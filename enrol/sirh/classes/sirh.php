@@ -72,24 +72,24 @@ class sirh {
     public function __construct() {
         global $CFG;
 
-        $this->url         = $CFG->sirh_api_url;
-        $this->key         = $CFG->sirh_api_token;
-        $this->inputsufix  = "Input";
+        $this->url = $CFG->sirh_api_url;
+        $this->key = $CFG->sirh_api_token;
+        $this->inputsufix = "Input";
         $this->outputsufix = "Output";
 
         $this->sirhapi = new \RestClient([
-            'base_url'     => $CFG->sirh_api_url,
+            'base_url' => $CFG->sirh_api_url,
             'curl_options' => [
                 CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING       => '',
-                CURLOPT_MAXREDIRS      => 10,
-                CURLOPT_TIMEOUT        => 0,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
                 CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION   => 'CURL_HTTP_VERSION_1_1',
-                CURLOPT_CUSTOMREQUEST  => 'GET'
+                CURLOPT_HTTP_VERSION => 'CURL_HTTP_VERSION_1_1',
+                CURLOPT_CUSTOMREQUEST => 'GET'
             ],
-            'headers'      => [
-                'Accept'        => 'application/json',
+            'headers' => [
+                'Accept' => 'application/json',
                 'Authorization' => 'Bearer ' . $CFG->sirh_api_token
             ],
         ]);
@@ -162,19 +162,19 @@ class sirh {
         $sirhs = [];
 
         foreach ($sirhsessions as $sirhsession) {
-            $session                   = new \stdClass();
-            $session->sirh             = $sirhsession->identifiantSirhOrigine;
-            $session->sirhtraining     = $sirhsession->identifiantFormation;
+            $session = new \stdClass();
+            $session->sirh = $sirhsession->identifiantSirhOrigine;
+            $session->sirhtraining = $sirhsession->identifiantFormation;
             $session->sirhtrainingname = $sirhsession->libelleFormation;
-            $session->sirhsession      = $sirhsession->identifiantSession;
-            $session->sirhsessionname  = $sirhsession->libelleSession;
+            $session->sirhsession = $sirhsession->identifiantSession;
+            $session->sirhsessionname = $sirhsession->libelleSession;
 
             // Convert startdate format.
-            $explodedstart      = explode('-', $sirhsession->dateDebut);
+            $explodedstart = explode('-', $sirhsession->dateDebut);
             $session->startdate = $explodedstart[2] . '/' . $explodedstart[1] . '/' . $explodedstart[0];
 
             // Convert enddate format.
-            $explodedend      = explode('-', $sirhsession->dateFin);
+            $explodedend = explode('-', $sirhsession->dateFin);
             $session->enddate = $explodedend[2] . '/' . $explodedend[1] . '/' . $explodedend[0];
 
             $sirhs[] = $session;
@@ -229,13 +229,13 @@ class sirh {
         // Get users with API.
         $filters = [
             'identifiantSirhOrigine' => $sirh,
-            'identifiantFormation'   => $sirhtraining,
-            'identifiantSession'     => $sirhsession,
+            'identifiantFormation' => $sirhtraining,
+            'identifiantSession' => $sirhsession,
         ];
 
         // Add last sync date.
         if (!is_null($lastsync)) {
-            $date                                   = date('Y-m-d\TH:i:s', $lastsync);
+            $date = date('Y-m-d\TH:i:s', $lastsync);
             $filters['dateDerniereSynchronisation'] = $date;
         }
 
@@ -256,13 +256,13 @@ class sirh {
         $users = [];
 
         foreach ($sirhusers as $sirhuser) {
-            $user             = new \stdClass();
-            $user->lastname   = $sirhuser->nom;
-            $user->firstname  = $sirhuser->prenom;
-            $user->email      = strtolower($sirhuser->email);
-            $user->username   = strtolower($sirhuser->email);
+            $user = new \stdClass();
+            $user->lastname = $sirhuser->nom;
+            $user->firstname = $sirhuser->prenom;
+            $user->email = strtolower($sirhuser->email);
+            $user->username = strtolower($sirhuser->email);
             $user->mnethostid = 1;
-            $user->confirmed  = 1;
+            $user->confirmed = 1;
 
             $users[] = $user;
         }
@@ -271,12 +271,12 @@ class sirh {
         $finalusers = is_null($nbusers) ? $users : array_slice($users, 0, $nbusers);
 
         return [
-            'nbTotalUsers'  => $response->NombreUtilisateursInscrits,
-            'users'         => $finalusers,
-            'nbUsers'       => count($finalusers),
+            'nbTotalUsers' => $response->NombreUtilisateursInscrits,
+            'users' => $finalusers,
+            'nbUsers' => count($finalusers),
             'updateSession' => $response->IndicateurMajSession,
-            'updateUsers'   => $response->IndicateurMajInscriptions,
-            'sessionSirh'   => $response->SessionSirh
+            'updateUsers' => $response->IndicateurMajInscriptions,
+            'sessionSirh' => $response->SessionSirh
         ];
     }
 }

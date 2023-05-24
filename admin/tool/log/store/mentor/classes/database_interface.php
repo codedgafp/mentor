@@ -59,13 +59,13 @@ class database_interface {
      */
     public function __construct() {
         global $DB;
-        $this->db                 = $DB;
-        $this->log                = array();
-        $this->log['log']         = array();
+        $this->db = $DB;
+        $this->log = array();
+        $this->log['log'] = array();
         $this->log['log_history'] = array();
-        $this->log['session']     = array();
-        $this->log['collection']  = array();
-        $this->log['user']        = array();
+        $this->log['session'] = array();
+        $this->log['collection'] = array();
+        $this->log['user'] = array();
     }
 
     /**
@@ -113,8 +113,8 @@ class database_interface {
 
         // Create where condition request.
         $where = "WHERE ";
-        $size  = count($datas);
-        $i     = 1;
+        $size = count($datas);
+        $i = 1;
         // Check all type of data for create condition.
         foreach ($datas as $key => $data) {
             $type = gettype($data);

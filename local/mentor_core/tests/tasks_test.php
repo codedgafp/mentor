@@ -41,7 +41,7 @@ require_once($CFG->dirroot . '/local/mentor_core/api/profile.php');
 class local_mentor_core_tasks_testcase extends advanced_testcase {
 
     public const UNAUTHORISED_CODE = 2020120810;
-    public const DEFAULT_USER      = 2;
+    public const DEFAULT_USER = 2;
 
     /**
      * Reset the singletons
@@ -51,8 +51,8 @@ class local_mentor_core_tasks_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -135,7 +135,7 @@ class local_mentor_core_tasks_testcase extends advanced_testcase {
     public function init_role() {
         global $DB;
 
-        $db      = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $manager = $db->get_role_by_name('manager');
 
         if (!$manager) {
@@ -156,25 +156,25 @@ class local_mentor_core_tasks_testcase extends advanced_testcase {
         global $DB;
 
         // Create user.
-        $user             = new stdClass();
-        $user->lastname   = 'lastname';
-        $user->firstname  = 'firstname';
-        $user->email      = 'test@test.com';
-        $user->username   = 'testusername';
-        $user->password   = 'to be generated';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
         $user->mnethostid = 1;
-        $user->confirmed  = 1;
-        $user->auth       = 'manual';
+        $user->confirmed = 1;
+        $user->auth = 'manual';
 
         $userid = local_mentor_core\profile_api::create_user($user);
         set_user_preference('auth_forcepasswordchange', 0, $user);
 
         $field = $DB->get_record('user_info_field', ['shortname' => 'mainentity']);
 
-        $userdata          = new stdClass();
+        $userdata = new stdClass();
         $userdata->fieldid = $field->id;
-        $userdata->data    = 'New Entity 1';
-        $userdata->userid  = $userid;
+        $userdata->data = 'New Entity 1';
+        $userdata->userid = $userid;
 
         $DB->insert_record('user_info_data', $userdata);
 
@@ -192,30 +192,30 @@ class local_mentor_core_tasks_testcase extends advanced_testcase {
         $data = new stdClass();
 
         if ($training) {
-            $data->name      = 'fullname';
+            $data->name = 'fullname';
             $data->shortname = 'shortname';
-            $data->content   = 'summary';
-            $data->status    = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+            $data->content = 'summary';
+            $data->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
         } else {
-            $data->trainingname      = 'fullname';
+            $data->trainingname = 'fullname';
             $data->trainingshortname = 'shortname';
-            $data->trainingcontent   = 'summary';
-            $data->trainingstatus    = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+            $data->trainingcontent = 'summary';
+            $data->trainingstatus = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
         }
 
         // Fields for taining.
         $data->traininggoal = 'TEST TRAINING ';
-        $data->thumbnail    = '';
+        $data->thumbnail = '';
 
         // Specific fields for session (only for update).
         if ($sessionid) {
-            $data->id     = $sessionid;
+            $data->id = $sessionid;
             $data->opento = 'all';
 
             $data->sessionstartdate = 1609801200;
-            $data->sessionenddate   = 1609801200;
-            $data->maxparticipants  = 10;
-            $data->opentolist       = '';
+            $data->sessionenddate = 1609801200;
+            $data->maxparticipants = 10;
+            $data->opentolist = '';
         }
 
         return $data;
@@ -239,9 +239,9 @@ class local_mentor_core_tasks_testcase extends advanced_testcase {
         try {
             // Get entity object for default category.
             $entityid = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1',
-                'userid'    => 2  // Set the admin user as manager of the entity.
+                'userid' => 2  // Set the admin user as manager of the entity.
             ]);
 
             $entity = \local_mentor_core\entity_api::get_entity($entityid);
@@ -289,10 +289,10 @@ class local_mentor_core_tasks_testcase extends advanced_testcase {
      */
     public function init_training_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -303,10 +303,10 @@ class local_mentor_core_tasks_testcase extends advanced_testcase {
      */
     public function init_session_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -459,7 +459,7 @@ class local_mentor_core_tasks_testcase extends advanced_testcase {
         }
 
         $customdata = new stdClass();
-        $task       = new \local_mentor_core\task\duplicate_session_into_training_task();
+        $task = new \local_mentor_core\task\duplicate_session_into_training_task();
 
         // Missing sessionid.
         $task->set_custom_data($customdata);
@@ -515,7 +515,7 @@ class local_mentor_core_tasks_testcase extends advanced_testcase {
         $training = $this->init_training_creation();
 
         $customdata = new stdClass();
-        $task       = new \local_mentor_core\task\create_session_task();
+        $task = new \local_mentor_core\task\create_session_task();
 
         $task->set_userid($USER->id);
 
@@ -563,7 +563,7 @@ class local_mentor_core_tasks_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $data             = new \stdClass();
+        $data = new \stdClass();
         $data->trainingid = 1;
 
         $taskrmock = $this->getMockBuilder('\local_mentor_core\task\duplicate_training_task')

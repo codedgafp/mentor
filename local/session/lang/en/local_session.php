@@ -27,73 +27,73 @@ $string['pluginname'] = 'Local Session';
 /*****************Edadmin**************************/
 
 $string['createsession'] = 'Créer une session';
-$string['trainingname']  = 'Intitulé de la formation';
-$string['shortname']     = 'Nom abrégé de la session';
-$string['status']        = 'Status';
-$string['startdate']     = 'Date de début';
-$string['participants']  = 'Participants';
-$string['shared']        = 'Partagée';
-$string['actions']       = 'Actions';
+$string['trainingname'] = 'Intitulé de la formation';
+$string['shortname'] = 'Nom abrégé de la session';
+$string['status'] = 'Status';
+$string['startdate'] = 'Date de début';
+$string['participants'] = 'Participants';
+$string['shared'] = 'Partagée';
+$string['actions'] = 'Actions';
 
-$string['inpreparation']      = 'En préparation';
+$string['inpreparation'] = 'En préparation';
 $string['openedregistration'] = 'Inscriptions ouvertes';
-$string['inprogress']         = 'En cours';
-$string['completed']          = 'Terminée';
-$string['archived']           = 'Archivée';
-$string['reported']           = 'Reportée';
-$string['cancelled']          = 'Annulée';
+$string['inprogress'] = 'En cours';
+$string['completed'] = 'Terminée';
+$string['archived'] = 'Archivée';
+$string['reported'] = 'Reportée';
+$string['cancelled'] = 'Annulée';
 
-$string['edadminsessioncoursetype']   = 'Sessions';
-$string['edadminsessioncoursetitle']  = 'Gestion des sessions';
-$string['sessionsheet']               = 'Fiche session';
-$string['sessionmanagement']          = 'Gestion des sessions';
-$string['move']                       = 'Déplacer';
-$string['movesessiondialogtitle']     = 'Déplacement d\'une session';
-$string['deletesessiondialogtitle']   = 'Suppression d\'une session';
+$string['edadminsessioncoursetype'] = 'Sessions';
+$string['edadminsessioncoursetitle'] = 'Gestion des sessions';
+$string['sessionsheet'] = 'Fiche session';
+$string['sessionmanagement'] = 'Gestion des sessions';
+$string['move'] = 'Déplacer';
+$string['movesessiondialogtitle'] = 'Déplacement d\'une session';
+$string['deletesessiondialogtitle'] = 'Suppression d\'une session';
 $string['dedicateddtargetdsubentity'] = 'Sous-espace cible';
 $string['deletesessionmessage']
-                                      = 'Attention ! Vous êtes sur le point de supprimer une session, sa fiche et son contenu. Confirmez-vous la suppression de ces éléments ?';
+    = 'Attention ! Vous êtes sur le point de supprimer une session, sa fiche et son contenu. Confirmez-vous la suppression de ces éléments ?';
 $string['movesessionmessage']
-                                      = 'Vous allez déplacer une session. Attention, cette session sera déplacée sans sa formation d\'origine. Veuillez préciser :';
+    = 'Vous allez déplacer une session. Attention, cette session sera déplacée sans sa formation d\'origine. Veuillez préciser :';
 
-$string['langfile']                   = 'French';
-$string['updatesession']              = 'Modifier une session';
-$string['fullname']                   = 'Libellé de la session';
+$string['langfile'] = 'French';
+$string['updatesession'] = 'Modifier une session';
+$string['fullname'] = 'Libellé de la session';
 $string['fullname_help']
-                                      = 'Le libellé est affiché en haut de toutes les pages de la session. C\'est aussi l\'intitulé qui s\'affiche dans la fiche de l\'offre de formation.';
-$string['shortname']                  = 'Nom abrégé de la session';
+    = 'Le libellé est affiché en haut de toutes les pages de la session. C\'est aussi l\'intitulé qui s\'affiche dans la fiche de l\'offre de formation.';
+$string['shortname'] = 'Nom abrégé de la session';
 $string['shortname_help']
-                                      = 'Le nom abrégé est affiché dans le fil d\'Ariane en haut des pages de la session. C\'est aussi le texte qui s\'affiche entre crochets dans le sujet des notifications en lien avec cette session. Il doit être court et unique dans toute la plateforme Mentor.';
-$string['shortnameexist']             = 'Ce nom abrégé de cours existe déjà.';
-$string['creativestructure']          = 'Structure créatrice';
-$string['cancelsessiondialogtitle']   = 'Annuler une session';
+    = 'Le nom abrégé est affiché dans le fil d\'Ariane en haut des pages de la session. C\'est aussi le texte qui s\'affiche entre crochets dans le sujet des notifications en lien avec cette session. Il doit être court et unique dans toute la plateforme Mentor.';
+$string['shortnameexist'] = 'Ce nom abrégé de cours existe déjà.';
+$string['creativestructure'] = 'Structure créatrice';
+$string['cancelsessiondialogtitle'] = 'Annuler une session';
 $string['cancelsessiondialogcontent'] = 'Voulez-vous vraiment annuler la session {$a} ?';
-$string['reportsessionmessage']       = 'Reporter une session';
-$string['langfile']                   = 'French';
-$string['wordingsession']             = 'Libellé de la session : {$a}';
+$string['reportsessionmessage'] = 'Reporter une session';
+$string['langfile'] = 'French';
+$string['wordingsession'] = 'Libellé de la session : {$a}';
 
-$string['session:create']            = 'Créer une session';
+$string['session:create'] = 'Créer une session';
 $string['session:createinsubentity'] = 'Créer une session dans une sous-entité';
-$string['session:manage']            = 'Gérer les sessions';
-$string['session:update']            = 'Mettre à jour une session';
-$string['session:delete']            = 'Supprimer une session';
-$string['session:view']              = 'Voir une session';
-$string['session:changefullname']    = 'Mettre à jour le libellé de session';
-$string['session:changeshortname']   = 'Mettre à jour le nom abrégé de session';
-$string['session:changeshortname']   = 'Mettre à jour le nom abrégé de session';
+$string['session:manage'] = 'Gérer les sessions';
+$string['session:update'] = 'Mettre à jour une session';
+$string['session:delete'] = 'Supprimer une session';
+$string['session:view'] = 'Voir une session';
+$string['session:changefullname'] = 'Mettre à jour le libellé de session';
+$string['session:changeshortname'] = 'Mettre à jour le nom abrégé de session';
+$string['session:changeshortname'] = 'Mettre à jour le nom abrégé de session';
 
 $string['errordatestartnotinital'] = 'Activez cette date pour passer au statut "{$a}"';
-$string['errorcoursenotfound']     = 'Cours non trouvé pour la session "{$a}"';
-$string['lifecycle']               = 'Informations sur le cycle de vie';
-$string['destination']             = 'La destination :';
+$string['errorcoursenotfound'] = 'Cours non trouvé pour la session "{$a}"';
+$string['lifecycle'] = 'Informations sur le cycle de vie';
+$string['destination'] = 'La destination :';
 
-$string['managespaces']               = 'Gérer les espaces';
-$string['managesessions']             = 'Gérer les sessions';
-$string['recyclebin']                 = 'Corbeille';
-$string['recyclebintitlepage']        = 'Espace de gestion de la corbeille des sessions supprimées';
-$string['trash']                      = 'Corbeille';
-$string['deleteall']                  = 'Tout supprimer';
-$string['deleteallpopin']             = 'Voulez-vous vraiment supprimer définitivement tout le contenu de la corbeille ?';
+$string['managespaces'] = 'Gérer les espaces';
+$string['managesessions'] = 'Gérer les sessions';
+$string['recyclebin'] = 'Corbeille';
+$string['recyclebintitlepage'] = 'Espace de gestion de la corbeille des sessions supprimées';
+$string['trash'] = 'Corbeille';
+$string['deleteall'] = 'Tout supprimer';
+$string['deleteallpopin'] = 'Voulez-vous vraiment supprimer définitivement tout le contenu de la corbeille ?';
 $string['requiredopentoregistration'] = 'Requis pour passer au statut &quot;Inscriptions ouvertes&quot;';
 $string['warningsinfo']
-                                      = 'Les champs marqués d\'un <i class="icon fa fa-exclamation-circle text-warning fa-fw "></i>sont requis pour passer au statut "Inscriptions ouvertes".';
+    = 'Les champs marqués d\'un <i class="icon fa fa-exclamation-circle text-warning fa-fw "></i>sont requis pour passer au statut "Inscriptions ouvertes".';

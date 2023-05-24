@@ -74,14 +74,14 @@ class catalog_renderer extends \plugin_renderer_base {
         $paramsrenderer = new \stdClass();
 
         // Get all collections.
-        $collectionsnames  = local_mentor_specialization_get_collections();
+        $collectionsnames = local_mentor_specialization_get_collections();
         $collectionscolors = local_mentor_specialization_get_collections('color');
 
         // Fill entities and collections list.
         foreach ($trainings as $idx => $training) {
             if ('' !== $training->entityname) {
                 $this->entities[$training->entityname] = [
-                    'id'   => $training->entityid,
+                    'id' => $training->entityid,
                     'name' => $training->entityname,
                 ];
             }
@@ -100,9 +100,9 @@ class catalog_renderer extends \plugin_renderer_base {
                     continue;
                 }
 
-                $tile                               = new \stdClass();
-                $tile->name                         = $collectionsnames[$collection];
-                $tile->color                        = $collectionscolors[$collection];
+                $tile = new \stdClass();
+                $tile->name = $collectionsnames[$collection];
+                $tile->color = $collectionscolors[$collection];
                 $trainings[$idx]->collectiontiles[] = $tile;
             }
         }
@@ -116,11 +116,11 @@ class catalog_renderer extends \plugin_renderer_base {
         $paramsrenderer->entities = array_values($this->entities);
 
         // Trainings list.
-        $paramsrenderer->trainings      = array_values($trainings);
+        $paramsrenderer->trainings = array_values($trainings);
         $paramsrenderer->trainingscount = count($trainings);
 
         // Json encode amd data.
-        $paramsrenderer->available_trainings   = json_encode($trainings);
+        $paramsrenderer->available_trainings = json_encode($trainings);
         $paramsrenderer->trainings_dictionnary = json_encode(local_catalog_get_dictionnary($trainings));
 
         // Call template.

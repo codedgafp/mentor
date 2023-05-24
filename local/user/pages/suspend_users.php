@@ -54,19 +54,19 @@ $PAGE->set_context($entitycontext);
 // Check capabilities.
 require_capability('local/mentor_core:suspendusers', $entitycontext);
 
-$title             = get_string('userssuspension', 'local_user');
-$url               = new moodle_url('/local/user/pages/suspend_users.php', ['entityid' => $entityid]);
+$title = get_string('userssuspension', 'local_user');
+$url = new moodle_url('/local/user/pages/suspend_users.php', ['entityid' => $entityid]);
 $usermanagementurl = new moodle_url('/course/view.php', ['id' => $usercourse['id']]);
 
 // Anchor directly to the import report.
 $anchorurl = new moodle_url('/local/user/pages/suspend_users.php', ['entityid' => $entityid], 'import-reports');
 
 // Suspend CSV form.
-$csvmform    = new suspendcsv_form($anchorurl->out(), ['entityid' => $entityid]);
+$csvmform = new suspendcsv_form($anchorurl->out(), ['entityid' => $entityid]);
 $csvformdata = $csvmform->get_data();
 
 // Suspend users form.
-$suspendusersform     = new suspendusers_form([], $url);
+$suspendusersform = new suspendusers_form([], $url);
 $suspendusersformdata = $suspendusersform->get_data();
 
 // Import users with validated data.
@@ -124,7 +124,7 @@ if (null !== $csvformdata) {
 
         // Preview array.
         $preview = [
-            'list'               => [], // Cleaned list of accounts.
+            'list' => [], // Cleaned list of accounts.
             'validforsuspension' => 0, // Number of lines that will suspend accounts.
         ];
 
@@ -138,7 +138,7 @@ if (null !== $csvformdata) {
             $out .= html_writer::tag('h5', get_string('preview_table', 'local_mentor_core'), ['class' => 'report-title']);
 
             // Building preview table.
-            $previewstable       = new html_table();
+            $previewstable = new html_table();
             $previewstable->head = [
                 get_string('csv_line', 'local_mentor_core'),
                 get_string('email')
@@ -168,10 +168,10 @@ if (null !== $csvformdata) {
             \core\notification::warning(get_string('errors_detected', 'local_mentor_core'));
 
             // Building errors report table.
-            $errorstable       = new html_table();
+            $errorstable = new html_table();
             $errorstable->head = ['Ligne', get_string('error')];
             $errorstable->data = $errors['list'];
-            $out               .= html_writer::table($errorstable);
+            $out .= html_writer::table($errorstable);
         }
 
         // Display import users form.

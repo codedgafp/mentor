@@ -39,8 +39,8 @@ class enrol_sirh_task_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \enrol_sirh\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -53,9 +53,9 @@ class enrol_sirh_task_testcase extends advanced_testcase {
         global $CFG;
 
         // SIRH API.
-        $CFG->sirh_api_url   = "www.sirh.fr";
+        $CFG->sirh_api_url = "www.sirh.fr";
         $CFG->sirh_api_token = "FALSEKEY";
-        $CFG->defaultauth    = 'manual';
+        $CFG->defaultauth = 'manual';
     }
 
     /**
@@ -72,64 +72,64 @@ class enrol_sirh_task_testcase extends advanced_testcase {
             'local_mentor_specialization');
 
         if ($training) {
-            $data->name      = 'fullname';
+            $data->name = 'fullname';
             $data->shortname = 'shortname';
-            $data->content   = 'summary';
-            $data->status    = 'ec';
+            $data->content = 'summary';
+            $data->status = 'ec';
         } else {
-            $data->trainingname      = 'fullname';
+            $data->trainingname = 'fullname';
             $data->trainingshortname = 'shortname';
-            $data->trainingcontent   = 'summary';
-            $data->trainingstatus    = 'ec';
+            $data->trainingcontent = 'summary';
+            $data->trainingstatus = 'ec';
         }
 
         // Fields for taining.
-        $data->teaser                       = 'http://www.edunao.com/';
-        $data->teaserpicture                = '';
-        $data->prerequisite                 = 'TEST';
-        $data->collection                   = 'accompagnement';
-        $data->traininggoal                 = 'TEST TRAINING ';
-        $data->idsirh                       = 'TEST ID SIRH';
-        $data->licenseterms                 = 'cc-sa';
-        $data->typicaljob                   = 'TEST';
-        $data->skills                       = [];
-        $data->certifying                   = '1';
-        $data->presenceestimatedtimehours   = '12';
+        $data->teaser = 'http://www.edunao.com/';
+        $data->teaserpicture = '';
+        $data->prerequisite = 'TEST';
+        $data->collection = 'accompagnement';
+        $data->traininggoal = 'TEST TRAINING ';
+        $data->idsirh = 'TEST ID SIRH';
+        $data->licenseterms = 'cc-sa';
+        $data->typicaljob = 'TEST';
+        $data->skills = [];
+        $data->certifying = '1';
+        $data->presenceestimatedtimehours = '12';
         $data->presenceestimatedtimeminutes = '10';
-        $data->remoteestimatedtimehours     = '15';
-        $data->remoteestimatedtimeminutes   = '30';
-        $data->trainingmodalities           = 'd';
-        $data->producingorganization        = 'TEST';
-        $data->producerorganizationlogo     = '';
-        $data->designers                    = 'TEST';
-        $data->contactproducerorganization  = 'TEST';
-        $data->thumbnail                    = '';
+        $data->remoteestimatedtimehours = '15';
+        $data->remoteestimatedtimeminutes = '30';
+        $data->trainingmodalities = 'd';
+        $data->producingorganization = 'TEST';
+        $data->producerorganizationlogo = '';
+        $data->designers = 'TEST';
+        $data->contactproducerorganization = 'TEST';
+        $data->thumbnail = '';
 
         // Specific fields for session (only for update).
         if ($sessionid) {
-            $data->id                      = $sessionid;
-            $data->opento                  = 'all';
-            $data->publiccible             = 'TEST';
-            $data->termsregistration       = 'autre';
+            $data->id = $sessionid;
+            $data->opento = 'all';
+            $data->publiccible = 'TEST';
+            $data->termsregistration = 'autre';
             $data->termsregistrationdetail = 'TEST';
 
-            $data->onlinesessionestimatedtimehours     = '10';
-            $data->onlinesessionestimatedtimeminutes   = '15';
-            $data->presencesessionestimatedtimehours   = '12';
+            $data->onlinesessionestimatedtimehours = '10';
+            $data->onlinesessionestimatedtimeminutes = '15';
+            $data->presencesessionestimatedtimehours = '12';
             $data->presencesessionestimatedtimeminutes = '25';
 
-            $data->sessionpermanent    = 0;
-            $data->sessionstartdate    = 1609801200;
-            $data->sessionenddate      = 1609801200;
-            $data->sessionmodalities   = 'presentiel';
-            $data->accompaniment       = 'TEST';
-            $data->maxparticipants     = 10;
-            $data->placesavailable     = 8;
-            $data->numberparticipants  = 2;
-            $data->location            = 'PARIS';
+            $data->sessionpermanent = 0;
+            $data->sessionstartdate = 1609801200;
+            $data->sessionenddate = 1609801200;
+            $data->sessionmodalities = 'presentiel';
+            $data->accompaniment = 'TEST';
+            $data->maxparticipants = 10;
+            $data->placesavailable = 8;
+            $data->numberparticipants = 2;
+            $data->location = 'PARIS';
             $data->organizingstructure = 'TEST ORGANISATION';
-            $data->sessionnumber       = 1;
-            $data->opentolist          = '';
+            $data->sessionnumber = 1;
+            $data->opentolist = '';
         }
 
         return $data;
@@ -153,9 +153,9 @@ class enrol_sirh_task_testcase extends advanced_testcase {
         try {
             // Get entity object for default category.
             $entityid = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1',
-                'sirhlist'  => 'RENOIRH_AES'
+                'sirhlist' => 'RENOIRH_AES'
             ]);
 
             $entity = \local_mentor_core\entity_api::get_entity($entityid);
@@ -196,7 +196,7 @@ class enrol_sirh_task_testcase extends advanced_testcase {
         }
 
         // Open to current entity.
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -208,10 +208,10 @@ class enrol_sirh_task_testcase extends advanced_testcase {
      */
     public function init_training_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -222,10 +222,10 @@ class enrol_sirh_task_testcase extends advanced_testcase {
      */
     public function init_session_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -286,7 +286,7 @@ class enrol_sirh_task_testcase extends advanced_testcase {
             ->will($this->returnValue([]));
 
         // Replace database interface by mock.
-        $reflection         = new ReflectionClass($taskmock);
+        $reflection = new ReflectionClass($taskmock);
         $reflectionproperty = $reflection->getProperty('dbi');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($taskmock, $dbimock);
@@ -325,11 +325,11 @@ class enrol_sirh_task_testcase extends advanced_testcase {
             ->disableOriginalConstructor()
             ->getMock();
 
-        $instancedata              = new \stdClass();
+        $instancedata = new \stdClass();
         $instancedata->customchar1 = 'customchar1';
         $instancedata->customchar2 = 'customchar2';
         $instancedata->customchar3 = 'customchar3';
-        $instancedata->customint3  = 'customint3';
+        $instancedata->customint3 = 'customint3';
 
         // Redefined get_all_instance_sirh return new value and check if execute this function.
         $dbimock->expects($this->once())
@@ -337,7 +337,7 @@ class enrol_sirh_task_testcase extends advanced_testcase {
             ->will($this->returnValue([$instancedata]));
 
         // Replace database interface by mock.
-        $reflection         = new ReflectionClass($taskmock);
+        $reflection = new ReflectionClass($taskmock);
         $reflectionproperty = $reflection->getProperty('dbi');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($taskmock, $dbimock);
@@ -394,20 +394,20 @@ class enrol_sirh_task_testcase extends advanced_testcase {
             ->method('send_email_update_user');
 
         // Create instance SIRH.
-        $course       = self::getDataGenerator()->create_course();
-        $sirh         = 'SIRH';
+        $course = self::getDataGenerator()->create_course();
+        $sirh = 'SIRH';
         $sirhtraining = 'SIRH training';
-        $sirhsession  = 'SIRH session';
+        $sirhsession = 'SIRH session';
 
-        $instanceid            = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
+        $instanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
             $course->id,
             $sirh,
             $sirhtraining,
             $sirhsession
         );
-        $instance1             = (object) \enrol_sirh_external::get_instance_info($instanceid);
+        $instance1 = (object) \enrol_sirh_external::get_instance_info($instanceid);
         $instance1->customint2 = $USER->id;
-        $oldtimeinstance1      = time() - 1000;
+        $oldtimeinstance1 = time() - 1000;
         $instance1->customint3 = $oldtimeinstance1;
         $DB->update_record('enrol', $instance1);
 
@@ -425,7 +425,7 @@ class enrol_sirh_task_testcase extends advanced_testcase {
             ->will($this->returnValue([$instance1]));
 
         // Replace database interface by mock.
-        $reflection         = new ReflectionClass($taskmock);
+        $reflection = new ReflectionClass($taskmock);
         $reflectionproperty = $reflection->getProperty('dbi');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($taskmock, $dbimock);
@@ -436,14 +436,14 @@ class enrol_sirh_task_testcase extends advanced_testcase {
             ->getMock();
 
         // Session_users data.
-        $sessionusersdata                                  = [];
-        $sessionusersdata['updateSession']                 = true;
-        $sessionusersdata['updateUsers']                   = false;
-        $sessionusersdata['sessionSirh']                   = new \stdClass();
+        $sessionusersdata = [];
+        $sessionusersdata['updateSession'] = true;
+        $sessionusersdata['updateUsers'] = false;
+        $sessionusersdata['sessionSirh'] = new \stdClass();
         $sessionusersdata['sessionSirh']->libelleFormation = 'SIRH training bis';
-        $sessionusersdata['sessionSirh']->libelleSession   = 'SIRH session bis';
-        $sessionusersdata['sessionSirh']->dateDebut        = '10/10/2022';
-        $sessionusersdata['sessionSirh']->dateFin          = '10/11/2022';
+        $sessionusersdata['sessionSirh']->libelleSession = 'SIRH session bis';
+        $sessionusersdata['sessionSirh']->dateDebut = '10/10/2022';
+        $sessionusersdata['sessionSirh']->dateFin = '10/11/2022';
 
         // Redefined get_session_users return false and check if execute this function.
         $apimock->expects($this->once())
@@ -513,8 +513,10 @@ class enrol_sirh_task_testcase extends advanced_testcase {
 
         // Create session course.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
-        $course    = $session->get_course();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
+        $course = $session->get_course();
 
         // Close the default email sink.
         $sink = $this->redirectEmails();
@@ -523,19 +525,19 @@ class enrol_sirh_task_testcase extends advanced_testcase {
         $sink = $this->redirectEmails();
 
         // Create instance SIRH.
-        $sirh         = 'SIRH';
+        $sirh = 'SIRH';
         $sirhtraining = 'SIRH training';
-        $sirhsession  = 'SIRH session';
+        $sirhsession = 'SIRH session';
 
-        $instanceid            = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
+        $instanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
             $course->id,
             $sirh,
             $sirhtraining,
             $sirhsession
         );
-        $instance1             = (object) \enrol_sirh_external::get_instance_info($instanceid);
+        $instance1 = (object) \enrol_sirh_external::get_instance_info($instanceid);
         $instance1->customint2 = $USER->id;
-        $oldtimeinstance1      = time() - 1000;
+        $oldtimeinstance1 = time() - 1000;
         $instance1->customint3 = $oldtimeinstance1;
         $DB->update_record('enrol', $instance1);
         $instance1->sessionname = $session->fullname;
@@ -554,7 +556,7 @@ class enrol_sirh_task_testcase extends advanced_testcase {
             ->will($this->returnValue([$instance1]));
 
         // Replace database interface by mock.
-        $reflection         = new ReflectionClass($taskmock);
+        $reflection = new ReflectionClass($taskmock);
         $reflectionproperty = $reflection->getProperty('dbi');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($taskmock, $dbimock);
@@ -565,22 +567,22 @@ class enrol_sirh_task_testcase extends advanced_testcase {
             ->getMock();
 
         // Session_users data.
-        $user                                              = new \stdClass();
-        $user->lastname                                    = 'lastname';
-        $user->firstname                                   = 'firstname';
-        $user->email                                       = 'moodle@mail.fr';
-        $user->username                                    = 'moodle@mail.fr';
-        $user->mnethostid                                  = 1;
-        $user->confirmed                                   = 1;
-        $sessionusersdata                                  = [];
-        $sessionusersdata['users']                         = [$user];
-        $sessionusersdata['updateSession']                 = false;
-        $sessionusersdata['updateUsers']                   = true;
-        $sessionusersdata['sessionSirh']                   = new \stdClass();
+        $user = new \stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'moodle@mail.fr';
+        $user->username = 'moodle@mail.fr';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $sessionusersdata = [];
+        $sessionusersdata['users'] = [$user];
+        $sessionusersdata['updateSession'] = false;
+        $sessionusersdata['updateUsers'] = true;
+        $sessionusersdata['sessionSirh'] = new \stdClass();
         $sessionusersdata['sessionSirh']->libelleFormation = 'SIRH training bis';
-        $sessionusersdata['sessionSirh']->libelleSession   = 'SIRH session bis';
-        $sessionusersdata['sessionSirh']->dateDebut        = '10/10/2022';
-        $sessionusersdata['sessionSirh']->dateFin          = '10/11/2022';
+        $sessionusersdata['sessionSirh']->libelleSession = 'SIRH session bis';
+        $sessionusersdata['sessionSirh']->dateDebut = '10/10/2022';
+        $sessionusersdata['sessionSirh']->dateFin = '10/11/2022';
 
         // Redefined get_session_users return false and check if execute this function.
         $apimock->expects($this->once())
@@ -594,23 +596,30 @@ class enrol_sirh_task_testcase extends advanced_testcase {
         $taskmock->execute();
 
         // Check if send mail.
-        $this->assertSame(2, $sink->count());
+        $this->assertSame(3, $sink->count());
         $resultmail = $sink->get_messages();
-        $this->assertCount(2, $resultmail);
+        $this->assertCount(3, $resultmail);
         $sink->close();
 
         // Check content mail.
         // First mail.
-        $this->assertSame(format_string(get_site()->fullname) .': '. get_string('newusernewpasswordsubj'), $resultmail[0]->subject);
+        $this->assertSame(format_string(get_site()->fullname) . ': ' . get_string('newusernewpasswordsubj'),
+            $resultmail[0]->subject);
         $this->assertSame($user->email, $resultmail[0]->to);
         $this->assertSame('noreply@' . get_host_from_url($CFG->wwwroot), $resultmail[0]->from);
         $this->assertNotContains('Content-Type: text/plain', $resultmail[0]->header);
 
         // Second mail.
-        $this->assertSame('Mentor : Modification des inscriptions à une session Mentor par un SIRH', $resultmail[1]->subject);
-        $this->assertSame($USER->email, $resultmail[1]->to);
+        $this->assertSame('[Mentor] Votre inscription à la formation fullname', $resultmail[1]->subject);
+        $this->assertSame($user->email, $resultmail[1]->to);
         $this->assertSame('noreply@' . get_host_from_url($CFG->wwwroot), $resultmail[1]->from);
         $this->assertNotContains('Content-Type: text/plain', $resultmail[1]->header);
+
+        // Third mail.
+        $this->assertSame('Mentor : Modification des inscriptions à une session Mentor par un SIRH', $resultmail[2]->subject);
+        $this->assertSame($USER->email, $resultmail[2]->to);
+        $this->assertSame('noreply@' . get_host_from_url($CFG->wwwroot), $resultmail[2]->from);
+        $this->assertNotContains('Content-Type: text/plain', $resultmail[2]->header);
 
         // Check updated instance.
         $instance2 = (object) \enrol_sirh_external::get_instance_info($instanceid);
@@ -654,8 +663,10 @@ class enrol_sirh_task_testcase extends advanced_testcase {
 
         // Create session course.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
-        $course    = $session->get_course();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
+        $course = $session->get_course();
 
         // Close the default email sink.
         $sink = $this->redirectEmails();
@@ -664,19 +675,19 @@ class enrol_sirh_task_testcase extends advanced_testcase {
         $sink = $this->redirectEmails();
 
         // Create instance SIRH.
-        $sirh         = 'SIRH';
+        $sirh = 'SIRH';
         $sirhtraining = 'SIRH training';
-        $sirhsession  = 'SIRH session';
+        $sirhsession = 'SIRH session';
 
-        $instanceid            = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
+        $instanceid = \enrol_sirh\sirh_api::create_enrol_sirh_instance(
             $course->id,
             $sirh,
             $sirhtraining,
             $sirhsession
         );
-        $instance1             = (object) \enrol_sirh_external::get_instance_info($instanceid);
+        $instance1 = (object) \enrol_sirh_external::get_instance_info($instanceid);
         $instance1->customint2 = $USER->id;
-        $oldtimeinstance1      = time() - 1000;
+        $oldtimeinstance1 = time() - 1000;
         $instance1->customint3 = $oldtimeinstance1;
         $DB->update_record('enrol', $instance1);
         $instance1->sessionname = $session->fullname;
@@ -695,7 +706,7 @@ class enrol_sirh_task_testcase extends advanced_testcase {
             ->will($this->returnValue([$instance1]));
 
         // Replace database interface by mock.
-        $reflection         = new ReflectionClass($taskapi);
+        $reflection = new ReflectionClass($taskapi);
         $reflectionproperty = $reflection->getProperty('dbi');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($taskapi, $dbimock);
@@ -706,22 +717,22 @@ class enrol_sirh_task_testcase extends advanced_testcase {
             ->getMock();
 
         // Session_users data.
-        $user                                              = new \stdClass();
-        $user->lastname                                    = 'lastname';
-        $user->firstname                                   = 'firstname';
-        $user->email                                       = 'moodle@mail.fr';
-        $user->username                                    = 'moodle@mail.fr';
-        $user->mnethostid                                  = 1;
-        $user->confirmed                                   = 1;
-        $sessionusersdata                                  = [];
-        $sessionusersdata['users']                         = [$user];
-        $sessionusersdata['updateSession']                 = true;
-        $sessionusersdata['updateUsers']                   = true;
-        $sessionusersdata['sessionSirh']                   = new \stdClass();
+        $user = new \stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'moodle@mail.fr';
+        $user->username = 'moodle@mail.fr';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $sessionusersdata = [];
+        $sessionusersdata['users'] = [$user];
+        $sessionusersdata['updateSession'] = true;
+        $sessionusersdata['updateUsers'] = true;
+        $sessionusersdata['sessionSirh'] = new \stdClass();
         $sessionusersdata['sessionSirh']->libelleFormation = 'SIRH training bis';
-        $sessionusersdata['sessionSirh']->libelleSession   = 'SIRH session bis';
-        $sessionusersdata['sessionSirh']->dateDebut        = '10/10/2022';
-        $sessionusersdata['sessionSirh']->dateFin          = '10/11/2022';
+        $sessionusersdata['sessionSirh']->libelleSession = 'SIRH session bis';
+        $sessionusersdata['sessionSirh']->dateDebut = '10/10/2022';
+        $sessionusersdata['sessionSirh']->dateFin = '10/11/2022';
 
         // Redefined get_session_users return false and check if execute this function.
         $apimock->expects($this->once())
@@ -735,29 +746,36 @@ class enrol_sirh_task_testcase extends advanced_testcase {
         $taskapi->execute();
 
         // Check if send mail.
-        $this->assertSame(3, $sink->count());
+        $this->assertSame(4, $sink->count());
         $resultmail = $sink->get_messages();
-        $this->assertCount(3, $resultmail);
+        $this->assertCount(4, $resultmail);
         $sink->close();
 
         // Check content mail.
         // First mail.
-        $this->assertSame(format_string(get_site()->fullname) .': '. get_string('newusernewpasswordsubj'), $resultmail[0]->subject);
+        $this->assertSame(format_string(get_site()->fullname) . ': ' . get_string('newusernewpasswordsubj'),
+            $resultmail[0]->subject);
         $this->assertSame($user->email, $resultmail[0]->to);
         $this->assertSame('noreply@' . get_host_from_url($CFG->wwwroot), $resultmail[0]->from);
         $this->assertNotContains('Content-Type: text/plain', $resultmail[0]->header);
 
         // Second mail.
-        $this->assertSame('Mentor : Modification des informations d\'une session SIRH', $resultmail[1]->subject);
-        $this->assertSame($USER->email, $resultmail[1]->to);
+        $this->assertSame('[Mentor] Votre inscription à la formation fullname', $resultmail[1]->subject);
+        $this->assertSame($user->email, $resultmail[1]->to);
         $this->assertSame('noreply@' . get_host_from_url($CFG->wwwroot), $resultmail[1]->from);
         $this->assertNotContains('Content-Type: text/plain', $resultmail[1]->header);
 
-        // Last mail.
-        $this->assertSame('Mentor : Modification des inscriptions à une session Mentor par un SIRH', $resultmail[2]->subject);
+        // Third mail.
+        $this->assertSame('Mentor : Modification des informations d\'une session SIRH', $resultmail[2]->subject);
         $this->assertSame($USER->email, $resultmail[2]->to);
         $this->assertSame('noreply@' . get_host_from_url($CFG->wwwroot), $resultmail[2]->from);
         $this->assertNotContains('Content-Type: text/plain', $resultmail[2]->header);
+
+        // Last mail.
+        $this->assertSame('Mentor : Modification des inscriptions à une session Mentor par un SIRH', $resultmail[3]->subject);
+        $this->assertSame($USER->email, $resultmail[3]->to);
+        $this->assertSame('noreply@' . get_host_from_url($CFG->wwwroot), $resultmail[3]->from);
+        $this->assertNotContains('Content-Type: text/plain', $resultmail[3]->header);
 
         // Check updated instance.
         $instance2 = (object) \enrol_sirh_external::get_instance_info($instanceid);

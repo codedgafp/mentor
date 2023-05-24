@@ -52,7 +52,7 @@ class entity_controller extends controller_base {
             switch ($action) {
                 case 'get_members' :
                     $entityid = $this->get_param('entityid', PARAM_INT);
-                    $status   = $this->get_param('status', PARAM_RAW);
+                    $status = $this->get_param('status', PARAM_RAW);
                     $mainonly = $this->get_param('mainonly', PARAM_BOOL, false);
 
                     return $this->success($this->get_members($entityid, $status, $mainonly));
@@ -75,7 +75,7 @@ class entity_controller extends controller_base {
      * @throws \moodle_exception
      */
     public static function get_members($entityid, $status, $mainonly = false) {
-        $entity  = entity_api::get_entity($entityid);
+        $entity = entity_api::get_entity($entityid);
         $members = array_values($entity->get_members($status));
 
         $entities = [];
@@ -87,7 +87,10 @@ class entity_controller extends controller_base {
                 $entities[$member->mainentity] = entity_api::get_entity_by_name($member->mainentity, $mainonly);
             }
 
-            $member->entityshortname = $entities[$member->mainentity]->shortname;
+            $member->entityshortname
+                = isset($entities[$member->mainentity]->shortname) ?
+                $entities[$member->mainentity]->shortname :
+                '';
 
             // Check if user has capability to update user profile.
             $members[$key]->hasconfigaccess = $member->can_edit_profile();

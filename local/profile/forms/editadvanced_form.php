@@ -48,17 +48,17 @@ class local_profile_user_form extends user_editadvanced_form {
     public function definition() {
         global $CFG, $COURSE;
 
-        $mform              = $this->_form;
-        $editoroptions      = null;
+        $mform = $this->_form;
+        $editoroptions = null;
         $filemanageroptions = null;
 
         if (!is_array($this->_customdata)) {
             throw new coding_exception('invalid custom data for user_edit_form');
         }
-        $editoroptions      = $this->_customdata['editoroptions'];
+        $editoroptions = $this->_customdata['editoroptions'];
         $filemanageroptions = $this->_customdata['filemanageroptions'];
-        $user               = $this->_customdata['user'];
-        $userid             = $user->id;
+        $user = $this->_customdata['user'];
+        $userid = $user->id;
 
         // Accessibility: "Required" is bad legend text.
         $strgeneral = get_string('general');
@@ -72,11 +72,11 @@ class local_profile_user_form extends user_editadvanced_form {
         // Print the required moodle fields first.
         $mform->addElement('header', 'moodle', $strgeneral);
 
-        $auths                = core_component::get_plugin_list('auth');
-        $enabled              = get_string('pluginenabled', 'core_plugin');
-        $disabled             = get_string('plugindisabled', 'core_plugin');
-        $authoptions          = array($enabled => array(), $disabled => array());
-        $cannotchangepass     = array();
+        $auths = core_component::get_plugin_list('auth');
+        $enabled = get_string('pluginenabled', 'core_plugin');
+        $disabled = get_string('plugindisabled', 'core_plugin');
+        $authoptions = array($enabled => array(), $disabled => array());
+        $cannotchangepass = array();
         $cannotchangeusername = array();
         foreach ($auths as $auth => $unused) {
             $authinst = get_auth_plugin($auth);

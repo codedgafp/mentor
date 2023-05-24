@@ -41,8 +41,8 @@ class training_create extends base {
      */
     protected function init() {
         $this->data['objecttable'] = 'training';
-        $this->data['crud']        = 'c';
-        $this->data['edulevel']    = self::LEVEL_OTHER;
+        $this->data['crud'] = 'c';
+        $this->data['edulevel'] = self::LEVEL_OTHER;
     }
 
     /**
@@ -79,8 +79,8 @@ class training_create extends base {
      */
     protected function get_legacy_logdata() {
         return array(
-                SITEID, 'training', 'add', 'local/trainings/pages/update_training.php?trainingid=' . $this->objectid,
-                $this->objectid
+            SITEID, 'training', 'add', 'local/trainings/pages/update_training.php?trainingid=' . $this->objectid,
+            $this->objectid
         );
     }
 

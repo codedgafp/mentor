@@ -145,9 +145,9 @@ class recyclebin_renderer extends \plugin_renderer_base {
                     $item->entityid
             )), array(
                 'contextid' => $item->contextid,
-                'itemid'    => $item->id,
-                'action'    => 'restore',
-                'sesskey'   => sesskey()
+                'itemid' => $item->id,
+                'action' => 'restore',
+                'sesskey' => sesskey()
             ));
 
             // Add restore action to row.
@@ -161,15 +161,15 @@ class recyclebin_renderer extends \plugin_renderer_base {
             );
 
             // Build delete link.
-            $deleteurl    = new \moodle_url(new \moodle_url('/local/trainings/pages/recyclebin_trainings.php', array(
+            $deleteurl = new \moodle_url(new \moodle_url('/local/trainings/pages/recyclebin_trainings.php', array(
                 'entityid'
                 =>
                     $item->entityid
             )), array(
                 'contextid' => $item->contextid,
-                'itemid'    => $item->id,
-                'action'    => 'delete',
-                'sesskey'   => sesskey()
+                'itemid' => $item->id,
+                'action' => 'delete',
+                'sesskey' => sesskey()
             ));
             $deleteaction = new confirm_action(get_string('deleteconfirm', 'tool_recyclebin'));
 

@@ -46,12 +46,12 @@
                 {{^isenrol}}
                     {{^placesnotlimited}}
                         {{#placesavailable}}
-                                    {{#placesavailablemoreone}}
-                                        {{# str }} placesavailable, local_mentor_core, {{placesavailable}}{{/str}}
-                                    {{/placesavailablemoreone}}
-                                    {{^placesavailablemoreone}}
-                                        {{# str }} placeavailable, local_mentor_core, {{placesavailable}}{{/str}}
-                                    {{/placesavailablemoreone}}
+                            {{#placesavailablemoreone}}
+                                {{# str }} placesavailable, local_mentor_core, {{placesavailable}}{{/str}}
+                            {{/placesavailablemoreone}}
+                            {{^placesavailablemoreone}}
+                                {{# str }} placeavailable, local_mentor_core, {{placesavailable}}{{/str}}
+                            {{/placesavailablemoreone}}
                         {{/placesavailable}}
                         {{^placesavailable}}
                             <span class="complete">

@@ -48,7 +48,7 @@ class catalog_controller extends controller_base {
         try {
             switch ($action) {
                 case 'enrol_current_user':
-                    $sessionid    = $this->get_param('sessionid', PARAM_INT);
+                    $sessionid = $this->get_param('sessionid', PARAM_INT);
                     $enrolmentkey = $this->get_param('enrolmentkey', PARAM_RAW, null);
                     return $this->success(self::enrol_current_user($sessionid, $enrolmentkey));
 
@@ -75,7 +75,7 @@ class catalog_controller extends controller_base {
      */
     public static function enrol_current_user($sessionid, $enrolmentkey = null) {
         $session = local_mentor_core\session_api::get_session($sessionid);
-        $result  = $session->enrol_current_user($enrolmentkey);
+        $result = $session->enrol_current_user($enrolmentkey);
 
         // Enrolment success, return the url of the session course.
         if ($result['status']) {

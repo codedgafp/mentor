@@ -23,13 +23,13 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname']           = 'Coller un lien vidéo';
-$string['allowed_domains']      = 'Domaines autorisés';
-$string['allowed_domain']       = 'Domaine autorisé';
+$string['pluginname'] = 'Coller un lien vidéo';
+$string['allowed_domains'] = 'Domaines autorisés';
+$string['allowed_domain'] = 'Domaine autorisé';
 $string['allowed_domains_desc'] = 'Liste des domaines autorisés (un par ligne)';
-$string['save']                 = 'Enregistrer';
-$string['fillurl']              = 'Saisir une URL';
-$string['inserturl']            = 'Insérer une URL de vidéo';
-$string['erroremptyurl']        = 'Ce champ ne peut pas être vide.';
-$string['errorvalidurl']        = 'Vous devez saisir une URL valide.';
-$string['errorallowedurl']      = 'Ce domaine n’est pas autorisé.';
+$string['save'] = 'Enregistrer';
+$string['fillurl'] = 'Saisir une URL';
+$string['inserturl'] = 'Insérer une URL de vidéo';
+$string['erroremptyurl'] = 'Ce champ ne peut pas être vide.';
+$string['errorvalidurl'] = 'Vous devez saisir une URL valide.';
+$string['errorallowedurl'] = 'Ce domaine n’est pas autorisé.';

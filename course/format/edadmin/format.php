@@ -29,7 +29,7 @@ $_SESSION['lastentity'] = $course->category;
 
 // Get format type.
 $courseformatoptions = new \format_edadmin\course_format_option($course->id);
-$formatype           = $courseformatoptions->get_option_value('formattype');
+$formatype = $courseformatoptions->get_option_value('formattype');
 
 require_once($CFG->dirroot . '/local/' . $formatype . '/classes/output/' . $formatype . '_renderer.php');
 
@@ -49,7 +49,7 @@ $mainonly = false;
 
 if (in_array($formatype, $redirectedtypes)) {
     if (!$ismainentity) {
-        $mainentity   = $currententity->get_main_entity();
+        $mainentity = $currententity->get_main_entity();
         $parentcourse = $mainentity->get_edadmin_courses_url($formatype);
         redirect($parentcourse);
     }
@@ -60,7 +60,7 @@ if (in_array($formatype, $redirectedtypes)) {
 
 if ($ismainentity) {
     // Get managed entities if user has any.
-    $managedentities         = \local_mentor_core\entity_api::get_managed_entities($USER, $mainonly);
+    $managedentities = \local_mentor_core\entity_api::get_managed_entities($USER, $mainonly);
     $trainingmanagedentities = \local_mentor_core\training_api::get_entities_training_managed();
 
     $managedentities = $managedentities + $trainingmanagedentities;
@@ -68,7 +68,7 @@ if ($ismainentity) {
     // Create an entity selector if it manages several entities.
     if (count($managedentities) > 1) {
 
-        $data                 = new \stdClass();
+        $data = new \stdClass();
         $data->switchentities = [];
 
         $isadmin = is_siteadmin();
@@ -82,10 +82,18 @@ if ($ismainentity) {
                 continue;
             }
 
-            $entitydata             = new \stdClass();
-            $entitydata->name       = $entity->shortname;
-            $entitydata->link       = $entity->get_edadmin_courses_url($formatype);
-            $entitydata->selected   = $entity->id == $course->category;
+            // Check if user has capability to access to the edadmin course.
+            if (!has_capability(
+                local_mentor_core_get_edadmin_course_view_capability($formatype),
+                $entity->get_context()
+            )) {
+                continue;
+            }
+
+            $entitydata = new \stdClass();
+            $entitydata->name = $entity->shortname;
+            $entitydata->link = $entity->get_edadmin_courses_url($formatype);
+            $entitydata->selected = $entity->id == $course->category;
             $data->switchentities[] = $entitydata;
         }
 

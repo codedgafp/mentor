@@ -48,7 +48,7 @@ class library_api {
      */
     public static function get_library() {
         $specialization = specialization::get_instance();
-        $library        = $specialization->get_specialization('get_library');
+        $library = $specialization->get_specialization('get_library');
 
         if (!is_object($library)) {
             $library = \local_mentor_core\library::get_instance();
@@ -67,7 +67,7 @@ class library_api {
      * @throws \moodle_exception
      */
     public static function create_library($setconfig = true) {
-        $db      = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $library = $db->get_library_object();
 
         if ($library) {
@@ -77,7 +77,7 @@ class library_api {
 
         $libraryid = \local_mentor_core\entity_api::create_entity(
             array(
-                'name'      => \local_mentor_core\library::NAME,
+                'name' => \local_mentor_core\library::NAME,
                 'shortname' => \local_mentor_core\library::SHORTNAME
             )
         );
@@ -142,11 +142,19 @@ class library_api {
     public static function publish_to_library($trainingid, $executenow = false) {
         global $USER;
 
+        // Get training.
+        $training = \local_mentor_core\training_api::get_training($trainingid);
+
+        // Check publish to library capability.
+        if (!has_capability('local/library:publish', $training->get_context())) {
+            return false;
+        }
+
         $adhoctask = new \local_library\task\publication_library_task();
 
         $adhoctask->set_custom_data([
             'trainingid' => $trainingid,
-            'userid'     => $USER->id,
+            'userid' => $USER->id,
         ]);
 
         $adhoctask->set_userid($USER->id);
@@ -199,15 +207,15 @@ class library_api {
         global $CFG;
 
         // Get all collections.
-        $collectionsnames  = local_mentor_specialization_get_collections();
+        $collectionsnames = local_mentor_specialization_get_collections();
         $collectionscolors = local_mentor_specialization_get_collections('color');
 
         // Get library trainings.
         $trainingslibrary = self::get_library()->get_trainings();
 
         // Fill entities, collections and trainings list.
-        $entities                       = [];
-        $collections                    = [];
+        $entities = [];
+        $collections = [];
         $trainingslibraryparamsrenderer = [];
 
         foreach ($trainingslibrary as $traininglibrary) {
@@ -224,7 +232,7 @@ class library_api {
             // Set entities list.
             if ('' !== $originaltrainingentity->shortname) {
                 $entities[$originaltrainingentity->shortname] = [
-                    'id'   => $originaltrainingentity->id,
+                    'id' => $originaltrainingentity->id,
                     'name' => $originaltrainingentity->shortname,
                 ];
             }
@@ -237,31 +245,31 @@ class library_api {
             }
 
             // Set new training renderer params.
-            $trainingrenderer                        = new \stdClass();
-            $trainingrenderer->id                    = $traininglibrary->id;
-            $trainingrenderer->trainingsheeturl      = $CFG->wwwroot .
-                                                       '/local/library/pages/training.php?trainingid=' .
-                                                       $training->id;
-            $trainingrenderer->name                  = $training->name;
-            $trainingrenderer->thumbnail             = $training->get_file_url();
-            $trainingrenderer->entityid              = $originaltrainingentity->id;
-            $trainingrenderer->entityname            = $originaltrainingentity->shortname;
-            $trainingrenderer->entityfullname        = $originaltrainingentity->name;
+            $trainingrenderer = new \stdClass();
+            $trainingrenderer->id = $traininglibrary->id;
+            $trainingrenderer->trainingsheeturl = $CFG->wwwroot .
+                                                  '/local/library/pages/training.php?trainingid=' .
+                                                  $training->id;
+            $trainingrenderer->name = $training->name;
+            $trainingrenderer->thumbnail = $training->get_file_url();
+            $trainingrenderer->entityid = $originaltrainingentity->id;
+            $trainingrenderer->entityname = $originaltrainingentity->shortname;
+            $trainingrenderer->entityfullname = $originaltrainingentity->name;
             $trainingrenderer->producingorganization = $training->producingorganization;
             $trainingrenderer->producerorganizationshortname
-                                                     = $training->producerorganizationshortname;
-            $trainingrenderer->catchphrase           = $training->catchphrase;
-            $trainingrenderer->collection            = $training->collection;
-            $trainingrenderer->collectionstr         = $training->collectionstr;
-            $trainingrenderer->typicaljob            = $training->typicaljob;
-            $trainingrenderer->skills                = $training->get_skills_name();
-            $trainingrenderer->content               = html_entity_decode($training->content);
-            $trainingrenderer->idsirh                = $training->idsirh;
-            $trainingtime                            = $training->presenceestimatedtime + $training->remoteestimatedtime;
+                = $training->producerorganizationshortname;
+            $trainingrenderer->catchphrase = $training->catchphrase;
+            $trainingrenderer->collection = $training->collection;
+            $trainingrenderer->collectionstr = $training->collectionstr;
+            $trainingrenderer->typicaljob = $training->typicaljob;
+            $trainingrenderer->skills = $training->get_skills_name();
+            $trainingrenderer->content = html_entity_decode($training->content);
+            $trainingrenderer->idsirh = $training->idsirh;
+            $trainingtime = $training->presenceestimatedtime + $training->remoteestimatedtime;
             $trainingrenderer->time
-                                                     = $trainingtime ?
+                = $trainingtime ?
                 local_mentor_core_minutes_to_hours($trainingtime) : 0;
-            $trainingrenderer->modality              = get_string($training->get_modality_name(), 'local_mentor_specialization');
+            $trainingrenderer->modality = get_string($training->get_modality_name(), 'local_mentor_specialization');
 
             // Build collection tiles.
             $trainingrenderer->collectiontiles = [];
@@ -271,9 +279,9 @@ class library_api {
                     continue;
                 }
 
-                $tile                                = new \stdClass();
-                $tile->name                          = $collectionsnames[$collection];
-                $tile->color                         = $collectionscolors[$collection];
+                $tile = new \stdClass();
+                $tile->name = $collectionsnames[$collection];
+                $tile->color = $collectionscolors[$collection];
                 $trainingrenderer->collectiontiles[] = $tile;
             }
 
@@ -292,11 +300,11 @@ class library_api {
         $paramsrenderer->entities = array_values($entities);
 
         // Trainings list.
-        $paramsrenderer->trainings      = array_values($trainingslibraryparamsrenderer);
+        $paramsrenderer->trainings = array_values($trainingslibraryparamsrenderer);
         $paramsrenderer->trainingscount = count($trainingslibraryparamsrenderer);
 
         // Json encode amd data.
-        $paramsrenderer->available_trainings   = json_encode($trainingslibraryparamsrenderer, JSON_HEX_TAG);
+        $paramsrenderer->available_trainings = json_encode($trainingslibraryparamsrenderer, JSON_HEX_TAG);
         $paramsrenderer->trainings_dictionnary = json_encode(local_catalog_get_dictionnary($trainingslibraryparamsrenderer));
 
         // Variable used for performance tests.
@@ -311,9 +319,15 @@ class library_api {
      * @param int|\stdClass $userorid
      * @return bool
      */
-    public static function user_has_access() {
+    public static function user_has_access($userorid = null) {
+        global $USER;
+
+        if (is_null($userorid)) {
+            $userorid = $USER;
+        }
+
         $library = self::get_library();
-        return has_capability('local/library:view', $library->get_context());
+        return has_capability('local/library:view', $library->get_context(), $userorid);
     }
 
     /**
@@ -327,11 +341,11 @@ class library_api {
     public static function get_training_renderer($training) {
 
         // Get all collections.
-        $collectionsnames  = local_mentor_specialization_get_collections();
+        $collectionsnames = local_mentor_specialization_get_collections();
         $collectionscolors = local_mentor_specialization_get_collections('color');
 
-        $trainingrenderer                 = $training->convert_for_template();
-        $originaltraining                 = self::get_original_trainging($training->id);
+        $trainingrenderer = $training->convert_for_template();
+        $originaltraining = self::get_original_trainging($training->id);
         $trainingrenderer->entityfullname = $originaltraining->get_entity()->get_main_entity()->name;
 
         // Build collection tiles.
@@ -342,9 +356,9 @@ class library_api {
                 continue;
             }
 
-            $tile                                = new \stdClass();
-            $tile->name                          = $collectionsnames[$collection];
-            $tile->color                         = $collectionscolors[$collection];
+            $tile = new \stdClass();
+            $tile->name = $collectionsnames[$collection];
+            $tile->color = $collectionscolors[$collection];
             $trainingrenderer->collectiontiles[] = $tile;
         }
 
@@ -357,14 +371,14 @@ class library_api {
 
         $trainingrenderer->presenceestimatedtime = $training->presenceestimatedtime ?
             local_mentor_core_minutes_to_hours($training->presenceestimatedtime) : false;
-        $trainingrenderer->remoteestimatedtime   = $training->remoteestimatedtime ?
+        $trainingrenderer->remoteestimatedtime = $training->remoteestimatedtime ?
             local_mentor_core_minutes_to_hours($training->remoteestimatedtime) : false;
-        $trainingrenderer->modality              = get_string($training->get_modality_name(), 'local_mentor_specialization');
+        $trainingrenderer->modality = get_string($training->get_modality_name(), 'local_mentor_specialization');
 
         $librarypublication = self::get_library_publication($training->id, 'trainingid');
 
-        $trainingrenderer->timecreated  = date('d/m/y', $librarypublication->timecreated);
-        if($librarypublication->timecreated !== $librarypublication->timemodified) {
+        $trainingrenderer->timecreated = date('d/m/y', $librarypublication->timecreated);
+        if ($librarypublication->timecreated !== $librarypublication->timemodified) {
             $trainingrenderer->timemodified = date('d/m/y', $librarypublication->timemodified);
         }
 
@@ -417,7 +431,7 @@ class library_api {
         $adhoctask = new \local_library\task\import_to_entity_task();
 
         $adhoctask->set_custom_data([
-            'trainingid'        => $trainingid,
+            'trainingid' => $trainingid,
             'trainingshortname' => $trainingshortname,
             'destinationentity' => $destinationentity,
         ]);

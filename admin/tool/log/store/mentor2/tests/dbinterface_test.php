@@ -41,8 +41,8 @@ class logstore_mentor2_database_interface_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core specialization singleton.
         $specialization = \local_mentor_core\specialization::get_instance();
-        $reflection     = new ReflectionClass($specialization);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($specialization);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -93,7 +93,7 @@ class logstore_mentor2_database_interface_testcase extends advanced_testcase {
 
         // Check db attribute.
         $dbinterfacereflection = new ReflectionObject($dbinterface);
-        $dbreflection          = $dbinterfacereflection->getProperty('db');
+        $dbreflection = $dbinterfacereflection->getProperty('db');
         $dbreflection->setAccessible(true);
 
         self::assertSame($DB, $dbreflection->getValue($dbinterface));
@@ -138,7 +138,7 @@ class logstore_mentor2_database_interface_testcase extends advanced_testcase {
 
         // Create reflection to have access to log attribute and add_to_log method.
         $dbinterfacereflection = new ReflectionObject($dbinterface);
-        $logreflection         = $dbinterfacereflection->getProperty('log');
+        $logreflection = $dbinterfacereflection->getProperty('log');
         $logreflection->setAccessible(true);
         $addtologmethod = $dbinterfacereflection->getMethod('add_to_log');
         $addtologmethod->setAccessible(true);
@@ -239,7 +239,7 @@ class logstore_mentor2_database_interface_testcase extends advanced_testcase {
 
         // Create reflection to have add_to_log method.
         $dbinterfacereflection = new ReflectionObject($dbinterface);
-        $addtologmethod        = $dbinterfacereflection->getMethod('add_to_log');
+        $addtologmethod = $dbinterfacereflection->getMethod('add_to_log');
         $addtologmethod->setAccessible(true);
 
         // Log2.
@@ -330,7 +330,7 @@ class logstore_mentor2_database_interface_testcase extends advanced_testcase {
 
         // Create reflection to have add_to_log method.
         $dbinterfacereflection = new ReflectionObject($dbinterface);
-        $addtologmethod        = $dbinterfacereflection->getMethod('add_to_log');
+        $addtologmethod = $dbinterfacereflection->getMethod('add_to_log');
         $addtologmethod->setAccessible(true);
 
         // Add new log data.
@@ -399,14 +399,14 @@ class logstore_mentor2_database_interface_testcase extends advanced_testcase {
         self::assertEmpty($logdata['log2']);
 
         // Create log data.
-        $time  = time();
+        $time = time();
         $logid = $dbinterface->insert_record('log2',
             array(
-                'userlogid'    => 1,
+                'userlogid' => 1,
                 'sessionlogid' => 2,
-                'timecreated'  => $time,
-                'lastview'     => $time,
-                'numberview'   => 3
+                'timecreated' => $time,
+                'lastview' => $time,
+                'numberview' => 3
             )
         );
 
@@ -456,14 +456,14 @@ class logstore_mentor2_database_interface_testcase extends advanced_testcase {
         self::assertEmpty($DB->get_records('logstore_mentor_log2'));
 
         // Insert log data to database.
-        $time  = time();
+        $time = time();
         $logid = $dbinterface->insert_record('log2',
             array(
-                'userlogid'    => 1,
+                'userlogid' => 1,
                 'sessionlogid' => 2,
-                'timecreated'  => $time,
-                'lastview'     => $time,
-                'numberview'   => 3
+                'timecreated' => $time,
+                'lastview' => $time,
+                'numberview' => 3
             )
         );
 
@@ -502,20 +502,20 @@ class logstore_mentor2_database_interface_testcase extends advanced_testcase {
         self::assertEmpty($logdata['log2']);
 
         // Create log data to database and log data.
-        $time  = time();
-        $data  = array(
-            'userlogid'    => 1,
+        $time = time();
+        $data = array(
+            'userlogid' => 1,
             'sessionlogid' => 2,
-            'timecreated'  => $time,
-            'lastview'     => $time,
-            'numberview'   => 3
+            'timecreated' => $time,
+            'lastview' => $time,
+            'numberview' => 3
         );
         $logid = $DB->insert_record('logstore_mentor_log2', $data);
 
         // Update log data.
-        $data['id']           = $logid;
+        $data['id'] = $logid;
         $data['sessionlogid'] = 20;
-        $data['numberview']   = 30;
+        $data['numberview'] = 30;
         $dbinterface->update_record('log2', $data);
 
         // Get updated log data to database.
@@ -567,13 +567,13 @@ class logstore_mentor2_database_interface_testcase extends advanced_testcase {
         self::assertEmpty($logdata['log2']);
 
         // Create new data log to database and attribute.
-        $time  = time();
-        $data  = array(
-            'userlogid'    => 1,
+        $time = time();
+        $data = array(
+            'userlogid' => 1,
             'sessionlogid' => 2,
-            'timecreated'  => $time,
-            'lastview'     => $time,
-            'numberview'   => 3
+            'timecreated' => $time,
+            'lastview' => $time,
+            'numberview' => 3
         );
         $logid = $dbinterface->get_or_create_record('log2', $data);
 
@@ -614,7 +614,7 @@ class logstore_mentor2_database_interface_testcase extends advanced_testcase {
 
         // New log data.
         $data['sessionlogid'] = 20;
-        $data['numberview']   = 30;
+        $data['numberview'] = 30;
 
         // Create new log data to database and attribute.
         $newlogid = $dbinterface->get_or_create_record('log2', $data);

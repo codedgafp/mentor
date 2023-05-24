@@ -24,57 +24,57 @@
  */
 $string['pluginname'] = 'Local User';
 
-$string['cohortnotexisterror']    = 'Le cohort (id : {$a}) n\'existe pas';
+$string['cohortnotexisterror'] = 'Le cohort (id : {$a}) n\'existe pas';
 $string['addusercohortmembererror']
-                                  = 'L\'utilisateur (id : {$a->userid}) n\'a pas été ajouté à la cohorte (id : {$a->cohortid})';
+    = 'L\'utilisateur (id : {$a->userid}) n\'a pas été ajouté à la cohorte (id : {$a->cohortid})';
 $string['removeusercohortmembererror']
-                                  = 'L\'utilisateur (id : {$a->userid}) n\'a pas été enlevé à la cohorte (id : {$a->cohortid})';
-$string['unknownusererror']       = 'L\'utilisateur (id : {$a}) n\'est actuellement plus enregistré';
+    = 'L\'utilisateur (id : {$a->userid}) n\'a pas été enlevé à la cohorte (id : {$a->cohortid})';
+$string['unknownusererror'] = 'L\'utilisateur (id : {$a}) n\'est actuellement plus enregistré';
 $string['unknownuseryemailerror'] = 'L\'utilisateur (email : {$a}) n\'est actuellement plus enregistré';
-$string['suspendedusererror']     = 'L\'utilisateur (id : {$a}) n\'a pas été suspendu';
-$string['activeusererror']        = 'L\'utilisateur (id : {$a}) n\'a pas été activé';
-$string['rolenotexisterror']      = 'Le role {$a} n\'exite pas';
+$string['suspendedusererror'] = 'L\'utilisateur (id : {$a}) n\'a pas été suspendu';
+$string['activeusererror'] = 'L\'utilisateur (id : {$a}) n\'a pas été activé';
+$string['rolenotexisterror'] = 'Le role {$a} n\'exite pas';
 
 /*****************Edadmin**************************/
 
-$string['edadminusercoursetype']  = 'Utilisateurs';
+$string['edadminusercoursetype'] = 'Utilisateurs';
 $string['edadminusercoursetitle'] = 'Gestion des utilisateurs';
 
 /*****************User admin**********************/
 
 // Renderer.
-$string['manageroles']      = "Gérer les rôles";
-$string['lastname']         = "Nom";
-$string['firstname']        = "Prénom";
-$string['email']            = "Mail";
+$string['manageroles'] = "Gérer les rôles";
+$string['lastname'] = "Nom";
+$string['firstname'] = "Prénom";
+$string['email'] = "Mail";
 $string['connectingentity'] = 'Entité de rattachement';
-$string['region']           = 'Région';
-$string['lastconnection']   = "Date de dernière connexion";
-$string['sortby']           = "Filtrer par";
-$string['status']           = "Statut";
-$string['applyfilters']     = "Appliquer les filtres";
-$string['resetfilters']     = "Réinitialiser les filtres";
-$string['suspendusers']     = 'Suspendre des utilisateurs en lot';
-$string['userssuspension']  = 'Suspension d\'utilisateurs';
+$string['region'] = 'Région';
+$string['lastconnection'] = "Date de dernière connexion";
+$string['sortby'] = "Filtrer par";
+$string['status'] = "Statut";
+$string['applyfilters'] = "Appliquer les filtres";
+$string['resetfilters'] = "Réinitialiser les filtres";
+$string['suspendusers'] = 'Suspendre des utilisateurs en lot';
+$string['userssuspension'] = 'Suspension d\'utilisateurs';
 
 // CSV Import.
-$string['importusers']    = "Importation d'utilisateurs";
+$string['importusers'] = "Importation d'utilisateurs";
 $string['validateimport'] = "Valider l'import";
 $string['invalid_headers']
-                          = 'Les en-têtes du fichier sont incorrects. Les en-têtes attendus sont : "lastname", "firstname" et "email". Si vous avez les bons en-têtes, pensez à vérifier que vous avez sélectionné le bon séparateur.';
+    = 'Les en-têtes du fichier sont incorrects. Les en-têtes attendus sont : "lastname", "firstname" et "email". Si vous avez les bons en-têtes, pensez à vérifier que vous avez sélectionné le bon séparateur.';
 $string['missing_headers']
-                          = 'Les en-têtes du fichier sont incorrects. Les en-têtes attendus sont : "lastname", "firstname" et "email". Si vous avez les bons en-têtes, pensez à vérifier que vous avez sélectionné le bon séparateur.';
+    = 'Les en-têtes du fichier sont incorrects. Les en-têtes attendus sont : "lastname", "firstname" et "email". Si vous avez les bons en-têtes, pensez à vérifier que vous avez sélectionné le bon séparateur.';
 
 // JS.
-$string['deletemultipleusers']              = 'Etes-vous sur de vouloir supprimer ces {$a} utilisateurs ?';
+$string['deletemultipleusers'] = 'Etes-vous sur de vouloir supprimer ces {$a} utilisateurs ?';
 $string['deletemultipleuserswhithusername'] = 'Etes-vous sur de vouloir supprimer les utilisateurs :';
-$string['deleteoneuser']                    = 'Etes-vous sur de vouloir supprimer l\'utilisateur {$a} ?';
-$string['removeuser']                       = 'Supprimer utilisateur';
-$string['adduser']                          = 'Ajouter un utilisateur';
-$string['validemailrequired']               = 'Une adresse électronique valide est requise';
-$string['neverconnected']                   = 'Jamais';
-$string['elevatedroles']                    = 'Consultation des rôles';
-$string['exportlistusers']                  = 'Exporter la liste des utilisateurs';
+$string['deleteoneuser'] = 'Etes-vous sur de vouloir supprimer l\'utilisateur {$a} ?';
+$string['removeuser'] = 'Supprimer utilisateur';
+$string['adduser'] = 'Ajouter un utilisateur';
+$string['validemailrequired'] = 'Une adresse électronique valide est requise';
+$string['neverconnected'] = 'Jamais';
+$string['elevatedroles'] = 'Consultation des rôles';
+$string['exportlistusers'] = 'Exporter la liste des utilisateurs';
 
 /*****************DataTable***********************/
 

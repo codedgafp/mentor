@@ -93,16 +93,16 @@ function enrol_sirh_validate_users($content, $instance, $notificationtype = SIRH
     }
 
     $allowedroles = \local_mentor_core\session_api::get_all_roles($courseid);
-    $defaultrole  = $allowedroles['participant']->localname;
-    $definedrole  = $allowedroles['participant'];
+    $defaultrole = $allowedroles['participant']->localname;
+    $definedrole = $allowedroles['participant'];
 
     // Fields pattern.
-    $pattern      = '/[\/~`\!@#\$%\^&\*\(\)_\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/';
+    $pattern = '/[\/~`\!@#\$%\^&\*\(\)_\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/';
     $emailpattern = '/[\'\/~`\!#\$%\^&\*\(\)\+=\{\}\[\]\|;:"\<\>,\?\\\]/';
 
     // Check entries.
     foreach ($content as $user) {
-        $rolename   = $defaultrole;
+        $rolename = $defaultrole;
         $ignoreline = false;
 
         // Lowercase email.
@@ -122,10 +122,10 @@ function enrol_sirh_validate_users($content, $instance, $notificationtype = SIRH
                     'error_task_specials_chars',
                     'enrol_sirh',
                     array(
-                        'sirh'         => $instance->customchar1,
+                        'sirh' => $instance->customchar1,
                         'trainingsirh' => $instance->customchar2,
-                        'sessionsirh'  => $instance->customchar3,
-                        'useremail'    => $user->email
+                        'sessionsirh' => $instance->customchar3,
+                        'useremail' => $user->email
                     )
                 ));
             }
@@ -147,10 +147,10 @@ function enrol_sirh_validate_users($content, $instance, $notificationtype = SIRH
                     'error_task_email_not_valid',
                     'enrol_sirh',
                     array(
-                        'sirh'         => $instance->customchar1,
+                        'sirh' => $instance->customchar1,
                         'trainingsirh' => $instance->customchar2,
-                        'sessionsirh'  => $instance->customchar3,
-                        'useremail'    => $user->email
+                        'sessionsirh' => $instance->customchar3,
+                        'useremail' => $user->email
                     )
                 ));
             }
@@ -188,8 +188,8 @@ function enrol_sirh_validate_users($content, $instance, $notificationtype = SIRH
             // User is enrolled.
             if (!empty($oldroles) && !isset($oldroles[$definedrole->id])) {
 
-                $strparams           = new stdClass();
-                $strparams->newrole  = $rolename;
+                $strparams = new stdClass();
+                $strparams->newrole = $rolename;
                 $strparams->oldroles = '';
                 foreach ($oldroles as $oldrole) {
                     $strparams->oldroles .= $allowedroles[$oldrole->shortname]->localname . ',';
@@ -228,7 +228,10 @@ function enrol_sirh_validate_users($content, $instance, $notificationtype = SIRH
                             get_string(
                                 'warning_user_role',
                                 'enrol_sirh',
-                                array('mail' => $u->email, 'oldrole' => $strparams->oldroles, 'newrole' => $strparams->newrole)
+                                array(
+                                    'mail' => $u->email, 'oldrole' => $strparams->oldroles,
+                                    'newrole' => $strparams->newrole
+                                )
                             )
                         ];
                     }
@@ -270,20 +273,20 @@ function enrol_sirh_html_table_renderer_users_session($userssession) {
     // Set data table.
     $usersessiontable = [];
     foreach ($userssession as $usersession) {
-        $userdata            = new \stdClass();
-        $userdata->lastname  = $usersession->lastname;
+        $userdata = new \stdClass();
+        $userdata->lastname = $usersession->lastname;
         $userdata->firstname = $usersession->firstname;
-        $userdata->email     = $usersession->email;
-        $usersessiontable[]  = $userdata;
+        $userdata->email = $usersession->email;
+        $usersessiontable[] = $userdata;
     }
 
     // Create table with data and setting.
-    $userssessiontable                      = new html_table();
-    $userssessiontable->head                = ['Nom', 'Prénom', 'Adresse de couriel'];
-    $userssessiontable->data                = $usersessiontable;
-    $userssessiontable->id                  = 'user-session-table';
+    $userssessiontable = new html_table();
+    $userssessiontable->head = ['Nom', 'Prénom', 'Adresse de couriel'];
+    $userssessiontable->data = $usersessiontable;
+    $userssessiontable->id = 'user-session-table';
     $userssessiontable->attributes['class'] = 'generaltable user-hidden';
-    $out                                    .= html_writer::table($userssessiontable);
+    $out .= html_writer::table($userssessiontable);
 
     if (count($userssession) > 5) {
         $out .= html_writer::tag('div', '', ['id' => 'gradientmask']);

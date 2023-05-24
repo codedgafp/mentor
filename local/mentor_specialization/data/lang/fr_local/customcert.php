@@ -25,4 +25,4 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['customcert:view'] = 'Télécharger le certificat';
-$string['getcustomcert']   = 'Télécharger le certificat';
+$string['getcustomcert'] = 'Télécharger le certificat';

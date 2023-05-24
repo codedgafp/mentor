@@ -109,10 +109,10 @@ class database_interface {
                 AND e.customchar2 = :sirhtraining
                 AND e.customchar3 = :sirhsession
         ', array(
-            'courseid'     => $courseid,
-            'sirh'         => $sirh,
+            'courseid' => $courseid,
+            'sirh' => $sirh,
             'sirhtraining' => $sirhtraining,
-            'sirhsession'  => $sirhsession,
+            'sirhsession' => $sirhsession,
         ));
     }
 

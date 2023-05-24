@@ -75,7 +75,7 @@ class mytrainings implements renderable, templatable {
         // Create data for the template block.
         $templateparams = new \stdClass();
 
-        $templateparams->trainings      = [];
+        $templateparams->trainings = [];
         $templateparams->trainingsheets = [];
 
         foreach ($trainingsuserdesigner as $traininguserdesigner) {
@@ -84,12 +84,12 @@ class mytrainings implements renderable, templatable {
                 continue;
             }
 
-            $templateparams->trainings[]                               = $traininguserdesigner;
+            $templateparams->trainings[] = $traininguserdesigner;
             $templateparams->trainingsheets[$traininguserdesigner->id] = $traininguserdesigner;
         }
 
-        $templateparams->trainingscount         = count($templateparams->trainingsheets);
-        $templateparams->catalogurl             = $CFG->wwwroot . '/local/catalog/index.php';
+        $templateparams->trainingscount = count($templateparams->trainingsheets);
+        $templateparams->catalogurl = $CFG->wwwroot . '/local/catalog/index.php';
         $templateparams->trainingssheettemplate = 'local_mentor_core/sheet/training-sheet';
 
         // Return data for the template block.

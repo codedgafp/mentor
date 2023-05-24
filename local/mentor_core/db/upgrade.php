@@ -59,7 +59,7 @@ function xmldb_local_mentor_core_upgrade($oldversion) {
         // Training table fields.
         $trainingfields = [
             'traininggoal' => [XMLDB_TYPE_TEXT, '255', null, null, null],
-            'thumbnail'    => [XMLDB_TYPE_CHAR, '255', null, null, null]
+            'thumbnail' => [XMLDB_TYPE_CHAR, '255', null, null, null]
         ];
 
         // Adding fields to database.
@@ -74,7 +74,7 @@ function xmldb_local_mentor_core_upgrade($oldversion) {
         try {
             $DB->execute("UPDATE {session}
             SET courseshortname = REPLACE(courseshortname,:search,:replace)", [
-                'search'  => '&#39;',
+                'search' => '&#39;',
                 'replace' => "'"
             ]);
         } catch (\dml_exception $e) {
@@ -84,12 +84,16 @@ function xmldb_local_mentor_core_upgrade($oldversion) {
         try {
             $DB->execute("UPDATE {course}
             SET shortname = REPLACE(shortname,:search,:replace)", [
-                'search'  => '&#39;',
+                'search' => '&#39;',
                 'replace' => "'"
             ]);
         } catch (\dml_exception $e) {
             mtrace('WARNING : Replace unicode to shortname in course!!!');
         }
+    }
+
+    if ($oldversion < 2023040500) {
+        local_mentor_core_update_entities_list();
     }
 
     return true;

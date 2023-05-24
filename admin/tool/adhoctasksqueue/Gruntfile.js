@@ -24,7 +24,7 @@
  * Grunt configuration
  */
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
     var path = require('path'),
         tasks = {},
         cwd = process.env.PWD || process.cwd(),
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
      * @param {String} srcPath the  matched src path
      * @return {String} The rewritten destination path.
      */
-    var uglifyRename = function(destPath, srcPath) {
+    var uglifyRename = function (destPath, srcPath) {
         destPath = srcPath.replace('src', 'build');
         destPath = destPath.replace('.js', '.min.js');
         destPath = path.resolve(cwd, destPath);
@@ -74,13 +74,13 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         uglify: {
-			dynamic_mappings: {
+            dynamic_mappings: {
                 files: grunt.file.expandMapping(
                     ['**/src/*.js', '!**/node_modules/**'],
                     '',
                     {
                         cwd: process.cwd(),
-                        rename: function(destBase, destPath) {
+                        rename: function (destBase, destPath) {
                             destPath = destPath.replace('src', 'build');
                             destPath = destPath.replace('.js', '.min.js');
                             destPath = path.resolve(process.cwd(), destPath);
@@ -92,11 +92,11 @@ module.exports = function(grunt) {
         }
     });
 
-    tasks.startup = function() {
+    tasks.startup = function () {
         // Are we in a YUI directory?
         if (path.basename(path.resolve(cwd, '../../')) == 'yui') {
             grunt.task.run('yui');
-        // Are we in an AMD directory?
+            // Are we in an AMD directory?
         } else if (inAMD) {
             grunt.task.run('amd');
         } else {
@@ -110,15 +110,15 @@ module.exports = function(grunt) {
     // method is slightly complicated to deal with multiple changed files at once (copied
     // from the grunt-contrib-watch readme).
     var changedFiles = Object.create(null);
-    var onChange = grunt.util._.debounce(function() {
-          var files = Object.keys(changedFiles);
-          grunt.config('uglify.amd.files', [{expand: true, src: files, rename: uglifyRename}]);
-          changedFiles = Object.create(null);
+    var onChange = grunt.util._.debounce(function () {
+        var files = Object.keys(changedFiles);
+        grunt.config('uglify.amd.files', [{expand: true, src: files, rename: uglifyRename}]);
+        changedFiles = Object.create(null);
     }, 200);
 
-    grunt.event.on('watch', function(action, filepath) {
-          changedFiles[filepath] = action;
-          onChange();
+    grunt.event.on('watch', function (action, filepath) {
+        changedFiles[filepath] = action;
+        onChange();
     });
 
     // Register NPM tasks.

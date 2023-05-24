@@ -63,11 +63,11 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
     public function init_competencies() {
         global $CFG;
 
-        $text      = file_get_contents($CFG->dirroot .
-                                       '/local/mentor_specialization/data/competencies/competencies_comma_separated.csv');
-        $encoding  = 'UTF-8';
+        $text = file_get_contents($CFG->dirroot .
+            '/local/mentor_specialization/data/competencies/competencies_comma_separated.csv');
+        $encoding = 'UTF-8';
         $delimiter = 'comma';
-        $importer  = new \tool_lpimportcsv\framework_importer($text, $encoding, $delimiter, 0, null, true);
+        $importer = new \tool_lpimportcsv\framework_importer($text, $encoding, $delimiter, 0, null, true);
         $importer->import();
     }
 
@@ -79,8 +79,8 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -108,16 +108,16 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
 
         return [
             [
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1',
-                'regions'   => [5], // Corse.
-                'userid'    => 2  // Set the admin user as manager of the entity.
+                'regions' => [5], // Corse.
+                'userid' => 2  // Set the admin user as manager of the entity.
             ],
             [
-                'name'      => 'New Entity 2',
+                'name' => 'New Entity 2',
                 'shortname' => 'New Entity 2',
-                'regions'   => [5], // Corse.
-                'userid'    => 2  // Set the admin user as manager of the entity.
+                'regions' => [5], // Corse.
+                'userid' => 2  // Set the admin user as manager of the entity.
             ],
         ];
     }
@@ -129,36 +129,36 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
 
     public function create_training($entity) {
 
-        $trainingdata                               = new stdClass();
-        $trainingdata->name                         = 'fullname';
-        $trainingdata->shortname                    = 'shortname';
-        $trainingdata->teaser                       = 'http://www.edunao.com/';
-        $trainingdata->teaserpicture                = '';
-        $trainingdata->prerequisite                 = 'TEST';
-        $trainingdata->collection                   = 'accompagnement';
-        $trainingdata->traininggoal                 = 'TEST TRAINING ';
-        $trainingdata->idsirh                       = 'TEST ID SIRH';
-        $trainingdata->licenseterms                 = 'cc-sa';
-        $trainingdata->typicaljob                   = 'TEST';
-        $trainingdata->skills                       = ['FP2SF001', 'FP2SF002'];
-        $trainingdata->certifying                   = '1';
-        $trainingdata->presenceestimatedtimehours   = '12';
+        $trainingdata = new stdClass();
+        $trainingdata->name = 'fullname';
+        $trainingdata->shortname = 'shortname';
+        $trainingdata->teaser = 'http://www.edunao.com/';
+        $trainingdata->teaserpicture = '';
+        $trainingdata->prerequisite = 'TEST';
+        $trainingdata->collection = 'accompagnement';
+        $trainingdata->traininggoal = 'TEST TRAINING ';
+        $trainingdata->idsirh = 'TEST ID SIRH';
+        $trainingdata->licenseterms = 'cc-sa';
+        $trainingdata->typicaljob = 'TEST';
+        $trainingdata->skills = ['FP2SF001', 'FP2SF002'];
+        $trainingdata->certifying = '1';
+        $trainingdata->presenceestimatedtimehours = '12';
         $trainingdata->presenceestimatedtimeminutes = '10';
-        $trainingdata->remoteestimatedtimehours     = '15';
-        $trainingdata->remoteestimatedtimeminutes   = '30';
-        $trainingdata->trainingmodalities           = 'd';
-        $trainingdata->producingorganization        = 'TEST';
-        $trainingdata->producerorganizationlogo     = '';
-        $trainingdata->designers                    = 'TEST';
-        $trainingdata->contactproducerorganization  = 'TEST';
-        $trainingdata->thumbnail                    = '';
-        $trainingdata->status                       = 'dr';
-        $trainingdata->content                      = [];
-        $trainingdata->content['text']              = 'ContentText';
-        $formationid                                = $entity->get_entity_formation_category();
-        $trainingdata->categorychildid              = $formationid;
-        $trainingdata->categoryid                   = $entity->id;
-        $trainingdata->creativestructure            = $entity->id;
+        $trainingdata->remoteestimatedtimehours = '15';
+        $trainingdata->remoteestimatedtimeminutes = '30';
+        $trainingdata->trainingmodalities = 'd';
+        $trainingdata->producingorganization = 'TEST';
+        $trainingdata->producerorganizationlogo = '';
+        $trainingdata->designers = 'TEST';
+        $trainingdata->contactproducerorganization = 'TEST';
+        $trainingdata->thumbnail = '';
+        $trainingdata->status = 'dr';
+        $trainingdata->content = [];
+        $trainingdata->content['text'] = 'ContentText';
+        $formationid = $entity->get_entity_formation_category();
+        $trainingdata->categorychildid = $formationid;
+        $trainingdata->categoryid = $entity->id;
+        $trainingdata->creativestructure = $entity->id;
         return \local_mentor_core\training_api::create_training($trainingdata);
     }
 
@@ -177,7 +177,7 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
 
         self::setAdminUser();
 
-        $entity   = $this->create_entity('Entity');
+        $entity = $this->create_entity('Entity');
         $training = $this->create_training($entity);
 
         $editform = $training->prepare_edit_form();
@@ -196,30 +196,30 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
         self::assertFalse(isset($editform->remoteestimatedtimeminutes));
 
         // Create producer organization logo file.
-        $fs                    = get_file_storage();
-        $component             = 'local_trainings';
-        $itemid                = $training->id;
-        $filearea              = 'producerorganizationlogo';
-        $contextid             = $training->get_context()->id;
-        $filerecord            = new stdClass();
+        $fs = get_file_storage();
+        $component = 'local_trainings';
+        $itemid = $training->id;
+        $filearea = 'producerorganizationlogo';
+        $contextid = $training->get_context()->id;
+        $filerecord = new stdClass();
         $filerecord->contextid = $contextid;
         $filerecord->component = $component;
-        $filerecord->filearea  = $filearea;
-        $filerecord->itemid    = $itemid;
-        $filerecord->filepath  = '/';
-        $filerecord->filename  = 'logo.png';
-        $filepath              = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
+        $filerecord->filearea = $filearea;
+        $filerecord->itemid = $itemid;
+        $filerecord->filepath = '/';
+        $filerecord->filename = 'logo.png';
+        $filepath = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
         $fs->create_file_from_pathname($filerecord, $filepath);
 
         // Create teaser picture file.
-        $filearea             = 'teaserpicture';
+        $filearea = 'teaserpicture';
         $filerecord->filearea = $filearea;
         $fs->create_file_from_pathname($filerecord, $filepath);
 
-        $data                        = new \stdClass();
+        $data = new \stdClass();
         $data->presenceestimatedtime = 185;
-        $data->remoteestimatedtime   = 75;
-        $data->timecreated           = time();
+        $data->remoteestimatedtime = 75;
+        $data->timecreated = time();
         $training->update($data);
 
         $editform = $training->prepare_edit_form();
@@ -249,11 +249,11 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
 
         self::setAdminUser();
 
-        $entity   = $this->create_entity('Entity');
+        $entity = $this->create_entity('Entity');
         $training = $this->create_training($entity);
 
         $duplicateshortname = 'duplicate_shortname';
-        $duplicatetraining  = $training->duplicate($duplicateshortname);
+        $duplicatetraining = $training->duplicate($duplicateshortname);
 
         self::assertEquals($training->name, $duplicatetraining->name);
         self::assertEquals($training->get_entity()->id, $duplicatetraining->get_entity()->id);
@@ -277,11 +277,11 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
 
         self::setAdminUser();
 
-        $entity         = $this->create_entity('Entity');
-        $training       = $this->create_training($entity);
+        $entity = $this->create_entity('Entity');
+        $training = $this->create_training($entity);
         $trainingskills = $training->skills;
 
-        $db     = \local_mentor_specialization\database_interface::get_instance();
+        $db = \local_mentor_specialization\database_interface::get_instance();
         $skills = $db->get_skills();
 
         $skillsnamestring = '';
@@ -308,12 +308,12 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
 
         self::setAdminUser();
 
-        $entity   = $this->create_entity('Entity');
+        $entity = $this->create_entity('Entity');
         $training = $this->create_training($entity);
 
         self::assertArrayNotHasKey('deletetraining', $training->get_actions());
 
-        $data         = new \stdClass();
+        $data = new \stdClass();
         $data->status = \local_mentor_core\training::STATUS_ARCHIVED;
         $training->update($data);
 
@@ -335,13 +335,13 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
 
         self::setAdminUser();
 
-        $entity   = $this->create_entity('Entity');
+        $entity = $this->create_entity('Entity');
         $training = $this->create_training($entity);
 
         // Check actual collection.
         self::assertEquals('accompagnement', $training->collection);
 
-        $data             = new stdClass();
+        $data = new stdClass();
         $data->collection = 'collection1';
 
         $training->update($data);
@@ -379,13 +379,13 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
 
         self::setAdminUser();
 
-        $entity   = $this->create_entity('Entity');
+        $entity = $this->create_entity('Entity');
         $training = $this->create_training($entity);
 
         // Check actual skills.
         self::assertEquals('FP2SF001,FP2SF002', $training->skills);
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->skills = 'FP2SF003';
 
         $training->update($data);
@@ -424,12 +424,12 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
 
         self::setAdminUser();
 
-        $entity   = $this->create_entity('Entity');
+        $entity = $this->create_entity('Entity');
         $training = $this->create_training($entity);
 
         // Create database interface Mock.
         $dbinterfacemock = $this->getMockBuilder('\local_mentor_core\database_interface')
-            ->setMethods(['update_training'])
+            ->setMethods(['update_training', 'get_course'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -438,7 +438,12 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
             ->method('update_training')
             ->will($this->returnValue(false));
 
-        $reflection         = new ReflectionClass($training);
+        // Return course value when get_course function call.
+        $dbinterfacemock->expects($this->any())
+            ->method('get_course')
+            ->will($this->returnValue($training->get_course(true)));
+
+        $reflection = new ReflectionClass($training);
         $reflectionproperty = $reflection->getProperty('dbinterface');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($training, $dbinterfacemock);
@@ -470,23 +475,23 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
 
         self::setAdminUser();
 
-        $entity   = $this->create_entity('Entity');
+        $entity = $this->create_entity('Entity');
         $training = $this->create_training($entity);
 
         // Create thumbnail file.
-        $fs                    = get_file_storage();
-        $component             = 'local_trainings';
-        $itemid                = $training->id;
-        $filearea              = 'thumbnail';
-        $contextid             = $training->get_context()->id;
-        $filerecord            = new stdClass();
+        $fs = get_file_storage();
+        $component = 'local_trainings';
+        $itemid = $training->id;
+        $filearea = 'thumbnail';
+        $contextid = $training->get_context()->id;
+        $filerecord = new stdClass();
         $filerecord->contextid = $contextid;
         $filerecord->component = $component;
-        $filerecord->filearea  = $filearea;
-        $filerecord->itemid    = $itemid;
-        $filerecord->filepath  = '/';
-        $filerecord->filename  = 'logo.png';
-        $filepath              = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
+        $filerecord->filearea = $filearea;
+        $filerecord->itemid = $itemid;
+        $filerecord->filepath = '/';
+        $filerecord->filename = 'logo.png';
+        $filepath = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
         $fs->create_file_from_pathname($filerecord, $filepath);
 
         self::assertEquals($training->convert_for_template()->thumbnail,
@@ -518,23 +523,23 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
 
         self::setAdminUser();
 
-        $entity   = $this->create_entity('Entity');
+        $entity = $this->create_entity('Entity');
         $training = $this->create_training($entity);
 
         // Create producing organization logo file.
-        $fs                    = get_file_storage();
-        $component             = 'local_trainings';
-        $itemid                = $training->id;
-        $filearea              = 'producerorganizationlogo';
-        $contextid             = $training->get_context()->id;
-        $filerecord            = new stdClass();
+        $fs = get_file_storage();
+        $component = 'local_trainings';
+        $itemid = $training->id;
+        $filearea = 'producerorganizationlogo';
+        $contextid = $training->get_context()->id;
+        $filerecord = new stdClass();
         $filerecord->contextid = $contextid;
         $filerecord->component = $component;
-        $filerecord->filearea  = $filearea;
-        $filerecord->itemid    = $itemid;
-        $filerecord->filepath  = '/';
-        $filerecord->filename  = 'logo.png';
-        $filepath              = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
+        $filerecord->filearea = $filearea;
+        $filerecord->itemid = $itemid;
+        $filerecord->filepath = '/';
+        $filerecord->filename = 'logo.png';
+        $filepath = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
         $fs->create_file_from_pathname($filerecord, $filepath);
 
         self::assertEquals($training->convert_for_template()->producingorganizationlogo,
@@ -566,25 +571,25 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
 
         self::setAdminUser();
 
-        $entity   = $this->create_entity('Entity');
+        $entity = $this->create_entity('Entity');
         $training = $this->create_training($entity);
 
         self::assertNull($training->get_file_url());
 
         // Create thumbnail file.
-        $fs                    = get_file_storage();
-        $component             = 'local_trainings';
-        $itemid                = $training->id;
-        $filearea              = 'thumbnail';
-        $contextid             = $training->get_context()->id;
-        $filerecord            = new stdClass();
+        $fs = get_file_storage();
+        $component = 'local_trainings';
+        $itemid = $training->id;
+        $filearea = 'thumbnail';
+        $contextid = $training->get_context()->id;
+        $filerecord = new stdClass();
         $filerecord->contextid = $contextid;
         $filerecord->component = $component;
-        $filerecord->filearea  = $filearea;
-        $filerecord->itemid    = $itemid;
-        $filerecord->filepath  = '/';
-        $filerecord->filename  = 'logo.png';
-        $filepath              = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
+        $filerecord->filearea = $filearea;
+        $filerecord->itemid = $itemid;
+        $filerecord->filepath = '/';
+        $filerecord->filename = 'logo.png';
+        $filepath = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
         $fs->create_file_from_pathname($filerecord, $filepath);
 
         self::assertNotNull($training->get_file_url());
@@ -593,19 +598,19 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
         self::assertNull($training->get_file_url('specificfile'));
 
         // Create thumbnail file.
-        $fs                    = get_file_storage();
-        $component             = 'local_trainings';
-        $itemid                = $training->id;
-        $filearea              = 'specificfile';
-        $contextid             = $training->get_context()->id;
-        $filerecord            = new stdClass();
+        $fs = get_file_storage();
+        $component = 'local_trainings';
+        $itemid = $training->id;
+        $filearea = 'specificfile';
+        $contextid = $training->get_context()->id;
+        $filerecord = new stdClass();
         $filerecord->contextid = $contextid;
         $filerecord->component = $component;
-        $filerecord->filearea  = $filearea;
-        $filerecord->itemid    = $itemid;
-        $filerecord->filepath  = '/';
-        $filerecord->filename  = 'logo.png';
-        $filepath              = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
+        $filerecord->filearea = $filearea;
+        $filerecord->itemid = $itemid;
+        $filerecord->filepath = '/';
+        $filerecord->filename = 'logo.png';
+        $filepath = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
         $fs->create_file_from_pathname($filerecord, $filepath);
 
         self::assertNotNull($training->get_file_url('specificfile'));
@@ -626,7 +631,7 @@ class local_mentor_specialization_training_class_testcase extends advanced_testc
 
         self::setAdminUser();
 
-        $entity   = $this->create_entity('Entity');
+        $entity = $this->create_entity('Entity');
         $training = $this->create_training($entity);
 
         $training->trainingmodalities = '';

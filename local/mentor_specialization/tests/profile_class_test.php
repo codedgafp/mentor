@@ -42,8 +42,8 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
     public function reset_singletons() {
         // Reset the mentor core specialization singleton.
         $specialization = \local_mentor_core\specialization::get_instance();
-        $reflection     = new ReflectionClass($specialization);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($specialization);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -78,24 +78,24 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
 
         $db = \local_mentor_core\database_interface::get_instance();
 
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@gouv.fr';
-        $auth      = 'manual';
+        $email = 'user@gouv.fr';
+        $auth = 'manual';
 
         // Create user.
         self::assertTrue(\local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, null, [], null, $auth));
 
         // Get user.
         $profiledata = $db->get_user_by_email($email);
-        $profile     = \local_mentor_core\profile_api::get_profile($profiledata->id);
+        $profile = \local_mentor_core\profile_api::get_profile($profiledata->id);
 
         // Nothing to synchronize.
         self::assertNull($profile->sync_entities());
 
-        $lastname2  = 'lastname2';
+        $lastname2 = 'lastname2';
         $firstname2 = 'firstname2';
-        $email2     = 'user2@gouv.fr';
+        $email2 = 'user2@gouv.fr';
 
         $entity1 = \local_mentor_core\entity_api::get_entity(1);
 
@@ -106,43 +106,43 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
 
         // Get user.
         $profiledata2 = $db->get_user_by_email($email2);
-        $profile2     = \local_mentor_core\profile_api::get_profile($profiledata2->id);
+        $profile2 = \local_mentor_core\profile_api::get_profile($profiledata2->id);
 
         // Entity cohort sync.
         self::assertTrue($profile2->sync_entities());
         self::assertCount(1, $entity1->get_members());
 
         $entity2id = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'Entity2',
+            'name' => 'Entity2',
             'shortname' => 'Entity2',
-            'regions'   => [3]
+            'regions' => [3]
         ]);
-        $entity2   = \local_mentor_core\entity_api::get_entity($entity2id);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entity2id);
 
         $entity3id = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'Entity3',
+            'name' => 'Entity3',
             'shortname' => 'Entity3'
         ]);
-        $entity3   = \local_mentor_core\entity_api::get_entity($entity3id);
+        $entity3 = \local_mentor_core\entity_api::get_entity($entity3id);
 
         self::assertCount(0, $entity2->get_members());
         self::assertCount(0, $entity3->get_members());
 
         // Change main entity and region profile.
-        $mainentityuserfield       = $DB->get_record('user_info_field', array('shortname' => 'mainentity'));
-        $mainentityfielddata       = $DB->get_record('user_info_data', array(
+        $mainentityuserfield = $DB->get_record('user_info_field', array('shortname' => 'mainentity'));
+        $mainentityfielddata = $DB->get_record('user_info_data', array(
             'userid' => $profile2->id, 'fieldid' =>
                 $mainentityuserfield->id
         ));
         $mainentityfielddata->data = 'Entity3';
         $DB->update_record('user_info_data', $mainentityfielddata);
 
-        $regionuserfield             = $DB->get_record('user_info_field', array('shortname' => 'region'));
-        $regionlist                  = explode("\n", $regionuserfield->param1);
-        $regionfielddata             = new stdClass();
-        $regionfielddata->userid     = $profile2->id;
-        $regionfielddata->fieldid    = $regionuserfield->id;
-        $regionfielddata->data       = $regionlist[2];
+        $regionuserfield = $DB->get_record('user_info_field', array('shortname' => 'region'));
+        $regionlist = explode("\n", $regionuserfield->param1);
+        $regionfielddata = new stdClass();
+        $regionfielddata->userid = $profile2->id;
+        $regionfielddata->fieldid = $regionuserfield->id;
+        $regionfielddata->data = $regionlist[2];
         $regionfielddata->dataformat = 0;
         $DB->insert_record('user_info_data', $regionfielddata);
 
@@ -169,20 +169,20 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
         self::setAdminUser();
 
         // Setting user data.
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@gouv.fr';
-        $auth      = 'manual';
+        $email = 'user@gouv.fr';
+        $auth = 'manual';
 
         // Create main and secondary entities.
         // Main.
         $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'Entity', 'shortname' => 'Entity']);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
         // Secondary.
         $entity2id = \local_mentor_core\entity_api::create_entity(['name' => 'Entity2', 'shortname' => 'Entity2']);
-        $entity2   = \local_mentor_core\entity_api::get_entity($entity2id);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entity2id);
         $entity3id = \local_mentor_core\entity_api::create_entity(['name' => 'Entity3', 'shortname' => 'Entity3']);
-        $entity3   = \local_mentor_core\entity_api::get_entity($entity3id);
+        $entity3 = \local_mentor_core\entity_api::get_entity($entity3id);
 
         // Check if entities does not have members.
         self::assertCount(0, $entity->get_members());
@@ -216,22 +216,22 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
         $db = \local_mentor_core\database_interface::get_instance();
 
         // Setting user data.
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@gouv.fr';
-        $auth      = 'manual';
+        $email = 'user@gouv.fr';
+        $auth = 'manual';
 
         // Create main and secondary entities.
         // Main.
         $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'Entity', 'shortname' => 'Entity']);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
         // Secondary.
         $entity2id = \local_mentor_core\entity_api::create_entity(['name' => 'Entity2', 'shortname' => 'Entity2']);
-        $entity2   = \local_mentor_core\entity_api::get_entity($entity2id);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entity2id);
 
         // Create user.
         \local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entity, [$entity2], null, $auth);
-        $user    = $db->get_user_by_email('user@gouv.fr');
+        $user = $db->get_user_by_email('user@gouv.fr');
         $profile = \local_mentor_core\profile_api::get_profile($user->id);
 
         // Get secondary entities user.
@@ -260,18 +260,18 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
         $db = \local_mentor_core\database_interface::get_instance();
 
         // Setting user data.
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@gouv.fr';
-        $auth      = 'manual';
+        $email = 'user@gouv.fr';
+        $auth = 'manual';
 
         // Create main entity.
         $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'Entity', 'shortname' => 'Entity']);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // Create user.
         \local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entity, [], null, $auth);
-        $user    = $db->get_user_by_email('user@gouv.fr');
+        $user = $db->get_user_by_email('user@gouv.fr');
         $profile = \local_mentor_core\profile_api::get_profile($user->id);
 
         // Get secondary entities user.
@@ -299,24 +299,24 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
         $db = \local_mentor_core\database_interface::get_instance();
 
         // Setting user data.
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@gouv.fr';
-        $auth      = 'manual';
+        $email = 'user@gouv.fr';
+        $auth = 'manual';
 
         // Create main and secondary entities.
         // Main.
         $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'Entity', 'shortname' => 'Entity']);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
         // Secondary.
         $entity2id = \local_mentor_core\entity_api::create_entity(['name' => 'Entity2', 'shortname' => 'Entity2']);
-        $entity2   = \local_mentor_core\entity_api::get_entity($entity2id);
+        $entity2 = \local_mentor_core\entity_api::get_entity($entity2id);
 
         // Create user.
         \local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entity, [], null, $auth);
-        $user                    = $db->get_user_by_email('user@gouv.fr');
+        $user = $db->get_user_by_email('user@gouv.fr');
         $user->secondaryentities = $entity2->name;
-        $profile                 = \local_mentor_core\profile_api::get_profile($user->id);
+        $profile = \local_mentor_core\profile_api::get_profile($user->id);
 
         // Create database interface Mock.
         $dbinterfacemock = $this->getMockBuilder('\local_mentor_core\database_interface')
@@ -330,7 +330,7 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
             ->will($this->returnValue($user));
 
         // Replace dbinterface data to profile object with mock.
-        $reflection         = new ReflectionClass($profile);
+        $reflection = new ReflectionClass($profile);
         $reflectionproperty = $reflection->getProperty('dbinterface');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($profile, $dbinterfacemock);
@@ -362,20 +362,20 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
         $db = \local_mentor_core\database_interface::get_instance();
 
         // Setting user data.
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@gouv.fr';
-        $auth      = 'manual';
+        $email = 'user@gouv.fr';
+        $auth = 'manual';
 
         // Create main entity.
         $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'Entity', 'shortname' => 'Entity']);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // Create user.
         \local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entity, [], null, $auth);
-        $user                    = $db->get_user_by_email('user@gouv.fr');
+        $user = $db->get_user_by_email('user@gouv.fr');
         $user->secondaryentities = '';
-        $profile                 = \local_mentor_core\profile_api::get_profile($user->id);
+        $profile = \local_mentor_core\profile_api::get_profile($user->id);
 
         // Create database interface Mock.
         $dbinterfacemock = $this->getMockBuilder('\local_mentor_core\database_interface')
@@ -389,7 +389,7 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
             ->will($this->returnValue($user));
 
         // Replace dbinterface data to profile object with mock.
-        $reflection         = new ReflectionClass($profile);
+        $reflection = new ReflectionClass($profile);
         $reflectionproperty = $reflection->getProperty('dbinterface');
         $reflectionproperty->setAccessible(true);
         $reflectionproperty->setValue($profile, $dbinterfacemock);
@@ -421,22 +421,22 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
         $db = \local_mentor_core\database_interface::get_instance();
 
         // Setting user data.
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@gouv.fr';
-        $auth      = 'manual';
+        $email = 'user@gouv.fr';
+        $auth = 'manual';
 
         // Create main entity.
         $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'Entity', 'shortname' => 'Entity']);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         $DB->delete_records('user_info_field', array('shortname' => 'secondaryentities'));
 
         // Create user.
         \local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entity, [], null, $auth);
-        $user                    = $db->get_user_by_email('user@gouv.fr');
+        $user = $db->get_user_by_email('user@gouv.fr');
         $user->secondaryentities = '';
-        $profile                 = \local_mentor_core\profile_api::get_profile($user->id);
+        $profile = \local_mentor_core\profile_api::get_profile($user->id);
 
         // Get secondary entities.
         $secondaryentities = $profile->get_secondary_entities();
@@ -463,23 +463,23 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
         $db = \local_mentor_core\database_interface::get_instance();
 
         // Setting user data.
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@gouv.fr';
-        $auth      = 'manual';
+        $email = 'user@gouv.fr';
+        $auth = 'manual';
 
         // Create main entity.
         $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'Entity', 'shortname' => 'Entity']);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // Create other entity.
         $entity2id = \local_mentor_core\entity_api::create_entity(['name' => 'Entity2', 'shortname' => 'Entity2']);
 
         // Create user.
         \local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entity, [$entity2id], null, $auth);
-        $user                    = $db->get_user_by_email('user@gouv.fr');
+        $user = $db->get_user_by_email('user@gouv.fr');
         $user->secondaryentities = '';
-        $profile                 = \local_mentor_core\profile_api::get_profile($user->id);
+        $profile = \local_mentor_core\profile_api::get_profile($user->id);
 
         self::assertTrue($profile->has_secondary_entity($entity2id));
 
@@ -502,14 +502,14 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
         $db = \local_mentor_core\database_interface::get_instance();
 
         // Setting user data.
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@gouv.fr';
-        $auth      = 'manual';
+        $email = 'user@gouv.fr';
+        $auth = 'manual';
 
         // Create main entity.
         $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'Entity', 'shortname' => 'Entity']);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // Create other entity.
         $entity2id = \local_mentor_core\entity_api::create_entity(['name' => 'Entity2', 'shortname' => 'Entity2']);
@@ -524,9 +524,9 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
         \local_mentor_core\profile_api::create_and_add_user(
             $lastname, $firstname, $email, $entity, [$entity2id, $entity4id], null, $auth
         );
-        $user                    = $db->get_user_by_email('user@gouv.fr');
+        $user = $db->get_user_by_email('user@gouv.fr');
         $user->secondaryentities = '';
-        $profile                 = \local_mentor_core\profile_api::get_profile($user->id);
+        $profile = \local_mentor_core\profile_api::get_profile($user->id);
 
         self::assertTrue($profile->has_secondary_entity($entity2id));
         self::assertTrue($profile->has_secondary_entity($entity4id));
@@ -552,20 +552,20 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
         $db = \local_mentor_core\database_interface::get_instance();
 
         // Setting user data.
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@gouv.fr';
-        $auth      = 'manual';
+        $email = 'user@gouv.fr';
+        $auth = 'manual';
 
         // Create main entity.
         $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'Entity', 'shortname' => 'Entity']);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // Create user.
         \local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entity, [], null, $auth);
-        $user                    = $db->get_user_by_email('user@gouv.fr');
+        $user = $db->get_user_by_email('user@gouv.fr');
         $user->secondaryentities = '';
-        $profile                 = \local_mentor_core\profile_api::get_profile($user->id);
+        $profile = \local_mentor_core\profile_api::get_profile($user->id);
 
         // Create other entity.
         $entity2id = \local_mentor_core\entity_api::create_entity(['name' => 'Entity2', 'shortname' => 'Entity2']);
@@ -591,23 +591,23 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
         $db = \local_mentor_core\database_interface::get_instance();
 
         // Setting user data.
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@gouv.fr';
-        $auth      = 'manual';
+        $email = 'user@gouv.fr';
+        $auth = 'manual';
 
         // Create main entity.
         $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'Entity', 'shortname' => 'Entity']);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // Create other entity.
         $entity2id = \local_mentor_core\entity_api::create_entity(['name' => 'Entity2', 'shortname' => 'Entity2']);
 
         // Create user.
         \local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entity, [$entity2id], null, $auth);
-        $user                    = $db->get_user_by_email('user@gouv.fr');
+        $user = $db->get_user_by_email('user@gouv.fr');
         $user->secondaryentities = '';
-        $profile                 = \local_mentor_core\profile_api::get_profile($user->id);
+        $profile = \local_mentor_core\profile_api::get_profile($user->id);
 
         // Create other entity.
         $entity3id = \local_mentor_core\entity_api::create_entity(['name' => 'Entity3', 'shortname' => 'Entity3']);
@@ -635,23 +635,23 @@ class local_mentor_specialization_profile_class_testcase extends advanced_testca
         $db = \local_mentor_core\database_interface::get_instance();
 
         // Setting user data.
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@gouv.fr';
-        $auth      = 'manual';
+        $email = 'user@gouv.fr';
+        $auth = 'manual';
 
         // Create main entity.
         $entityid = \local_mentor_core\entity_api::create_entity(['name' => 'Entity', 'shortname' => 'Entity']);
-        $entity   = \local_mentor_core\entity_api::get_entity($entityid);
+        $entity = \local_mentor_core\entity_api::get_entity($entityid);
 
         // Create other entity.
         $entity2id = \local_mentor_core\entity_api::create_entity(['name' => 'Entity2', 'shortname' => 'Entity2']);
 
         // Create user.
         \local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entity, [$entity2id], null, $auth);
-        $user                    = $db->get_user_by_email('user@gouv.fr');
+        $user = $db->get_user_by_email('user@gouv.fr');
         $user->secondaryentities = '';
-        $profile                 = \local_mentor_core\profile_api::get_profile($user->id);
+        $profile = \local_mentor_core\profile_api::get_profile($user->id);
 
         $fieldid = $DB->get_field('user_info_field', 'id', array('shortname' => 'secondaryentities'));
         $DB->delete_records('user_info_data', array('userid' => $user->id, 'fieldid' => $fieldid));

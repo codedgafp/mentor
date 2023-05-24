@@ -64,19 +64,19 @@ class import_to_entity_task extends \core\task\adhoc_task {
         $newtraining = $oldtraining->duplicate($data->trainingshortname, $data->destinationentity);
 
         // Get recipient and sender.
-        $creator     = \core_user::get_user($this->get_userid());
+        $creator = \core_user::get_user($this->get_userid());
         $supportuser = \core_user::get_support_user();
 
         // Get the content of the email.
-        $content     = get_string('import_to_entity_email', 'local_library', array(
-            'newtrainingurlsheet'  => $newtraining->get_sheet_url()->out(false),
-            'newtrainingfullname'  => $newtraining->name,
+        $content = get_string('import_to_entity_email', 'local_library', array(
+            'newtrainingurlsheet' => $newtraining->get_sheet_url()->out(false),
+            'newtrainingfullname' => $newtraining->name,
             'newtrainingshortname' => $newtraining->shortname,
-            'oldtrainingurlsheet'  => (new \moodle_url(
+            'oldtrainingurlsheet' => (new \moodle_url(
                 '/local/library/pages/training.php',
                 array('trainingid' => $oldtraining->id)
             ))->out(false),
-            'oldtrainingfullname'  => $oldtraining->name,
+            'oldtrainingfullname' => $oldtraining->name,
         ));
         $contenthtml = text_to_html($content, false, false, true);
 

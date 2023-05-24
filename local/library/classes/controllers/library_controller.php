@@ -51,9 +51,9 @@ class library_controller extends controller_base {
                     $trainingid = $this->get_param('trainingid', PARAM_INT);
                     return $this->success(self::enrol_current_user($trainingid));
                 case 'import_to_entity':
-                    $trainingid        = $this->get_param('trainingid', PARAM_INT);
+                    $trainingid = $this->get_param('trainingid', PARAM_INT);
                     $trainingshortname = $this->get_param('trainingshortname', PARAM_TEXT);
-                    $entityid          = $this->get_param('entityid', PARAM_INT);
+                    $entityid = $this->get_param('entityid', PARAM_INT);
                     return $this->success(self::import_to_entity($trainingid, $trainingshortname, $entityid));
                 default:
                     break;
@@ -73,7 +73,7 @@ class library_controller extends controller_base {
      */
     public static function enrol_current_user($trainingid) {
         $training = local_mentor_core\training_api::get_training($trainingid);
-        $result   = $training->enrol_current_user();
+        $result = $training->enrol_current_user();
 
         // Enrolment success, return the url of the session course.
         if ($result['status']) {

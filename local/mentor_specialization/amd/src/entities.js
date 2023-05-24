@@ -38,7 +38,7 @@ define([
 
                     // Check entity name length.
                     if (spacename.length > 200) {
-                        $('#saveentityform').attr("disabled",false);
+                        $('#saveentityform').attr("disabled", false);
                         $('.entities-form-maxlength').removeClass('entities-form-warning-none');
                         return;
                     } else {
@@ -59,7 +59,7 @@ define([
                                 M.table.ajax.reload();
                             } else {//If user not exist
                                 console.log(response);
-                                $('#saveentityform').attr("disabled",false);
+                                $('#saveentityform').attr("disabled", false);
                                 $(formtemplate + ' .entities-form-warning').removeClass(warningclass).html(response.message);
                             }
                         }
@@ -94,7 +94,7 @@ define([
                         }
                     }
 
-                    $('#saveentityform').attr("disabled","disabled");
+                    $('#saveentityform').attr("disabled", "disabled");
                     format_edadmin.ajax_call(ajaxcallparams);
                     $(formtemplate + ' .entities-form-warning').addClass(warningclass);
                 }
@@ -204,6 +204,64 @@ define([
                 }
             }).data('select2').$container.addClass("custom-select");
         }
+    };
+
+    /**
+     * Entity admin form event.
+     *
+     * @param {bool} canBeMainEntity
+     */
+    local_entities.adminFormEvent = function (canBeMainEntity) {
+        // Init data.
+        local_entities.canBeMainEntity = canBeMainEntity;
+        local_entities.canBeMainEntityPopupTrigger = false;
+
+        // Can be main entity data trigger change.
+        $('#id_canbemainentity').on('change', function (e) {
+            if (!local_entities.canBeMainEntity || e.currentTarget.checked) {
+                local_entities.canBeMainEntityPopupTrigger = false;
+                return;
+            }
+
+            local_entities.canBeMainEntityPopupTrigger = true;
+        });
+
+        // Form submit trigger.
+        $('.course-content > form').on('submit', function (e) {
+
+            if (!local_entities.canBeMainEntityPopupTrigger || e.originalEvent.submitter.id !== 'id_submitbutton') {
+                return;
+            }
+
+            e.preventDefault();
+
+            // Init modal information.
+            mentor.dialog('<div style="white-space: pre-wrap">' + M.util.get_string('canbemainentity_popup_content', 'local_mentor_specialization') + '</div>', {
+                width: 700,
+                close: function () {
+                    $(this).dialog("destroy");
+                },
+                title: M.util.get_string('warning', 'local_mentor_core'),
+                buttons: [
+                    {
+                        // Login page redirect.
+                        text: M.util.get_string('yes', 'moodle'),
+                        class: "btn btn-primary",
+                        click: function () {
+                            e.target.submit();
+                        }
+                    },
+                    {
+                        // Cancel button
+                        text: M.util.get_string('cancel', 'moodle'),
+                        class: "btn btn-secondary",
+                        click: function () {
+                            // Just close the modal.
+                            $(this).dialog("destroy");
+                        }
+                    }]
+            });
+        });
     };
 
     return local_entities;

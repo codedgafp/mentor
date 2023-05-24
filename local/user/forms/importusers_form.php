@@ -63,9 +63,9 @@ class importusers_form extends moodleform {
     public function __construct($users = [], $userstoreactivate = [], $addtoentity = 0, $action = null, $customdata = null,
         $method = 'post', $target = '', $attributes = null, $editable = true, $ajaxformdata = null) {
 
-        $this->users             = $users;
+        $this->users = $users;
         $this->userstoreactivate = $userstoreactivate;
-        $this->addtoentity       = $addtoentity;
+        $this->addtoentity = $addtoentity;
 
         parent::__construct($action, $customdata, $method, $target, $attributes, $editable, $ajaxformdata);
     }

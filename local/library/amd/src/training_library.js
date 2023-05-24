@@ -113,7 +113,7 @@ define([
          *
          * @param {string} nextTrainingShortname
          */
-        showModalImportToEntity: function(nextTrainingShortname) {
+        showModalImportToEntity: function (nextTrainingShortname) {
             // Set shortname training to form.
             $('#form-import-shortname').val(nextTrainingShortname);
 

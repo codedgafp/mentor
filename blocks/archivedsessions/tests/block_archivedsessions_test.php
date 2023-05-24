@@ -40,10 +40,10 @@ class block_archivedsessions_testcase extends advanced_testcase {
         $this->resetAfterTest(true);
         self::setAdminUser();
 
-        $block               = new \block_archivedsessions();
-        $block->instance     = new \stdClass();
+        $block = new \block_archivedsessions();
+        $block->instance = new \stdClass();
         $block->instance->id = 0;
-        $htmlattribute       = $block->html_attributes();
+        $htmlattribute = $block->html_attributes();
         self::assertContains('hidden-block', $htmlattribute['class']);
 
         self::resetAllData();
@@ -74,7 +74,7 @@ class block_archivedsessions_testcase extends advanced_testcase {
         $this->resetAfterTest(true);
         self::setAdminUser();
 
-        $block             = new \block_archivedsessions();
+        $block = new \block_archivedsessions();
         $applicableformats = $block->applicable_formats();
         self::assertIsArray($applicableformats);
         self::assertArrayHasKey('my', $applicableformats);
@@ -123,12 +123,12 @@ class block_archivedsessions_testcase extends advanced_testcase {
         $this->resetAfterTest(true);
         self::setAdminUser();
 
-        $block       = new \block_archivedsessions();
+        $block = new \block_archivedsessions();
         $block->page = new moodle_page();
         $block->get_required_javascript();
 
         $reflection = new ReflectionClass($block->page->requires);
-        $instance   = $reflection->getProperty('stringsforjs_as');
+        $instance = $reflection->getProperty('stringsforjs_as');
         $instance->setAccessible(true); // Now we can modify that :).
 
         $stringjs = $instance->getValue($block->page->requires);
@@ -144,7 +144,7 @@ class block_archivedsessions_testcase extends advanced_testcase {
         self::assertArrayHasKey('showless', $stringjs['block_archivedsessions']);
 
         $reflection = new ReflectionClass($block->page->requires);
-        $instance   = $reflection->getProperty('amdjscode');
+        $instance = $reflection->getProperty('amdjscode');
         $instance->setAccessible(true); // Now we can modify that :).
 
         $amdjs = $instance->getValue($block->page->requires);
@@ -164,7 +164,7 @@ class block_archivedsessions_testcase extends advanced_testcase {
         $this->resetAfterTest(true);
         self::setAdminUser();
 
-        $block       = new \block_archivedsessions();
+        $block = new \block_archivedsessions();
         $block->page = new moodle_page();
         $content = $block->get_content();
 
@@ -188,9 +188,9 @@ class block_archivedsessions_testcase extends advanced_testcase {
         $this->resetAfterTest(true);
         self::setAdminUser();
 
-        $block       = new \block_archivedsessions();
+        $block = new \block_archivedsessions();
         $block->page = new moodle_page();
-        $helpbutton  = $block->help_button();
+        $helpbutton = $block->help_button();
 
         self::assertContains(get_string('helpbuttontext', 'block_archivedsessions', get_config('theme_mentor', 'faq')),
             $helpbutton);

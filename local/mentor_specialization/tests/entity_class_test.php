@@ -39,8 +39,8 @@ class local_mentor_specialization_entity_class_testcase extends advanced_testcas
         global $CFG;
 
         $CFG->mentor_specializations = [
-            '\\local_mentor_specialization\\mentor_specialization' =>
-                'local/mentor_specialization/classes/mentor_specialization.php'
+                '\\local_mentor_specialization\\mentor_specialization' =>
+                        'local/mentor_specialization/classes/mentor_specialization.php'
         ];
     }
 
@@ -52,8 +52,8 @@ class local_mentor_specialization_entity_class_testcase extends advanced_testcas
     public function reset_singletons() {
         // Reset the mentor core specialization singleton.
         $specialization = \local_mentor_core\specialization::get_instance();
-        $reflection     = new ReflectionClass($specialization);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($specialization);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -80,15 +80,15 @@ class local_mentor_specialization_entity_class_testcase extends advanced_testcas
         $this->init_database();
 
         return [
-            [
-                'name'      => 'New Entity 1',
-                'shortname' => 'New Entity 1',
-                'regions'   => [5], // Corse.
-            ],
-            [
-                'name'      => 'New Entity 2',
-                'shortname' => 'New Entity 2',
-            ],
+                [
+                        'name' => 'New Entity 1',
+                        'shortname' => 'New Entity 1',
+                        'regions' => [5], // Corse.
+                ],
+                [
+                        'name' => 'New Entity 2',
+                        'shortname' => 'New Entity 2',
+                ],
         ];
     }
 
@@ -101,13 +101,13 @@ class local_mentor_specialization_entity_class_testcase extends advanced_testcas
     public function init_role() {
         global $DB;
 
-        $db      = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $manager = $db->get_role_by_name('manager');
 
         if (!$manager) {
             $otherrole = $DB->get_record('role', array('archetype' => 'manager'), '*', IGNORE_MULTIPLE);
             $this->duplicate_role($otherrole->shortname, 'manager', 'Manager',
-                'manager');
+                    'manager');
         }
     }
 
@@ -127,8 +127,8 @@ class local_mentor_specialization_entity_class_testcase extends advanced_testcas
         self::setAdminUser();
 
         $entitydata = $this->get_entities_data()[0];
-        $entityid   = \local_mentor_core\entity_api::create_entity($entitydata);
-        $entity     = new \local_mentor_specialization\mentor_entity($entityid);
+        $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
+        $entity = new \local_mentor_specialization\mentor_entity($entityid);
 
         self::assertEquals($entity->regions, $entitydata['regions']);
 
@@ -154,8 +154,8 @@ class local_mentor_specialization_entity_class_testcase extends advanced_testcas
         self::setAdminUser();
 
         $entitydata = $this->get_entities_data()[0];
-        $entityid   = \local_mentor_core\entity_api::create_entity($entitydata);
-        $entity     = new \local_mentor_specialization\mentor_entity($entityid);
+        $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
+        $entity = new \local_mentor_specialization\mentor_entity($entityid);
 
         self::assertEquals($entity->regions, $entitydata['regions']);
 
@@ -183,15 +183,15 @@ class local_mentor_specialization_entity_class_testcase extends advanced_testcas
         self::setAdminUser();
 
         $entitydata = $this->get_entities_data()[0];
-        $entityid   = \local_mentor_core\entity_api::create_entity($entitydata);
-        $entity     = new \local_mentor_specialization\mentor_entity($entityid);
+        $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
+        $entity = new \local_mentor_specialization\mentor_entity($entityid);
 
         self::assertCount(0, $entity->get_sirh_list());
         self::assertCount(0, $entity->get_sirh_list(true));
 
-        $data           = new stdClass();
-        $data->id       = $entity->id;
-        $data->name     = $entity->name;
+        $data = new stdClass();
+        $data->id = $entity->id;
+        $data->name = $entity->name;
         $data->sirhlist = ['SIRHTEST'];
         $entity->update($data);
 
@@ -216,20 +216,20 @@ class local_mentor_specialization_entity_class_testcase extends advanced_testcas
         self::setAdminUser();
 
         $entitydata = $this->get_entities_data()[0];
-        $entityid   = \local_mentor_core\entity_api::create_entity($entitydata);
-        $entity     = new \local_mentor_specialization\mentor_entity($entityid);
+        $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
+        $entity = new \local_mentor_specialization\mentor_entity($entityid);
 
-        $data         = new stdClass();
-        $data->id     = $entity->id;
-        $data->name   = $entity->name;
+        $data = new stdClass();
+        $data->id = $entity->id;
+        $data->name = $entity->name;
         $data->hidden = 1;
         $entity->update($data);
 
         self::assertEquals(1, $entity->is_hidden());
 
-        $data         = new stdClass();
-        $data->id     = $entity->id;
-        $data->name   = $entity->name;
+        $data = new stdClass();
+        $data->id = $entity->id;
+        $data->name = $entity->name;
         $data->hidden = 0;
         $entity->update($data);
 
@@ -254,8 +254,8 @@ class local_mentor_specialization_entity_class_testcase extends advanced_testcas
         self::setAdminUser();
 
         $entitydata = $this->get_entities_data()[0];
-        $entityid   = \local_mentor_core\entity_api::create_entity($entitydata);
-        $entity     = new \local_mentor_specialization\mentor_entity($entityid);
+        $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
+        $entity = new \local_mentor_specialization\mentor_entity($entityid);
 
         $formdata = $entity->get_form_data();
 
@@ -278,8 +278,8 @@ class local_mentor_specialization_entity_class_testcase extends advanced_testcas
         self::setAdminUser();
 
         $entitydata = $this->get_entities_data()[0];
-        $entityid   = \local_mentor_core\entity_api::create_entity($entitydata);
-        $entity     = new \local_mentor_specialization\mentor_entity($entityid);
+        $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
+        $entity = new \local_mentor_specialization\mentor_entity($entityid);
 
         // No training.
         self::assertCount(0, $entity->get_trainings());
@@ -288,34 +288,34 @@ class local_mentor_specialization_entity_class_testcase extends advanced_testcas
         self::assertCount(0, $entity->get_trainings());
 
         // Init training data.
-        $trainingdata                               = new stdClass();
-        $trainingdata->name                         = 'fullname';
-        $trainingdata->shortname                    = 'shortname';
-        $trainingdata->traininggoal                 = 'TEST TRAINING';
-        $trainingdata->thumbnail                    = '';
-        $trainingdata->status                       = \local_mentor_core\training::STATUS_DRAFT;
-        $trainingdata->categorychildid              = $entity->get_entity_formation_category();
-        $trainingdata->categoryid                   = $entity->id;
-        $trainingdata->creativestructure            = $entity->id;
-        $trainingdata->teaser                       = 'http://www.edunao.com/';
-        $trainingdata->teaserpicture                = '';
-        $trainingdata->prerequisite                 = 'TEST';
-        $trainingdata->collection                   = 'accompagnement';
-        $trainingdata->idsirh                       = 'TEST ID SIRH';
-        $trainingdata->licenseterms                 = 'cc-sa';
-        $trainingdata->typicaljob                   = 'TEST';
-        $trainingdata->skills                       = [1, 3];
-        $trainingdata->certifying                   = '1';
-        $trainingdata->presenceestimatedtimehours   = '12';
+        $trainingdata = new stdClass();
+        $trainingdata->name = 'fullname';
+        $trainingdata->shortname = 'shortname';
+        $trainingdata->traininggoal = 'TEST TRAINING';
+        $trainingdata->thumbnail = '';
+        $trainingdata->status = \local_mentor_core\training::STATUS_DRAFT;
+        $trainingdata->categorychildid = $entity->get_entity_formation_category();
+        $trainingdata->categoryid = $entity->id;
+        $trainingdata->creativestructure = $entity->id;
+        $trainingdata->teaser = 'http://www.edunao.com/';
+        $trainingdata->teaserpicture = '';
+        $trainingdata->prerequisite = 'TEST';
+        $trainingdata->collection = 'accompagnement';
+        $trainingdata->idsirh = 'TEST ID SIRH';
+        $trainingdata->licenseterms = 'cc-sa';
+        $trainingdata->typicaljob = 'TEST';
+        $trainingdata->skills = [1, 3];
+        $trainingdata->certifying = '1';
+        $trainingdata->presenceestimatedtimehours = '12';
         $trainingdata->presenceestimatedtimeminutes = '10';
-        $trainingdata->remoteestimatedtimehours     = '15';
-        $trainingdata->remoteestimatedtimeminutes   = '30';
-        $trainingdata->trainingmodalities           = 'd';
-        $trainingdata->producingorganization        = 'TEST';
-        $trainingdata->producerorganizationlogo     = '';
-        $trainingdata->designers                    = 'TEST';
-        $trainingdata->contactproducerorganization  = 'TEST';
-        $trainingdata->content['text']              = 'ContentText';
+        $trainingdata->remoteestimatedtimehours = '15';
+        $trainingdata->remoteestimatedtimeminutes = '30';
+        $trainingdata->trainingmodalities = 'd';
+        $trainingdata->producingorganization = 'TEST';
+        $trainingdata->producerorganizationlogo = '';
+        $trainingdata->designers = 'TEST';
+        $trainingdata->contactproducerorganization = 'TEST';
+        $trainingdata->content['text'] = 'ContentText';
 
         // Create training.
         $training = \local_mentor_core\training_api::create_training($trainingdata);
@@ -345,8 +345,8 @@ class local_mentor_specialization_entity_class_testcase extends advanced_testcas
         self::setAdminUser();
 
         $entitydata = $this->get_entities_data()[0];
-        $entityid   = \local_mentor_core\entity_api::create_entity($entitydata);
-        $entity     = new \local_mentor_specialization\mentor_entity($entityid);
+        $entityid = \local_mentor_core\entity_api::create_entity($entitydata);
+        $entity = new \local_mentor_specialization\mentor_entity($entityid);
 
         self::assertCount(0, $entity->get_sirh_list());
         self::assertCount(0, $entity->get_sirh_list(true));
@@ -377,20 +377,20 @@ class local_mentor_specialization_entity_class_testcase extends advanced_testcas
         self::setAdminUser();
 
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 2',
-            'shortname' => 'New Entity 2',
+                'name' => 'New Entity 2',
+                'shortname' => 'New Entity 2',
         ]);
-        $entity   = new \local_mentor_specialization\mentor_entity($entityid);
+        $entity = new \local_mentor_specialization\mentor_entity($entityid);
 
         // Hidden data not init.
         self::assertEquals(0, $entity->is_hidden());
 
         // Set Hidden data to 1.
-        $categoryoption             = new \stdClass();
+        $categoryoption = new \stdClass();
         $categoryoption->categoryid = $entity->id;
-        $categoryoption->name       = 'hidden';
-        $categoryoption->value      = 1;
-        $categoryoption->id         = $DB->insert_record('category_options', $categoryoption);
+        $categoryoption->name = 'hidden';
+        $categoryoption->value = 1;
+        $categoryoption->id = $DB->insert_record('category_options', $categoryoption);
         self::assertEquals(1, $entity->is_hidden());
 
         // Set Hidden data to 0.
@@ -418,10 +418,10 @@ class local_mentor_specialization_entity_class_testcase extends advanced_testcas
         self::setAdminUser();
 
         $entityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 2',
-            'shortname' => 'New Entity 2',
+                'name' => 'New Entity 2',
+                'shortname' => 'New Entity 2',
         ]);
-        $entity   = new \local_mentor_specialization\mentor_entity($entityid);
+        $entity = new \local_mentor_specialization\mentor_entity($entityid);
 
         // Hidden data not init.
         self::assertEquals(0, $entity->is_hidden());
@@ -429,18 +429,18 @@ class local_mentor_specialization_entity_class_testcase extends advanced_testcas
         // Set Hidden data to 1.
         $entity->update_visibility(1);
         self::assertEquals(1, $DB->get_field(
-            'category_options',
-            'value',
-            ['categoryid' => $entity->id, 'name' => 'hidden']
+                'category_options',
+                'value',
+                ['categoryid' => $entity->id, 'name' => 'hidden']
         ));
         self::assertEquals(1, $entity->is_hidden());
 
         // Set Hidden data to 0.
         $entity->update_visibility(0);
         self::assertEquals(0, $DB->get_field(
-            'category_options',
-            'value',
-            ['categoryid' => $entity->id, 'name' => 'hidden']
+                'category_options',
+                'value',
+                ['categoryid' => $entity->id, 'name' => 'hidden']
         ));
         self::assertEquals(0, $entity->is_hidden());
 

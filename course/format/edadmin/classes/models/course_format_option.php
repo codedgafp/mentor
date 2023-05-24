@@ -48,7 +48,7 @@ class course_format_option extends model {
         parent::__construct();
 
         $this->courseid = $courseid;
-        $this->options  = array();
+        $this->options = array();
 
         $listoptions = $this->dbinterface->get_course_format_options_by_course_id($this->courseid);
 

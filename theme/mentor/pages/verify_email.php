@@ -53,10 +53,21 @@ if ($mform->is_cancelled()) {
     $data = $mform->get_data();
     redirect(new moodle_url('/theme/mentor/pages/signup.php', array('email' => $data->email)));
 } else {
+    $userprofileurl = new moodle_url('/user/profile.php');
+
     // When user want to see form.
     echo $OUTPUT->header();
     echo $OUTPUT->heading(get_string('checkeligibity', 'theme_mentor'));
     echo $OUTPUT->navbar();
+    echo '<p id="verifywarningsinfo"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ' .
+         get_string('verifywarningsinfo', 'theme_mentor', $userprofileurl->out()) .
+         '</p>';
+    $ensavoirplusurl = (new moodle_url('/local/staticpage/view.php', array('page' => 'ensavoirplus')))->out(false);
+    $donneespersonnellesurl = (new moodle_url('/local/staticpage/view.php', array('page' => 'donneespersonnelles')))->out(false);
+    echo '<p id="rgpd-mentions">' .
+         get_string('rgpdmentions', 'theme_mentor',
+                 ['ensavoirplusurl' => $ensavoirplusurl, 'donneespersonnellesurl' => $donneespersonnellesurl]) .
+         '</p>';
     echo $mform->display();
 }
 

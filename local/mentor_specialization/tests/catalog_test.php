@@ -40,8 +40,8 @@ class local_mentor_specialization_catalog_testcase extends advanced_testcase {
         global $CFG;
 
         $CFG->mentor_specializations = [
-            '\\local_mentor_specialization\\mentor_specialization' =>
-                'local/mentor_specialization/classes/mentor_specialization.php'
+                '\\local_mentor_specialization\\mentor_specialization' =>
+                        'local/mentor_specialization/classes/mentor_specialization.php'
         ];
     }
 
@@ -53,8 +53,8 @@ class local_mentor_specialization_catalog_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core specialization singleton.
         $specialization = \local_mentor_core\specialization::get_instance();
-        $reflection     = new ReflectionClass($specialization);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($specialization);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -69,7 +69,7 @@ class local_mentor_specialization_catalog_testcase extends advanced_testcase {
         $this->resetAfterTest(false);
         $this->init_config();
 
-        $string        = 'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝŸ';
+        $string = 'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝŸ';
         $cleanedstring = local_catalog_clean_string($string);
 
         self::assertSame('aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUYY', $cleanedstring);
@@ -83,39 +83,39 @@ class local_mentor_specialization_catalog_testcase extends advanced_testcase {
         $this->init_config();
         $this->reset_singletons();
 
-        $training1                                = new stdClass();
-        $training1->id                            = 1;
-        $training1->name                          = 'BlaBla';
-        $training1->typicaljob                    = 'déDédèdê';
-        $training1->skills                        = 'blabla,blabla,dadada';
-        $training1->content                       = "<p><span>zéz èzà</span><i id='test'>ù</i></p>";
-        $training1->idsirh                        = 'TeSt';
-        $training1->producingorganization         = 'producingorganization';
+        $training1 = new stdClass();
+        $training1->id = 1;
+        $training1->name = 'BlaBla';
+        $training1->typicaljob = 'déDédèdê';
+        $training1->skills = 'blabla,blabla,dadada';
+        $training1->content = "<p><span>zéz èzà</span><i id='test'>ù</i></p>";
+        $training1->idsirh = 'TeSt';
+        $training1->producingorganization = 'producingorganization';
         $training1->producerorganizationshortname = 'producingorg';
-        $training1->catchphrase                   = 'Catch Phrase';
-        $training1->entityname                    = 'Entity name';
-        $training1->entityfullname                = 'Entity fullname';
+        $training1->catchphrase = 'Catch Phrase';
+        $training1->entityname = 'Entity name';
+        $training1->entityfullname = 'Entity fullname';
 
-        $training2                                = new stdClass();
-        $training2->id                            = 2;
-        $training2->name                          = 'BlaBla éèàçç';
-        $training2->typicaljob                    = 'déDédèdê';
-        $training2->skills                        = 'blabla,blabla,dadada';
-        $training2->content                       = "<p><span>zéz èzà</span><i id='test'>ù</i></p>";
-        $training2->idsirh                        = 'TeSt';
-        $training2->producingorganization         = 'producingorganization';
+        $training2 = new stdClass();
+        $training2->id = 2;
+        $training2->name = 'BlaBla éèàçç';
+        $training2->typicaljob = 'déDédèdê';
+        $training2->skills = 'blabla,blabla,dadada';
+        $training2->content = "<p><span>zéz èzà</span><i id='test'>ù</i></p>";
+        $training2->idsirh = 'TeSt';
+        $training2->producingorganization = 'producingorganization';
         $training2->producerorganizationshortname = 'producingorg';
-        $training2->catchphrase                   = 'Catch Phrase';
-        $training2->entityname                    = 'Entity name';
-        $training2->entityfullname                = 'Entity fullname';
+        $training2->catchphrase = 'Catch Phrase';
+        $training2->entityname = 'Entity name';
+        $training2->entityfullname = 'Entity fullname';
 
         $dictionnary = local_catalog_get_dictionnary([$training1, $training2]);
 
         $expected = [
-            1 => "blabla dededede blabla,blabla,dadada zez ezau test" .
-                 " producingorganization producingorg catch phrase entity name entity fullname",
-            2 => "blabla eeacc dededede blabla,blabla,dadada zez ezau test" .
-                 " producingorganization producingorg catch phrase entity name entity fullname",
+                1 => "blabla dededede blabla,blabla,dadada zez ezau test" .
+                     " producingorganization producingorg catch phrase entity name entity fullname",
+                2 => "blabla eeacc dededede blabla,blabla,dadada zez ezau test" .
+                     " producingorganization producingorg catch phrase entity name entity fullname",
         ];
 
         self::assertSame($expected, $dictionnary);

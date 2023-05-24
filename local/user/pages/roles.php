@@ -36,8 +36,8 @@ if (!is_siteadmin()) {
     print_error('Permission denied');
 }
 
-$title   = get_string('elevatedroles', 'local_user');
-$url     = new moodle_url('/local/user/pages/roles.php');
+$title = get_string('elevatedroles', 'local_user');
+$url = new moodle_url('/local/user/pages/roles.php');
 $context = context_system::instance();
 
 // Settings first element page.

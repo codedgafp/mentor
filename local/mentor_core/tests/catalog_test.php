@@ -46,8 +46,8 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -130,13 +130,13 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
     public function init_role() {
         global $DB;
 
-        $db      = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
         $manager = $db->get_role_by_name('manager');
 
         if (!$manager) {
             $otherrole = $DB->get_record('role', array('archetype' => 'manager'), '*', IGNORE_MULTIPLE);
             $this->duplicate_role($otherrole->shortname, 'manager', 'Manager',
-                'manager');
+                    'manager');
         }
     }
 
@@ -152,22 +152,22 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         // Init test data.
         $trainingdata = new stdClass();
 
-        $trainingdata->name      = 'fullname';
+        $trainingdata->name = 'fullname';
         $trainingdata->shortname = 'shortname';
-        $trainingdata->content   = 'summary';
+        $trainingdata->content = 'summary';
 
         // Create training object.
         $trainingdata->traininggoal = 'TEST TRAINING';
-        $trainingdata->thumbnail    = '';
-        $trainingdata->status       = \local_mentor_core\training::STATUS_DRAFT;
+        $trainingdata->thumbnail = '';
+        $trainingdata->status = \local_mentor_core\training::STATUS_DRAFT;
 
         try {
             // Get entity object for default category.
             $entityid = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'New Entity 1',
-                'shortname' => 'New Entity 1',
+                    'name' => 'New Entity 1',
+                    'shortname' => 'New Entity 1',
                 // Set the admin user as manager of the entity.
-                'userid'    => 2
+                    'userid' => 2
             ]);
 
             $entity = \local_mentor_core\entity_api::get_entity($entityid);
@@ -176,9 +176,9 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         }
 
         // Fill with entity data.
-        $formationid                     = $entity->get_entity_formation_category();
-        $trainingdata->categorychildid   = $formationid;
-        $trainingdata->categoryid        = $entity->id;
+        $formationid = $entity->get_entity_formation_category();
+        $trainingdata->categorychildid = $formationid;
+        $trainingdata->categoryid = $entity->id;
         $trainingdata->creativestructure = $entity->id;
 
         return $trainingdata;
@@ -217,8 +217,8 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         }
 
         // Update status.
-        $sessionupdate         = new stdClass();
-        $sessionupdate->id     = $session->id;
+        $sessionupdate = new stdClass();
+        $sessionupdate->id = $session->id;
         $sessionupdate->status = session::STATUS_OPENED_REGISTRATION;
         \local_mentor_core\session_api::update_session($sessionupdate);
 
@@ -226,8 +226,8 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         $session2 = session_api::create_session($training->id, 'session 2', true);
 
         // Update status.
-        $updatedata         = new stdClass();
-        $updatedata->id     = $session2->id;
+        $updatedata = new stdClass();
+        $updatedata->id = $session2->id;
         $updatedata->status = session::STATUS_OPENED_REGISTRATION;
         $updatedata->opento = 'all';
         session_api::update_session($updatedata);
@@ -250,7 +250,7 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         $this->resetAfterTest(true);
 
         $defaulttemplate = 'local_catalog/catalog';
-        $template        = catalog_api::get_catalog_template($defaulttemplate);
+        $template = catalog_api::get_catalog_template($defaulttemplate);
         self::assertEquals($defaulttemplate, $template);
 
         self::resetAllData();
@@ -265,7 +265,7 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         $this->resetAfterTest(true);
 
         $defaultjavascript = 'local_catalog/local_catalog';
-        $javascript        = catalog_api::get_catalog_javascript($defaultjavascript);
+        $javascript = catalog_api::get_catalog_javascript($defaultjavascript);
         self::assertEquals($defaultjavascript, $javascript);
 
         self::resetAllData();
@@ -332,14 +332,14 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         // Test with admin user.
         self::setAdminUser();
 
-        $training     = training_api::create_training($this->get_training_data());
-        $data         = new \stdClass();
+        $training = training_api::create_training($this->get_training_data());
+        $data = new \stdClass();
         $data->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
         $training->update($data);
 
-        $sessionid    = session_api::create_session($training->id, 'session 1', true);
-        $session      = \local_mentor_core\session_api::get_session($sessionid);
-        $data         = new \stdClass();
+        $sessionid = session_api::create_session($training->id, 'session 1', true);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $data = new \stdClass();
         $data->status = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
         $data->opento = \local_mentor_core\session::OPEN_TO_ALL;
         $session->update($data);
@@ -347,15 +347,15 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         self::assertCount(1, \local_mentor_core\catalog_api::get_sessions_template_by_training($training->id));
 
         // Test with user with main entity same training entity.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname';
-        $user->firstname                = 'firstname';
-        $user->email                    = 'test@test.com';
-        $user->username                 = 'testusername';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $training->get_entity()->name;
 
         $user1id = \local_mentor_core\profile_api::create_user($user);
@@ -367,17 +367,17 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
 
         // Test with user without main entity same training entity.
         $otherentityid = \local_mentor_core\entity_api::create_entity(['name' => 'Other Entity', 'shortname' => 'Other Entity']);
-        $otherentity   = \local_mentor_core\entity_api::get_entity($otherentityid);
+        $otherentity = \local_mentor_core\entity_api::get_entity($otherentityid);
 
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname2';
-        $user->firstname                = 'firstname2';
-        $user->email                    = 'test2@test.com';
-        $user->username                 = 'testusername2';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname2';
+        $user->firstname = 'firstname2';
+        $user->email = 'test2@test.com';
+        $user->username = 'testusername2';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $otherentity->name;
 
         $user2id = \local_mentor_core\profile_api::create_user($user);
@@ -408,14 +408,14 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $training     = training_api::create_training($this->get_training_data());
-        $data         = new \stdClass();
+        $training = training_api::create_training($this->get_training_data());
+        $data = new \stdClass();
         $data->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
         $training->update($data);
 
-        $sessionid    = session_api::create_session($training->id, 'session 1', true);
-        $session      = \local_mentor_core\session_api::get_session($sessionid);
-        $data         = new \stdClass();
+        $sessionid = session_api::create_session($training->id, 'session 1', true);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $data = new \stdClass();
         $data->status = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
         $data->opento = \local_mentor_core\session::OPEN_TO_NOT_VISIBLE;
         $session->update($data);
@@ -424,15 +424,15 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         self::assertFalse(\local_mentor_core\catalog_api::get_sessions_template_by_training($training->id));
 
         // Test with user with main entity same training entity.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname';
-        $user->firstname                = 'firstname';
-        $user->email                    = 'test@test.com';
-        $user->username                 = 'testusername';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $training->get_entity()->name;
 
         $user1id = \local_mentor_core\profile_api::create_user($user);
@@ -444,17 +444,17 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
 
         // Test with user without main entity same training entity.
         $otherentityid = \local_mentor_core\entity_api::create_entity(['name' => 'Other Entity', 'shortname' => 'Other Entity']);
-        $otherentity   = \local_mentor_core\entity_api::get_entity($otherentityid);
+        $otherentity = \local_mentor_core\entity_api::get_entity($otherentityid);
 
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname2';
-        $user->firstname                = 'firstname2';
-        $user->email                    = 'test2@test.com';
-        $user->username                 = 'testusername2';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname2';
+        $user->firstname = 'firstname2';
+        $user->email = 'test2@test.com';
+        $user->username = 'testusername2';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $otherentity->name;
 
         $user2id = \local_mentor_core\profile_api::create_user($user);
@@ -484,14 +484,14 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $training     = training_api::create_training($this->get_training_data());
-        $data         = new \stdClass();
+        $training = training_api::create_training($this->get_training_data());
+        $data = new \stdClass();
         $data->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
         $training->update($data);
 
-        $sessionid    = session_api::create_session($training->id, 'session 1', true);
-        $session      = \local_mentor_core\session_api::get_session($sessionid);
-        $data         = new \stdClass();
+        $sessionid = session_api::create_session($training->id, 'session 1', true);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $data = new \stdClass();
         $data->status = \local_mentor_core\session::STATUS_CANCELLED;
         $data->opento = \local_mentor_core\session::OPEN_TO_ALL;
         $session->update($data);
@@ -500,15 +500,15 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         self::assertFalse(\local_mentor_core\catalog_api::get_sessions_template_by_training($training->id));
 
         // Test with user with main entity same training entity.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname';
-        $user->firstname                = 'firstname';
-        $user->email                    = 'test@test.com';
-        $user->username                 = 'testusername';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $training->get_entity()->name;
 
         $user1id = \local_mentor_core\profile_api::create_user($user);
@@ -520,17 +520,17 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
 
         // Test with user without main entity same training entity.
         $otherentityid = \local_mentor_core\entity_api::create_entity(['name' => 'Other Entity', 'shortname' => 'Other Entity']);
-        $otherentity   = \local_mentor_core\entity_api::get_entity($otherentityid);
+        $otherentity = \local_mentor_core\entity_api::get_entity($otherentityid);
 
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname2';
-        $user->firstname                = 'firstname2';
-        $user->email                    = 'test2@test.com';
-        $user->username                 = 'testusername2';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname2';
+        $user->firstname = 'firstname2';
+        $user->email = 'test2@test.com';
+        $user->username = 'testusername2';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $otherentity->name;
 
         $user2id = \local_mentor_core\profile_api::create_user($user);
@@ -561,14 +561,14 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         // Test with admin user.
         self::setAdminUser();
 
-        $training     = training_api::create_training($this->get_training_data());
-        $data         = new \stdClass();
+        $training = training_api::create_training($this->get_training_data());
+        $data = new \stdClass();
         $data->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
         $training->update($data);
 
-        $sessionid    = session_api::create_session($training->id, 'session 1', true);
-        $session      = \local_mentor_core\session_api::get_session($sessionid);
-        $data         = new \stdClass();
+        $sessionid = session_api::create_session($training->id, 'session 1', true);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $data = new \stdClass();
         $data->status = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
         $data->opento = \local_mentor_core\session::OPEN_TO_CURRENT_ENTITY;
         $session->update($data);
@@ -576,15 +576,15 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         self::assertCount(1, \local_mentor_core\catalog_api::get_sessions_template_by_training($training->id));
 
         // Test with user with main entity same training entity.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname';
-        $user->firstname                = 'firstname';
-        $user->email                    = 'test@test.com';
-        $user->username                 = 'testusername';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $training->get_entity()->name;
 
         $user1id = \local_mentor_core\profile_api::create_user($user);
@@ -596,17 +596,17 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
 
         // Test with user without main entity same training entity.
         $otherentityid = \local_mentor_core\entity_api::create_entity(['name' => 'Other Entity', 'shortname' => 'Other Entity']);
-        $otherentity   = \local_mentor_core\entity_api::get_entity($otherentityid);
+        $otherentity = \local_mentor_core\entity_api::get_entity($otherentityid);
 
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname2';
-        $user->firstname                = 'firstname2';
-        $user->email                    = 'test2@test.com';
-        $user->username                 = 'testusername2';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname2';
+        $user->firstname = 'firstname2';
+        $user->email = 'test2@test.com';
+        $user->username = 'testusername2';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $otherentity->name;
 
         $user2id = \local_mentor_core\profile_api::create_user($user);
@@ -637,39 +637,39 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         // Test with admin user.
         self::setAdminUser();
 
-        $training     = training_api::create_training($this->get_training_data());
-        $data         = new \stdClass();
+        $training = training_api::create_training($this->get_training_data());
+        $data = new \stdClass();
         $data->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
         $training->update($data);
 
-        $otherentityid  = \local_mentor_core\entity_api::create_entity(['name' => 'Other Entity', 'shortname' => 'Other Entity']);
-        $otherentity    = \local_mentor_core\entity_api::get_entity($otherentityid);
+        $otherentityid = \local_mentor_core\entity_api::create_entity(['name' => 'Other Entity', 'shortname' => 'Other Entity']);
+        $otherentity = \local_mentor_core\entity_api::get_entity($otherentityid);
         $otherentityid2 = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'Other Entity 2',
-            'shortname' => 'Other Entity 2'
+                'name' => 'Other Entity 2',
+                'shortname' => 'Other Entity 2'
         ]);
-        $otherentity2   = \local_mentor_core\entity_api::get_entity($otherentityid2);
+        $otherentity2 = \local_mentor_core\entity_api::get_entity($otherentityid2);
 
-        $sessionid        = session_api::create_session($training->id, 'session 1', true);
-        $session          = \local_mentor_core\session_api::get_session($sessionid);
-        $data             = new \stdClass();
-        $data->status     = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
-        $data->opento     = \local_mentor_core\session::OPEN_TO_OTHER_ENTITY;
+        $sessionid = session_api::create_session($training->id, 'session 1', true);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $data = new \stdClass();
+        $data->status = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
+        $data->opento = \local_mentor_core\session::OPEN_TO_OTHER_ENTITY;
         $data->opentolist = [$otherentityid];
         $session->update($data);
 
         self::assertCount(1, \local_mentor_core\catalog_api::get_sessions_template_by_training($training->id));
 
         // Test with user with main entity same training entity.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname';
-        $user->firstname                = 'firstname';
-        $user->email                    = 'test@test.com';
-        $user->username                 = 'testusername';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $training->get_entity()->name;
 
         $user1id = \local_mentor_core\profile_api::create_user($user);
@@ -680,15 +680,15 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         self::setAdminUser();
 
         // Test with user without main entity same training entity but session is share to this entity.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname2';
-        $user->firstname                = 'firstname2';
-        $user->email                    = 'test2@test.com';
-        $user->username                 = 'testusername2';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname2';
+        $user->firstname = 'firstname2';
+        $user->email = 'test2@test.com';
+        $user->username = 'testusername2';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $otherentity->name;
 
         $user2id = \local_mentor_core\profile_api::create_user($user);
@@ -697,15 +697,15 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         self::assertCount(1, \local_mentor_core\catalog_api::get_sessions_template_by_training($training->id));
 
         // Test with user without main entity same training entity and session is not share to this entity.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname3';
-        $user->firstname                = 'firstname3';
-        $user->email                    = 'test3@test.com';
-        $user->username                 = 'testusername3';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname3';
+        $user->firstname = 'firstname3';
+        $user->email = 'test3@test.com';
+        $user->username = 'testusername3';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $otherentity2->name;
 
         $user3id = \local_mentor_core\profile_api::create_user($user);
@@ -735,48 +735,48 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $training     = training_api::create_training($this->get_training_data());
-        $data         = new \stdClass();
+        $training = training_api::create_training($this->get_training_data());
+        $data = new \stdClass();
         $data->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
         $training->update($data);
 
-        $otherentityid  = \local_mentor_core\entity_api::create_entity(['name' => 'Other Entity', 'shortname' => 'Other Entity']);
-        $otherentity    = \local_mentor_core\entity_api::get_entity($otherentityid);
+        $otherentityid = \local_mentor_core\entity_api::create_entity(['name' => 'Other Entity', 'shortname' => 'Other Entity']);
+        $otherentity = \local_mentor_core\entity_api::get_entity($otherentityid);
         $otherentityid2 = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'Other Entity 2',
-            'shortname' => 'Other Entity 2'
+                'name' => 'Other Entity 2',
+                'shortname' => 'Other Entity 2'
         ]);
-        $otherentity2   = \local_mentor_core\entity_api::get_entity($otherentityid2);
+        $otherentity2 = \local_mentor_core\entity_api::get_entity($otherentityid2);
 
         // Open to all.
-        $sessionid    = session_api::create_session($training->id, 'session 1', true);
-        $session      = \local_mentor_core\session_api::get_session($sessionid);
-        $data         = new \stdClass();
+        $sessionid = session_api::create_session($training->id, 'session 1', true);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $data = new \stdClass();
         $data->status = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
         $data->opento = \local_mentor_core\session::OPEN_TO_ALL;
         $session->update($data);
 
         // Open to current entity.
-        $sessionid2   = session_api::create_session($training->id, 'session 2', true);
-        $session2     = \local_mentor_core\session_api::get_session($sessionid2);
-        $data         = new \stdClass();
+        $sessionid2 = session_api::create_session($training->id, 'session 2', true);
+        $session2 = \local_mentor_core\session_api::get_session($sessionid2);
+        $data = new \stdClass();
         $data->status = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
         $data->opento = \local_mentor_core\session::OPEN_TO_CURRENT_ENTITY;
         $session2->update($data);
 
         // Open to other entity.
-        $sessionid3       = session_api::create_session($training->id, 'session 3', true);
-        $session3         = \local_mentor_core\session_api::get_session($sessionid3);
-        $data             = new \stdClass();
-        $data->status     = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
-        $data->opento     = \local_mentor_core\session::OPEN_TO_OTHER_ENTITY;
+        $sessionid3 = session_api::create_session($training->id, 'session 3', true);
+        $session3 = \local_mentor_core\session_api::get_session($sessionid3);
+        $data = new \stdClass();
+        $data->status = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
+        $data->opento = \local_mentor_core\session::OPEN_TO_OTHER_ENTITY;
         $data->opentolist = [$otherentityid];
         $session3->update($data);
 
         // Not visible.
-        $sessionid4   = session_api::create_session($training->id, 'session 4', true);
-        $session4     = \local_mentor_core\session_api::get_session($sessionid4);
-        $data         = new \stdClass();
+        $sessionid4 = session_api::create_session($training->id, 'session 4', true);
+        $session4 = \local_mentor_core\session_api::get_session($sessionid4);
+        $data = new \stdClass();
         $data->status = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
         $data->opento = \local_mentor_core\session::OPEN_TO_NOT_VISIBLE;
         $session4->update($data);
@@ -785,15 +785,15 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         self::assertCount(3, \local_mentor_core\catalog_api::get_sessions_template_by_training($training->id));
 
         // Test with user with main entity same training entity.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname';
-        $user->firstname                = 'firstname';
-        $user->email                    = 'test@test.com';
-        $user->username                 = 'testusername';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $training->get_entity()->name;
 
         $user1id = \local_mentor_core\profile_api::create_user($user);
@@ -804,15 +804,15 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         self::setAdminUser();
 
         // Test with user without main entity same training entity but session is share to this entity.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname2';
-        $user->firstname                = 'firstname2';
-        $user->email                    = 'test2@test.com';
-        $user->username                 = 'testusername2';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname2';
+        $user->firstname = 'firstname2';
+        $user->email = 'test2@test.com';
+        $user->username = 'testusername2';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $otherentity->name;
 
         $user2id = \local_mentor_core\profile_api::create_user($user);
@@ -821,15 +821,15 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         self::assertCount(2, \local_mentor_core\catalog_api::get_sessions_template_by_training($training->id));
 
         // Test with user without main entity same training entity and session is not share to this entity.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname3';
-        $user->firstname                = 'firstname3';
-        $user->email                    = 'test3@test.com';
-        $user->username                 = 'testusername3';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname3';
+        $user->firstname = 'firstname3';
+        $user->email = 'test3@test.com';
+        $user->username = 'testusername3';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = $otherentity2->name;
 
         $user3id = \local_mentor_core\profile_api::create_user($user);
@@ -860,7 +860,7 @@ class local_mentor_core_catalog_testcase extends advanced_testcase {
         self::setAdminUser();
 
         self::assertEquals('local_catalog/training',
-            \local_mentor_core\catalog_api::get_training_template('local_catalog/training'));
+                \local_mentor_core\catalog_api::get_training_template('local_catalog/training'));
 
         self::resetAllData();
     }

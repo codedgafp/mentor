@@ -21,8 +21,7 @@ function eventPath(evt) {
 
         if (!parentNode) {
             return memo;
-        }
-        else {
+        } else {
             return getParents(parentNode, memo.concat(parentNode));
         }
     }
@@ -31,7 +30,7 @@ function eventPath(evt) {
 }
 
 // Wait DOM load
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
 
     // Get all atto editors.
     var editors = document.getElementsByClassName('editor_atto_content');
@@ -39,7 +38,7 @@ window.addEventListener('load', function() {
     // Check if there are atto editors page.
     if (editors.length > 0) {
 
-        for(var i = 0; i < editors.length; i++) {
+        for (var i = 0; i < editors.length; i++) {
 
             var editor = editors[i];
 
@@ -49,10 +48,10 @@ window.addEventListener('load', function() {
                 var path = eventPath(event);
 
                 // Is mentor snippet
-                if($(path[0]).hasClass('mentor-video')) {
+                if ($(path[0]).hasClass('mentor-video')) {
                     var iframe = $(path[0]).children()[0];
                     // Is Peertube watch page ?
-                    if(iframe.src.startsWith("https://video.mentor.gouv.fr/") || iframe.src.startsWith("https://video-qua.mentor.gouv.fr/")) {
+                    if (iframe.src.startsWith("https://video.mentor.gouv.fr/") || iframe.src.startsWith("https://video-qua.mentor.gouv.fr/")) {
                         // Change the url to the url of the Peertube embed
                         iframe.src = iframe.src.replaceAll('/watch/', '/embed/');
                         iframe.src = iframe.src.replaceAll('/w/', '/videos/embed/');

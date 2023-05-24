@@ -112,7 +112,7 @@ class filter_scormlink_filter_testcase extends advanced_testcase {
         $DB = $this->createMock(get_class($DB));
 
         // Setting scorm data.
-        $scorm        = new \stdClass();
+        $scorm = new \stdClass();
         $scorm->popup = 0;
 
         // Return scorm data with disable popup.
@@ -156,9 +156,9 @@ class filter_scormlink_filter_testcase extends advanced_testcase {
 
         $this->resetAfterTest(true);
 
-        $text       = '<a href="https://mentor.gouv.fr/mod/scorm/view.php?id=10">Test text</a>';
+        $text = '<a href="https://mentor.gouv.fr/mod/scorm/view.php?id=10">Test text</a>';
         $textfilter = '<a href="#" onclick="window.open(' .
-        '\'https://mentor.gouv.fr/local/mentor_core/pages/scorm.php?cmid=10\',' .
+                      '\'https://mentor.gouv.fr/local/mentor_core/pages/scorm.php?cmid=10\',' .
                       '\'_blank\').focus();return false;">Test text</a>';
 
         $course = self::getDataGenerator()->create_course();
@@ -169,7 +169,7 @@ class filter_scormlink_filter_testcase extends advanced_testcase {
         $DB = $this->createMock(get_class($DB));
 
         // Setting scorm data.
-        $scorm        = new \stdClass();
+        $scorm = new \stdClass();
         $scorm->popup = 1;
 
         // Return scorm data with disable popup.

@@ -31,16 +31,21 @@
         }
     }
 }}
-<div id="modal-export-training">
-    <div id="modal-export-training-number">
-        {{ selectedtraininglength }} {{# str }} selecttrainingtoexport, local_catalog {{/str}}
-    </div>
-    <div id="modal-export-training-list">
-        {{# selectedtrainingname }}
-            <div>
-                <div class="checkmark"></div>
-                {{ . }}
-            </div>
-        {{/selectedtrainingname}}
-    </div>
+<div id="modal-export-training" {{^ selectedtraininglength }}class="warning-text"{{/ selectedtraininglength }}>
+    {{# selectedtraininglength }}
+        <div id="modal-export-training-number">
+            {{ selectedtraininglength }} {{# str }} selecttrainingtoexport, local_catalog {{/str}}
+        </div>
+        <div id="modal-export-training-list">
+            {{# selectedtrainingname }}
+                <div>
+                    <div class="checkmark"></div>
+                    {{ . }}
+                </div>
+            {{/selectedtrainingname}}
+        </div>
+    {{/ selectedtraininglength }}
+    {{^ selectedtraininglength }}
+        {{# str }} pleaseselecttraining, local_catalog {{/str}}
+    {{/ selectedtraininglength }}
 </div>

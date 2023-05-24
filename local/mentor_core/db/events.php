@@ -29,16 +29,16 @@ $observers = array(
 
     array(
         'eventname' => '\core\event\user_created',
-        'callback'  => 'local_mentor_core_observer::add_user_to_cohorts',
+        'callback' => 'local_mentor_core_observer::add_user_to_cohorts',
     ),
 
     array(
         'eventname' => '\core\event\user_updated',
-        'callback'  => 'local_mentor_core_observer::sync_user_cohorts',
+        'callback' => 'local_mentor_core_observer::sync_user_cohorts',
     ),
 
     array(
         'eventname' => '\core\event\course_category_deleted',
-        'callback'  => 'local_mentor_core_observer::sync_mainentity',
+        'callback' => 'local_mentor_core_observer::sync_mainentity',
     )
 );

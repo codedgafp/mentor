@@ -27,20 +27,21 @@ require_once('../../../config.php');
 require_once($CFG->dirroot . '/local/library/lib.php');
 require_once($CFG->dirroot . '/local/mentor_core/api/library.php');
 
+$trainingid = required_param('trainingid', PARAM_INT);
+
+$training = \local_mentor_core\training_api::get_training($trainingid);
+
 // Check if the user can view the library.
-if (!\local_mentor_core\library_api::user_has_access()) {
+if (!\local_mentor_core\library_api::user_has_access() || !$training) {
     throw new \moodle_exception('librarynotaccessible', 'local_library');
 }
-
-$trainingid = required_param('trainingid', PARAM_INT);
 
 $library = \local_mentor_core\library_api::get_library();
 $context = $library->get_context();
 
 $site = get_site();
 
-$training = \local_mentor_core\training_api::get_training($trainingid);
-$name     = $training->name;
+$name = $training->name;
 
 // Settings first element page.
 $PAGE->set_url('/local/library/pages/training.php', array('trainingid' => $trainingid));

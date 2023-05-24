@@ -21,6 +21,7 @@
  * $specialization = specialization::get_instance();
  * return $specialization->get_specialization('get_training_sheet_template', $defaulttemplate);
  * }
+ *
  * @package    block_mytrainings
  * @copyright  2020 Edunao SAS (contact@edunao.com)
  * @author     rcolet <remi.colet@edunao.com>
@@ -51,7 +52,7 @@ class renderer extends plugin_renderer_base {
 
         // Set training data as json into a hidden div.
         $trainingsjson = htmlspecialchars(json_encode($exportfortemplate->trainingsheets, JSON_HEX_TAG), ENT_QUOTES, 'UTF-8');
-        $template      = '<div id="available-trainings" style="display: none">' . $trainingsjson . '</div>';
+        $template = '<div id="available-trainings" style="display: none">' . $trainingsjson . '</div>';
 
         // Return the template block with data.
         return $template . $this->render_from_template('block_mytrainings/mytrainings', $exportfortemplate);

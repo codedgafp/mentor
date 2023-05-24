@@ -67,19 +67,19 @@
                 {{# str }} connectingmainentity, local_mentor_specialization {{/ str }} :
             </label>
             <select id="user-admin-form-add-entity" name="entity" class="custom-select">
-                {{#entities}}
+                {{# mainentities }}
                     <option value="{{id}}">{{shortname}}</option>
-                {{/entities}}
+                {{/ mainentities }}
             </select>
         </div>
         <div>
             <label for="user-admin-form-add-secondary-entities">{{# str }} connectingsecondaryentities, local_mentor_specialization {{/ str }} :</label>
             <select id="user-admin-form-add-secondary-entities" name="secondaryentities[]" class="custom-select" multiple="multiple">
-                {{# entities }}
+                {{# secondarymainentities }}
                     {{# id }}
                         <option value="{{ id }}"> {{ shortname }}</option>
                     {{/id}}
-                {{/ entities }}
+                {{/ secondarymainentities }}
             </select>
         </div>
         <div>

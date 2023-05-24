@@ -34,20 +34,20 @@ if ($hassiteconfig) {
 
         // Add collections field.
         $settings->add(new admin_setting_configtextarea(
-            'local_mentor_specialization/collections',
-            get_string('collections', 'local_mentor_specialization'),
-            get_string('collections_help', 'local_mentor_specialization'),
-            '',
-            PARAM_TEXT
+                'local_mentor_specialization/collections',
+                get_string('collections', 'local_mentor_specialization'),
+                get_string('collections_help', 'local_mentor_specialization'),
+                '',
+                PARAM_TEXT
         ));
 
         // Add video field.
         $settings->add(new admin_setting_configtextarea(
-            'local_mentor_specialization/videodomains',
-            get_string('videodomains', 'local_mentor_specialization'),
-            get_string('videodomains_help', 'local_mentor_specialization'),
-            'https://video.mentor.gouv.fr',
-            PARAM_TEXT
+                'local_mentor_specialization/videodomains',
+                get_string('videodomains', 'local_mentor_specialization'),
+                get_string('videodomains_help', 'local_mentor_specialization'),
+                'https://video.mentor.gouv.fr',
+                PARAM_TEXT
         ));
     }
 
@@ -55,6 +55,6 @@ if ($hassiteconfig) {
 
     // Add link to ldap cleanup.
     $ADMIN->add('server', new admin_externalpage('clear_ldap',
-        'Nettoyage du LDAP',
-        $CFG->wwwroot . '/local/mentor_specialization/pages/clear_ldap.php'));
+            'Nettoyage du LDAP',
+            $CFG->wwwroot . '/local/mentor_specialization/pages/clear_ldap.php'));
 }

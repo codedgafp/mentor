@@ -27,7 +27,11 @@ defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
     'local/library:view' => array(
-        'captype'      => 'read',
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_COURSECAT,
+    ),
+    'local/library:publish' => array(
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
     )
 );

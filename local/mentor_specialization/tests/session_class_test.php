@@ -65,8 +65,8 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
     public function reset_singletons() {
         // Reset the mentor core specialization singleton.
         $specialization = \local_mentor_core\specialization::get_instance();
-        $reflection     = new ReflectionClass($specialization);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($specialization);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -98,64 +98,64 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
             'local_mentor_specialization');
 
         if ($training) {
-            $data->name      = 'fullname';
+            $data->name = 'fullname';
             $data->shortname = 'shortname';
-            $data->content   = 'summary';
-            $data->status    = 'ec';
+            $data->content = 'summary';
+            $data->status = 'ec';
         } else {
-            $data->trainingname      = 'fullname';
+            $data->trainingname = 'fullname';
             $data->trainingshortname = 'shortname';
-            $data->trainingcontent   = 'summary';
-            $data->trainingstatus    = 'ec';
+            $data->trainingcontent = 'summary';
+            $data->trainingstatus = 'ec';
         }
 
         // Fields for taining.
-        $data->teaser                       = 'http://www.edunao.com/';
-        $data->teaserpicture                = '';
-        $data->prerequisite                 = 'TEST';
-        $data->collection                   = 'accompagnement';
-        $data->traininggoal                 = 'TEST TRAINING ';
-        $data->idsirh                       = 'TEST ID SIRH';
-        $data->licenseterms                 = 'cc-sa';
-        $data->typicaljob                   = 'TEST';
-        $data->skills                       = [];
-        $data->certifying                   = '1';
-        $data->presenceestimatedtimehours   = '12';
+        $data->teaser = 'http://www.edunao.com/';
+        $data->teaserpicture = '';
+        $data->prerequisite = 'TEST';
+        $data->collection = 'accompagnement';
+        $data->traininggoal = 'TEST TRAINING ';
+        $data->idsirh = 'TEST ID SIRH';
+        $data->licenseterms = 'cc-sa';
+        $data->typicaljob = 'TEST';
+        $data->skills = [];
+        $data->certifying = '1';
+        $data->presenceestimatedtimehours = '12';
         $data->presenceestimatedtimeminutes = '10';
-        $data->remoteestimatedtimehours     = '15';
-        $data->remoteestimatedtimeminutes   = '30';
-        $data->trainingmodalities           = 'd';
-        $data->producingorganization        = 'TEST';
-        $data->producerorganizationlogo     = '';
-        $data->designers                    = 'TEST';
-        $data->contactproducerorganization  = 'TEST';
-        $data->thumbnail                    = '';
+        $data->remoteestimatedtimehours = '15';
+        $data->remoteestimatedtimeminutes = '30';
+        $data->trainingmodalities = 'd';
+        $data->producingorganization = 'TEST';
+        $data->producerorganizationlogo = '';
+        $data->designers = 'TEST';
+        $data->contactproducerorganization = 'TEST';
+        $data->thumbnail = '';
 
         // Specific fields for session (only for update).
         if ($sessionid) {
-            $data->id                      = $sessionid;
-            $data->opento                  = 'all';
-            $data->publiccible             = 'TEST';
-            $data->termsregistration       = 'autre';
+            $data->id = $sessionid;
+            $data->opento = 'all';
+            $data->publiccible = 'TEST';
+            $data->termsregistration = 'autre';
             $data->termsregistrationdetail = 'TEST';
 
-            $data->onlinesessionestimatedtimehours     = '10';
-            $data->onlinesessionestimatedtimeminutes   = '15';
-            $data->presencesessionestimatedtimehours   = '12';
+            $data->onlinesessionestimatedtimehours = '10';
+            $data->onlinesessionestimatedtimeminutes = '15';
+            $data->presencesessionestimatedtimehours = '12';
             $data->presencesessionestimatedtimeminutes = '25';
 
-            $data->sessionpermanent    = 0;
-            $data->sessionstartdate    = 1609801200;
-            $data->sessionenddate      = 1609801200;
-            $data->sessionmodalities   = 'presentiel';
-            $data->accompaniment       = 'TEST';
-            $data->maxparticipants     = 10;
-            $data->placesavailable     = 8;
-            $data->numberparticipants  = 2;
-            $data->location            = 'PARIS';
+            $data->sessionpermanent = 0;
+            $data->sessionstartdate = 1609801200;
+            $data->sessionenddate = 1609801200;
+            $data->sessionmodalities = 'presentiel';
+            $data->accompaniment = 'TEST';
+            $data->maxparticipants = 10;
+            $data->placesavailable = 8;
+            $data->numberparticipants = 2;
+            $data->location = 'PARIS';
             $data->organizingstructure = 'TEST ORGANISATION';
-            $data->sessionnumber       = 1;
-            $data->opentolist          = '';
+            $data->sessionnumber = 1;
+            $data->opentolist = '';
         }
 
         return $data;
@@ -166,10 +166,10 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
      */
     public function init_training_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -193,7 +193,7 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         try {
             // Get entity object for default category.
             $entityid = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1'
             ]);
 
@@ -252,14 +252,14 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
 
         self::setAdminUser();
 
-        $sessionid                       = $this->init_session_creation();
-        $session                         = \local_mentor_core\session_api::get_session($sessionid);
-        $training                        = $session->get_training();
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $training = $session->get_training();
         $training->presenceestimatedtime = 120;
-        $training->remoteestimatedtime   = 130;
+        $training->remoteestimatedtime = 130;
         $session->get_training()->update($training);
         $session->presencesessionestimatedtime = 140;
-        $session->onlinesessionestimatedtime   = 150;
+        $session->onlinesessionestimatedtime = 150;
         $session->update($session);
 
         $sessioneditform = $session->prepare_edit_form();
@@ -319,9 +319,9 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         self::setAdminUser();
 
         // Create session.
-        $sessionid               = $this->init_session_creation();
-        $session                 = \local_mentor_core\session_api::get_session($sessionid);
-        $data                    = new stdClass();
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $data = new stdClass();
         $data->termsregistration = 'inscriptionlibre';
         $session->update($data);
 
@@ -334,7 +334,7 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         // Enrolment is enable.
         self::assertEquals($selfenrolmentinstance->status, 0);
 
-        $data                    = new stdClass();
+        $data = new stdClass();
         $data->termsregistration = 'autre';
         $session->update($data);
 
@@ -368,7 +368,7 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $session->create_self_enrolment_instance();
 
         $session->update_status(\local_mentor_core\session::STATUS_REPORTED);
@@ -411,13 +411,11 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
-        $data                    = new stdClass();
+        $data = new stdClass();
         $data->termsregistration = 'inscriptionlibre';
         $session->update($data);
-
-        self::assertFalse($session->get_enrolment_instances_by_type('self'));
 
         $session->update_status(\local_mentor_core\session::STATUS_IN_PROGRESS);
 
@@ -429,7 +427,7 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         self::assertIsObject($selfenrolmentinstance);
         self::assertEquals($selfenrolmentinstance->status, 0);
 
-        $data                    = new stdClass();
+        $data = new stdClass();
         $data->termsregistration = 'autre';
         $session->update($data);
         $session->update_status(\local_mentor_core\session::STATUS_IN_PROGRESS);
@@ -440,6 +438,72 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         // Self enrolment is disable.
         self::assertIsObject($selfenrolmentinstance);
         self::assertEquals($selfenrolmentinstance->status, 1);
+
+        $this->resetAllData();
+    }
+
+    /**
+     * Test update_status method (open registration to open)
+     *
+     * @covers  \local_mentor_specialization\mentor_session::update_status
+     * @covers  \local_mentor_specialization\mentor_session::open
+     * @covers  \local_mentor_specialization\mentor_session::show_course
+     */
+    public function test_update_status_to_open_mail() {
+        $this->resetAfterTest(true);
+        $this->init_config();
+        $this->init_database();
+        $this->reset_singletons();
+        $this->init_config();
+
+        self::setAdminUser();
+
+        // Create session.
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
+        $session->create_self_enrolment_instance();
+
+        $user1 = self::getDataGenerator()->create_user();
+        $user2 = self::getDataGenerator()->create_user();
+        $user3 = self::getDataGenerator()->create_user();
+        $user4 = self::getDataGenerator()->create_user();
+
+        self::getDataGenerator()->enrol_user($user1->id, $session->courseid, 'participant');
+        self::getDataGenerator()->enrol_user($user2->id, $session->courseid, 'tuteur');
+        self::getDataGenerator()->enrol_user($user3->id, $session->courseid, 'formateur');
+        self::getDataGenerator()->enrol_user($user4->id, $session->courseid, 'concepteur');
+
+        // Close the default email sink.
+        $sink = $this->redirectEmails();
+        $sink->close();
+        unset_config('noemailever');
+        $sink = $this->redirectEmails();
+
+        $session->update_status(\local_mentor_core\session::STATUS_IN_PROGRESS,
+            \local_mentor_core\session::STATUS_OPENED_REGISTRATION);
+
+        // Status is "archived".
+        self::assertEquals($session->status, \local_mentor_core\session::STATUS_IN_PROGRESS);
+
+        // Check if send mail.
+        $this->assertSame(3, $sink->count());
+        $resultmail = $sink->get_messages();
+        $this->assertCount(3, $resultmail);
+        $sink->close();
+
+        self::assertEquals($resultmail[0]->to, $user1->email);
+        self::assertEquals($resultmail[0]->subject,
+            get_string('email_open_session_object', 'local_mentor_specialization', $session->fullname));
+
+        self::assertEquals($resultmail[1]->to, $user2->email);
+        self::assertEquals($resultmail[1]->subject, get_string('email_open_session_object', 'local_mentor_specialization',
+            $session->fullname));
+
+        self::assertEquals($resultmail[2]->to, $user3->email);
+        self::assertEquals($resultmail[2]->subject, get_string('email_open_session_object', 'local_mentor_specialization',
+            $session->fullname));
 
         $this->resetAllData();
     }
@@ -461,7 +525,7 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $session->create_self_enrolment_instance();
 
         $session->update_status(\local_mentor_core\session::STATUS_ARCHIVED);
@@ -491,7 +555,7 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         $avaiblestatus = $session->get_available_status();
 
@@ -509,7 +573,7 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         self::assertArrayHasKey(\local_mentor_specialization\mentor_session::STATUS_OPENED_REGISTRATION, $avaiblestatus);
         self::assertArrayHasKey(\local_mentor_specialization\mentor_session::STATUS_REPORTED, $avaiblestatus);
 
-        $session->update_status(\local_mentor_specialization\mentor_session::STATUS_IN_PROGRESS);
+        $session->update_status(\local_mentor_specialization\mentor_session::STATUS_IN_PROGRESS, $avaiblestatus);
 
         $avaiblestatus = $session->get_available_status();
 
@@ -553,9 +617,9 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         self::assertArrayHasKey(\local_mentor_specialization\mentor_session::STATUS_ARCHIVED, $avaiblestatus);
 
         // Change session end date.
-        $data                   = new stdClass();
+        $data = new stdClass();
         $data->sessionstartdate = time();
-        $data->sessionenddate   = strtotime('+3 months', time());
+        $data->sessionenddate = strtotime('+3 months', time());
         $session->update($data);
 
         $avaiblestatus = $session->get_available_status();
@@ -586,25 +650,25 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         // Thumbnail not exist.
         self::assertFalse($session->get_session_picture());
 
         // Create thumbnail file.
-        $fs                    = get_file_storage();
-        $component             = 'local_session';
-        $itemid                = $session->id;
-        $filearea              = 'thumbnail';
-        $contextid             = $session->get_context()->id;
-        $filerecord            = new stdClass();
+        $fs = get_file_storage();
+        $component = 'local_session';
+        $itemid = $session->id;
+        $filearea = 'thumbnail';
+        $contextid = $session->get_context()->id;
+        $filerecord = new stdClass();
         $filerecord->contextid = $contextid;
         $filerecord->component = $component;
-        $filerecord->filearea  = $filearea;
-        $filerecord->itemid    = $itemid;
-        $filerecord->filepath  = '/';
-        $filerecord->filename  = 'logo.png';
-        $filepath              = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
+        $filerecord->filearea = $filearea;
+        $filerecord->itemid = $itemid;
+        $filerecord->filepath = '/';
+        $filerecord->filename = 'logo.png';
+        $filepath = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
         $fs->create_file_from_pathname($filerecord, $filepath);
 
         // Thumbnail exist.
@@ -615,7 +679,7 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         self::assertEquals($contextid, $thumbnailfile->get_contextid());
 
         // Create teaserpicture file.
-        $filearea             = 'teaserpicture';
+        $filearea = 'teaserpicture';
         $filerecord->filearea = $filearea;
         $fs->create_file_from_pathname($filerecord, $filepath);
 
@@ -627,7 +691,7 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         self::assertEquals($contextid, $teaserpicturefile->get_contextid());
 
         // Create teaserpicture file.
-        $filearea             = 'otherpicture';
+        $filearea = 'otherpicture';
         $filerecord->filearea = $filearea;
         $fs->create_file_from_pathname($filerecord, $filepath);
 
@@ -655,53 +719,53 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $session->create_self_enrolment_instance();
 
-        $training                        = $session->get_training();
+        $training = $session->get_training();
         $training->presenceestimatedtime = 120;
-        $training->remoteestimatedtime   = 130;
+        $training->remoteestimatedtime = 130;
         $session->get_training()->update($training);
         $session->presencesessionestimatedtime = 140;
-        $session->onlinesessionestimatedtime   = 150;
+        $session->onlinesessionestimatedtime = 150;
         $session->update($session);
 
         $sessionformdata = $session->prepare_edit_form();
 
         $sharedentities = [];
-        $allentities    = \local_mentor_core\entity_api::get_all_entities(true, [$session->get_entity()->id]);
+        $allentities = \local_mentor_core\entity_api::get_all_entities(true, [$session->get_entity()->id]);
         foreach ($allentities as $entity) {
             $sharedentities[$entity->id] = $entity->name;
         }
 
-        $formparams                 = new stdClass();
-        $formparams->session        = $session;
-        $formparams->returnto       = $session->get_url();
-        $formparams->session        = $session;
-        $formparams->entity         = $session->get_entity();
+        $formparams = new stdClass();
+        $formparams->session = $session;
+        $formparams->returnto = $session->get_url();
+        $formparams->session = $session;
+        $formparams->entity = $session->get_entity();
         $formparams->sharedentities = $sharedentities;
-        $formparams->logourl        = $CFG->wwwroot;
-        $formparams->actionurl      = $session->get_sheet_url()->out();
+        $formparams->logourl = $CFG->wwwroot;
+        $formparams->actionurl = $session->get_sheet_url()->out();
 
         $sessionform = \local_mentor_core\session_api::get_session_form($session->get_sheet_url()->out(), $formparams);
 
         $sessionformdata->presencesessionestimatedtimeminutes = 10;
-        $sessionformdata->presencesessionestimatedtimehours   = 4;
-        $sessionformdata->onlinesessionestimatedtimeminutes   = 10;
-        $sessionformdata->onlinesessionestimatedtimehours     = 10;
+        $sessionformdata->presencesessionestimatedtimehours = 4;
+        $sessionformdata->onlinesessionestimatedtimeminutes = 10;
+        $sessionformdata->onlinesessionestimatedtimehours = 10;
 
         $session->update($sessionformdata, $sessionform);
 
         // Check if estimate time data is update.
         self::assertEquals($sessionformdata->presencesessionestimatedtimeminutes +
-                           ($sessionformdata->presencesessionestimatedtimehours * 60), $session->presencesessionestimatedtime);
+            ($sessionformdata->presencesessionestimatedtimehours * 60), $session->presencesessionestimatedtime);
         self::assertEquals($sessionformdata->onlinesessionestimatedtimeminutes +
-                           ($sessionformdata->onlinesessionestimatedtimehours * 60), $session->onlinesessionestimatedtime);
+            ($sessionformdata->onlinesessionestimatedtimehours * 60), $session->onlinesessionestimatedtime);
 
         // Check if data en enrolment update.
-        $data                    = new stdClass();
+        $data = new stdClass();
         $data->termsregistration = 'inscriptionlibre';
-        $data->status            = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
+        $data->status = \local_mentor_core\session::STATUS_OPENED_REGISTRATION;
         $session->update($data);
 
         self::assertEquals($data->termsregistration, $session->termsregistration);
@@ -737,7 +801,7 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         $session->check_default_enrol();
 
@@ -772,7 +836,7 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = new \local_mentor_specialization\mentor_session($sessionid);
+        $session = new \local_mentor_specialization\mentor_session($sessionid);
 
         $sessiontemplatedata = $session->convert_for_template();
 
@@ -810,23 +874,23 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         self::assertEquals('', $sessiontemplatedata->sessionmodalities);
 
         // With online and presence data.
-        $data                                      = new \stdClass();
-        $data->presencesessionestimatedtimehours   = 1;
+        $data = new \stdClass();
+        $data->presencesessionestimatedtimehours = 1;
         $data->presencesessionestimatedtimeminutes = 2;
-        $data->onlinesessionestimatedtimeminutes   = 3;
-        $data->onlinesessionestimatedtimehours     = 4;
-        $data->publiccible                         = 'public cicble';
-        $data->termsregistration                   = 'termsregistration';
-        $data->termsregistrationdetail             = 'termsregistrationdetail';
-        $data->sessionpermanent                    = 0;
-        $data->sessionmodalities                   = 'presentiel';
-        $data->accompaniment                       = 'accompaniment';
-        $data->location                            = 'location';
-        $data->organizingstructure                 = 'organizingstructure';
+        $data->onlinesessionestimatedtimeminutes = 3;
+        $data->onlinesessionestimatedtimehours = 4;
+        $data->publiccible = 'public cicble';
+        $data->termsregistration = 'termsregistration';
+        $data->termsregistrationdetail = 'termsregistrationdetail';
+        $data->sessionpermanent = 0;
+        $data->sessionmodalities = 'presentiel';
+        $data->accompaniment = 'accompaniment';
+        $data->location = 'location';
+        $data->organizingstructure = 'organizingstructure';
 
         $presencesessiontime = (int) $data->presencesessionestimatedtimehours * 60 +
-                               $data->presencesessionestimatedtimeminutes;
-        $onlinesessiontime   = (int) $data->onlinesessionestimatedtimehours * 60 + $data->onlinesessionestimatedtimeminutes;
+            $data->presencesessionestimatedtimeminutes;
+        $onlinesessiontime = (int) $data->onlinesessionestimatedtimehours * 60 + $data->onlinesessionestimatedtimeminutes;
 
         $session->update($data, true);
 
@@ -857,10 +921,10 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         // Set modality session to "presentiel".
-        $data                    = new stdClass();
+        $data = new stdClass();
         $data->sessionmodalities = 'presentiel';
         $session->update($data);
 
@@ -888,10 +952,10 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         // Set modality session to "online".
-        $data                    = new stdClass();
+        $data = new stdClass();
         $data->sessionmodalities = 'online';
         $session->update($data);
 
@@ -919,10 +983,10 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         // Set modality session to "mixte".
-        $data                    = new stdClass();
+        $data = new stdClass();
         $data->sessionmodalities = 'mixte';
         $session->update($data);
 
@@ -950,7 +1014,7 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $session->create_self_enrolment_instance();
 
         $user = self::getDataGenerator()->create_user();
@@ -1007,8 +1071,8 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         self::setAdminUser();
 
         // Create session.
-        $sessionid       = $this->init_session_creation();
-        $session         = \local_mentor_core\session_api::get_session($sessionid);
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $session->opento = \local_mentor_core\session::OPEN_TO_ALL;
         $session->update($session);
 
@@ -1036,8 +1100,8 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         $db = \local_mentor_specialization\database_interface::get_instance();
 
         // Create session.
-        $sessionid       = $this->init_session_creation();
-        $session         = \local_mentor_core\session_api::get_session($sessionid);
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $session->opento = \local_mentor_core\session::OPEN_TO_CURRENT_ENTITY;
         $session->update($session);
 
@@ -1053,10 +1117,10 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         $entity2 = \local_mentor_core\entity_api::create_entity(array('name' => 'Entity2', 'shortname' => 'Entity2'));
 
         // Setting user data.
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@gouv.fr';
-        $auth      = 'manual';
+        $email = 'user@gouv.fr';
+        $auth = 'manual';
 
         // Create user.
         \local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entity2, [], null, $auth);
@@ -1092,8 +1156,8 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         $db = \local_mentor_specialization\database_interface::get_instance();
 
         // Create session.
-        $sessionid       = $this->init_session_creation();
-        $session         = \local_mentor_core\session_api::get_session($sessionid);
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $session->opento = \local_mentor_core\session::OPEN_TO_CURRENT_ENTITY;
         $session->update($session);
 
@@ -1104,10 +1168,10 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         $entity2 = \local_mentor_core\entity_api::create_entity(array('name' => 'Entity2', 'shortname' => 'Entity2'));
 
         // Setting user data.
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@gouv.fr';
-        $auth      = 'manual';
+        $email = 'user@gouv.fr';
+        $auth = 'manual';
 
         // Create user.
         \local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $entity2, [], null, $auth);
@@ -1140,8 +1204,8 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         self::setAdminUser();
 
         // Create session.
-        $sessionid       = $this->init_session_creation();
-        $session         = \local_mentor_core\session_api::get_session($sessionid);
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $session->opento = \local_mentor_core\session::OPEN_TO_NOT_VISIBLE;
         $session->update($session);
 
@@ -1176,14 +1240,16 @@ class local_mentor_specialization_session_class_testcase extends advanced_testca
         $db = \local_mentor_specialization\database_interface::get_instance();
 
         // Create session.
-        $sessionid       = $this->init_session_creation();
-        $session         = \local_mentor_core\session_api::get_session($sessionid);
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
 
         // Setting user data.
-        $lastname  = 'lastname';
+        $lastname = 'lastname';
         $firstname = 'firstname';
-        $email     = 'user@gouv.fr';
-        $auth      = 'manual';
+        $email = 'user@gouv.fr';
+        $auth = 'manual';
 
         // Create user.
         \local_mentor_core\profile_api::create_and_add_user($lastname, $firstname, $email, $session->get_entity(), [], null, $auth);

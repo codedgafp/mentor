@@ -36,11 +36,11 @@ require_once($CFG->dirroot . '/local/profile/lib.php');
 require_once($CFG->dirroot . '/local/mentor_core/api/entity.php');
 require_once($CFG->dirroot . '/local/profile/forms/editadvanced_form.php');
 
-$id     = optional_param('id', $USER->id, PARAM_INT);    // User id; -1 if creating new user.
+$id = optional_param('id', $USER->id, PARAM_INT);    // User id; -1 if creating new user.
 $course = optional_param('course', SITEID, PARAM_INT);   // Course id (defaults to Site).
 
 // PATCH EDUNAO.
-$returnto   = optional_param('returnto', null, PARAM_RAW);  // Code determining where to return to after save.
+$returnto = optional_param('returnto', null, PARAM_RAW);  // Code determining where to return to after save.
 $mainentity = optional_param('mainentity', null, PARAM_RAW);  // Default main entity for the new user.
 // END patch.
 
@@ -86,7 +86,7 @@ if ($id > 0 && !\local_mentor_core\profile_api::has_profile_config_access($id)) 
 
     // Patch Edunao.
     if ($entities = \local_mentor_core\entity_api::get_managed_entities(null, true)) {
-        $entity        = current($entities);
+        $entity = current($entities);
         $systemcontext = context_coursecat::instance($entity->id);
     }
 
@@ -95,12 +95,12 @@ if ($id > 0 && !\local_mentor_core\profile_api::has_profile_config_access($id)) 
     if ($id == -1) {
 
         // Creating new user.
-        $user            = new stdClass();
-        $user->id        = -1;
-        $user->auth      = 'manual';
+        $user = new stdClass();
+        $user->id = -1;
+        $user->auth = 'manual';
         $user->confirmed = 1;
-        $user->deleted   = 0;
-        $user->timezone  = '99';
+        $user->deleted = 0;
+        $user->timezone = '99';
         require_capability('moodle/user:create', $systemcontext);
 
         // Set the page titles.
@@ -153,13 +153,13 @@ if ($id > 0 && !\local_mentor_core\profile_api::has_profile_config_access($id)) 
     $user->interests = core_tag_tag::get_item_tags_array('core', 'user', $id);
 
     if ($user->id !== -1) {
-        $usercontext   = context_user::instance($user->id);
+        $usercontext = context_user::instance($user->id);
         $editoroptions = array(
-            'maxfiles'   => EDITOR_UNLIMITED_FILES,
-            'maxbytes'   => $CFG->maxbytes,
-            'trusttext'  => false,
+            'maxfiles' => EDITOR_UNLIMITED_FILES,
+            'maxbytes' => $CFG->maxbytes,
+            'trusttext' => false,
             'forcehttps' => false,
-            'context'    => $usercontext
+            'context' => $usercontext
         );
 
         $user = file_prepare_standard_editor($user, 'description', $editoroptions, $usercontext, 'user', 'profile', 0);
@@ -167,37 +167,37 @@ if ($id > 0 && !\local_mentor_core\profile_api::has_profile_config_access($id)) 
         $usercontext = null;
         // This is a new user, we don't want to add files here.
         $editoroptions = array(
-            'maxfiles'   => 0,
-            'maxbytes'   => 0,
-            'trusttext'  => false,
+            'maxfiles' => 0,
+            'maxbytes' => 0,
+            'trusttext' => false,
             'forcehttps' => false,
-            'context'    => $coursecontext
+            'context' => $coursecontext
         );
     }
 
     // Prepare filemanager draft area.
-    $draftitemid        = 0;
+    $draftitemid = 0;
     $filemanagercontext = $editoroptions['context'];
     $filemanageroptions = array(
-        'maxbytes'       => $CFG->maxbytes,
-        'subdirs'        => 0,
-        'maxfiles'       => 1,
+        'maxbytes' => $CFG->maxbytes,
+        'subdirs' => 0,
+        'maxfiles' => 1,
         'accepted_types' => 'optimised_image'
     );
     file_prepare_draft_area($draftitemid, $filemanagercontext->id, 'user', 'newicon', 0, $filemanageroptions);
     $user->imagefile = $draftitemid;
 
     if (!empty($mainentity)) {
-        $entity                         = \local_mentor_core\entity_api::get_entity($mainentity);
+        $entity = \local_mentor_core\entity_api::get_entity($mainentity);
         $user->profile_field_mainentity = $entity->name;
     }
 
     // Create form.
     $userform = new local_profile_user_form(new moodle_url($PAGE->url, array('returnto' => $returnto)),
         array(
-            'editoroptions'      => $editoroptions,
+            'editoroptions' => $editoroptions,
             'filemanageroptions' => $filemanageroptions,
-            'user'               => $user
+            'user' => $user
         ));
 
     // Deciding where to send the user back in most cases.
@@ -229,18 +229,18 @@ if ($id > 0 && !\local_mentor_core\profile_api::has_profile_config_access($id)) 
         }
 
         $usernew->timemodified = time();
-        $createpassword        = false;
+        $createpassword = false;
 
         if ($usernew->id == -1) {
             unset($usernew->id);
             $createpassword = !empty($usernew->createpassword);
             unset($usernew->createpassword);
-            $usernew        = file_postupdate_standard_editor($usernew, 'description', $editoroptions, null, 'user', 'profile',
+            $usernew = file_postupdate_standard_editor($usernew, 'description', $editoroptions, null, 'user', 'profile',
                 null);
             $usernew->email = strtolower($usernew->email);
 
-            $usernew->mnethostid  = $CFG->mnet_localhost_id; // Always local user.
-            $usernew->confirmed   = 1;
+            $usernew->mnethostid = $CFG->mnet_localhost_id; // Always local user.
+            $usernew->confirmed = 1;
             $usernew->timecreated = time();
             if ($authplugin->is_internal()) {
                 if ($createpassword || empty($usernew->newpassword)) {
@@ -274,7 +274,7 @@ if ($id > 0 && !\local_mentor_core\profile_api::has_profile_config_access($id)) 
             }
             $usercreated = true;
         } else {
-            $usernew        = file_postupdate_standard_editor($usernew, 'description', $editoroptions, $usercontext, 'user',
+            $usernew = file_postupdate_standard_editor($usernew, 'description', $editoroptions, $usercontext, 'user',
                 'profile', 0);
             $usernew->email = strtolower($usernew->email);
 
@@ -292,11 +292,11 @@ if ($id > 0 && !\local_mentor_core\profile_api::has_profile_config_access($id)) 
 
                 $object = get_string('disabledaccountobject', 'local_profile');
 
-                $a          = new stdClass();
+                $a = new stdClass();
                 $a->wwwroot = $CFG->wwwroot;
 
                 // Get the content of the email.
-                $content     = get_string('disabledaccountcontent', 'local_profile', $a);
+                $content = get_string('disabledaccountcontent', 'local_profile', $a);
                 $contenthtml = text_to_html($content, false, false, true);
 
                 email_to_user($user, $supportuser, $object, $content, $contenthtml);
@@ -308,16 +308,16 @@ if ($id > 0 && !\local_mentor_core\profile_api::has_profile_config_access($id)) 
 
                 $object = get_string('enabledaccountobject', 'local_profile');
 
-                $a                    = new stdClass();
-                $a->wwwroot           = $CFG->wwwroot;
+                $a = new stdClass();
+                $a->wwwroot = $CFG->wwwroot;
                 $a->forgetpasswordurl = $CFG->wwwroot . '/login/forgot_password.php';
 
                 // Get the content of the email.
-                $content     = get_string('enabledaccountcontent', 'local_profile', $a);
+                $content = get_string('enabledaccountcontent', 'local_profile', $a);
                 $contenthtml = text_to_html($content, false, false, true);
 
                 // Suspended users cannot receive emails.
-                $emailuser            = clone($user);
+                $emailuser = clone($user);
                 $emailuser->suspended = 0;
 
                 email_to_user($emailuser, $supportuser, $object, $content, $contenthtml);
@@ -397,11 +397,11 @@ if ($id > 0 && !\local_mentor_core\profile_api::has_profile_config_access($id)) 
                     'new' => $usernew
                 )
             );
-            $data      = array(
-                'objectid'      => $usernew->id,
+            $data = array(
+                'objectid' => $usernew->id,
                 'relateduserid' => $usernew->id,
-                'context'       => \context_user::instance($usernew->id),
-                'other'         => $otherdata
+                'context' => \context_user::instance($usernew->id),
+                'other' => $otherdata
             );
 
             // Create and trigger event.
@@ -465,14 +465,14 @@ if ($id > 0 && !\local_mentor_core\profile_api::has_profile_config_access($id)) 
             echo $OUTPUT->header();
         } else {
             $streditmyprofile = get_string('editmyprofile');
-            $userfullname     = fullname($user, true);
+            $userfullname = fullname($user, true);
             $PAGE->set_heading($userfullname);
             $PAGE->set_title("$course->shortname: $streditmyprofile - $userfullname");
             echo $OUTPUT->header();
             echo $OUTPUT->heading($userfullname);
         }
     } else if (!empty($USER->newadminuser)) {
-        $strinstallation      = get_string('installation', 'install');
+        $strinstallation = get_string('installation', 'install');
         $strprimaryadminsetup = get_string('primaryadminsetup');
 
         $PAGE->navbar->add($strprimaryadminsetup);
@@ -485,9 +485,9 @@ if ($id > 0 && !\local_mentor_core\profile_api::has_profile_config_access($id)) 
         echo ' < br />';
     } else {
         $streditmyprofile = get_string('editmyprofile');
-        $strparticipants  = get_string('participants');
-        $strnewuser       = get_string('newuser');
-        $userfullname     = fullname($user, true);
+        $strparticipants = get_string('participants');
+        $strnewuser = get_string('newuser');
+        $userfullname = fullname($user, true);
 
         $PAGE->set_title("$course->shortname: $streditmyprofile");
         $PAGE->set_heading($userfullname);

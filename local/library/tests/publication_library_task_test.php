@@ -39,8 +39,8 @@ class publication_library_task_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \local_mentor_core\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -64,14 +64,14 @@ class publication_library_task_testcase extends advanced_testcase {
         // Init test data.
         $trainingdata = new stdClass();
 
-        $trainingdata->name      = 'fullname';
+        $trainingdata->name = 'fullname';
         $trainingdata->shortname = $shortname;
-        $trainingdata->content   = 'summary';
+        $trainingdata->content = 'summary';
 
         // Create training object.
         $trainingdata->traininggoal = 'TEST TRAINING';
-        $trainingdata->thumbnail    = '';
-        $trainingdata->status       = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
+        $trainingdata->thumbnail = '';
+        $trainingdata->status = \local_mentor_core\training::STATUS_ELABORATION_COMPLETED;
 
         try {
             // Get entity object for default category.
@@ -83,9 +83,9 @@ class publication_library_task_testcase extends advanced_testcase {
         }
 
         // Fill with entity data.
-        $formationid                     = $entity->get_entity_formation_category();
-        $trainingdata->categorychildid   = $formationid;
-        $trainingdata->categoryid        = $entity->id;
+        $formationid = $entity->get_entity_formation_category();
+        $trainingdata->categorychildid = $formationid;
+        $trainingdata->categoryid = $entity->id;
         $trainingdata->creativestructure = $entity->id;
 
         return $trainingdata;
@@ -105,7 +105,7 @@ class publication_library_task_testcase extends advanced_testcase {
 
         self::setAdminUser();
 
-        $customdata         = new stdClass();
+        $customdata = new stdClass();
         $customdata->userid = $USER->id;
 
         $task = new \local_library\task\publication_library_task();
@@ -133,7 +133,7 @@ class publication_library_task_testcase extends advanced_testcase {
      *
      * @covers  \local_library\task\publication_library_task::execute
      */
-    public function test_execute_ok() {
+    public function test_publication_library_task() {
         $this->resetAfterTest(true);
         $this->reset_singletons();
         $this->setOutputCallback(function() {
@@ -143,16 +143,16 @@ class publication_library_task_testcase extends advanced_testcase {
 
         local_library_init_config();
 
-        $trainingdata           = $this->get_training_data(
+        $trainingdata = $this->get_training_data(
             [
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1'
             ]
         );
-        $training               = \local_mentor_core\training_api::create_training($trainingdata);
-        $user                   = $this->getDataGenerator()->create_user();
-        $customdata             = new stdClass();
-        $customdata->userid     = $user->id;
+        $training = \local_mentor_core\training_api::create_training($trainingdata);
+        $user = $this->getDataGenerator()->create_user();
+        $customdata = new stdClass();
+        $customdata->userid = $user->id;
         $customdata->trainingid = $training->id;
 
         self::assertFalse(\local_mentor_core\library_api::get_library_publication($training->id));
@@ -220,6 +220,82 @@ class publication_library_task_testcase extends advanced_testcase {
         self::assertTrue(
             intval($traininglibraryobject->timemodified) < intval($traininglibraryobject2->timemodified)
         );
+
+        self::resetAllData();
+    }
+
+    /**
+     * Test import_to_entity_task
+     *
+     * @covers  \local_library\task\import_to_entity_task::execute
+     */
+    public function test_import_to_entity_task() {
+        global $DB;
+
+        $this->resetAfterTest(true);
+        $this->reset_singletons();
+        $this->setOutputCallback(function() {
+        });
+
+        self::setAdminUser();
+
+        local_library_init_config();
+
+        $trainingdata = $this->get_training_data(
+            [
+                'name' => 'New Entity 1',
+                'shortname' => 'New Entity 1'
+            ]
+        );
+        $training = \local_mentor_core\training_api::create_training($trainingdata);
+        $user = $this->getDataGenerator()->create_user();
+        $customdata = new stdClass();
+        $customdata->userid = $user->id;
+        $customdata->trainingid = $training->id;
+
+        // Create.
+        $task = new \local_library\task\publication_library_task();
+        $task->set_userid($user->id);
+        $task->set_custom_data($customdata);
+        $task->execute();
+
+        $traininglibraryobject = \local_mentor_core\library_api::get_library_publication($training->id);
+        $traininglibrary = \local_mentor_core\training_api::get_training($traininglibraryobject->trainingid);
+
+        self::assertFalse($DB->record_exists('training', array('courseshortname' => 'newimporttraining')));
+
+        $entityid2 = \local_mentor_core\entity_api::create_entity([
+            'name' => 'New Entity 2',
+            'shortname' => 'New Entity 2'
+        ]);
+
+        $adhoctask = new \local_library\task\import_to_entity_task();
+
+        $adhoctask->set_custom_data([
+            'trainingid' => $traininglibrary->id,
+            'trainingshortname' => 'newimporttraining',
+        ]);
+
+        try {
+            $adhoctask->execute();
+            self::fail();
+        } catch (\coding_exception $e) {
+            self::assertInstanceOf('coding_exception', $e);
+        }
+
+        $adhoctask->set_custom_data([
+            'trainingid' => $traininglibrary->id,
+            'trainingshortname' => 'newimporttraining',
+            'destinationentity' => $entityid2,
+        ]);
+
+        $newtraining = $adhoctask->execute();
+
+        $newtrainingdata = $DB->get_record('training', array('courseshortname' => 'newimporttraining'));
+
+        self::assertEquals($newtraining->id, $newtrainingdata->id);
+        self::assertEquals($entityid2, $newtraining->get_entity()->id);
+        self::assertEquals($newtraining->shortname, 'newimporttraining');
 
         self::resetAllData();
     }

@@ -99,9 +99,9 @@ define([
                     $button.classList.add('edadmin-button');
                     $button.textContent = decodeURIComponent(text);
                     $button.data = button;
-                    $button.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            e.currentTarget.data.onclick();
+                    $button.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        e.currentTarget.data.onclick();
                     });
                     $buttons.append($button);
                 }

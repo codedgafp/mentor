@@ -11,7 +11,7 @@ $(document).ready(function () {
     });
 
     // Set collapse position with set browser mobile size.
-    $('body .mentor-accordion .card-header').each(function(index, element) {
+    $('body .mentor-accordion .card-header').each(function (index, element) {
         // When Collapse isn't in the atto snippet editor
         if (!$(element).parents('.editor_atto_content').length) {
 
@@ -25,7 +25,7 @@ $(document).ready(function () {
             var mobileSize = contentTarget.data('collapseMobileSize');
 
             // Is not mobile size.
-            if(window.innerWidth > mobileSize) {
+            if (window.innerWidth > mobileSize) {
                 return null;
             }
 
@@ -50,7 +50,7 @@ $(document).ready(function () {
             }
 
             // Collapse is open when browser has mobile size.
-            if(mobileAction === 'open') {
+            if (mobileAction === 'open') {
                 // Show target element.
                 contentTarget.addClass('show');
 

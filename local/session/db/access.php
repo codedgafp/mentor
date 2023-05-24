@@ -30,9 +30,9 @@ $capabilities = [
     'local/session:manage' => [
         'riskbitmask' => RISK_XSS,
 
-        'captype'      => 'write',
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => [
+        'archetypes' => [
             'manager' => CAP_ALLOW
         ],
 
@@ -42,21 +42,21 @@ $capabilities = [
     'local/session:view' => [
         'riskbitmask' => RISK_XSS,
 
-        'captype'      => 'read',
+        'captype' => 'read',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => [
+        'archetypes' => [
             'manager' => CAP_ALLOW
         ],
 
         'clonepermissionsfrom' => 'moodle/course:create'
     ],
 
-    'local/session:create'            => [
+    'local/session:create' => [
         'riskbitmask' => RISK_XSS,
 
-        'captype'      => 'write',
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => [
+        'archetypes' => [
             'manager' => CAP_ALLOW
         ],
 
@@ -65,9 +65,9 @@ $capabilities = [
     'local/session:createinsubentity' => [
         'riskbitmask' => RISK_XSS,
 
-        'captype'      => 'write',
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
-        'archetypes'   => [
+        'archetypes' => [
             'manager' => CAP_ALLOW
         ],
 
@@ -77,10 +77,10 @@ $capabilities = [
     'local/session:update' => [
         'riskbitmask' => RISK_XSS,
 
-        'captype'      => 'write',
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
-        'archetypes'   => [
-            'manager'        => CAP_ALLOW,
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
         ],
 
@@ -90,9 +90,9 @@ $capabilities = [
     'local/session:delete' => [
         'riskbitmask' => RISK_XSS,
 
-        'captype'      => 'write',
+        'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
-        'archetypes'   => [
+        'archetypes' => [
             'manager' => CAP_ALLOW
         ],
 
@@ -103,9 +103,9 @@ $capabilities = [
 
         'riskbitmask' => RISK_XSS,
 
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => [
             'manager' => CAP_ALLOW,
         ],
         'clonepermissionsfrom' => 'moodle/course:update'
@@ -115,9 +115,9 @@ $capabilities = [
 
         'riskbitmask' => RISK_XSS,
 
-        'captype'              => 'write',
-        'contextlevel'         => CONTEXT_COURSE,
-        'archetypes'           => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => [
             'manager' => CAP_ALLOW,
         ],
         'clonepermissionsfrom' => 'moodle/course:update'

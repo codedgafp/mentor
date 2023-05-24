@@ -43,25 +43,25 @@
 
 
 {{# addtraininglink }}
-<div id="trainings-buttons">
-    <form action="{{ addtraininglink }}">
-        <input type="hidden" name="entityid" value="{{ entityid }}" />
-        <button class="btn btn-primary" id="add-training-button">
-            {{# str }} addtraining, local_trainings {{/ str }}
-        </button>
-    </form>
+    <div id="trainings-buttons">
+        <form action="{{ addtraininglink }}">
+            <input type="hidden" name="entityid" value="{{ entityid }}"/>
+            <button class="btn btn-primary" id="add-training-button">
+                {{# str }} addtraining, local_trainings {{/ str }}
+            </button>
+        </form>
 
-    {{# recyclebinlink }}
-        <div id="recyclebin" class="btn btn-secondary">
-            <a href="{{ recyclebinlink }}" target="_blank" title="Corbeille" rel="opener">
+        {{# recyclebinlink }}
+            <div id="recyclebin" class="btn btn-secondary">
+                <a href="{{ recyclebinlink }}" target="_blank" title="Corbeille" rel="opener">
                 <span>
                     {{# str }} trash, local_trainings {{/ str }}
                 </span>
-            </a>
-        </div>
-    {{/recyclebinlink}}
+                </a>
+            </div>
+        {{/recyclebinlink}}
 
-</div>
+    </div>
 {{/addtraininglink }}
 
 <table id="trainings-table" data-entityid="{{entityid}}">

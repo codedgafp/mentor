@@ -40,11 +40,11 @@ class mentor_training extends \local_mentor_core\training {
      * @var string[]
      */
     protected $_allowedarea
-        = [
-            'thumbnail',
-            'producerorganizationlogo',
-            'teaserpicture'
-        ];
+            = [
+                    'thumbnail',
+                    'producerorganizationlogo',
+                    'teaserpicture'
+            ];
 
     /**
      * @var string
@@ -167,27 +167,27 @@ class mentor_training extends \local_mentor_core\training {
         parent::__construct($trainingid);
 
         // Set training data.
-        $this->teaser                        = $this->training->teaser;
-        $this->teaserpicture                 = $this->training->teaserpicture;
-        $this->prerequisite                  = $this->training->prerequisite;
-        $this->collection                    = $this->training->collection;
-        $this->collectionstr                 = $this->get_collections();
-        $this->creativestructure             = $this->training->creativestructure;
-        $this->idsirh                        = $this->training->idsirh;
-        $this->licenseterms                  = $this->training->licenseterms;
-        $this->typicaljob                    = $this->training->typicaljob;
-        $this->skills                        = $this->training->skills;
-        $this->certifying                    = $this->training->certifying;
-        $this->presenceestimatedtime         = $this->training->presenceestimatedtime;
-        $this->remoteestimatedtime           = $this->training->remoteestimatedtime;
-        $this->trainingmodalities            = $this->training->trainingmodalities;
-        $this->producingorganization         = $this->training->producingorganization;
-        $this->producerorganizationlogo      = $this->training->producerorganizationlogo;
-        $this->designers                     = $this->training->designers;
-        $this->contactproducerorganization   = $this->training->contactproducerorganization;
+        $this->teaser = $this->training->teaser;
+        $this->teaserpicture = $this->training->teaserpicture;
+        $this->prerequisite = $this->training->prerequisite;
+        $this->collection = $this->training->collection;
+        $this->collectionstr = $this->get_collections();
+        $this->creativestructure = $this->training->creativestructure;
+        $this->idsirh = $this->training->idsirh;
+        $this->licenseterms = $this->training->licenseterms;
+        $this->typicaljob = $this->training->typicaljob;
+        $this->skills = $this->training->skills;
+        $this->certifying = $this->training->certifying;
+        $this->presenceestimatedtime = $this->training->presenceestimatedtime;
+        $this->remoteestimatedtime = $this->training->remoteestimatedtime;
+        $this->trainingmodalities = $this->training->trainingmodalities;
+        $this->producingorganization = $this->training->producingorganization;
+        $this->producerorganizationlogo = $this->training->producerorganizationlogo;
+        $this->designers = $this->training->designers;
+        $this->contactproducerorganization = $this->training->contactproducerorganization;
         $this->producerorganizationshortname = $this->training->producerorganizationshortname;
-        $this->timecreated                   = $this->training->timecreated;
-        $this->catchphrase                   = $this->training->catchphrase;
+        $this->timecreated = $this->training->timecreated;
+        $this->catchphrase = $this->training->catchphrase;
 
     }
 
@@ -236,8 +236,8 @@ class mentor_training extends \local_mentor_core\training {
         if ($producerorganizationlogo = $this->get_training_picture('producerorganizationlogo')) {
             $draftitemid = file_get_submitted_draft_itemid('producerorganizationlogo');
             file_prepare_draft_area($draftitemid, $producerorganizationlogo->get_contextid(), 'local_trainings',
-                'producerorganizationlogo',
-                $training->id);
+                    'producerorganizationlogo',
+                    $training->id);
             $training->producerorganizationlogo = $draftitemid;
         } else {
             $training->producerorganizationlogo = '';
@@ -247,7 +247,7 @@ class mentor_training extends \local_mentor_core\training {
         if ($teaerpicture = $this->get_training_picture('teaserpicture')) {
             $draftteaserpictureid = file_get_submitted_draft_itemid('teaserpicture');
             file_prepare_draft_area($draftteaserpictureid, $teaerpicture->get_contextid(), 'local_trainings', 'teaserpicture',
-                $training->id);
+                    $training->id);
             $training->teaserpicture = $draftteaserpictureid;
         } else {
             $training->teaserpicture = '';
@@ -255,13 +255,13 @@ class mentor_training extends \local_mentor_core\training {
 
         // Get presence estimated time.
         if (isset($training->presenceestimatedtime)) {
-            $training->presenceestimatedtimehours   = floor($training->presenceestimatedtime / 60);
+            $training->presenceestimatedtimehours = floor($training->presenceestimatedtime / 60);
             $training->presenceestimatedtimeminutes = $training->presenceestimatedtime % 60;
         }
 
         // Get remote estimated time.
         if (isset($training->remoteestimatedtime)) {
-            $training->remoteestimatedtimehours   = floor($training->remoteestimatedtime / 60);
+            $training->remoteestimatedtimehours = floor($training->remoteestimatedtime / 60);
             $training->remoteestimatedtimeminutes = $training->remoteestimatedtime % 60;
         }
 
@@ -332,34 +332,34 @@ class mentor_training extends \local_mentor_core\training {
         if (!empty($mform)) {
             // Get estimated time (minutes).
             $data->presenceestimatedtime = (int) $data->presenceestimatedtimehours * 60 + $data->presenceestimatedtimeminutes;
-            $data->remoteestimatedtime   = (int) $data->remoteestimatedtimehours * 60 + $data->remoteestimatedtimeminutes;
+            $data->remoteestimatedtime = (int) $data->remoteestimatedtimehours * 60 + $data->remoteestimatedtimeminutes;
         }
 
         $this->presenceestimatedtime = $data->presenceestimatedtime;
-        $this->remoteestimatedtime   = $data->remoteestimatedtime;
+        $this->remoteestimatedtime = $data->remoteestimatedtime;
 
         // Other fields.
-        $this->teaser             = isset($data->teaser) ? trim($data->teaser) : $this->teaser;
-        $this->prerequisite       = isset($data->prerequisite) ? trim($data->prerequisite) : $this->prerequisite;
-        $this->licenseterms       = isset($data->licenseterms) ? trim($data->licenseterms) : $this->licenseterms;
-        $this->typicaljob         = isset($data->typicaljob) ? trim($data->typicaljob) : $this->typicaljob;
-        $this->certifying         = $data->certifying ?? $this->certifying;
+        $this->teaser = isset($data->teaser) ? trim($data->teaser) : $this->teaser;
+        $this->prerequisite = isset($data->prerequisite) ? trim($data->prerequisite) : $this->prerequisite;
+        $this->licenseterms = isset($data->licenseterms) ? trim($data->licenseterms) : $this->licenseterms;
+        $this->typicaljob = isset($data->typicaljob) ? trim($data->typicaljob) : $this->typicaljob;
+        $this->certifying = $data->certifying ?? $this->certifying;
         $this->trainingmodalities = $data->trainingmodalities ?? $this->trainingmodalities;
-        $this->catchphrase        = $data->catchphrase ?? $this->catchphrase;
+        $this->catchphrase = $data->catchphrase ?? $this->catchphrase;
 
-        $this->producingorganization         = isset($data->producingorganization) ? trim($data->producingorganization) :
-            $this->producingorganization;
-        $this->designers                     = isset($data->designers) ? trim($data->designers) :
-            $this->designers;
-        $this->contactproducerorganization   = isset($data->contactproducerorganization) ?
-            trim($data->contactproducerorganization) :
-            $this->contactproducerorganization;
+        $this->producingorganization = isset($data->producingorganization) ? trim($data->producingorganization) :
+                $this->producingorganization;
+        $this->designers = isset($data->designers) ? trim($data->designers) :
+                $this->designers;
+        $this->contactproducerorganization = isset($data->contactproducerorganization) ?
+                trim($data->contactproducerorganization) :
+                $this->contactproducerorganization;
         $this->producerorganizationshortname = isset($data->producerorganizationshortname) ?
-            trim($data->producerorganizationshortname) :
-            $this->producerorganizationshortname;
+                trim($data->producerorganizationshortname) :
+                $this->producerorganizationshortname;
         $this->producerorganizationshortname = isset($data->producerorganizationshortname) ?
-            trim($data->producerorganizationshortname) :
-            $this->producerorganizationshortname;
+                trim($data->producerorganizationshortname) :
+                $this->producerorganizationshortname;
 
         // Teaser picture.
         if (isset($data->deleteteaserpicture) && $data->deleteteaserpicture == 1) {
@@ -402,7 +402,7 @@ class mentor_training extends \local_mentor_core\training {
         $newtraining = parent::duplicate($trainingshortname, $destinationentity);
 
         // Copy the pictures.
-        $fs             = get_file_storage();
+        $fs = get_file_storage();
         $newpicturedata = ['contextid' => $newtraining->contextid, 'itemid' => $newtraining->id];
 
         // Copy the producerorganizationlogo.
@@ -489,27 +489,27 @@ class mentor_training extends \local_mentor_core\training {
         // Check if the template has already been retrieve.
         if (empty($this->template)) {
 
-            $templateobj                                = new \stdClass();
-            $templateobj->id                            = $this->id;
-            $templateobj->name                          = $this->name;
-            $templateobj->idsirh                        = $this->idsirh;
-            $templateobj->collection                    = $this->collection;
-            $templateobj->collectionstr                 = $this->collectionstr;
-            $templateobj->name                          = $this->name;
-            $templateobj->typicaljob                    = $this->typicaljob;
-            $templateobj->traininggoal                  = local_mentor_core_clean_html(html_entity_decode($this->traininggoal));
-            $templateobj->prerequisite                  = $this->prerequisite;
-            $templateobj->licenseterms                  = $this->licenseterms;
-            $templateobj->content                       = local_mentor_core_clean_html(html_entity_decode($this->content));
-            $templateobj->producingorganization         = $this->producingorganization;
+            $templateobj = new \stdClass();
+            $templateobj->id = $this->id;
+            $templateobj->name = $this->name;
+            $templateobj->idsirh = $this->idsirh;
+            $templateobj->collection = $this->collection;
+            $templateobj->collectionstr = $this->collectionstr;
+            $templateobj->name = $this->name;
+            $templateobj->typicaljob = $this->typicaljob;
+            $templateobj->traininggoal = local_mentor_core_clean_html(html_entity_decode($this->traininggoal));
+            $templateobj->prerequisite = $this->prerequisite;
+            $templateobj->licenseterms = $this->licenseterms;
+            $templateobj->content = local_mentor_core_clean_html(html_entity_decode($this->content));
+            $templateobj->producingorganization = $this->producingorganization;
             $templateobj->producerorganizationshortname = $this->producerorganizationshortname;
-            $templateobj->contactproducerorganization   = $this->contactproducerorganization;
-            $templateobj->courseurl                     = htmlspecialchars_decode($this->get_url()->out());
-            $templateobj->isreviewer                    = false;
-            $templateobj->catchphrase                   = $this->catchphrase;
-            $templateobj->isreviewer                    = false;
-            $templateobj->trainingsheeturl              = $CFG->wwwroot . '/local/catalog/pages/training.php?trainingid=' .
-                                                          $this->id;
+            $templateobj->contactproducerorganization = $this->contactproducerorganization;
+            $templateobj->courseurl = htmlspecialchars_decode($this->get_url()->out());
+            $templateobj->isreviewer = false;
+            $templateobj->catchphrase = $this->catchphrase;
+            $templateobj->isreviewer = false;
+            $templateobj->trainingsheeturl = $CFG->wwwroot . '/local/catalog/pages/training.php?trainingid=' .
+                                             $this->id;
 
             // Check if the user can review the training.
             if (!has_capability('local/trainings:update', $this->get_context(), $USER)) {
@@ -525,15 +525,15 @@ class mentor_training extends \local_mentor_core\training {
             $trainingentity = $this->get_entity()->get_main_entity();
 
             // Set entity data.
-            $templateobj->entityid       = $trainingentity->id;
-            $templateobj->entityname     = $trainingentity->shortname;
+            $templateobj->entityid = $trainingentity->id;
+            $templateobj->entityname = $trainingentity->shortname;
             $templateobj->entityfullname = $trainingentity->name;
 
             $templateobj->licensetermsfullname = empty($this->licenseterms) ? '' : \license_manager::get_license_by_shortname
             ($this->licenseterms)->fullname;
 
             $filebycontextid = $this->dbinterface->get_files_by_component_order_by_filearea($this->contextid, 'local_trainings',
-                $this->id);
+                    $this->id);
 
             // Training thumbnail.
             $templateobj->thumbnail = $this->get_file_url();
@@ -542,8 +542,8 @@ class mentor_training extends \local_mentor_core\training {
             $templateobj->producingorganizationlogo = $this->get_file_url('producerorganizationlogo');
 
             // Set teaser.
-            $teaserresult                 = $templateobj->thumbnail;
-            $fileurlteaserpicture         = $this->get_file_url('teaserpicture');
+            $teaserresult = $templateobj->thumbnail;
+            $fileurlteaserpicture = $this->get_file_url('teaserpicture');
             $templateobj->teaserispicture = true;
 
             if (($this->teaserpicture !== '') && !is_null($fileurlteaserpicture)) {
@@ -552,7 +552,7 @@ class mentor_training extends \local_mentor_core\training {
 
             if ($this->teaser !== '') {
                 $templateobj->teaserispicture = false;
-                $teaserresult                 = str_replace("/watch/", "/embed/", $this->teaser);
+                $teaserresult = str_replace("/watch/", "/embed/", $this->teaser);
                 // PeerTube update.
                 $teaserresult = str_replace("/w/", "/videos/embed/", $teaserresult);
                 $teaserresult = '<div class="mentor-video embed-responsive embed-responsive-16by9">
@@ -563,8 +563,8 @@ class mentor_training extends \local_mentor_core\training {
                                 '</iframe></div>';
             }
 
-            $templateobj->teaser                = $teaserresult;
-            $templateobj->skills                = $this->get_skills_name();
+            $templateobj->teaser = $teaserresult;
+            $templateobj->skills = $this->get_skills_name();
             $templateobj->favouritedesignerdata = $this->get_favourite_designer_data();
 
             // Check if all enrolments user are enabled.
@@ -578,19 +578,19 @@ class mentor_training extends \local_mentor_core\training {
 
     public function get_file_url($filename = 'thumbnail') {
         $filebycontextid = $this->dbinterface->get_files_by_component_order_by_filearea($this->contextid, 'local_trainings',
-            $this->id);
+                $this->id);
 
         if (!isset($filebycontextid[$filename])) {
             return null;
         }
 
         return \moodle_url::make_pluginfile_url(
-            $filebycontextid[$filename]->contextid,
-            $filebycontextid[$filename]->component,
-            $filebycontextid[$filename]->filearea,
-            $filebycontextid[$filename]->itemid,
-            $filebycontextid[$filename]->filepath,
-            $filebycontextid[$filename]->filename
+                $filebycontextid[$filename]->contextid,
+                $filebycontextid[$filename]->component,
+                $filebycontextid[$filename]->filearea,
+                $filebycontextid[$filename]->itemid,
+                $filebycontextid[$filename]->filepath,
+                $filebycontextid[$filename]->filename
         )->out();
     }
 
@@ -601,11 +601,11 @@ class mentor_training extends \local_mentor_core\training {
      */
     public function get_modality_name() {
         $modalities
-            = [
-            ''   => 'emptychoice',
-            'p'  => 'presentiel',
-            'd'  => 'online',
-            'dp' => 'mixte'
+                = [
+                '' => 'emptychoice',
+                'p' => 'presentiel',
+                'd' => 'online',
+                'dp' => 'mixte'
         ];
 
         return $modalities[$this->trainingmodalities];

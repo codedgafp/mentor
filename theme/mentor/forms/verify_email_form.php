@@ -73,7 +73,7 @@ class verify_email_form extends \moodleform {
         global $CFG;
 
         $errors = parent::validation($data, $files);
-        $db     = \local_mentor_core\database_interface::get_instance();
+        $db = \local_mentor_core\database_interface::get_instance();
 
         // Check if email data exist.
         if (isset($data['email'])) {

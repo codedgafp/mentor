@@ -41,8 +41,8 @@ require_login();
 
 // Get entity.
 $entityid = required_param('entityid', PARAM_INT);
-$entity   = \local_mentor_core\entity_api::get_entity($entityid);
-$entity   = $entity->get_main_entity();
+$entity = \local_mentor_core\entity_api::get_entity($entityid);
+$entity = $entity->get_main_entity();
 
 // Check capabilities.
 require_capability('local/entities:manageentity', $entity->get_context());

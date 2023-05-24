@@ -29,9 +29,9 @@ class entity extends abstractlog {
 
     public function get_required_fields() {
         return [
-                'entityid',
-                'name',
-                'regions'
+            'entityid',
+            'name',
+            'regions'
         ];
     }
 
@@ -57,8 +57,8 @@ class entity extends abstractlog {
 
         // Return id if exists.
         $existingentities = $DB->get_records('logstore_mentor_entity2', [
-                'entityid' => $this->eventdata['entityid'],
-                'name'     => $this->eventdata['name']
+            'entityid' => $this->eventdata['entityid'],
+            'name' => $this->eventdata['name']
         ]);
 
         // Entity does no exist.
@@ -82,7 +82,7 @@ class entity extends abstractlog {
 
                 // Regions selector.
                 $dbinterface = \local_mentor_specialization\database_interface::get_instance();
-                $regions     = $dbinterface->get_all_regions();
+                $regions = $dbinterface->get_all_regions();
 
                 $entityregions = [];
 
@@ -120,7 +120,7 @@ class entity extends abstractlog {
 
         // Regions selector.
         $dbinterface = \local_mentor_specialization\database_interface::get_instance();
-        $regions     = $dbinterface->get_all_regions();
+        $regions = $dbinterface->get_all_regions();
 
         foreach ($this->eventdata['regions'] as $regionid) {
 
@@ -129,11 +129,11 @@ class entity extends abstractlog {
             }
 
             // Get or create region.
-            $regionlog   = new \logstore_mentor2\models\region(['name' => $regions[$regionid]->name]);
+            $regionlog = new \logstore_mentor2\models\region(['name' => $regions[$regionid]->name]);
             $regionlogid = $regionlog->get_or_create_record('region2', ['name' => $regions[$regionid]->name]);
 
             // Set entity region.
-            $entityreg              = new \stdClass();
+            $entityreg = new \stdClass();
             $entityreg->entitylogid = $this->id;
             $entityreg->regionlogid = $regionlogid;
             $this->dbinterface->insert_record('entityreg2', $entityreg);

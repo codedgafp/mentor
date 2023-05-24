@@ -44,14 +44,14 @@ class entity_renderer extends \plugin_renderer_base {
         // Regions.
         $regions = $dbinterface->get_all_regions();
 
-        $noregion       = new \stdClass();
-        $noregion->id   = 0;
+        $noregion = new \stdClass();
+        $noregion->id = 0;
         $noregion->name = get_string('none', 'local_mentor_core');
 
         $regionsoptions = array_merge([$noregion], $regions);
 
         $options = (object) array(
-            'regions' => $regionsoptions
+                'regions' => $regionsoptions
         );
 
         // Call template.

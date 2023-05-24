@@ -189,8 +189,8 @@
   .card {
     margin: 0;
     border: none;
-    border-top: 1px solid rgba(0,0,0,.125);
-    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-top: 1px solid rgba(0, 0, 0, .125);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
 
     .card-header {
       font-weight: normal;
@@ -213,6 +213,7 @@
       &.opened {
         h5 {
           color: $maincolor;
+
           .btn {
             color: $maincolor;
           }
@@ -276,6 +277,7 @@
 
     h5 {
       color: $maincolor !important;
+
       .btn {
         color: $maincolor !important;
       }
@@ -356,13 +358,13 @@
   }
 
   .card-body > a:last-child {
-      color: $white!important;
-      background: $maincolor!important;
-      padding: 7px 16px 9px 15px!important;
-      border: none!important;
-      border-radius: 0!important;
-      bottom: 1.25rem;
-      position: absolute;
+    color: $white !important;
+    background: $maincolor !important;
+    padding: 7px 16px 9px 15px !important;
+    border: none !important;
+    border-radius: 0 !important;
+    bottom: 1.25rem;
+    position: absolute;
   }
 }
 
@@ -381,13 +383,13 @@
     left: 275px;
     top: -15px;
     background-color: white;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid rgba(0, 0, 0, .125);
   }
 }
 
 #card-popup-modal {
   .modal-content {
-    width: 450px!important;
+    width: 450px !important;
 
     .card-modal-form {
       margin: 20px;
@@ -460,7 +462,7 @@
     padding-top: 60px;
 
     i {
-      color: #0562C8!important;
+      color: #0562C8 !important;
     }
   }
 
@@ -517,7 +519,7 @@
         img {
           width: 30px;
           height: 30px;
-          clip-path: ellipse(50% 50%)!important;
+          clip-path: ellipse(50% 50%) !important;
           margin-left: 40px;
           margin-right: 10px;
 

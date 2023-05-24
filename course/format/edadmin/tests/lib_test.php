@@ -40,22 +40,22 @@ class format_edadmin_lib_testcase extends advanced_testcase {
     public function create_course() {
         // Set course data.
         $newcoursedata = array(
-            'fullname'            => 'fullname',
-            'shortname'           => 'shortname',
-            'categoryid'          => 1,
-            'format'              => 'edadmin',
+            'fullname' => 'fullname',
+            'shortname' => 'shortname',
+            'categoryid' => 1,
+            'format' => 'edadmin',
             'courseformatoptions' =>
                 array(
                     array(
-                        'name'  => 'formattype',
+                        'name' => 'formattype',
                         'value' => 'entities'
                     ),
                     array(
-                        'name'  => 'categorylink',
+                        'name' => 'categorylink',
                         'value' => 1
                     ),
                     array(
-                        'name'  => 'cohortlink',
+                        'name' => 'cohortlink',
                         'value' => 10
                     )
                 )
@@ -121,7 +121,7 @@ class format_edadmin_lib_testcase extends advanced_testcase {
         $newcourse = $this->create_course();
 
         $formatedadmin = \format_edadmin::instance($newcourse['id']);
-        $supportajax   = $formatedadmin->supports_ajax();
+        $supportajax = $formatedadmin->supports_ajax();
 
         self::assertIsObject($supportajax);
         self::assertObjectHasAttribute('capable', $supportajax);

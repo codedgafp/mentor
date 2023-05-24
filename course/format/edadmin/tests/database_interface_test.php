@@ -37,8 +37,8 @@ class format_edadmin_database_interface_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core db interface singleton.
         $dbinterface = \format_edadmin\database_interface::get_instance();
-        $reflection  = new ReflectionClass($dbinterface);
-        $instance    = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($dbinterface);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -91,31 +91,31 @@ class format_edadmin_database_interface_testcase extends advanced_testcase {
 
         // Set course data.
         $newcoursedata = array(
-            'fullname'            => 'fullname',
-            'shortname'           => 'shortname',
-            'categoryid'          => 1,
-            'format'              => 'edadmin',
+            'fullname' => 'fullname',
+            'shortname' => 'shortname',
+            'categoryid' => 1,
+            'format' => 'edadmin',
             'courseformatoptions' =>
                 array(
                     array(
-                        'name'  => 'formattype',
+                        'name' => 'formattype',
                         'value' => 'entities'
                     ),
                     array(
-                        'name'  => 'categorylink',
+                        'name' => 'categorylink',
                         'value' => 1
                     ),
                     array(
-                        'name'  => 'cohortlink',
+                        'name' => 'cohortlink',
                         'value' => 10
                     )
                 )
         );
 
         $optiondata = [
-            'formattype'   => 'entities',
+            'formattype' => 'entities',
             'categorylink' => 1,
-            'cohortlink'   => 10
+            'cohortlink' => 10
         ];
 
         // Create new course.

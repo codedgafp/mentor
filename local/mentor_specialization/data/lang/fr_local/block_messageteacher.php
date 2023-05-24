@@ -24,16 +24,16 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['groupsdesc']                 = 'Si ce paramètre est activé, les étudiants ne verront que les formateurs de leur propre groupe.';
-$string['includecoursecat']           = 'Inclure les formateurs de la catégorie concernée.';
+$string['groupsdesc'] = 'Si ce paramètre est activé, les étudiants ne verront que les formateurs de leur propre groupe.';
+$string['includecoursecat'] = 'Inclure les formateurs de la catégorie concernée.';
 $string['includecoursecatdesc']
-                                      = 'Si ce paramètre est activé, les utilisateurs ayant le rôle de formateur dans la catégorie mère du cours seront affichés, ainsi que ceux qui sont affectés dans le cours lui-même.';
-$string['messageprovider:message']    = 'Ce message provient du bloc « contacter mon formateur ».';
+        = 'Si ce paramètre est activé, les utilisateurs ayant le rôle de formateur dans la catégorie mère du cours seront affichés, ainsi que ceux qui sont affectés dans le cours lui-même.';
+$string['messageprovider:message'] = 'Ce message provient du bloc « contacter mon formateur ».';
 $string['messageteacher:addinstance'] = 'Ajouter un nouveau bloc « contacter mon formateur ».';
-$string['nogroupteachers']            = 'Il n\'y a pas encore de formateur affecté à votre groupe.';
-$string['pluginname']                 = 'Contacter mon formateur';
-$string['pluginnameplural']           = 'Contacter mes formateurs';
+$string['nogroupteachers'] = 'Il n\'y a pas encore de formateur affecté à votre groupe.';
+$string['pluginname'] = 'Contacter mon formateur';
+$string['pluginnameplural'] = 'Contacter mes formateurs';
 $string['rolesdesc']
-                                      = 'Sélectionnez tous les rôles qui seront les formateurs ou les personnes à qui les élèves peuvent souhaiter demander de l\'aide';
-$string['showuserpicturesdesc']       = 'Si ce paramètre est activé, les images des formateurs figureront à côté de leur nom';
-$string['teachersinclude']            = 'Les formateurs sont :';
+        = 'Sélectionnez tous les rôles qui seront les formateurs ou les personnes à qui les élèves peuvent souhaiter demander de l\'aide';
+$string['showuserpicturesdesc'] = 'Si ce paramètre est activé, les images des formateurs figureront à côté de leur nom';
+$string['teachersinclude'] = 'Les formateurs sont :';

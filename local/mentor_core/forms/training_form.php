@@ -48,7 +48,7 @@ class training_form extends \moodleform {
     public function __construct($action, $data) {
 
         // Init entity object.
-        $this->entity   = $data->entity;
+        $this->entity = $data->entity;
         $this->returnto = isset($data->returnto) ? $data->returnto : '';
 
         parent::__construct($data->actionurl);
@@ -152,7 +152,7 @@ class training_form extends \moodleform {
 
         // Check thumbnail.
         if ($data['status'] != training::STATUS_DRAFT) {
-            $fs      = get_file_storage();
+            $fs = get_file_storage();
             $context = \context_user::instance($USER->id);
 
             if (!$files = $fs->get_area_files($context->id, 'user', 'draft', $data['thumbnail'], 'id DESC', false)) {

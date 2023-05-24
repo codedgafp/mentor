@@ -202,7 +202,7 @@ define([
                     className: 'training-name-data',
                     data: function (data, type, row, meta) {
                         if (type === 'display') {
-                            return '<a href="' + data.url + '">' + data.name + '</a>';
+                            return '<a href="' + data.url + '" target="_blank">' + data.name + '</a>';
                         }
 
                         return data.name;
@@ -397,6 +397,14 @@ define([
                             'class': 'cursor-image-training-admin-trainings',
                             'onclick': 'local_trainings.moveTraining(' + trainingid + ');return false;',
                             'text': '<img src="' + M.util.image_url(index, 'local_trainings') + '" alt="' + index + '"> ' + M.util.get_string(index + 'tooltip', 'local_trainings')
+                        };
+                        break;
+                    case 'assignusers' :
+                        item = {
+                            'id': index + trainingid,
+                            'href': actions[index],
+                            'text': '<img src="' + M.util.image_url(index, 'local_trainings') + '" alt="' + index + '""> ' + M.util.get_string(index + 'tooltip', 'local_trainings'),
+                            'target': '_blank'
                         };
                         break;
                     default :

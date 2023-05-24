@@ -27,31 +27,31 @@ $string['pluginname'] = 'Local Entities';
 
 $string['errorunknownuser'] = 'L\'utilisateur (id: {$a}) n\'est actuellement plus enregistré';
 
-$string['edadminentitiescoursetype']  = 'Paramètres';
+$string['edadminentitiescoursetype'] = 'Paramètres';
 $string['edadminentitiescoursetitle'] = 'Gestion des paramètres';
 
-$string['dedicatedspace']         = 'Espace';
-$string['entitymanagementtitle']  = 'Administration des espaces';
-$string['spacename']              = 'Nom de l\'espace dédié';
-$string['responsiblename']        = 'Administrateur';
-$string['errorentityexisttitle']  = 'Nom déjà utilisé';
-$string['errorentityexist']       = 'Le nom \'{$a}\' est déjà utilisé par un autre espace';
-$string['member']                 = 'membre';
-$string['members']                = 'membres';
-$string['name']                   = 'Nom de l\'espace';
+$string['dedicatedspace'] = 'Espace';
+$string['entitymanagementtitle'] = 'Administration des espaces';
+$string['spacename'] = 'Nom de l\'espace dédié';
+$string['responsiblename'] = 'Administrateur';
+$string['errorentityexisttitle'] = 'Nom déjà utilisé';
+$string['errorentityexist'] = 'Le nom \'{$a}\' est déjà utilisé par un autre espace';
+$string['member'] = 'membre';
+$string['members'] = 'membres';
+$string['name'] = 'Nom de l\'espace';
 $string['success_editing_entity'] = 'L\'entité a été mise à jour avec succès !';
 $string['failure_editing_entity'] = 'Une erreur s\'est produite. Veuillez réessayer.';
-$string['formations']             = 'formations';
-$string['addentity']              = 'Ajouter un espace dédié';
-$string['addsubentity']           = 'Ajouter un sous espace dédié';
-$string['viewroles']              = 'Consulter les rôles utilisateurs';
-$string['editcontactpage']        = 'Éditer la page de contact';
-$string['editpresentationpage']   = 'Éditer la présentation de l\'espace';
+$string['formations'] = 'formations';
+$string['addentity'] = 'Ajouter un espace dédié';
+$string['addsubentity'] = 'Ajouter un sous espace dédié';
+$string['viewroles'] = 'Consulter les rôles utilisateurs';
+$string['editcontactpage'] = 'Éditer la page de contact';
+$string['editpresentationpage'] = 'Éditer la présentation de l\'espace';
 $string['createpresentationpage'] = 'Créer la présentation de l\'espace';
-$string['renameentity']           = 'Nom de l\'espace';
-$string['entityshortname']        = 'Nom abrégé de l’espace dédié ';
-$string['shortname']              = 'Nom abrégé de l’espace';
-$string['renamesubentity']        = 'Nom du sous-espace';
+$string['renameentity'] = 'Nom de l\'espace';
+$string['entityshortname'] = 'Nom abrégé de l’espace dédié ';
+$string['shortname'] = 'Nom abrégé de l’espace';
+$string['renamesubentity'] = 'Nom du sous-espace';
 
 /*****************DataTable***********************/
 
@@ -59,5 +59,5 @@ $string['langfile'] = 'French';
 
 /*****************Capabilities********************/
 
-$string['entities:manageentity']    = 'Gérer un espace';
+$string['entities:manageentity'] = 'Gérer un espace';
 $string['entities:renamesubentity'] = 'Renommer une sous-espace';

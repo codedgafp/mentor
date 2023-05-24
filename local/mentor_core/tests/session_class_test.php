@@ -44,15 +44,15 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
     public function reset_singletons() {
         // Reset the mentor core specialization singleton.
         $specialization = \local_mentor_core\specialization::get_instance();
-        $reflection     = new ReflectionClass($specialization);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($specialization);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
 
         $specialization = \local_mentor_core\database_interface::get_instance();
-        $reflection     = new ReflectionClass($specialization);
-        $instance       = $reflection->getProperty('instance');
+        $reflection = new ReflectionClass($specialization);
+        $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).
         $instance->setValue(null, null); // Instance is gone.
         $instance->setAccessible(false); // Clean up.
@@ -61,7 +61,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
     }
 
     protected static function get_protected_method($name) {
-        $class  = new ReflectionClass('\local_mentor_core\session');
+        $class = new ReflectionClass('\local_mentor_core\session');
         $method = $class->getMethod($name);
         $method->setAccessible(true);
         return $method;
@@ -81,64 +81,64 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
             'local_mentor_specialization');
 
         if ($training) {
-            $data->name      = 'fullname';
+            $data->name = 'fullname';
             $data->shortname = 'shortname';
-            $data->content   = 'summary';
-            $data->status    = 'ec';
+            $data->content = 'summary';
+            $data->status = 'ec';
         } else {
-            $data->trainingname      = 'fullname';
+            $data->trainingname = 'fullname';
             $data->trainingshortname = 'shortname';
-            $data->trainingcontent   = 'summary';
-            $data->trainingstatus    = 'ec';
+            $data->trainingcontent = 'summary';
+            $data->trainingstatus = 'ec';
         }
 
         // Fields for taining.
-        $data->teaser                       = 'http://www.edunao.com/';
-        $data->teaserpicture                = '';
-        $data->prerequisite                 = 'TEST';
-        $data->collection                   = 'accompagnement';
-        $data->traininggoal                 = 'TEST TRAINING ';
-        $data->idsirh                       = 'TEST ID SIRH';
-        $data->licenseterms                 = 'cc-sa';
-        $data->typicaljob                   = 'TEST';
-        $data->skills                       = [];
-        $data->certifying                   = '1';
-        $data->presenceestimatedtimehours   = '12';
+        $data->teaser = 'http://www.edunao.com/';
+        $data->teaserpicture = '';
+        $data->prerequisite = 'TEST';
+        $data->collection = 'accompagnement';
+        $data->traininggoal = 'TEST TRAINING ';
+        $data->idsirh = 'TEST ID SIRH';
+        $data->licenseterms = 'cc-sa';
+        $data->typicaljob = 'TEST';
+        $data->skills = [];
+        $data->certifying = '1';
+        $data->presenceestimatedtimehours = '12';
         $data->presenceestimatedtimeminutes = '10';
-        $data->remoteestimatedtimehours     = '15';
-        $data->remoteestimatedtimeminutes   = '30';
-        $data->trainingmodalities           = 'd';
-        $data->producingorganization        = 'TEST';
-        $data->producerorganizationlogo     = '';
-        $data->designers                    = 'TEST';
-        $data->contactproducerorganization  = 'TEST';
-        $data->thumbnail                    = '';
+        $data->remoteestimatedtimehours = '15';
+        $data->remoteestimatedtimeminutes = '30';
+        $data->trainingmodalities = 'd';
+        $data->producingorganization = 'TEST';
+        $data->producerorganizationlogo = '';
+        $data->designers = 'TEST';
+        $data->contactproducerorganization = 'TEST';
+        $data->thumbnail = '';
 
         // Specific fields for session (only for update).
         if ($sessionid) {
-            $data->id                      = $sessionid;
-            $data->opento                  = 'all';
-            $data->publiccible             = 'TEST';
-            $data->termsregistration       = 'autre';
+            $data->id = $sessionid;
+            $data->opento = 'all';
+            $data->publiccible = 'TEST';
+            $data->termsregistration = 'autre';
             $data->termsregistrationdetail = 'TEST';
 
-            $data->onlinesessionestimatedtimehours     = '10';
-            $data->onlinesessionestimatedtimeminutes   = '15';
-            $data->presencesessionestimatedtimehours   = '12';
+            $data->onlinesessionestimatedtimehours = '10';
+            $data->onlinesessionestimatedtimeminutes = '15';
+            $data->presencesessionestimatedtimehours = '12';
             $data->presencesessionestimatedtimeminutes = '25';
 
-            $data->sessionpermanent    = 0;
-            $data->sessionstartdate    = 1609801200;
-            $data->sessionenddate      = 1609801200;
-            $data->sessionmodalities   = 'presentiel';
-            $data->accompaniment       = 'TEST';
-            $data->maxparticipants     = 10;
-            $data->placesavailable     = 8;
-            $data->numberparticipants  = 2;
-            $data->location            = 'PARIS';
+            $data->sessionpermanent = 0;
+            $data->sessionstartdate = 1609801200;
+            $data->sessionenddate = 1609801200;
+            $data->sessionmodalities = 'presentiel';
+            $data->accompaniment = 'TEST';
+            $data->maxparticipants = 10;
+            $data->placesavailable = 8;
+            $data->numberparticipants = 2;
+            $data->location = 'PARIS';
             $data->organizingstructure = 'TEST ORGANISATION';
-            $data->sessionnumber       = 1;
-            $data->opentolist          = '';
+            $data->sessionnumber = 1;
+            $data->opentolist = '';
         }
 
         return $data;
@@ -149,10 +149,10 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
      */
     public function init_training_entity($data, $entity) {
         // Get "Formation" category id (child of entity category).
-        $formationid           = $entity->get_entity_formation_category();
+        $formationid = $entity->get_entity_formation_category();
         $data->categorychildid = $formationid;
 
-        $data->categoryid        = $entity->id;
+        $data->categoryid = $entity->id;
         $data->creativestructure = $entity->id;
 
         return $data;
@@ -176,7 +176,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         try {
             // Get entity object for default category.
             $entityid = \local_mentor_core\entity_api::create_entity([
-                'name'      => 'New Entity 1',
+                'name' => 'New Entity 1',
                 'shortname' => 'New Entity 1'
             ]);
 
@@ -241,7 +241,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::assertEquals($session->fullname, $sessionobj->fullname);
         self::assertEquals($session->shortname, $sessionobj->shortname);
 
-        $baddata     = new stdClass();
+        $baddata = new stdClass();
         $baddata->id = $sessionid;
 
         try {
@@ -271,8 +271,8 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         $session = new \local_mentor_core\session($sessionid);
 
-        // Instance must exists at session creation.
-        self::assertTrue($session->create_manual_enrolment_instance());
+        // Create manual instance.
+        self::assertIsInt($session->create_manual_enrolment_instance());
 
         $enrolmentinstance = $session->get_enrolment_instances_by_type('manual');
         self::assertIsObject($enrolmentinstance);
@@ -354,7 +354,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         $session = new \local_mentor_core\session($sessionid);
 
-        // Self enrolment not exist.
+        // Self enrolment does not exist.
         self::assertFalse($session->enable_self_enrolment_instance());
 
         $session->create_self_enrolment_instance();
@@ -362,7 +362,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         // Self enrolment already enable.
         self::assertFalse($session->enable_self_enrolment_instance());
 
-        $selfenrolmentinstance         = $session->get_enrolment_instances_by_type('self');
+        $selfenrolmentinstance = $session->get_enrolment_instances_by_type('self');
         $selfenrolmentinstance->status = '1';
         $session->update_enrolment_instance($selfenrolmentinstance);
 
@@ -391,6 +391,8 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         $sessionid = $this->init_session_creation();
 
         $session = new \local_mentor_core\session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
 
         $session->create_manual_enrolment_instance();
 
@@ -443,12 +445,12 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create new entities.
         $entityid1 = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 2',
+            'name' => 'New Entity 2',
             'shortname' => 'New Entity 2'
         ]);
 
         $entityid2 = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 3',
+            'name' => 'New Entity 3',
             'shortname' => 'New Entity 3'
         ]);
 
@@ -481,19 +483,19 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         $session = new \local_mentor_core\session($sessionid);
 
         // Shared to other entity.
-        $data             = new stdClass();
-        $data->opento     = 'current_entity';
+        $data = new stdClass();
+        $data->opento = 'current_entity';
         $data->opentolist = [];
         $session->update($data);
 
         // Create new entities.
         $entityid1 = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 2',
+            'name' => 'New Entity 2',
             'shortname' => 'New Entity 2'
         ]);
 
         $entityid2 = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 3',
+            'name' => 'New Entity 3',
             'shortname' => 'New Entity 3'
         ]);
 
@@ -501,8 +503,8 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::assertFalse($isshared);
 
         // Shared to other entity.
-        $data             = new stdClass();
-        $data->opento     = 'other_entities';
+        $data = new stdClass();
+        $data->opento = 'other_entities';
         $data->opentolist = [];
         $session->update($data);
 
@@ -536,18 +538,18 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create new entities.
         $entityid1 = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 2',
+            'name' => 'New Entity 2',
             'shortname' => 'New Entity 2'
         ]);
 
         $entityid2 = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New Entity 3',
+            'name' => 'New Entity 3',
             'shortname' => 'New Entity 3'
         ]);
 
         // Shared to other entity.
-        $data             = new stdClass();
-        $data->opento     = 'other_entities';
+        $data = new stdClass();
+        $data->opento = 'other_entities';
         $data->opentolist = [];
         $session->update($data);
 
@@ -677,14 +679,14 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         $session->update_status(\local_mentor_core\session::STATUS_IN_PREPARATION);
 
         // Status is "in preparation".
         self::assertEquals($session->status, \local_mentor_core\session::STATUS_IN_PREPARATION);
         self::assertEquals($session->get_course()->visible, 0);
-        // Self enrolment instance not exist.
+        // Self enrolment instance does not exist.
         self::assertFalse($session->get_enrolment_instances_by_type('self'));
 
         $this->resetAllData();
@@ -705,7 +707,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         $session->update_status(\local_mentor_core\session::STATUS_OPENED_REGISTRATION);
 
@@ -733,7 +735,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         $session->update_status(\local_mentor_core\session::STATUS_IN_PROGRESS);
 
@@ -760,7 +762,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $session->create_self_enrolment_instance();
 
         $session->update_status(\local_mentor_core\session::STATUS_COMPLETED);
@@ -770,6 +772,67 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::assertEquals($session->get_course()->visible, 1);
         $selfenrolmentinstance = $session->get_enrolment_instances_by_type('self');
         self::assertEquals($selfenrolmentinstance->status, 1);
+
+        $this->resetAllData();
+    }
+
+    /**
+     * Test update_status method (to complete)
+     *
+     * @covers  \local_mentor_core\session::update_status
+     * @covers  \local_mentor_core\session::complete
+     */
+    public function test_update_status_to_complete_mail() {
+        $this->resetAfterTest(true);
+        $this->reset_singletons();
+
+        self::setAdminUser();
+
+        // Create session.
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
+        $session->create_manual_enrolment_instance();
+
+        $user1 = self::getDataGenerator()->create_user();
+        $user2 = self::getDataGenerator()->create_user();
+        $user3 = self::getDataGenerator()->create_user();
+        $user4 = self::getDataGenerator()->create_user();
+
+        self::getDataGenerator()->enrol_user($user1->id, $session->courseid, 'participant');
+        self::getDataGenerator()->enrol_user($user2->id, $session->courseid, 'tuteur');
+        self::getDataGenerator()->enrol_user($user3->id, $session->courseid, 'formateur');
+        self::getDataGenerator()->enrol_user($user4->id, $session->courseid, 'concepteur');
+
+        // Close the default email sink.
+        $sink = $this->redirectEmails();
+        $sink->close();
+        unset_config('noemailever');
+        $sink = $this->redirectEmails();
+
+        $session->update_status(\local_mentor_core\session::STATUS_COMPLETED, \local_mentor_core\session::STATUS_IN_PROGRESS);
+
+        // Status is "complete".
+        self::assertEquals($session->status, \local_mentor_core\session::STATUS_COMPLETED);
+
+        // Check if send mail.
+        $this->assertSame(3, $sink->count());
+        $resultmail = $sink->get_messages();
+        $this->assertCount(3, $resultmail);
+        $sink->close();
+
+        self::assertEquals($resultmail[0]->to, $user1->email);
+        self::assertEquals($resultmail[0]->subject,
+            get_string('email_complete_session_object', 'local_mentor_core', $session->fullname));
+
+        self::assertEquals($resultmail[1]->to, $user2->email);
+        self::assertEquals($resultmail[1]->subject, get_string('email_complete_session_object', 'local_mentor_core',
+            $session->fullname));
+
+        self::assertEquals($resultmail[2]->to, $user3->email);
+        self::assertEquals($resultmail[2]->subject, get_string('email_complete_session_object', 'local_mentor_core',
+            $session->fullname));
 
         $this->resetAllData();
     }
@@ -788,16 +851,77 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $session->create_self_enrolment_instance();
 
         $session->update_status(\local_mentor_core\session::STATUS_ARCHIVED);
 
-        // Status is "complete".
+        // Status is "archived".
         self::assertEquals($session->status, \local_mentor_core\session::STATUS_ARCHIVED);
         self::assertEquals($session->get_course()->visible, 1);
         $selfenrolmentinstance = $session->get_enrolment_instances_by_type('self');
         self::assertEquals($selfenrolmentinstance->status, 1);
+
+        $this->resetAllData();
+    }
+
+    /**
+     * Test update_status method (to archive)
+     *
+     * @covers  \local_mentor_core\session::update_status
+     * @covers  \local_mentor_core\session::archive
+     */
+    public function test_update_status_to_archive_mail() {
+        $this->resetAfterTest(true);
+        $this->reset_singletons();
+
+        self::setAdminUser();
+
+        // Create session.
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
+        $session->create_manual_enrolment_instance();
+
+        $user1 = self::getDataGenerator()->create_user();
+        $user2 = self::getDataGenerator()->create_user();
+        $user3 = self::getDataGenerator()->create_user();
+        $user4 = self::getDataGenerator()->create_user();
+
+        self::getDataGenerator()->enrol_user($user1->id, $session->courseid, 'participant');
+        self::getDataGenerator()->enrol_user($user2->id, $session->courseid, 'tuteur');
+        self::getDataGenerator()->enrol_user($user3->id, $session->courseid, 'formateur');
+        self::getDataGenerator()->enrol_user($user4->id, $session->courseid, 'concepteur');
+
+        // Close the default email sink.
+        $sink = $this->redirectEmails();
+        $sink->close();
+        unset_config('noemailever');
+        $sink = $this->redirectEmails();
+
+        $session->update_status(\local_mentor_core\session::STATUS_ARCHIVED, \local_mentor_core\session::STATUS_COMPLETED);
+
+        // Status is "archived".
+        self::assertEquals($session->status, \local_mentor_core\session::STATUS_ARCHIVED);
+
+        // Check if send mail.
+        $this->assertSame(3, $sink->count());
+        $resultmail = $sink->get_messages();
+        $this->assertCount(3, $resultmail);
+        $sink->close();
+
+        self::assertEquals($resultmail[0]->to, $user1->email);
+        self::assertEquals($resultmail[0]->subject,
+            get_string('email_archive_session_object', 'local_mentor_core', $session->fullname));
+
+        self::assertEquals($resultmail[1]->to, $user2->email);
+        self::assertEquals($resultmail[1]->subject, get_string('email_archive_session_object', 'local_mentor_core',
+            $session->fullname));
+
+        self::assertEquals($resultmail[2]->to, $user3->email);
+        self::assertEquals($resultmail[2]->subject, get_string('email_archive_session_object', 'local_mentor_core',
+            $session->fullname));
 
         $this->resetAllData();
     }
@@ -816,7 +940,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $session->create_self_enrolment_instance();
 
         $session->update_status(\local_mentor_core\session::STATUS_REPORTED);
@@ -845,7 +969,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $session->create_self_enrolment_instance();
 
         $session->update_status(\local_mentor_core\session::STATUS_REPORTED);
@@ -884,7 +1008,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $session->create_self_enrolment_instance();
 
         $session->update_status(\local_mentor_core\session::STATUS_CANCELLED);
@@ -911,7 +1035,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $session->create_self_enrolment_instance();
         $otherstatus = 'other_status';
 
@@ -937,7 +1061,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         $course = $session->get_course();
 
@@ -946,20 +1070,20 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
             $field->value = 1;
             $DB->update_record('course_format_options', $field);
         } else {
-            $field           = new stdClass();
-            $field->value    = 1;
+            $field = new stdClass();
+            $field->value = 1;
             $field->courseid = $course->id;
-            $field->name     = 'coursedisplay';
+            $field->name = 'coursedisplay';
             $DB->insert_record('course_format_options', $field);
         }
 
-        $url     = $session->get_url();
+        $url = $session->get_url();
         $section = $url->get_param('section');
         self::assertNull($section);
 
         course_create_section($course->id, 0);
 
-        $url     = $session->get_url();
+        $url = $session->get_url();
         $section = $url->get_param('section');
         self::assertEquals(1, $section);
 
@@ -978,8 +1102,8 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::setAdminUser();
 
         // Create session.
-        $sessionid         = $this->init_session_creation();
-        $session           = \local_mentor_core\session_api::get_session($sessionid);
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $sessionbackupfile = $session->generate_backup();
 
         self::assertEquals('backup', $sessionbackupfile->get_component());
@@ -1006,24 +1130,24 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::setAdminUser();
 
         // Create session.
-        $sessionid       = $this->init_session_creation();
-        $session         = \local_mentor_core\session_api::get_session($sessionid);
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $sessiontraining = $session->get_training();
 
         $fs = get_file_storage();
 
         $component = 'local_trainings';
-        $itemid    = $sessiontraining->id;
-        $filearea  = 'thumbnail';
+        $itemid = $sessiontraining->id;
+        $filearea = 'thumbnail';
         $contextid = $sessiontraining->get_context()->id;
 
-        $filerecord            = new stdClass();
+        $filerecord = new stdClass();
         $filerecord->contextid = $contextid;
         $filerecord->component = $component;
-        $filerecord->filearea  = $filearea;
-        $filerecord->itemid    = $itemid;
-        $filerecord->filepath  = '/';
-        $filerecord->filename  = 'logo.png';
+        $filerecord->filearea = $filearea;
+        $filerecord->itemid = $itemid;
+        $filerecord->filepath = '/';
+        $filerecord->filename = 'logo.png';
 
         $filepath = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
 
@@ -1031,7 +1155,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         $fs->create_file_from_pathname($filerecord, $filepath);
 
         $teacherrole = $db->get_role_by_name('teacher');
-        $user        = self::getDataGenerator()->create_user();
+        $user = self::getDataGenerator()->create_user();
         role_assign($teacherrole->id, $user->id, $sessiontraining->get_context());
 
         $newtraining = $session->duplicate_into_training();
@@ -1044,14 +1168,14 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Check training user enrolment.
         $allenrolmentssessiontraining = array_values($sessiontraining->get_all_enrolments());
-        $allenrolmentsnewtraining     = array_values($newtraining->get_all_enrolments());
+        $allenrolmentsnewtraining = array_values($newtraining->get_all_enrolments());
         self::assertCount(1, $allenrolmentsnewtraining);
         self::assertEquals($allenrolmentssessiontraining[0]->roleid, $allenrolmentsnewtraining[0]->roleid);
         self::assertEquals($allenrolmentssessiontraining[0]->userid, $allenrolmentsnewtraining[0]->userid);
 
         // Check training files.
         $allfilessessiontraining = array_values($sessiontraining->get_all_training_files());
-        $allfilesnewtraining     = array_values($newtraining->get_all_training_files());
+        $allfilesnewtraining = array_values($newtraining->get_all_training_files());
         self::assertCount(1, $allfilesnewtraining);
         self::assertEquals($allfilessessiontraining[0]->get_itemid(), $allfilesnewtraining[0]->get_itemid());
         self::assertEquals($allfilessessiontraining[0]->get_contextid(), $allfilesnewtraining[0]->get_contextid());
@@ -1074,9 +1198,9 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = new \local_mentor_core\session($sessionid);
-        $backup    = $session->generate_backup();
-        $training  = $session->get_training();
+        $session = new \local_mentor_core\session($sessionid);
+        $backup = $session->generate_backup();
+        $training = $session->get_training();
 
         // Create Session mock.
         $sessionmock = $this->getMockBuilder('\local_mentor_core\session')
@@ -1170,11 +1294,11 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         self::assertFalse($session->is_open_to_all());
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'all';
         $session->update($data);
 
@@ -1195,21 +1319,21 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $otherentityname = 'otherentity';
-        $otherentityid   = \local_mentor_core\entity_api::create_entity([
-            'name'      => $otherentityname,
+        $otherentityid = \local_mentor_core\entity_api::create_entity([
+            'name' => $otherentityname,
             'shortname' => $otherentityname
         ]);
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         $getopentolistmethod = self::get_protected_method('get_opento_list');
 
         // Is not shared with an other entity.
         self::assertEquals('', $getopentolistmethod->invoke($session));
 
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'other_entities';
         $session->update($data);
         $session->update_session_sharing([$otherentityid]);
@@ -1242,19 +1366,19 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $session->create_self_enrolment_instance();
 
         $newusers = [];
 
-        $data                  = new stdClass();
+        $data = new stdClass();
         $data->maxparticipants = '';
         $session->update($data);
 
         // Not has max participant data.
         self::assertFalse($session->count_potential_available_places($newusers));
 
-        $data                  = new stdClass();
+        $data = new stdClass();
         $data->maxparticipants = 3;
         $session->update($data);
 
@@ -1274,11 +1398,11 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         $newusers = [
             [
-                'role'  => 'concepteur',
+                'role' => 'concepteur',
                 'email' => 'user1@test.gouv.fr'
             ],
             [
-                'role'  => 'participant',
+                'role' => 'participant',
                 'email' => 'user2@test.gouv.fr'
             ]
         ];
@@ -1288,11 +1412,11 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         $newusers = [
             [
-                'role'  => 'concepteur',
+                'role' => 'concepteur',
                 'email' => $newuser->email
             ],
             [
-                'role'  => 'participant',
+                'role' => 'participant',
                 'email' => 'user2@test.gouv.fr'
             ]
         ];
@@ -1320,10 +1444,10 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         $sessioncourse = $session->get_entity()->get_edadmin_courses('session');
-        $url           = $CFG->wwwroot . '/course/view.php?id=' . $sessioncourse['id'];
+        $url = $CFG->wwwroot . '/course/view.php?id=' . $sessioncourse['id'];
 
         $actions = $session->get_actions();
 
@@ -1482,7 +1606,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         $getdisableselfenrolmentinstancemethod = self::get_protected_method('disable_self_enrolment_instance');
 
@@ -1513,7 +1637,8 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->create_manual_enrolment_instance();
 
         $getdisablemanualenrolmentinstancemethod = self::get_protected_method('disable_manual_enrolment_instance');
 
@@ -1539,8 +1664,10 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
-        $courseid  = $session->courseid;
+        $session = \local_mentor_core\session_api::get_session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
+        $courseid = $session->courseid;
 
         $session->create_manual_enrolment_instance();
 
@@ -1573,23 +1700,23 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New other entity',
+            'name' => 'New other entity',
             'shortname' => 'New other entity'
         ]);
 
         // Create user.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname';
-        $user->firstname                = 'firstname';
-        $user->email                    = 'test@test.com';
-        $user->username                 = 'testusername';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = 'New other entity';
 
         $userid = local_mentor_core\profile_api::create_user($user);
@@ -1615,15 +1742,15 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::assertEquals('errorauthorizationselfenrolment', $enrolmessage['lang']);
 
         // Create user.
-        $user2                           = new stdClass();
-        $user2->lastname                 = 'lastname1';
-        $user2->firstname                = 'firstname1';
-        $user2->email                    = 'test1@test.com';
-        $user2->username                 = 'testusername1';
-        $user2->password                 = 'to be generated';
-        $user2->mnethostid               = 1;
-        $user2->confirmed                = 1;
-        $user2->auth                     = 'manual';
+        $user2 = new stdClass();
+        $user2->lastname = 'lastname1';
+        $user2->firstname = 'firstname1';
+        $user2->email = 'test1@test.com';
+        $user2->username = 'testusername1';
+        $user2->password = 'to be generated';
+        $user2->mnethostid = 1;
+        $user2->confirmed = 1;
+        $user2->auth = 'manual';
         $user2->profile_field_mainentity = 'New Entity 1';
 
         $userid2 = local_mentor_core\profile_api::create_user($user2);
@@ -1674,15 +1801,15 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::assertEmpty($enrolmessage['warnings']);
 
         // Create user.
-        $user3                           = new stdClass();
-        $user3->lastname                 = 'lastname2';
-        $user3->firstname                = 'firstname2';
-        $user3->email                    = 'test2@test.com';
-        $user3->username                 = 'testusername2';
-        $user3->password                 = 'to be generated';
-        $user3->mnethostid               = 1;
-        $user3->confirmed                = 1;
-        $user3->auth                     = 'manual';
+        $user3 = new stdClass();
+        $user3->lastname = 'lastname2';
+        $user3->firstname = 'firstname2';
+        $user3->email = 'test2@test.com';
+        $user3->username = 'testusername2';
+        $user3->password = 'to be generated';
+        $user3->mnethostid = 1;
+        $user3->confirmed = 1;
+        $user3->auth = 'manual';
         $user3->profile_field_mainentity = 'New Entity 1';
 
         $user3 = local_mentor_core\profile_api::create_user($user3);
@@ -1743,43 +1870,43 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::setAdminUser();
 
         // Create session.
-        $sessionid       = $this->init_session_creation();
-        $session         = \local_mentor_core\session_api::get_session($sessionid);
+        $sessionid = $this->init_session_creation();
+        $session = \local_mentor_core\session_api::get_session($sessionid);
         $sessiontraining = $session->get_training();
-        $sessioncourse   = $session->get_course();
+        $sessioncourse = $session->get_course();
 
         // Create thumbnail.
-        $fs                    = get_file_storage();
-        $component             = 'local_trainings';
-        $itemid                = $sessiontraining->id;
-        $filearea              = 'thumbnail';
-        $contextid             = $sessiontraining->get_context()->id;
-        $filerecord            = new stdClass();
+        $fs = get_file_storage();
+        $component = 'local_trainings';
+        $itemid = $sessiontraining->id;
+        $filearea = 'thumbnail';
+        $contextid = $sessiontraining->get_context()->id;
+        $filerecord = new stdClass();
         $filerecord->contextid = $contextid;
         $filerecord->component = $component;
-        $filerecord->filearea  = $filearea;
-        $filerecord->itemid    = $itemid;
-        $filerecord->filepath  = '/';
-        $filerecord->filename  = 'logo.png';
-        $filepath              = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
+        $filerecord->filearea = $filearea;
+        $filerecord->itemid = $itemid;
+        $filerecord->filepath = '/';
+        $filerecord->filename = 'logo.png';
+        $filepath = $CFG->dirroot . '/local/mentor_core/pix/logo.png';
         $fs->create_file_from_pathname($filerecord, $filepath);
 
         $now = time();
         // Set Date Time Zone at France.
-        $dtz         = new \DateTimeZone('Europe/Paris');
+        $dtz = new \DateTimeZone('Europe/Paris');
         $nowdatetime = new \DateTime("@$now");
         $nowdatetime->setTimezone($dtz);
         $nowdate = $nowdatetime->format('d/m/Y');
 
-        $nowplusoneday         = $now + 86400;
+        $nowplusoneday = $now + 86400;
         $nowplusonedaydatetime = new \DateTime("@$nowplusoneday");
         $nowplusonedaydatetime->setTimezone($dtz);
         $nowplusonedaydate = $nowplusonedaydatetime->format('d/m/Y');
 
         // Add start and en date session.
-        $data                   = new stdClass();
+        $data = new stdClass();
         $data->sessionstartdate = $now;
-        $data->sessionenddate   = $nowplusoneday;
+        $data->sessionenddate = $nowplusoneday;
         $session->update($data);
 
         $datatempalte = $session->convert_for_template();
@@ -1848,7 +1975,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::assertObjectNotHasAttribute('iscanceled', $datatempalte);
 
         // Add max participant.
-        $data                  = new stdClass();
+        $data = new stdClass();
         $data->maxparticipants = 12;
         $session->update($data);
 
@@ -1953,13 +2080,13 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         // Not shared.
         self::assertFalse($session->is_shared());
 
         // Open to all entities.
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'all';
         $session->update($data);
 
@@ -1969,22 +2096,22 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         $newentityid2 = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 2', 'shortname' => 'New Entity 2']);
         $newentityid3 = \local_mentor_core\entity_api::create_entity(['name' => 'New Entity 3', 'shortname' => 'New Entity 3']);
 
-        $data             = new stdClass();
-        $data->opento     = 'other_entities';
+        $data = new stdClass();
+        $data->opento = 'other_entities';
         $data->opentolist = [$newentityid2];
         $session->update($data);
 
         self::assertEquals(1, $session->is_shared());
 
-        $data             = new stdClass();
-        $data->opento     = 'other_entities';
+        $data = new stdClass();
+        $data->opento = 'other_entities';
         $data->opentolist = [$newentityid2, $newentityid3];
         $session->update($data);
 
         self::assertEquals(2, $session->is_shared());
 
         // Not shared and not visible.
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'not_visible';
         $session->update($data);
 
@@ -2010,7 +2137,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = \local_mentor_core\session_api::get_session($sessionid);
+        $session = \local_mentor_core\session_api::get_session($sessionid);
 
         // Update sharing.
         $session->opento = 'current_entity';
@@ -2027,27 +2154,27 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::assertTrue($session->is_available_to_user());
 
         $otherentityid = \local_mentor_core\entity_api::create_entity([
-            'name'      => 'New other entity',
+            'name' => 'New other entity',
             'shortname' => 'New other entity'
         ]);
 
         // Create user with main entity in other entity.
-        $user                           = new stdClass();
-        $user->lastname                 = 'lastname';
-        $user->firstname                = 'firstname';
-        $user->email                    = 'test@test.com';
-        $user->username                 = 'testusername';
-        $user->password                 = 'to be generated';
-        $user->mnethostid               = 1;
-        $user->confirmed                = 1;
-        $user->auth                     = 'manual';
+        $user = new stdClass();
+        $user->lastname = 'lastname';
+        $user->firstname = 'firstname';
+        $user->email = 'test@test.com';
+        $user->username = 'testusername';
+        $user->password = 'to be generated';
+        $user->mnethostid = 1;
+        $user->confirmed = 1;
+        $user->auth = 'manual';
         $user->profile_field_mainentity = 'New other entity';
 
         $userid = local_mentor_core\profile_api::create_user($user);
         set_user_preference('auth_forcepasswordchange', 0, $user);
 
         // Open to all entities.
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'all';
         $session->update($data);
 
@@ -2055,8 +2182,8 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::assertTrue($session->is_available_to_user($userid));
 
         // Shared to other entity.
-        $data             = new stdClass();
-        $data->opento     = 'other_entities';
+        $data = new stdClass();
+        $data->opento = 'other_entities';
         $data->opentolist = [$otherentityid];
         $session->update($data);
 
@@ -2064,7 +2191,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::assertTrue($session->is_available_to_user($userid));
 
         // Open to current entity.
-        $data         = new stdClass();
+        $data = new stdClass();
         $data->opento = 'current_entity';
         $session->update($data);
 
@@ -2072,15 +2199,15 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::assertFalse($session->is_available_to_user($userid));
 
         // Create user with main entity in session entity.
-        $user2                           = new stdClass();
-        $user2->lastname                 = 'lastname2';
-        $user2->firstname                = 'firstname2';
-        $user2->email                    = 'test2@test.com';
-        $user2->username                 = 'testusername2';
-        $user2->password                 = 'to be generated';
-        $user2->mnethostid               = 1;
-        $user2->confirmed                = 1;
-        $user2->auth                     = 'manual';
+        $user2 = new stdClass();
+        $user2->lastname = 'lastname2';
+        $user2->firstname = 'firstname2';
+        $user2->email = 'test2@test.com';
+        $user2->username = 'testusername2';
+        $user2->password = 'to be generated';
+        $user2->mnethostid = 1;
+        $user2->confirmed = 1;
+        $user2->auth = 'manual';
         $user2->profile_field_mainentity = $session->get_entity()->name;
 
         $userid2 = local_mentor_core\profile_api::create_user($user2);
@@ -2105,15 +2232,15 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = new \local_mentor_core\session($sessionid);
+        $session = new \local_mentor_core\session($sessionid);
 
-        $data                    = new \stdClass();
-        $data->shortname         = 'newshortname';
-        $data->fullname          = 'newfullname';
-        $data->status            = \local_mentor_core\session::STATUS_COMPLETED;
-        $data->sessionstartdate  = time();
-        $data->maxparticipants   = 30;
-        $data->sessionenddate    = time() + 3600;
+        $data = new \stdClass();
+        $data->shortname = 'newshortname';
+        $data->fullname = 'newfullname';
+        $data->status = \local_mentor_core\session::STATUS_COMPLETED;
+        $data->sessionstartdate = time();
+        $data->maxparticipants = 30;
+        $data->sessionenddate = time() + 3600;
         $data->termsregistration = 'newtermsregistration';
 
         $session->create_self_enrolment_instance();
@@ -2143,11 +2270,11 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = new \local_mentor_core\session($sessionid);
+        $session = new \local_mentor_core\session($sessionid);
 
         self::assertEquals('', $session->get_available_places());
 
-        $data                  = new \stdClass();
+        $data = new \stdClass();
         $data->maxparticipants = 30;
 
         $session->update($data);
@@ -2171,9 +2298,9 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = new \local_mentor_core\session($sessionid);
-        $course    = $session->get_course();
-        $backup    = $session->generate_backup();
+        $session = new \local_mentor_core\session($sessionid);
+        $course = $session->get_course();
+        $backup = $session->generate_backup();
 
         // Create Training mock.
         $sessionmock = $this->getMockBuilder('\local_mentor_core\session')
@@ -2209,8 +2336,8 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Create session.
         $sessionid = $this->init_session_creation();
-        $session   = new \local_mentor_core\session($sessionid);
-        $user      = self::getDataGenerator()->create_user();
+        $session = new \local_mentor_core\session($sessionid);
+        $user = self::getDataGenerator()->create_user();
 
         self::assertFalse($session->get_user_favourite_data($user->id));
 
@@ -2241,8 +2368,12 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::setAdminUser();
 
         $sessionid = $this->init_session_creation();
-        $session   = new \local_mentor_core\session($sessionid);
-        $course    = $session->get_course();
+        $session = new \local_mentor_core\session($sessionid);
+        $session->sessionstartdate = time();
+        $session->update($session);
+        $session->create_self_enrolment_instance();
+        $session->create_manual_enrolment_instance();
+        $course = $session->get_course();
 
         $user = self::getDataGenerator()->create_user();
         self::setUser($user);
@@ -2257,7 +2388,7 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
         self::assertTrue($session->has_enroll_user_enabled());
 
         // Disable enrol user.
-        $enroluserinstance         = $DB->get_record_sql('
+        $enroluserinstance = $DB->get_record_sql('
             SELECT ue.*
             FROM {user_enrolments} ue
             JOIN {enrol} e ON e.id = ue.enrolid
@@ -2277,6 +2408,279 @@ class local_mentor_core_session_class_testcase extends advanced_testcase {
 
         // Manual enrol is disable, but self enrol is enable.
         self::assertTrue($session->has_enroll_user_enabled());
+
+        self::resetAllData();
+    }
+
+    /**
+     * Test get_editors
+     *
+     * @covers \local_mentor_core\session::get_editors
+     */
+    public function test_get_editors() {
+        global $DB;
+
+        $this->resetAfterTest(true);
+        $this->reset_singletons();
+
+        self::setAdminUser();
+
+        $sessionid = $this->init_session_creation();
+        $session = new \local_mentor_core\session($sessionid);
+        $session->create_manual_enrolment_instance();
+        $session->sessionstartdate = time();
+        $session->update($session);
+        $sessioncourse = $session->get_course();
+        $entity = $session->get_entity()->get_main_entity();
+        $entitycontext = $entity->get_context();
+
+        $users = [];
+        for ($i = 1; $i < 12; $i++) {
+            $users[$i] = self::getDataGenerator()->create_user(['username' => 'user' . $i]);
+        }
+
+        // Entity context.
+        $admindedie = $DB->get_record('role', ['shortname' => 'admindedie']);
+        $coursecreator = $DB->get_record('role', ['shortname' => 'coursecreator']);
+        $respformation = $DB->get_record('role', ['shortname' => 'respformation']);
+        $referentlocal = $DB->get_record('role', ['shortname' => 'referentlocal']);
+        $reflocalnonediteur = $DB->get_record('role', ['shortname' => 'reflocalnonediteur']);
+        self::getDataGenerator()->role_assign($admindedie->id, $users[1]->id, $entitycontext->id);
+        self::getDataGenerator()->role_assign($coursecreator->id, $users[2]->id, $entitycontext->id);
+        self::getDataGenerator()->role_assign($respformation->id, $users[3]->id, $entitycontext->id);
+        self::getDataGenerator()->role_assign($referentlocal->id, $users[4]->id, $entitycontext->id);
+        self::getDataGenerator()->role_assign($reflocalnonediteur->id, $users[5]->id, $entitycontext->id);
+
+        // Session context.
+        $participant = $DB->get_record('role', ['shortname' => 'participant']);
+        $participantnonediteur = $DB->get_record('role', ['shortname' => 'participantnonediteur']);
+        $concepteur = $DB->get_record('role', ['shortname' => 'concepteur']);
+        $formateur = $DB->get_record('role', ['shortname' => 'formateur']);
+        $tuteur = $DB->get_record('role', ['shortname' => 'tuteur']);
+        $participantdemonstration = $DB->get_record('role', ['shortname' => 'participantdemonstration']);
+        self::getDataGenerator()->enrol_user($users[6]->id, $sessioncourse->id, $participant->id);
+        self::getDataGenerator()->enrol_user($users[7]->id, $sessioncourse->id, $participantnonediteur->id);
+        self::getDataGenerator()->enrol_user($users[8]->id, $sessioncourse->id, $concepteur->id);
+        self::getDataGenerator()->enrol_user($users[9]->id, $sessioncourse->id, $formateur->id);
+        self::getDataGenerator()->enrol_user($users[10]->id, $sessioncourse->id, $tuteur->id);
+        self::getDataGenerator()->enrol_user($users[11]->id, $sessioncourse->id, $participantdemonstration->id);
+
+        $editors = $session->get_editors();
+        self::assertCount(5, $editors);
+        $editorsname = array_map(function($e) {
+            return $e->username;
+        }, $editors);
+        self::assertContains($users[1]->username, $editorsname);
+        self::assertNotContains($users[2]->username, $editorsname);
+        self::assertContains($users[3]->username, $editorsname);
+        self::assertContains($users[4]->username, $editorsname);
+        self::assertNotContains($users[5]->username, $editorsname);
+        self::assertNotContains($users[6]->username, $editorsname);
+        self::assertNotContains($users[7]->username, $editorsname);
+        self::assertContains($users[8]->username, $editorsname);
+        self::assertContains($users[9]->username, $editorsname);
+        self::assertNotContains($users[10]->username, $editorsname);
+        self::assertNotContains($users[11]->username, $editorsname);
+
+        self::resetAllData();
+    }
+
+    /**
+     * Test get_all_users
+     *
+     * @covers \local_mentor_core\session::get_all_users
+     */
+    public function test_get_all_users() {
+        global $DB;
+
+        $this->resetAfterTest(true);
+        $this->reset_singletons();
+
+        self::setAdminUser();
+
+        $sessionid = $this->init_session_creation();
+        $session = new \local_mentor_core\session($sessionid);
+        $session->create_manual_enrolment_instance();
+        $session->sessionstartdate = time();
+        $session->update($session);
+        $sessioncourse = $session->get_course();
+        $entity = $session->get_entity()->get_main_entity();
+        $entitycontext = $entity->get_context();
+
+        $users = [];
+        for ($i = 1; $i < 12; $i++) {
+            $users[$i] = self::getDataGenerator()->create_user(['username' => 'user' . $i]);
+        }
+
+        // Entity context.
+        $admindedie = $DB->get_record('role', ['shortname' => 'admindedie']);
+        $coursecreator = $DB->get_record('role', ['shortname' => 'coursecreator']);
+        $respformation = $DB->get_record('role', ['shortname' => 'respformation']);
+        $referentlocal = $DB->get_record('role', ['shortname' => 'referentlocal']);
+        $reflocalnonediteur = $DB->get_record('role', ['shortname' => 'reflocalnonediteur']);
+        self::getDataGenerator()->role_assign($admindedie->id, $users[1]->id, $entitycontext->id);
+        self::getDataGenerator()->role_assign($coursecreator->id, $users[2]->id, $entitycontext->id);
+        self::getDataGenerator()->role_assign($respformation->id, $users[3]->id, $entitycontext->id);
+        self::getDataGenerator()->role_assign($referentlocal->id, $users[4]->id, $entitycontext->id);
+        self::getDataGenerator()->role_assign($reflocalnonediteur->id, $users[5]->id, $entitycontext->id);
+
+        // Session context.
+        $participant = $DB->get_record('role', ['shortname' => 'participant']);
+        $participantnonediteur = $DB->get_record('role', ['shortname' => 'participantnonediteur']);
+        $concepteur = $DB->get_record('role', ['shortname' => 'concepteur']);
+        $formateur = $DB->get_record('role', ['shortname' => 'formateur']);
+        $tuteur = $DB->get_record('role', ['shortname' => 'tuteur']);
+        $participantdemonstration = $DB->get_record('role', ['shortname' => 'participantdemonstration']);
+        self::getDataGenerator()->enrol_user($users[6]->id, $sessioncourse->id, $participant->id);
+        self::getDataGenerator()->enrol_user($users[7]->id, $sessioncourse->id, $participantnonediteur->id);
+        self::getDataGenerator()->enrol_user($users[8]->id, $sessioncourse->id, $concepteur->id);
+        self::getDataGenerator()->enrol_user($users[9]->id, $sessioncourse->id, $formateur->id);
+        self::getDataGenerator()->enrol_user($users[10]->id, $sessioncourse->id, $tuteur->id);
+        self::getDataGenerator()->enrol_user($users[11]->id, $sessioncourse->id, $participantdemonstration->id);
+
+        $allusers = $session->get_all_users();
+        self::assertCount(9, $allusers);
+        $allusersname = array_map(function($e) {
+            return $e->username;
+        }, $allusers);
+
+        self::assertContains($users[1]->username, $allusersname);
+        self::assertNotContains($users[2]->username, $allusersname);
+        self::assertContains($users[3]->username, $allusersname);
+        self::assertContains($users[4]->username, $allusersname);
+        self::assertNotContains($users[5]->username, $allusersname);
+        self::assertContains($users[6]->username, $allusersname);
+        self::assertContains($users[7]->username, $allusersname);
+        self::assertContains($users[8]->username, $allusersname);
+        self::assertContains($users[9]->username, $allusersname);
+        self::assertContains($users[10]->username, $allusersname);
+        self::assertContains($users[11]->username, $allusersname);
+
+        self::resetAllData();
+    }
+
+    /**
+     * Test get_all_group
+     *
+     * @covers \local_mentor_core\session::get_all_group
+     */
+    public function test_get_all_group() {
+        $this->resetAfterTest(true);
+        $this->reset_singletons();
+
+        self::setAdminUser();
+
+        $sessionid = $this->init_session_creation();
+        $session = new \local_mentor_core\session($sessionid);
+
+        self::assertEmpty($session->get_all_group());
+
+        $group = new stdClass();
+        $group->name = 'testgroup';
+        $group->courseid = $session->get_course()->id;
+
+        self::getDataGenerator()->create_group($group);
+
+        $sessiongroups = $session->get_all_group();
+
+        self::assertCount(1, $sessiongroups);
+        $newgroupe = current($sessiongroups);
+        self::assertEquals($newgroupe->name, 'testgroup');
+        self::assertEquals($newgroupe->courseid, $session->get_course()->id);
+
+        self::resetAllData();
+    }
+
+    /**
+     * Test get_tutors
+     *
+     * @covers \local_mentor_core\session::get_tutors
+     */
+    public function test_get_tutors() {
+        $this->resetAfterTest(true);
+        $this->reset_singletons();
+
+        self::setAdminUser();
+
+        $sessionid = $this->init_session_creation();
+        $session = new \local_mentor_core\session($sessionid);
+        $session->create_manual_enrolment_instance();
+        $session->sessionstartdate = time();
+        $session->update($session);
+        $course = $session->get_course();
+        $user = self::getDataGenerator()->create_user();
+
+        self::assertEmpty($session->get_tutors());
+
+        self::getDataGenerator()->enrol_user($user->id, $course->id, \local_mentor_specialization\mentor_profile::ROLE_TUTEUR);
+
+        $tutors = $session->get_tutors();
+
+        self::assertCount(1, $tutors);
+        self::assertArrayHasKey($user->id, $tutors);
+
+        self::resetAllData();
+    }
+
+    /**
+     * Test get_formateurs
+     *
+     * @covers \local_mentor_core\session::get_formateurs
+     */
+    public function test_get_formateurs() {
+        $this->resetAfterTest(true);
+        $this->reset_singletons();
+
+        self::setAdminUser();
+
+        $sessionid = $this->init_session_creation();
+        $session = new \local_mentor_core\session($sessionid);
+        $session->create_manual_enrolment_instance();
+        $session->sessionstartdate = time();
+        $session->update($session);
+        $course = $session->get_course();
+        $user = self::getDataGenerator()->create_user();
+
+        self::assertEmpty($session->get_formateurs());
+
+        self::getDataGenerator()->enrol_user($user->id, $course->id, \local_mentor_specialization\mentor_profile::ROLE_FORMATEUR);
+
+        $formateurs = $session->get_formateurs();
+
+        self::assertCount(1, $formateurs);
+        self::assertArrayHasKey($user->id, $formateurs);
+
+        self::resetAllData();
+    }
+
+    /**
+     * Test get_demonstrateurs
+     *
+     * @covers \local_mentor_core\session::get_demonstrateurs
+     */
+    public function test_get_demonstrateurs() {
+        $this->resetAfterTest(true);
+        $this->reset_singletons();
+
+        self::setAdminUser();
+
+        $sessionid = $this->init_session_creation();
+        $session = new \local_mentor_core\session($sessionid);
+        $session->create_manual_enrolment_instance();
+        $session->sessionstartdate = time();
+        $session->update($session);
+        $course = $session->get_course();
+        $user = self::getDataGenerator()->create_user();
+
+        self::assertEmpty($session->get_demonstrateurs());
+
+        self::getDataGenerator()
+            ->enrol_user($user->id, $course->id, \local_mentor_specialization\mentor_profile::ROLE_PARTICIPANTDEMONSTRATION);
+
+        $demonstrateurs = $session->get_demonstrateurs();
+
+        self::assertCount(1, $demonstrateurs);
+        self::assertArrayHasKey($user->id, $demonstrateurs);
 
         self::resetAllData();
     }

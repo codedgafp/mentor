@@ -25,16 +25,16 @@
 
 // Generic.
 $string['pluginname'] = "File d'attente des tâches ad hoc";
-$string['error']      = 'Erreur';
-$string['langfile']   = 'French';
+$string['error'] = 'Erreur';
+$string['langfile'] = 'French';
 
 // Customdata.
-$string['customdatacontent']       = 'Contenu du champ customdata';
+$string['customdatacontent'] = 'Contenu du champ customdata';
 $string['customdatacontentnojson'] = 'Contenu du champ customdata (invalid JSON)';
-$string['nocustomdata']            = 'Rien à afficher';
+$string['nocustomdata'] = 'Rien à afficher';
 
 // Delete task.
-$string['deletetask']         = 'Supprimer une tâche ad hoc';
+$string['deletetask'] = 'Supprimer une tâche ad hoc';
 $string['deletetaskquestion'] = 'Êtes vous sûr de vouloir supprimer la tâche {$a} ?';
-$string['deletetaskerror']    = 'Problème lors de la suppression de la tâche {$a}.';
+$string['deletetaskerror'] = 'Problème lors de la suppression de la tâche {$a}.';
 

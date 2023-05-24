@@ -49,22 +49,22 @@ $sessions = \local_mentor_core\catalog_api::get_sessions_template_by_training($t
 $title = $training->name . ' (' . get_string('preview', 'local_trainings') . ')';
 
 // Get training template.
-$trainingtemplate          = $training->convert_for_template();
+$trainingtemplate = $training->convert_for_template();
 $trainingtemplate->preview = true;
-$trainingtemplate->title   = $title;
+$trainingtemplate->title = $title;
 
 // Create false available session if is empty.
 if (empty($sessions)) {
-    $falsesession                   = new stdClass();
-    $falsesession->id               = 0;
-    $falsesession->isenrol          = false;
+    $falsesession = new stdClass();
+    $falsesession->id = 0;
+    $falsesession->isenrol = false;
     $falsesession->placesnotlimited = true;
-    $falsesession->isinprogress     = true;
-    $falsesession->fullname         = $training->name;
-    $falsesession->onlinesession    = "xxh";
-    $falsesession->presencesession  = "xxh";
+    $falsesession->isinprogress = true;
+    $falsesession->fullname = $training->name;
+    $falsesession->onlinesession = "xxh";
+    $falsesession->presencesession = "xxh";
     $falsesession->sessionpermanent = true;
-    $falsesession->sessionenddate   = false;
+    $falsesession->sessionenddate = false;
 
     $sessions[] = $falsesession;
 }

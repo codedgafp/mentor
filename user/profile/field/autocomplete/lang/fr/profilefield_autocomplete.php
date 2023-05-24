@@ -24,4 +24,4 @@
  */
 
 $string['pluginname'] = 'Autocomplétion';
-$string['multiple']   = 'Choix multiple';
+$string['multiple'] = 'Choix multiple';

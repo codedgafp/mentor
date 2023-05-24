@@ -38,8 +38,8 @@ require_once($CFG->dirroot . '/admin/tool/log/store/mentor/classes/model/log.php
 
 class store implements \tool_log\log\writer {
     use \tool_log\helper\store,
-            \tool_log\helper\buffered_writer,
-            \tool_log\helper\reader {
+        \tool_log\helper\buffered_writer,
+        \tool_log\helper\reader {
     }
 
     /** @var string $logguests true if logging guest access */
@@ -51,10 +51,10 @@ class store implements \tool_log\log\writer {
      * @var string[]
      */
     private $eventallowedlist
-            = [
-                    '\core\event\course_viewed',
-                    '\core\event\course_completed'
-            ];
+        = [
+            '\core\event\course_viewed',
+            '\core\event\course_completed'
+        ];
 
     public function __construct(\tool_log\log\manager $manager) {
         $this->helper_setup($manager);
@@ -111,29 +111,29 @@ class store implements \tool_log\log\writer {
 
             // Create data to log store.
             $data = array(
-                    'userid'    => $event['userid'],
-                    'entity'    => $mainentity->id,
-                    'trainer'   => !$session->is_participant($event['userid']) && $session->is_trainer($event['userid']),
-                    'sessionid' => $session->id,
-                    'shared'    => $session->is_shared(),
-                    'space'     => $session->get_entity()->id,
-                    'status'    => $session->status,
-                    'completed' => 0
+                'userid' => $event['userid'],
+                'entity' => $mainentity->id,
+                'trainer' => !$session->is_participant($event['userid']) && $session->is_trainer($event['userid']),
+                'sessionid' => $session->id,
+                'shared' => $session->is_shared(),
+                'space' => $session->get_entity()->id,
+                'status' => $session->status,
+                'completed' => 0
             );
 
             // Get or create user log store record.
-            $userlog           = new \logstore_mentor\models\user($data);
+            $userlog = new \logstore_mentor\models\user($data);
             $data['userlogid'] = $userlog->get_or_create_record();
 
             // Get or create session log store record.
             $sessionlog = new \logstore_mentor\models\session($data);
 
-            $param                = ['collections' => $training->collection];
+            $param = ['collections' => $training->collection];
             $data['sessionlogid'] = $sessionlog->get_or_create_record('session', $param);
 
             // Get or create collection log store record.
             foreach (explode(',', $training->collection) as $itemcollection) {
-                $data['name']  = $itemcollection;
+                $data['name'] = $itemcollection;
                 $collectionlog = new \logstore_mentor\models\collection($data);
                 $collectionlog->get_or_create_record();
             }

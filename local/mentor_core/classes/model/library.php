@@ -30,8 +30,8 @@ require_once($CFG->dirroot . '/local/mentor_core/classes/model/model.php');
 
 class library extends entity {
 
-    public const NAME            = 'Bibliothèque de formations';
-    public const SHORTNAME       = 'Biblio formations';
+    public const NAME = 'Bibliothèque de formations';
+    public const SHORTNAME = 'Biblio formations';
     public const CONFIG_VALUE_ID = 'library_id';
 
     /**

@@ -60,8 +60,7 @@ var profileSecondaryEntitiesFilter = function (formList) {
     var mainEntitySelect = $('#id_profile_field_mainentity').val();
 
     // Remove entity already selected.
-    // "slice(1)" -> remove "...choose" choice
-    var filterSecondaryEntityFormList = formList.slice(1).filter(function (opt) {
+    var filterSecondaryEntityFormList = formList.filter(function (opt) {
         return mainEntitySelect !== opt;
     });
 
@@ -84,22 +83,29 @@ var profileSecondaryEntitiesFilter = function (formList) {
 // Check if input exist.
 if ($('#id_profile_field_mainentity').length && $('#id_profile_field_secondaryentities').length) {
 
-    // Get all entity data select.
-    var formList = $.map($('#id_profile_field_mainentity').find('option'), function (opt) {
+    console.log('test');
+
+    // Get all main entity data select.
+    var formMainEntityList = $.map($('#id_profile_field_mainentity').find('option'), function (opt) {
         return opt.text;
     });
 
-    profileMainEntityFilter(formList);
+    // Get all secondary entity data select.
+    var formSecondaryEntityList = $.map($('#id_profile_field_secondaryentities').find('option'), function (opt) {
+        return opt.text;
+    });
 
-    profileSecondaryEntitiesFilter(formList);
+    profileMainEntityFilter(formMainEntityList);
+
+    profileSecondaryEntitiesFilter(formSecondaryEntityList);
 
     // When main entity input change.
     $('#id_profile_field_mainentity').change(function () {
-        profileSecondaryEntitiesFilter(formList);
+        profileSecondaryEntitiesFilter(formSecondaryEntityList);
     });
 
     // When secondary entities input change.
     $('#id_profile_field_secondaryentities').change(function () {
-        profileMainEntityFilter(formList);
+        profileMainEntityFilter(formMainEntityList);
     });
 }

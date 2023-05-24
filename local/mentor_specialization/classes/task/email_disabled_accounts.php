@@ -54,8 +54,8 @@ class email_disabled_accounts extends \core\task\scheduled_task {
         ';
 
         $records = $DB->get_records_sql($sql, [
-            'eventname' => '\core\event\user_login_failed', 'reason' => '%\"reason\":2%', 'lastexecution'
-                        => $lastexecution
+                'eventname' => '\core\event\user_login_failed', 'reason' => '%\"reason\":2%', 'lastexecution'
+                => $lastexecution
         ]);
 
         $supportuser = \core_user::get_support_user();
@@ -63,7 +63,7 @@ class email_disabled_accounts extends \core\task\scheduled_task {
         $object = get_string('email_disabled_accounts_object', 'local_mentor_specialization');
 
         // Get the content of the email.
-        $content     = get_string('email_disabled_accounts_content', 'local_mentor_specialization');
+        $content = get_string('email_disabled_accounts_content', 'local_mentor_specialization');
         $contenthtml = text_to_html($content, false, false, true);
 
         foreach ($records as $record) {

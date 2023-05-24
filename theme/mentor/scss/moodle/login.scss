@@ -40,6 +40,7 @@
     background-image: url("[[pix:theme|login]]");
     background-size: cover;
     background-repeat: no-repeat;
+    margin-top: 0!important;
 
     #region-main-box {
       display: flex;
@@ -84,7 +85,7 @@
           }
 
           @media(max-width: 1220px) {
-            right: calc(240px - ( 500px - 42% ));
+            right: calc(240px - (500px - 42%));
           }
         }
 
@@ -466,6 +467,12 @@
   }
 }
 
+#page-theme-mentor-pages-verify_email {
+  #region-main-box {
+    padding-right: 10%;
+  }
+}
+
 #page-theme-mentor-pages-verify_email,
 #page-theme-mentor-pages-signup {
 
@@ -495,14 +502,13 @@
 
       .mform {
         padding-top: 20px;
+        order: 4;
       }
     }
   }
 
   &.notloggedin {
     .fixed-top {
-      position: unset !important;
-
       div[data-region="drawer-toggle"] {
         display: none !important;
       }
@@ -526,10 +532,19 @@
       & > nav {
         order: 2;
         margin-bottom: 6px;
+      }
+
+      #verifywarningsinfo {
+        order: 4;
 
         & + form {
-          order: 4;
+          order: 5;
         }
+      }
+
+      #rgpd-mentions {
+        padding-top: 40px;
+        order: 5;
       }
     }
   }
@@ -605,10 +620,11 @@ body.notloggedin {
     @media(max-width: 456px) {
       height: 154px;
     }
+
     .usermenu {
       text-align: right;
 
-      .login  {
+      .login {
         line-height: 1em;
       }
     }

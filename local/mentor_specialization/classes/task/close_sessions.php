@@ -67,7 +67,7 @@ class close_sessions extends \core\task\scheduled_task {
             mtrace('Close session : ' . $session->id . ' - ' . $session->courseshortname);
 
             $session = new mentor_session($session->id);
-            $session->update_status(mentor_session::STATUS_COMPLETED);
+            $session->update_status(mentor_session::STATUS_COMPLETED, $status);
         }
     }
 }

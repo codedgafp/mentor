@@ -34,7 +34,7 @@ class block_archivedsessions extends block_base {
      * @return array
      */
     public function html_attributes() {
-        $attributes          = parent::html_attributes();
+        $attributes = parent::html_attributes();
         $attributes['class'] .= ' hidden-block';
         return $attributes;
     }
@@ -109,7 +109,7 @@ class block_archivedsessions extends block_base {
 
         // Get template with data rendarable.
         $renderable = new \block_archivedsessions\output\archivedsessions($this->config);
-        $content    = $renderer->render($renderable);
+        $content = $renderer->render($renderable);
 
         // Create content for the block.
         $this->content = new stdClass();
@@ -138,7 +138,7 @@ class block_archivedsessions extends block_base {
      */
     public function help_button() {
 
-        $text    = get_string('helpbuttontext', 'block_archivedsessions', get_config('theme_mentor', 'faq'));
+        $text = get_string('helpbuttontext', 'block_archivedsessions', get_config('theme_mentor', 'faq'));
         $helptxt = get_string('helpbuttontexttitle', 'block_archivedsessions');
 
         $output = '<a class="btn btn-link p-0 help_button" role="button" data-container="body" ' .

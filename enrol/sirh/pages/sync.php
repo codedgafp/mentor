@@ -45,24 +45,24 @@ $instanceid = optional_param('instanceid', null, PARAM_INT);
 
 $data = array(
     'instanceid' => $instanceid,
-    'users'      => [],
-    'userssync'  => [],
+    'users' => [],
+    'userssync' => [],
     'addtogroup' => \syncsirh_form::ADD_TO_NO_GROUP
 );
 
 if (is_null($instanceid)) {
     // Other require param.
-    $data['sirh']         = required_param('sirh', PARAM_RAW);
+    $data['sirh'] = required_param('sirh', PARAM_RAW);
     $data['sirhtraining'] = required_param('sirhtraining', PARAM_RAW);
-    $data['sirhsession']  = required_param('sirhsession', PARAM_RAW);
+    $data['sirhsession'] = required_param('sirhsession', PARAM_RAW);
 } else {
 
     $instance = enrol_sirh_external::get_instance_info($instanceid);
 
     // Other require param.
-    $data['sirh']         = $instance['customchar1'];
+    $data['sirh'] = $instance['customchar1'];
     $data['sirhtraining'] = $instance['customchar2'];
-    $data['sirhsession']  = $instance['customchar3'];
+    $data['sirhsession'] = $instance['customchar3'];
 
     if (!is_null($instance['customint1'])) {
         $data['groupid'] = intval($instance['customint1']) === 0 ?
@@ -77,10 +77,10 @@ if (!enrol_sirh_plugin_is_enabled()) {
 }
 
 // Set session data.
-$session           = \local_mentor_core\session_api::get_session($sessionid);
-$sessioncourse     = $session->get_course();
-$coursecontext     = $session->get_context();
-$sessiongroup      = $session->get_all_group();
+$session = \local_mentor_core\session_api::get_session($sessionid);
+$sessioncourse = $session->get_course();
+$coursecontext = $session->get_context();
+$sessiongroup = $session->get_all_group();
 $sessiondgroupdata = [];
 foreach ($sessiongroup as $group) {
     $sessiondgroupdata[$group->id] = $group->name;
@@ -116,7 +116,7 @@ $PAGE->navbar->add($session->fullname . ' - Sessions SIRH', new moodle_url('/enr
 $PAGE->navbar->add($title);
 
 $params = [
-    'modaltitle'   => get_string('sirh_modal_title', 'enrol_sirh'),
+    'modaltitle' => get_string('sirh_modal_title', 'enrol_sirh'),
     'modalcontent' => get_string('sirh_modal_content', 'enrol_sirh'),
 ];
 
@@ -133,11 +133,11 @@ $anchorurl = new moodle_url('/enrol/sirh/pages/sync.php', [
 ], 'sirh-sync-user');
 
 // Sync form.
-$syncform     = new syncsirh_form($data, $anchorurl->out(false), []);
+$syncform = new syncsirh_form($data, $anchorurl->out(false), []);
 $syncformdata = $syncform->get_data();
 
 // Sync users form.
-$syncusersform     = new syncusers_form($data,
+$syncusersform = new syncusers_form($data,
     new moodle_url('/enrol/sirh/pages/sync.php', ['sessionid' => $sessionid]));
 $syncusersformdata = $syncusersform->get_data();
 
@@ -182,15 +182,15 @@ if (null !== $syncusersformdata) {
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('syncsirhtitle', 'enrol_sirh', array(
-    'sirh'         => $data['sirh'],
+    'sirh' => $data['sirh'],
     'sirhtraining' => $data['sirhtraining'],
-    'sirhsession'  => $data['sirhsession']
+    'sirhsession' => $data['sirhsession']
 )));
 
 if (null !== $syncformdata) {
 
     $usersession = json_decode($syncformdata->users);
-    $out         .= enrol_sirh_html_table_renderer_users_session($usersession);
+    $out .= enrol_sirh_html_table_renderer_users_session($usersession);
 
     $out .= $syncform->render();
 
@@ -205,23 +205,23 @@ if (null !== $syncformdata) {
 
     // Errors array.
     $warnings = [
-        'list'           => [], // Warning list.
+        'list' => [], // Warning list.
         'groupsnotfound' => [], // List of not found group name.
-        'rolenotfound'   => [], // List of not found role name.
-        'loseprivilege'  => [], // List of users who could have lost their privilege.
+        'rolenotfound' => [], // List of not found role name.
+        'loseprivilege' => [], // List of users who could have lost their privilege.
     ];
 
     // Preview array.
     $preview = [
-        'list'                 => [], // Cleaned list of accounts.
-        'validlines'           => 0, // Number of lines without error.
-        'validforcreation'     => 0, // Number of lines that will create an account.
+        'list' => [], // Cleaned list of accounts.
+        'validlines' => 0, // Number of lines without error.
+        'validforcreation' => 0, // Number of lines that will create an account.
         'validforreactivation' => [], // Valid accounts for reactivation.
     ];
 
     $usersessionform = json_decode($syncformdata->users);
 
-    $datainstance           = new stdClass();
+    $datainstance = new stdClass();
     $datainstance->courseid = $sessioncourse->id;
 
     // Build preview and errors array.
@@ -234,9 +234,9 @@ if (null !== $syncformdata) {
     if ($syncformdata->addtogroup === \syncsirh_form::ADD_TO_NEW_GROUP) {
         array_unshift($warnings['list'], [
             get_string('warning_create_group', 'enrol_sirh', array(
-                'sirh'         => $data['sirh'],
+                'sirh' => $data['sirh'],
                 'sirhtraining' => $data['sirhtraining'],
-                'sirhsession'  => $data['sirhsession']
+                'sirhsession' => $data['sirhsession']
             ))
         ]);
     }
@@ -250,8 +250,8 @@ if (null !== $syncformdata) {
         get_string('warnings_number', 'enrol_sirh', count($warnings['list'])),
     ],
         array(
-            'id'                       => 'report-preview',
-            'data-creation-number'     => $preview['validforcreation'],
+            'id' => 'report-preview',
+            'data-creation-number' => $preview['validforcreation'],
             'data-reactivation-number' => count($preview['validforreactivation'])
         )
     );
@@ -262,10 +262,10 @@ if (null !== $syncformdata) {
         \core\notification::warning(get_string('errors_detected', 'enrol_sirh'));
 
         // Building errors report table.
-        $errorstable       = new html_table();
+        $errorstable = new html_table();
         $errorstable->head = [get_string('error')];
         $errorstable->data = $errors['list'];
-        $out               .= html_writer::table($errorstable);
+        $out .= html_writer::table($errorstable);
     }
 
     // Display warnings bloc.
@@ -274,10 +274,10 @@ if (null !== $syncformdata) {
         \core\notification::warning(get_string('warnings_detected', 'enrol_sirh'));
 
         // Building errors report table.
-        $warningstable       = new html_table();
+        $warningstable = new html_table();
         $warningstable->head = [get_string('warning', 'enrol_sirh')];
         $warningstable->data = $warnings['list'];
-        $out                 .= html_writer::table($warningstable);
+        $out .= html_writer::table($warningstable);
     }
 
     // Check available places.
@@ -301,7 +301,7 @@ if (null !== $syncformdata) {
         }
     }
 
-    $data['userssync']  = $preview['list'];
+    $data['userssync'] = $preview['list'];
     $data['addtogroup'] = $syncformdata->addtogroup;
 
     // Sync users form.
@@ -323,7 +323,7 @@ if (null !== $syncformdata) {
     $data['users'] = $userssession['users'];
 
     $syncform = new syncsirh_form($data, $anchorurl->out(false), []);
-    $out      .= $syncform->render();
+    $out .= $syncform->render();
 
     echo html_writer::div($out, 'enrol_sirh_sync', ['id' => 'sirh-session-user']);
 }

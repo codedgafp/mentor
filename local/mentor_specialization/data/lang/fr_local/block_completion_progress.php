@@ -25,10 +25,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['completion_progress:overview'] = 'Vue d\'ensemble de la progression de tous les participants inscrits au cours';
-$string['config_percentage']            = 'Montrer le pourcentage de progression aux participants';
-$string['overview']                     = 'Vue d\'ensemble des participants';
-$string['showinactive']                 = 'Montrer les participants inactifs dans l\'aperçu';
-$string['showlastincourse']             = 'Afficher la dernière visite du participant dans l\'aperçu';
-$string['why_show_precentage']          = 'Pourquoi montrer un pourcentage de progression aux participants ?';
+$string['config_percentage'] = 'Montrer le pourcentage de progression aux participants';
+$string['overview'] = 'Vue d\'ensemble des participants';
+$string['showinactive'] = 'Montrer les participants inactifs dans l\'aperçu';
+$string['showlastincourse'] = 'Afficher la dernière visite du participant dans l\'aperçu';
+$string['why_show_precentage'] = 'Pourquoi montrer un pourcentage de progression aux participants ?';
 $string['why_show_precentage_help']
-                                        = '<p>Il est possible de montrer le pourcentage global de progrès aux participants.</p><p>Ce pourcentage représente le nombre d\'activités réalisées divisé par le nombre total d\'activités surveillées.</p><p>Le pourcentage de progression apparaît lorsque le pointeur de la souris survole un élément de la barre.</p>';
+        = '<p>Il est possible de montrer le pourcentage global de progrès aux participants.</p><p>Ce pourcentage représente le nombre d\'activités réalisées divisé par le nombre total d\'activités surveillées.</p><p>Le pourcentage de progression apparaît lorsque le pointeur de la souris survole un élément de la barre.</p>';

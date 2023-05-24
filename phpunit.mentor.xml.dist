@@ -70,6 +70,7 @@
         	<directory suffix=".php">local/mentor_specialization/db/*</directory>
             <directory suffix=".php">local/codechecker</directory>
             <directory suffix=".php">local/staticpage</directory>
+            <directory suffix=".php">auth/agentconnect</directory>
             <directory suffix=".php">*/*/tests</directory>
             <directory suffix=".php">*/*/lang</directory>
             <directory suffix=".php">*/*/*/lang</directory>
@@ -88,6 +89,7 @@
 		    <file>local/session/classes/controllers/session_controller.php</file>
 		    <file>local/trainings/classes/controllers/training_controller.php</file>
 		    <file>blocks/mytrainings/classes/controllers/training_favourite_controller.php</file>
+		    <file>course/format/edadmin/format.php</file>
 		</exclude>
 	</whitelist>
 </filter>
